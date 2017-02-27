@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>index</title>
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/index.css">
+    <script src="js/jquery-1.10.1.min.js"></script>
+    <script src="js/swiper.min.js"></script>
+    <script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="bootstrap/js/bootstrap-paginator.js"></script>
+    <script type="text/javascript" src="bootstrap/js/bootstrap-paginator.min.js"></script>
+    <script type="text/javascript" src="bootstrap/js/bootstrap-datetimepicker.js"></script>
+    <script type="text/javascript" src="bootstrap/js/bootstrap-datetimepicker.zh-CN.js"></script>
+    <script type="text/javascript" src="angular/angular.min.js"></script>
+    <script type="text/javascript" src="angular/angular-route.js"></script>
+    <script type="text/javascript" src="js/angular.js"> </script>
+    <link rel="stylesheet" href="css/swiper.min.css">
+    <link href="css/bootstrap-datetimepicker.css" rel="stylesheet" media="screen">
+    <style>
+        .select{
+            background: #eee;
+        }
+    </style>
+    <script >
+        $(function(){
+            if(localStorage.length>1){
+            $(".navbar-text").html("欢迎您,"+"&nbsp;"+localStorage.loginName);
+            $(".navbar-link").hide();
+            $(".navbar-right").append('<li><a href="javascript:;" class="navbar-link" onclick="doClear()">退出</a></li>');
+            }else{
+                $(".navbar-text").html("您尚未");
+            $(".navbar-link").show();
+            }
+        });
+        function doClear(){
+            window.localStorage.clear();
+            location.reload();
+        }
+    </script>
+
+
+</head>
+
+<body style="margin:0;padding:0">
+<div class="container">
+    <!-- 顶部图片 -->
+	 <div class="row top_pic">
+	 	<span class="banner"><img src="images/banner.png" ></span>
+	 	<span class="plane"><img src="images/plane.png" class="img-responsive"></span>
+	 </div>
+         <!-- 轮播图 -->
+    <div class="row">
+               
+        <div class="swiper-container">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide" style="background-image:url(images/feiji.jpg);background-size:100%"></div>
+                <div class="swiper-slide" style="background-image:url(images/feiji2.jpg);background-size:100%"></div>
+                <div class="swiper-slide" style="background-image:url(images/feiji3.jpg);background-size:100%"></div>
+                <div class="swiper-slide" style="background-image:url(images/feiji4.jpg);background-size:100%"></div>
+                <div class="swiper-slide" style="background-image:url(images/feiji5.png);background-size:100%"></div>
+            </div>
+            <div class="swiper-scrollbar"></div>
+            <div class="swiper-button-prev swiper-button-white"></div>
+            <div class="swiper-button-next swiper-button-white"></div>
+    </div>
+
+    <script src="js/swiper.min.js"></script>
+    <script>
+        var swiper=new Swiper(".swiper-container",{
+            scrollbar:".swiper-scrollbar", 
+            scrollbarHide:false,
+            paginationClickable:true,
+            spaceBetween:20,
+            autoplay:2000,
+            // loop:true,
+            autoplayDisableOnInteraction:false,
+            prevButton:".swiper-button-prev",
+            nextButton:".swiper-button-next",
+        });
+    </script>
+    </div>
+     <!-- 导航栏 -->
+    <div class="row">
+            <nav class="navbar navbar-default">
+                <div class="navbar-header">
+                    <a class="navbar-brand">航班系统</a>
+                    <button class="navbar-toggle" data-toggle="collapse" data-target="#menu">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    </button>
+
+                </div>
+                <div class="collapse navbar-collapse clearfix" id="menu">
+                    <ul class="nav navbar-nav">
+                        <li><a>首页</a></li>
+                        <li><a href="#/flightManage">航班管理</a></li>
+                        <li><a href="#/ticketManage">票数管理</a></li>
+                        <li><a href="#/order">机票预订</a></li>
+                        <li><a href="#/myOrder">我的订单</a></li>
+                        <li><a href="#/memberManage">我的信息</a></li>
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li class="navbar-text">您尚未</li>
+                        <li><a href="login.html" class="navbar-link">登录</a></li>
+                        <li><a href="regist.html" class="navbar-link">注册</a></li>
+                    </ul>
+	                </div>
+	            </nav>
+	        </div>
+
+        <script>
+            $(".nav li").click(function(){
+                $(".nav li").removeClass('select');
+                $(this).addClass('select')
+            })
+        </script>
+
+
+
+    <ng-view></ng-view>
+</div>
+
+</body>
+
+</html>

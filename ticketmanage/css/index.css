@@ -1,0 +1,200 @@
+body{
+	margin: 0;
+	padding: 0;
+}
+.top_pic{
+	height: 140px;
+	background-image:url(../images/top_pic.jpg) ;
+	background-size: 100% 100%;
+	overflow: hidden;
+
+}
+.banner img{
+	height:300px;
+	width: 300px;
+	margin-top: -80px;
+}
+.plane img{
+	height:200px;
+	width: 300px;
+	float: right;
+	margin-right: 30px;
+	margin-top: -30px
+
+}
+.nav{
+	font-size: 15px
+}
+
+.swiper-container{
+	margin-top:-20px;
+	width: 100%;
+	height: 300px;
+	}
+
+/*主页面*/
+
+
+/*航班管理页面*/
+.fms .info1 input {
+    width: 80px;
+    height: 30px;
+    border-radius: 20px;
+    font-size: 15px;
+    line-height: 15px;
+    text-align: center;
+    border: 1px solid #D8D6D6;
+    outline: none;
+}
+
+.fms .info2 {
+    line-height: 35px;
+    margin-top: -7px;
+}
+
+.fms .info2 input {
+    text-align: center;
+}
+#search {
+    width: 55px;
+    height: 36px;
+    line-height: 30px;
+    border-radius: 5px;
+    background-color: #f3f3f3;
+    border: 1px solid #ddd;
+}
+/* 添加航班模态框 */
+.modal-dialog .form-group {
+    margin: 0 auto;
+    width: 284px;
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+
+.modal-dialog .bd1 input {
+    border-radius: 6px;
+    border: 1px solid #d3d3d3;
+    margin-left: 28px;
+}
+
+.modal-body .form-group label {
+    width: 80px;
+    text-align: right;
+}
+
+.modal-body .input-group-addon {
+    width: 40px;
+}
+
+
+/*票数管理页面*/
+.tm .form-group input {
+    width: 80px;
+    height: 30px;
+    border-radius: 20px;
+    font-size: 15px;
+    line-height: 15px;
+    text-align: center;
+    border: 1px solid #D8D6D6;
+    outline: none;
+}
+.tm .form-group .btn{
+    background: red;
+
+}
+#ttab {
+    margin-top: 20px;
+}
+
+th,td {
+    text-align: center;
+}
+
+.tbtn input {
+    border: none;
+    border-radius: 3px;
+    height: 30px;
+}
+
+#tfadd label {
+    text-align: left;
+}
+
+/*机票预订页面*/
+.order .form-group>input {
+    border-radius: 5px;
+   
+    width: 75px; 
+    border: 1px solid #d3d3d3;
+}
+.adate{
+    line-height: 42px;
+    margin-top: -12px;
+}
+#ftab{
+    margin-top: 20px;
+}
+#confirm_order .bd1 {
+    width: 332px;
+}
+
+#confirm_order .bd1 label {
+    width: 128px;
+}
+
+#confirm_order .bd2 label {
+    width: 104px;
+}
+
+#confirm_order .bd2 input {
+    border-radius: 5px;
+    border: 1px solid #d3d3d3;
+    width: 20%;
+}
+
+#confirm_order .bd2 input:nth-of-type(1) {
+    margin-left: 10%;
+}
+
+#orderPrice{
+    padding-left: 10%;
+}
+
+#orderPrice input:nth-of-type(1)
+{
+    margin-left: 0px;
+}
+
+/*我的订单页面*/
+#motab th p {
+    margin: 0;
+}
+
+#motab th,
+td {
+    text-align: center;
+}
+
+
+#backShow{
+    font-weight: bold;
+    font-size: 25px;
+    color: #555;
+}
+
+#backShow img{
+    vertical-align: middle;
+    height: 30px;
+}
+
+/*我的信息页面*/
+#managePage{
+    background-color: #eee;
+    padding-bottom: 50px;
+}
+#managePage .input-group-addon:first-child {
+    width: 87px;
+}
+
+
+

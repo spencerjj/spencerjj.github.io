@@ -1,0 +1,144 @@
+    <!-- 航班查询条件 -->
+        
+        <div class="container order" id="order">
+            <div class="row">
+                <form action="" class="form-inline">
+                    <div class="col-md-3 form-group">
+                        <label for="leaveCity" class="control-label" ><strong style="font-size:20px;">航班查询：</strong >出发城市</label>
+                        <input type="text" ng-model="" name="leaveCity" style="width:100px;">
+                    </div>
+                    <div class="col-md-3 form-group">
+                    <label for="arrivalCity" class="control-label">到达城市</label>
+                    <input type="text" ng-model="" name="arrivalCity" style="width:100px;">
+                </div>
+                <div class="col-md-4 form-group adate">
+                    <label for="dtp_input" class="col-xs-4 control-label">出发日期</label>
+                    <div class="input-group date form_datetime col-xs-7 " data-date-format="dd MM yyyy - HH:ii p" data-link-field="dtp_input">
+                        <input class="form-control" type="text" value="" readonly name="depatureDate" ng-model="">
+                        <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+                        <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
+                    </div>
+                    <input type="hidden" id="dtp_input" value="">
+                </div>
+                <div class="col-md-1 adate">
+                    <input type="button" value="查询" id="searchall" class="btn btn-primary" ng-click="">
+                </div>
+
+                    
+                </form>
+            </div>
+
+            <!-- 获得的界面 -->
+    <div class="container">
+        <div class="row">
+            <table class="table table-bordered table-hover table-responsive" id="ftab">
+                <thead>
+                    <tr>
+                        <th>序号</th>
+                        <th>航班号</th>
+                        <th>所属航空公司</th>
+                        <th>飞机机型</th>
+                        <th>出发城市</th>
+                        <th>到达城市</th>
+                        <th>票价</th>
+                        <th>操作</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr >
+                        <td>{{v.1}}</td>
+                        <td>{{v.2}}</td>
+                        <td>{{v.3}}</td>
+                        <td>{{v.4}}</td>
+                        <td>{{v.5}}</td>
+                        <td>{{v.6}}</td>
+                        <td>经济舱:{{v.7}} <br><br> 头等舱:{{v.8}}</td>
+                        <td>
+                            <a href="#confirm_order" data-toggle="modal"><button type="button" class="btn  btn-success" ng-click="">预定</button></a><br>
+                            <button type="button" class="btn  btn-success" ng-click="">预定</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <!-- Bootstrap 分页 -->
+    <div class="container">
+        <div class="row" align="center">
+            <ul id="orderPaginator" class="pagination">
+                <li><a href="#">&laquo;</a></li>
+                <li class="active"><a>1</a></li>
+                <li><a href="#">2</a></li>
+                <li><a href="#">3</a></li>
+                <li><a href="#">4</a></li>
+                <li><a href="#">5</a></li>
+                <li><a href="#">&raquo;</a></li>
+            </ul>
+        </div>    
+    </div>
+        <!-- 模态框 -->
+    <!-- 机票预订确认模态框 -->
+    <div class="modal fade" id="confirm_order" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <form id="cof" action="" method="post">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title" id="myModalLabel">预定确认</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group bd1">
+                            <label for="no" class="control-label">航班号</label>
+                            <input type="text" ng-model="" name="no" readonly style="width: 140px;">
+                        </div>
+                        <div class="form-group bd1">
+                            <label for="passengerName" class="control-label">乘机人姓名</label>
+                            <input type="text" name="passengerName" value="spencer" readonly style="width: 140px;">
+                        </div>
+                        <div class="form-group bd1">
+                            <label for="iCard" class="control-label">乘机人身份证号码</label>
+                            <input type="text" name="iCard" value="1234567890213" readonly style="width: 140px;">
+                        </div>
+                        <div class="form-group bd2">
+                            <label for="" class="control-label">城市区间</label>
+                            <input type="text" ng-model="" name="leaveCity" readonly style="width: 63px;"> -
+                            <input type="text" ng-model="" name="arrivalCity" readonly style="width: 63px;">
+                        </div>
+                        <div class="form-group bd2">
+                            <label for="" class="control-label">时间区间</label>
+                            <input type="text" ng-model="" name="leaveTime" readonly style="width: 63px;"> -
+                            <input type="text" ng-model="" name="arrivalTime" readonly style="width: 63px;">
+                        </div>
+                        <div class="form-group bd1">
+                            <label class="control-label" style="float:left">价格</label>
+                            <div class="input-group input-group-sm" id="orderPrice">
+                                <span class="input-group-addon">￥</span>
+                                <input type="text" class="form-control" ng-model="" name="economyPrice" style="width:100px" readonly ng-if="type==0">
+                            </div>
+                         </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" ng-click="">确认</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+
+    </div>
+        <script type="text/javascript">
+    $('.form_datetime').datetimepicker({
+        format: "hh:ii:ss",
+        language: 'zh-CN',
+        weekStart: 1,
+        todayBtn:  1,
+        autoclose: 1,
+        todayHighlight: 1,
+        startView: 2,
+        forceParse: 0,
+        showMeridian: 1
+    });
+    </script>

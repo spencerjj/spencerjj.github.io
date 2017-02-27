@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>regist</title>
+	<meta name="viewport" content="width=device-width">
+	<link rel="stylesheet" href="css/regist.css">
+    <script src="js/jquery-1.10.1.min.js"></script>
+	<script src="js/regist.js"></script>
+	<script>
+		$(function() {
+			$('#register #password,#rpassword').focus(function() {
+				$('#owl-login').addClass('password');
+			}).blur(function() {
+				$('#owl-login').removeClass('password');
+			});
+		});
+	</script>
+</head>
+<body ng-controller="registController">
+		<div class="top">
+			<img src="images/banner.png">
+		</div>
+	<div class="main">
+		
+		<div id="register">
+			<div class="wrapper">
+				<div class="register">
+					<form method="post" class="container offset1 loginform">
+						<div id="owl-login">
+							<div class="hand"></div>
+							<div class="hand hand-r"></div>
+							<div class="arms">
+								<div class="arm"></div>
+								<div class="arm arm-r"></div>
+							</div>
+						</div>
+						<div class="pad">
+							<input type="hidden" name="_csrf" value="9IAtUxV2CatyxHiK2LxzOsT6wtBE6h8BpzOmk=">
+							<div class="control-group">
+								<div class="controls">
+									<input id="loginName" type="text" name="loginName" placeholder="登录名" tabindex="1" autofocus="autofocus" class="form-control input-medium">
+								</div>
+								<span id="nameInfo" style="color:red;font-size:15px"></span>
+							</div>
+							<div class="control-group">
+								<div class="controls">
+									<input id="password" type="password" name="password" placeholder="密码" tabindex="2" class="form-control input-medium">
+								</div>
+								<span id="pwdInfo" style="color:red;font-size:15px"></span>
+							</div>
+							<div class="control-group">
+								<div class="controls">
+									<input id="rpassword" type="password" name="rpassword" placeholder="重复密码" tabindex="3" class="form-control input-medium">
+								</div>
+								<span id="rpwdInfo" style="color:red;font-size:15px"></span>
+							</div>
+							<div class="control-group">
+								<div class="controls">
+									<input id="userName" type="text" name="userName" placeholder="用户名" tabindex="4" class="form-control input-medium">
+								</div>
+								<span id="unameInfo" style="color:red;font-size:15px"></span>
+							</div>
+							<div class="control-group">
+								<div class="controls">
+									<input type="radio" name="sex" value="1" > 男&nbsp;&nbsp;&nbsp;
+									<input type="radio" name="sex" value="0" > 女
+								</div>
+							</div>
+							<div class="control-group">
+								<div class="controls">
+									<input id="userICard" type="text" name="userICard" placeholder="身份证号" tabindex="5" class="form-control input-medium">
+								</div>
+								<span id="ICardInfo" style="color:red;font-size:15px"></span>
+							</div>
+							<div class="control-group">
+								<div class="controls">
+									<input id="mail" type="text" name="mail" placeholder="邮箱" tabindex="6" class="form-control input-medium">
+								</div>
+								<span id="emailInfo" style="color:red;font-size:15px"></span>
+							</div>
+
+						</div>
+						<div class="form-actions">
+							<p class="pull-left text-muted"><input type="checkbox"> 同意条约</p>
+							<a href="login.html" tabindex="7" class="btn btn-link text-muted">已有账号？登录</a>
+							<button tabindex="8" class="btn btn-primary" type="button" onclick="doRegist()">注册</button>
+						</div>
+					</form>
+				</div>
+			</div>
+			
+		</div>
+	</div>
+</body>
+</html>
