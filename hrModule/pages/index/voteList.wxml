@@ -1,0 +1,10 @@
+<view class="content">
+  <view class="list expired" wx:for="{{lists}}" bindtap="toPage" data-id="{{item.id}}" data-mark="{{item.status}}" hover-class='hover1' hover-stay-time='50'>
+    <text class="name">标签名:<text class="active"> {{item.tagNames}}</text></text>
+    <text class="date" wx:if="{{item.status=='4'}}">截止日期:<text class="active"> {{item.endDate}}</text></text>
+    <text class="date" wx:if="{{item.status=='3'}}"><text style="color:red">已结束</text></text>
+    <image class="arraw" src="../../images/arraw2.png"  wx:if="{{item.status=='4'}}"></image>
+  </view>
+</view>
+<i-message id="message" />
+<i-toast id="toast" />

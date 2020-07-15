@@ -1,0 +1,83 @@
+<view class="content">
+
+	<view class="top">
+		<!-- <view class='v'>
+  <image src='../../images/timg.png' mode="aspectFill"></image>
+</view> -->
+		<!-- <view class="cover"></view>
+		<view class="cover1">
+		</view> -->
+		<view class="profile" bindtap="toPage" data-url="myInfos">
+			<image src="{{imgPath}}" mode="aspectFill"></image>
+		</view>
+		<view class="tags">
+			<view class="tag1" bindtap="toPage" data-url="myTag" wx:if="{{lists.length>=1}}">
+				{{lists[0].value?lists[0].value:lists[0].employeeTag.name}}
+			</view>
+			<view class="tag2" bindtap="toPage" data-url="myTag" wx:if="{{lists.length>=2}}">
+				{{lists[1].value?lists[1].value:lists[1].employeeTag.name}}
+			</view>
+			<view class="tag3" bindtap="toPage" data-url="myTag" wx:if="{{lists.length>=3}}">
+				{{lists[2].value?lists[2].value:lists[2].employeeTag.name}}
+			</view>
+			<view class="tag4" bindtap="toPage" data-url="myTag" wx:if="{{lists.length>=4}}">
+				{{lists[3].value?lists[3].value:lists[3].employeeTag.name}}
+			</view>
+			<view class="tag5" bindtap="toPage" data-url="myTag" wx:if="{{lists.length>=5}}">
+				{{lists[4].value?lists[4].value:lists[4].employeeTag.name}}
+			</view>
+		</view>
+		<view class="infos" bindtap="toPage" data-url="myInfos">
+		<view class="infoCon" style="color:#000">{{userDetails.userName}}</view>
+		<view class="infoCon"  style="color:#666">{{userDetails.office}}</view>
+	</view>
+	</view>
+	<view class="moreDetails">
+		<view class="section" hover-class='hover1' hover-stay-time='50' data-url="360/360Lists" bindtap="toPage">
+			<image src="../../images/pinggu.png" class="icon"></image>  360评估<image src="../../images/arraw1.png" class="arraw"></image><view class="count" wx:if="{{resCount}}">{{resCount}}</view>
+		</view>
+		<view class="section" hover-class='hover1' hover-stay-time='50'  data-url="../index/voteList" bindtap="toPage">
+			<image src="../../images/toupiao1.png" class="icon"></image>  我的投票<image src="../../images/arraw1.png" class="arraw"></image><view class="count" wx:if="{{voteCount}}">{{voteCount}}</view>
+		</view>
+		<view class="section" hover-class='hover1' hover-stay-time='50' data-url="360/360result" bindtap="toPage">
+			<image src="../../images/fenxi.png" class="icon"></image>  我的评估<image src="../../images/arraw1.png" class="arraw"></image>
+		</view>
+		<!-- <view class="detailInfo">
+			<view class="detailSection" data-url="myTag" bindtap="toPage">
+				<view class="detailIcon">
+					<image src="../../images/phone.png"></image>
+				</view>
+				<view class="detailTitle">
+					我的标签
+				</view>
+			</view>
+			<view class="detailSection">
+				<view class="detailIcon">
+					<image src="../../images/pinggu.png"></image>
+				</view>
+				<view class="detailTitle">
+					360评估
+				</view>
+			</view>
+			<view class="detailSection" data-url="../index/voteList" bindtap="toPage">
+				<view class="detailIcon">
+					<image src="../../images/toupiao1.png"></image>
+				</view>
+				<view class="detailTitle">
+					投票
+				</view>
+				<view class="count" wx:if="{{voteCount}}">{{voteCount}}</view>
+			</view>
+		</view> -->
+		<!-- <view class="title">
+			标题标题
+		</view>
+		<view class="addtion"><text>流程</text><image src="../../images/arraw.png" class="arraw"></image></view>
+		<view class="addtion"><text>360评估</text><image src="../../images/arraw.png" class="arraw"></image></view>
+		<view class="addtion"><text>我的标签</text><image src="../../images/arraw.png" class="arraw"></image></view> -->
+	</view>
+</view>
+<view class="version">当前版本: V{{appVersion}}</view>
+<i-spin fix wx:if="{{loadAll}}"></i-spin>
+<i-message id="message" />
+<i-toast id="toast" />

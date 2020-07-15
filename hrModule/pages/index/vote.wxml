@@ -1,0 +1,233 @@
+<view class="content">
+	<!-- <view class="title" style="z-index:1 !important">
+		<view class="c1">
+			<text>评选感言</text>
+		</view>
+		<textarea class="c1Input" placeholder='123' placeholder-style='color:#af9d7f' auto-height maxlength='1000' value=""></textarea>
+	</view>
+	<view class="title" wx:for="{{array}}">
+		<view class="c1">
+			<text>是否同意好领导<text style="color:red;font-size:25rpx">*</text></text>
+		</view>
+		<picker value="{{item.option}}" range="{{item.objectArray}}" range-key="name" bindchange="pickChange" data-id="{{item.objectArray[item.option].id}}" data-index="{{index}}">
+			<view class="timePicker">
+				<text wx:if="{{index1==100}}">请选择...</text>
+				{{item.objectArray[item.option].name}}
+				<image class="arraw" src="http://img.gagctv.com/17112314452261654"></image>
+			</view>
+		</picker>
+	</view> -->
+
+	<!-- 选领导(单选) -->
+	<form bindsubmit="formSubmit" bindreset="formReset">
+  <view class="main"><text wx:if="{{lists.length>1}}">{{currentPage}}.</text>标签: {{currentList.employeeTag.name}}</view>
+		<radio-group name="selectiontest" bindchange="bossRadioChange"  wx:if="{{currentList.employeeTag.type=='4'}}">
+			<!-- <view class="section_title"></view> -->
+			<view class="pics">
+				<view class="pic" wx:for="{{currentList.voterList}}" wx:for-item="boss">
+				<!-- <view class="number">{{index+1}}</view> -->
+
+					<label>
+						<view class="profile">
+							<image src="{{boss.avatar}}" mode="aspectFill"></image>
+						</view>
+						<view class="select">
+							<view class="name">{{boss.empName}}</view>
+						</view>
+						<radio value="{{boss.empCode}}" style="margin-top:0;display:none" ></radio>
+            <view class="vote {{ifVote==boss.empCode?'voted':'voteText'}}"><image src="../../images/like.png" wx:if="{{ifVote!=boss.empCode}}"></image>{{ifVote==boss.empCode?'已选择':'投我一票'}}</view>
+					</label>
+				</view>
+			</view>
+		</radio-group>
+	<!-- 选领导(多选) -->
+	<!-- <form bindsubmit="formSubmit" bindreset="formReset">
+		<checkbox-group name="selectiontest" bindchange="bossCheckboxChange">
+			<view class="section_title">{{item.ques}}</view>
+			<view class="pics">
+				<view class="pic" wx:for="{{questioncurrentList}}">
+					<label>
+						<view class="profile">
+							<image src="../../images/pic.jpg" mode="aspectFill"></image>
+						</view>
+						<view class="select">
+							<view class="name">领导</view>
+						</view>
+						<checkbox value="{{index}}" style="margin-top:0;display:none"></checkbox>
+						<view class="{{ifVote.indexOf(index)?'voted':'voteText'}}">{{ifVote.indexOf(index)?'已选择':'投我一票'}}</view>
+					</label>
+				</view>
+			</view>
+		</checkbox-group>
+		<view class="btn_area">
+			<button form-type="submit" type="info">{{btnText}}</button>
+		</view>
+	</form> -->
+
+	<!-- 领导标签(单选) -->
+		<view  wx:for="{{currentList.voterList}}" wx:for-item="boss"  wx:if="{{currentList.employeeTag.type=='2'}}" class="bigSel">
+		<!-- <view class="number">{{index+1}}</view> -->
+		<view class="number">{{index+1}}</view>
+			<view class="pics1">
+				<view class="pic">
+					<label>
+						<view class="profile">
+							<image src="{{boss.avatar}}" mode="aspectFill"></image>
+						</view>
+						<view class="select">
+							<view class="name">{{boss.empName}}</view>
+						</view>
+					</label>
+				</view>
+			</view>
+			<block wx:for-index="index">
+				<view class="section section_gap myradio1">
+					<radio-group name="{{boss.empCode}}">
+						<view class="section_title">[单选]</view>
+						<view class="mylabel">
+              <label wx:for="{{currentList.valueList}}">
+								<radio value="{{item.id}}"></radio>
+								<view>{{item.name}}</view>
+							</label>
+						</view>
+					</radio-group>
+				</view>
+			</block>
+		</view>
+  <!-- 领导标签(多选) -->
+		<view wx:for="{{currentList.voterList}}" wx:for-item="boss"  wx:if="{{currentList.employeeTag.type=='3'}}" class="bigSel ">
+		<view class="number">{{index+1}}</view>
+			<view class="pics1">
+				<view class="pic">
+					<label>
+						<view class="profile">
+							<image src="{{boss.avatar}}" mode="aspectFill"></image>
+						</view>
+						<view class="select">
+							<view class="name">{{boss.empName}}</view>
+						</view>
+					</label>
+				</view>
+			</view>
+			<block wx:for-index="index">
+				<view class="section section_gap myradio2">
+        <checkbox-group name="{{boss.empCode}}">
+						<view class="section_title">[多选]</view>
+						<view class="mylabel">
+              <label wx:for="{{currentList.valueList}}">
+								<checkbox value="{{item.id}}"></checkbox>
+								<view>{{item.name}}</view>
+							</label>
+						</view>
+					</checkbox-group>
+				</view>
+			</block>
+		</view>
+    <view class="btn_area" wx:if="{{!loadAll}}">
+			<button form-type="submit" type="info" wx:if="{{currentPage==lists.length}}" hover-class='hover1' hover-stay-time='50'>{{btnText}}</button>
+			<button form-type="submit" type="info" wx:if="{{currentPage!=lists.length}}" hover-class='hover1' hover-stay-time='50'>下一项</button>
+		</view>
+	</form>
+	<!-- <form bindsubmit="formSubmit" bindreset="formReset">
+		<block wx:for-index="index">
+			<view class="section section_gap myradio1">
+				<radio-group name="selection1">
+					<view class="section_title">五五分</view>
+					<view class="mylabel">
+						<label>
+							<radio value="A"></radio>
+							<view> A、答案1</view>
+						</label>
+						<label>
+							<radio value="B"></radio>
+              <view>B、答案2</view>
+						</label>
+						<label>
+							<radio value="C"></radio>
+              <view>C、答案3</view>
+						</label>
+						<label>
+							<radio value="D"></radio>
+              <view>D、答案4</view>
+						</label>
+					</view>
+				</radio-group>
+			</view>
+		</block>
+    		<block wx:for-index="index">
+			<view class="section section_gap myradio2">
+				<radio-group name="selection1">
+					<view class="section_title">自适应</view>
+					<view class="mylabel">
+						<label>
+							<radio value="A"></radio>
+							<view> A、答案1</view>
+						</label>
+						<label>
+							<radio value="B"></radio>
+              <view>B、答案2</view>
+						</label>
+						<label>
+							<radio value="C"></radio>
+              <view>C、答案3</view>
+						</label>
+						<label>
+							<radio value="D"></radio>
+              <view>D、答案4</view>
+						</label>
+					</view>
+				</radio-group>
+			</view>
+		</block>
+        		<block wx:for-index="index">
+			<view class="section section_gap myradio3">
+				<radio-group name="selection1">
+					<view class="section_title">单行</view>
+					<view><label>
+							<radio value="A">A、答案1</radio>
+						</label></view>
+					<view><label>
+							<radio value="B">B、答案2</radio>
+						</label></view>
+					<view><label>
+							<radio value="C">C、答案3</radio>
+						</label></view>
+					<view><label>
+							<radio value="D">D、答案4</radio>
+						</label></view>
+				</radio-group>
+			</view>
+		</block>
+		<block wx:for="{{questioncurrentList}}" wx:for-index="index">
+			<view class="section section_gap">
+				<checkbox-group name="selection1{{index}}">
+					<view class="section_title">{{item.ques}}</view>
+					<view><label>
+							<checkbox value="A">A、{{item.ans1}}</checkbox>
+						</label></view>
+					<view><label>
+							<checkbox value="B">B、{{item.ans2}}</checkbox>
+						</label></view>
+					<view><label>
+							<checkbox value="C">C、{{item.ans3}}</checkbox>
+						</label></view>
+					<view><label>
+							<checkbox value="D">D、{{item.ans4}}</checkbox>
+						</label></view>
+				</checkbox-group>
+			</view>
+		</block>
+
+		<view class="btn_area">
+			<button form-type="submit" type="info">{{btnText}}</button>
+		</view>
+	</form> -->
+</view>
+
+
+<i-modal title="提交确认" visible="{{ visible }}" actions="{{ actions }}" bind:click="handleClick">
+	<view>确认提交此投票吗？</view>
+</i-modal>
+<i-message id="message" />
+<i-spin fix wx:if="{{loadAll}}"></i-spin>
+<i-toast id="toast" />

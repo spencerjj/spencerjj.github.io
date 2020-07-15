@@ -1,0 +1,16 @@
+<view class='title'>你的权限: 店长</view>
+<view class='tip'>请选择你的权限</view>
+<view class="storeList">
+  <view class='info-box' wx:for="{{storeList}}" data-index="{{index}}" bindtap='onStoreSelected' wx:key="index" hover-class='hover1' hover-stay-time='50'>
+    <image class='storeIcon' src='../../images/nan.png'></image>
+    <view class='storeInfo'>
+      <view class='storeName'>{{item.storeName}}</view>
+      <view class='storeAdmin'>管理员: ***</view>
+    </view>
+    <view class='camInfo'>
+      <view class='camNum'>{{item.camNum}}</view>
+      <view class='camTip'>摄像机数量</view>
+    </view>
+    <image class='arrow' src='../../images/arraw1.png'></image>
+  </view>
+</view>

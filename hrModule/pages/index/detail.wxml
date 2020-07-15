@@ -1,0 +1,66 @@
+<view class="detail">
+      <view class="state">
+    <text>已批准</text>
+  </view>
+  <view class="state1" wx:if="{{list.status==0}}">
+    <text>待审批</text>
+  </view>
+  <view class="state1" wx:if="{{list.status==-1}}">
+    <text>已拒绝</text>
+  </view>
+  <view class="title">
+    我要请假
+  </view>
+  <view class="content">
+    卡就是点击爱神的箭卡号圣诞节看哈几十块的哈就开始搭框架啊还是的话接口哈卡的
+  </view>
+  <view class="c1" style="margin-left:20rpx">
+        <image src="../../images/reason.png" style="width:50rpx;height:50rpx"></image>
+        <text>请假事由</text>
+      </view>
+    <view class="myTime1" style="color:#ffcc00;margin-left:3%;font-size:30rpx">事假</view>
+    <view class="myTime1" style="color:#ffcc00;margin-left:3%;font-size:30rpx" wx:if="{{list.typeLeave==2}}">病假</view>
+    <view class="myTime1" style="color:#ffcc00;margin-left:3%;font-size:30rpx" wx:if="{{list.typeLeave==3}}">其他</view>
+  <view class="date">
+    <view class="time1">
+      <view class="c1">
+        <image src="../../images/timeIcon.png"></image>
+        <text>请假时间</text>
+      </view>
+      <view class="myTime">2019.11.11至2019.12.12，共计5天</view>
+    </view>
+      <view class="c1">
+        <image src="../../images/people.png"></image>
+        <text>请假人</text>
+      </view>
+    <view class="myTime1" style="color:#ffcc00">某某</view>
+  </view>
+  <view class="pics">
+    <image wx:for="{{imglist}}" src="{{item}}" bindtap='detail' data-url="item" mode="widthFix"></image>
+  </view>
+    <view class="hint">
+    <view class="c1" style="padding-bottom:10rpx">
+    <image src="../../images/reason1.png"></image>
+      <text >拒绝理由</text>
+    </view>
+    <text style="color:#ffcc00">太忙了</text>
+  </view>
+  <view class="bottom">
+    <view class="source">
+      肘子
+    </view>
+    <view class="publishTime">
+      2019.1.1
+    </view>
+  </view>
+</view>
+<view class="action">
+    <button  class="agree"  hover-class='hover1' hover-stay-time='20' bindtap='comment' data-mark='-1'>拒绝</button>
+    <button  class="reject"  hover-class='hover1' hover-stay-time='20' bindtap='action' data-mark="1">同意</button>
+  </view>
+  <view class='pocket_input' wx:if="{{inputShow}}" > 
+<input type='text' placeholder-style='input-placeholder' cursor='{{cursor_position}}' class='input_style' placeholder='{{notice}}' focus='{{focus}}' cursor-spacing="2" adjust-position='true' bindfocus="bindfocus" bindblur="bindblur" bindconfirm="action1" confirm-type="send" bindinput='getComment' placeholder='请输入拒绝理由'></input>
+</view>
+<view style="width:100%;height:100%;position:fixed;top:0;left:0;background:#333;opacity:.8;z-index:99" wx:if="{{inputShow}}">
+123
+</view>

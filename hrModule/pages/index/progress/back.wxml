@@ -1,0 +1,52 @@
+<view class="content">
+	<view class="title">
+		<view class="c1">
+			<text>当前环节</text>
+		</view>
+		<view class="departPicker">
+			<text>{{task}}</text>
+		</view>
+	</view>
+	<view class="title" style="padding-bottom:10rpx">
+		<view class="c1">
+			<text>退回到哪</text>
+		</view>
+	</view>
+	<view class="lists {{item.sel?'selected':''}}" bindtap='select' wx:for="{{list}}" data-actid="{{item.activityId}}" data-actid="{{item.activityId}}" wx:for-index="index" data-index="{{index}}">
+		<view class="right">
+			<view class="time1">
+				<text>环节名称:</text>
+				{{item.assigneeName}}
+			</view>
+			<view class="time1">
+				<text>环节处理人:</text>
+				{{item.activityName}}
+			</view>
+			<view class="count">
+				<image src="../../../images/01-27.jpg" wx:if="{{item.sel==1}}"></image>
+				<image src="../../../images/01-26.jpg" wx:else></image>
+			</view>
+		</view>
+	</view>
+	<view class="lists" wx:if="{{list.length==0}}">
+		<view class="right">
+			<view class="time1">
+				当前无可退回节点
+			</view>
+		</view>
+	</view>
+	<view class="title">
+		<view class="c1">
+			<text>退回原因</text>
+		</view>
+		<input class="number"  bindinput='hinput' value="{{hint}}" placeholder="请输入退回原因" placeholder-style="color:#af9d7f"></input>
+	</view>
+	<view class="bottom">
+		<button class="publish" bindtap='publish'>提 交</button>
+	</view>
+</view>
+<i-message id="message" />
+<i-toast id="toast" />
+<i-modal title="提交确认" visible="{{ visible }}" actions="{{ actions }}" bind:click="handleClick">
+    <view>提交后无法取消哦</view>
+</i-modal>

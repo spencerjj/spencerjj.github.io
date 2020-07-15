@@ -1,0 +1,204 @@
+<view class="content">
+	<!-- <input class="main" value="岗位招聘申请表" placeholder-style='color:#af9d7f' bindinput='mainInput' disabled></input> -->
+	<view class="title">
+		<view class="c1">
+			<text>所属公司</text>
+		</view>
+		<view class="codePicker">
+			<text>{{lists.companyName}}</text>
+		</view>
+	</view>
+	<view class="title">
+		<view class="c1">
+			<text>所属部门</text>
+		</view>
+		<view class="codePicker">
+			<text>{{lists.officeName}}</text>
+		</view>
+	</view>
+	<view class="title">
+		<view class="c1">
+			<text>所属岗位</text>
+		</view>
+		<view class="codePicker">
+			<text>{{lists.postName}}</text>
+		</view>
+	</view>
+	<view class="title">
+		<view class="c1">
+			<text>申请原因</text>
+		</view>
+		<view class="codePicker">
+			<text>{{lists.reasonType}}</text>
+		</view>
+	</view>
+	<view class="title">
+		<view class="c1">
+			<text>编制人数</text>
+		</view>
+		<view class="codePicker">
+			<text>{{lists.postFormation}}</text>
+		</view>
+	</view>
+	<view class="title">
+		<view class="c1">
+			<text>在岗人数</text>
+		</view>
+		<view class="codePicker">
+			<text>{{lists.postFormationNow}}</text>
+		</view>
+	</view>
+	<view class="title">
+		<view class="c1">
+			<text>招聘人数</text>
+		</view>
+		<view class="codePicker">
+			<text>{{lists.postNeed}}</text>
+		</view>
+	</view>
+	<view class="title">
+		<view class="c1">
+			<text>上级</text>
+		</view>
+		<view class="codePicker">
+			<text>{{lists.managerName}}</text>
+		</view>
+	</view>
+	<view class="title">
+		<view class="c1">
+			<text>所属岗位</text>
+		</view>
+		<view class="codePicker">
+			<text>{{lists.postName}}</text>
+		</view>
+	</view>
+	<view class="title">
+		<view class="c1">
+			<text>岗位层级</text>
+		</view>
+		<view class="codePicker">
+			<text>{{lists.postType}}</text>
+		</view>
+	</view>
+	<view class="title">
+		<view class="c1">
+			<text>薪资构成</text>
+		</view>
+		<view class="codePicker">
+			<text>{{lists.salaryConstitute}}</text>
+		</view>
+	</view>
+	<view class="title">
+		<view class="c1">
+			<text>到岗日期</text>
+		</view>
+		<view class="codePicker">
+			<text>{{lists.arriveData}}</text>
+		</view>
+	</view>
+	<view class="title">
+		<view class="c1">
+			<text>年龄范围</text>
+		</view>
+		<view class="codePicker">
+			<text>{{lists.ageRange}}</text>
+		</view>
+	</view>
+	<view class="title">
+		<view class="c1">
+			<text>性别</text>
+		</view>
+		<view class="codePicker">
+			<text wx:if="{{lists.ageRange==1}}">男</text>
+			<text wx:if="{{lists.ageRange==2}}">女</text>
+			<text wx:else>不限</text>
+		</view>
+	</view>
+	<view class="title">
+		<view class="c1">
+			<text>学历</text>
+		</view>
+		<view class="codePicker">
+			<text>{{lists.education}}</text>
+		</view>
+	</view>
+
+	<view class="title" style="z-index:1 !important">
+		<view class="c1">
+			<text>岗位职责</text>
+		</view>
+		<!-- <textarea class="c1Input" placeholder='' placeholder-style='color:#af9d7f' auto-height maxlength='1000' disabled="true" value="{{lists.postDuty}}"></textarea> -->
+    <view class="c1Input">{{lists.postDuty}}</view>
+	</view>
+  <view class="title" style="z-index:1 !important">
+		<view class="c1">
+			<text>任职要求</text>
+		</view>
+		<!-- <textarea class="c1Input" placeholder='' placeholder-style='color:#af9d7f' auto-height maxlength='1000' disabled="true" value="{{lists.postClaim}}"></textarea> -->
+    <view class="c1Input">{{lists.postClaim}}</view>
+	</view>
+  <view class="title" style="z-index:1 !important">
+		<view class="c1">
+			<text>试用期目标</text>
+		</view>
+		<!-- <textarea class="c1Input" placeholder='' placeholder-style='color:#af9d7f' auto-height maxlength='1000' disabled="true" value="{{lists.tryTarget}}"></textarea> -->
+    <view class="c1Input">{{lists.tryTarget}}</view>
+	</view>
+  <view class="title" style="z-index:1 !important">
+		<view class="c1">
+			<text>候选人寻找及猎聘方向</text>
+		</view>
+		<!-- <textarea class="c1Input" placeholder='' placeholder-style='color:#af9d7f' auto-height maxlength='1000' disabled="true" value="{{lists.candidateDirection}}"></textarea> -->
+    <view class="c1Input">{{lists.candidateDirection}}</view>
+	</view>
+
+	<view class="title" style="z-index:1 !important" wx:if="{{current==1&&can}}">
+		<view class="c1">
+			<text>审批意见</text>
+		</view>
+		<input class="number" placeholder='常用语: 同意  已阅' placeholder-style='color:#af9d7f' bindinput='hinput' value="{{hint}}"></input>
+	</view>
+</view>
+<view class="bottom">
+	<button class="progress {{current==1&&can?'btnwid1':'btnwid'}}" bindtap='progress' hover-class='hover1' hover-stay-time='50'>流程追踪</button>
+	<button class="publish btnwid1" bindtap='handleOpen' wx:if="{{current==1&&can}}" hover-class='hover2' hover-stay-time='50'>审批操作</button>
+</view>
+<i-action-sheet visible="{{visible}}" actions="{{actions}}" show-cancel bind:cancel="handleCancel" bind:click="handleClickItem" />
+<i-toast id="toast" />
+<i-message id="message" />
+<i-drawer mode="right" visible="{{showRight1}}" bind:close="progress">
+	<scroll-view  class="proShow" scroll-y='true' catchtouchmove='true'>
+		<view class="c1" style="margin-bottom:20rpx">
+			<text style="font-weight:bolder;color:#1890ff;margin-left:10rpx;font-size:35rpx">流转信息</text>
+		</view>
+			<i-steps current="{{verticalCurrent}}" direction="vertical">
+			<i-step  wx:for="{{proLists}}" icon="{{index==proLists.length-1?'brush':''}}">
+			<view class="lists" slot="content">
+			<view class="right">
+				<view class="time1">
+					<text class="timeLeft">环节名称:</text>
+					<text class="timeRight">{{item.name}}</text>
+				</view>
+				<view class="time1">
+					<text class="timeLeft">创建时间:</text>
+					<text class="timeRight">{{item.createTime}}</text>
+				</view>
+				<view class="time1">
+					<text class="timeLeft">完成时间:</text>
+					<text class="timeRight">{{item.endTime}}</text>
+				</view>
+				<view class="time1">
+					<text class="timeLeft">分配人员:</text>
+					<text class="timeRight">{{item.assigneeInfo}}</text>
+				</view>
+				<view class="time1">
+					<text class="timeLeft">审批意见:</text>
+					<text class="timeRight">{{item.comment}}</text>
+				</view>
+			</view>
+		</view>
+			</i-step>
+		</i-steps>
+	</scroll-view >
+</i-drawer>
+<i-spin fix wx:if="{{loadAll}}"></i-spin>

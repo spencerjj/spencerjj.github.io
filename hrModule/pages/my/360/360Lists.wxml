@@ -1,0 +1,29 @@
+<!-- <view class="container">
+    <canvas canvas-id="radarCanvas" class="canvas" bindtouchstart="touchHandler"></canvas>
+</view> -->
+
+<view class="content">  
+  <view class="list expired" wx:for="{{lists}}" data-index="{{index}}">
+    <view class="top" hover-class='hover1' hover-stay-time='50' bindtap="showDetail" data-index="{{index}}">
+    <text class="title">标题:<text class="active"> {{item.logTitle}}</text></text>
+    <text class="name" wx:if="{{item.mark==0}}">被评估人:<text class="active"> {{item.estimateName}}</text></text>
+    <text class="date" wx:if="{{item.status=='0'}}"><text class="active">未评估</text></text>
+    <text class="date1" wx:if="{{item.status=='2'&&item.mark==0}}"><text style="active">{{item.zhdf}}</text></text>
+    <image class="arraw {{item.mark==1?'selected':''}}" src="../../../images/lan.png"></image>
+    </view>
+    <view class="details {{item.mark==1?'show':''}}">
+      <view class="detail" wx:if="{{item.status=='2'}}"><text class="dtitle">综合得分:</text><text class="active"> {{item.zhdf}}</text></view>
+      <view class="detail"><text class="dtitle">被评估人:</text><text class="active"> {{item.estimateName}}</text></view>
+      <view class="detail"><text class="dtitle">模板名称:</text><text class="active"> {{item.modelName}}</text></view>
+      <view class="detail"><text class="dtitle">被评估人部门:</text><text class="active"> {{item.officeName}}</text></view>
+      <view class="detail"><text class="dtitle">评估关系:</text><text class="active"> {{item.relation}}</text></view>
+      <view class="detail"><text class="dtitle">截止日期:</text><text class="active"> {{item.estimateLog.endDate}}</text></view>
+      <view class="detail do" bindtap="toPage" data-id="{{item.id}}"><image src="../../../images/add.png"></image><text class="dotext" wx:if="{{item.status=='0'}}">立即评估>></text><text class="dotext" wx:if="{{item.status=='2'}}">重新评估>></text></view>
+    </view>
+  </view>
+</view>
+<i-message id="message" />
+<i-toast id="toast" />
+<i-spin fix wx:if="{{loadAll}}"></i-spin>
+<view wx:if="{{listIsFull}}" class='nullDataInfo'><i-load-more tip="无更多数据了" loading="{{ false }}" /></view>
+<view wx:if="{{loading}}" class='buskmark'><image src='../../../images/00-12.png'></image></view>

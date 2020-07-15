@@ -1,0 +1,6 @@
+<view class="content">
+  <view class="img"><image src="../../../images/success.png"></image></view>
+  <view class="title1">提交成功</view>
+  <view class="title2">已收到您的评估，感谢填写</view>
+  <button class="back" bindtap="toPage">返 回</button>
+</view>

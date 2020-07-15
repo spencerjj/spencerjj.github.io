@@ -1,0 +1,18 @@
+<view class="i-sticky-demo-des">
+    注: 1.由于组件内部不能使用onPageScroll,导致不能监听scrollTop值只能通过用户用props传递。
+</view>
+<view class="i-sticky-demo-des">
+    2.在微信开发客户端显示的时候会有bug。不停计算scrollTop值不能同步
+</view>
+<view class="i-sticky-demo">
+    <i-sticky scrollTop="{{scrollTop}}">
+        <i-sticky-item i-class="i-sticky-demo-title" wx:for="{{lists}}" wx:for-item='boss'>
+            <view slot="title">
+                {{boss.id}}
+            </view>
+            <view slot="content">
+                <view class="i-sticky-demo-item"  wx:for="{{boss.content}}" wx:for-item="son" data-index="{{index}}" bindtap="select">{{son.name}}</view>
+            </view>
+        </i-sticky-item>
+    </i-sticky>
+</view>

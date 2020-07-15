@@ -1,0 +1,279 @@
+/* pages/index/vote.wxss */
+page {
+  background: #f7f7f7
+}
+
+.content {
+  width: 94%;
+  margin-left: 3%;
+  padding-bottom: 100rpx;
+}
+
+.main {
+  border-radius: 10rpx;
+  border: 5rpx dashed #ccc;
+  margin-top: 30rpx;
+  padding: 5rpx;
+  height: 80rpx;
+  font-size: 40rpx;
+  text-align: center;
+  color: #b6a890;
+  font-weight: bolder;
+  line-height: 80rpx;
+  background: #fff;
+}
+
+.section {
+  margin: 20rpx;
+}
+
+radio,
+checkbox {
+  margin-top: 20rpx;
+}
+
+radio .wx-radio-input {
+  display: block;
+}
+
+.section_title {
+  font-size: 35rpx;
+  color: #6f9ef5;
+  font-weight: bolder;
+  margin-top: 20rpx;
+}
+
+.btn_area {
+  width: 94%;
+  margin: 0 auto;
+  margin-top: 100rpx;
+}
+
+.btn_area button {
+  font-size: 35rpx;
+  background: #fff;
+  color: #af9d7f;
+  height: 80rpx;
+  line-height: 80rpx;
+  width: 80%;
+  border: 2rpx solid #af9d7f;
+
+}
+
+.pics {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: left;
+  background: #eee;
+  padding-bottom: 30rpx;
+  margin-top: 20rpx;
+  border-radius: 10rpx;
+}
+
+.pic {
+  width: 37%;
+  text-align: center;
+  margin-left: 4.5%;
+  margin-top: 30rpx;
+  padding: 20rpx;
+  background: white;
+  border-radius: 10rpx;
+  box-shadow: 0px 0px 5px #af9d7f;
+  position: relative;
+}
+
+/* .pic:nth-child(2n+1){
+  margin-left: 0;
+} */
+.profile image {
+  width: 100%;
+  height: 300rpx;
+  border-radius: 5rpx;
+}
+
+.select image {
+  width: 50rpx;
+  height: 50rpx;
+}
+
+.name {
+  font-weight: bolder;
+  font-size: 35rpx;
+  color: #af9d7f
+}
+
+.c1 {
+  margin-top: 20rpx;
+  position: relative
+}
+
+.c1 text {
+  font-size: 35rpx;
+  color: #af9d7f;
+  padding-left: 10rpx;
+  font-weight: bolder;
+}
+
+.c1Input {
+  border-radius: 10rpx;
+  border: 2rpx dashed #ccc;
+  margin-top: 10rpx;
+  padding: 5rpx;
+  font-size: 35rpx;
+  padding-left: 10px;
+  width: 96%;
+  min-height: 200rpx;
+  z-index: 1;
+  color: #af9d7f;
+  /* background: #eee; */
+}
+
+.timePicker {
+  width: 97%;
+  height: 80rpx;
+  border: 2rpx dashed #ccc;
+  border-radius: 10rpx;
+  line-height: 80rpx;
+  color: #af9d7f;
+  padding-left: 20rpx;
+  margin-top: 10rpx;
+  position: relative;
+  font-size: 35rpx
+}
+
+.arraw {
+  width: 40rpx;
+  height: 45rpx;
+  top: 50%;
+  margin-top: -22.5rpx;
+  right: 20rpx;
+  position: absolute
+}
+
+.myradio1 .mylabel {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+}
+
+.myradio1 .mylabel view {
+  vertical-align: middle;
+  display: inline-block;
+  margin-right: 20rpx;
+  width: 70%;
+  white-space: wrap;
+}
+
+.myradio1 label {
+  width: 49%;
+  text-align: center;
+  min-height: 90rpx;
+  background: white;
+  box-shadow: 0px 0px 5px #ccc;
+}
+
+.myradio2 .mylabel {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: center;
+  border: 2rpx solid #ccc;
+  box-shadow: 0px 0px 3px #ccc;
+  background: white;
+  padding-bottom: 20rpx;
+}
+
+.myradio2 .mylabel view {
+  vertical-align: middle;
+  display: inline-block;
+  margin-right: 20rpx;
+}
+
+.myradio2 label {
+  min-width: 20%;
+}
+
+.vote image {
+  width: 30rpx;
+  height: 30rpx;
+  margin-right: 10rpx;
+}
+
+.vote {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.voteText {
+  /* border: #af9d7f 3rpx solid; */
+  border-radius: 10rpx;
+  font-size: 30rpx;
+  color: #af9d7f;
+  margin-top: 10rpx;
+  height: 50rpx;
+  line-height: 50rpx;
+  box-shadow: 0px 0px 5px #af9d7f;
+}
+
+.voted {
+  border-radius: 10rpx;
+  font-size: 30rpx;
+  color: #fff;
+  margin-top: 10rpx;
+  background: #af9d7f;
+  height: 50rpx;
+  line-height: 50rpx;
+  box-shadow: 0px 0px 5px #af9d7f;
+}
+
+.pics1 {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.bigSel {
+  background: #eee;
+  padding-bottom: 30rpx;
+  margin-top: 20rpx;
+  border-radius: 10rpx;
+  position: relative;
+  transform: scale(1, 1);
+  transition: transform 0.5s linear, opacity 0.5s linear;
+}
+
+
+/* .number{
+  width: 50rpx;
+height: 50rpx;
+font-size: 35rpx;
+font-weight: bolder;
+color: white;
+border-radius: 50%;
+background: #af9d7f;
+text-align: center;
+line-height: 50rpx;
+position: absolute;
+left: 20rpx;
+top: 20rpx;
+} */
+.number {
+  width: 50rpx;
+  height: 50rpx;
+  border-radius: 50rpx;
+  background: #af8d7f;
+  color: white;
+  font-size: 35rpx;
+  line-height: 50rpx;
+  position: absolute;
+  text-align: center;
+  left: 20rpx;
+  top: 20rpx;
+  opacity: .7;
+}
+.hover1{
+  background:#eee !important
+}

@@ -1,0 +1,82 @@
+{
+  "pages": [
+    "pages/my/my",
+    "pages/index/inform",
+    "pages/my/select",
+    "pages/my/selectLists",
+    "pages/my/myInfos",
+    "pages/index/progress/transfer",
+    "pages/index/progress/leave",
+    "pages/my/360/360Lists",
+    "pages/my/360/estimate",
+    "pages/my/newFunction",
+    "pages/my/360/360result",
+    "pages/my/360/success",
+    "pages/my/360/welcome",
+    "pages/index/voteList",
+    "pages/index/progress/entry",
+    "pages/index/vote",
+    "pages/my/leaderTag",
+    "pages/my/myTag",
+    "pages/index/success",
+    "pages/index/progress/back",
+    "pages/index/progress/apply",
+    "pages/index/publish",
+    "pages/index/progress/regular",
+    "pages/index/progress/renew",
+    "pages/index/edit",
+    "pages/index/detail",
+    "pages/index/listDetail"
+  ],
+  "tabBar": {
+    "color": "#bfbfbf",
+    "selectedColor": "#af9d7f",
+    "borderStyle": "black",
+    "backgroundColor": "#f3f3f3",
+    "list": [
+      {
+        "pagePath": "pages/index/inform",
+        "iconPath": "images/job.png",
+        "selectedIconPath": "images/jobed.png",
+        "text": "流程列表"
+      },
+      {
+        "pagePath": "pages/my/my",
+        "iconPath": "images/my.png",
+        "selectedIconPath": "images/myed.png",
+        "text": "个人中心"
+      }
+    ]
+  },
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "WeChat",
+    "navigationBarTextStyle": "black",
+    "backgroundColor": "#69bcf9"
+  },
+  "usingComponents": {
+    "i-message": "component/iview/message/index",
+    "i-modal": "component/iview/modal/index",
+    "i-switch": "component/iview/switch/index",
+    "i-radio-group": "component/iview/radio-group/index",
+    "i-radio": "component/iview/radio/index",
+    "i-row": "component/iview/row/index",
+    "i-col": "component/iview/col/index",
+    "i-button": "component/iview/button/index",
+    "i-icon": "component/iview/icon/index",
+    "i-tabs": "component/iview/tabs/index",
+    "i-tab": "component/iview/tab/index",
+    "i-action-sheet": "component/iview/action-sheet/index",
+    "i-toast": "component/iview/toast/index",
+    "i-spin": "component/iview/spin/index",
+    "i-rate": "component/iview/rate/index",
+    "i-load-more": "component/iview/load-more/index",
+    "i-steps": "component/iview/steps/index",
+    "i-step": "component/iview/step/index",
+    "i-progress": "component/iview/progress/index",
+    "i-drawer": "component/iview/drawer/index",
+    "i-input-number": "component/iview/input-number/index"
+  },
+  "sitemapLocation": "sitemap.json"
+}

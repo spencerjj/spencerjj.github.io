@@ -1,0 +1,46 @@
+<view class="content">
+	<view class="profile section"  bindtap='upload'>
+		<view class="pic">
+			<image src="{{path}}" mode="aspectFill"></image>
+		</view>
+		<view class="action">
+			<text>重新上传</text>
+		</view>
+		<image class="arraw" src="../../images/arraw1.png"></image>
+	</view>
+	<view class="name section">
+		<view class="s1">姓名</view>
+		<input placeholder='' maxlength="8" class="fill" bindinput="inputName" value="{{name}}"  disabled></input>
+		<!-- <image class="arraw" src="../../images/arraw1.png"></image> -->
+	</view>
+	<view class="number section">
+		<view class="s1">邮箱</view>
+		<input placeholder='请完善邮箱信息' placeholder-style="color:#bfbfbf;font-weight:normal;font-size:30rpx" maxlength="30" type="number" class="fill" bindinput="emailInput" value="{{email}}"></input>
+		<image class="arraw" src="../../images/arraw1.png"></image>
+	</view>
+	<view class="number section">
+		<view class="s1">手机号</view>
+		<input placeholder='请完善手机号信息' placeholder-style="color:#bfbfbf;font-weight:normal;font-size:30rpx" maxlength="11" type="number" class="fill" bindinput="phoneInput" value="{{phone}}"></input>
+		<image class="arraw" src="../../images/arraw1.png"></image>
+	</view>
+	<view class="title section">
+		<view class="s1">部门</view>
+		<input placeholder='' maxlength="11" type="number" class="fill" bindinput="inputPhone" value="{{office}}"  disabled></input>
+		<!-- <image class="arraw" src="../../images/arraw1.png"></image> -->
+	</view>
+  <view class="name section">
+		<view class="s1">上级领导</view>
+		<input placeholder='' maxlength="8" class="fill" bindinput="inputName" value="{{managername}}"  disabled></input>
+		<!-- <image class="arraw" src="../../images/arraw1.png"></image> -->
+	</view>
+  <view class="name section" bindtap="toPage">
+		<view class="s1">我的标签</view>
+		<!-- <input placeholder='' maxlength="11" type="number" class="fill" bindinput="inputPhone" value="{{office}}"  disabled></input> -->
+		<image class="arraw" src="../../images/arraw1.png"></image><view class="count" wx:if="{{count}}">{{count}}</view>
+	</view>
+</view>
+<view class="save {{mark?'':'disabled'}}" bindtap='save'>
+	保存
+</view>
+<i-toast id="toast" />
+<i-spin fix wx:if="{{loadAll}}"></i-spin>

@@ -1,0 +1,62 @@
+<view class="detail">
+  <view class="title">
+    领导开会
+  </view>
+  <view class="content">
+    开会啊啊啊开会啊啊啊开会啊啊啊开会啊啊啊开会啊啊啊开会啊啊啊开会啊啊啊开会啊啊啊开会啊啊啊开会啊啊啊
+  </view>
+  <view class="detail1">
+    很多人开会很重要
+  </view>
+  <view class="date">
+    <view class="time1">
+      <view class="c1">
+        <image src="../../images/timeIcon.png"></image>
+        <text>放假时间</text>
+      </view>
+      <view class="myTime">2019.2.2-2910.1.1</view>
+    </view>
+      <view class="c1">
+      <image src="../../images/textIcon.png"></image>
+      <text>缴费项目</text>
+    </view>
+    <view class="myTime">吃法</view>
+    <view class="c1">
+      <image src="../../images/qian.png"></image>
+      <text>缴费金额</text>
+    </view>
+    <view class="myTime">￥100</view>
+    <view class="time2">
+      <view class="c1">
+        <image src="../../images/timeIcon.png"></image>
+        <text>提交时间</text>
+      </view>
+      <view class="myTime">2018.1.1</view>
+    </view>
+    <view class="c1">
+      <image src="../../images/location.png"></image>
+      <text>会议地点</text>
+    </view>
+    <view class="myTime">2019.2.2</view>
+  </view>
+  <view class="pics" >
+    <!-- <image wx:for="{{imglist}}" src="{{item}}" bindtap='detail' data-url="{{item}}" mode="widthFix"></image> -->
+  </view>
+    <view class="hint">
+    <view class="c1" style="padding-bottom:10rpx">
+      <image src="../../images/notice.png"></image>
+      <text>温馨提示</text>
+    </view>
+    <text>出入平安</text>
+  </view>
+  <view class="bottom">
+    <view class="source">
+      我啊
+    </view>
+    <view class="publishTime">
+      2019.8.8
+    </view>
+  </view>
+  </view>
+
+<view class='nullDataInfo'></view>

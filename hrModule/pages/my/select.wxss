@@ -1,0 +1,107 @@
+page {
+  background-color: #f7f7f7;
+}
+
+.title {
+  width: auto;
+  height: 40rpx;
+  line-height: 40rpx;
+  font-size: 40rpx;
+  color: #000;
+  margin: 20rpx 0 0 35rpx;
+}
+
+.tip {
+  width: auto;
+  height: 24rpx;
+  line-height: 24rpx;
+  font-size: 24rpx;
+  color: #4a4a4a;
+  margin: 30rpx 0 0 35rpx;
+}
+
+.storeList {
+  padding-top: 30rpx;
+}
+
+.info-box {
+  position: relative;
+  width: 92%;
+  height: 140rpx;
+  margin-left: 4%;
+  background: #fff;
+  margin-bottom: 20rpx;
+  box-shadow: 0 0 5rpx #ccc;
+  border-radius: 10rpx;
+}
+
+.info-box .storeIcon {
+  float: left;
+  margin: 30rpx;
+  width: 80rpx;
+  height: 80rpx;
+}
+
+.info-box .storeInfo {
+  width: auto;
+  max-width: 330rpx;
+  height: 140rpx;
+  float: left;
+}
+
+.info-box .storeInfo .storeName {
+  width: auto;
+  height: 50rpx;
+  font-size: 36rpx;
+  line-height: 50rpx;
+  color: #000;
+  margin-top: 30rpx;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  color:#5cadff;
+}
+
+.info-box .storeInfo .storeAdmin {
+  width: auto;
+  height: 34rpx;
+  font-size: 24rpx;
+  line-height: 34rpx;
+  color: #5a5a5a;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  color:#5cadff;
+}
+
+.info-box .camInfo {
+  width: auto;
+  height: 100rpx;
+  float: right;
+  margin-top: 20rpx;
+  margin-right: 70rpx;
+  text-align: center;
+}
+
+.info-box .camInfo .camNum {
+  color: #5a5a5a;
+  font-size: 36rpx;
+}
+
+.info-box .camInfo .camTip {
+  color: #5a5a5a;
+  font-size: 24rpx;
+  margin-top: 6rpx;
+}
+
+.info-box .arrow {
+  width: 30rpx;
+  height: 35rpx;
+  top: 50%;
+  margin-top: -17.5rpx;
+  right: 15rpx;
+  position: absolute;
+}
+.hover1{
+  background: #eee !important;
+}

@@ -1,0 +1,15 @@
+{
+  "navigationBarTitleText": "云宝幼儿园",
+  "navigationBarBackgroundColor": "#FFCC00",
+  "enablePullDownRefresh": false,
+  "usingComponents":{
+    "i-row": "../../component/iview/row/index",
+    "i-col": "../../component/iview/col/index",
+    "i-button": "../../component/iview/button/index",
+    "i-icon": "../../component/iview/icon/index",
+    "i-tabs": "../../component/iview/tabs/index",
+    "i-tab": "../../component/iview/tab/index",
+    "i-notice-bar":"../../component/iview/notice-bar/index",
+    "i-action-sheet": "../../component/iview/action-sheet/index"
+  }
+}

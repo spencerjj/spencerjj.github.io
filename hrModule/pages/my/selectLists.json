@@ -1,0 +1,10 @@
+{
+  "navigationBarTitleText": "普灵仕集团",
+  "navigationBarTextStyle": "white",
+  "navigationBarBackgroundColor": "#69bcf9",
+  "enablePullDownRefresh": true,
+  "usingComponents": {
+    "i-sticky":"../../component/iview/sticky/index",
+    "i-sticky-item":"../../component/iview/sticky-item/index"
+  }
+}

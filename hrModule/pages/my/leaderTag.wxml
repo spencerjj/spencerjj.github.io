@@ -1,0 +1,57 @@
+<!--pages/customerDetail/customerDetail.wxml-->
+<view class='card'>
+	<view class='card-box1 card-box' bindtap="switchPage">
+		<view class='image-box'>
+			<!-- <image data-url='{{customerInfo.image?imgBase+customerInfo.image:""}}' bindtap='showBigImg' src='{{customerInfo.image?imgBase+customerInfo.image:""}}'></image> -->
+			<image src='../../images/user1.jpg'  mode="aspectFill"></image>
+		</view>
+		<input class="nameInput" value="{{userDetails.managername}}" placeholder-class="phcolor" disabled="true">
+		</input>
+	</view>
+	<view class='card-box2 card-box'>
+		<view class='title'>ta的标签</view>
+		<!-- <view class="leaderTag">评价上级</view> -->
+		<view class='tag-box'>
+			<view class='group'>
+				<view wx:for="{{lists}}" class="tag {{item.employeeTag.type=='4'?'bg-red':''}} {{item.employeeTag.type=='2'?'bg-lan':''}} {{item.employeeTag.type=='3'?'bg-lv':''}} {{item.employeeTag.type=='1'?'bg-huang':''}}">
+					<view wx:if="{{item.employeeTag.type=='1'||item.employeeTag.type=='4'}}">{{item.employeeTag.name}}</view>
+					<view wx:if="{{item.employeeTag.type=='2'}}" bindtap="showSelection" data-id="2" data-index="{{index}}"  data-mark="{{item.employeeTag.isW=='1'}}">{{item.value?item.value:item.employeeTag.name}}
+					</view>
+					<view wx:if="{{item.employeeTag.type=='3'}}" bindtap="showSelection" data-id="3" data-index="{{index}}" data-mark="{{item.employeeTag.isW}}">{{item.value?item.value:item.employeeTag.name}}
+					</view>
+				</view>
+			</view>
+		</view>
+		<view class="addTag" bindtap="comment" hover-class='hover1' hover-stay-time='50'><image src="../../images/addcomment1.png"></image> 给ta新增一个标签</view>
+	</view>
+</view>
+
+<i-message id="message" />
+<i-spin fix wx:if="{{loadAll}}"></i-spin>
+<i-drawer mode="right" visible="{{showRight1}}" bind:close="close">
+	<scroll-view class="proShow" scroll-y='true' catchtouchmove='true'>
+		<view class="c1" style="margin-bottom:20rpx;margin-top:20rpx;margin-left:12%">
+			<text style="font-weight:bolder;color:#1890ff">标签选择</text>
+		</view>
+		<view class="lists {{item.sel?'selected':''}}" bindtap='select' wx:for="{{list}}" data-id="{{item.id}}" wx:for-index="index" data-index="{{index}}">
+			<view class="right">
+				<view class="time1 {{item.sel?'selected1':''}}">
+					{{item.name}}
+				</view>
+				<view class="count">
+					<image src="../../images/01-27.jpg" wx:if="{{item.sel==1}}"></image>
+					<image src="../../images/01-26.jpg" wx:else></image>
+				</view>
+			</view>
+		</view>
+		<view class="action">
+			<button class="save" bindtap='save'  hover-class='hover1' hover-stay-time='50'>保存</button>
+			<button class="close" bindtap='close'>关闭</button>
+		</view>
+	</scroll-view>
+</i-drawer>
+<view class='pocket_input' wx:if="{{inputShow}}" style="bottom:{{bottom}}px">
+	<input type='text' placeholder-style='input-placeholder' cursor='{{cursor_position}}' class='input_style' placeholder='{{notice}}' focus='{{focus}}' cursor-spacing="2" adjust-position='{{false}}' bindfocus="bindfocus" bindblur="bindblur" bindconfirm="add" confirm-type="done" bindinput='getTags' maxlength='500'></input>
+</view>
+<view style="width:100%;height:100%;position:fixed;top:0;left:0;background:#333;opacity:.8;z-index:99" wx:if="{{inputShow}}"></view>
+<i-toast id="toast" />

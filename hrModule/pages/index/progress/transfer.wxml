@@ -1,0 +1,138 @@
+<view class="content">
+    <!-- <input class="main" value="转岗流程表" placeholder-style='color:#af9d7f' bindinput='mainInput' disabled></input> -->
+  <view class="title">
+    <view class="c1">
+      <text>转岗员工</text>
+    </view>
+    <view class="codePicker">
+      <text>{{lists.empName}}</text>
+    </view>
+  </view>
+  <view class="title">
+    <view class="c1">
+      <text>调出公司</text>
+    </view>
+    <view class="codePicker">
+      <text>{{lists.companyNameOut}}</text>
+    </view>
+  </view>
+  <view class="title">
+    <view class="c1">
+      <text>调出部门</text>
+    </view>
+    <view class="codePicker">
+      <text>{{lists.officeNameOut}}</text>
+    </view>
+  </view>
+  <view class="title" wx:if="{{lists.bpm.activityId=='hrbp'}}">
+		<view class="c1">
+			<text>调动类型<text style="color:red;font-size:25rpx">*</text> </text>
+		</view>
+		<picker value="{{index1}}" range="{{array1}}" bindchange="pickChange" disabled="{{current==1&&lists.bpm.activityId=='hrbp'?false:true}}">
+			<view class="timePicker  {{ifOut?'':'pickerError'}}">
+				<text wx:if="{{index1==10}}" style="color:#af9d7f">请选择...</text>
+				{{array1[index1]}}
+				<image class="arraw" src="http://img.gagctv.com/17112314452261654"></image>
+			</view>
+		</picker>
+	</view>
+  <view class="title">
+    <view class="c1">
+      <text>调出岗位</text>
+    </view>
+    <view class="codePicker">
+      <text>{{lists.postNameOut}}</text>
+    </view>
+  </view>
+  <view class="title">
+    <view class="c1">
+      <text>调出上级</text>
+    </view>
+    <view class="codePicker">
+      <text>{{lists.managerNameOut}}</text>
+    </view>
+  </view>
+  <view class="title">
+    <view class="c1">
+      <text>调入公司</text>
+    </view>
+    <view class="codePicker">
+      <text>{{lists.companyNameIn}}</text>
+    </view>
+  </view>
+  <view class="title">
+    <view class="c1">
+      <text>调入部门</text>
+    </view>
+    <view class="codePicker">
+      <text>{{lists.officeNameIn}}</text>
+    </view>
+  </view>
+  <view class="title">
+    <view class="c1">
+      <text>调入岗位</text>
+    </view>
+    <view class="codePicker">
+      <text>{{lists.postNameIn}}</text>
+    </view>
+  </view>
+  <view class="title">
+    <view class="c1">
+      <text>调入上级</text>
+    </view>
+    <view class="codePicker">
+      <text>{{lists.managerNameIn}}</text>
+    </view>
+  </view>
+
+
+  <view class="title" style="z-index:1 !important"  wx:if="{{current==1&&can}}">
+    <view class="c1">
+      <text>审批意见</text>
+    </view>
+    <input class="number" placeholder='常用语: 同意  已阅' placeholder-style='color:#af9d7f' bindinput='hinput' value="{{hint}}"></input>
+  </view>
+</view>
+<view class="bottom">
+	<button class="progress {{current==1&&can?'btnwid1':'btnwid'}}" bindtap='progress' hover-class='hover1' hover-stay-time='50'>流程追踪</button>
+	<button class="publish btnwid1" bindtap='handleOpen' wx:if="{{current==1&&can}}" hover-class='hover2' hover-stay-time='50'>审批操作</button>
+</view>
+<i-action-sheet visible="{{visible}}" actions="{{actions}}" show-cancel bind:cancel="handleCancel" bind:click="handleClickItem" />
+<i-toast id="toast" />
+<i-message id="message" />
+<i-drawer mode="right" visible="{{showRight1}}" bind:close="progress">
+	<scroll-view  class="proShow" scroll-y='true' catchtouchmove='true'>
+		<view class="c1" style="margin-bottom:20rpx">
+			<text style="font-weight:bolder;color:#1890ff;margin-left:10rpx;font-size:35rpx">流转信息</text>
+		</view>
+				<i-steps current="{{verticalCurrent}}" direction="vertical">
+			<i-step  wx:for="{{proLists}}" icon="{{index==proLists.length-1?'brush':''}}">
+			<view class="lists" slot="content">
+			<view class="right">
+				<view class="time1">
+					<text class="timeLeft">环节名称:</text>
+					<text class="timeRight">{{item.name}}</text>
+				</view>
+				<view class="time1">
+					<text class="timeLeft">创建时间:</text>
+					<text class="timeRight">{{item.createTime}}</text>
+				</view>
+				<view class="time1">
+					<text class="timeLeft">完成时间:</text>
+					<text class="timeRight">{{item.endTime}}</text>
+				</view>
+				<view class="time1">
+					<text class="timeLeft">分配人员:</text>
+					<text class="timeRight">{{item.assigneeInfo}}</text>
+				</view>
+				<view class="time1">
+					<text class="timeLeft">审批意见:</text>
+					<text class="timeRight">{{item.comment}}</text>
+				</view>
+			</view>
+		</view>
+			</i-step>
+		</i-steps>
+	</scroll-view >
+</i-drawer>
+<i-spin fix wx:if="{{loadAll}}"></i-spin>

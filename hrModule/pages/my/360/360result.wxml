@@ -1,0 +1,11 @@
+<view class="container">
+    <!-- <view class="select"> -->
+        <!-- <picker class='typeInput' mode="selector" bindchange="pickerChange" range='{{array}}'>
+        {{array[index]}}</image>
+        </picker> -->
+        <!-- 2019下半年度 -->
+    <!-- </view> -->
+    <canvas canvas-id="radarCanvas" class="canvas" bindtouchstart="touchHandler"></canvas>
+</view>
+<i-spin fix wx:if="{{loadAll}}"></i-spin>
+<i-toast id="toast" />

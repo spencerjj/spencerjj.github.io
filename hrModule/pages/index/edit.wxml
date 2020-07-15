@@ -1,0 +1,105 @@
+<view class="content">
+    <input class="main" value="新增入职流程表单"  placeholder='新增入职流程表单' placeholder-style='color:#af9d7f' bindinput='mainInput' disabled></input>
+  <view class="title">
+    <view class="c1">
+      <text>员工名称</text>
+    </view>
+      <view class="departPicker" bindtap='toggleRight'>
+      <text>请选择员工名称</text>
+      <image   class="arraw"   src="http://img.gagctv.com/17112314452261654"></image>
+    </view>
+  </view>
+  <view class="title">
+    <view class="c1">
+      <text>单位</text>
+    </view>
+    <picker value="{{index1}}"  range="{{array1}}" bindchange="departChange">
+      <view class="timePicker">
+      <text wx:if="{{index1==''}}">请选择单位</text>
+        {{array1[index1]}}
+              <image   class="arraw"   src="http://img.gagctv.com/17112314452261654"></image>
+      </view>
+    </picker>
+  </view>
+  <view class="title">
+    <view class="c1">
+      <text>工号</text>
+    </view>
+      <view class="codePicker" bindtap=''>
+      <text>请先选择单位</text>
+    </view>
+  </view>
+  <view class="title">
+    <view class="c1">
+      <text>部门</text>
+    </view>
+    <view class="departPicker" bindtap=''>
+      <text>请选择部门</text>
+      <image   class="arraw"   src="http://img.gagctv.com/17112314452261654"></image>
+    </view>
+  </view>
+  <view class="sub">
+    <view class="c2">
+      <text>入职岗位</text>
+    </view>
+  <picker value="{{index1}}"  range="{{array1}}" bindchange="departChange">
+      <view class="timePicker">
+      <text wx:if="{{index1==''}}">请选择入职岗位</text>
+        {{array1[index1]}}
+              <image   class="arraw"   src="http://img.gagctv.com/17112314452261654"></image>
+      </view>
+    </picker>
+  </view>
+  <view class="title">
+    <view class="c1">
+      <text>直接上级</text>
+    </view>
+    <view class="departPicker" bindtap=''>
+      <text>请选择直接上级</text>
+      <image   class="arraw"   src="http://img.gagctv.com/17112314452261654"></image>
+    </view>
+  </view>
+  <view class="title">
+    <view class="c1">
+      <text>手机号码</text>
+    </view>
+      <input class="number" placeholder='请输入手机号码' placeholder-style='color:#af9d7f' bindinput='numberInput'></input>
+  </view>
+  <view class="sub">
+    <view class="c2">
+      <text>入职时间</text>
+    </view>
+  <picker mode="date" value="{{date1}}" start="2020-01-01" end="2030-10-01" bindchange="bindDateChange">
+    <view class="timePicker">
+      {{date1}}
+            <image   class="arraw"   src="http://img.gagctv.com/17112314452261654"></image>
+    </view>
+  </picker>
+  </view>
+  <!-- <view class="up">
+    <view class="c3">
+      <text>图片</text>
+    </view>
+    <view class="pics">
+      <view class="upImg">
+          <image wx:for="{{imglist}}" src="{{item}}" data-url="{{item}}" bindtouchstart='touchStart' bindtouchend='touchEnd' mode="aspectFill"></image>
+        <image src="../../images/upload.png" bindtap='uploadImg'></image>
+      </view>
+    </view>
+  </view> -->
+    <view class="title" style="z-index:1 !important">
+    <view class="c1">
+      <text>备注</text>
+    </view>
+    <textarea class="c1Input" placeholder='请输入备注(选填)' placeholder-style='color:#af9d7f' bindinput='hinput' value="{{hint}}" auto-height maxlength='1000' ></textarea>
+  </view>
+</view>
+<view class="bottom">
+  <button class="publish" bindtap='publish'>发 布</button>
+</view>
+<i-drawer mode="right" visible="{{showRight}}" bind:close="toggleRight">
+    <view class="demo-container">
+        禁止单击遮罩关闭
+        <i-button bind:click="toggleRight" type="primary">关闭</i-button>
+    </view>
+</i-drawer>

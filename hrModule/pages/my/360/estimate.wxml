@@ -1,0 +1,256 @@
+<view class="content">
+	<!-- 选领导(单选) -->
+	<view class="part1" wx:if="{{totalIndex==0}}">
+		<view class="main">{{lists.estimateModel.name}}</view>
+		<view class="topInfo">
+			<view>被评估人:</view>
+			<view>{{lists.estimateName}}</view>
+		</view>
+		<view class="topInfo">
+			<view>被评估人部门:</view>
+			<view>{{lists.officeName}}</view>
+		</view>
+		<view class="topInfo">
+			<view>被评估人岗位:</view>
+			<view>{{lists.postName}}</view>
+		</view>
+		<view class="explain">
+			<view>说明:</view>
+			<text>{{lists.estimateModel.description}}</text>
+		</view>
+		<view class="next"><button hover-class='hover1' hover-stay-time='50' bindtap="start">开始评估</button></view>
+	</view>
+	<view class="part2 part" wx:if="{{totalIndex==1}}">
+		<view class="title1">评估纬度</view>
+		<view class="title2">价值观(1/5)</view>
+		<view class="title1">内容</view>
+		<view class="title3">{{lists.estimateModel.estimateModelContentList[0].contentTitle}}</view>
+		<view class="title4">{{lists.estimateModel.estimateModelContentList[0].contentIntroduce}}</view>
+		<view class="title1">行为</view>
+		<view class="title4">
+			<text>{{lists.estimateModel.estimateModelContentList[0].contentAction}}</text>
+		</view>
+		<view class="title1">单项评分</view>
+		<view class="title4 point">
+			<!-- <i-cell title="自定义星星个数">
+        <i-rate 
+        bind:change="onChange1" 
+            count="{{10}}"
+            value="{{starIndex1}}">
+        </i-rate>
+    </i-cell> -->
+			<i-panel>
+				<view style="padding: 16px;color:#69bcf9">
+					<i-input-number value="{{ value1 }}" min="10" max="{{lists.estimateModel.estimateModelContentList[0].contentScore}}" bindchange="handleChange1" />
+				</view>
+			</i-panel>
+		</view>
+		<view class="title1">单项权重</view>
+		<view class="title4">{{lists.estimateModel.estimateModelContentList[0].contentWeight*100}}%</view>
+		<view class="title1">单项得分</view>
+		<view class="title4">{{point1?point1:0}}</view>
+		<view class="title1">综合得分</view>
+		<view class="title4">{{totalPoint?totalPoint:0}}</view>
+		<view class="title1" style="color:red">关键行为事迹</view>
+		<view>
+			<textarea auto-height maxlength='1000' bindinput="handleinput1" cursor-spacing='20' value="{{gjsl1}}"></textarea>
+		</view>
+
+		<view class="next"><button hover-class='hover1' hover-stay-time='50' bindtap="next">下一项</button></view>
+	</view>
+	<view class="part3" wx:if="{{totalIndex==2}}">
+		<view class="title1">评估纬度</view>
+		<view class="title2">价值观(2/5)</view>
+		<view class="title1">内容</view>
+		<view class="title3">{{lists.estimateModel.estimateModelContentList[1].contentTitle}}</view>
+		<view class="title4">{{lists.estimateModel.estimateModelContentList[1].contentIntroduce}}</view>
+		<view class="title1">行为</view>
+		<view class="title4">
+			<text>{{lists.estimateModel.estimateModelContentList[1].contentAction}}</text>
+		</view>
+		<view class="title1">单项评分</view>
+		<view class="title4 point">
+			<i-panel>
+				<view style="padding: 16px;color:#69bcf9">
+					<i-input-number value="{{ value2 }}" min="10" max="{{lists.estimateModel.estimateModelContentList[1].contentScore}}" bindchange="handleChange2" />
+				</view>
+			</i-panel>
+		</view>
+		<view class="title1">单项权重</view>
+		<view class="title4">{{lists.estimateModel.estimateModelContentList[1].contentWeight*100}}%</view>
+		<view class="title1">单项得分</view>
+		<view class="title4">{{point2?point2:0}}</view>
+		<view class="title1">综合得分</view>
+		<view class="title4">{{totalPoint?totalPoint:0}}</view>
+		<view class="title1" style="color:red">关键行为事迹</view>
+		<view>
+			<textarea auto-height maxlength='1000' cursor-spacing='20' bindinput="handleinput2" value="{{gjsl2}}"></textarea>
+		</view>
+
+		<view class="next1">
+			<button hover-class='hover1' hover-stay-time='50' bindtap="back">上一项</button>
+			<button hover-class='hover1' hover-stay-time='50' bindtap="next">下一项</button>
+		</view>
+	</view>
+	<view class="part4" wx:if="{{totalIndex==3}}">
+		<view class="title1">评估纬度</view>
+		<view class="title2">价值观(3/5)</view>
+		<view class="title1">内容</view>
+		<view class="title3">{{lists.estimateModel.estimateModelContentList[2].contentTitle}}</view>
+		<view class="title4">{{lists.estimateModel.estimateModelContentList[2].contentIntroduce}}</view>
+		<view class="title1">行为</view>
+		<view class="title4">
+			<text>{{lists.estimateModel.estimateModelContentList[2].contentAction}}</text>
+		</view>
+		<view class="title1">单项评分</view>
+		<view class="title4 point">
+			<i-panel>
+				<view style="padding: 16px;color:#69bcf9">
+					<i-input-number value="{{ value3 }}" min="10" max="{{lists.estimateModel.estimateModelContentList[2].contentScore}}" bindchange="handleChange3" />
+				</view>
+			</i-panel>
+		</view>
+		<view class="title1">单项权重</view>
+		<view class="title4">{{lists.estimateModel.estimateModelContentList[2].contentWeight*100}}%</view>
+		<view class="title1">单项得分</view>
+		<view class="title4">{{point3?point3:0}}</view>
+		<view class="title1">综合得分</view>
+		<view class="title4">{{totalPoint?totalPoint:0}}</view>
+		<view class="title1" style="color:red">关键行为事迹</view>
+		<view>
+			<textarea auto-height maxlength='1000' cursor-spacing='20' bindinput="handleinput3" value="{{gjsl3}}"></textarea>
+		</view>
+
+		<view class="next1">
+			<button hover-class='hover1' hover-stay-time='50' bindtap="back">上一项</button>
+			<button hover-class='hover1' hover-stay-time='50' bindtap="next">下一项</button>
+		</view>
+	</view>
+	<view class="part5" wx:if="{{totalIndex==4}}">
+		<view class="title1">评估纬度</view>
+		<view class="title2">价值观(4/5)</view>
+		<view class="title1">内容</view>
+		<view class="title3">{{lists.estimateModel.estimateModelContentList[3].contentTitle}}</view>
+		<view class="title4">{{lists.estimateModel.estimateModelContentList[3].contentIntroduce}}</view>
+		<view class="title1">行为</view>
+		<view class="title4">
+			<text>{{lists.estimateModel.estimateModelContentList[3].contentAction}}</text>
+		</view>
+		<view class="title1">单项评分</view>
+		<view class="title4 point">
+			<i-panel>
+				<view style="padding: 16px;color:#69bcf9">
+					<i-input-number value="{{ value4 }}" min="10" max="100" bindchange="handleChange4" />
+				</view>
+			</i-panel>
+		</view>
+		<view class="title1">单项权重</view>
+		<view class="title4">{{lists.estimateModel.estimateModelContentList[3].contentWeight*100}}%</view>
+		<view class="title1">单项得分</view>
+		<view class="title4">{{point4?point4:0}}</view>
+		<view class="title1">综合得分</view>
+		<view class="title4">{{totalPoint?totalPoint:0}}</view>
+		<view class="title1" style="color:red">关键行为事迹</view>
+		<view>
+			<textarea auto-height maxlength='1000' cursor-spacing='20' bindinput="handleinput4" value="{{gjsl4}}"></textarea>
+		</view>
+
+		<view class="next1">
+			<button hover-class='hover1' hover-stay-time='50' bindtap="back">上一项</button>
+			<button hover-class='hover1' hover-stay-time='50' bindtap="next">下一项</button>
+		</view>
+	</view>
+	<view class="part6" wx:if="{{totalIndex==5}}">
+		<view class="title1">评估纬度</view>
+		<view class="title2">业绩贡献(5/5)</view>
+		<view class="title1">内容</view>
+		<view class="title3">{{lists.estimateModel.estimateModelContentList[4].contentTitle}}</view>
+		<view class="title4">{{lists.estimateModel.estimateModelContentList[4].contentIntroduce}}</view>
+		<view class="title1">行为</view>
+		<view class="title4">
+			<text>{{lists.estimateModel.estimateModelContentList[4].contentAction}}</text>
+		</view>
+		<view class="title1">单项评分</view>
+		<view class="title4 point">
+			<i-panel>
+				<view style="padding: 16px;color:#69bcf9">
+					<i-input-number value="{{ value5 }}" min="10" max="{{lists.estimateModel.estimateModelContentList[4].contentScore}}" bindchange="handleChange5" />
+				</view>
+			</i-panel>
+		</view>
+		<view class="title1">单项权重</view>
+		<view class="title4">{{lists.estimateModel.estimateModelContentList[4].contentWeight*100}}%</view>
+		<view class="title1">单项得分</view>
+		<view class="title4">{{point5?point5:0}}</view>
+		<view class="title1">综合得分</view>
+		<view class="title4">{{totalPoint?totalPoint:0}}</view>
+		<view class="title1" style="color:red">关键行为事迹</view>
+		<view>
+			<textarea auto-height maxlength='1000' cursor-spacing='20' bindinput="handleinput5" value="{{gjsl5}}"></textarea>
+		</view>
+		<view class="next1">
+			<button hover-class='hover1' hover-stay-time='50' bindtap="back">上一项</button>
+			<button hover-class='hover1' hover-stay-time='50' bindtap="next">下一项</button>
+		</view>
+	</view>
+	<view class="part7" wx:if="{{totalIndex==6}}">
+		<view class="title1">综合得分</view>
+		<view class="title3 titleshow">{{totalPoint}}</view>
+		<view class="title1" wx:if="{{lists.relation=='直接上级'}}">发展计划(直接上级填写)</view>
+		<view class="title4" wx:if="{{lists.relation=='直接上级'}}">
+			<radio-group name="fzjh" bindchange="checkChange" style="padding-top: 20rpx">
+				<view class="mylabel">
+					<label>
+						<radio value="1"></radio>
+						<text>拟晋升(半年内)</text>
+					</label>
+					<label>
+						<radio value="2"></radio>
+						<text>拟晋升(一年内)</text>
+					</label>
+					<label>
+						<radio value="3" checked></radio>
+						<text>原岗发展</text>
+					</label>
+					<label>
+						<radio value="4"></radio>
+						<text>拟调岗</text>
+					</label>
+					<label>
+						<radio value="5"></radio>
+						<text>限期整改</text>
+					</label>
+					<label>
+						<radio value="6"></radio>
+						<text>拟淘汰</text>
+					</label>
+				</view>
+			</radio-group>
+
+		</view>
+		<view class="title1">与被评估人关系</view>
+		<view class="title4">
+			<text>{{lists.relation}}</text>
+		</view>
+		<view class="title1" style="color:red">综合评价</view>
+		<view>
+			<textarea auto-height maxlength='1000' cursor-spacing='20' bindinput="handleinput6" value="{{zhpj}}" class="{{visible?'light':''}}"></textarea>
+		</view>
+		<view class="title1">贡献示例</view>
+		<view>
+			<textarea auto-height maxlength='1000' cursor-spacing='20' bindinput="handleinput7" value="{{gxsl}}" class="{{visible?'light':''}}"></textarea>
+		</view>
+		<view class="title1">评估人</view>
+		<view class="title4">{{lists.operatorName}}</view>
+		<view class="next1">
+			<button hover-class='hover1' hover-stay-time='50' bindtap="back">返回修改</button>
+			<button hover-class='hover1' hover-stay-time='50' bindtap="save">提交</button>
+		</view>
+	</view>
+</view>
+
+
+<i-action-sheet visible="{{visible}}" actions="{{actions}}" show-cancel bind:cancel="handleCancel" bind:click="handleClick" />
+<i-message id="message" />
+<i-spin fix wx:if="{{loadAll}}"></i-spin>
+<i-toast id="toast" />
