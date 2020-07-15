@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+<head>
+  <meta charset="UTF-8">  
+  <meta name="viewport" content="width=device-width,height=device-height,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <link rel="stylesheet" href="css/index.css">
+  <link rel="stylesheet" href="css/dialog.css" />
+  <title>年度钜惠</title>
+  <style>
+    .hide{
+      display:none
+    }
+  </style>
+</head>
+<body ng-controller="myController" ng-cloak>
+  <div class="content hide">
+    <div class="header">
+      <img src="images/1.jpg" alt="">
+    </div>
+    <div class="details">
+      <div class="dtitle">年度钜惠</div>
+      <div class="dcontent" style="color:#c1af80">丹花店展售 - 100元优惠券（满1000使用）</div>
+      <div class="dcontent" style="color:#c1af80">活动时间：6.22-6.28</div>
+      <div class="dcontent">使用规则：</div>
+      <div class="dcontent">单笔消费满1000元使用一张（一口价商品除外）</div>
+      <div class="dcontent" style="color:#777">每个手机号限领一份</div> 
+      <div class="dcontent">地址：花园路与农业路交叉口丹尼斯百货1楼展厅</div>
+    </div>
+    <div class="name">
+      <div class="ntitle"><span style="color:#ea6262;font-size:15px">*&nbsp;</span>姓名</div>
+      <div class="top">
+        <div class="tLeft">
+          <img src="images/4.png" alt="">
+        </div>
+        <div class="tRight">
+          <input type="text" class="number" id="name" oninput="getName()">
+        </div>
+      </div>
+    </div>
+    <div class="phone">
+      <div class="ntitle"><span style="color:#ea6262;font-size:15px">*&nbsp;</span>手机</div>
+      <div class="top">
+        <div class="tLeft">
+            <img src="images/3.png" alt="">
+        </div>
+        <div class="tRight">
+            <input type="number" class="number" id="number" oninput="getNum()">
+        </div>
+      </div>
+      <div class="myCode">
+        <div class="inputCode">
+          <input type="number" class="code" id="code" oninput="getNum1()" placeholder="验证码">
+        </div>
+        <div class="mRight" onclick="send()">
+        获取验证码
+      </div>
+      </div>
+    </div>
+    <div class="confirm">
+      <div class="ntitle"><span style="color:#ea6262;font-size:15px">*&nbsp;</span>确认报名</div>
+      <div class="cRight">
+          <!-- <input type="text" class="number1" value="是" disabled="true"> -->
+          <span class="number1">是</span>
+          <img src="images/5.png" alt="" class="arraw">
+      </div>
+    </div>
+    <div class="bottom">
+      <div class="login ifbottom" ng-click="login()">
+        立即报名
+      </div>
+    </div>
+    <div style="height:150px;width:100%"></div>
+  </div>
+  </body>
+<script src="js/angular.min.js"></script>
+<script src="js/jquery.2.0.0.min.js"></script>
+<script src="js/index.js"></script>
+<script src="js/zepto.min.js"></script>
+<script src="js/dialog.min.js"></script>
+<script src="js/cookie.js"></script>
+<script src="http://res.wx.qq.com/open/js/jweixin-1.6.0.js"></script>
+<script>
+  var data = {
+    url:encodeURIComponent(location.href)
+  }
+  $.ajax({
+    type: 'post',
+    url: 'http://192.168.2.50:8080/dp-pro/lampo/activity1/getSignature',
+    data: JSON.stringify(data),
+    contentType:'application/json',
+    success: function(res){
+      var temp = JSON.parse(res)
+        wx.config({ debug: false, appId: temp.appId, timestamp: temp.timestamp, nonceStr: temp.nonceStr, signature:temp.signature, jsApiList: ["updateAppMessageShareData", "updateTimelineShareData"] });
+        setTimeout(function () {
+        wx.ready(function () { 
+          wx.updateAppMessageShareData({
+            title: '年度钜惠',
+            desc: '【6.22-6.28】丹花店展售 - 100元优惠券',
+            link: temp.url,
+            imgUrl: 'http://himg.bdimg.com/sys/portrait/item/fa2ce7ac91e79c8be5b08fe799bde78b973541.jpg',
+            success: function () {
+            }
+          })
+          wx.updateTimelineShareData({ 
+            title: '【6.22-6.28】丹花店展售 - 100元优惠券',
+            link: temp.url,
+            imgUrl: 'http://himg.bdimg.com/sys/portrait/item/fa2ce7ac91e79c8be5b08fe799bde78b973541.jpg',
+            success: function () {
+              // 设置成功
+            }
+          })
+        }); 
+          },500)
+    }
+  })
+
+
+</script>
+</html>

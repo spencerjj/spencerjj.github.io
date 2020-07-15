@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,height=device-height,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <link rel="stylesheet" href="css/verify.css">
+  <link rel="stylesheet" href="css/dialog.css" />
+  <title>核验用户</title>
+</head>
+<body ng-controller="myController" ng-cloak>
+<div class="back">
+			
+</div>
+    <div class="content">
+      <input placeholder="请输入顾客手机号" oninput="getCode()" type="number" id="code"></input>
+      <div class="check" ng-click="check()">查询顾客</div>
+    </div>
+    <div class="cus hide">
+    	<div class="title">顾客报名信息</div>
+    	<div class="infos"><span>手机号：</span>{{info.mobile}}</div>
+    	<div class="infos"><span>姓名：</span>{{info.name}}</div>
+    	<div class="infos"><span>报名时间：</span>{{info.createTime|limitTo:11}}</div>
+    	<div class="confirm" ng-click="confirm()" ng-if="info.status=='0'">核验</div>
+    	<div class="status1" ng-if="info.status=='0'"><span>待核验</span></div>
+    	<div class="status2" ng-if="info.status=='1'"><span>已核验</span></div>
+    </div>
+  <div class="logo">
+	<img src="images/logo.png" alt="">
+	</div>
+</body>
+<script src="js/angular.min.js"></script>
+<script src="js/jquery.2.0.0.min.js"></script>
+<script src="js/verify.js"></script>
+<script src="js/zepto.min.js"></script>
+<script src="js/dialog.min.js"></script>
+</html>

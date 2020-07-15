@@ -1,0 +1,197 @@
+
+*{
+  padding:0;
+  margin:0;
+}
+.content{
+  width: 100%;
+  background: #282c27
+}
+.header{
+  width: 100%;
+  height: 200px;
+  text-align: center;
+}
+.header img{
+  width: 100%;
+  height: 100%;
+}
+.details{
+  width: 94%;
+  margin-left: 3%;
+  margin-top: 20px
+}
+.dtitle{
+  width: 100%;
+  text-align: center;
+  font-weight: bolder;
+  color:#c1af80;
+  font-size: 20px
+}
+.dcontent{
+  width: 100%;
+  color: #ccc;
+  font-size: 14px;
+  margin-top: 5px
+}
+.name{
+  margin-top: 40px;
+  width: 94%;
+  margin-left: 3%;
+}
+.ntitle{
+  color:#c1af80;
+  font-size: 15px;
+  font-weight: bolder;
+}
+.top{
+  width: 100%
+  border-bottom:1px solid #eee;
+  height: 40px;
+  background: white;
+  border-radius: 3px;
+  margin-top: 10px
+}
+.tLeft{
+  width: 10%;
+  height: 100%;
+  /*border-right: 1px solid #666;*/
+  float: left;
+  text-align: center;
+}
+.tLeft img{
+  width: 18px;
+  height: 18px;
+  margin-top: 10px
+}
+.tRight{
+  float: left;
+  width: 80%;
+  height: 40px;
+}
+.number{
+  width: 100%;
+  height: 40px;
+  font-size: 18px;
+  color:#999;
+}
+.phone{
+  margin-top: 30px;
+  width: 94%;
+  margin-left: 3%;
+}
+input:focus{
+  outline: none;
+  background: none
+}
+input {border:none; outline:none;background: none}
+input::-webkit-input-placeholder{
+  color:#ccc;
+}
+.myCode{
+  height: 40px;
+  line-height: 40px;
+  margin-top: 8px
+}
+.myCode div{
+  display: inline-block;
+  width: 49%;
+  height: 40px;
+  line-height: 40px;
+  background: white;
+  border-radius: 3px;
+}
+.myCode div:first-child{
+  float: left;
+  padding-left: 10px;
+  box-sizing: border-box;
+}
+.myCode div:last-child{
+  float: right;
+}
+.code{
+    width: 100%;
+  height: 40px;
+  font-size: 18px;
+  color:#999;
+}
+.invite{
+  width: 100%;
+  height: 100%;
+  font-size: 15px;
+  margin-top: 3px;
+  margin-left: 10px;
+}
+.mRight{
+  border-radius: 3px;
+  line-height: 28px;
+  font-size: 13px;
+  text-align: center;
+  background: #fff;
+  color: #999;
+  border-bottom: 1px solid #eee
+}
+.confirm{
+  margin-top: 30px;
+  width: 94%;
+  margin-left: 3%;
+}
+.cRight{
+  width: 100%;
+  height: 40px;
+  background: #bbb;
+  border-radius: 3px;
+  margin-top: 10px;
+  position: relative;
+}
+.number1{
+  width: 100%;
+  height: 100%;
+  font-size: 18px;
+  line-height: 40px;
+  color:#777;
+  margin-left: 10px
+}
+.arraw{
+  width: 12px;
+  height: 12px;
+  position: absolute;
+  top:50%;
+  right:10px;
+  margin-top: -6px
+}
+.bottom{
+  width: 100%;
+  height: 80px;
+  background: white;
+  padding-top: 30px;
+  background: rgba(0,0,0,.8);
+  position: fixed;
+  bottom: 0
+}
+.login{
+  width: 94%;
+  margin-left: 3%;
+  background: #46963d;
+  color:white;
+  height: 50px;
+  border-radius: 5px;
+  font-size: 18px;
+  line-height: 50px;
+  text-align: center;
+  transition: .2s ease-in-out;
+}
+.ifbottom{
+  opacity: .3
+}
+.sendState{
+  background: #999
+}
+.notice{
+  width: 94%;
+  margin-left: 3%;
+  text-align: right;
+  font-size: 12px;
+  color:#0DA8FF;
+  margin-top: 20px
+}
