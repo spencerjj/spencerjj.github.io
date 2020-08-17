@@ -1,0 +1,85 @@
+/* pages/login/login.wxss */
+page{
+  background: #F7F7F7
+}
+.logo{
+  width: 210rpx;
+  margin:0 auto;
+  margin-top:100rpx
+}
+.name{
+  width: 400rpx;
+  margin:0 auto;
+  margin-top:30rpx;
+  text-align:center;
+}
+.name text{
+  font-size: 50rpx;
+  font-family: Arial;
+  font-weight: bolder;
+  color:#1790FF
+}
+.logo image{
+  width: 206rpx;
+  height: 206rpx;
+  border-radius: 50%;
+}
+.name image{
+  width: 242rpx;
+  height: 80rpx;
+}
+.login{
+  width: 350rpx;
+  height:80rpx;
+  line-height: 80rpx;
+  margin:0 auto;
+  border-radius: 10rpx;
+  text-align: center;
+  margin-top:500rpx;
+  color:#1790FF;
+  border:2rpx solid #1790FF
+}
+.login1{
+  width: 300rpx;
+  height:80rpx;
+  line-height: 80rpx;
+  margin:0 auto;
+  line-height: 80rpx;
+  border-radius: 10rpx;
+  text-align: center;
+  margin-top:300rpx;
+  color:#999;
+  border:2rpx solid #999
+}
+.hover{
+  background: #1790FF;
+  color: #f7f7f7;
+}
+.bottom{
+  text-align: center;
+  margin-top:200rpx;
+  vertical-align: middle;
+}
+.select{
+  width: 50rpx;
+  height: 50rpx;
+  vertical-align: middle;
+}
+.agree{
+  color:#999;
+  font-size: 28rpx;
+}
+.agreement{
+  color:#1790FF;
+  font-size: 28rpx  
+}
+.notice{
+  color:red;
+  position: absolute;
+  top:38%;
+  font-size: 33rpx;
+  text-align: center;
+  width: 90%;
+  margin-left:5%
+}
+

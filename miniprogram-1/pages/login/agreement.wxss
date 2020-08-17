@@ -1,0 +1,28 @@
+/* pages/login/agreement.wxss */
+page{
+  width: 90%;
+  margin-left:5%;
+  margin-top:30rpx;
+  padding-bottom:50rpx
+}
+.agree{
+  font-size: 30rpx;
+  color:#333
+}
+.privite{
+  font-size: 30rpx;
+  color:#333
+}
+.title{
+  width: 100%;
+  font-size: 40rpx;
+  text-align: center;
+  color: black;
+  font-weight: bolder;
+  display: inline-block
+}
+.title1{
+  width: 100%;
+  text-align: center;
+  display: inline-block
+}

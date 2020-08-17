@@ -1,0 +1,22 @@
+<view class="content">
+  <view class="logo">
+    <image src="/images/logo.jpeg"></image>
+  </view>
+  <view class="name">
+    <text>百货商管平台</text>
+  </view>
+  <!-- <view class="notice">系统升级中，暂不提供服务，试商用用户如有问题，请联系客服。</view> -->
+  <button class="login" hover-class='hover' hover-stay-time='100' open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber"  wx:if="{{state==2}}">
+    授权登录
+  </button>
+   <button class="login" hover-class='hover' hover-stay-time='100' bindtap='doSelect' wx:if="{{state==3}}">
+    授权登录
+  </button>
+  <view class="bottom">
+     <image src="/images/01-27.jpg" class="select"></image>
+      <!-- <image src="/images/01-28.jpg" class="select" bindtap='action' wx:if="{{state==3}}"></image> -->
+      <text class="agree">　同意</text> <text class="agreement" bindtap='goAgreementPage'>《百货商管平台用户协议及隐私保护政策》</text>
+  </view>
+</view>
+<van-notify id="van-notify" />
+<van-toast id="van-toast" />

@@ -1,0 +1,293 @@
+/* pages/class/class.wxss */
+page{
+  /* border-top:20rpx solid #eee; */
+}
+.lists{
+  position: relative; 
+  padding-left:20rpx;
+  /* overflow:auto; */
+  padding-bottom: 20rpx;
+  border-bottom:1rpx solid #eee;
+  clear: both;
+  overflow: auto;
+  margin-bottom:20rpx
+}
+.left{
+  height: 100%;
+  width: 13.5%;
+  float: left
+}
+.left image{
+  width: 80rpx;
+  height: 80rpx;
+  margin-top:10rpx;
+  border-radius: 10rpx
+}
+.right{
+  float: left;
+  width: 85%;
+}
+.selection{
+  position: absolute;
+  font-size: 25rpx;
+  top:25rpx;
+  right: 30rpx;
+  color: #666
+}
+.selection image{
+  width: 30rpx;
+  height: 30rpx
+}
+.title{
+  font-size: 35rpx;
+  padding-top:5rpx;
+  font-weight: bolder
+}
+.content{
+  font-size: 32rpx;
+  line-height: 40rpx;
+  padding-top:10rpx;
+  padding-bottom:10rpx;
+  position: relative
+}
+.content text{
+  display: block;
+  padding-bottom: 10rpx;
+  word-wrap:break-word;
+}
+.one{
+  width: 45% !important;
+  height: 300rpx !important;
+}
+.content image{
+  width: 30.7%;
+  margin-left:2%;
+  height: 200rpx;
+}
+.content image:nth-child(3n+1){
+  margin-left:0;
+}
+.content1{
+  height: 150rpx;
+  background: #eee;
+  padding-top:10rpx;
+  padding-bottom:10rpx;
+  margin-top:10rpx;
+  margin-bottom: 10rpx;
+  padding-left: 10rpx
+}
+.cleft{
+  height: 150rpx;
+  width: 150rpx;
+  float: left
+}
+.cleft image{
+  width: 100%;
+  height: 100%
+}
+.cright{
+  float: left;
+  width: 65%;
+  height: 130rpx;
+  margin-left:3%;
+  padding-left:10rpx;
+  padding-top:10rpx;
+  padding-bottom: 10rpx;
+}
+.ctitle{
+  font-size:35rpx;
+  color:#666
+}
+.ctext{
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  font-size: 25rpx;
+  color:#999
+}
+.from{
+  font-size: 25rpx;
+  color:#666;
+  line-height: 35rpx;
+  font-weight: bolder
+}
+.from image{
+  width: 30rpx;
+  height: 30rpx;
+  display: inline-block;
+  vertical-align: middle
+}
+.action{
+  float: right;
+  margin-right:20rpx
+}
+.action image:nth-child(1){
+  width: 32rpx;
+  height: 32rpx;
+  margin-right: 20rpx;
+  margin-top:10rpx
+}
+.action image:nth-child(2){
+  width: 40rpx;
+  height: 40rpx;
+  margin-top:10rpx
+}
+.details{
+  font-size: 25rpx;
+  color:#ccc;
+  line-height: 35rpx;
+  font-weight: bolder;
+  padding-top:10rpx;
+  padding-bottom:10rpx
+}
+.feedback{
+  background: #eee;
+  width: 93%;
+  border-radius: 10rpx;
+  padding:10rpx;
+  padding-left:15rpx
+}
+.like{
+  font-size: 30rpx;
+  font-weight: 500
+}
+.like image{
+  width:30rpx;
+  height: 30rpx;
+  float: left;
+  margin-top: 6rpx;
+  margin-right:10rpx
+}
+.comment{
+  font-size: 30rpx;
+  width:100%;
+  word-wrap:break-word
+}
+.clists{
+  margin-top:0rpx
+}
+.name{
+  font-weight: 500
+}
+.add{
+  position: fixed;
+  right:10rpx;
+  bottom: 0rpx;
+  z-index: 99
+}
+.add image{
+  width: 100rpx;
+  height: 100rpx;
+}
+
+.show1{
+  display: block
+}
+.hide1{
+  display: none
+}
+.nullDataInfo{
+  width: 100%;
+  height: 30rpx;
+  text-align: center;
+  line-height: 30rpx;
+  font-size: 30rpx;
+  color: #ddd;
+  padding-top: 50rpx;
+  padding-bottom:30rpx
+}
+
+.buskmark{
+  width: 100%;
+  text-align: center;
+  margin-top: 10rpx;
+}
+.buskmark image{
+  width:50rpx;
+  height: 50rpx;
+  animation: loadingRotate 0.8s linear infinite
+}
+
+@keyframes loadingRotate{
+  0% {transform: rotate(0deg);}
+  50% {transform: rotate(180deg);}
+  100% {transform: rotate(360deg);}
+}
+.control{
+  position: absolute;
+  bottom:-40rpx;
+  right: 0rpx;
+  height: 30rpx;
+  width:140rpx
+}
+.control image:first-child{
+  width: 35rpx;
+  height: 35rpx;
+  float: left;
+}
+.control image:nth-child(2){
+  width: 35rpx;
+  height: 35rpx;
+  float: left;
+}
+.control image:nth-child(3){
+  width: 45rpx;
+  height: 45rpx;
+  margin-top:-1rpx;
+  margin-left:35rpx
+}
+.pocket_input {
+position: fixed;
+bottom: 0;
+width: 100%;
+background-color: white;
+overflow: hidden;
+height:80rpx;
+border-top:2rpx solid #ccc;
+background: #eee;
+z-index: 999
+}
+.input_style{
+background-color: #F4F5F6;
+font-size: 30rpx;
+line-height: 30rpx;
+border-radius: 10rpx;
+height:60rpx;
+width:90%;
+margin:5% auto  auto auto;
+margin-top:10rpx;
+background: white;
+padding-left: 15rpx;
+}
+.input-placeholder{
+margin-left: 25rpx;
+}
+
+.nodata{
+  width: 305rpx;
+  height: 200rpx;
+  margin:0 auto;
+  margin-top:30%
+}
+.nodata image{
+  width: 100%;
+  height: 100%
+}
+.nodata .notext{
+  width: 100%;
+  margin-top:20rpx;
+  color: #999;
+  text-align: center
+}
+.more{
+  position: absolute;
+  width: 50rpx;
+  height: 50rpx;
+  right:35rpx;
+  top:0rpx
+}
+.more image{
+  width: 100%;
+  height: 100%
+}

@@ -1,0 +1,6 @@
+<view class="content">
+  <view class="img"><image src="../../images/success.png"></image></view>
+  <view class="title1">后台审核中</view>
+  <view class="title2">已提交后台审核，请耐心等候...</view>
+  <!-- <button class="back" bindtap="toPage">返 回</button> -->
+</view>

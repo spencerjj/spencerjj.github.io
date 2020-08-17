@@ -1,0 +1,89 @@
+<view class="content">
+	<view class="top">
+		<view class="left">
+			<image src='/images/nan.png'></image>
+			<view class="nickName">
+				{{name}}
+			</view>
+			<view class="title">
+				{{phoneNo}}
+			</view>
+		</view>
+	</view>
+
+	<view class="bottom">
+		<view class='optBox'>
+			<view class="start">
+				<picker mode="date" bindchange="onStartDatePickerChanged" end="{{endDate}}">
+					<view class='dateInput'>起始日期: {{startDate}}</view>
+				</picker>
+				<picker mode="time" bindchange="onstartTimePickerChanged">
+					<view class='timeInput'>起始时间: {{startTime}}</view>
+				</picker>
+			</view>
+
+			<view class="end">
+				<picker mode="date" bindchange="onEndDatePickerChanged" start="{{startDate}}" end="{{today}}">
+					<view class='dateInput'>结束日期: {{endDate}}</view>
+				</picker>
+				<picker mode="time" bindchange="onEndTimePickerChanged">
+					<view class='timeInput'>结束时间: {{endTime}}</view>
+				</picker>
+			</view>
+
+			<!-- <picker value="{{index1}}" range="{{array1}}" bindchange="pickChange1">
+				<view class="picker">
+					{{array1[index1]}}
+					<image class="arraw1" src="/images/arraw.png"></image>
+				</view>
+			</picker> -->
+			<!-- <picker value="{{index2}}" range="{{array2}}" bindchange="pickChange2">
+				<view class="picker1">
+					{{array2[index2]}}
+					<image class="arraw1" src="/images/arraw.png"></image>
+				</view>
+			</picker> -->
+			<!-- <picker value="{{index1}}" range="{{array1}}" bindchange="pickChange1">
+				<view class="picker1">
+					{{array1[index1]}}
+					<image class="arraw1" src="/images/arraw.png"></image>
+				</view>
+			</picker> -->
+			<view class="check" bindtap="check" hover-class="hover1" hover-stay-time='50'>查询</view>
+		</view>
+		<view style="height:5rpx;width:100%;background:#eee;margin-top:15rpx"></view>
+		<view class="listContent">
+			<!-- <van-divider contentPosition="center" textColor="#5cadff" wx:if="{{lists.length>0}}">共{{lists.length}}条数据</van-divider> -->
+      <view class="table">
+      <view class="tr bg-w">
+      <view class="th">部门</view>
+      <view class="th">吊牌总价</view>
+      <view class="th ">成交总价</view>
+      <view class="th ">数量</view>
+      </view>
+      <block wx:for="{{lists}}" wx:key="index">
+      <view class="tr bg-g" wx:if="{{index % 2 == 0}}" hover-class="trhover" hover-stay-time="0.5" bindtap="toDetail" data-mark="{{item.dailyNo}}">
+      <view class="td">{{item.orgName?item.orgName:'未知'}}</view>
+      <view class="td">￥{{item.price?item.price:'0'}}</view>
+      <view class="td">￥{{item.payment?item.payment:'0'}}</view>
+      <view class="td">{{item.entryNum}}</view>
+      </view>
+      <view class="tr" wx:else  hover-class="trhover" hover-stay-time="0.5" bindtap="toDetail" data-mark="{{item.dailyNo}}">
+      <view class="td">{{item.orgName?item.orgName:'未知'}}</view>
+      <view class="td">￥{{item.price?item.price:'0'}}</view>
+      <view class="td">￥{{item.payment?item.payment:'0'}}</view>
+      <view class="td">{{item.entryNum}}</view>
+      </view>
+      </block>
+      </view>
+			<van-empty image="search" description="暂无数据" wx:if="{{lists.length==0}}" />
+      
+			<view wx:if="{{listIsFull}}" class='nullDataInfo'>
+				<van-divider custom-style="width:94%;margin-left:3%;padding-bottom:20rpx" contentPosition="center">到底了</van-divider>
+			</view>
+			<view wx:if="{{loading}}" class='buskmark'>
+				<image src='../../images/00-12.png'></image>
+			</view>
+		</view>
+	</view>
+</view>

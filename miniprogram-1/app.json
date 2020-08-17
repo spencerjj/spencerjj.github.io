@@ -1,0 +1,40 @@
+{
+  "pages": [
+    "pages/index/deList",
+    "pages/index/braList",
+    "pages/index/finList",
+    "pages/index/sonLists",
+    "pages/login/login",
+    "pages/index/listDetail",
+    "pages/login/regist",
+    "pages/index/lists",
+    "pages/index/index",
+    "pages/index/select",
+    "pages/login/class",
+    "pages/login/test",
+    "pages/index/success"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "WeChat",
+    "navigationBarTextStyle": "black",
+    "backgroundColor": "#f3f3f3"
+  },
+  "usingComponents": {
+    "van-notify": "@vant/weapp/notify/index",
+    "van-cell": "@vant/weapp/cell/index",
+    "van-tag": "@vant/weapp/tag/index",
+    "van-cell-group": "@vant/weapp/cell-group/index",
+    "van-slider": "@vant/weapp/slider/index",
+    "van-button": "@vant/weapp/button/index",
+    "van-toast": "@vant/weapp/toast/index",
+    "van-transition": "@vant/weapp/transition/index",
+    "van-divider": "@vant/weapp/divider/index",
+    "van-datetime-picker": "@vant/weapp/datetime-picker/index",
+    "van-dialog": "@vant/weapp/dialog/index",
+    "van-empty": "@vant/weapp/empty/index",
+    "van-sticky": "@vant/weapp/sticky/index"
+  },
+  "sitemapLocation": "sitemap.json"
+}

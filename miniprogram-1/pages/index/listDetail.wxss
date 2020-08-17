@@ -1,0 +1,203 @@
+/* pages/index/payInfo/listDetail.wxss */
+page{
+  background: #eee;
+}
+.top{
+  height: 800rpx;
+  background: linear-gradient(#69bcf9, #eee);
+  width: 100%;
+  padding-top: 10rpx;
+  position: relative;
+  
+}
+.title{
+  margin-left: 10%;
+  padding-top:40rpx
+}
+.subject{
+  font-size: 45rpx;
+  font-weight: bolder
+}
+.school{
+  font-size: 30rpx
+}
+.time{
+  width: 95%;
+  margin-left: 2.5%;
+  height: 150rpx;
+  background: white;
+  margin-top:10rpx;
+  border-radius: 10rpx 10rpx 0 0;
+}
+.timeTitle{
+  margin-left: 8%;
+  padding-top:60rpx;
+  font-size: 30rpx;
+  font-weight: bolder
+}
+.endTime{
+  margin-left: 5%;  
+  padding-top:20rpx;
+  font-size: 35rpx;
+  color:#69bcf9;
+  font-weight: bolder;
+}
+.billList{
+  width: 95%;
+  margin-left: 2.5%;
+  min-height: 500rpx;
+  background: white;
+  /* margin-top:20rpx; */
+  position: relative;
+}
+.mark1{
+  width: 6rpx;
+  height: 35rpx;
+  background: #69bcf9;
+  position: absolute;
+  left: 3%;
+  top:20rpx
+}
+.mark2{
+  width: 6rpx;
+  height: 35rpx;
+  background: #69bcf9;
+  position: absolute;
+  left: 5%;
+  top: 40rpx;
+}
+.mark3{
+  width: 6rpx;
+  height: 35rpx;
+  background: #69bcf9;
+  position: absolute;
+  left: 4%;
+  top: 180rpx;
+}
+.billTitle{
+  position: relative;
+}
+.billTitle1{
+  margin-left:5%;
+  padding-top:15rpx;
+  font-size: 35rpx;
+}
+.billLists{
+  margin-left:4%;
+  padding-top:30rpx;
+  font-size: 35rpx;
+  color:#69bcf9;
+  clear: both;
+  font-weight: bolder;
+}
+.listAmount{
+  float: right;
+  margin-right: 20rpx
+}
+.total{
+  clear: both;
+  border-top:1rpx solid #eee;
+  color:#999;
+  font-size: 35rpx;
+  padding-top:20rpx
+}
+.total1{
+  float:right;
+  margin-right:20rpx
+}
+.totalAmount{
+  color:#69bcf9;
+  font-size: 35rpx
+}
+.bottom{
+  clear: both;
+  border-top: 1rpx solid #eee;
+  padding-top: 50rpx;
+  
+}
+.bTitle{
+  margin-left:4%;
+  color:#999;
+  font-size: 35rpx
+}
+.comAct{
+  font-size: 23rpx;
+  color:#5cadff;
+  float: right;
+  margin-right: 50rpx;
+  font-weight: bolder;
+  border: 2rpx solid #5cadff;
+  height: 40rpx;
+  line-height: 40rpx;
+  /* margin-top: 18rpx; */
+  padding: 0rpx 5rpx 0rpx 5rpx;
+  border-radius: 10rpx;
+  background: #fff;
+}
+.remark{
+  margin-left:4%;
+  color:#69bcf9;
+  font-size: 35rpx;
+  padding-top:10rpx;
+  padding-bottom: 30rpx
+}
+
+.pics{
+  width: 90%;
+  margin-left: 8%;
+  margin-top:10rpx
+}
+.pics image{
+  width: 30.7%;
+  margin-left:2%;
+  height: 200rpx;
+}
+.pics image:nth-child(3n+1){
+  margin-left:0;
+}
+.my{
+  position: relative;
+  width: 100%;
+  clear: both;
+  height: 150rpx;
+}
+.teacher text{
+  position: absolute;
+  right:20rpx;
+  font-size: 35rpx;
+  color:#666
+}
+.createTime{
+  position: absolute;
+  right: 20rpx;
+  font-size: 35rpx;
+  color:#666;
+  top:50rpx
+}
+.pocket_input {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  background-color: white;
+  overflow: hidden;
+  height:200rpx;
+  border-top:2rpx solid #ccc;
+  background: #eee;
+  z-index: 999
+  }
+  .input_style{
+    background-color: #F4F5F6;
+    font-size: 35rpx;
+    line-height: 50rpx;
+    border-radius: 10rpx;
+    height: 180rpx;
+    width: 90%;
+    margin: 5% auto auto auto;
+    margin-top: 10rpx;
+    background: white;
+    padding-left: 15rpx;
+    
+  }
+  .input-placeholder{
+    margin-left: 25rpx;
+  }

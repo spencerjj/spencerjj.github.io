@@ -1,0 +1,107 @@
+<!--pages/class/class.wxml-->
+<view class="lists" wx:for="{{lists}}" wx:for-index="mainIndex">
+  <view class="left">
+    <image src="../../images/nan.png" wx:if="{{!item.parentHeadImg&&!item.teacherHeadImg}}"></image>
+    <image src="{{item.parentHeadImg}}" wx:elif="{{item.parentHeadImg}}"></image>
+    <image src="{{item.teacherHeadImg}}" wx:else="{{item.teacherHeadImg}}"></image>
+  </view>
+  <view class="more" bindtap='more' wx:if="{{item.pkTeacher==pkTeacher}}" data-mark="{{mainIndex}}" data-name="{{item.pkCcMoment}}">
+    <image src="../../images/more.png"></image>
+  </view>
+  <view class="right">
+    <view class="title" wx:if="{{item.nameTeacher}}">
+      {{item.nameTeacher}}
+    </view>
+    <view class="title" wx:if="{{item.nameParent}}">
+      {{item.nameParent}}
+    </view>
+    <view class="title" wx:if="{{!item.nameTeacher&&!item.nameParent}}">
+      未知
+    </view>
+    <view class="content">
+      <text>{{item.content}}</text> 
+      <view class="pics" wx:if="{{item.images.length>1}}">
+        <image  wx:for="{{item.images}}" wx:for-item="item1" src="{{item1}}?imageView2/1/w/220/h/220"  data-mark="{{item.images}}" data-name="{{item1}}" bindtap='showImg'></image>
+      </view>
+       <view class="pics" wx:if="{{item.images.length==1}}">
+        <image src="{{item.images[0]}}?imageView2/1/w/220/h/260" class="one" data-mark="{{item.images[0]}}" bindtap='showImg1'></image>
+      </view>
+      <view class="control">
+        <image src="../../images/zan.png" bindtap='zan' data-mark="{{mainIndex}}" data-name="{{item.pkCcMoment}}" style="{{item.isZan?'display:none':''}}"></image>
+        <image src="../../images/zaned.png" style="{{item.isZan?'':'display:none'}}"></image>
+        <image src="../../images/comment.png" bindtap='comment'  data-mark="{{mainIndex}}" data-name="{{item.pkCcMoment}}"></image>
+      </view>
+    </view>
+    <view class="from">
+      <image src="../../images/people.png"></image>
+      来自{{item.nameClass}}
+    </view>
+    <view class="details">
+      <text>{{item.createTime}} </text>
+    </view>
+
+    <view class="feedback" wx:if="{{item.likes.length!=0||item.comments.length!=0}}">
+      <view class="like" wx:if="{{item.likes.length!=0}}">
+        <image src="../../images/zan.png"></image>
+          <text wx:for="{{item.likes}}" wx:for-item="litem" wx:for-index="idx" style="display:inline-block;margin-top:-50rpx">
+            {{litem.nameParent?litem.nameParent:litem.nameTeacher}}<text wx:if='{{idx+1!=item.likes.length}}'>，</text>
+          </text>
+      </view>
+      <view class="comment" wx:if="{{item.comments.length!=0}}">
+        <view class="clists" wx:for="{{item.comments}}"  wx:for-item="citem" wx:for-index="idx" bindtap='reply' data-index="{{mainIndex}}" data-pkuser="{{citem.pkParent?citem.pkParent:citem.pkTeacher}}" data-pkmom="{{item.pkCcMoment}}" data-type="{{citem.pkParent?'2':'1'}}" data-name="{{citem.nameTeacher?citem.nameTeacher:citem.nameParent}}">
+          <text class="name">{{citem.nameParent?citem.nameParent:citem.nameTeacher}}:</text>
+          {{citem.content}}
+        </view>
+        <!-- <input confirm-type="send" type='text'bindconfirm="sendComment" bindinput='getComment' style="{{item.isCom?'':'display:none'}}"></input> -->
+      </view>
+    </view>
+    <!-- <view class="selection"><image src="../../images/select.png"></image></view> -->
+  </view>
+</view>
+<!-- <view class="lists">
+  <view class="left">
+    <image src="https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=2782036536,2162902092&fm=26&gp=0.jpg"></image>
+  </view>
+  <view class="right" data-url="../index/listDetail" bindtap='toPage'>
+    <view class="title">
+      放假通知
+    </view>
+    <view class="content1">
+      <view class="cleft">
+        <image src="../../images/timg.jpeg"></image>
+      </view>
+      <view class="cright">
+        <view class="ctitle">
+          寒假放假通知
+        </view>
+        <view class="ctext">
+          新春佳节即将来临，我园全体教职工提前祝您节日快乐！寒假将至，作业很多，抓紧监督
+        </view>
+      </view>
+    </view>
+    <view class="from">
+      <image src="../../images/people.png"></image>
+      来自亲子班123
+    </view>
+    <view class="details">
+      <text>12分钟前　</text>
+      <text>1</text>人已读
+    </view>
+  </view>
+</view> -->
+<!-- <view class="add" bindtap='showGuide'>
+  <image src="../../images/add.png"></image>
+</view> -->
+<view wx:if="{{listIsFull}}" class='nullDataInfo'>到底了：）</view>
+<view wx:if="{{loading}}" class='buskmark'><image src='../../images/00-12.png'></image></view>
+<!-- <view class='pocket_input' style='bottom:{{height}}px;' wx:if="{{inputShow}}" > -->
+<view class='pocket_input' wx:if="{{inputShow}}" > 
+<input type='text' placeholder-style='input-placeholder' cursor='{{cursor_position}}' class='input_style' placeholder='{{notice}}' focus='{{focus}}' cursor-spacing="2" adjust-position='true' bindfocus="bindfocus" bindblur="bindblur" bindconfirm="sendComment" confirm-type="send" bindinput='getComment' maxlength='500'></input>
+</view>
+<view style="width:100%;height:100%;position:fixed;top:0;left:0;background:#333;opacity:.8;z-index:99" wx:if="{{inputShow}}">
+123
+</view>
+<view class="nodata" wx:if="{{showNo}}">
+  <image src="../../images/noData.png"></image>
+  <view class="notext">暂无内容</view>
+</view>

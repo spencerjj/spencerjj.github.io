@@ -1,0 +1,116 @@
+<view class="content">
+	<view class="top">
+		<view class="left">
+			<image src='/images/nan.png'></image>
+			<view class="nickName">
+				{{name}}
+			</view>
+			<view class="title">
+				{{phoneNo}}
+			</view>
+		</view>
+		<view class="pointBar">
+			<view class="section" bindtap="toPage" data-type="1" hover-class="secTab" hover-stay-time="1s">
+				<view class="num">
+					100
+				</view>
+				<view class="name">
+					已提货已入账
+				</view>
+			</view>
+			<view class="section" bindtap="toPage" data-type="2" hover-class="secTab" hover-stay-time="1s">
+				<view class="num">
+					88
+				</view>
+				<view class="name">
+					未提货
+				</view>
+			</view>
+			<view class="section" bindtap="toPage" data-type="3" hover-class="secTab" hover-stay-time="1s">
+				<view class="num">
+					20
+				</view>
+				<view class="name">
+					已提货未入账
+				</view>
+			</view>
+		</view>
+	</view>
+	<view class="bottom">
+		<view class='optBox'>
+			<view class="start">
+				<picker mode="date" bindchange="onStartDatePickerChanged" end="{{endDate}}">
+					<view class='dateInput'>起始日期: {{startDate}}</view>
+				</picker>
+				<picker mode="time" bindchange="onstartTimePickerChanged">
+					<view class='timeInput'>起始时间: {{startTime}}</view>
+				</picker>
+			</view>
+
+			<view class="end">
+				<picker mode="date" bindchange="onEndDatePickerChanged" start="{{startDate}}" end="{{today}}">
+					<view class='dateInput'>结束日期: {{endDate}}</view>
+				</picker>
+				<picker mode="time" bindchange="onEndTimePickerChanged">
+					<view class='timeInput'>结束时间: {{endTime}}</view>
+				</picker>
+			</view>
+
+			<!-- <picker value="{{index1}}" range="{{array1}}" bindchange="pickChange1">
+				<view class="picker">
+					{{array1[index1]}}
+					<image class="arraw1" src="/images/arraw.png"></image>
+				</view>
+			</picker> -->
+			<!-- <picker value="{{index2}}" range="{{array2}}" bindchange="pickChange2">
+				<view class="picker1">
+					{{array2[index2]}}
+					<image class="arraw1" src="/images/arraw.png"></image>
+				</view>
+			</picker> -->
+			<picker value="{{index1}}" range="{{array1}}" bindchange="pickChange1">
+				<view class="picker1">
+					{{array1[index1]}}
+					<image class="arraw1" src="/images/arraw.png"></image>
+				</view>
+			</picker>
+			<view class="check" bindtap="check" hover-class="hover1" hover-stay-time='50'>查询</view>
+		</view>
+		<view style="height:5rpx;width:100%;background:#eee;margin-top:15rpx"></view>
+		<view class="listContent">
+		<van-divider contentPosition="center" textColor="#5cadff" wx:if="{{lists.length>0}}">共{{lists.length}}条数据</van-divider>
+			<van-empty image="search" description="暂无数据" wx:if="{{lists.length==0}}" />
+			<view class="list expired" wx:for="{{lists}}" data-index="{{index}}" wx:key="id">
+				<view class="top1" hover-class='hover1' hover-stay-time='50' bindtap="" data-index="{{index}}">
+					<text class="title">对账单号:<text class="active"> {{item.dailyNo}}</text></text>
+					<text class="date1" wx:if="{{item.entryMoneyPost}}"><text class="active1" style="color:red;font-size:30rpx">￥{{item.entryMoneyPost}}</text></text>
+					<!-- <image class="arraw {{item.mark==1?'selected':''}}" src="/images/lan.png"></image> -->
+				</view>
+				<view class="details {{!item.mark?'show':''}}">
+					<view class="detail"><text class="dtitle">所属门店:</text><text class="active1"> {{item.shopName}}</text></view>
+					<view class="detail"><text class="dtitle">生成时间:</text><text class="active1"> {{item.createDate}}</text></view>
+					<view class="detail"><text class="dtitle">结算周期:</text><text class="active1"> {{item.startTime}} ~ {{item.endTime}}</text></view>
+					<!-- <view class="detail1" style="line-height:40rpx;padding-top:20rpx;padding-bottom:10rpx;"><text class="dtitle" style="float:left">备注:</text><text class="active" style="display:inline-block;float:left;width:60%;word-break:break-all;margin-left: 10rpx;"> {{item.comment}}</text>
+						<view class="comAct" bindtap="comment" data-index="{{index}}" data-mark="{{item.comment}}"><text><text wx:if="{{item.comment.length==0}}">添加</text><text wx:else>修改</text>备注</text></view>
+					</view> -->
+					<view class="detail do" bindtap="confirm" data-id="{{item.id}}" data-title="{{item.goodsName}}">
+						<view class="dotext" wx:if="{{item.status==2}}">确认</view>
+						<view class="dotext1" wx:else>已确认</view>
+					</view>
+					<view class="detail do" bindtap="toPage" data-id="{{item.dailyNo}}" data-mark="1">
+						<image src="/images/add.png"></image><text class="doDetail">查看部门对账单>></text>
+					</view>
+					<view class="detail do" bindtap="toPage" data-id="{{item.dailyNo}}" data-mark="2">
+						<image src="/images/add.png"></image><text class="doDetail">查看品牌对账单>></text>
+					</view>
+				</view>
+			</view>
+			<view wx:if="{{listIsFull}}" class='nullDataInfo'>
+				<van-divider custom-style="width:94%;margin-left:3%;padding-bottom:20rpx" contentPosition="center">到底了</van-divider>
+			</view>
+			<view wx:if="{{loading}}" class='buskmark'>
+				<image src='../../images/00-12.png'></image>
+			</view>
+		</view>
+	</view>
+</view>

@@ -1,0 +1,61 @@
+<view class="content">
+	<view class="top">
+		<view class="left">
+			<image src='/images/nan.png'></image>
+			<view class="nickName">
+				{{name}}
+			</view>
+			<view class="title">
+				{{phoneNo}}
+			</view>
+		</view>
+		<view class="period">
+			<picker value="{{index}}" range="{{array}}" bindchange="pickChange">
+				<view class="picker">
+					{{array[index]}}
+					<image class="arraw1" src="/images/down.png"></image>
+				</view>
+			</picker>
+		</view>
+		<view class="pointBar">
+			<view class="section" bindtap="toPage" data-type="1" hover-class="secTab" hover-stay-time="1s">
+				<view class="num">
+					100
+				</view>
+				<view class="name">
+					已提货已入账
+				</view>
+			</view>
+			<view class="section" bindtap="toPage" data-type="2" hover-class="secTab" hover-stay-time="1s">
+				<view class="num">
+					88
+				</view>
+				<view class="name">
+					未提货
+				</view>
+			</view>
+			<view class="section" bindtap="toPage" data-type="3" hover-class="secTab" hover-stay-time="1s">
+				<view class="num">
+					20
+				</view>
+				<view class="name">
+					已提货未入账
+				</view>
+			</view>
+		</view>
+	</view>
+	<view class="bottom">
+		<view class="warning selection" data-url='warningRecord/warningRecord' bindtap='call' hover-class='hover'>
+			<image class='icon' src='/images/02-7.png'></image>
+			<text class="text">我的收银</text>
+			<image class="arraw" src="http://img.gagctv.com/17112314452261654"></image>
+		</view>
+		<view class="warning selection" data-url='warningRecord/warningRecord' bindtap='call' hover-class='hover'>
+			<image class='icon' src='/images/02-8.png'></image>
+			<text class="text">我的财务</text>
+			<image class="arraw" src="http://img.gagctv.com/17112314452261654"></image>
+		</view>
+		<view style="height:50rpx;width:100%"></view>
+	</view>
+</view>
+<van-toast id="van-toast" />

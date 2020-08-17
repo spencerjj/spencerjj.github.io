@@ -1,0 +1,42 @@
+<view class="content">
+	<view class="name section">
+		<view class="s1">姓名</view>
+		<input placeholder='' maxlength="8" class="fill" bindinput="usernameInput" value="{{name}}" placeholder="请填写姓名" placeholder-style="color:#bfbfbf;font-weight:normal;font-size:30rpx"></input>
+		<!-- <image class="arraw" src="../../images/arraw1.png"></image> -->
+	</view>
+	<view class="number section">
+		<view class="s1">公司</view>
+		<picker value="{{index1}}" range="{{array1}}" bindchange="companyChange">
+			<view class="fill">
+				{{array1[index1]}}
+				<image class="arraw" src="/images/arraw1.png"></image>
+			</view>
+		</picker>
+		<image class="arraw" src="../../images/arraw1.png"></image>
+	</view>
+	<view class="number section">
+		<view class="s1">角色</view>
+		<picker value="{{index2}}" range="{{array2}}" bindchange="roleChange">
+			<view class="fill">
+				{{array2[index2]}}
+				<image class="arraw" src="/images/arraw1.png"></image>
+			</view>
+		</picker>
+		<image class="arraw" src="../../images/arraw1.png"></image>
+	</view>
+	<view class="title section">
+		<view class="s1">机构</view>
+		<picker value="{{index3}}" range="{{array3}}" bindchange="officeChange">
+			<view class="fill">
+				{{array3[index3]}}
+				<image class="arraw" src="/images/arraw1.png"></image>
+			</view>
+		</picker>
+		<image class="arraw" src="../../images/arraw1.png"></image>
+	</view>
+</view>
+<view class="save {{mark?'':'disabled'}}" bindtap='save'>
+	注册
+</view>
+<van-notify id="van-notify" />
+<van-toast id="van-toast" />
