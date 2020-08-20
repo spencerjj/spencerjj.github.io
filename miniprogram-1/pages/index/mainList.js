@@ -33,23 +33,21 @@ Page({
     pageSize:10,
     companyLists:'',
     companyCode:'',
+    shopName:'',
     startTime1:'',
     endTime1:'',
-    shopName:'',
-    flag:2,
-    dailyNo:'',
     show1:false,
     show2:false,
     show3:false,
     show4:false,
-    officeName:''
+    showContent:false,
+    flag:''
   },
   onLoad: function () {
 
   },
   onShow:function(){
     var that = this;
-    wx.hideHomeButton()
     var now = new Date();
     that.setData({
       // endDate: now.format('yyyy-MM-dd'),
@@ -58,42 +56,36 @@ Page({
       today: now.format('yyyy-MM-dd')
     });
     var userInfo = wx.getStorageSync('userInfo');
+
     console.log(userInfo)
     if(userInfo.roleCodes){
-      if(userInfo.roleCodes.indexOf('finance')!=-1){
-        this.setData({
-          show1:true,
-          flag:1,
-          height:310
-        })
-      }
-      if(userInfo.roleCodes.indexOf('wshop')!=-1){
-        this.setData({
-          show2:true,
-          flag:2,
-          height:230
-        })
-      }
-      if(userInfo.roleCodes.indexOf('dept_cw')!=-1){
-        this.setData({
-          show3:true,
-          flag:3
-        })
-      }
-      if(userInfo.roleCodes.indexOf('brand')!=-1){
-        this.setData({
-          show4:true,
-          flag:4
-        })
-      }
+    if(userInfo.roleCodes.indexOf('finance')!=-1){
+      this.setData({
+        show1:true,
+        flag:1
+      })
     }
-    console.log('code='+that.data.companyCode)
+    if(userInfo.roleCodes.indexOf('wshop')!=-1){
+      this.setData({
+        show2:true,
+        flag:2
+      })
+    }
+    if(userInfo.roleCodes.indexOf('dept_cw')!=-1){
+      this.setData({
+        show3:true
+      })
+    }
+    if(userInfo.roleCodes.indexOf('brand')!=-1){
+      this.setData({
+        show4:true
+      })
+    }
+  }
     that.setData({
       name:userInfo.username,
       phoneNo:userInfo.loginCode,
-      sid:userInfo.sid,
-      companyCode:userInfo.companyCode,
-      officeName:userInfo.officeName
+      sid:userInfo.sid
     })
     that.getSelectLists()
     that.getLists()
@@ -131,6 +123,9 @@ Page({
   },
   getLists(x){
     var that = this
+    if(x){
+      var data = x
+    }else{
       var data={
         __sid:that.data.sid,
         __ajax:'json',
@@ -140,10 +135,7 @@ Page({
         startTime:that.data.startTime,
         endTime:that.data.endTime
       }
-      if(that.data.flag==2){
-        data.shopId = wx.getStorageSync('userInfo').companyCode
-        data.shopName = wx.getStorageSync('userInfo').companyName
-      }
+    }
     getRequest(getApiHost(), 'platform/v1/api/dayily/getDailyOrderHead.json', 'body', data, 0, false, true).then(
       res => {
         if(res.result&&res.result=='login'){
@@ -164,6 +156,9 @@ Page({
                 })
               // },500)
             }else{
+              that.setData({
+                showContent:true
+              })
               if(that.data.pageNo>1){
                 console.log('第'+that.data.pageNo+'页')
                 var list = that.data.lists
@@ -272,15 +267,14 @@ Page({
   },
   toPage(e){
     app.doMessage()
+    var mark = e.currentTarget.dataset.mark
     var url = ''
-    if(this.data.show1){
-      url = 'deList?dailyNo='+e.currentTarget.dataset.id+'&flag=1&status='+e.currentTarget.dataset.status
-    }else if (this.data.show2){
-      url = 'deList?dailyNo='+e.currentTarget.dataset.id+'&flag=2&status='+e.currentTarget.dataset.status
-    }else if(this.data.show3){
-      url = 'deList?dailyNo='+e.currentTarget.dataset.id+'&flag=3&status='+e.currentTarget.dataset.status
-    }else if(this.data.show4){
-      url = 'braList?dailyNo='+e.currentTarget.dataset.id+'&flag=4&status='+e.currentTarget.dataset.status
+    if(mark==1){
+      url = 'deList?dailyNo='+e.currentTarget.dataset.id
+    }else if (mark==2){
+      url = 'braList?dailyNo='+e.currentTarget.dataset.id
+    }else if(mark==0){
+      url = 'finList?dailyNo='+e.currentTarget.dataset.id+'&flag='+this.data.flag
     }
     wx.navigateTo({
       url: url
@@ -313,9 +307,7 @@ Page({
       }
     } 
     that.setData({
-      lists: '',
-      listIsFull: false,
-      loading: false,
+      lists:'',
       shopName:that.data.array1[that.data.index1],
       startTime:that.data.startDate+' '+that.data.startTime1,
       endTime:that.data.endDate+' '+that.data.endTime1
@@ -325,7 +317,7 @@ Page({
   getSelectLists(e){
     var that = this
     var data={}
-    postRequest(getApiHost(), 'platform/v1/api/wxmini/getCompanyList.json', 'body', data, 0, false, false).then(
+    postRequest(getApiHost(), 'platform/v1/api/wxmini/getCompanyList.json', 'body', data, 0, false, true).then(
       res => {
         if(res.result){
           var lists = res.data
@@ -350,36 +342,5 @@ Page({
         confirmColor: '#1890FF'
       })
     });
-  },
-  confirm(e){
-    app.doMessage()
-    var that = this
-    wx.showModal({
-      title: '提示',
-      content: '确认该订单吗',
-      success(res) {
-        if (res.confirm) {
-          var data={
-            dailyNo:e.currentTarget.dataset.id,
-            status:2,
-            __sid:that.data.sid,
-            __ajax:'json',
-          }
-          getRequest(getApiHost(), 'platform/v1/api/dayily/issue.json', 'body', data, 0, false, true).then(
-            res => {
-              that.getLists()
-            }
-          ).catch(res => {
-            wx.showModal({
-              title: '错误',
-              content: res.message,
-              showCancel: false,
-              confirmText: '知道了',
-              confirmColor: '#1890FF'
-            })
-          });
-        }
-      }
-    })
   }
 })

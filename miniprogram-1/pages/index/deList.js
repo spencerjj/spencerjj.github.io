@@ -19,9 +19,9 @@ Page({
     index:0,
     today: '',
     endDate: '',
-    endTime: '00:00',
+    endTime: '',
     startDate:'',
-    startTime:'00:00',
+    startTime:'',
     lists:[],
     listIsFull:false,
     loading:false,
@@ -33,30 +33,61 @@ Page({
     pageSize:10,
     companyLists:'',
     companyCode:'',
-    id:''
+    id:'',
+    startTime1:'',
+    endTime1:'',
+    dailyNo:'',
+    officeCode:'',
+    disabled1:false,
+    disabled2:false,
+    disabled3:false,
+    flag:0,
+    companyName:'',
+    officeName:''
   },
   onLoad: function () {
-    console.log(this.options.id)
+    console.log(this.options.status)
     this.setData({
-      id:this.options.id
+      dailyNo:this.options.dailyNo,
+      flag:this.options.flag,
+      status:this.options.status
     })
+    if(this.options.flag==1){
+      wx.setNavigationBarTitle({
+        title: '财务账单'
+      })
+    }else if(this.options.flag==2){
+      wx.setNavigationBarTitle({
+        title: '微商城账单'
+      })
+    }else if(this.options.flag==3){
+      wx.setNavigationBarTitle({
+        title: '部门账单'
+      })
+    }
   },
   onShow:function(){
     var that = this;
+    wx.hideHomeButton()
     var now = new Date();
     that.setData({
-      endDate: now.format('yyyy-MM-dd'),
-      startDate:now.format('yyyy-MM-dd'),
+      // endDate: now.format('yyyy-MM-dd'),
+      // startDate:now.format('yyyy-MM-dd'),
       // endTime: now.format('hh:mm'),
       today: now.format('yyyy-MM-dd')
     });
     var userInfo = wx.getStorageSync('userInfo');
+    console.log(userInfo)
     that.setData({
       name:userInfo.username,
       phoneNo:userInfo.loginCode,
-      sid:userInfo.sid
+      sid:userInfo.sid,
+      officeCode:userInfo.officeCode,
+      companyCode:userInfo.companyCode,
+      companyName:userInfo.companyName,
+      officeName:userInfo.officeName
     })
-    that.getSelectLists()
+    // that.getSelectLists()
     that.getLists()
   },
   onPullDownRefresh: function () {
@@ -92,18 +123,48 @@ Page({
   },
   getLists(x){
     var that = this
-    if(x){
-      var data = x
-    }else{
+    var url= ''
+    if(that.data.flag==1){
       var data={
         __sid:that.data.sid,
         __ajax:'json',
+        dailyNo:that.data.dailyNo,
         pageNo:that.data.pageNo,
+        shopId:that.data.companyCode,
         pageSize:that.data.pageSize,
-        dailyNo:that.data.id
+        startTime:that.data.startTime,
+        endTime:that.data.endTime
       }
+      url = 'getDailyOrderGroupByOrg.json'
+    }else if(that.data.flag==2){
+      var data={
+        __sid:that.data.sid,
+        __ajax:'json',
+        dailyNo:that.data.dailyNo,
+        pageNo:that.data.pageNo,
+        shopId:that.data.companyCode,
+        pageSize:that.data.pageSize,
+        startTime:that.data.startTime,
+        endTime:that.data.endTime
+      }
+      url="getDailyOrderGroupByOrg.json"
+    }else if(that.data.flag==3){
+      var data={
+        __sid:that.data.sid,
+        __ajax:'json',
+        dailyNo:that.data.dailyNo,
+        pageNo:that.data.pageNo,
+        shopId:that.data.companyCode,
+        orgId:that.data.officeCode,
+        pageSize:that.data.pageSize,
+        startTime:that.data.startTime,
+        endTime:that.data.endTime
+      }
+      url="getDailyOrderGroupByBrand.json"
     }
-    getRequest(getApiHost(), 'platform/v1/api/dayily/getDailyOrderGroupByOrg.json', 'body', data, 0, false, true).then(
+    
+    console.log(data)
+    getRequest(getApiHost(), 'platform/v1/api/dayily/'+url, 'body', data, 0, false, true).then(
       res => {
         console.log(res)
         if(res.result&&res.result=='login'){
@@ -184,8 +245,18 @@ Page({
     });
   },
   onstartTimePickerChanged: function(e) {
+    if(this.data.startDate.length==0){
+      Notify({
+        message: '请先选择起始日期',
+        type: 'warning'
+      });
       this.setData({
-        startTime: e.detail.value
+        startTime1: ''
+      });
+      return;
+    }
+      this.setData({
+        startTime1: e.detail.value
       });
   },
   onEndDatePickerChanged: function(e) {
@@ -194,13 +265,24 @@ Page({
     });
   },
   onEndTimePickerChanged: function(e) {
+    if(this.data.endDate.length==0){
+      Notify({
+        message: '请先选择结束日期',
+        type: 'warning'
+      });
       this.setData({
-        endTime: e.detail.value
+        endTime1: ''
+      });
+      return;
+    }
+      this.setData({
+        endTime1: e.detail.value
       });
   },
   pickChange1(e){
     this.setData({
-      index1:e.detail.value
+      index1:e.detail.value,
+      companyCode:this.data.companyLists[e.detail.value].companyCode
     })
   },
   pickChange2(e){
@@ -225,56 +307,176 @@ Page({
   },
   check(e){
     var that = this
-    var data = {
-      companyCode:that.data.companyCode,
-      startTime:that.data.startDate+' '+that.data.startTime,
-      endTime:that.data.endDate+' '+that.data.endTime,
-      pageSize:that.data.pageSize,
-      pageNo:that.data.pageNo,
-      dailyNo:that.data.id,
-      __sid:that.data.sid,
-      __ajax:'json',
+    if(that.data.startTime1.length==0){
+      if(that.data.startDate.length>1){
+        that.setData({
+          startTime1:'00:00'
+        })
+      }
     }
+    if(that.data.endTime1.length==0){
+      if(that.data.endDate.length>1){
+        that.setData({
+          endTime1:'00:00'
+        })
+      }
+    } 
     that.setData({
-      lists:''
+      lists: '',
+      listIsFull: false,
+      loading: false,
+      startTime:that.data.startDate+' '+that.data.startTime1,
+      endTime:that.data.endDate+' '+that.data.endTime1
     })
-    that.getLists(data)
+    that.getLists()
   },
-  getSelectLists(e){
+  // getSelectLists(e){
+  //   var that = this
+  //   var data={}
+  //   postRequest(getApiHost(), 'platform/v1/api/wxmini/getCompanyList.json', 'body', data, 0, false, true).then(
+  //     res => {
+  //       if(res.result){
+  //         if(that.data.flag==1){
+  //         var lists = res.data
+  //         var array1 = []
+  //         lists.map((item)=>{
+  //           array1.push(item.companyName)
+  //         })
+  //         console.log(array1)
+  //           that.setData({
+  //             companyLists:lists,
+  //             array1:array1,
+  //             companyCode:lists[0].companyCode
+  //           })
+  //         }
+         
+  //       }else{
+  //         wx.showModal({
+  //           title: '错误',
+  //           content: res.message,
+  //           showCancel: false,
+  //           confirmText: '知道了',
+  //           confirmColor: '#1890FF'
+  //         })
+  //       }
+  //     }
+  //   ).catch(res => {
+  //     wx.showModal({
+  //       title: '错误',
+  //       content: '获取公司列表失败，请联系管理员',
+  //       showCancel: false,
+  //       confirmText: '知道了',
+  //       confirmColor: '#1890FF'
+  //     })
+  //   });
+  // },
+  confirm(e){
+    app.doMessage()
     var that = this
-    var data={}
-    postRequest(getApiHost(), 'platform/v1/api/wxmini/getCompanyList.json', 'body', data, 0, false, true).then(
-      res => {
-        if(res.result){
-          var lists = res.data
-          var array1 = []
-          lists.map((item)=>{
-            array1.push(item.companyName)
-          })
-          console.log(array1)
-          that.setData({
-            companyLists:lists,
-            array1:array1,
-            companyCode:lists[0].companyCode
-          })
-        }else{
-          wx.showModal({
-            title: '错误',
-            content: res.message,
-            showCancel: false,
-            confirmText: '知道了',
-            confirmColor: '#1890FF'
-          })
+    wx.showModal({
+      title: '提示',
+      content: '确认该订单吗',
+      success(res) {
+        if (res.confirm) {
+          var data={
+            dailyNo:that.data.dailyNo,
+            status:2,
+            __sid:that.data.sid,
+            __ajax:'json',
+          }
+          getRequest(getApiHost(), 'platform/v1/api/dayily/issue.json', 'body', data, 0, false, true).then(
+            res => {
+              that.setData({
+                disabled1:true
+              })
+            }
+          ).catch(res => {
+            wx.showModal({
+              title: '错误',
+              content: res.message,
+              showCancel: false,
+              confirmText: '知道了',
+              confirmColor: '#1890FF'
+            })
+          });
         }
       }
-    ).catch(res => {
-      wx.showModal({
-        title: '错误',
-        content: '获取公司列表失败，请联系管理员',
-        showCancel: false,
-        confirmText: '知道了',
-        confirmColor: '#1890FF'
-      })
-    });
+    })
+  },
+  wconfirm(e){
+    app.doMessage()
+    var that = this
+    var lists = that.data.lists
+    var array = []
+    lists.map((item)=>{
+      array.push(item.id-1+1)
+    })
+    console.log(array)
+    wx.showModal({
+      title: '提示',
+      content: '确认该订单吗',
+      success(res) {
+        if (res.confirm) {
+          var data={
+            dailyNo:that.data.dailyNo,
+            status:3,
+            __sid:that.data.sid,
+            __ajax:'json',
+          }
+          getRequest(getApiHost(), 'platform/v1/api/dayily/wshopissue.json', 'body', data, 0, false, true).then(
+            res => {
+              that.setData({
+                disabled2:true
+              })
+            }
+          ).catch(res => {
+            wx.showModal({
+              title: '错误',
+              content: res.message,
+              showCancel: false,
+              confirmText: '知道了',
+              confirmColor: '#1890FF'
+            })
+          });
+        }
+      }
+    })
+  },
+  dconfirm(e){
+    app.doMessage()
+    var that = this
+    console.log(e.currentTarget.dataset.index)
+    wx.showModal({
+      title: '提示',
+      content: '确认该订单吗',
+      success(res) {
+        if (res.confirm) {
+          var data={
+            id:e.currentTarget.dataset.id,
+            orgId:that.data.officeCode,
+            status:4,
+            __sid:that.data.sid,
+            __ajax:'json',
+          }
+          getRequest(getApiHost(), 'platform/v1/api/dayily/orgissue.json', 'body', data, 0, false, true).then(
+            res => {
+              var lists = that.data.lists
+              lists[e.currentTarget.dataset.index].status = 4
+              that.setData({
+                lists:lists
+              })
+            }
+          ).catch(res => {
+            wx.showModal({
+              title: '错误',
+              content: res.message,
+              showCancel: false,
+              confirmText: '知道了',
+              confirmColor: '#1890FF'
+            })
+          });
+        }
+      }
+    })
   }
 })

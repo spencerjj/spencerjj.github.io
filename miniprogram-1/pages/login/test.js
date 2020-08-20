@@ -1,15 +1,11 @@
 // pages/login/test.js
-import Notify from '../../miniprogram_npm/@vant/weapp/notify/notify';
-
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    currentValue: 50,
-    lists:[10,20,30,40,50,60,70,80,90],
-    myValue:50
+
   },
 
   /**
@@ -66,15 +62,5 @@ Page({
    */
   onShareAppMessage: function () {
 
-  },
-  onDrag(event) {
-    this.setData({
-      currentValue: event.detail.value,
-      myValue:Math.floor(event.detail.value/10)*10
-    });
-    Notify({
-      message:Math.floor(event.detail.value/10)*10 ,
-      type: 'primary'
-    });
-  },
+  }
 })

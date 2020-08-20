@@ -1,102 +1,75 @@
 <view class="content">
-  <view class="top">
-    <view class="time">
-    <view class="mark2"></view>
-      <view class="billTitle1">
-        商品名称
-      </view>
-      <view class="endTime">
-        {{listDetail.time}}
-      </view>
-    </view>
-    <view class="billList">
-    <view class="billTitle">
-        <view class="mark1"></view>
-        <view class="billTitle1">订单编号</view>
-      </view>
-      <view class="billLists">
-        <view class="listName">
-          {{listDetail.nameSchool}} - {{listDetail.depart}}
-        </view>
-      </view>
-      <view class="billTitle"  style="margin-top:20rpx">
-        <view class="mark1"></view>
-        <view class="billTitle1">吊牌单价</view>
-      </view>
-      <view class="billLists">
-        <view class="listName">
-          {{listDetail.deadlineTime}}
-        </view>
-      </view>
-      <view class="billTitle" style="margin-top:20rpx">
-        <view class="mark1"></view>
-        <view class="billTitle1">商品数量</view>
-      </view>
-      <view class="billLists">
-        <view class="listName">
-          ￥{{listDetail.itemAmount}}
-        </view>
-      </view>
-      <view class="billTitle" style="margin-top:20rpx">
-        <view class="mark1"></view>
-        <view class="billTitle1">成交总价</view>
-      </view>
-      <view class="billLists">
-        <view class="listName">
-          ￥{{listDetail.itemAmount}}
-        </view>
-      </view>
-      <view class="billTitle" style="margin-top:20rpx">
-        <view class="mark1"></view>
-        <view class="billTitle1">提货时间</view>
-      </view>
-      <view class="billLists">
-        <view class="listName">
-          ￥{{listDetail.itemAmount}}
-        </view>
-      </view>
-      <view class="billTitle" style="margin-top:20rpx">
-        <view class="mark1"></view>
-        <view class="billTitle1">收货人</view>
-      </view>
-      <view class="billLists">
-        <view class="listName">
-          ￥{{listDetail.itemAmount}}
-        </view>
-      </view>
-      <view class="billTitle" style="margin-top:20rpx">
-        <view class="mark1"></view>
-        <view class="billTitle1">手机号</view>
-      </view>
-      <view class="billLists">
-        <view class="listName">
-          ￥{{listDetail.itemAmount}}
-        </view>
-      </view>
-      <view style="clear:both;width:100%;height:50rpx"></view>
-      <view class="bottom">
-        <view class="bTitle">
-          备注信息
-           <view class="comAct"  bindtap="comment"><text><text wx:if="{{listDetail.comment.length==0}}">添加</text><text wx:else>修改</text>备注</text></view>
-        </view>
-        <view class="remark" wx:if="{{listDetail.comment}}">
-          {{listDetail.comment}}
-        </view>
-        <view class="my">
-          <view class="teacher">
-            <text wx:if="{{listDetail.nameTeacherCreate}}">{{listDetail.nameTeacherCreate}}</text>
-            <text wx:else> </text>
-          </view>
-          <view class="createTime">
-            {{listDetail.createTime}}
-          </view>
-        </view>
-      <view style="clear:both;width:100%;height:50rpx;background:#eee"></view>
-      </view>
-    </view>
-  </view>
+	<view class="top">
+		<view class="table">
+			<view class="tr bg-w">
+				<view class="th">商品名称</view>
+				<view class="th">商品编码</view>
+			</view>
+			<block>
+				<view class="tr bg-g" hover-class="trhover" hover-stay-time="0.5">
+					<view class="td">{{brandName}}</view>
+					<view class="td">{{itemNo}}</view>
+				</view>
+			</block>
+		</view>
+		<view class="table">
+			<view class="tr bg-w">
+				<view class="th ">部门</view>
+				<view class="th ">商品数量</view>
+			</view>
+			<block>
+				<view class="tr bg-g" hover-class="trhover" hover-stay-time="0.5">
+					<view class="td">{{departName}}</view>
+					<view class="td">{{num}}</view>
+				</view>
+			</block>
+		</view>
+		<view class="table">
+			<view class="tr bg-w">
+				<view class="th ">吊牌单价</view>
+				<view class="th ">成交总价</view>
+			</view>
+			<block>
+				<view class="tr bg-g" hover-class="trhover" hover-stay-time="0.5">
+					<view class="td">{{price}}</view>
+					<view class="td">{{payment}}</view>
+				</view>
+			</block>
+		</view>
+		<view class="table">
+			<view class="tr bg-w">
+				<view class="th ">收货人</view>
+				<view class="th ">收货人手机号</view>
+			</view>
+			<block>
+				<view class="tr bg-g" hover-class="trhover" hover-stay-time="0.5">
+					<view class="td">{{receiverName}}</view>
+					<view class="td">{{receiverTel}}</view>
+				</view>
+			</block>
+		</view>
+
+
+		<view class="billList">
+			<view class="bottom">
+				<view class="bTitle">
+					备注信息
+					<!-- <view class="comAct" bindtap="comment"><text><text wx:if="{{remark.length==0}}">添加</text><text wx:else>修改</text>备注</text></view> -->
+				</view>
+				<!-- <view class="remark" wx:if="{{remark}}">
+					{{remark}}
+				</view> -->
+        <textarea  class="remark" value="{{remark}}" bindinput="remarkInput">
+        </textarea>
+        <button class="modify" bindtap="add">反馈</button>
+				<view class="my">
+				
+				</view>
+			</view>
+		</view>
+	</view>
 </view>
 <view class='pocket_input' wx:if="{{inputShow}}" style="bottom:{{bottom}}px">
-	<textarea type='text' placeholder-style='input-placeholder' cursor='{{cursor_position}}' class='input_style' placeholder='{{notice}}' focus='{{focus}}' cursor-spacing="2" adjust-position='{{false}}' bindfocus="bindfocus" value="{{listDetail.comment}}" bindblur="bindblur" bindconfirm="add" confirm-type="done" bindinput='getTags' maxlength='500'></textarea>
+	<textarea type='text' placeholder-style='input-placeholder' cursor='{{cursor_position}}' class='input_style' placeholder='{{notice}}' focus='{{focus}}' cursor-spacing="2" adjust-position='{{false}}' bindfocus="bindfocus" value="{{remark}}" bindblur="bindblur" bindconfirm="add" confirm-type="done" bindinput='getTags' maxlength='500'></textarea>
 </view>
 <view style="width:100%;height:100%;position:fixed;top:0;left:0;background:#333;opacity:.8;z-index:99" wx:if="{{inputShow}}"></view>

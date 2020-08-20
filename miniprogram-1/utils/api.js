@@ -191,6 +191,7 @@ function request(requestMethod, host, path, paramsLocation, params, security_typ
           // getApp().login(code);
         // }
          else {
+          console.log(res)
           console.log("请求失败：", res.data.message);
           reject(res.data);
           // if (showError) wx.showToast({

@@ -14,6 +14,16 @@
 		</picker>
 		<image class="arraw" src="../../images/arraw1.png"></image>
 	</view>
+		<view class="title section">
+		<view class="s1">机构</view>
+		<picker value="{{index3}}" range="{{array3}}" bindchange="officeChange">
+			<view class="fill">
+				{{array3[index3]}}
+				<image class="arraw" src="/images/arraw1.png"></image>
+			</view>
+		</picker>
+		<image class="arraw" src="../../images/arraw1.png"></image>
+	</view>
 	<view class="number section">
 		<view class="s1">角色</view>
 		<picker value="{{index2}}" range="{{array2}}" bindchange="roleChange">
@@ -24,19 +34,18 @@
 		</picker>
 		<image class="arraw" src="../../images/arraw1.png"></image>
 	</view>
-	<view class="title section">
-		<view class="s1">机构</view>
-		<picker value="{{index3}}" range="{{array3}}" bindchange="officeChange">
-			<view class="fill">
-				{{array3[index3]}}
-				<image class="arraw" src="/images/arraw1.png"></image>
-			</view>
-		</picker>
-		<image class="arraw" src="../../images/arraw1.png"></image>
+	<view class="number section">
+	<view class="s1">手机号</view>
+	<view class="fill">
+		<input value="{{phoneNo}}" disabled="true" style="width:70%"></input>
+		<button class="getPhone" open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber">获取手机号</button>
+		
 	</view>
+	</view>
+
 </view>
-<view class="save {{mark?'':'disabled'}}" bindtap='save'>
+<button class="save {{mark?'':'disabled'}}" bindtap="save">
 	注册
-</view>
+</button>
 <van-notify id="van-notify" />
 <van-toast id="van-toast" />

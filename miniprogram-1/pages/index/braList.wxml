@@ -12,7 +12,7 @@
 		<view class="pointBar">
 			<view class="section" bindtap="toPage" data-type="1" hover-class="secTab" hover-stay-time="1s">
 				<view class="num">
-					100
+					{{entryMoneyPost?entryMoneyPost:'　'}}
 				</view>
 				<view class="name">
 					已提货已入账
@@ -20,7 +20,7 @@
 			</view>
 			<view class="section" bindtap="toPage" data-type="2" hover-class="secTab" hover-stay-time="1s">
 				<view class="num">
-					88
+					{{deliveredMoney?deliveredMoney:'　'}}
 				</view>
 				<view class="name">
 					未提货
@@ -28,7 +28,7 @@
 			</view>
 			<view class="section" bindtap="toPage" data-type="3" hover-class="secTab" hover-stay-time="1s">
 				<view class="num">
-					20
+					{{unrecordedMoney?unrecordedMoney:'　'}}
 				</view>
 				<view class="name">
 					已提货未入账
@@ -39,23 +39,23 @@
 
 	<view class="bottom">
 		<view class='optBox'>
-			<view class="start">
+			<!-- <view class="start">
 				<picker mode="date" bindchange="onStartDatePickerChanged" end="{{endDate}}">
 					<view class='dateInput'>起始日期: {{startDate}}</view>
 				</picker>
 				<picker mode="time" bindchange="onstartTimePickerChanged">
 					<view class='timeInput'>起始时间: {{startTime}}</view>
 				</picker>
-			</view>
+			</view> -->
 
-			<view class="end">
+			<!-- <view class="end">
 				<picker mode="date" bindchange="onEndDatePickerChanged" start="{{startDate}}" end="{{today}}">
 					<view class='dateInput'>结束日期: {{endDate}}</view>
 				</picker>
 				<picker mode="time" bindchange="onEndTimePickerChanged">
 					<view class='timeInput'>结束时间: {{endTime}}</view>
 				</picker>
-			</view>
+			</view> -->
 
 			<!-- <picker value="{{index1}}" range="{{array1}}" bindchange="pickChange1">
 				<view class="picker">
@@ -75,44 +75,50 @@
 					<image class="arraw1" src="/images/arraw.png"></image>
 				</view>
 			</picker> -->
+			<input class="picker1" placeholder="请输入查询的商品名称" bindinput="bindinput"></input>
 			<view class="check" bindtap="check" hover-class="hover1" hover-stay-time='50'>查询</view>
 		</view>
 		<view style="height:5rpx;width:100%;background:#eee;margin-top:15rpx"></view>
 		<view class="listContent">
 			<!-- <van-divider contentPosition="center" textColor="#5cadff" wx:if="{{lists.length>0}}">共{{lists.length}}条数据</van-divider> -->
-      <view class="table">
-      <view class="tr bg-w">
-      <view class="th">商品名称</view>
-      <view class="th">商品编码</view>
-      <view class="th ">吊牌单价</view>
-      <view class="th ">商品数量</view>
-      <view class="th ">成交总价</view>
-      <view class="th ">收货人</view>
-      <view class="th ">收货人手机号</view>
-      </view>
-      <block wx:for="{{lists}}" wx:key="index">
-      <view class="tr bg-g" wx:if="{{index % 2 == 0}}"  hover-class="trhover" hover-stay-time="0.5" bindtap="toDetail" data-mark="{{item.dailyNo}}">
-      <view class="td">{{item.brandName}}</view>
-      <view class="td">{{item.brandCode}}</view>  
-      <view class="td">{{item.price}}</view>
-      <view class="td">{{item.entryNum}}</view>
-       <view class="td">{{item.payment}}</view>
-        <view class="td">{{item.receiverName}}</view>
-         <view class="td">{{item.receiverTel}}</view>
-      </view>
-      <view class="tr" wx:else  hover-class="trhover" hover-stay-time="0.5" bindtap="toDetail" data-mark="{{item.dailyNo}}">
-      <view class="td">{{item.brandName}}</view>
-      <view class="td">{{item.brandCode}}</view>  
-      <view class="td">{{item.price}}</view>
-      <view class="td">{{item.entryNum}}</view>
-      <view class="td">{{item.payment}}</view>
-      <view class="td">{{item.receiverName}}</view>
-      <view class="td">{{item.receiverTel}}</view>
-      </view>
-      </block>
-      </view>
+			<van-tabs active="{{ active }}" bind:change="onChange">
+				<van-tab title="已提货已入账"></van-tab>
+				<van-tab title="未提货"></van-tab>
+				<van-tab title="已提货未入账"></van-tab>
+			</van-tabs>
+			<view class="table">
+				<view class="tr bg-w">
+					<view class="th">商品名称</view>
+					<view class="th">商品编码</view>
+					<view class="th ">吊牌单价</view>
+					<view class="th ">商品数量</view>
+					<view class="th ">成交总价</view>
+					<view class="th ">收货人</view>
+					<view class="th ">收货人手机号</view>
+				</view>
+				<block wx:for="{{lists}}" wx:key="index">
+					<view class="tr bg-g" wx:if="{{index % 2 == 0}}" hover-class="trhover" hover-stay-time="0.5" bindtap="toDetail" data-index="{{index}}">
+						<view class="td">{{item.brandName}}</view>
+						<view class="td">{{item.itemNo}}</view>
+						<view class="td">{{item.price}}</view>
+						<view class="td">{{item.num}}</view>
+						<view class="td">{{item.payment}}</view>
+						<view class="td">{{item.receiverName}}</view>
+						<view class="td">{{item.receiverTel}}</view>
+					</view>
+					<view class="tr" wx:else hover-class="trhover" hover-stay-time="0.5" bindtap="toDetail" data-mark="{{item.dailyNo}}">
+						<view class="td">{{item.brandName}}</view>
+						<view class="td">{{item.itemNo}}</view>
+						<view class="td">{{item.price}}</view>
+						<view class="td">{{item.num}}</view>
+						<view class="td">{{item.payment}}</view>
+						<view class="td">{{item.receiverName}}</view>
+						<view class="td">{{item.receiverTel}}</view>
+					</view>
+				</block>
+			</view>
 			<van-empty image="search" description="暂无数据" wx:if="{{lists.length==0}}" />
-      
+
 			<view wx:if="{{listIsFull}}" class='nullDataInfo'>
 				<van-divider custom-style="width:94%;margin-left:3%;padding-bottom:20rpx" contentPosition="center">到底了</van-divider>
 			</view>

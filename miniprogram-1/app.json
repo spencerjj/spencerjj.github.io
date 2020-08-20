@@ -1,18 +1,18 @@
 {
   "pages": [
+    "pages/index/finList",
     "pages/index/deList",
     "pages/index/braList",
-    "pages/index/finList",
-    "pages/index/sonLists",
-    "pages/login/login",
     "pages/index/listDetail",
-    "pages/login/regist",
-    "pages/index/lists",
-    "pages/index/index",
     "pages/index/select",
-    "pages/login/class",
-    "pages/login/test",
-    "pages/index/success"
+    "pages/index/lists",
+    "pages/index/sonLists",
+    "pages/index/mainList",
+    "pages/login/login",
+    "pages/index/index",
+    "pages/index/success",
+    "pages/index/error",
+    "pages/login/regist"
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -34,7 +34,11 @@
     "van-datetime-picker": "@vant/weapp/datetime-picker/index",
     "van-dialog": "@vant/weapp/dialog/index",
     "van-empty": "@vant/weapp/empty/index",
-    "van-sticky": "@vant/weapp/sticky/index"
+    "van-sticky": "@vant/weapp/sticky/index",
+    "van-tab": "@vant/weapp/tab/index",
+    "van-tabs": "@vant/weapp/tabs/index",
+    "van-checkbox": "@vant/weapp/checkbox/index",
+  "van-checkbox-group": "@vant/weapp/checkbox-group/index"
   },
   "sitemapLocation": "sitemap.json"
 }

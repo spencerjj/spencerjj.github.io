@@ -485,3 +485,18 @@ color:red !important
  .trhover{
    background: #ddd;
  }
+ .btm{
+   position: fixed;
+   bottom: 0;
+   width: 92%;
+   margin-left: 4%;
+   height: 130rpx;
+ }
+.tdCon{
+  height: 50rpx;
+  width: 100%;
+  background: #88bff5;
+  color:white;
+  line-height: 50rpx;
+  font-size: 20rpx;
+}

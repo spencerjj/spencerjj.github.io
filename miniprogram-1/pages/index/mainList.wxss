@@ -1,11 +1,42 @@
 /* pages/index/my.wxss */
 page{
-  background: #f1f1f1
+  background: #eee
+}
+.loading{
+  position: absolute;
+  top:0;
+  width:100%
+}
+.logo{
+  width: 210rpx;
+  margin:0 auto;
+  margin-top:100rpx
+}
+.name{
+  width: 400rpx;
+  margin:0 auto;
+  margin-top:30rpx;
+  text-align:center;
+}
+.name text{
+  font-size: 50rpx;
+  font-family: Arial;
+  font-weight: bolder;
+  color:#1790FF
+}
+.logo image{
+  width: 206rpx;
+  height: 206rpx;
+  border-radius: 50%;
+}
+.name image{
+  width: 242rpx;
+  height: 80rpx;
 }
 .top{
   height: 350rpx;
   /* background: #0DA8FF; */
-  /* background:linear-gradient(#69bcf9 , #eee); */
+  background:linear-gradient(#69bcf9 , #eee);
 }
 .left{
   width: 92%;
@@ -22,11 +53,11 @@ page{
 .left .nickName{
   margin-left: 130rpx;
   font-size: 40rpx;
-  color: #666
+  color: white
 }
 .left .title{
   margin-left: 130rpx;
-  color: #666;
+  color: #eee;
   font-size: 32rpx
 }
 .pointBar{
@@ -78,7 +109,7 @@ page{
 }
 .optBox {
   width: 100%;
-  /* height: 310rpx; */
+  height: 310rpx;
   padding-bottom: 10rpx;
   /* padding-top: 20rpx; */
   color:#999;
@@ -157,7 +188,7 @@ page{
 }
 .bottom{
   clear: both;
-  margin-top:-200rpx;
+  margin-top:-340rpx;
   background: white;
   border-radius: 10rpx;
   padding-top: 10rpx;
@@ -224,13 +255,13 @@ page{
   margin-top: 0;
 }
 .hover1{
-  background:#fff
+  background:#eee
 }
 .active{
-  color: #000;
+  color: #5cadff;
 }
 .active1{
-  color: #000;
+  color: #5cadff;
   font-size: 25rpx;
 }
 .expired{
@@ -241,7 +272,7 @@ page{
 float: right;
 margin-right: 50rpx;
 font-weight: bolder;
-border: 2rpx solid #eee;
+border: 2rpx solid #5cadff;
 height: 30rpx;
 line-height: 30rpx;
 margin-top: 35rpx;
@@ -439,15 +470,14 @@ color:red !important
   line-height: 60rpx;
   text-align: center;
   border-radius: 5rpx;
-  color:#999;
-  background: #f1f0f0;
-  border:1rpx solid #999;
+  color:#69bcf9;
+  border:1rpx solid #69bcf9;
   width: 94%;
   margin-left: 3%;
   margin-top: 15rpx;
 }
 .checkhover{
-  background-color: #fff;
+  background-color: #eee;
 }
 .buskmark{
   width: 100%;

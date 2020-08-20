@@ -149,6 +149,7 @@ Page({
   },
   doLogin(e){
     var that = this;
+    app.doMessage()
     var data = {
       loginCode:that.data.phoneNo,
       param_deviceType:'mobileApp',
@@ -174,19 +175,9 @@ Page({
           }
           if (res.data.result == 'false') {
             if(res.data.data==404){
-              wx.showModal({
-                title: '提示',
-                content: '用户不存在，调转注册页面',
-                success (res) {
-                  if (res.confirm) {
-                    wx.navigateTo({
-                      url: 'regist?openid='+that.data.openid+'&phoneNo='+that.data.phoneNo,
-                    })
-                  } else if (res.cancel) {
-                    console.log('用户点击取消')
-                  }
-                }
-              })
+                wx.navigateTo({
+                  url: 'regist?openid='+that.data.openid+'&phoneNo='+that.data.phoneNo
+                })
             }else if(res.data.data==4){
               wx.navigateTo({
                 url: '../index/success'
@@ -199,10 +190,11 @@ Page({
             userInfo.username = res.data.username;
             userInfo.sid = res.data.sid;
             userInfo.loginCode = res.data.loginCode;
+            userInfo.roleCodes = res.data.roleCodes;
             wx.removeStorageSync('userInfo');
             wx.setStorageSync('userInfo', userInfo);
             wx.navigateTo({
-              url: '../index/finList',
+              url: '../index/mainList',
             })
           }
       }

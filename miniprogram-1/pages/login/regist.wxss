@@ -198,3 +198,19 @@ page {
   border-radius: 50%;
   margin-top: -20rpx;
 }
+.getPhone{
+  font-size: 25rpx;
+  color:#5cadff;
+  float: right;
+  font-weight: bolder;
+  border: 2rpx solid #5cadff;
+  height: 60rpx;
+  line-height: 60rpx;
+  /* margin-top: 18rpx; */
+  padding: 0rpx 5rpx 0rpx 5rpx;
+  border-radius: 10rpx;
+  background: #fff;
+  position: absolute;
+  right: 30rpx;
+  top:20rpx
+}

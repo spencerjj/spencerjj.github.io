@@ -1,11 +1,2 @@
-<view class="showbox">
-  <view wx:for="{{lists}}" class="{{myValue==item?'back':''}}">{{item}}</view>
-</view>
-<van-slider value="{{ currentValue }}" use-button-slot bind:drag="onDrag">
-  <view class="custom-button" slot="button">
-    {{ currentValue }}
-  </view>
-</van-slider>
-<van-notify id="van-notify" />
-  <button style="background:red" class="vv">123</button>
-
+<!--pages/login/test.wxml-->
+<text>pages/login/test.wxml</text>

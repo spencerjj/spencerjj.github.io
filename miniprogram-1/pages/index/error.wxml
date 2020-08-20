@@ -1,0 +1,5 @@
+<view class="content">
+  <view class="img"><image src="../../images/error.png"></image></view>
+  <view class="title1">该账号已停用</view>
+  <!-- <button class="back" bindtap="toPage">返 回</button> -->
+</view>

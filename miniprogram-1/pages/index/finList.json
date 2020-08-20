@@ -1,6 +1,6 @@
 {
-  "navigationBarTitleText": "财务账单",
-  "navigationBarTextStyle": "white",
-  "navigationBarBackgroundColor": "#69bcf9",
+  "navigationBarTitleText": "微商城账单",
+  "navigationBarTextStyle": "black",
+  "navigationBarBackgroundColor": "#f1f1f1",
   "enablePullDownRefresh": true
 }

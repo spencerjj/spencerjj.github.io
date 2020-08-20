@@ -15,21 +15,22 @@ Page({
   data: {
     pkTeacher:'',
     pkPayBill:'',
-    listDetail:{
-      billTitle:'账单',
-      nameSchool:'百货大楼',
-      depart:'销售部',
-      deadlineTime:'爱马仕',
-      itemAmount:10000.00,
-      time:'2019-01-10 12:00',
-      comment:'123'
-    },
     notice: '请输入备注信息',
     focus: false,
     myComment: '',
     inputShow: false,
     myTag:'',
-    dailyNo:''
+    dailyNo:'',
+    brandName:'',
+    itemNo:'',
+    price:'',
+    num:'',
+    payment:'',
+    receiverName:'',
+    receiverTel:'',
+    departName:'',
+    id:'',
+    remark:''
   },
 
   /**
@@ -37,8 +38,20 @@ Page({
    */
   onLoad: function (options) {
     var that = this;
+    console.log(options.remark)
+    var userInfo = wx.getStorageSync('userInfo');
     that.setData({
-      dailyNo:options.id
+      brandName:options.brandName!='undefined'?options.brandName:'',
+      itemNo:options.itemNo!='undefined'?options.itemNo:'',
+      price:options.price!='undefined'?options.price:'',
+      num:options.num!='undefined'?options.num:'',
+      payment:options.payment!='undefined'?options.payment:'',
+      receiverName:options.receiverName!='undefined'?options.receiverName:'',
+      receiverTel:options.receiverTel!='undefined'?options.receiverTel:'',
+      departName:options.departName!='undefined'?options.departName:'',
+      id:options.id,
+      remark:options.remark!='undefined'?options.remark:'',
+      sid:userInfo.sid
     })
   },
 
@@ -53,12 +66,7 @@ Page({
    * Lifecycle function--Called when page show
    */
   onShow: function () {
-    var that = this
-    var userInfo = wx.getStorageSync('userInfo');
-    that.setData({
-      sid:userInfo.sid
-    })
-    that.getDetail()
+
   },
 
   /**
@@ -107,26 +115,19 @@ Page({
       __ajax:'json',
       dailyNo:that.data.dailyNo
     }
-  getRequest(getApiHost(), 'platform/v1/api/dayily/getDailyOrderHead.json', 'body', data, 0, false, true).then(
-    res => {
+  // getRequest(getApiHost(), 'platform/v1/api/dayily/getDailyOrderHead.json', 'body', data, 0, false, true).then(
+  //   res => {
  
-    }
-  ).catch(res => {
-    wx.showModal({
-      title: '错误',
-      content: res.message,
-      showCancel: false,
-      confirmText: '知道了',
-      confirmColor: '#1890FF'
-    })
-  });
-  },
-  detail: function (e) {
-    console.log(e.target.dataset.url)
-    wx.previewImage({
-      current: e.target.dataset.url, // 当前显示图片的http链接
-      urls: this.data.imglist // 需要预览的图片http链接列表
-    })
+  //   }
+  // ).catch(res => {
+  //   wx.showModal({
+  //     title: '错误',
+  //     content: res.message,
+  //     showCancel: false,
+  //     confirmText: '知道了',
+  //     confirmColor: '#1890FF'
+  //   })
+  // });
   },
   toPage:function(){
 
@@ -135,7 +136,7 @@ Page({
     this.setData({
       focus: true,
       inputShow: true,
-      myTag:this.data.listDetail.comment,
+      myTag:this.data.remark,
     })
   },
   reply: function (e) {
@@ -149,8 +150,7 @@ Page({
   },
   bindblur: function (e) {
     this.setData({
-      inputShow: false,
-      myTag: '',
+      inputShow: false
     });
   },
   getTags: function (e) {
@@ -160,14 +160,36 @@ Page({
   },
   add(e){
     var that = this;
-    if(that.data.myTag.length>0){
-      console.log(that.data.myTag)
-      var listDetail = that.data.listDetail
-      listDetail.comment = that.data.myTag
-      console.log(listDetail)
-      that.setData({
-        listDetail:listDetail
+    if(that.data.remark.length>0){
+      console.log(that.data.remark)
+      var data={
+        __sid:that.data.sid,
+        __ajax:'json',
+        remark:that.data.remark,
+        id:that.data.id,
+        state:1
+      }
+    getRequest(getApiHost(), 'platform/v1/api/dayily/updateOrderBody.json', 'body', data, 0, false, true).then(
+      res => {
+        wx.navigateBack({
+          delta: 1,
+        })
+      }
+    ).catch(res => {
+      wx.showModal({
+        title: '错误',
+        content: res.message,
+        showCancel: false,
+        confirmText: '知道了',
+        confirmColor: '#1890FF'
       })
+    });
+
     }
+  },
+  remarkInput(e){
+    this.setData({
+      remark:e.detail.value
+    })
   }
 })

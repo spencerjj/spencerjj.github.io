@@ -40,6 +40,9 @@ App({
       }
     })
   },
+  onHide(e){
+
+  },
   globalData: {
     userInfo: null,
     url: 'http://192.168.2.81:8980/'
@@ -49,6 +52,14 @@ App({
     wx.removeStorageSync('userInfo');
     wx.redirectTo({
       url: '/pages/login/login',
+    })
+  },
+  doMessage(e){
+    wx.requestSubscribeMessage({
+      tmplIds: ['-RCILlm7nALXM6jxiYNiZuTbf6D5LBCwYPB-K6qDNn4'],
+      success(res) {
+        console.log('订阅成功')
+      }
     })
   },
   doLogin(e) {
@@ -62,7 +73,7 @@ App({
             code: code,
             ajax: '_json'
           }
-          getRequest(getApiHost(), 'platform/v1/api/wxmini/code2session.json', 'body', data, 0, false, true).then(
+          getRequest(getApiHost(), 'platform/v1/api/wxmini/code2session.json', 'body', data, 0, false, false).then(
             res => {
               // that.setData({
               //   openid:res.data.openid,
@@ -72,11 +83,12 @@ App({
                 openid: res.data.openid,
                 __ajax: 'json'
               }
-              getRequest(getApiHost(), 'platform/v1/api/wxmini/checkOpenid', 'body', data, 0, false, true).then(
+              getRequest(getApiHost(), 'platform/v1/api/wxmini/checkOpenid', 'body', data, 0, false, false).then(
                 res => {
+                  console.log('openid'+res.result)
                   if(res.result=='false'){
                     wx.redirectTo({
-                      url: '/pages/login/login',
+                      url: '/pages/login/regist',
                     })
                     return;
                   }
@@ -87,6 +99,9 @@ App({
                     param_deviceType:'mobileApp',
                     ajax: '_json',
                   }
+                  wx.showLoading({
+                    title: '自动登录中',
+                  })
                   wx.request({
                     url: HOST_URI+ 'platform/v1/api/wxmini/miniLogin.json',
                     data: data,
@@ -95,7 +110,8 @@ App({
                     },
                     success(res) {
                       console.log(res)
-                        if (!res.data.result&&res.data.result!='false') {
+                      wx.hideLoading()
+                        if (res.data.result=='false') {
                           wx.showModal({
                             title: '登录失败',
                             content: '服务器错误，请联系管理员',
@@ -103,28 +119,27 @@ App({
                             confirmText: '知道了',
                             confirmColor: '#1890FF'
                           })
-                          return;
                           reject()
+                          return;
                         }
+
                           var userInfo = {};
                           userInfo.companyName = res.data.companyName;
                           userInfo.officeName = res.data.officeName;
                           userInfo.username = res.data.username;
                           userInfo.sid = res.data.sid;
                           userInfo.loginCode = res.data.loginCode;
-                          wx.removeStorageSync('userInfo');
+                          userInfo.roleCodes = res.data.roleCodes;
+                          userInfo.officeCode = res.data.officeCode;
+                          userInfo.companyCode = res.data.companyCode;
                           wx.setStorageSync('userInfo', userInfo);
                           resolve(res.data.sid)
                     }
                   })
                 }
               ).catch(res => {
-                wx.showModal({
-                  title: '登录失败',
-                  content: '没有访问权限，请联系管理员',
-                  showCancel: false,
-                  confirmText: '知道了',
-                  confirmColor: '#1890FF'
+                wx.redirectTo({
+                  url: '/pages/login/regist',
                 })
               });
             }

@@ -6,8 +6,8 @@ page{
   height: 800rpx;
   background: linear-gradient(#69bcf9, #eee);
   width: 100%;
-  padding-top: 10rpx;
   position: relative;
+  border-top: 5rpx solid #eee;
   
 }
 .title{
@@ -43,12 +43,12 @@ page{
   font-weight: bolder;
 }
 .billList{
-  width: 95%;
-  margin-left: 2.5%;
-  min-height: 500rpx;
+  width: 100%;
+  min-height: 300rpx;
   background: white;
-  /* margin-top:20rpx; */
+  margin-top:20rpx;
   position: relative;
+  background: #f3f9fc;
 }
 .mark1{
   width: 6rpx;
@@ -118,7 +118,8 @@ page{
 .bTitle{
   margin-left:4%;
   color:#999;
-  font-size: 35rpx
+  font-size: 35rpx;
+  padding-bottom: 10rpx;
 }
 .comAct{
   font-size: 23rpx;
@@ -138,8 +139,9 @@ page{
   margin-left:4%;
   color:#69bcf9;
   font-size: 35rpx;
-  padding-top:10rpx;
-  padding-bottom: 30rpx
+  width:89%;
+  border: 1rpx dotted #ccc;
+  padding:10rpx
 }
 
 .pics{
@@ -200,4 +202,46 @@ page{
   }
   .input-placeholder{
     margin-left: 25rpx;
+  }
+  .table {
+    border: 0px solid darkgray;
+   }
+   .tr {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    height: 3rem;
+    align-items: center;
+    font-size: 30rpx;
+   }
+   .td {
+    width:50%;
+    justify-content: center;
+    text-align: center;
+    overflow: hidden;
+  text-overflow:ellipsis;
+  white-space: nowrap;
+   }
+   .bg-w{
+    background: snow;
+   }
+   .bg-g{
+    background: #E6F3F9;
+   }
+   .th {
+    width: 50%;
+    justify-content: center;
+    background: #69bcf9;
+    color: #fff;
+    display: flex;
+    height: 3rem;
+    align-items: center;
+   }
+   .trhover{
+    background: #ddd;
+  }
+  .modify{
+    width: 92%;
+    margin-left: 4%;
+    margin-top: 20rpx;
   }
