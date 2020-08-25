@@ -1,11 +1,11 @@
 /* pages/index/my.wxss */
 page{
-  background: #f1f1f1
+  background: #eee
 }
 .top{
   height: 350rpx;
   /* background: #0DA8FF; */
-  /* background:linear-gradient(#69bcf9 , #eee); */
+  background:linear-gradient(#69bcf9 , #eee);
 }
 .left{
   width: 92%;
@@ -22,11 +22,11 @@ page{
 .left .nickName{
   margin-left: 130rpx;
   font-size: 40rpx;
-  color: #666
+  color: white
 }
 .left .title{
   margin-left: 130rpx;
-  color: #666;
+  color: #eee;
   font-size: 32rpx
 }
 .pointBar{
@@ -219,18 +219,26 @@ page{
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+  height: 100rpx; /* mark */
+}
+.post{
+  position: absolute;
+  right: 0;
+  top:50rpx;
+  right: 10rpx;
+  font-size: 15px;
 }
 .list:first-child .top1{
   margin-top: 0;
 }
 .hover1{
-  background:#fff
+  background:#eee
 }
 .active{
-  color: #000;
+  color: #5cadff;
 }
 .active1{
-  color: #000;
+  color: #5cadff;
   font-size: 25rpx;
 }
 .expired{
@@ -241,7 +249,7 @@ page{
 float: right;
 margin-right: 50rpx;
 font-weight: bolder;
-border: 2rpx solid #eee;
+border: 2rpx solid #5cadff;
 height: 30rpx;
 line-height: 30rpx;
 margin-top: 35rpx;
@@ -259,7 +267,7 @@ line-height: 30rpx;
 margin-top: 35rpx;
 padding: 0rpx 5rpx 0rpx 5rpx;
 border-radius: 10rpx;
-color:red !important
+color:red !important;
 }
 
 .list .name {
@@ -274,6 +282,7 @@ color:red !important
 }
 .list .title{
   margin-left: 10rpx;
+  /* margin-top:15rpx; mark */
   font-size: 30rpx;
   font-weight: bolder;
   width: 55%;
@@ -439,15 +448,16 @@ color:red !important
   line-height: 60rpx;
   text-align: center;
   border-radius: 5rpx;
-  color:#999;
-  background: #f1f0f0;
-  border:1rpx solid #999;
+  color:#69bcf9;
+  border:1rpx solid #69bcf9;
   width: 94%;
   margin-left: 3%;
   margin-top: 15rpx;
+  width: 45%;
+  display: inline-block;
 }
 .checkhover{
-  background-color: #fff;
+  background-color: #eee;
 }
 .buskmark{
   width: 100%;

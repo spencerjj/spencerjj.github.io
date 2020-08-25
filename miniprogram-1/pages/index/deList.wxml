@@ -3,7 +3,7 @@
 		<view class="left">
 			<image src='/images/nan.png'></image>
 			<view class="nickName">
-				{{name}}<text wx:if="{{flag==3}}"> - {{officeName}}</text> 
+				{{name}}<text wx:if="{{flag==3}}"> - {{officeName}}</text>
 			</view>
 			<view class="title">
 				{{phoneNo}}
@@ -13,7 +13,7 @@
 
 	<view class="bottom">
 		<view class='optBox'>
-			<view class="start">
+			<!-- <view class="start">
 				<picker mode="date" bindchange="onStartDatePickerChanged" end="{{endDate}}">
 					<view class='dateInput'>起始日期{{startDate.length>1?':':''}} {{startDate}}</view>
 				</picker>
@@ -29,7 +29,7 @@
 				<picker mode="time" bindchange="onEndTimePickerChanged">
 					<view class='timeInput'>结束时间{{endTime1.length>1?':':''}} {{endTime1}}</view>
 				</picker>
-			</view>
+			</view> -->
 
 			<!-- <picker value="{{index1}}" range="{{array1}}" bindchange="pickChange1">
 				<view class="picker">
@@ -49,41 +49,42 @@
 					<image class="arraw1" src="/images/arraw.png"></image>
 				</view>
 			</picker> -->
-			<view class="check" bindtap="check" hover-class="hover1" hover-stay-time='50'>查询</view>
+			<input class="picker1" placeholder="请输入查询的{{flag==3?'柜组':'部门'}}名称" bindinput="bindinput" value="{{goodsName}}"></input>
+			<view class="myAction">
+				<view class="check" bindtap="check" hover-class="hover1" hover-stay-time='50' data-mark="1">查询</view>
+			</view>
+
 		</view>
 		<view style="height:5rpx;width:100%;background:#eee;margin-top:15rpx"></view>
 		<view class="listContent">
 			<!-- <van-divider contentPosition="center" textColor="#5cadff" wx:if="{{lists.length>0}}">共{{lists.length}}条数据</van-divider> -->
-      <view class="table">
-      <view class="tr bg-w">
-			<view class="th" wx:if="{{flag==3}}">品牌</view>
-      <view class="th" wx:else>部门</view>
-      <view class="th">吊牌总价</view>
-      <view class="th ">成交总价</view>
-      <view class="th ">数量</view>
-			<view class="th " wx:if="{{flag==3}}">操作</view>
-      </view>
-      <block wx:for="{{lists}}" wx:key="index">
-      <view class="tr bg-g" wx:if="{{index % 2 == 0}}" hover-class="trhover" hover-stay-time="0.5" bindtap="toDetail" data-mark="{{item.dailyNo}}">
-			<view class="td"  wx:if="{{flag==3}}">{{item.brandName?item.brandName:'未知'}}</view>
-      <view class="td" wx:else>{{item.orgName?item.orgName:'未知'}}</view>
-      <view class="td">￥{{item.price?item.price:'0'}}</view>
-      <view class="td">￥{{item.payment?item.payment:'0'}}</view>
-      <view class="td">{{item.entryNum}}</view>
-			<view class="td" wx:if="{{flag==3}}"><button disabled="{{item.status!=2}}" class="tdCon" bindtap="dconfirm" data-id="{{item.id}}"  data-index="{{index}}">{{item.status==2?'确认':'已确认'}}</button></view>
-      </view>
-      <view class="tr" wx:else  hover-class="trhover" hover-stay-time="0.5" bindtap="toDetail" data-mark="{{item.dailyNo}}">
-      <view class="td">{{item.orgName?item.orgName:'未知'}}</view>
-      <view class="td">￥{{item.price?item.price:'0'}}</view>
-      <view class="td">￥{{item.payment?item.payment:'0'}}</view>
-      <view class="td">{{item.entryNum}}</view>
-			<view class="td" wx:if="{{flag==3}}"><button disabled="{{item.status!=2}}" class="tdCon" bindtap="dconfirm" data-id="{{item.id}}" data-index="{{index}}">{{item.status==2?'确认':'已确认'}}</button></view>
-      </view>
-      </block>
-      </view>
+			<view class="table">
+				<view class="tr bg-w">
+					<view class="th">部门</view>
+					<view class="th" wx:if="{{flag==3}}">柜组</view>
+					<view class="th" wx:if="{{flag==3}}">品牌</view>
+					<view class="th">吊牌总价</view>
+					<view class="th ">成交总价</view>
+					<view class="th ">数量</view>
+					<view class="th " wx:if="{{flag!=3}}">运费</view>
+					<view class="th " wx:if="{{flag==3}}">操作</view>
+				</view>
+				<block wx:for="{{lists}}" wx:key="index">
+					<view class="tr {{index % 2 == 0?'bg-g':''}}" hover-class="trhover" hover-stay-time="0.5" bindtap="toDetail" data-mark="{{item.dailyNo}}">
+						<view class="td">{{item.orgName?item.orgName:'未知'}}</view>
+						<view class="td" wx:if="{{flag==3}}">{{item.mfName?item.mfName:'未知'}}</view>
+						<view class="td" wx:if="{{flag==3}}">{{item.brandName?item.brandName:'未知'}}</view>
+						<view class="td">￥{{item.price?item.price:'0'}}</view>
+						<view class="td">￥{{item.payment?item.payment:'0'}}</view>
+						<view class="td">{{item.entryNum}}</view>
+						<view class="td" wx:if="{{flag!=3}}">￥{{item.postFee}}</view>
+						<view class="td" wx:if="{{flag==3}}"><button disabled="{{item.status!=2}}" class="tdCon" bindtap="dconfirm" data-id="{{item.id}}" data-index="{{index}}">{{item.status==2?'确认':'完成'}}</button></view>
+					</view>
+				</block>
+			</view>
 
 			<van-empty image="search" description="暂无数据" wx:if="{{lists.length==0}}" />
-      
+
 			<view wx:if="{{listIsFull}}" class='nullDataInfo'>
 				<van-divider custom-style="width:94%;margin-left:3%;padding-bottom:20rpx" contentPosition="center">到底了</van-divider>
 			</view>
@@ -98,9 +99,8 @@
 	<button class="confirm" bindtap="confirm" disabled="{{disabled1||status!=0}}">{{disabled1||status!=0?'已确认':'确认'}}</button>
 </view>
 <view class="btm" wx:if="{{flag==2}}">
-	<button class="confirm" bindtap="wconfirm"  disabled="{{disabled2||status!=2}}">{{disabled2||status!=2?'已确认':'确认'}}</button>
+	<button class="confirm" bindtap="wconfirm" disabled="{{disabled2||status!=2}}">{{disabled2||status!=2?'已确认':'确认'}}</button>
 </view>
 <!-- <view class="btm" wx:if="{{flag==3}}">
 	<button class="confirm" bindtap="dconfirm" disabled="{{disabled3||status!=2}}">{{disabled3||status!=2?'已确认':'确认'}}</button>
 </view> -->
-

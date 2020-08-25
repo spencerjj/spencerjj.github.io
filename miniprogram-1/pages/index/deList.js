@@ -43,7 +43,8 @@ Page({
     disabled3:false,
     flag:0,
     companyName:'',
-    officeName:''
+    officeName:'',
+    officeName1:''
   },
   onLoad: function () {
     console.log(this.options.status)
@@ -132,8 +133,9 @@ Page({
         pageNo:that.data.pageNo,
         shopId:that.data.companyCode,
         pageSize:that.data.pageSize,
-        startTime:that.data.startTime,
-        endTime:that.data.endTime
+        orgName:that.data.officeName1
+        // startTime:that.data.startTime,
+        // endTime:that.data.endTime
       }
       url = 'getDailyOrderGroupByOrg.json'
     }else if(that.data.flag==2){
@@ -144,8 +146,9 @@ Page({
         pageNo:that.data.pageNo,
         shopId:that.data.companyCode,
         pageSize:that.data.pageSize,
-        startTime:that.data.startTime,
-        endTime:that.data.endTime
+        orgName:that.data.officeName1
+        // startTime:that.data.startTime,
+        // endTime:that.data.endTime
       }
       url="getDailyOrderGroupByOrg.json"
     }else if(that.data.flag==3){
@@ -157,8 +160,9 @@ Page({
         shopId:that.data.companyCode,
         orgId:that.data.officeCode,
         pageSize:that.data.pageSize,
-        startTime:that.data.startTime,
-        endTime:that.data.endTime
+        mfName:that.data.officeName1
+        // startTime:that.data.startTime,
+        // endTime:that.data.endTime
       }
       url="getDailyOrderGroupByBrand.json"
     }
@@ -290,6 +294,11 @@ Page({
       index2:e.detail.value
     })
   },
+  bindinput(e) {
+    this.setData({
+      officeName1: e.detail.value
+    })
+  },
   toPage(e){
     console.log(e.currentTarget.dataset.type)
     wx.navigateTo({
@@ -307,27 +316,44 @@ Page({
   },
   check(e){
     var that = this
-    if(that.data.startTime1.length==0){
-      if(that.data.startDate.length>1){
-        that.setData({
-          startTime1:'00:00'
-        })
+    app.doMessage()
+    var mark = e.currentTarget.dataset.mark
+    if(mark==0){
+      that.setData({
+        lists: '',
+        listIsFull: false,
+        loading: false,
+        startDate:'',
+        startTime1:'',
+        endDate:'',
+        endTime1:'',
+        startTime:'',
+        endTime:""
+      })
+    }else if(mark==1){
+      if(that.data.startTime1.length==0){
+        if(that.data.startDate.length>1){
+          that.setData({
+            startTime1:'00:00'
+          })
+        }
       }
+      if(that.data.endTime1.length==0){
+        if(that.data.endDate.length>1){
+          that.setData({
+            endTime1:'00:00'
+          })
+        }
+      } 
+      that.setData({
+        lists: '',
+        listIsFull: false,
+        loading: false,
+        startTime:that.data.startDate+' '+that.data.startTime1,
+        endTime:that.data.endDate+' '+that.data.endTime1
+      })
     }
-    if(that.data.endTime1.length==0){
-      if(that.data.endDate.length>1){
-        that.setData({
-          endTime1:'00:00'
-        })
-      }
-    } 
-    that.setData({
-      lists: '',
-      listIsFull: false,
-      loading: false,
-      startTime:that.data.startDate+' '+that.data.startTime1,
-      endTime:that.data.endDate+' '+that.data.endTime1
-    })
+
     that.getLists()
   },
   // getSelectLists(e){

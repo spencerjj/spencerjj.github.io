@@ -62,7 +62,8 @@ Page({
       name: userInfo.username,
       phoneNo: userInfo.loginCode,
       sid: userInfo.sid,
-      officeCode: userInfo.officeCode
+      officeCode: userInfo.officeCode,
+      officeName:userInfo.officeName
     })
     // that.getSelectLists()
     that.getHead()
@@ -108,8 +109,8 @@ Page({
       pageSize: that.data.pageSize,
       did: that.data.dailyNo,
       status: that.data.status,
-      brandName: that.data.goodsName,
-      brandCode: that.data.officeCode
+      itemTitle: that.data.goodsName,
+      mfCode: that.data.officeCode
     }
     getRequest(getApiHost(), 'platform/v1/api/dayily/getDailyOrderBody.json', 'body', data, 0, false, true).then(
       res => {
@@ -240,13 +241,23 @@ Page({
   },
   check(e) {
     var that = this
-    console.log(that.data.goodsName)
+    app.doMessage()
+    var mark = e.currentTarget.dataset.mark
+    if(mark==0){
+      that.setData({
+        lists: '',
+        listIsFull: false,
+        loading: false,
+        goodsName: ''
+      })
+    }else if(mark==1){
     that.setData({
       lists: '',
       listIsFull: false,
       loading: false,
       goodsName: that.data.goodsName
     })
+  }
     that.getLists()
   },
   // getSelectLists(e) {
@@ -284,12 +295,13 @@ Page({
       __sid: that.data.sid,
       __ajax: 'json',
       dailyNo: that.data.dailyNo,
+      mfCode:that.data.officeCode
     }
     getRequest(getApiHost(), 'platform/v1/api/dayily/getDailyOrderDetailByNo.json', 'body', data, 0, false, true).then(
       res => {
         console.log(res)
         that.setData({
-          entryMoneyPost: res.data.entryMoneyPost,
+          entryMoney: res.data.entryMoney,
           deliveredMoney: res.data.deliveredMoney,
           unrecordedMoney: res.data.unrecordedMoney
         })
@@ -309,7 +321,7 @@ Page({
     var lists = this.data.lists
     var index = e.currentTarget.dataset.index
     wx.navigateTo({
-      url: 'listDetail?brandName='+lists[index].brandName+'&itemNo='+lists[index].itemNo+'&price='+lists[index].price+'&num='+lists[index].num+'&payment='+lists[index].payment+'&receiverName='+lists[index].receiverName+'&receiverTel='+lists[index].receiverTel+'&departName='+lists[index].departName+'&remark='+lists[index].remark+'&id='+lists[index].id
+      url: 'listDetail?brandName='+lists[index].brandName+'&itemNo='+lists[index].itemNo+'&price='+lists[index].price+'&num='+lists[index].num+'&payment='+lists[index].payment+'&receiverName='+lists[index].receiverName+'&receiverTel='+lists[index].receiverTel+'&departName='+lists[index].departName+'&remark='+lists[index].remark+'&id='+lists[index].id+'&itemTitle='+lists[index].itemTitle
     })
   },
   onChange(event) {
@@ -318,6 +330,7 @@ Page({
     if (event.detail.name == 0) {
       that.setData({
         lists: '',
+        pageNo:1,
         listIsFull: false,
         loading: false,
         status: 'TRADE_SUCCESS'
@@ -326,6 +339,7 @@ Page({
       that.setData({
         lists: '',
         listIsFull: false,
+        pageNo:1,
         loading: false,
         status: 'WAIT_SELLER_SEND_GOODS'
       })
@@ -333,6 +347,7 @@ Page({
       that.setData({
         lists: '',
         listIsFull: false,
+        pageNo:1,
         loading: false,
         status: 'WAIT_BUYER_CONFIRM_GOODS'
       })

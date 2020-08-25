@@ -1,9 +1,10 @@
 {
   "pages": [
     "pages/index/finList",
-    "pages/index/deList",
-    "pages/index/braList",
     "pages/index/listDetail",
+    "pages/index/braList",
+    "pages/index/deList",
+    "pages/login/regist",
     "pages/index/select",
     "pages/index/lists",
     "pages/index/sonLists",
@@ -11,8 +12,7 @@
     "pages/login/login",
     "pages/index/index",
     "pages/index/success",
-    "pages/index/error",
-    "pages/login/regist"
+    "pages/index/error"
   ],
   "window": {
     "backgroundTextStyle": "light",

@@ -78,7 +78,7 @@ page{
 }
 .optBox {
   width: 100%;
-  height: 230rpx;
+  height: 130rpx;
   padding-bottom: 10rpx;
   /* padding-top: 20rpx; */
   color:#999;
@@ -421,6 +421,7 @@ color:red !important
   width:97%;
   margin-left:3%;
 }
+
 .check{
   clear: both;
   height: 60rpx;
@@ -432,6 +433,7 @@ color:red !important
   width: 94%;
   margin-left: 3%;
   margin-top: 15rpx;
+  display: inline-block;
 }
 .checkhover{
   background-color: #eee;
@@ -466,6 +468,7 @@ color:red !important
   width:40%;
   justify-content: center;
   text-align: center;
+  font-size: 25rpx;
  }
  .bg-w{
   background: snow;
@@ -481,6 +484,8 @@ color:red !important
   display: flex;
   height: 3rem;
   align-items: center;
+  font-size: 25rpx;
+  font-weight: bolder;
  }
  .trhover{
    background: #ddd;

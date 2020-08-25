@@ -164,7 +164,7 @@ function request(requestMethod, host, path, paramsLocation, params, security_typ
   }
 
   var token = wx.getStorageSync('token');
-  var header = { 'content-type': 'application/json' }
+  var header = { 'content-type': 'application/json'}
   if (token) {
     header['Authorization'] = 'Bearer ' + token
   }
@@ -179,8 +179,10 @@ function request(requestMethod, host, path, paramsLocation, params, security_typ
       header: header,
       data: formData,
       success: function(res) {
+        console.log(res)
         if (DEBUG) console.log("服务器返回数据：", res.data);
         if (showLoading) wx.hideLoading();
+
         var code = res.data.result;
         console.log(code == 'true'||code=='login')
         if (code == 'true'||code=='login') {
@@ -191,7 +193,7 @@ function request(requestMethod, host, path, paramsLocation, params, security_typ
           // getApp().login(code);
         // }
          else {
-          console.log(res)
+          console.log(res.data)
           console.log("请求失败：", res.data.message);
           reject(res.data);
           // if (showError) wx.showToast({

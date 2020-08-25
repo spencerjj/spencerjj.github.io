@@ -45,7 +45,7 @@ App({
   },
   globalData: {
     userInfo: null,
-    url: 'http://192.168.2.81:8980/'
+    url: HOST_URI
   },
   login: function (code) {
     wx.removeStorageSync('token');

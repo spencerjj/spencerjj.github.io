@@ -73,16 +73,20 @@
 					<image class="arraw1" src="/images/arraw.png"></image>
 				</view>
 			</picker>
-			<view class="check" bindtap="check" hover-class="hover1" hover-stay-time='50'>查询</view>
+			<view class="myAction">
+				<view class="check" bindtap="check" hover-class="hover1" hover-stay-time='50' data-mark="0">重置</view>
+				<view class="check" bindtap="check" hover-class="hover1" hover-stay-time='50' data-mark="1">查询</view>
+			</view>
 		</view>
 		<view style="height:5rpx;width:100%;background:#eee;margin-top:15rpx"></view>
 		<view class="listContent">
 			<!-- <van-divider contentPosition="center" textColor="#5cadff" wx:if="{{lists.length>0}}">共{{lists.length}}条数据</van-divider> -->
 			<van-empty image="search" description="暂无数据" wx:if="{{lists.length==0}}" />
 			<view class="list expired" wx:for="{{lists}}" data-index="{{index}}" wx:key="id" bindtap="toPage" data-id="{{item.dailyNo}}" data-status="{{item.status}}">
-				<view class="top1" hover-class='hover1' hover-stay-time='50' bindtap="" data-index="{{index}}">
-					<text class="title">对账单号:<text class="active"> {{item.dailyNo}}</text></text>
-					<text class="date1" wx:if="{{flag==1||flag==2}}"><text class="active1" style="color:red;font-size:30rpx">￥{{item.entryMoneyPost?item.entryMoneyPost:'0'}}</text></text>
+				<view class="top1" hover-class='hover1' hover-stay-time='50' bindtap="" data-index="{{index}}" style="height:{{top1Height}}rpx">
+					<text class="title" style="margin-top:{{titleTop}}rpx">对账单号:<text class="active"> {{item.dailyNo}}</text></text>
+					<view class="date1" wx:if="{{flag==1||flag==2}}"><text class="active1" style="color:red;font-size:30rpx">￥{{item.entryMoney?item.entryMoney:'0'}}</text></view>
+					<view class="post" wx:if="{{flag==1}}">运费:￥{{item.postFee?item.postFee:'0'}}</view>
 					<!-- <image class="arraw {{item.mark==1?'selected':''}}" src="/images/lan.png"></image> -->
 				</view>
 				<view class="details {{!item.mark?'show':''}}">

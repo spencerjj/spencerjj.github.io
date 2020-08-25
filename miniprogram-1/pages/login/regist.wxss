@@ -87,7 +87,7 @@ page {
 }
 
 .s1 {
-  width: 140rpx;
+  width: 120rpx;
   height: 50rpx;
   float: left;
   margin-top: 25rpx;
@@ -106,7 +106,7 @@ page {
 
 .fill {
   float: left;
-  margin-left: 80rpx;
+  margin-left: 40rpx;
   text-align: left;
   color: #69bcf9;
   font-size: 35rpx;

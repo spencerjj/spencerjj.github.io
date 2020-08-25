@@ -53,7 +53,7 @@ page{
 }
 .section .num{
   font-weight: bolder;
-  font-size: 35rpx;
+  font-size: 30rpx;
   color:red
 }
 .section .name{
@@ -431,6 +431,7 @@ color:red !important
   width: 94%;
   margin-left: 3%;
   margin-top: 15rpx;
+  display: inline-block;
 }
 .checkhover{
   background-color: #eee;

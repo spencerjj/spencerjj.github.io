@@ -42,6 +42,7 @@ Page({
     var userInfo = wx.getStorageSync('userInfo');
     that.setData({
       brandName:options.brandName!='undefined'?options.brandName:'',
+      itemTitle:options.itemTitle!='undefined'?options.itemTitle:'',
       itemNo:options.itemNo!='undefined'?options.itemNo:'',
       price:options.price!='undefined'?options.price:'',
       num:options.num!='undefined'?options.num:'',
@@ -185,6 +186,11 @@ Page({
       })
     });
 
+    }else{
+      Notify({
+        message: '请填写备注信息',
+        type: 'warning'
+      });
     }
   },
   remarkInput(e){

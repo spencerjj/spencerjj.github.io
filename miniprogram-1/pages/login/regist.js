@@ -21,76 +21,29 @@ Page({
     index2: 0,
     array3: [],
     index3: 0,
+    array4: [],
+    index4: 0,
     officeCode: '',
+    officeCode1:'',
     companyCode: '',
     roleCode: '',
     openid: '',
     phoneNo: '',
-    checked:false
+    checked:false,
+    ifBra:false,
+    ifFin:false,
+    mark1:true,
+    mark2:true,
+    mark3:true,
+    mark4:true,
+    officeLists1:''
   },
-
+  // 6010214
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-      var that = this;
-        wx.login({
-          success: function (res) {
-            var code = res.code //返回code
-            var data = {
-              code: code,
-              ajax: '_json'
-            }
-            getRequest(getApiHost(), 'platform/v1/api/wxmini/code2session.json', 'body', data, 0, false, true).then(
-              res => {
-                that.setData({
-                  openid:res.data.openid,
-                  sessionKey:res.data.sessionKey
-                })
-                var data = {
-                  openid: res.data.openid,
-                  __ajax: 'json'
-                }
-                getRequest(getApiHost(), 'platform/v1/api/wxmini/checkOpenid', 'body', data, 0, false, true).then(
-                  res => {
-                    console.log(res.data.status)
 
-                  }
-                ).catch(res => {
-                  console.log(res)
-                  if(res.data.status==4){
-                    wx.redirectTo({
-                      url: '../index/success',
-                    })
-                  }else if(res.data.status==0){
-                    wx.redirectTo({
-                      url: '../index/mainList',
-                    })
-                  }else if(res.data.status==2){
-                    url:'../index/error'
-                  }
-                  // wx.showModal({
-                  //   title: '登录失败',
-                  //   content: '没有访问权限，请联系管理员',
-                  //   showCancel: false,
-                  //   confirmText: '知道了',
-                  //   confirmColor: '#1890FF'
-                  // })
-                });
-              }
-            ).catch(res => {
-              console.log(res)
-              wx.showModal({
-                title: '登录失败',
-                content: '没有访问权限，请联系管理员',
-                showCancel: false,
-                confirmText: '知道了',
-                confirmColor: '#1890FF'
-              })
-            });
-          }
-        })
-    that.getLists()
   },
 
   /**
@@ -105,6 +58,64 @@ Page({
    */
   onShow: function () {
     wx.hideHomeButton()
+    var that = this;
+    wx.login({
+      success: function (res) {
+        var code = res.code //返回code
+        var data = {
+          code: code,
+          ajax: '_json'
+        }
+        getRequest(getApiHost(), 'platform/v1/api/wxmini/code2session.json', 'body', data, 0, false, false).then(
+          res => {
+            that.setData({
+              openid:res.data.openid,
+              sessionKey:res.data.sessionKey
+            })
+            var data = {
+              openid: res.data.openid,
+              __ajax: 'json'
+            }
+            getRequest(getApiHost(), 'platform/v1/api/wxmini/checkOpenid', 'body', data, 0, false, false).then(
+              res => {
+                console.log(res.data.status)
+
+              }
+            ).catch(res => {
+              console.log(res)
+              if(res.data.status==4){
+                wx.redirectTo({
+                  url: '../index/success',
+                })
+              }else if(res.data.status==0){
+                wx.redirectTo({
+                  url: '../index/finList',
+                })
+              }else if(res.data.status==2){
+                url:'../index/error'
+              }
+              // wx.showModal({
+              //   title: '登录失败',
+              //   content: '没有访问权限，请联系管理员',
+              //   showCancel: false,
+              //   confirmText: '知道了',
+              //   confirmColor: '#1890FF'
+              // })
+            });
+          }
+        ).catch(res => {
+          console.log(res)
+          wx.showModal({
+            title: '登录失败',
+            content: '没有访问权限，请联系管理员',
+            showCancel: false,
+            confirmText: '知道了',
+            confirmColor: '#1890FF'
+          })
+        });
+      }
+    })
+that.getLists()
   },
 
   /**
@@ -144,7 +155,7 @@ Page({
   getLists(e) {
     var that = this
     var data = {}
-    postRequest(getApiHost(), 'platform/v1/api/wxmini/getCompanyList.json', 'body', data, 0, false, true).then(
+    getRequest(getApiHost(), 'platform/v1/api/wxmini/getCompanyList.json', 'body', data, 0, false, false).then(
       res => {
         if (res.result) {
           var lists = res.data
@@ -154,8 +165,8 @@ Page({
           })
           that.setData({
             companyLists: lists,
-            array1: array1,
-            companyCode: lists[0].companyCode
+            array1: array1
+            // companyCode: lists[0].companyCode
           })
         } else {
           wx.showModal({
@@ -176,7 +187,7 @@ Page({
         confirmColor: '#1890FF'
       })
     });
-    postRequest(getApiHost(), 'platform/v1/api/wxmini/getRoleList.json', 'body', data, 0, false, true).then(
+    getRequest(getApiHost(), 'platform/v1/api/wxmini/getRoleList.json', 'body', data, 0, false, false).then(
       res => {
         var lists = res.data
         var array2 = []
@@ -185,9 +196,14 @@ Page({
         })
         that.setData({
           roleLists: lists,
-          array2: array2,
-          roleCode: lists[0].roleCode
+          array2: array2
+          // roleCode: lists[0].roleCode
         })
+        if(lists[0].roleName=='品牌'){
+          that.setData({
+            ifBra:true
+          })
+        }
       }
     ).catch(res => {
       wx.showModal({
@@ -198,7 +214,10 @@ Page({
         confirmColor: '#1890FF'
       })
     });
-    postRequest(getApiHost(), 'platform/v1/api/wxmini/getOfficeList.json', 'body', data, 0, false, false).then(
+    var data3={
+      officeType:3
+    }
+    getRequest(getApiHost(), 'platform/v1/api/wxmini/getOfficeList.json', 'body', data3, 0, false, false).then(
       res => {
         var lists = res.data
         var array3 = []
@@ -207,8 +226,33 @@ Page({
         })
         that.setData({
           officeLists: lists,
-          array3: array3,
-          officeCode: lists[0].officeCode
+          array3: array3
+          // officeCode: lists[0].officeCode
+        })
+      }
+    ).catch(res => {
+      wx.showModal({
+        title: '错误',
+        content: '获取部门列表失败，请联系管理员',
+        showCancel: false,
+        confirmText: '知道了',
+        confirmColor: '#1890FF'
+      })
+    });
+    var data4={
+      officeType:1
+    }
+    getRequest(getApiHost(), 'platform/v1/api/wxmini/getOfficeList.json', 'body', data4, 0, false, false).then(
+      res => {
+        var lists = res.data
+        var array4 = []
+        lists.map((item) => {
+          array4.push(item.officeName)
+        })
+        that.setData({
+          officeLists: lists,
+          array4: array4
+          // officeCode: lists[0].officeCode
         })
       }
     ).catch(res => {
@@ -237,22 +281,91 @@ Page({
     })
   },
   companyChange(e) {
+    var that = this;
     this.setData({
       index1: e.detail.value,
-      companyCode: this.data.companyLists[e.detail.value].companyCode
+      companyCode: this.data.companyLists[e.detail.value].companyCode,
+      mark1:false
     })
+    var data3={
+      officeType:3,
+      officeCode:this.data.companyLists[e.detail.value].companyCode
+    }
+    getRequest(getApiHost(), 'platform/v1/api/wxmini/getOfficeList.json', 'body', data3, 0, false, false).then(
+      res => {
+        var lists = res.data
+        var array3 = []
+        lists.map((item) => {
+          array3.push(item.officeName)
+        })
+        that.setData({
+          officeLists: lists,
+          array3: array3,
+          mark3:true,
+          index3:0
+        })
+      }
+    )
   },
   officeChange(e) {
+    var that = this
     this.setData({
       index3: e.detail.value,
-      officeCode: this.data.officeLists[e.detail.value].officeCode
+      officeCode: this.data.officeLists[e.detail.value].officeCode,
+      mark3:false
+    })
+    console.log(this.data.officeLists[e.detail.value].officeCode)
+    var data4={
+      officeType:1,
+      officeCode:this.data.officeLists[e.detail.value].officeCode
+    }
+    getRequest(getApiHost(), 'platform/v1/api/wxmini/getOfficeList.json', 'body', data4, 0, false, false).then(
+      res => {
+        var lists = res.data
+        var array4 = []
+        lists.map((item) => {
+          array4.push(item.officeName)
+        })
+        console.log(array4)
+        that.setData({
+          officeLists1: lists,
+          array4: array4,
+          mark4:true,
+          index4:0
+        })
+      })
+  },
+  braChange(e) {
+    this.setData({
+      index4: e.detail.value,
+      officeCode1: this.data.officeLists1[e.detail.value].officeCode,
+      mark4:false
     })
   },
   roleChange(e) {
     this.setData({
       index2: e.detail.value,
-      roleCode: this.data.roleLists[e.detail.value].roleCode
+      roleCode: this.data.roleLists[e.detail.value].roleCode,
+      mark2:false
     })
+    if(this.data.array2[e.detail.value]=='品牌'){
+      this.setData({
+        ifBra:true,
+      })
+    }else{
+      this.setData({
+        ifBra:false
+      })
+    }
+    if(this.data.array2[e.detail.value]=='财务'){
+      this.setData({
+        ifFin:true
+      })
+    }else{
+      this.setData({
+        ifFin:false
+      })
+    }
   },
   domessage(e){
     console.log(123)
@@ -300,7 +413,91 @@ Page({
     }
   },
   save: function () {
+    wx.requestSubscribeMessage({
+      tmplIds: ['-RCILlm7nALXM6jxiYNiZuTbf6D5LBCwYPB-K6qDNn4'],
+      success(res) {
+      }
+    })
     var that = this;
+  // 1、公司 2、角色 3、机构 4、品牌
+    console.log(that.data.ifBra)
+    if(that.data.ifBra){
+      if(that.data.mark2){
+        Notify({
+          message: '请选择您的角色',
+          type: 'warning'
+        });
+        return;
+      }
+      if(that.data.mark1){
+        Notify({
+          message: '请选择您的公司',
+          type: 'warning'
+        });
+        return;
+      }
+      if(that.data.mark3&&!that.data.ifFin){
+        Notify({
+          message: '请选择您的部门',
+          type: 'warning'
+        });
+        return;
+      }
+      if(that.data.mark4){
+        Notify({
+          message: '请选择您的品牌',
+          type: 'warning'
+        });
+        return;
+      }
+    }
+    if(!that.data.ifBra){
+      if(that.data.mark2){
+        Notify({
+          message: '请选择您的角色',
+          type: 'warning'
+        });
+        return;
+      }
+      if(that.data.mark1){
+        Notify({
+          message: '请选择您的公司',
+          type: 'warning'
+        });
+        return;
+      }
+      if(that.data.mark3&&!that.data.ifFin){
+        Notify({
+          message: '请选择您的部门',
+          type: 'warning'
+        });
+        return;
+      }
+    }
+    if(that.data.ifFin){
+      that.setData({
+        officeCode:'6010214'
+      })
+    }
+    if(that.data.ifBra){
+      that.setData({
+        officeCode:that.data.officeCode1
+      })
+    }
+    var data = {
+      username: that.data.username,
+      companyCode: that.data.companyCode,
+      officeCode: that.data.officeCode,
+      roleCode: that.data.roleCode,
+      __ajax: 'json',
+      openid: that.data.openid,
+      phoneNo: that.data.phoneNo
+    }
+
+    console.log(data)
+
+
+    
     if(that.data.phoneNo.length==0){
       Notify({
         message: '请先获取手机号码再登录',
@@ -334,6 +531,7 @@ Page({
                     openid: that.data.openid,
                     phoneNo: that.data.phoneNo
                   }
+
                   console.log(data)
                   getRequest(getApiHost(), 'platform/v1/api/wxmini/registByMini.json', 'body', data, 0, false, true).then(
                     res => {
@@ -403,5 +601,5 @@ Page({
     this.setData({
       checked: event.detail,
     });
-  },
+  }
 })

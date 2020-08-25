@@ -8,6 +8,7 @@ import {
 var app = getApp();
 import Notify from '../../miniprogram_npm/@vant/weapp/notify/notify';
 import format from '../../utils/time.js'
+
 function dateFromString(time) {
   time = time.replace(/-/g, ':').replace(' ', ':')
   time = time.split(':')
@@ -16,38 +17,44 @@ function dateFromString(time) {
 }
 Page({
   data: {
-    index:0,
+    index: 0,
     today: '',
     endDate: '',
     endTime: '',
-    startDate:'',
-    startTime:'',
-    lists:[],
-    listIsFull:false,
-    loading:false,
-    array1:[],
-    index1:0,
-    array2:['LV','爱马仕','范思哲'],
-    index2:0,
-    pageNo:1,
-    pageSize:10,
-    companyLists:'',
-    companyCode:'',
-    startTime1:'',
-    endTime1:'',
-    shopName:'',
-    flag:2,
-    dailyNo:'',
-    show1:false,
-    show2:false,
-    show3:false,
-    show4:false,
-    officeName:''
+    startDate: '',
+    startTime: '',
+    lists: [],
+    listIsFull: false,
+    loading: false,
+    array1: [],
+    index1: 0,
+    array2: ['LV', '爱马仕', '范思哲'],
+    index2: 0,
+    pageNo: 1,
+    pageSize: 10,
+    companyLists: '',
+    companyCode: '',
+    startTime1: '',
+    endTime1: '',
+    shopName: '',
+    flag: 2,
+    dailyNo: '',
+    show1: false,
+    show2: false,
+    show3: false,
+    show4: false,
+    officeName: '',
+    top1Height: 100,
+    titleTop: 0
   },
-  onLoad: function () {
-
+  onLoad: function (options) {
+    if(options.dailyNo){
+      this.setData({
+        dailyNo:options.dailyNo
+      })
+    }
   },
-  onShow:function(){
+  onShow: function () {
     var that = this;
     wx.hideHomeButton()
     var now = new Date();
@@ -59,41 +66,43 @@ Page({
     });
     var userInfo = wx.getStorageSync('userInfo');
     console.log(userInfo)
-    if(userInfo.roleCodes){
-      if(userInfo.roleCodes.indexOf('finance')!=-1){
+    if (userInfo.roleCodes) {
+      if (userInfo.roleCodes.indexOf('finance') != -1) {
         this.setData({
-          show1:true,
-          flag:1,
-          height:310
+          show1: true,
+          flag: 1,
+          height: 310,
+          top1Height: 130,
+          titleTop: 15
         })
       }
-      if(userInfo.roleCodes.indexOf('wshop')!=-1){
+      if (userInfo.roleCodes.indexOf('wshop') != -1) {
         this.setData({
-          show2:true,
-          flag:2,
-          height:230
+          show2: true,
+          flag: 2,
+          height: 230
         })
       }
-      if(userInfo.roleCodes.indexOf('dept_cw')!=-1){
+      if (userInfo.roleCodes.indexOf('dept_cw') != -1) {
         this.setData({
-          show3:true,
-          flag:3
+          show3: true,
+          flag: 3
         })
       }
-      if(userInfo.roleCodes.indexOf('brand')!=-1){
+      if (userInfo.roleCodes.indexOf('brand') != -1) {
         this.setData({
-          show4:true,
-          flag:4
+          show4: true,
+          flag: 4
         })
       }
     }
-    console.log('code='+that.data.companyCode)
+    console.log('code=' + that.data.companyCode)
     that.setData({
-      name:userInfo.username,
-      phoneNo:userInfo.loginCode,
-      sid:userInfo.sid,
-      companyCode:userInfo.companyCode,
-      officeName:userInfo.officeName
+      name: userInfo.username,
+      phoneNo: userInfo.loginCode,
+      sid: userInfo.sid,
+      companyCode: userInfo.companyCode,
+      officeName: userInfo.officeName
     })
     that.getSelectLists()
     that.getLists()
@@ -124,85 +133,86 @@ Page({
       that.getLists()
     }
   },
-  login(e){
+  login(e) {
     app.doLogin().then(data => {
       this.onShow()
     })
   },
-  getLists(x){
+  getLists(x) {
     var that = this
-      var data={
-        __sid:that.data.sid,
-        __ajax:'json',
-        pageNo:that.data.pageNo,
-        pageSize:that.data.pageSize,
-        shopName:that.data.shopName,
-        startTime:that.data.startTime,
-        endTime:that.data.endTime
-      }
-      if(that.data.flag==2){
-        data.shopId = wx.getStorageSync('userInfo').companyCode
-        data.shopName = wx.getStorageSync('userInfo').companyName
-      }
+    var data = {
+      __ajax:'json',
+      __sid: that.data.sid,
+      pageNo: that.data.pageNo,
+      pageSize: that.data.pageSize,
+      shopName: that.data.shopName,
+      dailyNo:that.data.dailyNo,
+      startTime: that.data.startTime,
+      endTime: that.data.endTime
+    }
+    if (that.data.flag == 2) {
+      data.shopId = wx.getStorageSync('userInfo').companyCode
+      data.shopName = wx.getStorageSync('userInfo').companyName
+    }
     getRequest(getApiHost(), 'platform/v1/api/dayily/getDailyOrderHead.json', 'body', data, 0, false, true).then(
       res => {
-        if(res.result&&res.result=='login'){
+        if (res.result && res.result == 'login') {
           that.login()
           console.log('登录失效')
           return;
         }
-        if(res.result){
+        if (res.result) {
           console.log(res)
-          if(res.data.list){
-            if(res.data.list.length==0){
+          if (res.data.list) {
+            if (res.data.list.length == 0) {
               // setTimeout(()=>{
-                that.setData({
-                  loading:false,
-                  listIsFull:false,
-                  showNo:true,
-                  loadAll:false
-                })
+              that.setData({
+                loading: false,
+                listIsFull: false,
+                showNo: true,
+                loadAll: false
+              })
               // },500)
-            }else{
-              if(that.data.pageNo>1){
-                console.log('第'+that.data.pageNo+'页')
+            } else {
+              if (that.data.pageNo > 1) {
+                console.log('第' + that.data.pageNo + '页')
                 var list = that.data.lists
                 list = list.concat(res.data.list)
                 that.setData({
-                  lists:list,
-                  showNo:false,
-                  loadAll:false
+                  lists: list,
+                  showNo: false,
+                  loadAll: false
                 })
                 console.log(that.data.lists)
-              }else{
+              } else {
                 that.setData({
-                lists:res.data.list,
-                showNo:false,
-                loadAll:false
-              })
-              }
-              
-              
-              if(res.data.count>that.data.pageSize){
-                that.setData({
-                  loading:true,
-                  listIsFull:false
+                  lists: res.data.list,
+                  showNo: false,
+                  loadAll: false
                 })
-                if(Math.ceil(res.data.count/that.data.pageSize)>that.data.pageNo){
+              }
+
+
+              if (res.data.count > that.data.pageSize) {
+                that.setData({
+                  loading: true,
+                  listIsFull: false
+                })
+                if (Math.ceil(res.data.count / that.data.pageSize) > that.data.pageNo) {
                   that.setData({
-                    isMore:true
+                    isMore: true
                   })
-                }else{
+                } else {
                   that.setData({
-                    isMore:false,
-                    loading:false,
-                    listIsFull:true
+                    isMore: false,
+                    loading: false,
+                    listIsFull: true
                   })
                 }
-              }else{
+              } else {
                 that.setData({
-                  loading:false,
-                  listIsFull:true
+                  loading: false,
+                  listIsFull: true
                 })
               }
             }
@@ -210,6 +220,9 @@ Page({
         }
       }
     ).catch(res => {
+      // wx.redirectTo({
+      //   url: '/pages/index/error',
+      // })
       wx.showModal({
         title: '错误',
         content: res.message,
@@ -219,13 +232,13 @@ Page({
       })
     });
   },
-  onStartDatePickerChanged: function(e) {
+  onStartDatePickerChanged: function (e) {
     this.setData({
       startDate: e.detail.value
     });
   },
-  onstartTimePickerChanged: function(e) {
-    if(this.data.startDate.length==0){
+  onstartTimePickerChanged: function (e) {
+    if (this.data.startDate.length == 0) {
       Notify({
         message: '请先选择起始日期',
         type: 'warning'
@@ -235,17 +248,17 @@ Page({
       });
       return;
     }
-      this.setData({
-        startTime1: e.detail.value
-      });
+    this.setData({
+      startTime1: e.detail.value
+    });
   },
-  onEndDatePickerChanged: function(e) {
+  onEndDatePickerChanged: function (e) {
     this.setData({
       endDate: e.detail.value
     });
   },
-  onEndTimePickerChanged: function(e) {
-    if(this.data.endDate.length==0){
+  onEndTimePickerChanged: function (e) {
+    if (this.data.endDate.length == 0) {
       Notify({
         message: '请先选择结束日期',
         type: 'warning'
@@ -255,89 +268,107 @@ Page({
       });
       return;
     }
-      this.setData({
-        endTime1: e.detail.value
-      });
-  },
-  pickChange1(e){
     this.setData({
-      index1:e.detail.value,
-      companyCode:this.data.companyLists[e.detail.value].companyCode
+      endTime1: e.detail.value
+    });
+  },
+  pickChange1(e) {
+    this.setData({
+      index1: e.detail.value,
+      companyCode: this.data.companyLists[e.detail.value].companyCode
     })
   },
-  pickChange2(e){
+  pickChange2(e) {
     this.setData({
-      index2:e.detail.value
+      index2: e.detail.value
     })
   },
-  toPage(e){
+  toPage(e) {
     app.doMessage()
     var url = ''
-    if(this.data.show1){
-      url = 'deList?dailyNo='+e.currentTarget.dataset.id+'&flag=1&status='+e.currentTarget.dataset.status
-    }else if (this.data.show2){
-      url = 'deList?dailyNo='+e.currentTarget.dataset.id+'&flag=2&status='+e.currentTarget.dataset.status
-    }else if(this.data.show3){
-      url = 'deList?dailyNo='+e.currentTarget.dataset.id+'&flag=3&status='+e.currentTarget.dataset.status
-    }else if(this.data.show4){
-      url = 'braList?dailyNo='+e.currentTarget.dataset.id+'&flag=4&status='+e.currentTarget.dataset.status
+    if (this.data.show1) {
+      url = 'deList?dailyNo=' + e.currentTarget.dataset.id + '&flag=1&status=' + e.currentTarget.dataset.status
+    } else if (this.data.show2) {
+      url = 'deList?dailyNo=' + e.currentTarget.dataset.id + '&flag=2&status=' + e.currentTarget.dataset.status
+    } else if (this.data.show3) {
+      url = 'deList?dailyNo=' + e.currentTarget.dataset.id + '&flag=3&status=' + e.currentTarget.dataset.status
+    } else if (this.data.show4) {
+      url = 'braList?dailyNo=' + e.currentTarget.dataset.id + '&flag=4&status=' + e.currentTarget.dataset.status
     }
     wx.navigateTo({
       url: url
     })
   },
-  showDetail(e){
+  showDetail(e) {
     var that = this;
     var lists = that.data.lists;
     var index = e.currentTarget.dataset.index
-    lists[index].mark = !lists[index].mark 
+    lists[index].mark = !lists[index].mark
     that.setData({
-      lists:lists,
+      lists: lists,
     })
   },
-  check(e){
+  check(e) {
     var that = this
     app.doMessage()
-    if(that.data.startTime1.length==0){
-      if(that.data.startDate.length>1){
-        that.setData({
-          startTime1:'00:00'
-        })
+    var mark = e.currentTarget.dataset.mark
+    if (mark == 0) {
+      that.setData({
+        lists: '',
+        listIsFull: false,
+        loading: false,
+        startDate: '',
+        startTime1: '',
+        endDate: '',
+        endTime1: '',
+        startTime: '',
+        endTime: '',
+        shopName: '',
+        index1:0
+      })
+    } else if (mark == 1) {
+      if (that.data.startTime1.length == 0) {
+        if (that.data.startDate.length > 1) {
+          that.setData({
+            startTime1: '00:00'
+          })
+        }
       }
+      if (that.data.endTime1.length == 0) {
+        if (that.data.endDate.length > 1) {
+          that.setData({
+            endTime1: '00:00'
+          })
+        }
+      }
+      that.setData({
+        lists: '',
+        listIsFull: false,
+        loading: false,
+        shopName: that.data.array1[that.data.index1],
+        startTime: that.data.startDate + ' ' + that.data.startTime1,
+        endTime: that.data.endDate + ' ' + that.data.endTime1
+      })
     }
-    if(that.data.endTime1.length==0){
-      if(that.data.endDate.length>1){
-        that.setData({
-          endTime1:'00:00'
-        })
-      }
-    } 
-    that.setData({
-      lists: '',
-      listIsFull: false,
-      loading: false,
-      shopName:that.data.array1[that.data.index1],
-      startTime:that.data.startDate+' '+that.data.startTime1,
-      endTime:that.data.endDate+' '+that.data.endTime1
-    })
+
     that.getLists()
   },
-  getSelectLists(e){
+  getSelectLists(e) {
     var that = this
-    var data={}
+    var data = {}
     postRequest(getApiHost(), 'platform/v1/api/wxmini/getCompanyList.json', 'body', data, 0, false, false).then(
       res => {
-        if(res.result){
+        if (res.result) {
           var lists = res.data
           var array1 = []
-          lists.map((item)=>{
+          lists.map((item) => {
             array1.push(item.companyName)
           })
           console.log(array1)
           that.setData({
-            companyLists:lists,
-            array1:array1,
-            companyCode:lists[0].companyCode
+            companyLists: lists,
+            array1: array1,
+            companyCode: lists[0].companyCode
           })
         }
       }
@@ -351,7 +382,7 @@ Page({
       })
     });
   },
-  confirm(e){
+  confirm(e) {
     app.doMessage()
     var that = this
     wx.showModal({
@@ -359,11 +390,11 @@ Page({
       content: '确认该订单吗',
       success(res) {
         if (res.confirm) {
-          var data={
-            dailyNo:e.currentTarget.dataset.id,
-            status:2,
-            __sid:that.data.sid,
-            __ajax:'json',
+          var data = {
+            dailyNo: e.currentTarget.dataset.id,
+            status: 2,
+            __sid: that.data.sid,
+            __ajax: 'json',
           }
           getRequest(getApiHost(), 'platform/v1/api/dayily/issue.json', 'body', data, 0, false, true).then(
             res => {

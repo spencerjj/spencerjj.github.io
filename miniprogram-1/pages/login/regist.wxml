@@ -5,42 +5,59 @@
 		<!-- <image class="arraw" src="../../images/arraw1.png"></image> -->
 	</view>
 	<view class="number section">
-		<view class="s1">公司</view>
-		<picker value="{{index1}}" range="{{array1}}" bindchange="companyChange">
-			<view class="fill">
-				{{array1[index1]}}
-				<image class="arraw" src="/images/arraw1.png"></image>
-			</view>
-		</picker>
-		<image class="arraw" src="../../images/arraw1.png"></image>
-	</view>
-		<view class="title section">
-		<view class="s1">机构</view>
-		<picker value="{{index3}}" range="{{array3}}" bindchange="officeChange">
-			<view class="fill">
-				{{array3[index3]}}
-				<image class="arraw" src="/images/arraw1.png"></image>
-			</view>
-		</picker>
-		<image class="arraw" src="../../images/arraw1.png"></image>
-	</view>
-	<view class="number section">
 		<view class="s1">角色</view>
 		<picker value="{{index2}}" range="{{array2}}" bindchange="roleChange">
 			<view class="fill">
-				{{array2[index2]}}
+				<text wx:if="{{mark2}}">请选择...</text>
+				<text wx:if="{{!mark2}}">{{array2[index2]}}</text>
 				<image class="arraw" src="/images/arraw1.png"></image>
 			</view>
 		</picker>
 		<image class="arraw" src="../../images/arraw1.png"></image>
 	</view>
 	<view class="number section">
-	<view class="s1">手机号</view>
-	<view class="fill">
-		<input value="{{phoneNo}}" disabled="true" style="width:70%"></input>
-		<button class="getPhone" open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber">获取手机号</button>
-		
+		<view class="s1">公司</view>
+		<picker value="{{index1}}" range="{{array1}}" bindchange="companyChange">
+			<view class="fill">
+				<text wx:if="{{mark1}}">请选择...</text>
+				<text wx:if="{{!mark1}}">{{array1[index1]}}</text>
+				<image class="arraw" src="/images/arraw1.png"></image>
+			</view>
+		</picker>
+		<image class="arraw" src="../../images/arraw1.png"></image>
 	</view>
+	<view class="title section">
+		<view class="s1">部门</view>
+		<picker value="{{index3}}" range="{{array3}}" bindchange="officeChange" disabled="{{ifFin}}">
+			<view class="fill">
+				<text wx:if="{{mark3&&!ifFin}}">请选择...</text>
+				<text wx:if="{{ifFin}}">集团财务部</text>
+				<text wx:if="{{!mark3&&!ifFin}}">{{array3[index3]}}</text>
+				<image class="arraw" src="/images/arraw1.png"></image>
+			</view>
+		</picker>
+		<image class="arraw" src="../../images/arraw1.png"></image>
+	</view>
+		<view class="title section" wx:if="{{ifBra}}">
+		<view class="s1">柜组</view>
+		<picker value="{{index4}}" range="{{array4}}" bindchange="braChange">
+			<view class="fill">
+				<text wx:if="{{mark4}}">请选择...</text>
+				<text wx:if="{{!mark4}}">{{array4[index4]}}</text>
+				<image class="arraw" src="/images/arraw1.png"></image>
+			</view>
+		</picker>
+		<image class="arraw" src="../../images/arraw1.png"></image>
+	</view>
+
+
+	<view class="number section">
+		<view class="s1">手机号</view>
+		<view class="fill">
+			<input value="{{phoneNo}}" disabled="true" style="width:70%"></input>
+			<button class="getPhone" open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber">获取手机号</button>
+
+		</view>
 	</view>
 
 </view>

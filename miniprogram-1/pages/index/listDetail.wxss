@@ -7,8 +7,6 @@ page{
   background: linear-gradient(#69bcf9, #eee);
   width: 100%;
   position: relative;
-  border-top: 5rpx solid #eee;
-  
 }
 .title{
   margin-left: 10%;
@@ -136,12 +134,12 @@ page{
   background: #fff;
 }
 .remark{
-  margin-left:4%;
+  margin-left:3%;
   color:#69bcf9;
   font-size: 35rpx;
-  width:89%;
-  border: 1rpx dotted #ccc;
-  padding:10rpx
+  width:91%;
+  border: 1rpx solid #ccc;
+  padding:10rpx;
 }
 
 .pics{
@@ -210,7 +208,7 @@ page{
     display: flex;
     width: 100%;
     justify-content: center;
-    height: 3rem;
+    min-height: 3rem;
     align-items: center;
     font-size: 30rpx;
    }
@@ -218,9 +216,6 @@ page{
     width:50%;
     justify-content: center;
     text-align: center;
-    overflow: hidden;
-  text-overflow:ellipsis;
-  white-space: nowrap;
    }
    .bg-w{
     background: snow;
@@ -234,14 +229,14 @@ page{
     background: #69bcf9;
     color: #fff;
     display: flex;
-    height: 3rem;
+    min-height: 3rem;
     align-items: center;
    }
    .trhover{
     background: #ddd;
   }
   .modify{
-    width: 92%;
-    margin-left: 4%;
+    width: 94%;
+    margin-left: 3%;
     margin-top: 20rpx;
   }

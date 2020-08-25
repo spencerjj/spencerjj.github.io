@@ -3,7 +3,7 @@
 		<view class="left">
 			<image src='/images/nan.png'></image>
 			<view class="nickName">
-				{{name}}
+				{{name}} - {{officeName}}
 			</view>
 			<view class="title">
 				{{phoneNo}}
@@ -12,7 +12,7 @@
 		<view class="pointBar">
 			<view class="section" bindtap="toPage" data-type="1" hover-class="secTab" hover-stay-time="1s">
 				<view class="num">
-					{{entryMoneyPost?entryMoneyPost:'　'}}
+					￥{{entryMoney?entryMoney:'0'}}
 				</view>
 				<view class="name">
 					已提货已入账
@@ -20,7 +20,7 @@
 			</view>
 			<view class="section" bindtap="toPage" data-type="2" hover-class="secTab" hover-stay-time="1s">
 				<view class="num">
-					{{deliveredMoney?deliveredMoney:'　'}}
+					￥{{deliveredMoney?deliveredMoney:'0'}}
 				</view>
 				<view class="name">
 					未提货
@@ -28,7 +28,7 @@
 			</view>
 			<view class="section" bindtap="toPage" data-type="3" hover-class="secTab" hover-stay-time="1s">
 				<view class="num">
-					{{unrecordedMoney?unrecordedMoney:'　'}}
+					￥{{unrecordedMoney?unrecordedMoney:'0'}}
 				</view>
 				<view class="name">
 					已提货未入账
@@ -75,8 +75,11 @@
 					<image class="arraw1" src="/images/arraw.png"></image>
 				</view>
 			</picker> -->
-			<input class="picker1" placeholder="请输入查询的商品名称" bindinput="bindinput"></input>
-			<view class="check" bindtap="check" hover-class="hover1" hover-stay-time='50'>查询</view>
+			<input class="picker1" placeholder="请输入查询的商品名称" bindinput="bindinput" value="{{goodsName}}"></input>
+			<view class="myAction">
+				<!-- <view class="check" bindtap="check" hover-class="hover1" hover-stay-time='50' data-mark="0">重置</view> -->
+				<view class="check" bindtap="check" hover-class="hover1" hover-stay-time='50' data-mark="1">查询</view>
+			</view>
 		</view>
 		<view style="height:5rpx;width:100%;background:#eee;margin-top:15rpx"></view>
 		<view class="listContent">
@@ -97,17 +100,8 @@
 					<view class="th ">收货人手机号</view>
 				</view>
 				<block wx:for="{{lists}}" wx:key="index">
-					<view class="tr bg-g" wx:if="{{index % 2 == 0}}" hover-class="trhover" hover-stay-time="0.5" bindtap="toDetail" data-index="{{index}}">
-						<view class="td">{{item.brandName}}</view>
-						<view class="td">{{item.itemNo}}</view>
-						<view class="td">{{item.price}}</view>
-						<view class="td">{{item.num}}</view>
-						<view class="td">{{item.payment}}</view>
-						<view class="td">{{item.receiverName}}</view>
-						<view class="td">{{item.receiverTel}}</view>
-					</view>
-					<view class="tr" wx:else hover-class="trhover" hover-stay-time="0.5" bindtap="toDetail" data-mark="{{item.dailyNo}}">
-						<view class="td">{{item.brandName}}</view>
+					<view class="tr {{index % 2 == 0?'bg-g':''}}" hover-class="trhover" hover-stay-time="0.5" bindtap="toDetail" data-index="{{index}}">
+						<view class="td">{{item.itemTitle}}</view>
 						<view class="td">{{item.itemNo}}</view>
 						<view class="td">{{item.price}}</view>
 						<view class="td">{{item.num}}</view>
