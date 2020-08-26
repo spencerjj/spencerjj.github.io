@@ -116,7 +116,7 @@ Page({
       __ajax:'json',
       dailyNo:that.data.dailyNo
     }
-  // getRequest(getApiHost(), 'platform/v1/api/dayily/getDailyOrderHead.json', 'body', data, 0, false, true).then(
+  // getRequest(getApiHost(), 'platform/v1/api/dayily/getDailyOrderHead', 'body', data, 0, false, true).then(
   //   res => {
  
   //   }
@@ -170,7 +170,7 @@ Page({
         id:that.data.id,
         state:1
       }
-    getRequest(getApiHost(), 'platform/v1/api/dayily/updateOrderBody.json', 'body', data, 0, false, true).then(
+    getRequest(getApiHost(), 'platform/v1/api/dayily/updateOrderBody', 'body', data, 0, false, true).then(
       res => {
         wx.navigateBack({
           delta: 1,

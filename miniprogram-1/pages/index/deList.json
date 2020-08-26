@@ -2,5 +2,6 @@
   "navigationBarTitleText": "部门账单",
   "navigationBarTextStyle": "white",
   "navigationBarBackgroundColor": "#69bcf9",
-  "enablePullDownRefresh": true
+  "enablePullDownRefresh": true,
+  "disableSwipeBack":true
 }

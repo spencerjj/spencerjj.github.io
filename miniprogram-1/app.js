@@ -73,7 +73,7 @@ App({
             code: code,
             ajax: '_json'
           }
-          getRequest(getApiHost(), 'platform/v1/api/wxmini/code2session.json', 'body', data, 0, false, false).then(
+          getRequest(getApiHost(), 'platform/v1/api/wxmini/code2session.json', 'body', data, 0, false, false, false).then(
             res => {
               // that.setData({
               //   openid:res.data.openid,
@@ -83,7 +83,10 @@ App({
                 openid: res.data.openid,
                 __ajax: 'json'
               }
-              getRequest(getApiHost(), 'platform/v1/api/wxmini/checkOpenid', 'body', data, 0, false, false).then(
+              wx.showLoading({
+                title: '校验用户中',
+              })
+              getRequest(getApiHost(), 'platform/v1/api/wxmini/checkOpenid', 'body', data, 0, false, false, false).then(
                 res => {
                   console.log('openid'+res.result)
                   if(res.result=='false'){
@@ -99,9 +102,6 @@ App({
                     param_deviceType:'mobileApp',
                     ajax: '_json',
                   }
-                  wx.showLoading({
-                    title: '自动登录中',
-                  })
                   wx.request({
                     url: HOST_URI+ 'platform/v1/api/wxmini/miniLogin.json',
                     data: data,
@@ -132,16 +132,29 @@ App({
                           userInfo.roleCodes = res.data.roleCodes;
                           userInfo.officeCode = res.data.officeCode;
                           userInfo.companyCode = res.data.companyCode;
+                          wx.removeStorageSync('userInfo')
                           wx.setStorageSync('userInfo', userInfo);
                           resolve(res.data.sid)
                     }
                   })
                 }
               ).catch(res => {
-                wx.redirectTo({
-                  url: '/pages/login/regist',
-                })
+                console.log('停用')
+                if(res.data.status==2){
+                  wx.redirectTo({
+                    url: '../index/error',
+                  })
+                }else if(res.data.status==4){
+                  wx.redirectTo({
+                    url: '../index/success',
+                  })
+                }else if(res.data.status==9){
+                  wx.redirectTo({
+                    url: '/pages/login/regist',
+                  })
+                }
               });
+
             }
           ).catch(res => {
             wx.showModal({

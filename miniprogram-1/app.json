@@ -1,17 +1,17 @@
 {
   "pages": [
     "pages/index/finList",
+    "pages/index/success",
+    "pages/login/regist",
     "pages/index/listDetail",
     "pages/index/braList",
     "pages/index/deList",
-    "pages/login/regist",
     "pages/index/select",
     "pages/index/lists",
     "pages/index/sonLists",
     "pages/index/mainList",
     "pages/login/login",
     "pages/index/index",
-    "pages/index/success",
     "pages/index/error"
   ],
   "window": {

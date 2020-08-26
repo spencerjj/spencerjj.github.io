@@ -49,8 +49,6 @@
 		</picker>
 		<image class="arraw" src="../../images/arraw1.png"></image>
 	</view>
-
-
 	<view class="number section">
 		<view class="s1">手机号</view>
 		<view class="fill">

@@ -113,6 +113,9 @@ page {
   margin-top: 30rpx;
   font-weight: bolder;
   width: 60%;
+  overflow: hidden;
+  text-overflow:ellipsis;
+  white-space: nowrap;
 }
 
 .picker {

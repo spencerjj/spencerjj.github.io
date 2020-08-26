@@ -69,7 +69,6 @@ Page({
   },
   onShow:function(){
     var that = this;
-    wx.hideHomeButton()
     var now = new Date();
     that.setData({
       // endDate: now.format('yyyy-MM-dd'),
@@ -137,7 +136,7 @@ Page({
         // startTime:that.data.startTime,
         // endTime:that.data.endTime
       }
-      url = 'getDailyOrderGroupByOrg.json'
+      url = 'getDailyOrderGroupByOrg'
     }else if(that.data.flag==2){
       var data={
         __sid:that.data.sid,
@@ -150,7 +149,7 @@ Page({
         // startTime:that.data.startTime,
         // endTime:that.data.endTime
       }
-      url="getDailyOrderGroupByOrg.json"
+      url="getDailyOrderGroupByOrg"
     }else if(that.data.flag==3){
       var data={
         __sid:that.data.sid,
@@ -164,7 +163,7 @@ Page({
         // startTime:that.data.startTime,
         // endTime:that.data.endTime
       }
-      url="getDailyOrderGroupByBrand.json"
+      url="getDailyOrderGroupByBrand"
     }
     
     console.log(data)
@@ -359,7 +358,7 @@ Page({
   // getSelectLists(e){
   //   var that = this
   //   var data={}
-  //   postRequest(getApiHost(), 'platform/v1/api/wxmini/getCompanyList.json', 'body', data, 0, false, true).then(
+  //   postRequest(getApiHost(), 'platform/v1/api/wxmini/getCompanyList', 'body', data, 0, false, true).then(
   //     res => {
   //       if(res.result){
   //         if(that.data.flag==1){
@@ -410,7 +409,7 @@ Page({
             __sid:that.data.sid,
             __ajax:'json',
           }
-          getRequest(getApiHost(), 'platform/v1/api/dayily/issue.json', 'body', data, 0, false, true).then(
+          getRequest(getApiHost(), 'platform/v1/api/dayily/issue', 'body', data, 0, false, true).then(
             res => {
               that.setData({
                 disabled1:true
@@ -449,7 +448,7 @@ Page({
             __sid:that.data.sid,
             __ajax:'json',
           }
-          getRequest(getApiHost(), 'platform/v1/api/dayily/wshopissue.json', 'body', data, 0, false, true).then(
+          getRequest(getApiHost(), 'platform/v1/api/dayily/wshopissue', 'body', data, 0, false, true).then(
             res => {
               that.setData({
                 disabled2:true
@@ -484,7 +483,7 @@ Page({
             __sid:that.data.sid,
             __ajax:'json',
           }
-          getRequest(getApiHost(), 'platform/v1/api/dayily/orgissue.json', 'body', data, 0, false, true).then(
+          getRequest(getApiHost(), 'platform/v1/api/dayily/orgissue', 'body', data, 0, false, true).then(
             res => {
               var lists = that.data.lists
               lists[e.currentTarget.dataset.index].status = 4

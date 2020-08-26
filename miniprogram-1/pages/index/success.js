@@ -1,4 +1,10 @@
 // pages/index/progress/success.js
+import {
+  getApiHost,
+  postRequest,
+  getRequest
+} from '../../utils/api.js'
+var app = getApp();
 Page({
 
   /**
@@ -31,6 +37,45 @@ Page({
    */
   onShow: function () {
     wx.hideHomeButton()
+    var that = this;
+    wx.login({
+      success: function (res) {
+        var code = res.code //返回code
+        var data = {
+          code: code,
+          ajax: '_json'
+        }
+        getRequest(getApiHost(), 'platform/v1/api/wxmini/code2session', 'body', data, 0, false, false).then(
+          res => {
+            that.setData({
+              openid:res.data.openid,
+              sessionKey:res.data.sessionKey
+            })
+            var data = {
+              openid: res.data.openid,
+              __ajax: 'json'
+            }
+            getRequest(getApiHost(), 'platform/v1/api/wxmini/checkOpenid', 'body', data, 0, false, false).then(
+              res => {
+                console.log(res.data.status)
+                if(res.data.status==0){
+                  wx.redirectTo({
+                    url: '../index/finList',
+                  })
+                }
+              }
+            ).catch(res => {
+              console.log(res)
+              if(res.data.status==0){
+                wx.redirectTo({
+                  url: '../index/finList',
+                })
+              }
+            });
+          }
+        )
+      }
+    })
   },
 
   /**

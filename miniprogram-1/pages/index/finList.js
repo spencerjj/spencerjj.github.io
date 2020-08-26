@@ -56,7 +56,6 @@ Page({
   },
   onShow: function () {
     var that = this;
-    wx.hideHomeButton()
     var now = new Date();
     that.setData({
       // endDate: now.format('yyyy-MM-dd'),
@@ -154,7 +153,7 @@ Page({
       data.shopId = wx.getStorageSync('userInfo').companyCode
       data.shopName = wx.getStorageSync('userInfo').companyName
     }
-    getRequest(getApiHost(), 'platform/v1/api/dayily/getDailyOrderHead.json', 'body', data, 0, false, true).then(
+    getRequest(getApiHost(), 'platform/v1/api/dayily/getDailyOrderHead', 'body', data, 0, false, true).then(
       res => {
         if (res.result && res.result == 'login') {
           that.login()
@@ -286,6 +285,7 @@ Page({
   toPage(e) {
     app.doMessage()
     var url = ''
+    console.log(e.currentTarget.dataset.id)
     if (this.data.show1) {
       url = 'deList?dailyNo=' + e.currentTarget.dataset.id + '&flag=1&status=' + e.currentTarget.dataset.status
     } else if (this.data.show2) {
@@ -356,7 +356,7 @@ Page({
   getSelectLists(e) {
     var that = this
     var data = {}
-    postRequest(getApiHost(), 'platform/v1/api/wxmini/getCompanyList.json', 'body', data, 0, false, false).then(
+    postRequest(getApiHost(), 'platform/v1/api/wxmini/getCompanyList', 'body', data, 0, false, false).then(
       res => {
         if (res.result) {
           var lists = res.data
@@ -396,7 +396,7 @@ Page({
             __sid: that.data.sid,
             __ajax: 'json',
           }
-          getRequest(getApiHost(), 'platform/v1/api/dayily/issue.json', 'body', data, 0, false, true).then(
+          getRequest(getApiHost(), 'platform/v1/api/dayily/issue', 'body', data, 0, false, true).then(
             res => {
               that.getLists()
             }

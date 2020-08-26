@@ -66,7 +66,7 @@ Page({
           code: code,
           ajax: '_json'
         }
-        getRequest(getApiHost(), 'platform/v1/api/wxmini/code2session.json', 'body', data, 0, false, false).then(
+        getRequest(getApiHost(), 'platform/v1/api/wxmini/code2session', 'body', data, 0, false, false, false).then(
           res => {
             that.setData({
               openid:res.data.openid,
@@ -76,7 +76,7 @@ Page({
               openid: res.data.openid,
               __ajax: 'json'
             }
-            getRequest(getApiHost(), 'platform/v1/api/wxmini/checkOpenid', 'body', data, 0, false, false).then(
+            getRequest(getApiHost(), 'platform/v1/api/wxmini/checkOpenid', 'body', data, 0, false, false, false).then(
               res => {
                 console.log(res.data.status)
 
@@ -92,7 +92,9 @@ Page({
                   url: '../index/finList',
                 })
               }else if(res.data.status==2){
-                url:'../index/error'
+                wx.redirectTo({
+                  url: '../index/error',
+                })
               }
               // wx.showModal({
               //   title: '登录失败',
@@ -155,7 +157,7 @@ that.getLists()
   getLists(e) {
     var that = this
     var data = {}
-    getRequest(getApiHost(), 'platform/v1/api/wxmini/getCompanyList.json', 'body', data, 0, false, false).then(
+    getRequest(getApiHost(), 'platform/v1/api/wxmini/getCompanyList', 'body', data, 0, false, false, false).then(
       res => {
         if (res.result) {
           var lists = res.data
@@ -179,15 +181,15 @@ that.getLists()
         }
       }
     ).catch(res => {
-      wx.showModal({
-        title: '错误',
-        content: '获取公司列表失败，请联系管理员',
-        showCancel: false,
-        confirmText: '知道了',
-        confirmColor: '#1890FF'
-      })
+      // wx.showModal({
+      //   title: '错误',
+      //   content: '获取公司列表失败，请联系管理员',
+      //   showCancel: false,
+      //   confirmText: '知道了',
+      //   confirmColor: '#1890FF'
+      // })
     });
-    getRequest(getApiHost(), 'platform/v1/api/wxmini/getRoleList.json', 'body', data, 0, false, false).then(
+    getRequest(getApiHost(), 'platform/v1/api/wxmini/getRoleList', 'body', data, 0, false, false, false).then(
       res => {
         var lists = res.data
         var array2 = []
@@ -206,18 +208,18 @@ that.getLists()
         }
       }
     ).catch(res => {
-      wx.showModal({
-        title: '错误',
-        content: '获取角色列表失败，请联系管理员',
-        showCancel: false,
-        confirmText: '知道了',
-        confirmColor: '#1890FF'
-      })
+      // wx.showModal({
+      //   title: '错误',
+      //   content: '获取角色列表失败，请联系管理员',
+      //   showCancel: false,
+      //   confirmText: '知道了',
+      //   confirmColor: '#1890FF'
+      // })
     });
     var data3={
       officeType:3
     }
-    getRequest(getApiHost(), 'platform/v1/api/wxmini/getOfficeList.json', 'body', data3, 0, false, false).then(
+    getRequest(getApiHost(), 'platform/v1/api/wxmini/getOfficeList', 'body', data3, 0, false, false, false).then(
       res => {
         var lists = res.data
         var array3 = []
@@ -231,18 +233,18 @@ that.getLists()
         })
       }
     ).catch(res => {
-      wx.showModal({
-        title: '错误',
-        content: '获取部门列表失败，请联系管理员',
-        showCancel: false,
-        confirmText: '知道了',
-        confirmColor: '#1890FF'
-      })
+      // wx.showModal({
+      //   title: '错误',
+      //   content: '获取部门列表失败，请联系管理员',
+      //   showCancel: false,
+      //   confirmText: '知道了',
+      //   confirmColor: '#1890FF'
+      // })
     });
     var data4={
       officeType:1
     }
-    getRequest(getApiHost(), 'platform/v1/api/wxmini/getOfficeList.json', 'body', data4, 0, false, false).then(
+    getRequest(getApiHost(), 'platform/v1/api/wxmini/getOfficeList', 'body', data4, 0, false, false).then(
       res => {
         var lists = res.data
         var array4 = []
@@ -256,13 +258,13 @@ that.getLists()
         })
       }
     ).catch(res => {
-      wx.showModal({
-        title: '错误',
-        content: '获取机构列表失败，请联系管理员',
-        showCancel: false,
-        confirmText: '知道了',
-        confirmColor: '#1890FF'
-      })
+      // wx.showModal({
+      //   title: '错误',
+      //   content: '获取机构列表失败，请联系管理员',
+      //   showCancel: false,
+      //   confirmText: '知道了',
+      //   confirmColor: '#1890FF'
+      // })
     });
   },
   usernameInput(e) {
@@ -291,7 +293,7 @@ that.getLists()
       officeType:3,
       officeCode:this.data.companyLists[e.detail.value].companyCode
     }
-    getRequest(getApiHost(), 'platform/v1/api/wxmini/getOfficeList.json', 'body', data3, 0, false, false).then(
+    getRequest(getApiHost(), 'platform/v1/api/wxmini/getOfficeList', 'body', data3, 0, false, false).then(
       res => {
         var lists = res.data
         var array3 = []
@@ -302,7 +304,9 @@ that.getLists()
           officeLists: lists,
           array3: array3,
           mark3:true,
-          index3:0
+          index3:0,
+          array4: that.data.array4,
+          mark4:true,
         })
       }
     )
@@ -319,7 +323,7 @@ that.getLists()
       officeType:1,
       officeCode:this.data.officeLists[e.detail.value].officeCode
     }
-    getRequest(getApiHost(), 'platform/v1/api/wxmini/getOfficeList.json', 'body', data4, 0, false, false).then(
+    getRequest(getApiHost(), 'platform/v1/api/wxmini/getOfficeList', 'body', data4, 0, false, false).then(
       res => {
         var lists = res.data
         var array4 = []
@@ -331,11 +335,18 @@ that.getLists()
           officeLists1: lists,
           array4: array4,
           mark4:true,
-          index4:0
+          index4:0,
         })
       })
   },
   braChange(e) {
+    if(this.data.mark3){
+      Notify({
+        message: '请先选择部门',
+        type: 'warning'
+      });
+      return;
+    }
     this.setData({
       index4: e.detail.value,
       officeCode1: this.data.officeLists1[e.detail.value].officeCode,
@@ -366,6 +377,10 @@ that.getLists()
         ifFin:false
       })
     }
+    this.setData({
+      mark3:true,
+      index3:0
+    })
   },
   domessage(e){
     console.log(123)
@@ -388,7 +403,7 @@ that.getLists()
         code: that.data.code,
         ajax: '_json',
       }
-      getRequest(getApiHost(), 'platform/v1/api/wxmini/getPhoneNumber.json', 'body', data, 0, false, false).then(
+      getRequest(getApiHost(), 'platform/v1/api/wxmini/getPhoneNumber', 'body', data, 0, false, false).then(
         res => {
           console.log(res.data)
           that.setData({
@@ -413,11 +428,6 @@ that.getLists()
     }
   },
   save: function () {
-    wx.requestSubscribeMessage({
-      tmplIds: ['-RCILlm7nALXM6jxiYNiZuTbf6D5LBCwYPB-K6qDNn4'],
-      success(res) {
-      }
-    })
     var that = this;
   // 1、公司 2、角色 3、机构 4、品牌
     console.log(that.data.ifBra)
@@ -533,7 +543,7 @@ that.getLists()
                   }
 
                   console.log(data)
-                  getRequest(getApiHost(), 'platform/v1/api/wxmini/registByMini.json', 'body', data, 0, false, true).then(
+                  getRequest(getApiHost(), 'platform/v1/api/wxmini/registByMini', 'body', data, 0, false, true).then(
                     res => {
                       console.log(res)
                       if (res.result == 'true') {

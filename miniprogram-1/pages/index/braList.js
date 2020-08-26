@@ -39,7 +39,10 @@ Page({
     goodsName: '',
     status: 'TRADE_SUCCESS',
     dailyNo: '',
-    officeCode: ''
+    officeCode: '',
+    entryMoney:0,
+    deliveredMoney:0,
+    unrecordedMoney:0
   },
   onLoad: function () {
     console.log(this.options.dailyNo)
@@ -49,7 +52,6 @@ Page({
   },
   onShow: function () {
     var that = this;
-    wx.hideHomeButton()
     var now = new Date();
     that.setData({
       // endDate: now.format('yyyy-MM-dd'),
@@ -112,7 +114,7 @@ Page({
       itemTitle: that.data.goodsName,
       mfCode: that.data.officeCode
     }
-    getRequest(getApiHost(), 'platform/v1/api/dayily/getDailyOrderBody.json', 'body', data, 0, false, true).then(
+    getRequest(getApiHost(), 'platform/v1/api/dayily/getDailyOrderBody', 'body', data, 0, false, true).then(
       res => {
         if (res.result && res.result == 'login') {
           that.login()
@@ -263,7 +265,7 @@ Page({
   // getSelectLists(e) {
   //   var that = this
   //   var data = {}
-  //   postRequest(getApiHost(), 'platform/v1/api/wxmini/getCompanyList.json', 'body', data, 0, false, true).then(
+  //   postRequest(getApiHost(), 'platform/v1/api/wxmini/getCompanyList', 'body', data, 0, false, true).then(
   //     res => {
   //       if (res.result) {
   //         var lists = res.data
@@ -297,7 +299,7 @@ Page({
       dailyNo: that.data.dailyNo,
       mfCode:that.data.officeCode
     }
-    getRequest(getApiHost(), 'platform/v1/api/dayily/getDailyOrderDetailByNo.json', 'body', data, 0, false, true).then(
+    getRequest(getApiHost(), 'platform/v1/api/dayily/getDailyOrderDetailByNo', 'body', data, 0, false, false).then(
       res => {
         console.log(res)
         that.setData({
