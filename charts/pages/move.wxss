@@ -1,0 +1,40 @@
+.table {
+  border: 1rpx solid #555;
+  border-right: none;
+  border-bottom: none;
+  margin: auto;
+  width: 96%;
+  font-size: 14px;
+}
+.th{
+  height: 40px;
+}
+.tr,.td{
+  height: 50px;
+}
+.th,.tr{
+  display: flex;
+  border-bottom: 1rpx solid #555;
+}
+
+.th1, .th2, .th3, .th4, .th5 ,.td{
+  width: 20%;
+  text-align: center;
+  border-right: 1rpx solid #555;
+}
+
+.th1,.td{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.th-title{
+  display: block;
+  border-bottom: 1rpx solid #555;
+}
+
+.th-title2{
+  text-align: center;
+}
+

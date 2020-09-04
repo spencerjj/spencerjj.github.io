@@ -1,0 +1,69 @@
+{
+  "pages": [
+    "pages/index/welcome",
+    "pages/bar/index",
+    "pages/index/member",
+    "pages/move",
+    "pages/index/charts",
+    "pages/index/index",
+    "pages/index/area",
+    "pages/charts/column/column",
+    "pages/index/select",
+    "pages/charts/radar/radar",
+    "pages/charts/scrollline/scrollline",
+    "pages/charts/line/line",
+    "pages/charts/pie/pie",
+    "pages/charts/ring/ring",
+    "pages/charts/area/area",
+    "pages/index/from",
+    "pages/index/brand"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "WeChat",
+    "navigationBarTextStyle": "black",
+    "backgroundColor": "#f3f3f3"
+  },
+  "tabBar": {
+    "color": "#cccccc",
+    "selectedColor": "#000000",
+    "borderStyle": "black",
+    "backgroundColor": "#f3f3f3",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "iconPath": "images/icon1.png",
+        "selectedIconPath": "images/icon1ed.png",
+        "text": "企业看板"
+      },
+      {
+        "pagePath": "pages/index/member",
+        "iconPath": "images/icon2.png",
+        "selectedIconPath": "images/icon2ed.png",
+        "text": "会员看板"
+      }
+    ]
+  },
+  "usingComponents": {
+    "van-notify": "@vant/weapp/notify/index",
+    "van-cell": "@vant/weapp/cell/index",
+    "van-tag": "@vant/weapp/tag/index",
+    "van-cell-group": "@vant/weapp/cell-group/index",
+    "van-slider": "@vant/weapp/slider/index",
+    "van-button": "@vant/weapp/button/index",
+    "van-toast": "@vant/weapp/toast/index",
+    "van-transition": "@vant/weapp/transition/index",
+    "van-divider": "@vant/weapp/divider/index",
+    "van-datetime-picker": "@vant/weapp/datetime-picker/index",
+    "van-dialog": "@vant/weapp/dialog/index",
+    "van-empty": "@vant/weapp/empty/index",
+    "van-sticky": "@vant/weapp/sticky/index",
+    "van-tab": "@vant/weapp/tab/index",
+    "van-tabs": "@vant/weapp/tabs/index",
+    "van-checkbox": "@vant/weapp/checkbox/index",
+    "van-checkbox-group": "@vant/weapp/checkbox-group/index",
+    "van-progress": "@vant/weapp/progress/index"
+  },
+  "sitemapLocation": "sitemap.json"
+}

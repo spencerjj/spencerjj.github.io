@@ -1,0 +1,265 @@
+/**index.wxss**/
+page{
+  background-color: #fff;
+  font-family: Arial !important;
+}
+.topCon{
+  border-bottom: 15rpx solid #eee;
+  padding-bottom: 50rpx;
+  overflow:hidden;
+  height: 1000rpx;
+  transition:0.5s linear;
+  background-color: #f7f7f7f7;
+}
+.topHide{
+  height:0;
+  padding-bottom: 0;
+}
+.title{
+  color:#888;
+  font-weight: bolder;
+  font-size: 28rpx;
+}
+.first{
+  width: 100%;
+  padding-left: 5%;
+  height: 190rpx;
+  padding-top: 20rpx;
+}
+.first .time{
+  height: 105rpx;
+  margin-top: 10rpx;
+  display: flex;
+  position: relative;
+}
+.first .time .date{
+  font-size: 110rpx;
+  font-weight: 900;
+  color:#46BDCD
+}
+.first .time .fullDate{
+  font-size: 23rpx;
+  font-weight: bolder;
+  color:#888;
+  position: absolute;
+  bottom: 0;
+  left: 300rpx;
+}
+.hideBar{
+  position: absolute;
+  top:30rpx;right:30rpx;
+  border:2rpx solid #46BDCD;
+  font-size: 28rpx;
+  width: 130rpx;
+  text-align: center;
+  border-radius: 10rpx;
+  color:#46BDCD;
+}
+.hideBar image{
+  width: 30rpx;
+  height: 20rpx;
+  transition: linear .2s;
+}
+.showBar{
+  position: fixed;
+  top:30rpx;right:30rpx;
+  border:2rpx solid #46BDCD;
+  font-size: 28rpx;
+  width: 130rpx;
+  text-align: center;
+  border-radius: 10rpx;
+  background: #46BDCD;
+  color:#fff;
+}
+.actionImage{
+  width: 30rpx;
+  height: 20rpx;
+  transition: linear .2s;
+}
+.upHide{
+  transform:rotate(180deg);
+}
+.second{
+  width: 100%;
+  color:#888;
+  display: flex;
+  padding-left: 5%;
+  padding-top:15rpx;
+}
+.section{
+  height: 115rpx;
+  box-shadow:0px 0px 3px 0px rgba(0,0,0,0.2);
+  background:white;
+  position: relative;
+}
+.data{
+  font-size:60rpx;
+  color:#46BDCD;
+  font-weight: 900;
+}
+.rise{
+  color:rgb(248, 107, 107) !important
+}
+.second1{
+  width: 40%;
+}
+.second2{
+  width: 25%;
+  text-align: right;
+}
+.second3{
+  text-align: right;
+  width: 25%;
+}
+.third{
+  width: 100%;
+  color:#888;
+  display: flex;
+  padding-left: 5%;
+  padding-top:15rpx;
+  margin-top: 30rpx;
+}
+.third1{
+  width: 45%;
+}
+.third2{
+  width: 45%;
+  text-align: right;
+}
+
+.fourth{
+  width: 100%;
+  color:#888;
+  display: flex;
+  padding-top:15rpx;
+  /* margin-top: 30rpx; */
+}
+.fourth1{
+  width: 100%;
+  text-align: center;
+}
+
+.fifth{
+  width: 100%;
+  color:#888;
+  display: flex;
+  padding-left: 5%;
+  padding-top:15rpx;
+  margin-top: 30rpx;
+}
+.fifth1{
+  width: 45%;
+}
+.fifth2{
+  width: 45%;
+  text-align: right;
+}
+.btm{
+  display: flex;
+}
+.sixth{
+  width: 43%;
+  color:#888;
+  padding-left: 5%;
+  padding-top:15rpx;
+  margin-top: 30rpx;
+}
+.seventh{
+  width: 43%;
+  color:#888;
+  padding-top:15rpx;
+  margin-top: 30rpx;
+  margin-left: auto;
+  text-align: right;
+  padding-right: 35rpx;
+}
+.arraw{
+  width: 40rpx;
+  height: 30rpx;
+  top:50%;
+  margin-top: -15rpx;
+  left: 88%;
+  position: absolute
+}
+.arraw1{
+  width: 40rpx;
+  height: 30rpx;
+  top:50%;
+  margin-top: -15rpx;
+  right: 20rpx;
+  position: absolute
+}
+.hover1{
+    background-color: #ccc;
+}
+.incoming{
+  margin-bottom: 50rpx;
+  width: 100%;
+  margin-top:50rpx
+}
+.chartsTitle{
+  font-size: 40rpx;
+  font-weight: 200;
+  height: 50rpx;
+  line-height: 50rpx;
+  margin-left: 5%;
+}
+.chartsTitle text{
+  font-size: 30rpx;
+  color:#415161;
+  line-height: 50rpx;
+}
+.toDetail{
+  float: right;
+  margin-right: 20rpx;
+  font-size: 25rpx;
+  color:#999;
+}
+.mark{
+  font-size: 25rpx;
+  font-weight: 200;
+  height: 50rpx;
+  line-height: 50rpx;
+  margin-left: 5%;
+
+}
+.chartsDetail{
+  width: 90%;
+  height: 60rpx;
+  line-height: 60rpx;
+  border-radius: 10rpx;
+  font-size: 35rpx;
+  font-weight: 200;
+  text-align: center;
+  background: #c7eff2;
+  margin-top:40rpx;
+  margin-bottom:20rpx;
+  margin-left: 5%;
+}
+.saleRate{
+  /* margin-bottom: 50rpx; */
+  width: 100%;
+}
+.saleTrend{
+  margin-bottom: 50rpx;
+  width: 100%;
+  margin-top: 40rpx;
+}
+.trend2020{
+  height: 600rpx;
+  position: relative;
+}
+.trend2019{
+  height: 550rpx;
+  position: relative;
+}
+.c1{
+  position: absolute;
+  top:150rpx;
+  left:0rpx;
+}
+.c2{
+  position: absolute;
+  top:150rpx;
+  left:26px;
+}

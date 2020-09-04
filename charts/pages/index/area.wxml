@@ -1,0 +1,65 @@
+<view class="container">
+	<view class="section">
+		<picker mode="date" fields="month" value="{{date}}" start="2015-09" end="{{today}}" bindchange="bindDateChange">
+			<view class="picker">
+				<text class="section__title">日期选择:　</text>{{date}}
+				<image class="arraw1" src="/images/arraw.png"></image>
+			</view>
+		</picker>
+	</view>
+	<view class="top">
+		<view class="topChild">
+			<view class="topTitle">
+				南区销售额
+			</view>
+			<view class="topCon">
+				13.97万元
+			</view>
+		</view>
+		<view class="topChild">
+			<view class="topTitle">
+				北区销售额
+			</view>
+			<view class="topCon">
+				25.12万元
+			</view>
+		</view>
+		<view class="topChild">
+			<view class="topTitle">
+				东区销售额
+			</view>
+			<view class="topCon">
+				43.31万元
+			</view>
+		</view>
+		<view class="topChild">
+			<view class="topTitle">
+				西区销售额
+			</view>
+			<view class="topCon">
+				45.23万元
+			</view>
+		</view>
+	</view>
+	<view style="width:100%;height:15rpx;background:#eee"></view>
+	<view class="content">
+		<view class="first">
+			<view class="section">
+				<picker mode="date" fields="year" value="{{year}}" start="2015" end="{{thisYear}}" bindchange="bindYearChange">
+					<view class="picker1">
+						<text class="section__title">区域统计:　</text>{{year}}年
+						<image class="arraw1" src="/images/arraw.png"></image>
+					</view>
+				</picker>
+			</view>
+			<view class="mark">单位：万元</view>
+			<canvas canvas-id="southCanvas" class="canvas" bindtouchstart="touchHandler"></canvas>
+			<view class="mark">单位：万元</view>
+			<canvas canvas-id="northCanvas" class="canvas" bindtouchstart="touchHandler"></canvas>
+			<view class="mark">单位：万元</view>
+			<canvas canvas-id="eastCanvas" class="canvas" bindtouchstart="touchHandler"></canvas>
+			<view class="mark">单位：万元</view>
+			<canvas canvas-id="westCanvas" class="canvas" bindtouchstart="touchHandler"></canvas>
+		</view>
+	</view>
+</view>

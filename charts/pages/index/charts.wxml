@@ -1,0 +1,24 @@
+<view class="container">
+    <canvas canvas-id="columnCanvas" class="canvas c1"></canvas>
+		<canvas canvas-id="lineCanvas" disable-scroll="true" class="canvas c2" style="height:170px" bindtouchstart="touchHandler"></canvas>
+    <canvas canvas-id="pieCanvas" class="canvas" style="margin-top:200px" bindtouchstart="touchHandler1"></canvas>
+</view>
+
+			<view class="table" border="10">
+				<view class="tr bg-w">
+					<view class="th" width="666px">序号</view>
+					<view class="th">店厅</view>
+					<view class="th ">本期</view>
+					<view class="th ">同期</view>
+					<view class="th ">同比</view>
+				</view>
+				<block  wx:for="{{lists}}" wx:key="index">
+					<view class="tr {{index % 2 == 0?'bg-g':''}}" hover-class="trhover" hover-stay-time="0.5" >
+						<view class="td" width="666px">123</view>
+						<view class="td">123</view>
+						<view class="td">123</view>
+						<view class="td">123</view>
+						<view class="td">123</view>
+					</view>
+				</block>
+			</view>

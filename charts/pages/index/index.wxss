@@ -1,0 +1,140 @@
+/**index.wxss**/
+page{
+    background-color: #fff;
+    font-family: Arial !important;
+    overflow-x: hidden;
+}
+.title{
+    color:#fff;
+    font-weight: bolder;
+    font-size: 28rpx;
+}
+.first{
+    width: 95%;
+    padding-left: 5%;
+    height: 190rpx;
+    padding-top: 20rpx;
+    background:#207fad
+}
+.first .time{
+    height: 105rpx;
+    margin-top: 10rpx;
+    display: flex;
+    position: relative;
+}
+.first .time .date{
+    font-size: 110rpx;
+    font-weight: 900;
+    color:#55e4f7
+}
+.first .time .fullDate{
+    font-size: 23rpx;
+    font-weight: bolder;
+    color:#fff;
+    position: absolute;
+    bottom: 0;
+    left: 300rpx;
+}
+.second{
+    width: 100%;
+    height: 630rpx;
+    padding-top: 20rpx;
+    background: url('http://report.princesky.com:8888/tubiao/top_bg2.jpg') no-repeat;
+    background-size: 100% 100%;
+    margin-bottom: 50rpx;
+}
+.totalData{
+    width: 94%;
+    margin-left: 3%;
+    height: 590rpx;
+    background:rgb(255, 255,255,.9);
+    box-sizing: border-box;
+    padding-top:40rpx
+}
+.dataSection{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    height: 190rpx;
+}
+.dataSection>view{
+    margin-left: 20rpx;
+}
+.dataSection>view:first-child{
+    margin-left: 0rpx;
+}
+.dataSection view:first-child .dataTitle view{
+    background: rgb(59, 212, 181,.6);
+}
+.dataSection view:nth-child(2) .dataTitle view{
+    background: rgb(58, 161, 255,.6);
+}
+.dataSection view:nth-child(3) .dataTitle view{
+    background: rgb(251, 199, 33,.6);
+}
+.dataTitle view{
+    display: inline-block;
+    width: 80rpx;
+    height: 80rpx;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 80rpx;
+}
+.dataTitle image{
+    width:40rpx;
+    height: 40rpx;
+    vertical-align: middle;
+}
+.dataTitle text{
+    height: 80rpx;
+    line-height: 80rpx;
+    margin-left: 15rpx;
+    float: right;
+    color:#999faa;
+    font-size:30rpx
+}
+.dataNum{
+    font-size: 45rpx;
+    font-weight: lighter;
+    color:#666;
+    text-align: center;
+    box-sizing: border-box;
+    padding-top: 10rpx;
+}
+.third{
+    margin-bottom: 50rpx;
+    width: 90%;
+    margin-left: 5%;
+}
+.chartsTitle{
+    font-size: 40rpx;
+    font-weight: 200;
+    height: 50rpx;
+    line-height: 50rpx;
+}
+.chartsTitle text{
+    font-size: 30rpx;
+    color:#415161;
+    line-height: 50rpx;
+}
+.mark{
+    font-size: 25rpx;
+    font-weight: 200;
+    height: 50rpx;
+    line-height: 50rpx;
+}
+.chartsDetail{
+    width: 100%;
+    height: 60rpx;
+    line-height: 60rpx;
+    border-radius: 10rpx;
+    font-size: 35rpx;
+    font-weight: 200;
+    text-align: center;
+    background: #c7eff2;
+    margin-top:40rpx;
+    margin-bottom:20rpx
+}
+.canvas{
+    width: 100%;
+}

@@ -1,0 +1,10 @@
+ <view class="loading">
+   <image src="../../images/loader.gif" style="left:{{gifLeft}}%"></image>
+   <view class="progress">
+    <van-progress color="#ccc" text-color="black" percentage="{{pro}}" stroke-width="6px"/>
+   </view>
+   <view class="text">
+    欢迎进入企业数据中心
+   </view>
+ </view>
+
