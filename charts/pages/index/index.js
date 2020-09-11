@@ -18,8 +18,9 @@ Page({
             title: '往期',
             data: [1, 2, 5, 7],
             categories: ['东区', '南区', '西区', '北区']
-        }
+        },
     ],
+    date:'2020-10'
     },
     onLoad: function() {
       var that = this

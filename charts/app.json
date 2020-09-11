@@ -1,8 +1,8 @@
 {
   "pages": [
+    "pages/index/member",
     "pages/index/welcome",
     "pages/bar/index",
-    "pages/index/member",
     "pages/move",
     "pages/index/charts",
     "pages/index/index",
@@ -16,7 +16,8 @@
     "pages/charts/ring/ring",
     "pages/charts/area/area",
     "pages/index/from",
-    "pages/index/brand"
+    "pages/index/brand",
+    "pages/index/goods"
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -42,6 +43,12 @@
         "iconPath": "images/icon2.png",
         "selectedIconPath": "images/icon2ed.png",
         "text": "会员看板"
+      },
+      {
+        "pagePath": "pages/index/goods",
+        "iconPath": "images/goods.png",
+        "selectedIconPath": "images/goodsed.png",
+        "text": "商品看板"
       }
     ]
   },
@@ -63,7 +70,9 @@
     "van-tabs": "@vant/weapp/tabs/index",
     "van-checkbox": "@vant/weapp/checkbox/index",
     "van-checkbox-group": "@vant/weapp/checkbox-group/index",
-    "van-progress": "@vant/weapp/progress/index"
+    "van-progress": "@vant/weapp/progress/index",
+    "van-dropdown-menu": "@vant/weapp/dropdown-menu/index",
+    "van-dropdown-item": "@vant/weapp/dropdown-item/index"
   },
   "sitemapLocation": "sitemap.json"
 }

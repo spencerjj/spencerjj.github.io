@@ -4,22 +4,24 @@
   display: block;
   background: rgba(0,0,0,.9);
   position: fixed;
-  z-index: 100;
+  z-index: 7;
   top: 0;
   left: 0;
+  background-image: url(../../images/logo2.png) no-repeat;
+  background-size: 100% 100%;
 }
-.loading image{
+.loading .move{
   width: 200rpx;
   height: 200rpx;
   border-radius: 5rpx;
   position: absolute;
   left: 50%;
-  top: 33%;
+  top: 410rpx;
   margin: 0 0 0 -100rpx;
 }
 .progress{
   position: absolute;
-  top:45%;
+  top:580rpx;
   width: 90%;
   left:5%;
 }
@@ -31,4 +33,19 @@
   font-weight: bolder;
   font-size: 50rpx;
   color:white
+}
+.back{
+  width: 100%;
+  height: 100%;
+  z-index: 8;
+  text-align: center;
+}
+.back image{
+  width: 200rpx;
+  height: 200rpx;
+  opacity: .1;
+  position: absolute;
+  bottom: 100rpx;
+  left: 50%;
+  margin-left: -100rpx;
 }

@@ -18,15 +18,15 @@ var config = {
     yAxisTitleWidth: 15,
     padding: 12,
     columePadding: 3,
-    fontSize: 10,
+    fontSize: 13,
     dataPointShape: ['diamond', 'circle', 'triangle', 'rect'],
     colors: ['#7cb5ec', '#f7a35c', '#434348', '#90ed7d', '#f15c80', '#8085e9'],
     pieChartLinePadding: 25,
     pieChartTextPadding: 15,
     xAxisTextPadding: 3,
-    titleColor: '#333333',
-    titleFontSize: 20,
-    subtitleColor: '#999999',
+    titleColor: '#000000',
+    titleFontSize: 30,
+    subtitleColor: '#000000',
     subtitleFontSize: 15,
     toolTipPadding: 3,
     toolTipBackground: '#000000',
@@ -811,7 +811,7 @@ function drawPointText(points, series, config, context) {
 
     context.beginPath();
     context.setFontSize(config.fontSize);
-    context.setFillStyle('#666666');
+    context.setFillStyle('#000');
     points.forEach(function (item, index) {
         if (item !== null) {
             var formatVal = series.format ? series.format(data[index]) : data[index];
@@ -827,7 +827,7 @@ function drawRadarLabel(angleList, radius, centerPosition, opts, config, context
     radius += config.radarLabelTextMargin;
     context.beginPath();
     context.setFontSize(config.fontSize);
-    context.setFillStyle(radarOption.labelColor || '#666666');
+    context.setFillStyle(radarOption.labelColor || '#000');
     angleList.forEach(function (angle, index) {
         var pos = {
             x: radius * Math.cos(angle),
@@ -905,7 +905,7 @@ function drawPieText(series, opts, config, context, radius, center) {
                 x: orginX3,
                 y: startY
             },
-            width: textWidth,
+            width: textWidth+5,
             height: config.fontSize,
             text: item.text,
             color: item.color
@@ -937,7 +937,7 @@ function drawPieText(series, opts, config, context, radius, center) {
         context.closePath();
         context.fill();
         context.beginPath();
-        context.setFillStyle('#666666');
+        context.setFillStyle('#000');
         context.fillText(item.text, textStartX, textPosition.y + 3);
         context.closePath();
         context.stroke();
@@ -972,7 +972,7 @@ function drawToolTip(textList, offset, opts, config, context) {
         return measureText(item.text);
     });
 
-    var toolTipWidth = legendWidth + legendMarginRight + 4 * config.toolTipPadding + Math.max.apply(null, textWidth);
+    var toolTipWidth = legendWidth + legendMarginRight + 10 * config.toolTipPadding + Math.max.apply(null, textWidth);
     var toolTipHeight = 2 * config.toolTipPadding + textList.length * config.toolTipLineHeight;
 
     // if beyond the right border
@@ -1036,7 +1036,7 @@ function drawYAxisTitle(title, opts, config, context) {
     context.save();
     context.beginPath();
     context.setFontSize(config.fontSize);
-    context.setFillStyle(opts.yAxis.titleFontColor || '#333333');
+    context.setFillStyle(opts.yAxis.titleFontColor || '#000');
     context.translate(0, opts.height);
     context.rotate(-90 * Math.PI / 180);
     context.fillText(title, startX, config.padding + 0.5 * config.fontSize);
@@ -1073,7 +1073,7 @@ function drawColumnDataPoints(series, opts, config, context) {
         points.forEach(function (item, index) {
             if (item !== null) {
                 var startX = item.x - item.width / 2 + 1;
-                var height = opts.height - item.y - config.padding - config.xAxisHeight - config.legendHeight;
+                var height = opts.height - item.y - config.padding - config.xAxisHeight - config.legendHeight+2;
                 context.moveTo(startX, item.y);
                 context.rect(startX, item.y, item.width - 2, height);
             }
@@ -1331,7 +1331,7 @@ function drawXAxis(categories, opts, config, context) {
     if (config._xAxisTextAngle_ === 0) {
         context.beginPath();
         context.setFontSize(config.fontSize);
-        context.setFillStyle(opts.xAxis.fontColor || '#666666');
+        context.setFillStyle(opts.xAxis.fontColor || '#000');
         categories.forEach(function (item, index) {
             var offset = eachSpacing / 2 - measureText(item) / 2;
             context.fillText(item, xAxisPoints[index] + offset, startY + config.fontSize + 5);
@@ -1343,7 +1343,7 @@ function drawXAxis(categories, opts, config, context) {
             context.save();
             context.beginPath();
             context.setFontSize(config.fontSize);
-            context.setFillStyle(opts.xAxis.fontColor || '#666666');
+            context.setFillStyle(opts.xAxis.fontColor || '#000');
             var textWidth = measureText(item);
             var offset = eachSpacing / 2 - textWidth;
 
@@ -1418,7 +1418,7 @@ function drawYAxis(series, opts, config, context) {
     context.stroke();
     context.beginPath();
     context.setFontSize(config.fontSize);
-    context.setFillStyle(opts.yAxis.fontColor || '#666666');
+    context.setFillStyle(opts.yAxis.fontColor || '#000');
     rangesFormat.forEach(function (item, index) {
         var pos = points[index] ? points[index] : endY;
         context.fillText(item, config.padding + config.yAxisTitleWidth, pos + config.fontSize / 2);
@@ -1455,7 +1455,7 @@ function drawLegend(series, opts, config, context) {
         var startX = (opts.width - width) / 2 + padding;
         var startY = opts.height - config.padding - config.legendHeight + listIndex * (config.fontSize + marginTop) + padding + marginTop;
 
-        context.setFontSize(config.fontSize);
+        context.setFontSize(11);
         itemList.forEach(function (item) {
             switch (opts.type) {
                 case 'line':
@@ -1479,7 +1479,6 @@ function drawLegend(series, opts, config, context) {
                         context.stroke();
                         context.closePath();
                     }
-                   
                     break;
                 case 'pie':
                 case 'ring':
@@ -1500,7 +1499,7 @@ function drawLegend(series, opts, config, context) {
             }
             startX += padding + shapeWidth;
             context.beginPath();
-            context.setFillStyle(opts.extra.legendTextColor || '#333333');
+            context.setFillStyle(opts.extra.legendTextColor || '#000');
             context.fillText(item.name, startX, startY + 9);
             context.closePath();
             context.stroke();

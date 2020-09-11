@@ -11,9 +11,9 @@ function setOption(chart, xlist, ylist1, ylist2){
           type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
         },
         confine: true,
-        // formatter(param){
-        //   return "增长:" + (param[0].data-param[1].data)
-        // }
+        formatter(param){
+          return "增长:" + (param[0].data-param[1].data)
+        }
       },
       legend: {
         data: ['2020', '2019'],
@@ -96,6 +96,18 @@ function setOption(chart, xlist, ylist1, ylist2){
   }
 Page({
   data: {
+    option1: [
+      { text: '全部商品', value: 0 },
+      { text: '新款商品', value: 1 },
+      { text: '活动商品', value: 2 },
+    ],
+    option2: [
+      { text: '默认排序', value: 'a' },
+      { text: '好评排序', value: 'b' },
+      { text: '销量排序', value: 'c' },
+    ],
+    value1: 0,
+    value2: 'a',
     ec: {
       lazyLoad: true
     },
@@ -120,10 +132,11 @@ Page({
     
   },
   init1: function (xdata, ylist1, ylist2) {           //初始化第一个图表
-    this.oneComponent.init((canvas, width, height) => {
+    this.oneComponent.init((canvas, width, height,dpr) => {
       const chart = echarts.init(canvas, null, {
         width: width,
-        height: height
+        height: height,
+        devicePixelRatio: dpr
       });
       setOption(chart, xdata, ylist1, ylist2)  //赋值给echart图表
       this.chart = chart;

@@ -19,7 +19,7 @@
 						<view>
 							<image src="/images/t1.png"></image>
 						</view>
-                        <text>本日累计</text>    
+						<text>本日累计</text>
 					</view>
 					<view class="dataNum">
 						16725
@@ -30,7 +30,7 @@
 						<view>
 							<image src="/images/t4.png"></image>
 						</view>
-                        <text>本日同比</text>  
+						<text>本日同比</text>
 					</view>
 					<view class="dataNum">
 						88.88%
@@ -41,9 +41,9 @@
 						<view>
 							<image src="/images/t3.png"></image>
 						</view>
-                        <text>完成率</text>  
+						<text>完成率</text>
 					</view>
-					<view class="dataNum">
+					<view class="dataNum down">
 						22.85%
 					</view>
 				</view>
@@ -54,7 +54,7 @@
 						<view>
 							<image src="/images/t1.png"></image>
 						</view>
-                        <text>本期累计</text>  
+						<text>本期累计</text>
 					</view>
 					<view class="dataNum">
 						16725
@@ -65,7 +65,7 @@
 						<view>
 							<image src="/images/t4.png"></image>
 						</view>
-                        <text>本期同比</text>  
+						<text>本期同比</text>
 					</view>
 					<view class="dataNum">
 						16725
@@ -76,20 +76,55 @@
 						<view>
 							<image src="/images/t3.png"></image>
 						</view>
-                        <text>完成率</text> 
+						<text>完成率</text>
 					</view>
 					<view class="dataNum">
 						88.88%
 					</view>
 				</view>
 			</view>
-			<view class="year dataSection">
+			<view class="month dataSection">
+				<view class="monthData">
+					<view class="dataTitle">
+						<view>
+							<image src="/images/t1.png"></image>
+						</view>
+						<text>本年累计</text>
+					</view>
+					<view class="dataNum">
+						16725
+					</view>
+				</view>
+				<view class="monthRate">
+					<view class="dataTitle">
+						<view>
+							<image src="/images/t4.png"></image>
+						</view>
+						<text>本年同比</text>
+					</view>
+					<view class="dataNum">
+						16725
+					</view>
+				</view>
+				<view class="monthComplete">
+					<view class="dataTitle">
+						<view>
+							<image src="/images/t3.png"></image>
+						</view>
+						<text>完成率</text>
+					</view>
+					<view class="dataNum down">
+						18.88%
+					</view>
+				</view>
+			</view>
+			<!-- <view class="year dataSection">
 				<view class="yearData">
 					<view class="dataTitle">
 						<view>
 							<image src="/images/t1.png"></image>
 						</view>
-                        <text>本年累计</text> 
+						<text>本年累计</text>
 					</view>
 					<view class="dataNum">
 						16725
@@ -100,38 +135,65 @@
 						<view>
 							<image src="/images/t4.png"></image>
 						</view>
-                        <text>本年同比</text> 
+						<text>本年同比</text>
 					</view>
 					<view class="dataNum">
 						16725
 					</view>
 				</view>
-			</view>
+			</view> -->
 		</view>
 	</view>
-    <view class="third">
-        <view class="chartsTitle">
-            区域统计<text>　　全部</text>
-        </view>
-        <view class="chartsDetail">完成率对比</view>
-        <view class="mark">单位：万元</view>
-        <canvas canvas-id="areaCanvas" class="canvas" bindtouchstart="toPage" data-mark="area"></canvas>
-    </view>
-    <view class="third">
-        <view class="chartsTitle">
-            渠道统计<text>　　全部</text>
-        </view>
-        <view class="chartsDetail">完成率对比</view>
-        <view class="mark">单位：万元</view>
-        <canvas canvas-id="fromCanvas" class="canvas" bindtouchstart="toPage" data-mark="from"></canvas>
-    </view>
-        <view class="third">
-        <view class="chartsTitle">
-            品牌统计<text>　　全部</text>
-        </view>
-        <view class="chartsDetail">完成率对比</view>
-        <view class="mark">单位：万元</view>
-        <canvas canvas-id="brandCanvas" class="canvas" bindtouchstart="toPage" data-mark="brand"></canvas>
-    </view>
+	<view class="third">
+		<view class="chartsTitle">
+			区域统计<text>　　全部</text>
+		</view>
+		<!-- <view class="section">
+			<picker mode="date" fields="month" value="{{date}}" start="2015-09" end="{{today}}" bindchange="bindDateChange">
+				<view class="picker">
+					<text class="section__title">区域统计　</text>{{date}}
+					<image class="arraw1" src="/images/arraw.png"></image>
+				</view>
+			</picker>
+		</view> -->
+		<view class="chartsDetail">完成率对比</view>
+		<view class="mark">单位：万元</view>
+		<canvas canvas-id="areaCanvas" class="canvas"></canvas>
+		<view class="toDetail" bindtap="toPage" data-mark="area">点击查看详细数据</view>
+	</view>
+	<view class="third">
+		<view class="chartsTitle">
+			渠道统计<text>　　全部</text>
+		</view>
+		<!-- <view class="section">
+			<picker mode="date" fields="month" value="{{date}}" start="2015-09" end="{{today}}" bindchange="bindDateChange">
+				<view class="picker">
+					<text class="section__title">渠道统计　</text>{{date}}
+					<image class="arraw1" src="/images/arraw.png"></image>
+				</view>
+			</picker>
+		</view> -->
+		<view class="chartsDetail">完成率对比</view>
+		<view class="mark">单位：万元</view>
+		<canvas canvas-id="fromCanvas" class="canvas"></canvas>
+		<view class="toDetail" bindtap="toPage" data-mark="from">点击查看详细数据</view>
+	</view>
+	<view class="third">
+		<view class="chartsTitle">
+			品牌统计<text>　　全部</text>
+		</view>
+		<!-- <view class="section">
+			<picker mode="date" fields="month" value="{{date}}" start="2015-09" end="{{today}}" bindchange="bindDateChange">
+				<view class="picker">
+					<text class="section__title">品牌统计　</text>{{date}}
+					<image class="arraw1" src="/images/arraw.png"></image>
+				</view>
+			</picker>
+		</view> -->
+		<view class="chartsDetail">完成率对比</view>
+		<view class="mark">单位：万元</view>
+		<canvas canvas-id="brandCanvas" class="canvas"></canvas>
+		<view class="toDetail" bindtap="toPage" data-mark="brand">点击查看详细数据</view>
+	</view>
 
 </view>

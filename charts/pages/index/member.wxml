@@ -1,21 +1,104 @@
 <view class="container">
-	<view class="{{!ifUp?'hideBar':'showBar'}} " bindtap="up">{{!ifUp?'收起':'展开'}}
+	<!-- <view class="{{!ifUp?'hideBar':'showBar'}} " bindtap="up">{{!ifUp?'收起':'展开'}}
 		<image class="actionImage {{ifUp?'upHide':''}}" src="{{!ifUp?'/images/hideUp.png':'/images/downShow.png'}}"></image>
-	</view>
+	</view> -->
 	<view class="topCon {{ifUp?'topHide':''}}">
 		<view class="first">
 			<view class="title">数据发生年份：</view>
 			<view class="time">
-				<view class="date">
+				<!-- <view class="date">
 					10/29
+				</view> -->
+				<picker mode="date" fields="day" value="{{date}}" start="{{thisYear}}-01-01" end="{{yestoday}}" bindchange="bindDateChange">
+				<view class="date">
+					{{showDate}}
+					<image class="arraw1" src="/images/arraw.png"></image>
 				</view>
+			</picker>
 				<view class="fullDate">
 					<view>2020年10月29日</view>
 					<view>星期三</view>
 				</view>
 			</view>
 		</view>
-		<view class="fourth section" bindtap="toPage" hover-class="hover1" hover-stay-time=".5s">
+		<view class="middle">
+			<view class="mfirst">
+				<view class="msection">
+					<view class="mtop">
+						<text class="mainTitle">会员人数</text>
+					</view>
+					<view class="mdata">
+						244602
+					</view>
+					<view class="mtime">
+						本年度
+					</view>
+				</view>
+				<view class="msection">
+					<view class="mtop">
+						<text class="mtitle">2020新招人数</text>
+						<text class="mcompare rise">+1461</text>
+					</view>
+					<view class="mdata">
+						24642
+					</view>
+					<view class="mtime">
+						本年度
+					</view>
+				</view>
+				<view class="msection">
+					<view class="mtop">
+						<text class="mtitle">2019新招人数</text>
+						<text class="mcompare">0</text>
+					</view>
+					<view class="mdata">
+						23181
+					</view>
+					<view class="mtime">
+						去年
+					</view>
+				</view>
+			</view>
+			<view class="mfirst" style="margin-top:40rpx">
+				<view class="msection">
+					<view class="mtop">
+						<text class="mtitle">招新转化率</text>
+						<text class="mcompare down">-27.10%</text>
+					</view>
+					<view class="mdata">
+						63.12%
+					</view>
+					<view class="mtime">
+						本年度
+					</view>
+				</view>
+				<view class="msection">
+					<view class="mtop">
+						<text class="mtitle">招新复购率</text>
+						<text class="mcompare rise">+0.52%</text>
+					</view>
+					<view class="mdata">
+						36.02%
+					</view>
+					<view class="mtime">
+						本年度
+					</view>
+				</view>
+				<view class="msection">
+					<view class="mtop">
+						<text class="mtitle">老会员回购率</text>
+						<text class="mcompare down">-2.93%</text>
+					</view>
+					<view class="mdata">
+						23.47%
+					</view>
+					<view class="mtime">
+						本年度
+					</view>
+				</view>
+			</view>
+		</view>
+		<!-- <view class="fourth section" bindtap="toPage" hover-class="hover1" hover-stay-time=".5s">
 			<view class="fourth1">
 				<view class="title">
 					会员人数
@@ -43,7 +126,6 @@
 				</view>
 			</view>
 		</view>
-
 		<view class="btm">
 			<view class="sixth section" bindtap="toPage" hover-class="hover1" hover-stay-time=".5s">
 				<view class="sixth1">
@@ -109,9 +191,17 @@
 					</view>
 				</view>
 			</view>
-		</view>
+		</view> -->
 	</view>
 	<view class="incoming">
+		<!-- <view class="section">
+			<picker mode="date" fields="month" value="{{date}}" start="2015-09" end="{{today}}" bindchange="bindDateChange">
+				<view class="picker">
+					<text class="section__title">实收占比　</text>{{date}}
+					<image class="arraw1" src="/images/arraw.png"></image>
+				</view>
+			</picker>
+		</view> -->
 		<view class="chartsTitle">
 			实收占比<text>　　全部</text>
 		</view>
@@ -125,6 +215,14 @@
 		<view class="chartsTitle">
 			区域会员销售<text>　　全部</text>
 		</view>
+		<!-- <view class="section">
+			<picker mode="date" fields="month" value="{{date}}" start="2015-09" end="{{today}}" bindchange="bindDateChange">
+				<view class="picker" style="width:65%">
+					<text class="section__title">区域会员销售　</text>{{date}}
+					<image class="arraw1" src="/images/arraw.png"></image>
+				</view>
+			</picker>
+		</view> -->
 		<view class="chartsDetail">销售占比</view>
 		<view class="mark">单位：人数</view>
 		<canvas canvas-id="areaCanvas" class="canvas" bindtouchstart="toPage" data-mark="area"></canvas>
@@ -135,18 +233,25 @@
 		<view class="chartsTitle">
 			两年会员销售趋势<text>　　全部</text>
 		</view>
+		<!-- <view class="section">
+			<picker mode="date" fields="month" value="{{date}}" start="2015-09" end="{{today}}" bindchange="bindDateChange">
+				<view class="picker" style="width:76%">
+					<text class="section__title">两年会员销售趋势　</text>{{date}}
+					<image class="arraw1" src="/images/arraw.png"></image>
+				</view>
+			</picker>
+		</view> -->
 		<view class="trend2020">
 			<view class="chartsDetail">2020销售趋势</view>
 			<view class="mark">单位：人数</view>
 			<canvas canvas-id="columnCanvas2020" class="canvas c1"></canvas>
-					<canvas canvas-id="lineCanvas2020" disable-scroll="true" class="canvas c2" bindtouchstart="touchHandler2020"></canvas>
+			<canvas canvas-id="lineCanvas2020" disable-scroll="true" class="canvas c2" bindtouchstart="touchHandler2020"></canvas>
 		</view>
 		<view class="trend2019">
 			<view class="chartsDetail">2019销售趋势</view>
 			<view class="mark">单位：人数</view>
 			<canvas canvas-id="columnCanvas2019" class="canvas c1"></canvas>
-					<canvas canvas-id="lineCanvas2019" disable-scroll="true" class="canvas c2" bindtouchstart="touchHandler2019"></canvas>
+			<canvas canvas-id="lineCanvas2019" disable-scroll="true" class="canvas c2" bindtouchstart="touchHandler2019"></canvas>
 		</view>
 	</view>
-
 </view>

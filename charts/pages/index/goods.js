@@ -1,12 +1,11 @@
-// pages/index/welcome.js
+// pages/index/goods.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    pro:0,
-    gifLeft:2
+
   },
 
   /**
@@ -27,22 +26,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    var set = setInterval(()=>{
-      this.setData({
-        pro:this.data.pro+1,
-      })
-      if(this.data.gifLeft<90){
-        this.setData({
-          gifLeft:this.data.gifLeft+0.9
-        })
-      }
-      if(this.data.pro==100){
-        clearInterval(set)
-        // wx.switchTab({
-        //   url: 'index',
-        // })
-      }
-    },20)
+
   },
 
   /**

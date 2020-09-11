@@ -5,6 +5,7 @@ import {
 } from '../../utils/api.js'
 var app = getApp();
 import Notify from '../../miniprogram_npm/@vant/weapp/notify/notify';
+import format from '../../utils/time.js'
 var wxCharts = require('../../utils/wxcharts.js');
 var pieChart2020 = null;
 var pieChart2019 = null;
@@ -15,8 +16,22 @@ var column2019 = null;
 var line2019 = null;
 Page({
     data: {
+        option1: [
+            { text: '全部商品', value: 0 },
+            { text: '新款商品', value: 1 },
+            { text: '活动商品', value: 2 },
+          ],
+          option2: [
+            { text: '默认排序', value: 'a' },
+            { text: '好评排序', value: 'b' },
+            { text: '销量排序', value: 'c' },
+          ],
+          value1: 0,
+          value2: 'a',
         ifUp: false,
         lists: [1, 2, 3, 4, 5],
+        date:'2019-09',
+        yestoday:'',
         main: [{
                 title: '2019',
                 data: [5931, 3698, 3737, 2737, 2462, 1076],
@@ -71,11 +86,21 @@ Page({
         this.doLine2020()
         this.doColumn2019()
         this.doLine2019()
+        var now = new Date()
+        var yestoday = now.getFullYear()+'-'+(now.getMonth()+1)+'-'+(now.getDate()-1)
+        var showDate = new Date(yestoday)
+        console.log(yestoday)
+        this.setData({
+            today: now.format('yyyy-MM-dd'),
+            yestoday:yestoday,
+            date: showDate.format('yyyy-MM-dd'),
+            showDate:showDate.format('MM/dd'),
+            thisYear:now.getFullYear(),
+            year:now.getFullYear()
+          })
     },
     toPage(e) {
-        wx.switchTab({
-            url: 'charts',
-        })
+
     },
     up(e) {
         if (!this.data.ifUp) {
@@ -373,5 +398,12 @@ Page({
         wx.navigateTo({
           url: '../bar/index',
         })
-    }
+    },
+    bindDateChange(e){
+        var date = new Date(e.detail.value)
+        this.setData({
+          showDate:date.format('MM/dd'),
+          date:e.detail.value
+        })
+      },
 })

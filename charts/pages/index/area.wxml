@@ -1,12 +1,10 @@
 <view class="container">
-	<view class="section">
 		<picker mode="date" fields="month" value="{{date}}" start="2015-09" end="{{today}}" bindchange="bindDateChange">
 			<view class="picker">
 				<text class="section__title">日期选择:　</text>{{date}}
 				<image class="arraw1" src="/images/arraw.png"></image>
 			</view>
 		</picker>
-	</view>
 	<view class="top">
 		<view class="topChild">
 			<view class="topTitle">

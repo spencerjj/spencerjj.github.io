@@ -2,21 +2,29 @@
 page{
   background-color: #fff;
   font-family: Arial !important;
+
+}
+.container{
+  overflow-x: hidden;
 }
 .topCon{
   border-bottom: 15rpx solid #eee;
   padding-bottom: 50rpx;
   overflow:hidden;
-  height: 1000rpx;
+  height: 720rpx;
   transition:0.5s linear;
   background-color: #f7f7f7f7;
+  background: url('http://m.qpic.cn/psc?/V117fsiB1u3hJS/bqQfVz5yrrGYSXMvKr.cqVBFTrn5OJOtsPWO2n8v1HWHAPV76tNRbci8uCSwW7DoSSJqyWP8ZGLMfMiAZrVaADiCacfVJMUvLugKIJYJFyM!/b&bo=OASgBQAAAAABB7k!&rf=viewer_4');
+  background-size: 100%;
+  background-position: bottom;
+  overflow-x: hidden;
 }
 .topHide{
   height:0;
   padding-bottom: 0;
 }
 .title{
-  color:#888;
+  color:white;
   font-weight: bolder;
   font-size: 28rpx;
 }
@@ -35,15 +43,15 @@ page{
 .first .time .date{
   font-size: 110rpx;
   font-weight: 900;
-  color:#46BDCD
+  color:#53e0f3;
+  float: left;
 }
 .first .time .fullDate{
   font-size: 23rpx;
   font-weight: bolder;
-  color:#888;
-  position: absolute;
-  bottom: 0;
-  left: 300rpx;
+  color:#fff;
+  margin-top: 40rpx;
+  margin-left: 30rpx;
 }
 .hideBar{
   position: absolute;
@@ -86,19 +94,16 @@ page{
   padding-left: 5%;
   padding-top:15rpx;
 }
-.section{
+/* .section{
   height: 115rpx;
   box-shadow:0px 0px 3px 0px rgba(0,0,0,0.2);
   background:white;
   position: relative;
-}
+} */
 .data{
   font-size:60rpx;
   color:#46BDCD;
   font-weight: 900;
-}
-.rise{
-  color:rgb(248, 107, 107) !important
 }
 .second1{
   width: 40%;
@@ -154,6 +159,67 @@ page{
   width: 45%;
   text-align: right;
 }
+.middle{
+  width: 94%;
+  margin-left: 3%;
+  height: 500rpx;
+  background:rgb(255, 255,255,.9);
+  box-sizing: border-box;
+  padding-top:40rpx;
+  margin-top: 20rpx;
+}
+.mfirst{
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  flex-direction: row;
+}
+.msection{
+  text-align: center;
+  flex: 1;
+}
+.mtop{
+  width: 90%;
+  margin-left: 5%;
+}
+.mainTitle{
+  display: inline-block;
+  height: 100rpx;
+  line-height: 80rpx;
+  font-weight: bolder;
+  font-size: 40rpx;
+}
+.mtitle,.mcompare{
+  display: inline-block;
+  height: 100rpx;
+  font-weight: bolder;
+}
+.mtitle{
+  float: left;
+  width: 53%;
+  font-size: 28rpx;
+  color:#555
+}
+.mcompare{
+  line-height: 100rpx;
+  font-size: 25rpx;
+}
+.mdata{
+  font-size: 40rpx;
+  font-weight: bolder;
+  color:#46BDCD
+}
+.mtime{
+  font-size: 30rpx;
+  font-weight: 600;
+}
+.rise{
+  color:#46BDCD
+}
+.down{
+  color:red
+}
+
 .btm{
   display: flex;
 }
@@ -203,11 +269,33 @@ page{
   height: 50rpx;
   line-height: 50rpx;
   margin-left: 5%;
+  position: relative;
 }
 .chartsTitle text{
   font-size: 30rpx;
   color:#415161;
   line-height: 50rpx;
+}
+.picker{
+  position: relative;
+  width: 56%;
+  height: 50rpx;
+  line-height: 50rpx;
+  font-weight: 200;
+  font-size: 35rpx;
+  margin-left: 5%;
+}
+.picker text{
+  font-size: 40rpx;
+}
+
+.arraw1{
+  width: 30rpx;
+  height: 35rpx;
+  top:50%;
+  margin-top: -17.5rpx;
+  right: 45rpx;
+  position: absolute
 }
 .toDetail{
   float: right;
