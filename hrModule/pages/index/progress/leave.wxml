@@ -6,6 +6,15 @@
     </view>
     <view class="codePicker">
       <text>{{lists.userName}}</text>
+       <image src="../../../images/file.png" bindtap="copy" data-cont="{{lists.userName}}" class="copyfile"></image>
+    </view>
+  </view>
+  <view class="title">
+    <view class="c1">
+      <text>工号</text>
+    </view>
+    <view class="codePicker">
+      <text>{{lists.empNo}}</text>
     </view>
   </view>
   <view class="title">

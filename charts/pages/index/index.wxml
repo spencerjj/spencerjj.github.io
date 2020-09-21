@@ -1,6 +1,6 @@
 <view class="container">
 	<view class="first">
-		<view class="title">数据发生日期：</view>
+		<view class="title">数据发生时间：</view>
 		<view class="time">
 			<view class="date">
 				10/29

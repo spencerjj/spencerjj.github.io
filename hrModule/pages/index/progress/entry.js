@@ -15,7 +15,7 @@ Page({
     hint: '',
     isBottom: false,
     array1: ['是', '否'],
-    index1: 3,
+    index1: 0,
     index2: 3,
     index3: 3,
     index4: 3,
@@ -38,7 +38,7 @@ Page({
     ],
     visible: false,
     lists: '',
-    ifoa: '',
+    ifoa: 0,
     ifdoor: '',
     ifemail: '',
     iftrain: '',
@@ -50,7 +50,8 @@ Page({
     proLists:'',
     loadAll:true,
     url:'',
-    can:false
+    can:false,
+    safeLevel:''
   },
 
   /**
@@ -182,7 +183,8 @@ Page({
                 loadAll:false,
                 oaPwd:res.data.oaEmployEntry.oaPwd?res.data.oaEmployEntry.oaPwd:'',
                 emailAccount:res.data.oaEmployEntry.emailAccount?res.data.oaEmployEntry.emailAccount:'',
-                emailPwd:res.data.oaEmployEntry.emailPwd?res.data.oaEmployEntry.emailPwd:''
+                emailPwd:res.data.oaEmployEntry.emailPwd?res.data.oaEmployEntry.emailPwd:'',
+                safeLevel:res.data.oaEmployEntry.safeLevel?res.data.oaEmployEntry.safeLevel:''
               })
               var post = res.data.postList
               var lists = res.data.oaEmployEntry
@@ -203,7 +205,7 @@ Page({
                   })
                 } else {
                   that.setData({
-                    index1: 1
+                    index1: 0
                   })
                 }
               }
@@ -326,6 +328,12 @@ Page({
       emailPwd: e.detail.value
     })
   },
+  hinput4: function (e) {
+    console.log(e.detail.value)
+    this.setData({
+      safeLevel: e.detail.value
+    })
+  },
   pickChange1: function (e) {
     console.log(e.detail.value)
     this.setData({
@@ -380,7 +388,7 @@ Page({
     }
     // 提交操作
     if (index == 1) {
-      if (that.data.ifoa.length != 0 && that.data.ifdoor.length != 0 && that.data.ifemail.length != 0 && that.data.iftrain.length != 0) {
+      if (that.data.ifoa.length != 0 && that.data.ifdoor.length != 0 && that.data.ifemail.length != 0) {
         const action = [...this.data.actions];
         action[0].loading = true;
 
@@ -391,13 +399,14 @@ Page({
           // __sid: app.globalData.__sid,
           __sid: app.globalData.tempSid,
           __ajax: 'json',
-          isoa: Math.abs(that.data.index1 - 1),
+          isoa: 1,
           isemail: Math.abs(that.data.index2 - 1),
           isdoor: Math.abs(that.data.index3 - 1),
           istraining: Math.abs(that.data.index4 - 1),
           oaPwd:that.data.oaPwd,
           emailAccount:that.data.emailAccount,
           emailPwd:that.data.emailPwd,
+          safeLevel:that.data.safeLevel,
           'bpm.comment': that.data.hint,
           id: that.data.id,
           'bpm.taskId':that.data.lists.bpm.taskId,

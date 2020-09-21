@@ -398,4 +398,16 @@ progress() {
     }
     })
 },
+copy(e){
+  wx.setClipboardData({
+    data: e.currentTarget.dataset.cont,
+    success (res) {
+      wx.getClipboardData({
+        success (res) {
+          console.log(res.data) // data
+        }
+      })
+    }
+  })
+}
 })

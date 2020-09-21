@@ -15,13 +15,13 @@
 	</view>
 	<view class="number section">
 		<view class="s1">邮箱</view>
-		<input placeholder='请完善邮箱信息' placeholder-style="color:#bfbfbf;font-weight:normal;font-size:30rpx" maxlength="30" type="number" class="fill" bindinput="emailInput" value="{{email}}"></input>
-		<image class="arraw" src="../../images/arraw1.png"></image>
+		<input placeholder='请完善邮箱信息' placeholder-style="color:#bfbfbf;font-weight:normal;font-size:30rpx" maxlength="30" type="number" class="fill" bindinput="emailInput" value="{{email}}" disabled="true"></input>
+		<!-- <image class="arraw" src="../../images/arraw1.png"></image> -->
 	</view>
 	<view class="number section">
 		<view class="s1">手机号</view>
-		<input placeholder='请完善手机号信息' placeholder-style="color:#bfbfbf;font-weight:normal;font-size:30rpx" maxlength="11" type="number" class="fill" bindinput="phoneInput" value="{{phone}}"></input>
-		<image class="arraw" src="../../images/arraw1.png"></image>
+		<input placeholder='请完善手机号信息' placeholder-style="color:#bfbfbf;font-weight:normal;font-size:30rpx" maxlength="11" type="number" class="fill" bindinput="phoneInput" value="{{phone}}" disabled="true"></input>
+		<!-- <image class="arraw" src="../../images/arraw1.png"></image> -->
 	</view>
 	<view class="title section">
 		<view class="s1">部门</view>

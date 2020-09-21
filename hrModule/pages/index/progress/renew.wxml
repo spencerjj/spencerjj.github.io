@@ -24,6 +24,14 @@
       <text>{{lists.officeName}}</text>
     </view>
   </view>
+   <view class="title">
+    <view class="c1">
+      <text>岗位</text>
+    </view>
+    <view class="codePicker">
+      <text>{{lists.postName}}</text>
+    </view>
+  </view>
   <view class="sub">
     <view class="c1">
       <text>原合同结束日期</text>

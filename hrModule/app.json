@@ -1,15 +1,14 @@
 {
   "pages": [
     "pages/my/my",
+    "pages/index/progress/leave",
     "pages/index/inform",
     "pages/my/select",
     "pages/my/selectLists",
     "pages/my/myInfos",
     "pages/index/progress/transfer",
-    "pages/index/progress/leave",
     "pages/my/360/360Lists",
     "pages/my/360/estimate",
-    "pages/my/newFunction",
     "pages/my/360/360result",
     "pages/my/360/success",
     "pages/my/360/welcome",

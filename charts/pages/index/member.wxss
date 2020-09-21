@@ -14,9 +14,9 @@ page{
   height: 720rpx;
   transition:0.5s linear;
   background-color: #f7f7f7f7;
-  background: url('http://m.qpic.cn/psc?/V117fsiB1u3hJS/bqQfVz5yrrGYSXMvKr.cqVBFTrn5OJOtsPWO2n8v1HWHAPV76tNRbci8uCSwW7DoSSJqyWP8ZGLMfMiAZrVaADiCacfVJMUvLugKIJYJFyM!/b&bo=OASgBQAAAAABB7k!&rf=viewer_4');
+  background: url('http://tiebapic.baidu.com/forum/w%3D580/sign=7d549ba76bd98d1076d40c39113eb807/501cb21bb051f819d5910e11cdb44aed2f73e7c7.jpg');
   background-size: 100%;
-  background-position: bottom;
+  background-position: top;
   overflow-x: hidden;
 }
 .topHide{

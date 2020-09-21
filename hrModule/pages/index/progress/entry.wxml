@@ -9,13 +9,20 @@
 			<image src="../../../images/file.png" bindtap="copy" data-cont="{{lists.name}}"></image>
 		</view>
 	</view>
+		<view class="title">
+		<view class="c1">
+			<text>员工性别</text>
+		</view>
+		<view class="codePicker">
+			<text>{{lists.sex==1?'男':'女'}}</text>
+		</view>
+	</view>
 	<view class="title">
 		<view class="c1">
 			<text>单位</text>
 		</view>
 		<view class="codePicker">
 			<text>{{lists.companyName}}</text>
-			<image src="../../../images/file.png" bindtap="copy" data-cont="{{lists.companyName}}"></image>
 		</view>
 	</view>
 	<view class="title">
@@ -33,6 +40,7 @@
 		</view>
 		<view class="codePicker">
 			<text>{{lists.officeName}}</text>
+			<image src="../../../images/file.png" bindtap="copy" data-cont="{{lists.officeName}}"></image>
 		</view>
 	</view>
 	<view class="sub">
@@ -41,6 +49,7 @@
 		</view>
 		<view class="codePicker">
 			<text>{{lists.postName}}</text>
+			<image src="../../../images/file.png" bindtap="copy" data-cont="{{lists.postName}}"></image>
 		</view>
 	</view>
 	<view class="title">
@@ -69,15 +78,21 @@
 			<text>{{lists.conStartDate}}</text>
 		</view>
 	</view>
+		<view class="title" style="z-index:1 !important" wx:if="{{oaEmployEntry.bpm.activityId != 'anth'}}">
+		<view class="c1">
+			<text>OA安全级别<text style="color:red;font-size:25rpx">*</text></text>
+		</view>
+			<input class="c1Input"  placeholder='请输入...' placeholder-style='color:#af9d7f;padding:0;margin:0'  bindinput='hinput4' value="{{safeLevel}}" disabled="{{current==1&&lists.bpm.activityId=='DeptManager'?false:true}}"></input>
+	</view>
 	<view class="title">
 		<view class="c1">
-			<text>是否开通oa<text style="color:red;font-size:25rpx">*</text></text>
+			<text>是否开通OA<text style="color:red;font-size:25rpx">*</text></text>
 		</view>
-		<picker value="{{index1}}" range="{{array1}}" bindchange="pickChange1"  disabled="{{current==1&&lists.bpm.activityId=='DeptManager'?false:true}}">
-			<view class="timePicker {{ifoa?'':'pickerError'}}">
+		<picker value="{{index1}}" range="{{array1}}" bindchange="pickChange1"  disabled="true">
+			<view class="timePicker">
 				<text wx:if="{{index1==3}}" style="color:#af9d7f">请选择...</text>
 				{{array1[index1]}}
-				<image class="arraw" src="http://img.gagctv.com/17112314452261654"></image>
+				<!-- <image class="arraw" src="http://img.gagctv.com/17112314452261654"></image> -->
 			</view>
 		</picker>
 	</view>
@@ -105,7 +120,7 @@
 			</view>
 		</picker>
 	</view>
-	<view class="title">
+	<!-- <view class="title">
 		<view class="c1">
 			<text>是否参加培训<text style="color:red;font-size:25rpx">*</text> </text>
 		</view>
@@ -116,7 +131,7 @@
 				<image class="arraw" src="http://img.gagctv.com/17112314452261654"></image>
 			</view>
 		</picker>
-	</view>
+	</view> -->
 	<view class="title" style="z-index:1 !important" wx:if="{{oaEmployEntry.bpm.activityId != 'anth'}}">
 		<view class="c1">
 			<text>OA密码<text style="color:red;font-size:25rpx">*</text></text>

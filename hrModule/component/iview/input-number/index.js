@@ -17,6 +17,9 @@ function addNum (num1, num2) {
 }
 
 Component({
+    options: {
+        addGlobalClass: true,
+      },
     externalClasses: ['i-class'],
 
     properties: {

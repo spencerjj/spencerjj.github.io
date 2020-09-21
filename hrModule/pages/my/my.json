@@ -4,6 +4,5 @@
   "navigationBarBackgroundColor": "#69bcf9",
   "enablePullDownRefresh": true,
   "usingComponents": {
-    "i-notice-bar":"../../component/iview/notice-bar/index"
   }
 }

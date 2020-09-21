@@ -63,3 +63,16 @@ ec-canvas {
 .second{
   background:#ebeff7
 }
+.chartsDetail{
+  width: 90%;
+  height: 60rpx;
+  line-height: 60rpx;
+  border-radius: 10rpx;
+  font-size: 35rpx;
+  font-weight: 200;
+  text-align: center;
+  background: #c7eff2;
+  margin-top:40rpx;
+  margin-bottom:20rpx;
+  margin-left: 5%;
+}

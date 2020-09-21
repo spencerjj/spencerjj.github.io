@@ -1,7 +1,7 @@
 {
   "pages": [
-    "pages/index/member",
     "pages/index/welcome",
+    "pages/index/member",
     "pages/bar/index",
     "pages/move",
     "pages/index/charts",

@@ -179,12 +179,11 @@ function request(requestMethod, host, path, paramsLocation, params, security_typ
       header: header,
       data: formData,
       success: function(res) {
-        console.log(res)
+        // console.log(res)
         if (DEBUG) console.log("服务器返回数据：", res.data);
         if (showLoading) wx.hideLoading();
 
         var code = res.data.result;
-        console.log(code == 'true'||code=='login')
         if (code == 'true'||code=='login') {
           resolve(res.data);
         } 

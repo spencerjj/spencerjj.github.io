@@ -6,8 +6,17 @@
     </view>
     <view class="codePicker">
       <text>{{lists.empName}}</text>
+      <image src="../../../images/file.png" bindtap="copy" data-cont="{{lists.empName}}"></image>
     </view>
   </view>
+  	<view class="title">
+		<view class="c1">
+			<text>工号</text>
+		</view>
+		<view class="codePicker">
+			<text>{{lists.empNo}}</text>
+		</view>
+	</view>
   <view class="title">
     <view class="c1">
       <text>调出公司</text>
@@ -66,6 +75,7 @@
     </view>
     <view class="codePicker">
       <text>{{lists.officeNameIn}}</text>
+      <image src="../../../images/file.png" bindtap="copy" data-cont="{{lists.officeNameIn}}"></image>
     </view>
   </view>
   <view class="title">
@@ -82,9 +92,17 @@
     </view>
     <view class="codePicker">
       <text>{{lists.managerNameIn}}</text>
+      <image src="../../../images/file.png" bindtap="copy" data-cont="{{lists.managerNameIn}}"></image>
     </view>
   </view>
-
+    <view class="title">
+    <view class="c1">
+      <text>转岗日期</text>
+    </view>
+    <view class="codePicker">
+      <text>{{lists.transferDate}}</text>
+    </view>
+  </view>
 
   <view class="title" style="z-index:1 !important"  wx:if="{{current==1&&can}}">
     <view class="c1">

@@ -480,5 +480,17 @@ getToday(){
     }
     var currentdate = year + seperator1 + month + seperator1 + strDate;
     return currentdate;
+  },
+  copy(e){
+    wx.setClipboardData({
+      data: e.currentTarget.dataset.cont,
+      success (res) {
+        wx.getClipboardData({
+          success (res) {
+            console.log(res.data) // data
+          }
+        })
+      }
+    })
   }
 })

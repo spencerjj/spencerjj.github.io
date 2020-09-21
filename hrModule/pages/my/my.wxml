@@ -77,7 +77,7 @@
 		<view class="addtion"><text>我的标签</text><image src="../../images/arraw.png" class="arraw"></image></view> -->
 	</view>
 </view>
-<view class="version">当前版本: V{{appVersion}}</view>
+<view class="version">当前版本: V {{appVersion}}</view>
 <i-spin fix wx:if="{{loadAll}}"></i-spin>
 <i-message id="message" />
 <i-toast id="toast" />
