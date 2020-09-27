@@ -1,2 +1,90 @@
-<!--pages/index/from.wxml-->
-<text>pages/index/from.wxml</text>
+<view class="container">
+	<!-- <picker mode="date" fields="month" value="{{date}}" start="2015-09" end="{{today}}" bindchange="bindDateChange">
+			<view class="picker">
+				<text class="section__title">日期选择:　</text>{{date}}
+				<image class="arraw1" src="/images/arraw3.png"></image>
+			</view>
+		</picker> -->
+	<view class="topSelection">
+		<view class="{{mark==0?'sactive':''}}" bindtap="changeYear" data-id='0'>本年</view>
+		<view class="{{mark==1?'sactive':''}}" bindtap="changeYear" data-id='1'>同期</view>
+	</view>
+	<view class="newData">
+		<view class="section" wx:for="{{showTopData}}" wx:key="index">
+			<view class="stitle">{{item.name}}</view>
+			<view class="sdata">{{item.money}}</view>
+			<view class="stype">万元</view>
+		</view>
+	</view>
+	<!-- <view class="top">
+		<view class="topChild">
+			<view class="topTitle">
+				南区销售额
+			</view>
+			<view class="topCon">
+				13.97万元
+			</view>
+		</view>
+		<view class="topChild">
+			<view class="topTitle">
+				北区销售额
+			</view>
+			<view class="topCon">
+				25.12万元
+			</view>
+		</view>
+		<view class="topChild">
+			<view class="topTitle">
+				东区销售额
+			</view>
+			<view class="topCon">
+				43.31万元
+			</view>
+		</view>
+		<view class="topChild">
+			<view class="topTitle">
+				西区销售额
+			</view>
+			<view class="topCon">
+				45.23万元
+			</view>
+		</view>
+	</view> -->
+	<view style="width:100%;height:5rpx;background:#666"></view>
+	<view class="content">
+		<view class="first">
+			<view class="section1">
+				<view class="picker1">
+					<text class="section__title">区域统计</text>
+				</view>
+				<!-- <picker mode="date" fields="year" value="{{year}}" start="2015" end="{{thisYear}}">
+					<view class="picker1">
+						<text class="section__title">区域统计</text>
+						{{year}}年
+						<image class="arraw1" src="/images/arraw3.png"></image>
+					</view>
+				</picker> -->
+			</view>
+			<view class="mark">单位：万元</view>
+			<canvas canvas-id="canvas1" class="canvas"></canvas>
+			<view class="mark">单位：万元</view>
+			<canvas canvas-id="canvas2" class="canvas"></canvas>
+			<view class="mark">单位：万元</view>
+			<canvas canvas-id="canvas3" class="canvas"></canvas>
+			<view class="mark" wx:if="{{chartList.length>=4}}">单位：万元</view>
+			<canvas canvas-id="canvas4" class="canvas" wx:if="{{chartList.length>=4}}"></canvas>
+			<view class="mark" wx:if="{{chartList.length>=5}}">单位：万元</view>
+			<canvas canvas-id="canvas5" class="canvas" wx:if="{{chartList.length>=5}}"></canvas>
+			<view class="mark" wx:if="{{chartList.length>=6}}">单位：万元</view>
+			<canvas canvas-id="canvas6" class="canvas" wx:if="{{chartList.length>=6}}"></canvas>
+			<view class="mark" wx:if="{{chartList.length>=7}}">单位：万元</view>
+			<canvas canvas-id="canvas7" class="canvas" wx:if="{{chartList.length>=7}}"></canvas>
+			<view class="mark" wx:if="{{chartList.length>=8}}">单位：万元</view>
+			<canvas canvas-id="canvas8" class="canvas" wx:if="{{chartList.length>=8}}"></canvas>
+			<view class="mark" wx:if="{{chartList.length>=9}}">单位：万元</view>
+			<canvas canvas-id="canvas9" class="canvas" wx:if="{{chartList.length>=9}}"></canvas>
+			<view class="mark" wx:if="{{chartList.length>=10}}">单位：万元</view>
+			<canvas canvas-id="canvas10" class="canvas" wx:if="{{chartList.length>=10}}"></canvas>
+		</view>
+	</view>
+</view>

@@ -1,5 +1,5 @@
 page{
-  background-color: #f7f7f7;
+  background-color: #0E1C3E;
 }
 ec-canvas {
   width: 100%;
@@ -75,4 +75,10 @@ ec-canvas {
   margin-top:40rpx;
   margin-bottom:20rpx;
   margin-left: 5%;
+}
+.rise{
+  color:red
+}
+.down{
+  color:#4ecb74
 }

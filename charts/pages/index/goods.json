@@ -1,3 +1,6 @@
 {
-  "usingComponents": {}
+  "navigationBarTitleText": "商品看板",
+  "navigationBarTextStyle": "white",
+  "navigationBarBackgroundColor": "#102757",
+  "enablePullDownRefresh": false
 }

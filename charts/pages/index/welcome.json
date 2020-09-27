@@ -1,6 +1,6 @@
 {
-  "navigationBarTitleText": "企业数据中心",
-  "navigationBarTextStyle": "black",
-  "navigationBarBackgroundColor": "#fff",
+  "navigationBarTitleText": "蓝豹数据中心",
+  "navigationBarTextStyle": "white",
+  "navigationBarBackgroundColor": "#102757",
   "enablePullDownRefresh": false
 }

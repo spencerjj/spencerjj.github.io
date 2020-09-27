@@ -144,45 +144,14 @@ Page({
   onShareAppMessage: function() {
 
   },
-  onStoreSelected(){
-   this.setData({
-    storeShow:false,
-    typeShow:true
-   })
+  onStoreSelected(e){
+    wx.switchTab({
+      url: 'index',
+    })
   },
-  onGoodsSelected(){
-    this.setData({
-     goodsShow:false,
-      typeShow:true
-    })
-   },
-   onTypeSelected(e){
-    var index = e.currentTarget.dataset.index
-    wx.requestSubscribeMessage({
-      tmplIds: ['-RCILlm7nALXM6jxiYNiZuTbf6D5LBCwYPB-K6qDNn4'],
-      success (res) {
-        if(index==1){
-          wx.navigateTo({
-            url: 'index1',
-          })
-        }else{
-          wx.navigateTo({
-            url: 'index'
-          })
-        }
-        console.log(res)
-      },
-      fail(res){
-        wx.showModal({
-          title: '订阅失败',
-          content: res.errMsg,
-          showCancel: false,
-          confirmText: '知道了',
-          confirmColor: '#1890FF'
-        })
-      }
-    })
 
+   onTypeSelected(e){
+ 
 
    },
    back(e){

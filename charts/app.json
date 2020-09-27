@@ -1,53 +1,46 @@
 {
-  "pages": [
+  "pages": [ 
     "pages/index/welcome",
     "pages/index/member",
+    "pages/index/index",
+    "pages/index/select",
+    "pages/index/area",
     "pages/bar/index",
     "pages/move",
     "pages/index/charts",
-    "pages/index/index",
-    "pages/index/area",
-    "pages/charts/column/column",
-    "pages/index/select",
-    "pages/charts/radar/radar",
-    "pages/charts/scrollline/scrollline",
-    "pages/charts/line/line",
-    "pages/charts/pie/pie",
-    "pages/charts/ring/ring",
-    "pages/charts/area/area",
     "pages/index/from",
     "pages/index/brand",
     "pages/index/goods"
   ],
   "window": {
     "backgroundTextStyle": "light",
-    "navigationBarBackgroundColor": "#fff",
+    "navigationBarBackgroundColor": "#102757",
     "navigationBarTitleText": "WeChat",
     "navigationBarTextStyle": "black",
-    "backgroundColor": "#f3f3f3"
+    "backgroundColor": "#102757"
   },
   "tabBar": {
-    "color": "#cccccc",
-    "selectedColor": "#000000",
+    "color": "#666",
+    "selectedColor": "#cccccc",
     "borderStyle": "black",
-    "backgroundColor": "#f3f3f3",
+    "backgroundColor": "#102757",
     "list": [
       {
         "pagePath": "pages/index/index",
-        "iconPath": "images/icon1.png",
-        "selectedIconPath": "images/icon1ed.png",
-        "text": "企业看板"
+        "iconPath": "images/icon1ed.png",
+        "selectedIconPath": "images/icon1.png",
+        "text": "销售看板"
       },
       {
         "pagePath": "pages/index/member",
-        "iconPath": "images/icon2.png",
-        "selectedIconPath": "images/icon2ed.png",
+        "iconPath": "images/icon2ed.png",
+        "selectedIconPath": "images/icon2.png",
         "text": "会员看板"
       },
       {
         "pagePath": "pages/index/goods",
-        "iconPath": "images/goods.png",
-        "selectedIconPath": "images/goodsed.png",
+        "iconPath": "images/goodsed.png",
+        "selectedIconPath": "images/goods.png",
         "text": "商品看板"
       }
     ]
@@ -72,7 +65,8 @@
     "van-checkbox-group": "@vant/weapp/checkbox-group/index",
     "van-progress": "@vant/weapp/progress/index",
     "van-dropdown-menu": "@vant/weapp/dropdown-menu/index",
-    "van-dropdown-item": "@vant/weapp/dropdown-item/index"
+    "van-dropdown-item": "@vant/weapp/dropdown-item/index",
+    "van-popup": "@vant/weapp/popup/index"
   },
   "sitemapLocation": "sitemap.json"
 }

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,height=device-height,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <link rel="stylesheet" href="css/verify.css">
+  <link rel="stylesheet" href="css/dialog.css" />
+  <title>查询书籍</title>
+</head>
+<body ng-controller="myController" ng-cloak>
+    <div class="logo">
+       半山查书系统-用户版
+    </div>
+    <div class="content">
+      <input placeholder="书名" type="text" id="name" max-length="50"></input>
+      <input placeholder="书号" type="text" id="code" max-length="50" style="margin-top:20px"></input>
+      <div class="check" ng-click="check()">查询</div>
+    </div>
+ <!--    <div style="float:right;color:red;font-size:14px;height:20px;background:#c1af80;color:white;padding:0px 5px 0 5px;border-radius:5px;margin-top:5px">共{{count}}条数据</div> -->
+    <div class="cus">
+      <span class="table">
+        <span class="tr bg-w">
+          <span class="th" style="width:30%">书号</span>
+          <span class="th">书名</span>
+          <span class="th" style="width:20%">位置</span>
+          <span class="th" style="width:15%">定价</span>
+        </span>
+        <span ng-repeat='x in lists' class="tr {{$index % 2 == 0?'bg-g':'bg-w'}}" ng-if="mark==1">
+          <div class="td" style="width:30%">{{x.spCode}}</div>
+          <div class="td">{{x.spName}}</div>
+          <div class="td" style="width:20%">{{x.ckPlace}}</div>
+          <div class="td" style="width:15%">￥{{x.spSaPri}}</div>
+        </span>
+        <span class="bg-m" style="height:30px !important;display:inline-block;width:100%;text-align:center;line-height:30px"  ng-if="mark==1" ng-click='more()'>
+          <span class="td" ng-if="ismore==1">查看更多</span>
+          <span class="td" ng-if="ismore==0">到底了</span>
+        </span>
+        <img src="images/nodata.png" alt="" style="width:100%;border-radius:0 0 10px 10px" ng-if="mark==0">
+      </span>
+    </div>
+
+
+
+</body>
+<script src="js/angular.min.js"></script>
+<script src="js/jquery.2.0.0.min.js"></script>
+<script src="js/verify.js"></script>
+<script src="js/zepto.min.js"></script>
+<script src="js/dialog.min.js"></script>
+</html>

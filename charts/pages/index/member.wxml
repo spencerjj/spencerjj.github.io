@@ -1,18 +1,14 @@
-<view class="container">
+<view class="container" wx:if="{{ifTotalVip||ifVipCardCot||ifReRate||ifOldRate||ifPieData||ifAreaData||ifTwoData}}">
 	<!-- <view class="{{!ifUp?'hideBar':'showBar'}} " bindtap="up">{{!ifUp?'收起':'展开'}}
 		<image class="actionImage {{ifUp?'upHide':''}}" src="{{!ifUp?'/images/hideUp.png':'/images/downShow.png'}}"></image>
 	</view> -->
-	<view class="topCon {{ifUp?'topHide':''}}">
-		<view class="first">
+	<view class="topCon">
+		<!-- <view class="first">
 			<view class="title">数据发生时间：</view>
 			<view class="time">
-				<!-- <view class="date">
-					10/29
-				</view> -->
 				<picker mode="date" fields="day" value="{{date}}" start="{{thisYear}}-01-01" end="{{yestoday}}" bindchange="bindDateChange">
 				<view class="date">
 					{{showDate}}
-					<image class="arraw1" src="/images/arraw.png"></image>
 				</view>
 			</picker>
 				<view class="fullDate">
@@ -20,238 +16,107 @@
 					<view>星期{{week}}</view>
 				</view>
 			</view>
-		</view>
+		</view> -->
 		<view class="middle">
-			<view class="mfirst">
-				<view class="msection">
-					<view class="mtop">
-						<text class="mainTitle">会员人数</text>
+			<view class="topTitle">
+				<picker mode="date" fields="day" value="{{date}}" start="{{thisYear}}-01-01" end="{{yestoday}}"
+					bindchange="bindDateChange">
+					<view class="date">
+						数据发生日期 - {{showDate}}
+						<image class="arraw" src="/images/arraw3.png"></image>
 					</view>
-					<view class="mdata">
-						{{totalVip}}
-					</view>
-					<view class="mtime">
-						本年度
-					</view>
+				</picker>
+			</view>
+			<view class="totalTitle" wx:if="{{ifTotalVip}}">会员总数</view>
+			<view class="totalData" wx:if="{{ifTotalVip}}">
+				{{totalVip}} <image src="/images/ques.png" bindtap="showDetail" data-mark='1' style="width:40rpx;height:40rpx;vertical-align:center"></image>
+			</view>
+			<view class="newData" bindtap="showDetail">
+				<view class="section" wx:if="{{ifVipCardCot}}">
+					<view class="stitle">招新人数</view>
+					<view class="sdata">{{vipCardCot2020}}</view>
+					<view class="stype">同比：<text class="{{vipCardCompare>=0?'rise':'down'}}">{{vipCardCompare?'+':''}}{{vipCardCompare}}</text></view>
 				</view>
-				<view class="msection">
-					<view class="mtop">
-						<text class="mtitle">{{thisYear}}新招人数</text>
-						<text class="mcompare  {{(vipCardCot2020-vipCardCot2019)>0?'rise':'down'}}">{{vipCardCot2020>vipCardCot2019?'+':'-'}}{{vipCardCot2020-vipCardCot2019}}</text>
-					</view>
-					<view class="mdata">
-						{{vipCardCot2020}}
-					</view>
-					<view class="mtime">
-						本年度
-					</view>
+				<!-- <view class="section">
+						<view class="stitle">2019同期总招新人数</view>
+						<view class="sdata">{{vipCardCot2019}}</view>
+						<view class="stype">0</view>
+					</view> -->
+				<!-- <view class="section">
+						<view class="stitle">较昨日新增</view>
+						<view class="sdata">0</view>
+						<view class="stype"></view>
+					</view> -->
+				<view class="section" wx:if="{{ifVipCardCot}}">
+					<view class="stitle">招新转化率</view>
+					<view class="sdata">{{vipRate2020}}%</view>
+					<view class="stype">同比：<text class="{{(vipRate2020-vipRate2019)>=0?'rise':'down'}}">{{vipRate2020>vipRate2019?'+':''}}{{vipCompare}}%</text></view>
 				</view>
-				<view class="msection">
-					<view class="mtop">
-						<text class="mtitle">{{lastYear}}新招人数</text>
-						<text class="mcompare">0</text>
-					</view>
-					<view class="mdata">
-						{{vipCardCot2019}}
-					</view>
-					<view class="mtime">
-						去年
-					</view>
+				<view class="section" wx:if="{{ifReRate}}">
+					<view class="stitle">招新复购率</view>
+					<view class="sdata">{{reRate2020}}%</view>
+					<view class="stype">同比：<text class="{{(reRate2020-reRate2019)>=0?'rise':'down'}}">{{reRate2020>reRate2019?'+':''}}{{reCompare}}%</text></view>
+				</view>
+				<view class="section" wx:if="{{ifOldRate}}">
+					<view class="stitle">老会员回购率</view>
+					<view class="sdata">{{oldRate2020}}%</view>
+					<view class="stype">同比：<text class="{{(oldRate2020-oldRate2019)>=0?'rise':'down'}}">{{oldRate2020>oldRate2019?'+':''}}{{oldCompare}}%</text></view>
 				</view>
 			</view>
-			<view class="mfirst" style="margin-top:40rpx">
-				<view class="msection">
-					<view class="mtop">
-						<text class="mtitle">招新转化率</text>
-						<text class="mcompare {{(vipRate2020-vipRate2019)>0?'rise':'down'}}">{{vipRate2020>vipRate2019?'+':''}}{{(vipRate2020-vipRate2019)}}.00%</text>
-					</view>
-					<view class="mdata">
-						{{vipRate2020}}%
-					</view>
-					<view class="mtime">
-						本年度
-					</view>
-				</view>
-				<view class="msection">
-					<view class="mtop">
-						<text class="mtitle">招新复购率</text>
-						<text class="mcompare {{(reRate2020-reRate2019)>0?'rise':'down'}}">{{reRate2020>reRate2019?'+':''}}{{(reRate2020-reRate2019)}}.00%</text>
-					</view>
-					<view class="mdata">
-						{{reRate2020}}%
-					</view>
-					<view class="mtime">
-						本年度
-					</view>
-				</view>
-				<view class="msection">
-					<view class="mtop">
-						<text class="mtitle">老会员回购率</text>
-						<text class="mcompare {{(oldRate2020-oldRate2019)>0?'rise':'down'}}">{{oldRate2020>oldRate2019?'+':'-'}}{{(oldRate2020-oldRate2019)}}.00%</text>
-					</view>
-					<view class="mdata">
-						{{oldRate2020}}%
-					</view>
-					<view class="mtime">
-						本年度
-					</view>
-				</view>
-			</view>
+
 		</view>
-		<!-- <view class="fourth section" bindtap="toPage" hover-class="hover1" hover-stay-time=".5s">
-			<view class="fourth1">
-				<view class="title">
-					会员人数
-				</view>
-				<view class="data">
-					244602
-				</view>
-			</view>
-		</view>
-		<view class="third section" bindtap="toPage" hover-class="hover1" hover-stay-time=".5s">
-			<view class="third1">
-				<view class="title">
-					2020招新人数
-				</view>
-				<view class="data">
-					24642 <text style="font-size:30rpx">(新增1461)</text>
-				</view>
-			</view>
-			<view class="third2">
-				<view class="title">
-					2019招新人数
-				</view>
-				<view class="data">
-					23181
-				</view>
-			</view>
-		</view>
-		<view class="btm">
-			<view class="sixth section" bindtap="toPage" hover-class="hover1" hover-stay-time=".5s">
-				<view class="sixth1">
-					<view class="title">
-						招新转化率
-					</view>
-					<view class="data">
-						63.12%
-					</view>
-				</view>
-			</view>
-			<view class="seventh section" bindtap="toPage" hover-class="hover1" hover-stay-time=".5s">
-				<view class="seventh1">
-					<view class="title">
-						同年对比
-					</view>
-					<view class="data rise">
-						-27.10%
-					</view>
-				</view>
-			</view>
-		</view>
-		<view class="btm">
-			<view class="sixth section" bindtap="toPage" hover-class="hover1" hover-stay-time=".5s">
-				<view class="sixth1">
-					<view class="title">
-						招新复购率
-					</view>
-					<view class="data">
-						36.02%
-					</view>
-				</view>
-			</view>
-			<view class="seventh section" bindtap="toPage" hover-class="hover1" hover-stay-time=".5s">
-				<view class="seventh1">
-					<view class="title">
-						同年对比
-					</view>
-					<view class="data">
-						0.52%
-					</view>
-				</view>
-			</view>
-		</view>
-		<view class="btm">
-			<view class="sixth section" bindtap="toPage" hover-class="hover1" hover-stay-time=".5s">
-				<view class="sixth1">
-					<view class="title">
-						老会员回购率
-					</view>
-					<view class="data">
-						23.47%
-					</view>
-				</view>
-			</view>
-			<view class="seventh section" bindtap="toPage" hover-class="hover1" hover-stay-time=".5s">
-				<view class="seventh1">
-					<view class="title">
-						同年对比
-					</view>
-					<view class="data rise">
-						-2.93%
-					</view>
-				</view>
-			</view>
-		</view> -->
 	</view>
-	<view class="incoming">
-		<!-- <view class="section">
-			<picker mode="date" fields="month" value="{{date}}" start="2015-09" end="{{today}}" bindchange="bindDateChange">
-				<view class="picker">
-					<text class="section__title">实收占比　</text>{{date}}
-					<image class="arraw1" src="/images/arraw.png"></image>
-				</view>
-			</picker>
-		</view> -->
+	<view class="incoming" wx:if="{{ifPieData}}">
 		<view class="chartsTitle">
-			实收占比<text>　　全部</text>
+			销售占比
 		</view>
-		<view class="chartsDetail">{{thisYear}}实收占比</view>
-		<canvas canvas-id="pieCanvas2020" class="canvas" style="height:300px"></canvas>
-		<view class="chartsDetail">{{lastYear}}实收占比</view>
-		<canvas canvas-id="pieCanvas2019" class="canvas" style="height:300px"></canvas>
+		<view class="chartsDetail">{{thisYear}}销售占比</view>
+		<canvas canvas-id="pieCanvas2020" class="canvas" style="height:300px;margin-left:-50rpx"></canvas>
+		<view class="chartsDetail">{{lastYear}}销售占比</view>
+		<canvas canvas-id="pieCanvas2019" class="canvas" style="height:300px;margin-left:-50rpx"></canvas>
 	</view>
-	<view style="width:100%;height:15rpx;background:#eee;margin-bottom:30rpx"></view>
-	<view class="saleRate">
-		<view class="chartsTitle">
-			区域会员销售<text>　　全部</text>
+	<view style="width:100%;height:5rpx;background:#666;margin-bottom:30rpx"  wx:if="{{ifPieData}}"></view>
+	<view class="saleRate" wx:if="{{ifAreaData}}">
+		<view class="chartsDetail" bindtap="toDetail">区域会员销售 <image src="/images/check.png" class="check"></image>
 		</view>
-		<!-- <view class="section">
-			<picker mode="date" fields="month" value="{{date}}" start="2015-09" end="{{today}}" bindchange="bindDateChange">
-				<view class="picker" style="width:65%">
-					<text class="section__title">区域会员销售　</text>{{date}}
-					<image class="arraw1" src="/images/arraw.png"></image>
-				</view>
-			</picker>
-		</view> -->
-		<view class="chartsDetail">会员销售占比</view>
-		<view class="mark">单位：人数</view>
+		<view class="mark">单位：万元</view>
 		<canvas canvas-id="areaCanvas" class="canvas" bindtouchstart="toPage" data-mark="area"></canvas>
-		<view class="toDetail" bindtap="toDetail">点击查看详细数据</view>
 	</view>
-	<view style="width:100%;height:15rpx;background:#eee"></view>
-	<view class="saleTrend">
+	<view style="width:100%;height:5rpx;background:#666" wx:if="{{ifAreaData}}"></view>
+	<view class="saleTrend" wx:if="{{ifTwoData}}">
 		<view class="chartsTitle">
-			两年会员销售趋势<text>　　全部</text>
+			两年会员销售及占比
 		</view>
-		<!-- <view class="section">
-			<picker mode="date" fields="month" value="{{date}}" start="2015-09" end="{{today}}" bindchange="bindDateChange">
-				<view class="picker" style="width:76%">
-					<text class="section__title">两年会员销售趋势　</text>{{date}}
-					<image class="arraw1" src="/images/arraw.png"></image>
-				</view>
-			</picker>
-		</view> -->
-		<view class="trend2020">
-			<view class="chartsDetail">{{thisYear}}销售趋势</view>
-			<view class="mark">单位：人数</view>
+		<view class="trend2020" style="height:{{trend2020}}rpx">
+			<view class="chartsDetail">{{thisYear}}会员销售及占比</view>
+			<!-- <view class="mark">单位：万元　<image src="/images/ques.png" bindtap="showPopup" data-mark='trend2020'></image></view> -->
+			<view class="mark">单位：万元 </view>
 			<canvas canvas-id="columnCanvas2020" class="canvas c1"></canvas>
-			<canvas canvas-id="lineCanvas2020" disable-scroll="true" class="canvas c2" bindtouchstart="touchHandler2020"></canvas>
+			<canvas canvas-id="lineCanvas2020" class="canvas c2" bindtouchstart="touchHandler2020"></canvas>
+			<view style="color:#c7eff2;height:100rpx;font-size:25rpx;margin-top:430rpx" wx:if="{{trend2020Des}}">
+				*折线图为占比，柱状图为人数折线图为占比，柱状图为人数折线图为占比，柱状图为人数折线图为占比，柱状图为人数折线图为占比，柱状图为人数折线图为占比，柱状图为人数折线图为占比，柱状图为人数折线图为占比，柱状图为人数折线图为占比，柱状图为人数
+			</view>
 		</view>
-		<view class="trend2019">
-			<view class="chartsDetail">{{lastYear}}销售趋势</view>
-			<view class="mark">单位：人数</view>
+
+		<view class="trend2019" style="height:{{trend2019}}rpx">
+			<view class="chartsDetail">{{lastYear}}会员销售及占比</view>
+			<!-- <view class="mark">单位：万元　<image src="/images/ques.png" bindtap="showPopup" data-mark='trend2019'></image></view> -->
+			<view class="mark">单位：万元 </view>
 			<canvas canvas-id="columnCanvas2019" class="canvas c1"></canvas>
-			<canvas canvas-id="lineCanvas2019" disable-scroll="true" class="canvas c2" bindtouchstart="touchHandler2019"></canvas>
+			<canvas canvas-id="lineCanvas2019" class="canvas c2" bindtouchstart="touchHandler2019"></canvas>
+			<view style="color:#c7eff2;height:100rpx;font-size:25rpx;margin-top:430rpx" wx:if="{{trend2019Des}}">
+				*折线图为占比，柱状图为人数折线图为占比，柱状图为人数折线图为占比，柱状图为人数折线图为占比，柱状图为人数折线图为占比，柱状图为人数折线图为占比，柱状图为人数折线图为占比，柱状图为人数折线图为占比，柱状图为人数折线图为占比，柱状图为人数
+			</view>
 		</view>
 	</view>
 </view>
+<view style="width:100%;text-align:center;font-size:40rpx;color:white;margin-top:400rpx;font-weight:bolder" wx:else>
+	<image src="/images/nodata.png" style="width:298rpx;height:206rpx"></image>
+	<view style="margin-top:30rpx;margin-left:-10rpx">暂无数据权限</view>
+</view>
+<van-popup show="{{ show }}" bind:close="onClose" position="bottom"
+  custom-style="height: 30%;background:#fff;">
+	<view style="width:90%;margin-left:5%;color:#fff;margin-top:20rpx">
+		{{describe}}
+	</view>
+</van-popup>

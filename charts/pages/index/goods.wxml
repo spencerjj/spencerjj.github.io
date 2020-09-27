@@ -1,2 +1,64 @@
 <!--pages/index/goods.wxml-->
-<text>即将开放，敬请期待......</text>
+<!-- <view style="width:100%;text-align:center;font-size:40rpx;color:white;margin-top:500rpx">即将上线，敬请期待......</view> -->
+<view class="container">
+	<view class="topCon">
+		<!-- <view class="first">
+			<view class="title">数据发生时间：</view>
+			<view class="time">
+				<picker mode="date" fields="day" value="{{date}}" start="{{thisYear}}-01-01" end="{{yestoday}}" bindchange="bindDateChange">
+				<view class="date">
+					{{showDate}}
+				</view>
+			</picker>
+				<view class="fullDate">
+					<view>{{today}}</view>
+					<view>星期{{week}}</view>
+				</view>
+			</view>
+		</view> -->
+		<view class="middle">
+			<view class="topTitle"><picker mode="date" fields="day" value="{{date}}" start="{{thisYear}}-01-01" end="{{yestoday}}" bindchange="bindDateChange">
+				<view class="date">
+					数据发生日期 - {{showDate}}
+					<image class="arraw" src="/images/arraw3.png"></image>
+				</view>
+			</picker></view>
+			<view class="totalTitle">会员总数</view>
+			<view class="totalData">
+				{{totalVip}}
+			</view>
+			<view class="newData">
+					<view class="section">
+						<view class="stitle">2020总招新人数</view>
+						<view class="sdata">{{vipCardCot2020}}</view>
+						<view class="stype">同比：<text class="{{(vipCardCot2020-vipCardCot2019)>=0?'rise':'down'}}"> {{vipCardCot2020>vipCardCot2019?'+':''}}{{(vipCardCot2020-vipCardCot2019)}}</text></view>
+					</view>
+					<!-- <view class="section">
+						<view class="stitle">2019同期总招新人数</view>
+						<view class="sdata">{{vipCardCot2019}}</view>
+						<view class="stype">0</view>
+					</view> -->
+					<!-- <view class="section">
+						<view class="stitle">较昨日新增</view>
+						<view class="sdata">0</view>
+						<view class="stype"></view>
+					</view> -->
+					<view class="section">
+						<view class="stitle">招新转化率</view>
+						<view class="sdata">{{vipRate2020}}%</view>
+						<view class="stype">同比：<text class="{{(vipRate2020-vipRate2019)>=0?'rise':'down'}}"> {{vipRate2020>vipRate2019?'+':''}}{{vipCompare}}%</text></view>
+					</view>
+					<view class="section">
+						<view class="stitle">招新复购率</view>
+						<view class="sdata">{{reRate2020}}%</view>
+						<view class="stype">同比：<text class="{{(reRate2020-reRate2019)>=0?'rise':'down'}}"> {{reRate2020>reRate2019?'+':''}}{{reCompare}}%</text></view>
+					</view>
+					<view class="section">
+						<view class="stitle">老会员回购率</view>
+						<view class="sdata">{{oldRate2020}}%</view>
+						<view class="stype">同比：<text class="{{(oldRate2020-oldRate2019)>=0?'rise':'down'}}"> {{oldRate2020>oldRate2019?'+':''}}{{oldCompare}}%</text></view>
+					</view>
+      </view>
+    </view>
+  </view>
+</view>

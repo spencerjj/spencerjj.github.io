@@ -2,8 +2,7 @@
   <text slot="kun">锟锟</text>
   <text slot="shuai">帅</text>
 </starsTemplate> -->
-<view class='title'>你的权限: HRBP</view>
-<view class='tip'>请选择门店</view>
+<view class='tip'>请选择公司</view>
 
 <van-transition
   show="{{ storeShow }}"
@@ -12,7 +11,7 @@
 >
 <view class="storeList">
   <view class='info-box' wx:for="{{storeList}}" data-index="{{index}}" bindtap='onStoreSelected' wx:key="index" hover-class='hover1' hover-stay-time='50'>
-    <image class='storeIcon' src='/images/profile.png'></image>
+    <image class='storeIcon' src='/images/logo2.png'></image>
     <view class='storeInfo'>
       <view class='storeName'>{{item.storeName}}</view>
       <!-- <view class='storeAdmin'>导购: ***</view> -->
@@ -45,7 +44,7 @@
 </view>
 <van-button plain icon="exchange" type="info" class="back" bind:click="back" data-index="2" custom-style="color:#5cadff;border-color:#5cadff;font-size:34rpx">返回</van-button>
 </van-transition> -->
-<van-transition
+<!-- <van-transition
   show="{{ typeShow }}"
   name="fade-left"
  class="goods">
@@ -64,4 +63,4 @@
   </view>
 </view>
 <van-button plain icon="exchange" type="info" class="back" bind:click="back" data-index="3" custom-style="color:#5cadff;border-color:#5cadff;font-size: 34rpx">返回</van-button>
-</van-transition>
+</van-transition> -->

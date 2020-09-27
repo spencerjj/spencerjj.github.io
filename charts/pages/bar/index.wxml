@@ -1,14 +1,15 @@
-<view class="chartsDetail">区域会员销售占比</view>
+<view class="chartsDetail">区域会员销售(万元)</view>
 <view class="container">
-	<ec-canvas id="mychart-dom-bar" canvas-id="mychart-bar" ec="{{ ec }}"></ec-canvas>
+	<ec-canvas id="mychart-dom-bar" canvas-id="mychart-bar" ec="{{ ec1 }}"></ec-canvas>
+	<!-- <ec-canvas id="mychart-dom-line" canvas-id="mychart-line" ec="{{ ec2 }}"></ec-canvas> -->
 </view>
 <view class="table">
 	<view class="th head">
 		<view class="th1">区域</view>
 		<view class="th1">年度</view>
-		<view class="th1">销售额</view>
-		<view class="th1">销售占比</view>
-		<view class="th1">增幅</view>
+		<view class="th1">销售额(万)</view>
+		<view class="th1">销售份额</view>
+		<view class="th1">增幅(万)</view>
 	</view>
 	<view  wx:for="{{tableDate}}" class="th {{index%2==0?'first':'second'}}">
 		<view class="th1">{{item.areaName}}</view>
@@ -30,7 +31,7 @@
 				{{item.rate2019}}%
 			</view>
 		</view>
-		<view class="th1">
+		<view class="th1 {{item.compare>=0?'rise':'down'}}">
 			{{item.compare}}
 		</view>
 	</view>

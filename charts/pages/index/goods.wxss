@@ -1,3 +1,259 @@
 page{
-  background: #f3f3f3;
+  background-color: #102757;
+  font-family: Arial !important;
+
+}
+.canvas{
+  width: 100%;
+}
+@media screen and (max-width:320){
+
+  .canvas{
+    width: 98% !important;
+  }
+
+}
+.container{
+  overflow-x: hidden;
+}
+.topCon{
+  border-bottom: 5rpx solid #666;
+  padding-bottom: 50rpx;
+  overflow:hidden;
+  min-height: 800rpx;
+  transition:0.5s linear;
+  /* background: url('http://tiebapic.baidu.com/forum/w%3D580/sign=7d549ba76bd98d1076d40c39113eb807/501cb21bb051f819d5910e11cdb44aed2f73e7c7.jpg'); */
+  background-size: 100%;
+  background-position: top;
+  overflow-x: hidden;
+}
+.topHide{
+  height:0;
+  padding-bottom: 0;
+}
+.title{
+  color:white;
+  font-weight: bolder;
+  font-size: 28rpx;
+}
+.first{
+  width: 100%;
+  padding-left: 5%;
+  height: 190rpx;
+  padding-top: 20rpx;
+}
+.first .time{
+  height: 105rpx;
+  margin-top: 10rpx;
+  display: flex;
+  position: relative;
+}
+.first .time .date{
+  font-size: 110rpx;
+  font-weight: 900;
+  color:#53e0f3;
+  /* float: left; */
+}
+.first .time .fullDate{
+  font-size: 23rpx;
+  font-weight: bolder;
+  color:#fff;
+  margin-top: 40rpx;
+  margin-left: 30rpx;
+}
+.hideBar{
+  position: absolute;
+  top:30rpx;right:30rpx;
+  border:2rpx solid #46BDCD;
+  font-size: 28rpx;
+  width: 130rpx;
+  text-align: center;
+  border-radius: 10rpx;
+  color:#46BDCD;
+}
+.hideBar image{
+  width: 30rpx;
+  height: 20rpx;
+  transition: linear .2s;
+}
+.showBar{
+  position: fixed;
+  top:30rpx;right:30rpx;
+  border:2rpx solid #46BDCD;
+  font-size: 28rpx;
+  width: 130rpx;
+  text-align: center;
+  border-radius: 10rpx;
+  background: #46BDCD;
+  color:#fff;
+}
+.actionImage{
+  width: 30rpx;
+  height: 20rpx;
+  transition: linear .2s;
+}
+.upHide{
+  transform:rotate(180deg);
+}
+.second{
+  width: 100%;
+  color:#fff;
+  display: flex;
+  padding-left: 5%;
+  padding-top:15rpx;
+}
+/* .section{
+  height: 115rpx;
+  box-shadow:0px 0px 3px 0px rgba(0,0,0,0.2);
+  background:white;
+  position: relative;
+} */
+.data{
+  font-size:60rpx;
+  color:#46BDCD;
+  font-weight: 900;
+}
+.second1{
+  width: 40%;
+}
+.second2{
+  width: 25%;
+  text-align: right;
+}
+.second3{
+  text-align: right;
+  width: 25%;
+}
+.third{
+  width: 100%;
+  color:#fff;
+  display: flex;
+  padding-left: 5%;
+  padding-top:15rpx;
+  margin-top: 30rpx;
+}
+.third1{
+  width: 45%;
+}
+.third2{
+  width: 45%;
+  text-align: right;
+}
+
+.fourth{
+  width: 100%;
+  color:#fff;
+  display: flex;
+  padding-top:15rpx;
+  /* margin-top: 30rpx; */
+}
+.fourth1{
+  width: 100%;
+  text-align: center;
+}
+
+.fifth{
+  width: 100%;
+  color:#fff;
+  display: flex;
+  padding-left: 5%;
+  padding-top:15rpx;
+  margin-top: 30rpx;
+}
+.fifth1{
+  width: 45%;
+}
+.fifth2{
+  width: 45%;
+  text-align: right;
+}
+.middle{
+  width: 94%;
+  margin-left: 3%;
+  min-height: 800rpx;
+  box-sizing: border-box;
+  margin-top: 20rpx;
+} 
+.topTitle{
+  font-size: 35rpx;
+  color:white;
+  width: 100%;
+  text-align: center;
+  padding-bottom:20rpx
+}
+.totalTitle{
+  text-align: center;
+  font-size: 38rpx;
+  color:#fff
+}
+.totalData{
+  font-size: 100rpx;
+  text-align: center;
+  color:#96D2DA
+}
+.newData{
+  display: flex;
+  margin-top: 70rpx;
+  flex-wrap: wrap;
+}
+.section{
+  width: 48%;
+  height: 250rpx;
+  background-color: #1e315e;
+  text-align: center;
+  margin-top: 30rpx;
+}
+.section:nth-child(2n){
+  margin-left: 4%;
+}
+.section:nth-child(1){
+  border-top:6rpx solid #E3D383;
+  color:#E3D383
+}
+.section:nth-child(2){
+  border-top:6rpx solid #7BBEE6;
+  color:#7BBEE6
+}
+.section:nth-child(3){
+  border-top:6rpx solid #75AE88;
+  color:#75AE88
+}
+.section:nth-child(4){
+  border-top:6rpx solid #B37474;
+  color:#B37474
+}
+.section:nth-child(5){
+  border-top:6rpx solid #f4b374;
+  color:#f4b374
+}
+.section:nth-child(6){
+  border-top:6rpx solid #51bdbd;
+  color:#51bdbd
+}
+
+.stitle{
+  font-size: 28rpx;
+  height: 100rpx;
+  line-height: 100rpx;
+}
+.sdata{
+  font-size: 45rpx;
+  height: 60rpx;
+  line-height: 80rpx;
+  font-weight: bolder;
+}
+.stype{
+  font-size: 28rpx;
+  height: 90rpx;
+  line-height: 120rpx;
+}
+.arraw{
+  width: 20rpx;
+  height: 20rpx;
+}
+.rise{
+  color:red
+}
+.down{
+  color:#22EB1A
 }

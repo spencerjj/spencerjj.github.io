@@ -18,18 +18,18 @@ var config = {
     yAxisTitleWidth: 15,
     padding: 12,
     columePadding: 3,
-    fontSize: 12,
+    fontSize: 10,
     dataPointShape: ['diamond', 'circle', 'triangle', 'rect'],
     colors: ['#7cb5ec', '#f7a35c', '#434348', '#90ed7d', '#f15c80', '#8085e9'],
     pieChartLinePadding: 25,
     pieChartTextPadding: 15,
     xAxisTextPadding: 3,
-    titleColor: '#000000',
+    titleColor: '#102757',
     titleFontSize: 30,
-    subtitleColor: '#000000',
+    subtitleColor: '#102757',
     subtitleFontSize: 15,
     toolTipPadding: 3,
-    toolTipBackground: '#000000',
+    toolTipBackground: '#102757',
     toolTipOpacity: 0.7,
     toolTipLineHeight: 14,
     radarGridCount: 3,
@@ -811,7 +811,7 @@ function drawPointText(points, series, config, context) {
 
     context.beginPath();
     context.setFontSize(config.fontSize);
-    context.setFillStyle('#000');
+    context.setFillStyle('#fff');
     points.forEach(function (item, index) {
         if (item !== null) {
             var formatVal = series.format ? series.format(data[index]) : data[index];
@@ -827,7 +827,7 @@ function drawRadarLabel(angleList, radius, centerPosition, opts, config, context
     radius += config.radarLabelTextMargin;
     context.beginPath();
     context.setFontSize(config.fontSize);
-    context.setFillStyle(radarOption.labelColor || '#000');
+    context.setFillStyle(radarOption.labelColor || '#fff');
     angleList.forEach(function (angle, index) {
         var pos = {
             x: radius * Math.cos(angle),
@@ -937,7 +937,7 @@ function drawPieText(series, opts, config, context, radius, center) {
         context.closePath();
         context.fill();
         context.beginPath();
-        context.setFillStyle('#000');
+        context.setFillStyle('#fff');
         context.fillText(item.text, textStartX, textPosition.y + 3);
         context.closePath();
         context.stroke();
@@ -1036,7 +1036,7 @@ function drawYAxisTitle(title, opts, config, context) {
     context.save();
     context.beginPath();
     context.setFontSize(config.fontSize);
-    context.setFillStyle(opts.yAxis.titleFontColor || '#000');
+    context.setFillStyle(opts.yAxis.titleFontColor || '#fff');
     context.translate(0, opts.height);
     context.rotate(-90 * Math.PI / 180);
     context.fillText(title, startX, config.padding + 0.5 * config.fontSize);
@@ -1073,7 +1073,7 @@ function drawColumnDataPoints(series, opts, config, context) {
         points.forEach(function (item, index) {
             if (item !== null) {
                 var startX = item.x - item.width / 2 + 1;
-                var height = opts.height - item.y - config.padding - config.xAxisHeight - config.legendHeight+2;
+                var height = opts.height - item.y - config.padding - config.xAxisHeight - config.legendHeight;
                 context.moveTo(startX, item.y);
                 context.rect(startX, item.y, item.width - 2, height);
             }
@@ -1331,7 +1331,7 @@ function drawXAxis(categories, opts, config, context) {
     if (config._xAxisTextAngle_ === 0) {
         context.beginPath();
         context.setFontSize(config.fontSize);
-        context.setFillStyle(opts.xAxis.fontColor || '#000');
+        context.setFillStyle(opts.xAxis.fontColor || '#fff');
         categories.forEach(function (item, index) {
             var offset = eachSpacing / 2 - measureText(item) / 2;
             context.fillText(item, xAxisPoints[index] + offset, startY + config.fontSize + 5);
@@ -1343,7 +1343,7 @@ function drawXAxis(categories, opts, config, context) {
             context.save();
             context.beginPath();
             context.setFontSize(config.fontSize);
-            context.setFillStyle(opts.xAxis.fontColor || '#000');
+            context.setFillStyle(opts.xAxis.fontColor || '#fff');
             var textWidth = measureText(item);
             var offset = eachSpacing / 2 - textWidth;
 
@@ -1371,7 +1371,10 @@ function drawYAxisGrid(opts, config, context) {
     var endX = opts.width - config.padding;
 
     var points = [];
-    for (var i = 0; i < config.yAxisSplit; i++) {
+    // for (var i = 0; i < config.yAxisSplit; i++) {
+    //     points.push(config.padding + eachSpacing * i);
+    // }
+    for (var i = 0; i < 0; i++) {
         points.push(config.padding + eachSpacing * i);
     }
     points.push(config.padding + eachSpacing * config.yAxisSplit + 2);
@@ -1401,14 +1404,14 @@ function drawYAxis(series, opts, config, context) {
     var eachSpacing = Math.floor(spacingValid / config.yAxisSplit);
     var startX = config.padding + yAxisTotalWidth;
     var endX = opts.width - config.padding;
-    var endY = opts.height - config.padding - config.xAxisHeight - config.legendHeight;
+    var endY = 0;
 
     // set YAxis background
     context.setFillStyle(opts.background || '#ffffff');
     if (opts._scrollDistance_ < 0) {
         context.fillRect(0, 0, startX, endY + config.xAxisHeight + 5);
     }
-    context.fillRect(endX, 0, opts.width, endY + config.xAxisHeight + 5);
+    // context.fillRect(endX, 0, opts.width, endY + config.xAxisHeight + 5);
 
     var points = [];
     for (var i = 0; i <= config.yAxisSplit; i++) {
@@ -1418,7 +1421,7 @@ function drawYAxis(series, opts, config, context) {
     context.stroke();
     context.beginPath();
     context.setFontSize(config.fontSize);
-    context.setFillStyle(opts.yAxis.fontColor || '#000');
+    context.setFillStyle(opts.yAxis.fontColor || '#fff');
     rangesFormat.forEach(function (item, index) {
         var pos = points[index] ? points[index] : endY;
         context.fillText(item, config.padding + config.yAxisTitleWidth, pos + config.fontSize / 2);
@@ -1453,31 +1456,48 @@ function drawLegend(series, opts, config, context) {
             width += 3 * padding + measureText(item.name) + shapeWidth;
         });
         var startX = (opts.width - width) / 2 + padding;
+
         var startY = opts.height - config.padding - config.legendHeight + listIndex * (config.fontSize + marginTop) + padding + marginTop;
 
         context.setFontSize(11);
         itemList.forEach(function (item) {
             switch (opts.type) {
                 case 'line':
-                   
-                    if(item.name=='　'){
-                       
-                    }else{
+                        startX = (opts.width - width) / 2 + padding+60;
                         context.beginPath();
                         context.setLineWidth(1);
                         context.setStrokeStyle(item.color);
-                        context.lineTo(startX + 17, startY + 5);
                         context.moveTo(startX - 2, startY + 5);
+                        context.lineTo(startX + 17, startY + 5);
                         context.stroke();
                         context.closePath();
                         context.beginPath();
                         context.setLineWidth(1);
                         context.setStrokeStyle('#ffffff');
+                        context.setFillStyle(item.color);
                         context.moveTo(startX + 7.5, startY + 5);
                         context.arc(startX + 7.5, startY + 5, 4, 0, 2 * Math.PI);
                         context.fill();
                         context.stroke();
                         context.closePath();
+                    
+                    break;
+                case 'column':
+                    if(item.name == '会员'){
+                        startX = (opts.width - width) / 2 + padding-60;
+                        context.beginPath();
+                        context.setFillStyle(item.color);
+                        context.moveTo(startX, startY);
+                        context.rect(startX, startY, 15, 10);
+                        context.closePath();
+                        context.fill();
+                    }else{
+                        context.beginPath();
+                        context.setFillStyle(item.color);
+                        context.moveTo(startX, startY);
+                        context.rect(startX, startY, 15, 10);
+                        context.closePath();
+                        context.fill();
                     }
                     break;
                 case 'pie':
@@ -1499,7 +1519,7 @@ function drawLegend(series, opts, config, context) {
             }
             startX += padding + shapeWidth;
             context.beginPath();
-            context.setFillStyle(opts.extra.legendTextColor || '#000');
+            context.setFillStyle('#ffffff');
             context.fillText(item.name, startX, startY + 9);
             context.closePath();
             context.stroke();
@@ -1529,7 +1549,7 @@ function drawPieDataPoints(series, opts, config, context) {
     series.forEach(function (eachSeries) {
         context.beginPath();
         context.setLineWidth(2);
-        context.setStrokeStyle('#ffffff');
+        context.setStrokeStyle('#102757');
         context.setFillStyle(eachSeries.color);
         context.moveTo(centerPosition.x, centerPosition.y);
         context.arc(centerPosition.x, centerPosition.y, radius, eachSeries._start_, eachSeries._start_ + 2 * eachSeries._proportion_ * Math.PI);
@@ -1541,12 +1561,12 @@ function drawPieDataPoints(series, opts, config, context) {
     });
 
     if (opts.type === 'ring') {
-        var innerPieWidth = radius * 0.6;
+        var innerPieWidth = radius * 0.7;
         if (typeof opts.extra.ringWidth === 'number' && opts.extra.ringWidth > 0) {
             innerPieWidth = Math.max(0, radius - opts.extra.ringWidth);
         }
         context.beginPath();
-        context.setFillStyle(opts.background || '#ffffff');
+        context.setFillStyle(opts.background || '#102757');
         context.moveTo(centerPosition.x, centerPosition.y);
         context.arc(centerPosition.x, centerPosition.y, innerPieWidth, 0, 2 * Math.PI);
         context.closePath();
@@ -1783,7 +1803,7 @@ function drawCharts(type, opts, config, context) {
                 timing: 'easeIn',
                 duration: duration,
                 onProcess: function onProcess(process) {
-                    drawYAxisGrid(opts, config, context);
+                    // drawYAxisGrid(opts, config, context);
 
                     var _drawLineDataPoints = drawLineDataPoints(series, opts, config, context, process),
                         xAxisPoints = _drawLineDataPoints.xAxisPoints,
@@ -1793,7 +1813,7 @@ function drawCharts(type, opts, config, context) {
                     _this.chartData.xAxisPoints = xAxisPoints;
                     _this.chartData.calPoints = calPoints;
                     _this.chartData.eachSpacing = eachSpacing;
-                    drawXAxis(categories, opts, config, context);
+                    // drawXAxis(categories, opts, config, context);
                     drawLegend(opts.series, opts, config, context);
                     drawYAxis(series, opts, config, context);
                     drawToolTipBridge(opts, config, context, process);

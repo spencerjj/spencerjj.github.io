@@ -1,8 +1,12 @@
 /**index.wxss**/
 page{
-    background-color: #fff;
+    background-color: #102757;
     font-family: Arial !important;
     overflow-x: hidden;
+}
+.container{
+    width: 100%;
+    overflow-x: hidden !important;
 }
 .title{
     color:#fff;
@@ -13,8 +17,6 @@ page{
     width: 95%;
     padding-left: 5%;
     height: 190rpx;
-    padding-top: 20rpx;
-    background:#207fad
 }
 .first .time{
     height: 105rpx;
@@ -35,11 +37,89 @@ page{
     margin-top: 40rpx;
     margin-left: 30rpx;
   }
+.allData{
+    width: 94%;
+    margin-left: 3%;
+    margin-bottom: 50rpx;
+}
+.allTop{
+    display: flex;
+    justify-content: center;
+    color:#eee;
+}
+.allSection{
+    flex: 1;
+    text-align: center;
+    height: 160rpx;
+    width: 48%;
+    background: rgb(11,32,52);
+    border-top:6rpx solid #7BBEE6;
+    position: relative;
+}
+.allSection view{
+    margin-top: 10rpx;
+    font-size:28rpx;
+    color:#7BBEE6
+}
+.allSection view:nth-child(1){
+    font-size: 50rpx;
+    font-weight: bolder;
+    margin-top: 30rpx;
+}
+.allSection:nth-child(2){
+    margin-left: 4%;
+}
+.allMid{
+    display: flex;
+    justify-content: center;
+}
+.allLeft,.allRight{
+    width: 48%;
+    margin-top: 30rpx;
+}
+.allLeft{
+    border: 6rpx dotted #E3D383;
+}
+
+.allRight{
+    margin-left: 4%;
+    border: 6rpx dotted #B37474;
+}
+.allLeft .allSection1{
+    /* border-top:2rpx dotted #E3D383; */
+    color:#E3D383
+}
+.allRight .allSection1{
+    /* border-top:2rpx dotted #B37474; */
+    color:#B37474
+}
+.allSection1{
+    flex: 1;
+    text-align: center;
+    height: 160rpx;
+    width: 100%;
+    background: rgb(11,32,52);
+    position: relative;
+}
+.allSection1:first-child{
+    border-top:none
+}
+.allSection1 view{
+    font-size:28rpx;
+}
+.allSection1 view:nth-child(1){
+    font-size: 50rpx;
+    font-weight: bolder;
+    padding-top: 30rpx;
+}
+.allSection1 view:nth-child(2){
+    margin-top: 20rpx;
+}
 .second{
     width: 100%;
     height: 630rpx;
     padding-top: 20rpx;
-    background: url('http://report.princesky.com:8888/tubiao/top_bg2.jpg') no-repeat;
+    /* background: url('http://report.princesky.com:8888/tubiao/top_bg2.jpg') no-repeat; */
     background-size: 100% 100%;
     margin-bottom: 50rpx;
 }
@@ -47,9 +127,10 @@ page{
     width: 94%;
     margin-left: 3%;
     height: 590rpx;
-    background:rgb(255, 255,255,.9);
+    background:rgba(195, 208, 241, 0.8);
     box-sizing: border-box;
-    padding-top:40rpx
+    padding-top:40rpx;
+    box-shadow: 0 0 5rpx 2rpx #eee;
 }
 .dataSection{
     display: flex;
@@ -100,6 +181,7 @@ page{
     text-align: center;
     box-sizing: border-box;
     padding-top: 10rpx;
+    font-weight: bolder;
 }
 .third{
     margin-bottom: 50rpx;
@@ -111,10 +193,11 @@ page{
     font-weight: 200;
     height: 50rpx;
     line-height: 50rpx;
+    color:#fff
 }
 .chartsTitle text{
     font-size: 30rpx;
-    color:#415161;
+    color:#c7eff2;
     line-height: 50rpx;
 }
 .mark{
@@ -122,6 +205,7 @@ page{
     font-weight: 200;
     height: 50rpx;
     line-height: 50rpx;
+    color:white
 }
 .chartsDetail{
     width: 100%;
@@ -133,8 +217,18 @@ page{
     text-align: center;
     background: #c7eff2;
     margin-top:40rpx;
-    margin-bottom:20rpx
-}
+    margin-bottom:20rpx;
+    font-weight: bolder;
+    position: relative;
+  }
+  .check{
+    width: 50rpx;
+    height: 50rpx;
+    vertical-align: middle;
+    position: absolute;
+    top: 6rpx;
+    right: 10rpx;
+  }
 .canvas{
     width: 100%;
 }
@@ -143,9 +237,6 @@ page{
     margin-right: 20rpx;
     font-size: 25rpx;
     color:#999;
-  }
-  .down{
-      color:red !important
   }
   .picker{
     position: relative;
@@ -167,3 +258,39 @@ page{
     right: 15rpx;
     position: absolute
   }
+  .rate{
+      position: absolute;
+      right: 5rpx;
+      top:55rpx
+  }
+  .rise{
+    color:red
+  }
+  .down{
+    color:#22EB1A
+  }
+  .saleTrend{
+    margin-bottom: 50rpx;
+    width: 90%;
+    margin-left: 5%;
+    margin-top: 40rpx;
+  }
+  .trend2020{
+    height: 600rpx;
+    position: relative;
+  }
+  .trend2019{
+    height: 550rpx;
+    position: relative;
+  }
+  .c1{
+    position: absolute;
+    top:150rpx;
+    left:0rpx;
+  }
+  .c2{
+    position: absolute;
+    top:150rpx;
+    left:26px;
+  }
+  

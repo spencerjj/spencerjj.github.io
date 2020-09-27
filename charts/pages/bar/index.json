@@ -1,4 +1,8 @@
 {
+  "navigationBarTitleText": "区域会员销售详情",
+  "navigationBarTextStyle": "white",
+  "navigationBarBackgroundColor": "#0E1C3E",
+  "enablePullDownRefresh": false,
   "usingComponents": {
     "ec-canvas": "../../utils/ec-canvas/ec-canvas"
   }

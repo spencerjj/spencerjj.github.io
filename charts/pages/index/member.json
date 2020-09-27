@@ -1,3 +1,6 @@
 {
-  "usingComponents": {}
+  "navigationBarTitleText": "会员看板",
+  "navigationBarTextStyle": "white",
+  "navigationBarBackgroundColor": "#102757",
+  "enablePullDownRefresh": true
 }

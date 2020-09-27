@@ -1,13 +1,13 @@
-page {
-  background-color: #f7f7f7;
+page{
+  background-color: #102757;
+  font-family: Arial !important;
 }
-
 .title {
   width: auto;
   height: 40rpx;
   line-height: 40rpx;
   font-size: 40rpx;
-  color: #000;
+  color: #fff;
   margin: 20rpx 0 0 35rpx;
 }
 
@@ -16,7 +16,7 @@ page {
   height: 24rpx;
   line-height: 24rpx;
   font-size: 24rpx;
-  color: #4a4a4a;
+  color: #eee;
   margin: 30rpx 0 0 35rpx;
 }
 
@@ -29,7 +29,7 @@ page {
   width: 92%;
   height: 140rpx;
   margin-left: 4%;
-  background: #fff;
+  background: #1e315e;
   margin-bottom: 20rpx;
   box-shadow: 0 0 5rpx #ccc;
   border-radius: 10rpx;
@@ -54,7 +54,7 @@ page {
   height: 140rpx;
   font-size: 36rpx;
   line-height: 140rpx;
-  color:#666;
+  color:#fff;
   font-weight: bolder;
 }
 
@@ -63,11 +63,10 @@ page {
   height: 34rpx;
   font-size: 24rpx;
   line-height: 34rpx;
-  color: #5a5a5a;
+  color: #fff;
   text-overflow: ellipsis;
   overflow: hidden;
   white-space: nowrap;
-  color:#5cadff;
 }
 
 .info-box .camInfo {
@@ -77,15 +76,17 @@ page {
   margin-top: 20rpx;
   margin-right: 70rpx;
   text-align: center;
+  color:#fff
 }
 
 .info-box .camInfo .camNum {
-  color: #5a5a5a;
+  color: #fff;
   font-size: 36rpx;
+  margin-top:5rpx
 }
 
 .info-box .camInfo .camTip {
-  color: #5a5a5a;
+  color: #fff;
   font-size: 24rpx;
   margin-top: 6rpx;
 }
@@ -99,11 +100,10 @@ page {
   position: absolute;
 }
 .hover1{
-  background: #eee !important;
+  background: #6c91e7 !important;
 }
 .store{
   position: absolute;
-  top:100rpx;
   width: 100%;
 }
 .goods{

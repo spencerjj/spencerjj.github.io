@@ -1,6 +1,6 @@
 {
-  "navigationBarTitleText": "选择角色",
-  "navigationBarTextStyle": "black",
-  "navigationBarBackgroundColor": "#f5f5f5",
-  "enablePullDownRefresh": true
+  "navigationBarTitleText": "选择公司",
+  "navigationBarTextStyle": "white",
+  "navigationBarBackgroundColor": "#102757",
+  "enablePullDownRefresh": false
 }

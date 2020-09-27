@@ -1,152 +1,76 @@
-<view class="container">
+
+
+<view class="container" wx:if="{{ifYearData||ifMonthData||ifDayData||ifAreaList||ifBrandList||ifFromList||ifTwoData}}">
 	<view class="first">
 		<view class="title">数据发生时间：</view>
 		<view class="time">
-			<view class="date">
-				10/29
-			</view>
+			<picker mode="date" fields="day" value="{{date}}" start="{{thisYear}}-01-01" end="{{yestoday}}" bindchange="bindDateChange">
+				<view class="date">
+					{{showDate}}
+				</view>
+			</picker>
 			<view class="fullDate">
-				<view>2019年10月29日</view>
-				<view>星期三</view>
+				<view>{{today}}</view>
+				<view>星期{{week}}</view>
 			</view>
 		</view>
 	</view>
-	<view class="second">
-		<view class="totalData">
-			<view class="this dataSection">
-				<view class="thisData">
-					<view class="dataTitle">
-						<view>
-							<image src="/images/t1.png"></image>
-						</view>
-						<text>本日累计</text>
-					</view>
-					<view class="dataNum">
-						16725
-					</view>
+	<view class="allData" wx:if="{{ifMonthData||ifYearData||ifDayData}}">
+		<view class="allTop" wx:if="{{ifDayData}}">
+			<view class="allSection">
+				<view>{{dayData.invmoney}} <text style="font-size:20rpx">万 </text></view>
+				<view>本日<text class="{{dayData.incrate>=0?'rise':'down'}}" style="font-size:20rpx" wx:if="{{dayData.incrate}}">　{{dayData.incrate}}%</text></view>
+			</view>
+			<view class="allSection">
+				<view>{{dayData.lastinvmoney}} <text style="font-size:20rpx">万</text></view>
+				<view>同期</view>
+			</view>
+		</view>
+		<view class="allMid"  wx:if="{{ifMonthData||ifYearData}}">
+			<view class="allLeft"  wx:if="{{ifMonthData}}">
+				<view class="allSection1">
+					<view>{{monthData.invmoney}} <text style="font-size:20rpx">万 </text></view>
+					<view>本月<text class="{{monthData.incrate>=0?'rise':'down'}}" style="font-size:20rpx" wx:if="{{monthData.incrate}}">　{{monthData.incrate}}%</text></view>
 				</view>
-				<view class="thisRate">
-					<view class="dataTitle">
-						<view>
-							<image src="/images/t4.png"></image>
-						</view>
-						<text>本日同比</text>
-					</view>
-					<view class="dataNum">
-						88.88%
-					</view>
+				<view class="allSection1">
+					<view>{{monthData.lastinvmoney}} <text style="font-size:20rpx">万</text></view>
+					<view>同期(月)</view>
 				</view>
-				<view class="thisComplete">
-					<view class="dataTitle">
-						<view>
-							<image src="/images/t3.png"></image>
-						</view>
-						<text>完成率</text>
-					</view>
-					<view class="dataNum down">
-						22.85%
-					</view>
+				<view class="allSection1">
+					<view>{{monthData.rate}}%</view>
+					<view>完成率(月)</view>
 				</view>
 			</view>
-			<view class="month dataSection">
-				<view class="monthData">
-					<view class="dataTitle">
-						<view>
-							<image src="/images/t1.png"></image>
-						</view>
-						<text>本期累计</text>
-					</view>
-					<view class="dataNum">
-						16725
-					</view>
+			<view class="allRight" wx:if="{{ifYearData}}">
+				<view class="allSection1">
+					<view>{{yearData.invmoney}} <text style="font-size:20rpx">万  </text></view>
+					<view>本年<text class="{{yearData.incrate>=0?'rise':'down'}}" style="font-size:20rpx" wx:if="{{yearData.incrate}}">　{{yearData.incrate}}%</text></view>
 				</view>
-				<view class="monthRate">
-					<view class="dataTitle">
-						<view>
-							<image src="/images/t4.png"></image>
-						</view>
-						<text>本期同比</text>
-					</view>
-					<view class="dataNum">
-						16725
-					</view>
+				<view class="allSection1">
+					<view>{{yearData.lastinvmoney}} <text style="font-size:20rpx">万</text></view>
+					<view>同期(年)</view>
 				</view>
-				<view class="monthComplete">
-					<view class="dataTitle">
-						<view>
-							<image src="/images/t3.png"></image>
-						</view>
-						<text>完成率</text>
-					</view>
-					<view class="dataNum">
-						88.88%
-					</view>
+				<view class="allSection1">
+					<view>{{yearData.rate}}%</view>
+					<view>完成率(年)</view>
 				</view>
 			</view>
-			<view class="month dataSection">
-				<view class="monthData">
-					<view class="dataTitle">
-						<view>
-							<image src="/images/t1.png"></image>
-						</view>
-						<text>本年累计</text>
-					</view>
-					<view class="dataNum">
-						16725
-					</view>
-				</view>
-				<view class="monthRate">
-					<view class="dataTitle">
-						<view>
-							<image src="/images/t4.png"></image>
-						</view>
-						<text>本年同比</text>
-					</view>
-					<view class="dataNum">
-						16725
-					</view>
-				</view>
-				<view class="monthComplete">
-					<view class="dataTitle">
-						<view>
-							<image src="/images/t3.png"></image>
-						</view>
-						<text>完成率</text>
-					</view>
-					<view class="dataNum down">
-						18.88%
-					</view>
-				</view>
-			</view>
-			<!-- <view class="year dataSection">
-				<view class="yearData">
-					<view class="dataTitle">
-						<view>
-							<image src="/images/t1.png"></image>
-						</view>
-						<text>本年累计</text>
-					</view>
-					<view class="dataNum">
-						16725
-					</view>
-				</view>
-				<view class="yearRate">
-					<view class="dataTitle">
-						<view>
-							<image src="/images/t4.png"></image>
-						</view>
-						<text>本年同比</text>
-					</view>
-					<view class="dataNum">
-						16725
-					</view>
-				</view>
-			</view> -->
 		</view>
 	</view>
-	<view class="third">
+	<view class="saleTrend" wx:if="{{ifTwoData}}">
 		<view class="chartsTitle">
-			区域统计<text>　　全部</text>
+			销售总计
+		</view>
+		<view class="trend2020">
+			<view class="chartsDetail">{{thisYear}}全年销售及同比</view>
+			<view class="mark">单位：万元</view>
+			<canvas canvas-id="columnCanvas2020" class="canvas c1"></canvas>
+			<canvas canvas-id="lineCanvas2020" class="canvas c2" bindtouchstart="touchHandler2020"></canvas>
+		</view>
+</view>
+	<view class="third" wx:if="{{ifAreaList}}">
+		<view class="chartsTitle">
+			区域统计
 		</view>
 		<!-- <view class="section">
 			<picker mode="date" fields="month" value="{{date}}" start="2015-09" end="{{today}}" bindchange="bindDateChange">
@@ -156,14 +80,15 @@
 				</view>
 			</picker>
 		</view> -->
-		<view class="chartsDetail">完成率对比</view>
+		<view class="chartsDetail" bindtap="toPage" data-mark="area">全年销售额对比 <image src="/images/check.png" class="check" bindtap="toPage" data-mark="area"></image>
+		</view>
 		<view class="mark">单位：万元</view>
 		<canvas canvas-id="areaCanvas" class="canvas"></canvas>
-		<view class="toDetail" bindtap="toPage" data-mark="area">点击查看详细数据</view>
+		<!-- <view class="toDetail" bindtap="toPage" data-mark="area">点击查看详细数据</view> -->
 	</view>
-	<view class="third">
+	<view class="third" wx:if="{{ifFromList}}">
 		<view class="chartsTitle">
-			渠道统计<text>　　全部</text>
+			渠道统计
 		</view>
 		<!-- <view class="section">
 			<picker mode="date" fields="month" value="{{date}}" start="2015-09" end="{{today}}" bindchange="bindDateChange">
@@ -173,14 +98,15 @@
 				</view>
 			</picker>
 		</view> -->
-		<view class="chartsDetail">完成率对比</view>
+		<view class="chartsDetail" bindtap="toPage" data-mark="from">全年销售额对比 <image src="/images/check.png" class="check"  bindtap="toPage" data-mark="from"></image>
+		</view>
 		<view class="mark">单位：万元</view>
 		<canvas canvas-id="fromCanvas" class="canvas"></canvas>
-		<view class="toDetail" bindtap="toPage" data-mark="from">点击查看详细数据</view>
+		<!-- <view class="toDetail" bindtap="toPage" data-mark="from">点击查看详细数据</view> -->
 	</view>
-	<view class="third">
+	<view class="third" wx:if="{{ifBrandList}}">
 		<view class="chartsTitle">
-			品牌统计<text>　　全部</text>
+			品牌统计
 		</view>
 		<!-- <view class="section">
 			<picker mode="date" fields="month" value="{{date}}" start="2015-09" end="{{today}}" bindchange="bindDateChange">
@@ -190,10 +116,15 @@
 				</view>
 			</picker>
 		</view> -->
-		<view class="chartsDetail">完成率对比</view>
+		<view class="chartsDetail" bindtap="toPage" data-mark="brand">全年销售额对比 <image src="/images/check.png" class="check"  bindtap="toPage" data-mark="brand"></image>
+		</view>
 		<view class="mark">单位：万元</view>
 		<canvas canvas-id="brandCanvas" class="canvas"></canvas>
-		<view class="toDetail" bindtap="toPage" data-mark="brand">点击查看详细数据</view>
+		<!-- <view class="toDetail" bindtap="toPage" data-mark="brand">点击查看详细数据</view> -->
 	</view>
 
+</view>
+<view style="width:100%;text-align:center;font-size:40rpx;color:white;margin-top:400rpx;font-weight:bolder" wx:else>
+	<image src="/images/nodata.png" style="width:298rpx;height:206rpx"></image>
+	<view style="margin-top:30rpx;margin-left:-10rpx">暂无数据权限</view>
 </view>

@@ -15,7 +15,8 @@ Page({
    */
   data: {
     pro:0,
-    gifLeft:2
+    gifLeft:2,
+    ifLogin:false
   },
 
   /**
@@ -23,6 +24,7 @@ Page({
    */
   onLoad: function (options) {
     var that = this
+    this.loading()
     var chartsUser = wx.getStorageSync('chartsUser');
     this.setData({
         userName: chartsUser.userName,
@@ -48,7 +50,9 @@ Page({
             return;
           }
         if(res.result){
-          that.loading()
+          that.setData({
+            ifLogin:true
+          })
         }
       }
     ).catch(res => {
@@ -118,7 +122,7 @@ Page({
   loading(e){
     var set = setInterval(()=>{
       this.setData({
-        pro:this.data.pro+1,
+        pro:this.data.pro==100?this.data.pro:this.data.pro+1,
       })
       if(this.data.gifLeft<90){
         this.setData({
@@ -126,11 +130,13 @@ Page({
         })
       }
       if(this.data.pro==100){
-        clearInterval(set)
-        wx.switchTab({
-          url: 'member',
-        })
+        if(this.data.ifLogin){
+          clearInterval(set)
+          wx.switchTab({
+            url: 'index',
+          })
+        }
       }
-    },20)
+    },10)
   }
 })
