@@ -13,7 +13,9 @@
 				<view>{{today}}</view>
 				<view>星期{{week}}</view>
 			</view>
+			<image src="/images/ques.png" catchtap="showDetail" data-mark='1' style="width:40rpx;height:40rpx;vertical-align:center;float:right;margin-top:50rpx;margin-left:50rpx;z-index:9"></image>
 		</view>
+
 	</view>
 	<view class="allData" wx:if="{{ifMonthData||ifYearData||ifDayData}}">
 		<view class="allTop" wx:if="{{ifDayData}}">
@@ -80,7 +82,7 @@
 				</view>
 			</picker>
 		</view> -->
-		<view class="chartsDetail" bindtap="toPage" data-mark="area">全年销售额对比 <image src="/images/check.png" class="check" bindtap="toPage" data-mark="area"></image>
+		<view class="chartsDetail" bindtap="toPage" data-mark="area">全年销售额对比 <image src="/images/check.png" class="check" data-mark="area"></image>
 		</view>
 		<view class="mark">单位：万元</view>
 		<canvas canvas-id="areaCanvas" class="canvas"></canvas>
@@ -98,7 +100,7 @@
 				</view>
 			</picker>
 		</view> -->
-		<view class="chartsDetail" bindtap="toPage" data-mark="from">全年销售额对比 <image src="/images/check.png" class="check"  bindtap="toPage" data-mark="from"></image>
+		<view class="chartsDetail" bindtap="toPage" data-mark="from">全年销售额对比 <image src="/images/check.png" class="check"  data-mark="from"></image>
 		</view>
 		<view class="mark">单位：万元</view>
 		<canvas canvas-id="fromCanvas" class="canvas"></canvas>
@@ -116,7 +118,7 @@
 				</view>
 			</picker>
 		</view> -->
-		<view class="chartsDetail" bindtap="toPage" data-mark="brand">全年销售额对比 <image src="/images/check.png" class="check"  bindtap="toPage" data-mark="brand"></image>
+		<view class="chartsDetail" bindtap="toPage" data-mark="brand">全年销售额对比 <image src="/images/check.png" class="check" data-mark="brand"></image>
 		</view>
 		<view class="mark">单位：万元</view>
 		<canvas canvas-id="brandCanvas" class="canvas"></canvas>

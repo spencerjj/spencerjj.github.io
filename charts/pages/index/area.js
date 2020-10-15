@@ -153,31 +153,34 @@ Page({
           return;
       } 
         let list = res.data
+        console.log(list)
         let topData1 = []
         let topData2 = []
         for(let x in list){
           if(list[x].year==that.data.thisYear){
             topData1.push({
               name:list[x].areaname,
-              money:list[x].money
+              money:list[x].money.toFixed(2)
             })
           }else if(list[x].year==that.data.lastYear){
             topData2.push({
               name:list[x].areaname,
-              money:list[x].money
+              money:list[x].money.toFixed(2)
             })
           }
         }
-        if(that.data.mark==0){
-          that.setData({
-            showTopData:topData1
-          })
-        }else{
-          that.setData({
-            showTopData:topData2
-          })
+        for(let x in topData1){
+          topData1[x].compare =  (topData1[x].money-topData2[x].money).toFixed(2)
         }
-
+        // if(that.data.mark==0){
+          that.setData({
+            showTopData:topData1,
+          })
+        // }else{
+        //   that.setData({
+        //     showTopData:topData2
+        //   })
+        // }
       }
     )
     var data = {

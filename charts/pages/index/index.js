@@ -88,16 +88,23 @@ Page({
             officeName: chartsUser.officeName
         })
         var now = new Date()
+        var now1 = new Date()
         var month = (now.getMonth() + 1) >= 10 ? (now.getMonth() + 1) : '0' + (now.getMonth() + 1)
-        var day = (now.getDate() - 1) >= 10 ? (now.getDate() - 1) : '0' + (now.getDate() - 1)
+        var day = now.getDate()
+        now1.setTime(now1.getTime()-24*60*60*1000);
+        console.log(now1.getFullYear())
+        var month1 = (now1.getMonth() + 1) >= 10 ? (now1.getMonth() + 1) : '0' + (now1.getMonth() + 1)
+        var day1 = now1.getDate()>10?now1.getDate():'0'+now1.getDate()
+        var t2 = now1.getFullYear()+'-'+month1+'-'+day1
+        
         var yestoday = now.getFullYear() + '-' + (month) + '-' + (day)
         var today = now.getFullYear() + '年' + (month) + '月' + (day) + '日'
-        var showDate = (month) + '/' + (day)
+        var showDate = (month1)+'/'+(day1)
         var week = "日一二三四五六".charAt(new Date(yestoday).getDay())
         this.setData({
             today: today,
-            yestoday: yestoday,
-            date: yestoday,
+            yestoday: t2,
+            date: t2,
             showDate: showDate,
             thisYear: now.getFullYear(),
             lastYear: now.getFullYear() - 1,
@@ -159,7 +166,11 @@ Page({
         // 本日累计销售
         getRequest(getApiHost(), 'platform/v1/api/minireport/lampo/findDateRate', 'body', data, 0, false, false).then(
             res => {
-
+                if (res.result && res.result == 'login') {
+                    that.login()
+                    console.log('登录失效')
+                    return;
+                }
                 if (res.data == undefined) {
                     wx.showModal({
                         title: '提示',
@@ -631,4 +642,12 @@ Page({
             }
         });
     },
+    showDetail(e){
+        console.log(123)
+        wx.showModal({
+          title:'口径说明',
+          content:'销售总计：折线图为当月销售额同比。\r\n区域统计：’总公司‘-上海广场bespoke店、公司内卖和内卖（LV0001）及经销售卡(LV0013)的卡提货。\r\n渠道统计：‘其他’-上海广场bespoke店、公司内卖和赠送。',
+          showCancel:false
+        })
+    }
 })

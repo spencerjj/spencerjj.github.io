@@ -117,21 +117,27 @@ Page({
             officeName:chartsUser.officeName
         })
         var now = new Date()
-        var month =  (now.getMonth()+1)>=10?(now.getMonth()+1):'0'+(now.getMonth()+1)
-        var day =  (now.getDate()-1)>=10?(now.getDate()-1):'0'+(now.getDate()-1)
-        var yestoday = now.getFullYear()+'-'+(month)+'-'+(day)
-        var today = now.getFullYear()+'年'+(month)+'月'+(day)+'日'
-        var showDate = (month)+'/'+(day)
+        var now1 = new Date()
+        var month = (now.getMonth() + 1) >= 10 ? (now.getMonth() + 1) : '0' + (now.getMonth() + 1)
+        var day = now.getDate()
+        now1.setTime(now1.getTime()-24*60*60*1000);
+        console.log(now1.getFullYear())
+        var month1 = (now1.getMonth() + 1) >= 10 ? (now1.getMonth() + 1) : '0' + (now1.getMonth() + 1)
+        var day1 = now1.getDate()>10?now1.getDate():'0'+now1.getDate()
+        var t2 = now1.getFullYear()+'-'+month1+'-'+day1
+        var yestoday = now.getFullYear() + '-' + (month) + '-' + (day)
+        var today = now.getFullYear() + '年' + (month) + '月' + (day) + '日'
+        var showDate = (month1)+'/'+(day1)
         var week = "日一二三四五六".charAt(new Date(yestoday).getDay())
         this.setData({
             today: today,
-            yestoday:yestoday,
-            date: yestoday,
-            showDate:showDate,
-            thisYear:now.getFullYear(),
-            lastYear:now.getFullYear()-1,
-            week:week
-          })
+            yestoday: t2,
+            date: t2,
+            showDate: showDate,
+            thisYear: now.getFullYear(),
+            lastYear: now.getFullYear() - 1,
+            week: week
+        })
         // this.doPie2020()
         // this.doPie2019()
         // this.doAreaChart()

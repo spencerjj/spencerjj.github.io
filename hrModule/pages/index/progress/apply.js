@@ -28,13 +28,9 @@ Page({
           loading:false
       },
       {
-          name: '退回',
-          color:'red',
+        name: '退回',
+        color: 'red',
       }
-      // {
-      //     name: '中止',
-      //     color:'red'
-      // }
     ],
     visible:false,
     lists:'',
@@ -47,7 +43,9 @@ Page({
     proLists:'',
     url:'',
     loadAll:true,
-    can:false
+    can:false,
+    reason:'',
+    inputShow:false
   },
 
   /**
@@ -163,6 +161,18 @@ that.getInfo()
             success(res) {
               console.log(res)
               var lists = res.data.oaPostRecruitment
+              if(lists.bpm.activityId=='hrbp'&&lists.status!='1'){
+                let x = that.data.actions
+                let y =
+                {
+                    name: '终止',
+                    color:'red'
+                }
+                x.push(y)
+                that.setData({
+                  actions:x
+                })
+              }
               that.setData({
                 lists:lists,
                 id:lists.id,
@@ -416,5 +426,71 @@ progress() {
       }
     }
     })
+},
+getComment(e){
+  console.log(e.detail.value)
+  this.setData({
+    reason:e.detail.value
+  })
+},
+bindblur(e){
+  this.setData({
+    reason:'',
+    inputShow:false
+  })
+},
+cancelApply(e){
+  var that = this
+  that.setData({
+    loadAll:true
+  })
+        var data = {
+          // __sid: app.globalData.__sid,
+          __sid: app.globalData.tempSid,
+          __ajax: 'json',
+          remarks: that.data.reason,
+          id: that.data.lists.bpm.procInsId,
+          'bpm.taskId':that.data.lists.bpm.taskId,
+          'bpm.procInsId':that.data.lists.bpm.procInsId,
+          'bpm.activityId':that.data.lists.bpm.activityId
+        }
+        wx.request({
+          url: app.globalData.url + 'oa/oaPostRecruitment/stopBpm.json',
+          method: 'post',
+          data: data,
+          header: {
+            'content-type': 'application/x-www-form-urlencoded',
+          },
+          success(res) {
+            console.log(res)
+            if (res.data.result=='true') {
+              setTimeout(() => {
+                that.setData({
+                  inputShow: false,
+                  loadAll:false
+                });
+                $Toast({
+                  content: '终止成功！',
+                  type: 'success'
+                });
+                setTimeout(() => {
+                  wx.switchTab({
+                    url: '../inform',
+                  })
+                },1000)
+              }, 1000);
+            }else{
+              $Toast({
+                content: res.data.message,
+                type: 'error'
+              });
+                that.setData({
+                  inputShow: false,
+                  loadAll:false
+                });
+            }
+
+          }
+        })
 }
 })

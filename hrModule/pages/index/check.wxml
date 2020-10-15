@@ -1,0 +1,60 @@
+<view class="content">
+	<input class="main" value="9月15日工序上报" placeholder='9.15日工序上报' placeholder-style='color:#af9d7f' bindinput='mainInput' disabled></input>
+	<view class="title">
+		<view class="c1">
+			<text>当日完成工序</text>
+      <text style="float:right;font-weight:bolder;color:#0384ff;margin-top:5rpx" bindtap="showDrawer">+添加</text>
+		</view>
+	</view>
+	<view class="add" wx:if="{{!lists.length}}">
+    <text class="doAdd" bindtap="showDrawer">+待添加</text>
+	</view>
+  <i-card wx:if="{{lists.length}}" wx:for="{{lists}}" title="{{item.name}}" extra="{{item.code}}" thumb="https://gss0.baidu.com/7Ls0a8Sm2Q5IlBGlnYG/sys/portraith/item/tb.1.bd95b29e.RexvwhSHedDaN7tj2xTpjQ?t=1592967296">
+      <view slot="content">
+      数量： <input class="num" value="{{item.count}}"></input>
+      </view>
+      <view slot="footer" bindtap="delete" data-index="{{index}}" class="delete">
+        <image src="../../images/delete.png"></image>  删除
+      </view>
+  </i-card>
+<i-drawer1 mode="top" wx:if="{{visibility}}" visible="true" bind:close="showDrawer">
+  <view class="sonLists" wx:if="{{sonvisibility}}">
+    <view wx:for="{{codeLists}}" class="sonItem" bindtap="selectItem"  hover-class='hover1' hover-stay-time='50' data-name="{{item.name}}" data-code="{{item.code}}">{{item.name}}({{item.code}})</view>
+  </view>
+  <view class="dtitle">
+    添加工序
+  </view>
+  <view class="addDrawer">
+    <view class="title" style="z-index:1 !important">
+      <view class="c1">
+        <text>工序名称</text>
+      </view>
+      <input class="c1Input" placeholder="请填写工序名称" placeholder-style='color:#af9d7f;padding:0' bindinput='checkInput' value="{{keywords}}"  bindconfirm="confirm" confirm-type="done"></input>
+    </view>
+    <view class="title" style="z-index:1 !important;margin-top:50rpx">
+      <view class="c1">
+        <text>数量</text>
+      </view>
+      <i-panel>
+				<view style="margin-left:150rpx;margin-top:50rpx">
+					<i-input-number value="{{ everyNum }}" min="1" max="100" bindchange="handleChange" />
+				</view>
+			</i-panel>
+    </view>
+    	<button class="progress1 btnwid" bindtap='addOne' hover-class='hover1' hover-stay-time='50'>添加</button>
+  </view>
+  
+</i-drawer1>
+	<view class="title" style="z-index:1 !important">
+		<view class="c1">
+			<text>备注</text>
+		</view>
+		<input class="c1Input" placeholder="请填写备注" placeholder-style='color:#af9d7f;padding:0' bindinput='mainInput'></input>
+	</view>
+</view>
+<view class="bottom">
+	<button class="progress btnwid" bindtap='handleOpen' hover-class='hover1' hover-stay-time='50'>上报</button>
+</view>
+<i-toast id="toast" />
+<i-message id="message" />
+<i-action-sheet visible="{{visible}}" actions="{{actions}}" show-cancel bind:cancel="handleCancel" bind:click="handleClickItem" />

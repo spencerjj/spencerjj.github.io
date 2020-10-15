@@ -200,5 +200,10 @@ page{
   line-height: 50rpx;
   color:white
 }
-
+.rise{
+  color:red
+}
+.down{
+  color:#22EB1A
+}
 

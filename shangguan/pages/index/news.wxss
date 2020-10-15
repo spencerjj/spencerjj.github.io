@@ -1,0 +1,28 @@
+/* pages/index/news.wxss */
+.container{
+  width: 94%;
+  margin-left: 3%;
+}
+.title{
+  font-size: 50rpx;
+  font-weight: bolder;
+  margin-top:20rpx
+}
+.date{
+  color:#555;
+  font-size: 35rpx;
+  margin-top: 20rpx;
+  margin-bottom: 50rpx;
+}
+.text{
+  font-size: 30rpx;
+  line-height: 50rpx;
+  letter-spacing: 3rpx;
+  color:#777
+}
+.banner{
+  width: 100%;
+  box-shadow: 5rpx 5rpx 30rpx 1rpx #999;
+  margin-top: 30rpx;
+  margin-bottom: 30rpx;
+}

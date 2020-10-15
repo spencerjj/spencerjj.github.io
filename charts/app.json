@@ -1,8 +1,8 @@
 {
   "pages": [ 
     "pages/index/welcome",
-    "pages/index/member",
     "pages/index/index",
+    "pages/index/member",
     "pages/index/select",
     "pages/index/area",
     "pages/bar/index",

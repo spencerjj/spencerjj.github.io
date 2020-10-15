@@ -5,15 +5,15 @@
 				<image class="arraw1" src="/images/arraw3.png"></image>
 			</view>
 		</picker> -->
-	<view class="topSelection">
+	<!-- <view class="topSelection">
 		<view class="{{mark==0?'sactive':''}}" bindtap="changeYear" data-id='0'>本年</view>
-		<view class="{{mark==1?'sactive':''}}" bindtap="changeYear" data-id='1'>同期</view>
-	</view>
+		<view class="{{mark==1?'sactive':''}}" bindtap="changeYear" data-id='1'>本月</view>
+	</view> -->
 	<view class="newData">
 		<view class="section" wx:for="{{showTopData}}" wx:key="index">
 			<view class="stitle">{{item.name}}</view>
-			<view class="sdata">{{item.money}}</view>
-			<view class="stype">万元</view>
+			<view class="sdata">{{item.money}} <text style="font-size:20rpx">万</text></view>
+			<view class="stype">同比：<text class="{{item.compare>=0?'rise':'down'}}">{{item.compare>0?'+':''}}{{item.compare}}</text></view>
 		</view>
 	</view>
 	<!-- <view class="top">
@@ -51,11 +51,12 @@
 		</view>
 	</view> -->
 	<view style="width:100%;height:5rpx;background:#666"></view>
+
 	<view class="content">
 		<view class="first">
 			<view class="section1">
 				<view class="picker1">
-					<text class="section__title">区域统计</text>
+					<text class="section__title">区域统计({{thisYear}})</text>
 				</view>
 				<!-- <picker mode="date" fields="year" value="{{year}}" start="2015" end="{{thisYear}}">
 					<view class="picker1">

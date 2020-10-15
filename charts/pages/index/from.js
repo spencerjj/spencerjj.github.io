@@ -169,15 +169,18 @@ Page({
             })
           }
         }
-        if (that.data.mark == 0) {
-          that.setData({
-            showTopData: topData1
-          })
-        } else {
-          that.setData({
-            showTopData: topData2
-          })
+        for(let x in topData1){
+          topData1[x].compare =  (topData1[x].money-topData2[x].money).toFixed(2)
         }
+        // if(that.data.mark==0){
+          that.setData({
+            showTopData:topData1,
+          })
+        // }else{
+        //   that.setData({
+        //     showTopData:topData2
+        //   })
+        // }
 
       }
     )

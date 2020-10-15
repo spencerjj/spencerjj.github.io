@@ -1,0 +1,18 @@
+<view class="content">
+  <view class="list" bindtap="call" data-number="13196705310" hover-class='hover1' hover-stay-time='50'>
+    <text class="name">部门：<text class="active">物业</text></text>
+    <text class="date">联系人:<text class="active"> 老王</text></text>
+    <image class="call" src="../../images/call1.png"></image>
+  </view>
+  <view class="list" bindtap="call" data-number="13196705310" hover-class='hover1' hover-stay-time='50'>
+    <text class="name">部门：<text class="active">楼管</text></text>
+    <text class="date">联系人:<text class="active"> 老李</text></text>
+    <image class="call" src="../../images/call1.png"></image>
+  </view>
+  <view class="list" bindtap="call" data-number="13196705310" hover-class='hover1' hover-stay-time='50'>
+    <text class="name">部门：<text class="active">值班室</text></text>
+    <text class="date">联系人:<text class="active"> 老铁</text></text>
+    <image class="call" src="../../images/call1.png"></image>
+  </view>
+</view>
+<view wx:if="{{!listIsFull}}" class='nullDataInfo'><i-load-more tip="无更多数据了" loading="{{ false }}" /></view>

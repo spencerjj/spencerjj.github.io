@@ -166,6 +166,10 @@
 <i-action-sheet visible="{{visible}}" actions="{{actions}}" show-cancel bind:cancel="handleCancel" bind:click="handleClickItem" />
 <i-toast id="toast" />
 <i-message id="message" />
+<view class='pocket_input' wx:if="{{inputShow}}">
+	<input type='text' placeholder-style='input-placeholder' cursor='{{cursor_position}}' class='input_style' placeholder='{{notice}}' focus='{{focus}}' cursor-spacing="2" adjust-position='true' bindfocus="bindfocus" bindblur="bindblur" bindconfirm="cancelApply" confirm-type="done" bindinput='getComment' maxlength='500'></input>
+</view>
+<view style="width:100%;height:100%;position:fixed;top:0;left:0;background:#333;opacity:.8;z-index:99" wx:if="{{inputShow}}"></view>
 <i-drawer mode="right" visible="{{showRight1}}" bind:close="progress">
 	<scroll-view  class="proShow" scroll-y='true' catchtouchmove='true'>
 		<view class="c1" style="margin-bottom:20rpx">

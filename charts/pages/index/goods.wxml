@@ -1,21 +1,7 @@
 <!--pages/index/goods.wxml-->
-<!-- <view style="width:100%;text-align:center;font-size:40rpx;color:white;margin-top:500rpx">即将上线，敬请期待......</view> -->
-<view class="container">
+<view style="width:100%;text-align:center;font-size:40rpx;color:white;margin-top:500rpx">即将上线，敬请期待......</view>
+<!-- <view class="container">
 	<view class="topCon">
-		<!-- <view class="first">
-			<view class="title">数据发生时间：</view>
-			<view class="time">
-				<picker mode="date" fields="day" value="{{date}}" start="{{thisYear}}-01-01" end="{{yestoday}}" bindchange="bindDateChange">
-				<view class="date">
-					{{showDate}}
-				</view>
-			</picker>
-				<view class="fullDate">
-					<view>{{today}}</view>
-					<view>星期{{week}}</view>
-				</view>
-			</view>
-		</view> -->
 		<view class="middle">
 			<view class="topTitle"><picker mode="date" fields="day" value="{{date}}" start="{{thisYear}}-01-01" end="{{yestoday}}" bindchange="bindDateChange">
 				<view class="date">
@@ -33,16 +19,6 @@
 						<view class="sdata">{{vipCardCot2020}}</view>
 						<view class="stype">同比：<text class="{{(vipCardCot2020-vipCardCot2019)>=0?'rise':'down'}}"> {{vipCardCot2020>vipCardCot2019?'+':''}}{{(vipCardCot2020-vipCardCot2019)}}</text></view>
 					</view>
-					<!-- <view class="section">
-						<view class="stitle">2019同期总招新人数</view>
-						<view class="sdata">{{vipCardCot2019}}</view>
-						<view class="stype">0</view>
-					</view> -->
-					<!-- <view class="section">
-						<view class="stitle">较昨日新增</view>
-						<view class="sdata">0</view>
-						<view class="stype"></view>
-					</view> -->
 					<view class="section">
 						<view class="stitle">招新转化率</view>
 						<view class="sdata">{{vipRate2020}}%</view>
@@ -61,4 +37,4 @@
       </view>
     </view>
   </view>
-</view>
+</view> -->

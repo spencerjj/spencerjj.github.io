@@ -115,7 +115,7 @@ Page({
     var that = this;
     var requestData = ''
     var requestUrl = ''
-    if(that.data.status==1||that.data.status==2){
+    if(that.data.status==1){
       requestData = {
         __sid: that.data.__sid,
         pageNo: that.data.pageNo,
@@ -125,6 +125,16 @@ Page({
       }
       requestUrl = 'bpm/bpmMyTask/listData.json'
 
+    }else if(that.data.status==2){
+      requestData = {
+        __sid: that.data.__sid,
+        pageNo: that.data.pageNo,
+        pageSize: that.data.pageSize,
+        status:that.data.status,
+        'procIns.name':that.data.name,
+        __ajax:'json'
+      }
+      requestUrl = 'bpm/bpmMyTask/listData.json'
     }else{
       requestData = {
         __sid: that.data.__sid,
@@ -255,12 +265,12 @@ Page({
       loadAll:true,
       showNo:false,
       isMore:false,
-      lists:''
+      lists:'',
+      name:''
     })
     this.showList();
     wx.pageScrollTo({
       scrollTop: 0
     })
-    
   }
 })

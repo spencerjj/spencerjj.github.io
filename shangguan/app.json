@@ -1,0 +1,65 @@
+{
+  "pages": [
+    "pages/index/call",
+    "pages/index/newsList",
+    "pages/index/report",
+    "pages/index/inspection",
+    "pages/my/my",
+    "pages/index/shopLists",
+    "pages/index/check",
+    "pages/index/news",
+    "pages/index/check1",
+    "pages/index/inform"
+  ],
+  "tabBar": {
+    "color": "#bfbfbf",
+    "selectedColor": "#af9d7f",
+    "borderStyle": "black",
+    "backgroundColor": "#f3f3f3",
+    "list": [
+      {
+        "pagePath": "pages/index/inform",
+        "iconPath": "images/job.png",
+        "selectedIconPath": "images/jobed.png",
+        "text": "事项"
+      },
+      {
+        "pagePath": "pages/my/my",
+        "iconPath": "images/my.png",
+        "selectedIconPath": "images/myed.png",
+        "text": "功能"
+      }
+    ]
+  },
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "WeChat",
+    "navigationBarTextStyle": "black",
+    "backgroundColor": "#69bcf9"
+  },
+  "usingComponents": {
+    "i-message": "component/iview/message/index",
+    "i-modal": "component/iview/modal/index",
+    "i-switch": "component/iview/switch/index",
+    "i-radio-group": "component/iview/radio-group/index",
+    "i-radio": "component/iview/radio/index",
+    "i-row": "component/iview/row/index",
+    "i-col": "component/iview/col/index",
+    "i-button": "component/iview/button/index",
+    "i-icon": "component/iview/icon/index",
+    "i-tabs": "component/iview/tabs/index",
+    "i-tab": "component/iview/tab/index",
+    "i-action-sheet": "component/iview/action-sheet/index",
+    "i-toast": "component/iview/toast/index",
+    "i-spin": "component/iview/spin/index",
+    "i-rate": "component/iview/rate/index",
+    "i-load-more": "component/iview/load-more/index",
+    "i-steps": "component/iview/steps/index",
+    "i-step": "component/iview/step/index",
+    "i-progress": "component/iview/progress/index",
+    "i-drawer": "component/iview/drawer/index",
+    "i-input-number": "component/iview/input-number/index"
+  },
+  "sitemapLocation": "sitemap.json"
+}

@@ -1,0 +1,23 @@
+	<view class='container'>
+		<input class="main" value="紧急事故" placeholder-style='color:#af9d7f' bindinput='mainInput' disabled></input>
+		<view class="title">
+			<view class="c1">
+				<text>事故照片</text>
+			</view>
+			<view class="codePicker" bindtap="upload">
+				<!-- <image src="http://tiebapic.baidu.com/forum/w%3D580/sign=4c36fa524443fbf2c52ca62b807fca1e/cd014afbfbedab648925929ae036afc379311e27.jpg" class="notice"></image> -->
+        <image class="photo" src="http://tiebapic.baidu.com/forum/w%3D580/sign=cb059115dd8065387beaa41ba7dda115/11fef636afc3793152439272fcc4b74543a9114b.jpg" mode="widthFix"></image>
+			</view>
+		</view>
+    	<view class="title">
+			<view class="c1">
+				<text>备注</text>
+			</view>
+			<textarea class="codePicker1" value="仪器短路，紧急修复">
+				
+			</textarea>
+		</view>
+    <view class="progress">
+      处理
+    </view>
+	</view>

@@ -1,0 +1,32 @@
+<view class="content">
+  <view class="security selection" data-id='1' bindtap='do' hover-class='hover'>
+    <image class='icon' src='../../images/add.png'></image>
+    <text class="text">入职流程</text>
+    <image class="arraw" src="../../images/arraw1.png"></image>
+  </view>
+  <view class="security selection" data-id='2' bindtap='do' hover-class='hover'>
+    <image class='icon' src='../../images/add.png'></image>
+    <text class="text">离职流程</text>
+    <image class="arraw" src="../../images/arraw1.png"></image>
+  </view>
+  <view class="security selection" data-id='3' bindtap='do' hover-class='hover'>
+    <image class='icon' src='../../images/add.png'></image>
+    <text class="text">招聘申请流程</text>
+    <image class="arraw" src="../../images/arraw1.png"></image>
+  </view>
+  <view class="security selection" data-id='4' bindtap='do' hover-class='hover'>
+    <image class='icon' src='../../images/add.png'></image>
+    <text class="text">离职流程</text>
+    <image class="arraw" src="../../images/arraw1.png"></image>
+  </view>
+  <view class="security selection" data-id='5' bindtap='do' hover-class='hover'>
+    <image class='icon' src='../../images/add.png'></image>
+    <text class="text">转岗流程</text>
+    <image class="arraw" src="../../images/arraw1.png"></image>
+  </view>
+  <view class="security selection" data-id='6' bindtap='do' hover-class='hover'>
+    <image class='icon' src='../../images/add.png'></image>
+    <text class="text">合同续签流程</text>
+    <image class="arraw" src="../../images/arraw1.png"></image>
+  </view>
+</view>

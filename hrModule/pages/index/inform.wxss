@@ -284,3 +284,18 @@ i-tabs {
 .hover1{
   background:#eee;
 }
+.picker1{
+  clear: both;
+  width: 94%;
+  margin-left: 3%;
+  margin-top: 15rpx;
+  height: 60rpx;
+  background: #fff;
+  color: #666;
+  text-align: center;
+  font-size: 30rpx;
+  line-height: 60rpx;
+  border:1rpx solid #eee;
+  box-shadow: 0 0 5rpx #eee;
+  position: relative;
+}

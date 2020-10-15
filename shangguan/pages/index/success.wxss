@@ -1,0 +1,30 @@
+/* pages/index/progress/success.wxss */
+page{
+  background:#f7f7f7;
+}
+.content{
+  text-align: center;
+}
+.img{
+  margin-top: 100rpx;
+}
+.img image{
+  width: 200rpx;
+  height: 200rpx;
+}
+.title1{
+  font-size: 50rpx;
+  font-weight: 500;
+  margin-top: 40rpx;
+}
+.title2{
+  margin-top: 20rpx;
+  color:#999
+}
+.back{
+  margin-top: 100rpx;
+  background:#57b638;
+  color:white;
+  border-radius: 10rpx;
+  width: 80%;
+}
