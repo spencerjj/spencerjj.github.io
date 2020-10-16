@@ -42,12 +42,15 @@ Page({
     officeCode: '',
     entryMoney:0,
     deliveredMoney:0,
-    unrecordedMoney:0
+    unrecordedMoney:0,
+    disabled1:false,
+    status1:''
   },
   onLoad: function () {
     console.log(this.options.dailyNo)
     this.setData({
-      dailyNo: this.options.dailyNo
+      dailyNo: this.options.dailyNo,
+      status1:this.options.status
     })
   },
   onShow: function () {
@@ -65,7 +68,12 @@ Page({
       phoneNo: userInfo.loginCode,
       sid: userInfo.sid,
       officeCode: userInfo.officeCode,
-      officeName:userInfo.officeName
+      officeName:userInfo.officeName,
+      pageNo: 1
+    })
+    wx.pageScrollTo({
+      scrollTop: 0,
+      duration: 0
     })
     // that.getSelectLists()
     that.getHead()
@@ -355,5 +363,37 @@ Page({
       })
     }
     that.getLists()
+  },
+  confirm(e){
+    app.doMessage()
+    var that = this
+    wx.showModal({
+      title: '提示',
+      content: '确认该订单吗',
+      success(res) {
+        if (res.confirm) {
+          var data={
+            did:that.data.dailyNo,
+            mfCode:that.data.officeCode,
+            state:0,
+            __sid:that.data.sid,
+            __ajax:'json',
+          }
+          getRequest(getApiHost(), 'platform/v1/api/dayily/mfissue', 'body', data, 0, false, true).then(
+            res => {
+
+            }
+          ).catch(res => {
+            wx.showModal({
+              title: '错误',
+              content: res.message,
+              showCancel: false,
+              confirmText: '知道了',
+              confirmColor: '#1890FF'
+            })
+          });
+        }
+      }
+    })
   },
 })

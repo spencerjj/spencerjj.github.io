@@ -7,7 +7,7 @@
 			</view>
 			<block>
 				<view class="tr bg-g" hover-class="trhover" hover-stay-time="0.5">
-					<view class="td">{{brandName}}</view>
+					<view class="td">{{itemTitle}}</view>
 					<view class="td">{{itemNo}}</view>
 				</view>
 			</block>

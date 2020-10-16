@@ -101,6 +101,7 @@
 <view class="btm" wx:if="{{flag==2}}">
 	<button class="confirm" bindtap="wconfirm" disabled="{{disabled2||status!=2}}">{{disabled2||status!=2?'已确认':'确认'}}</button>
 </view>
-<!-- <view class="btm" wx:if="{{flag==3}}">
-	<button class="confirm" bindtap="dconfirm" disabled="{{disabled3||status!=2}}">{{disabled3||status!=2?'已确认':'确认'}}</button>
-</view> -->
+<view class="btm" wx:if="{{flag==3}}">
+	<button class="confirm" bindtap="aconfirm">一键确认</button>
+</view>
+	<view style="height:100rpx;width:100%"></view>

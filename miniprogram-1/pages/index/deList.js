@@ -85,7 +85,12 @@ Page({
       officeCode:userInfo.officeCode,
       companyCode:userInfo.companyCode,
       companyName:userInfo.companyName,
-      officeName:userInfo.officeName
+      officeName:userInfo.officeName,
+      pageNo: 1
+    })
+    wx.pageScrollTo({
+      scrollTop: 0,
+      duration: 0
     })
     // that.getSelectLists()
     that.getLists()
@@ -503,5 +508,38 @@ Page({
         }
       }
     })
-  }
+  },
+  aconfirm(e){
+    app.doMessage()
+    var that = this
+    wx.showModal({
+      title: '提示',
+      content: '确认该订单吗',
+      success(res) {
+        if (res.confirm) {
+          var data={
+            dailyNo:that.data.dailyNo,
+            orgId:that.data.officeCode,
+            status:4,
+            __sid:that.data.sid,
+            __ajax:'json',
+          }
+          getRequest(getApiHost(), 'platform/v1/api/dayily/orgAllIssue', 'body', data, 0, false, true).then(
+            res => {
+              that.getLists()
+            }
+          ).catch(res => {
+            wx.showModal({
+              title: '错误',
+              content: res.message,
+              showCancel: false,
+              confirmText: '知道了',
+              confirmColor: '#1890FF'
+            })
+          });
+        }
+      }
+    })
+  },
+
 })

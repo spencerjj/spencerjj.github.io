@@ -489,3 +489,10 @@ white-space: nowrap;
  .trhover{
   background: #ddd;
 }
+.btm{
+  position: fixed;
+  bottom: 0;
+  width: 92%;
+  margin-left: 4%;
+  height: 130rpx;
+}

@@ -83,17 +83,13 @@ Page({
               }
             ).catch(res => {
               console.log(res)
-              if(res.data.status==4){
-                wx.redirectTo({
-                  url: '../index/success',
-                })
-              }else if(res.data.status==0){
-                wx.redirectTo({
-                  url: '../index/finList',
-                })
-              }else if(res.data.status==2){
+              if(res.data.status==2){
                 wx.redirectTo({
                   url: '../index/error',
+                })
+              }else if(res.data.status==4){
+                wx.redirectTo({
+                  url: '../index/success',
                 })
               }
               // wx.showModal({
@@ -313,6 +309,13 @@ that.getLists()
   },
   officeChange(e) {
     var that = this
+    if(this.data.mark1){
+      Notify({
+        message: '请先选择公司',
+        type: 'warning'
+      });
+      return;
+    }
     this.setData({
       index3: e.detail.value,
       officeCode: this.data.officeLists[e.detail.value].officeCode,
@@ -321,7 +324,7 @@ that.getLists()
     console.log(this.data.officeLists[e.detail.value].officeCode)
     var data4={
       officeType:1,
-      officeCode:this.data.officeLists[e.detail.value].officeCode
+      parentCode:this.data.officeLists[e.detail.value].officeCode
     }
     getRequest(getApiHost(), 'platform/v1/api/wxmini/getOfficeList', 'body', data4, 0, false, false).then(
       res => {
@@ -359,7 +362,7 @@ that.getLists()
       roleCode: this.data.roleLists[e.detail.value].roleCode,
       mark2:false
     })
-    if(this.data.array2[e.detail.value]=='品牌'){
+    if(this.data.array2[e.detail.value]=='柜组'){
       this.setData({
         ifBra:true,
       })
@@ -554,7 +557,7 @@ that.getLists()
                         //   confirmText: '知道了',
                         //   confirmColor: '#1890FF'
                         // })
-                        wx.navigateTo({
+                        wx.redirectTo({
                           url: '../index/success',
                         })
                       }

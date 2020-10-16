@@ -16,6 +16,7 @@
     "autoAudits": false,
     "showShadowRootInWxmlPanel": true,
     "scopeDataCheck": false,
+    "uglifyFileName": false,
     "checkInvalidKey": true,
     "checkSiteMap": true,
     "uploadWithSourceMap": true,
@@ -40,7 +41,7 @@
   "isGameTourist": false,
   "simulatorType": "qywx_simulator_plugin",
   "simulatorPluginLibVersion": {
-    "qywx_simulator_plugin": "2.8.3"
+    "qywx_simulator_plugin": "2.10.1"
   },
   "condition": {
     "search": {

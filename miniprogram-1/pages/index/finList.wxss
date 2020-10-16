@@ -475,3 +475,6 @@ color:red !important;
   50% {transform: rotate(180deg);}
   100% {transform: rotate(360deg);}
 }
+.acstatus{
+  color:red !important
+}

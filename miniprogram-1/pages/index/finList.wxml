@@ -93,6 +93,7 @@
 					<view class="detail"><text class="dtitle">所属门店:</text><text class="active1"> {{item.shopName}}</text></view>
 					<view class="detail"><text class="dtitle">生成时间:</text><text class="active1"> {{item.createDate}}</text></view>
 					<view class="detail"><text class="dtitle">结算周期:</text><text class="active1"> {{item.startTime}} ~ {{item.endTime}}</text></view>
+					<view class="detail"><text class="dtitle">订单状态:</text><text class="active1 acstatus" wx:if="{{item.status==0}}"> 待财务审核</text><text class="active1 acstatus" wx:if="{{item.status==2}}"> 财务已确认</text><text class="active1 acstatus" wx:if="{{item.status==3}}"> 微商城组已确认</text><text class="active1 acstatus" wx:if="{{item.status==1}}"> 商品编码存在异常，请先核实</text><text class="active1 acstatus" wx:if="{{item.status==4}}"> 部门已确认</text></view>
 					<!-- <view class="detail1" style="line-height:40rpx;padding-top:20rpx;padding-bottom:10rpx;"><text class="dtitle" style="float:left">备注:</text><text class="active" style="display:inline-block;float:left;width:60%;word-break:break-all;margin-left: 10rpx;"> {{item.comment}}</text>
 						<view class="comAct" bindtap="comment" data-index="{{index}}" data-mark="{{item.comment}}"><text><text wx:if="{{item.comment.length==0}}">添加</text><text wx:else>修改</text>备注</text></view>
 					</view> -->

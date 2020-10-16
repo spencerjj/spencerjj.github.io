@@ -1,10 +1,10 @@
 {
   "pages": [
     "pages/index/finList",
-    "pages/index/success",
     "pages/login/regist",
-    "pages/index/listDetail",
     "pages/index/braList",
+    "pages/index/success",
+    "pages/index/listDetail",
     "pages/index/deList",
     "pages/index/select",
     "pages/index/lists",

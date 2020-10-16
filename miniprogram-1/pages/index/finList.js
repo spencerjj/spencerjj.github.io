@@ -47,12 +47,16 @@ Page({
     top1Height: 100,
     titleTop: 0
   },
+  onLaunch:function(e){
+    
+  },
   onLoad: function (options) {
     if(options.dailyNo){
       this.setData({
         dailyNo:options.dailyNo
       })
     }
+    // wx.removeStorageSync('userInfo')
   },
   onShow: function () {
     var that = this;
@@ -99,9 +103,14 @@ Page({
     that.setData({
       name: userInfo.username,
       phoneNo: userInfo.loginCode,
-      sid: userInfo.sid,
+      sid: '892dc3044b434840a464339b08bfa0aa',
       companyCode: userInfo.companyCode,
-      officeName: userInfo.officeName
+      officeName: userInfo.officeName,
+      pageNo: 1
+    })
+    wx.pageScrollTo({
+      scrollTop: 0,
+      duration: 0
     })
     that.getSelectLists()
     that.getLists()
@@ -113,13 +122,13 @@ Page({
       loading: false,
     })
     this.onShow();
-
     wx.showNavigationBarLoading()
     setTimeout(function () {
       wx.hideNavigationBarLoading()
       wx.stopPullDownRefresh()
     }, 500);
   },
+
   onReachBottom: function () {
     var that = this;
     console.log('到底了')
@@ -144,14 +153,14 @@ Page({
       __sid: that.data.sid,
       pageNo: that.data.pageNo,
       pageSize: that.data.pageSize,
-      shopName: that.data.shopName,
-      dailyNo:that.data.dailyNo,
+      shopName: '',
+      dailyNo:'E60320201016',
       startTime: that.data.startTime,
       endTime: that.data.endTime
     }
     if (that.data.flag == 2) {
-      data.shopId = wx.getStorageSync('userInfo').companyCode
-      data.shopName = wx.getStorageSync('userInfo').companyName
+      data.shopId = ''
+      data.shopName = ''
     }
     getRequest(getApiHost(), 'platform/v1/api/dayily/getDailyOrderHead', 'body', data, 0, false, true).then(
       res => {
@@ -229,6 +238,9 @@ Page({
         confirmText: '知道了',
         confirmColor: '#1890FF'
       })
+      // if(res.message=='身份异常'){
+      //   that.login()
+      // }
     });
   },
   onStartDatePickerChanged: function (e) {

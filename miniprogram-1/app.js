@@ -41,7 +41,8 @@ App({
     })
   },
   onHide(e){
-
+    console.log('清除缓存')
+    wx.removeStorageSync('userInfo')
   },
   globalData: {
     userInfo: null,
@@ -73,7 +74,7 @@ App({
             code: code,
             ajax: '_json'
           }
-          getRequest(getApiHost(), 'platform/v1/api/wxmini/code2session.json', 'body', data, 0, false, false, false).then(
+          getRequest(getApiHost(), 'platform/v1/api/wxmini/code2session.json', 'body', data, 0, false, false).then(
             res => {
               // that.setData({
               //   openid:res.data.openid,
@@ -86,7 +87,7 @@ App({
               wx.showLoading({
                 title: '校验用户中',
               })
-              getRequest(getApiHost(), 'platform/v1/api/wxmini/checkOpenid', 'body', data, 0, false, false, false).then(
+              getRequest(getApiHost(), 'platform/v1/api/wxmini/checkOpenid', 'body', data, 0, false, false).then(
                 res => {
                   console.log('openid'+res.result)
                   if(res.result=='false'){

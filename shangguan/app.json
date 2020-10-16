@@ -1,8 +1,8 @@
 {
   "pages": [
+    "pages/index/report",
     "pages/index/call",
     "pages/index/newsList",
-    "pages/index/report",
     "pages/index/inspection",
     "pages/my/my",
     "pages/index/shopLists",
