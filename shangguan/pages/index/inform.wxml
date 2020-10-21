@@ -2,15 +2,11 @@
 <i-tabs current="{{ current }}" color="#af9d7f" bindchange="handleChange" style="z-index:99">
     <i-tab key="1" title="待办事项"></i-tab>
     <i-tab key="2" title="已办事项"></i-tab>
+    <i-tab key="3" title="我发起的"></i-tab>
 </i-tabs>
 
 <view class="lists" bindtap='showDetail1' data-id="{{item.id}}" data-status="{{item.status}}" data-key="{{item.procIns.procDef.key?item.procIns.procDef.key:item.formKey}}" data-biz="{{item.procIns.bizKey?item.procIns.bizKey:item.bizKey}}" hover-class='hover1' hover-stay-time='50'>
-  <!-- <view class="left">
-    <image src="../../images/add.png" wx:if="{{current==1}}"></image>
-    <image src="../../images/finish.png" wx:if="{{current==2}}"></image>
-    <image src="../../images/about.png" wx:if="{{current==3}}"></image>
-    <view class="mark1 hide1"></view>
-  </view> -->
+
   <view class="right">
     <view class="title" wx:if="{{current==3}}">
       楼道巡检
@@ -38,12 +34,12 @@
       {{item.name}}
     </view>
     <view class="time1"  wx:if="{{current==3}}">
-      <text>流程类型:</text>
-      {{item.procDef.name}}
+      <text>发起类型:</text>
+      报障
     </view>
     <view class="time1"  wx:if="{{current==3}}">
       <text>发起人:</text>
-      {{item.startUserName}}
+      某人
     </view>
     <view class="time1" wx:if="{{current!=3}}">
       <text>{{item.assigneeInfo}}</text>
@@ -63,18 +59,17 @@
     </view>
 
      <view class="time1" wx:if="{{current==3}}">
-      <text>启动时间:</text>
-      {{item.startTime}}
+      <text>发起时间:</text>
+      2020-09-10 18:00
     </view>
-    <view class="time1" wx:if="{{current==3&&item.endTime}}">
+    <view class="time1" wx:if="{{current==3}}">
       <text>结束时间:</text>
-      {{item.endTime}}
+      2020-09-10 20:00
     </view>
     
-    <view class="count2">紧急</view>
-    <view class="count1" wx:if="{{item.priority==100}}">重要</view>
-    <view class="count2" wx:if="{{item.priority==150}}">紧急</view>
-    <view class="count3" wx:if="{{current==3&&item.status==1}}">进行</view>
+    <view class="count1" wx:if="{{current==4}}">重要</view>
+    <view class="count2" wx:if="{{current==1||current==2}}">紧急</view>
+    <view class="count3" wx:if="{{current==3}}">进行</view>
     <view class="count4" wx:if="{{current==3&&item.status==2}}">结束</view>
   </view>
   <view style="height:10rpx;width:100%;clear:both"></view>

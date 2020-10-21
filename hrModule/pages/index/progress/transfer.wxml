@@ -84,6 +84,7 @@
     </view>
     <view class="codePicker">
       <text>{{lists.postNameIn}}</text>
+      <image src="../../../images/file.png" bindtap="copy" data-cont="{{lists.postNameIn}}"></image>
     </view>
   </view>
   <view class="title">

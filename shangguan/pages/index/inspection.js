@@ -16,6 +16,8 @@ Page({
   data: {
     index:0,
     array:['正常','异常'],
+    index1:0,
+    array1:['天台','楼道','储物间'],
     title:'添加备注',
     content:'无异常',
     lists:[],
@@ -29,13 +31,15 @@ Page({
       }
     ],
     visible:false,
+    today:'',
+    time:''
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    this.getToday()
   },
 
   /**
@@ -202,4 +206,28 @@ handleOpen() {
       visible: true
   });
 },
+placeChange(e){
+  this.setData({
+    index1:e.detail.value
+  })
+},
+timeChange(e){
+  this.setData({
+    time:e.detail.value
+  })
+},
+getToday(e){
+  var date = new Date()
+  var year = date.getFullYear()>=10?date.getFullYear():'0'+date.getFullYear()
+  var month = (date.getMonth()-1+2)>=10?(date.getMonth()-1+2):'0'+(date.getMonth()-1+2)
+  var day = date.getDate()>=10?date.getDate():'0'+date.getDate()
+  var hour = date.getHours()>=10?date.getHours():'0'+date.getHours()
+  var second = date.getMinutes()>=10?date.getMinutes():'0'+date.getMinutes()
+  var today = year+'-'+month+'-'+day
+  var time = hour+':'+second
+  this.setData({
+    today:today,
+    time:time
+})
+}
 })

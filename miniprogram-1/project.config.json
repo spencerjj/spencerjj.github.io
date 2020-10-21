@@ -35,7 +35,7 @@
     "packNpmRelationList": []
   },
   "compileType": "miniprogram",
-  "libVersion": "2.12.0",
+  "libVersion": "2.13.1",
   "appid": "wxa3e59e4bb65452ea",
   "projectname": "minimart",
   "debugOptions": {

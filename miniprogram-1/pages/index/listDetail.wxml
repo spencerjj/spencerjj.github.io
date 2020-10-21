@@ -26,7 +26,7 @@
 		</view>
 		<view class="table">
 			<view class="tr bg-w">
-				<view class="th ">吊牌单价</view>
+				<view class="th ">吊牌总价</view>
 				<view class="th ">成交总价</view>
 			</view>
 			<block>

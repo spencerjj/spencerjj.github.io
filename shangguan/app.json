@@ -1,15 +1,15 @@
 {
   "pages": [
+    "pages/index/inform",
+    "pages/index/inspection",
     "pages/index/report",
     "pages/index/call",
     "pages/index/newsList",
-    "pages/index/inspection",
     "pages/my/my",
     "pages/index/shopLists",
     "pages/index/check",
     "pages/index/news",
-    "pages/index/check1",
-    "pages/index/inform"
+    "pages/index/check1"
   ],
   "tabBar": {
     "color": "#bfbfbf",

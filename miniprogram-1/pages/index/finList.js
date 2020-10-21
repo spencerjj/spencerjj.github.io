@@ -103,7 +103,7 @@ Page({
     that.setData({
       name: userInfo.username,
       phoneNo: userInfo.loginCode,
-      sid: '892dc3044b434840a464339b08bfa0aa',
+      sid: userInfo.sid,
       companyCode: userInfo.companyCode,
       officeName: userInfo.officeName,
       pageNo: 1
@@ -153,8 +153,8 @@ Page({
       __sid: that.data.sid,
       pageNo: that.data.pageNo,
       pageSize: that.data.pageSize,
-      shopName: '',
-      dailyNo:'E60320201016',
+      shopName: that.data.shopName,
+      dailyNo:that.data.dailyNo,
       startTime: that.data.startTime,
       endTime: that.data.endTime
     }

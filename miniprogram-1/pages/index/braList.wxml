@@ -93,7 +93,7 @@
 				<view class="tr bg-w">
 					<view class="th" style="width:60%">商品名称</view>
 					<view class="th">商品编码</view>
-					<view class="th ">吊牌单价</view>
+					<view class="th ">吊牌总价</view>
 					<view class="th ">商品数量</view>
 					<view class="th ">成交总价</view>
 					<view class="th ">收货人</view>
