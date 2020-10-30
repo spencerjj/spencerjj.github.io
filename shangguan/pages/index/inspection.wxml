@@ -35,7 +35,7 @@
         src="/images/add3.png"  mode="aspectFill">
         </image>
       </view>
-      <view wx:for="{{lists}}" class="photo"  wx:if="{{lists.length>0}}">
+      <view wx:for="{{lists}}" class="photo"  wx:if="{{lists.length>0}}" wx:key="key">
         <image src="{{item}}" mode="aspectFill" bindtap="showPic" data-url="{{item}}"></image>
         <image src="/images/delete.png" class="delete" bindtap="delete" data-index="{{index}}"></image>
       </view>
@@ -55,9 +55,9 @@
 	</view>
   <view class="title">
     <view class="c1">
-      <text><text style="color:red;font-size:25rpx">*</text> {{title}}</text>
+      <text><text style="color:red;font-size:25rpx">*</text> 故障描述</text>
     </view>
-    <textarea class="codePicker1" value="{{content}}">
+    <textarea class="codePicker1" value="请输入故障详情">
 
 		</textarea>
   </view>

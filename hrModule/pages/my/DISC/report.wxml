@@ -1,0 +1,105 @@
+<view class="container" wx:if="{{type}}">
+  <view class="profile">
+			<image src="{{imgPath}}" mode="aspectFill"></image>
+		</view>
+  <view class="title">{{result.discTitle}}</view>
+  <view class="detail">用户名:{{result.empName}}　工号:{{result.empCode}}</view>
+  <view class="detail">测评时间:{{result.updateDate}}</view>
+  <resultD wx:if="{{type=='d'}}"/>
+  <resultI wx:elif="{{type=='i'}}"/>
+  <resultS wx:elif="{{type=='s'}}"/>
+  <resultC wx:elif="{{type=='c'}}"/>
+
+
+  <view class="pic">
+    <view class="x"></view>
+    <view class="y"></view>
+    <view class="area areaPos1" style="width:{{width}}rpx;height:{{height}}rpx" wx:if="{{mark==1}}">
+      <!-- <view style="position:absolute;width:20rpx;height:20rpx;background:rgb(0, 104, 172);border-radius:50%;top:-5rpx;right:-5rpx;white-space:nowrap"></view> -->
+    </view>
+    <view class="area areaPos2" style="width:{{width}}rpx;height:{{height}}rpx" wx:elif="{{mark==2}}">
+      <!-- <view style="position:absolute;width:20rpx;height:20rpx;background:rgb(0, 104, 172);border-radius:50%;top:-5rpx;left:-5rpx;white-space:nowrap"></view> -->
+    </view>
+    <view class="area areaPos3" style="width:{{width}}rpx;height:{{height}}rpx" wx:elif="{{mark==3}}">
+      <!-- <view style="position:absolute;width:20rpx;height:20rpx;background:rgb(0, 104, 172);border-radius:50%;bottom:-5rpx;right:-5rpx;white-space:nowrap"></view> -->
+    </view>
+    <view class="area areaPos4" style="width:{{width}}rpx;height:{{height}}rpx" wx:else="{{mark==4}}">
+      <!-- <view style="position:absolute;width:20rpx;height:20rpx;background:rgb(0, 104, 172);border-radius:50%;bottom:-5rpx;left:-5rpx;white-space:nowrap"></view> -->
+    </view>
+    <view class="topTitle">理性</view>
+    <view class="bottomTitle">感性</view>
+    <view class="leftTitle">内向被动</view>
+    <view class="rightTitle">外向主动</view>
+    <view style="position:absolute;left:30rpx;top:20rpx;font-size:30rpx;font-weight:bolder;text-align:center">
+      <view><text style="color:yellow">C</text>ompliance</view>
+      <view>完美型/服从者</view>
+    </view>
+    <view style="position:absolute;right:30rpx;top:20rpx;font-size:30rpx;font-weight:bolder;text-align:center">
+      <view><text style="color:yellow">D</text>ominance</view>
+      <view>支配性/控制者</view>
+    </view>
+    <view style="position:absolute;left:30rpx;bottom:20rpx;font-size:30rpx;font-weight:bolder;text-align:center">
+      <view><text style="color:yellow">S</text>teadiness</view>
+      <view>支配性/控制者</view>
+    </view>
+    <view style="position:absolute;right:30rpx;bottom:20rpx;font-size:30rpx;font-weight:bolder;text-align:center">
+      <view><text style="color:yellow">I</text>nfluence</view>
+      <view>支配性/控制者</view>
+    </view>
+  </view>
+  <view class="canPic">
+    <view class="title1">测试分值与图表</view>
+    <canvas canvas-id="myCanvas" class="myCanvas"></canvas>
+    <view class="pointsDetail">
+      <view class="points">
+        <view style="width: 100%;line-height:70rpx">本次选择详情(计数/分值)</view>
+        <view>
+          <view>
+            D
+          </view>
+          <view>
+            {{result.dcount}}题
+          </view>
+          <view>
+            {{result.dscore}}分
+          </view>
+        </view>
+        <view>
+          <view>
+            I
+          </view>
+          <view>
+            {{result.icount}}题
+          </view>
+          <view>
+            {{result.iscore}}分
+          </view>
+        </view>
+        <view>
+          <view>
+            S
+          </view>
+          <view>
+            {{result.scount}}题
+          </view>
+          <view>
+            {{result.sscore}}分
+          </view>
+        </view>
+        <view>
+          <view>
+            C
+          </view>
+          <view>
+            {{result.ccount}}题
+          </view>
+          <view>
+            {{result.cscore}}分
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>
+<i-toast id="toast" />
+<view style="height:100rpx;width:100%"></view>

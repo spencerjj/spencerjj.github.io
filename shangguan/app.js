@@ -59,6 +59,7 @@ App({
             data: {
               code: code,
               param_deviceType: 'mobileApp',
+              param_userType:'merchant',
               __ajax: 'json'
             },
             async: true,
@@ -71,10 +72,10 @@ App({
               })
               that.globalData.statusCode = res.statusCode
               if (res.statusCode == 200) {
-                if(res.data.data.result=='false'){
+                if(res.data.result=='false'){
                   wx.showModal({
                     title: '登录失败',
-                    content: res.data.data.message,
+                    content: res.data.message,
                     showCancel: false,
                     confirmText: '知道了',
                     confirmColor: '#1890FF'
@@ -82,14 +83,18 @@ App({
                   return;
                 }
                 var userDetails = {};
-                userDetails.mobile = res.data.data.mobile;
-                userDetails.userName = res.data.data.userName;
-                userDetails.office = res.data.data.officeName;
-                userDetails.__sid = res.data.data.__sid;
+                userDetails.companyName = res.data.companyName;
+                userDetails.companyCode = res.data.companyCode;
+                userDetails.userName = res.data.userName;
+                userDetails.userCode = res.data.userCode;
+                userDetails.officeName = res.data.officeName;
+                userDetails.officeCode = res.data.officeCode;
+                userDetails.loginCode = res.data.loginCode;
+                userDetails.__sid = res.data.__sid;
                 wx.removeStorageSync('userDetails');
                 wx.setStorageSync('userDetails', userDetails);
-                that.globalData.__sid = res.data.data.__sid;
-                resolve(res.data.data.__sid)
+                that.globalData.__sid = res.data.__sid;
+                resolve(res.data.__sid)
               } else {
                 wx.showModal({
                   title: '登录失败',

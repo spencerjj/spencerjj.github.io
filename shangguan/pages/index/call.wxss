@@ -1,21 +1,24 @@
-page {
-  background: #f7f7f7
-}
 
-.list {
+page {
+  background: #f7f7f7;
+}
+.content{
+  padding-bottom: 50rpx;
+  height: 100%;
+  overflow: hidden;
+}
+.list .top{
   width: 94%;
   margin-left: 3%;
-  height: 100rpx;
+  min-height: 100rpx;
   background: white;
   margin-top: 30rpx;
-  color: black;
+  color: #9b9b9b;
   line-height: 100rpx;
-  border-radius: 10rpx;
   position: relative;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  box-shadow: 0 0 5rpx #ccc;
 }
 .hover1{
   background:#eee
@@ -27,28 +30,121 @@ page {
   color:#9b9b9b
 }
 .list .date {
-  font-size: 32rpx;
-  font-weight: bolder;
+  font-size: 23rpx;
+float: right;
+margin-right: 50rpx;
+font-weight: bolder;
+border: 2rpx solid #5cadff;
+height: 30rpx;
+line-height: 30rpx;
+margin-top: 35rpx;
+padding: 0rpx 5rpx 0rpx 5rpx;
+border-radius: 10rpx;
+}
+.list .date1 {
+  font-size: 23rpx;
+float: right;
+margin-right: 50rpx;
+font-weight: bolder;
+border: 2rpx solid red;
+height: 30rpx;
+line-height: 30rpx;
+margin-top: 35rpx;
+padding: 0rpx 5rpx 0rpx 5rpx;
+border-radius: 10rpx;
+color:red
 }
 
 .list .name {
-  margin-left: 15rpx;
-  font-size: 32rpx;
+  margin-left: 10rpx;
+  font-size: 30rpx;
   font-weight: bolder;
-  min-width: 40%;
+  width: 35%;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
   float: left;
 }
-
+.list .title{
+  margin-left: 10rpx;
+  font-size: 30rpx;
+  font-weight: bolder;
+  width: 40%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  float: left;
+}
+.arraw {
+  width: 30rpx;
+  height: 35rpx;
+  top: 50%;
+  margin-top: -17.5rpx;
+  right: 15rpx;
+  position: absolute;
+  transition: 0.1s linear;
+}
 .call {
   width: 40rpx;
   height: 45rpx;
   top: 50%;
   margin-top: -22.5rpx;
   right: 20rpx;
-  position: absolute
+  position: absolute;
+}
+.selected{
+  transform: rotate(180deg);
+}
+
+.details{
+  height: 0;
+  opacity: 0;
+  margin-left: 100%;
+  transition: 0.2s linear;
+}
+.show{
+  height: 100%;
+  margin-left: 0;
+  opacity: 1;
+}
+.list .detail{
+  width: 94%;
+  margin-left: 3%;
+  height: 80rpx;
+  background: white;
+  color: #9b9b9b;
+  line-height: 80rpx;
+  position: relative;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  border-bottom:2rpx solid #eee;
+  padding-left: 20rpx;
+  box-sizing: border-box;
+  font-size: 30rpx;
+  font-weight: bolder;
+}
+.list .detail:first-child{
+  border-top:2rpx solid #eee;
+}
+.dtitle{
+  display:inline-block;
+  width: 23%;
+}
+.do image{
+  width: 30rpx;
+  height: 30rpx;
+  margin-top: 25rpx;
+  float:left;
+  margin-left: 37%;
+  margin-right: 10rpx;
+}
+.do{
+  text-align: center;
+  color: #5cadff !important;
+}
+.dotext{
+  float: left;
 }
 .nullDataInfo{
   width: 100%;
@@ -58,5 +154,23 @@ page {
   font-size: 30rpx;
   color: #ddd;
   padding-top: 50rpx;
-  padding-bottom:50rpx
+  padding-bottom:30rpx
 }
+
+.buskmark{
+  width: 100%;
+  text-align: center;
+  margin-top: 10rpx;
+}
+.buskmark image{
+  width:50rpx;
+  height: 50rpx;
+  animation: loadingRotate 0.8s linear infinite
+}
+
+@keyframes loadingRotate{
+  0% {transform: rotate(0deg);}
+  50% {transform: rotate(180deg);}
+  100% {transform: rotate(360deg);}
+}
+

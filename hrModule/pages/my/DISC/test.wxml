@@ -1,0 +1,24 @@
+<view class="container" wx:if="{{!loadAll}}">
+    <view class="title">请选择符合你的一个：</view>
+    <view class="sections">
+      <view class="section" bindtap="select" wx:for="{{current}}" data-mark="{{index}}" wx:key="index">
+        <view class="secItem {{item.mark?'secItemed':''}}">
+          <view class="secTitle {{item.mark?'secTitleed':''}}">{{item.topicTitle}}</view>
+          <view class="secCon">{{item.topicLabel}}</view>
+        </view>
+      </view>
+    </view>
+    <view class="action">
+      <view bindtap="preview">上一题</view>
+      <view>　　　</view>
+      <view bindtap="next">下一题</view>
+    </view>
+    <view class="notice">
+      当前第{{index+1}}题，共计{{lists.length}}题
+    </view>
+    <button class="confirm" disabled="{{!ifConfirm}}" bindtap="confirm">提交</button>
+
+</view>
+<i-spin fix wx:if="{{loadAll}}"></i-spin>
+<i-toast id="toast" />
+<view style="height:100rpx;width:100%"></view>

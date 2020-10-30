@@ -42,6 +42,9 @@
 		<view class="section" hover-class='hover1' hover-stay-time='50' data-url="360/360result" bindtap="toPage">
 			<image src="../../images/fenxi.png" class="icon"></image>  我的评估<image src="../../images/arraw1.png" class="arraw"></image>
 		</view>
+		<view class="section" hover-class='hover1' hover-stay-time='50' data-url="DISC/index" bindtap="toPage">
+			<image src="../../images/disc.png" class="icon" style="width:45rpx;height:45rpx"></image>  DISC测评<image src="../../images/arraw1.png" class="arraw"></image>
+		</view>
 		<!-- <view class="detailInfo">
 			<view class="detailSection" data-url="myTag" bindtap="toPage">
 				<view class="detailIcon">

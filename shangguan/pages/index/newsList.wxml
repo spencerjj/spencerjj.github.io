@@ -3,7 +3,7 @@
     <view class="date">{{item.date}}</view>
     <view class="content">
       <view class="top">
-        <image src="/images/offie.png" mode="aspectFill"></image>
+        <image src='http://tiebapic.baidu.com/forum/w%3D580/sign=cb059115dd8065387beaa41ba7dda115/11fef636afc3793152439272fcc4b74543a9114b.jpg' mode="aspectFill"></image>
       </view>
       <view class="text">
         {{item.content}}

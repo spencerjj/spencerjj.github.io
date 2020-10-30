@@ -41,15 +41,13 @@
   "isGameTourist": false,
   "simulatorType": "qywx_simulator_plugin",
   "simulatorPluginLibVersion": {
-    "qywx_simulator_plugin": "2.8.3"
+    "qywx_simulator_plugin": "2.10.1"
   },
   "condition": {
     "search": {
-      "current": -1,
       "list": []
     },
     "conversation": {
-      "current": -1,
       "list": []
     },
     "game": {
@@ -57,7 +55,6 @@
       "list": []
     },
     "miniprogram": {
-      "current": -1,
       "list": []
     }
   }

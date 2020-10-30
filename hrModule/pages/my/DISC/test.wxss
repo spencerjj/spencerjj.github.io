@@ -1,0 +1,69 @@
+.container{
+  width: 90%;
+  margin-left: 5%;
+}
+.title{
+  font-weight: bolder;
+  padding-top: 30rpx;
+  font-size: 35rpx;
+}
+
+.section{
+  width: 98%;
+  height: 180rpx;
+  border:2rpx dashed black;
+  border-radius: 10rpx;
+  margin-left: 15rpx;
+  margin-top: 15rpx;
+  margin-top: 50rpx;
+}
+.secItem{
+  width: 100%;
+  height: 180rpx;
+  border:2rpx solid black;
+  background: white;
+  margin-left: -15rpx;
+  margin-top: -15rpx;
+  border-radius: 10rpx;
+}
+.secItemed{
+  border-color: rgb(221, 3, 3) !important;
+}
+.secTitle{
+  font-size: 45rpx;
+  font-weight: bolder;
+  margin-left: 20rpx;
+  margin-top: 30rpx;
+}
+.secCon{
+  font-size: 30rpx;
+  color:#666;
+  font-weight: 100;
+  margin-left: 20rpx;
+  margin-top: 10rpx;
+}
+.secTitleed{
+  color:rgb(221, 3, 3) !important
+}
+.action{
+  text-align: center;
+  margin-top: 40rpx;
+}
+.action view{
+  display: inline-block;
+  font-size: 38rpx;
+  color:rgba(17, 107, 179);
+}
+.confirm{
+  height: 80rpx;
+  line-height: 80rpx;
+  background: rgba(17, 107, 179);
+  color:white;
+  margin-top: 50rpx;
+  width: 99%;
+}
+.notice{
+  text-align: center;
+  margin-top: 40rpx;
+  font-size: 38rpx;
+}

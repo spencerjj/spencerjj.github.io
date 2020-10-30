@@ -2,7 +2,7 @@
 <view class="i-class i-as {{ visible ? 'i-as-show' : '' }}">
     <view class="i-as-header i-class-header"><slot name="header"></slot></view>
     <view class="i-as-actions">
-        <view class="i-as-action-item" wx:for="{{ actions }}" wx:key="{{ item.name }}">
+        <view class="i-as-action-item" wx:for="{{ actions }}" wx:key="index">
             <i-button
                 bind:click="handleClickItem"
                 data-index="{{ index }}"

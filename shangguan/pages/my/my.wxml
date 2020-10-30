@@ -1,6 +1,6 @@
 <view class="container">
 	<view class="allSecion">
-		<view class="section"  bindtap="toPage" data-url="../index/report">
+		<view class="section"  bindtap="toPage" data-url="../index/guide">
 			<view class="secIcon">
 				<image
 					src="http://tiebapic.baidu.com/forum/w%3D580/sign=eba740a96e310a55c424defc87444387/8cd3e61190ef76c6bb7e21718a16fdfaae5167ce.jpg">

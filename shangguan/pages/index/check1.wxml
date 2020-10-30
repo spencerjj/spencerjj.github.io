@@ -1,23 +1,57 @@
-	<view class='container'>
-		<input class="main" value="紧急事故" placeholder-style='color:#af9d7f' bindinput='mainInput' disabled></input>
-		<view class="title">
-			<view class="c1">
-				<text>事故照片</text>
-			</view>
-			<view class="codePicker" bindtap="upload">
-				<!-- <image src="http://tiebapic.baidu.com/forum/w%3D580/sign=4c36fa524443fbf2c52ca62b807fca1e/cd014afbfbedab648925929ae036afc379311e27.jpg" class="notice"></image> -->
-        <image class="photo" src="http://tiebapic.baidu.com/forum/w%3D580/sign=cb059115dd8065387beaa41ba7dda115/11fef636afc3793152439272fcc4b74543a9114b.jpg" mode="widthFix"></image>
-			</view>
+<view class='container'>
+  <input class="main" value="日常巡检" placeholder-style='color:#af9d7f' bindinput='mainInput'></input>
+  <view class="title">
+		<view class="c1">
+			<text>报障时间</text>
 		</view>
-    	<view class="title">
-			<view class="c1">
-				<text>备注</text>
+			<view class="timePicker">
+				{{today}} {{time}}
 			</view>
-			<textarea class="codePicker1" value="仪器短路，紧急修复">
-				
-			</textarea>
+	</view>
+  <view class="title">
+		<view class="c1">
+			<text>报障地点</text>
 		</view>
-    <view class="progress">
-      处理
+			<view class="timePicker">
+				{{array1[index1]}}
+			</view>
+	</view>
+	<view class="title">
+    <view class="c1">
+      <text>故障描述</text>
+    </view>
+    <view class="codePicker1">
+			{{content}}
+		</view>
+  </view>
+  <view class="title">
+    <view class="c1">
+      <text>现场照片</text>
+    </view>
+    <view class="codePicker">
+			<image
+        src="{{lists[0]}}" class="up" wx:if="{{lists.length==1}}" mode="aspectFill" bindtap="showPic" data-url="{{lists[0]}}">
+      </image>
+      <view wx:for="{{lists}}" class="photo"  wx:if="{{lists.length>1}}">
+        <image src="{{item}}" mode="aspectFill" bindtap="showPic" data-url="{{item}}"></image>
+      </view>
     </view>
 	</view>
+	<view class="title">
+		<view class="c1">
+			<text><text style="color:red;font-size:25rpx">*</text> 故障类型</text>
+		</view>
+		<picker value="{{index}}" range="{{array}}" bindchange="pickChange">
+			<view class="timePicker">
+				{{array[index]}}
+				<image class="arraw" src="http://img.gagctv.com/17112314452261654"></image>
+			</view>
+		</picker>
+	</view>
+  <view class="progress" bindtap="handleOpen">
+    提交
+  </view>
+</view>
+<view style="width:100%;height:150rpx"></view>
+<i-action-sheet visible="{{visible}}" actions="{{actions}}" show-cancel bind:cancel="handleCancel" bind:click="handleClickItem" />
+<i-toast id="toast" />

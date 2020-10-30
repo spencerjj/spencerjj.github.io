@@ -1,0 +1,201 @@
+/* pages/my/DISC/report.wxss */
+.container{
+  width: 96%;
+  margin-left: 2%;
+  padding-top: 30rpx;
+  padding-bottom: 100rpx;
+}
+.title{
+  color:#69bcf9;
+  font-size: 45rpx;
+  font-weight: bolder;
+  text-align: right;
+  margin-bottom: 20rpx;
+}
+.title1{
+  color:#69bcf9;
+  font-size: 35rpx;
+  font-weight: bolder;
+  margin-bottom: 20rpx;
+  margin-top:30rpx
+}
+.detail{
+  text-align: right;
+  font-size: 28rpx;
+  color:#333;
+  font-weight: 100;
+  margin-bottom: 10rpx;
+}
+.profile {
+  width: 170rpx;
+  height: 170rpx;
+  border-radius: 50%;
+  overflow: hidden;
+  margin: 0 auto;
+  position: absolute;
+  top: 30rpx;
+  left: 30rpx;
+  z-index: 5;
+  box-shadow: 0px 0px 5px #939df2;
+}
+.profile image {
+  width: 100%;
+  height: 100%;
+}
+.pic{
+  width: 100%;
+  height: 600rpx;
+  border:1rpx solid white;
+  margin-top: 50rpx;
+  position: relative;
+  background: #69bcf9;
+  box-shadow: 0px 0px 5px #939df2;
+  color:white
+}
+.x{
+  position: absolute;
+  width: 70%;
+  margin-left: 15%;
+  height: 1rpx;
+  border-top: 2rpx solid white;
+  margin-top: 300rpx;
+  z-index: 9;
+}
+.y{
+  position: absolute;
+  height: 80%;
+  margin-top: 8%;
+  width: 1rpx;
+  border-left: 2rpx solid white;
+  margin-left: 50%;
+  z-index: 9;
+}
+.area{
+  width: 30rpx;
+  height: 30rpx;
+  position: absolute;
+  background: #eeeeee;
+  z-index: 3;
+  background: url('http://tiebapic.baidu.com/forum/w%3D580/sign=7e46ee45d15c1038247ececa8211931c/eb0c5bafa40f4bfb6cfb700b144f78f0f7361850.jpg') center ;
+  background-size: 100% 100%;
+  box-shadow: 0px 0px 5px #939df2;
+}
+.areaPos1{
+  left:50%;
+  bottom:50%;
+  transition: linear 1s;
+  /* border-radius: 0 100% 0 0; */
+}
+.areaPos2{
+  right:50%;
+  bottom:50%;
+  transition: linear 1s;
+  /* border-radius: 100% 0 0 0; */
+}
+.areaPos3{
+  left:50%;
+  top:50%;
+  transition: linear 1s;
+  /* border-radius: 0 0 100% 0; */
+}
+.areaPos4{
+  right:50%;
+  top:50%;
+  transition: linear 1s;
+  /* border-radius: 0 0 0 100%; */
+}
+.topTitle{
+  width: 100%;
+  text-align: center;
+  font-weight: bolder;
+  font-size: 35rpx;
+  position: absolute;
+  color:white;
+  top:5rpx;
+}
+.bottomTitle{
+  position: absolute;
+  color:white;
+  bottom: 5rpx;
+  width: 100%;
+  text-align: center;
+  font-weight: bolder;
+  font-size: 35rpx;
+}
+.leftTitle{
+  position: absolute;
+  color:white;
+  top:50%;
+  left:5rpx;
+  width: 80rpx;
+  text-align: center;
+  font-weight: bolder;
+  font-size: 35rpx;
+  margin-top: -45rpx;
+}
+.rightTitle{
+  position: absolute;
+  color:white;
+  top:50%;
+  right:5rpx;
+  width: 80rpx;
+  text-align: center;
+  font-weight: bolder;
+  font-size: 35rpx;
+  margin-top: -45rpx;
+}
+.canPic{
+  height: 1000rpx;
+  border-top:20rpx solid #eee;
+  margin-top: 30rpx;
+}
+.title1{
+  font-size: 37rpx;
+  font-weight: bolder;
+  margin-top: 30rpx;
+  color:#000000
+}
+.myCanvas{
+  width: 320px;
+  height: 600rpx;
+  border:2rpx solid #000;
+  margin:0 auto;
+  margin-top: 30rpx;
+
+}
+.pointsDetail{
+  height: 280rpx;
+  width: 100%;
+  margin-top: 20rpx;
+  float: right;
+}
+.pointsTitles{
+  float:right;
+  margin-right:30rpx;
+  
+}
+.pointsTitles view{
+  text-align: right;
+  height:70rpx;
+  line-height: 70rpx;
+}
+.points{
+  width: 320px;
+  height: 100%;
+  border:1rpx solid black;
+  margin:0 auto
+}
+.points{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.points>view{
+  width: 25%;
+  text-align: center;
+}
+.points>view view{
+  height: 70rpx;
+  line-height: 70rpx;
+}

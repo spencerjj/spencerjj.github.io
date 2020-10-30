@@ -2,6 +2,7 @@
 const {
   $Message,$Toast
 } = require('../../component/iview/base/index');
+const md5 = require('../../utils/md5')
 var app = getApp();
 import {
   getApiHost,
@@ -17,12 +18,11 @@ Page({
     index:0,
     array:['正常','异常'],
     index1:0,
-    array1:['天台','楼道','储物间'],
-    title:'添加备注',
-    content:'无异常',
+    array1:['南区','北区','西区','东区','楼道','天台'],
     lists:[],
-    total:6,
-    limit:6,
+    img:[],
+    total:9,
+    limit:9,
     actions: [
       {
           name: '提交',
@@ -40,6 +40,7 @@ Page({
    */
   onLoad: function (options) {
     this.getToday()
+    console.log(md5.b64Md5('1B2M2Y8AsgTpgAmY7PhCfg'))
   },
 
   /**
@@ -106,11 +107,75 @@ Page({
           // tempFilePath可以作为img标签的src属性显示图片
           const tempFilePaths = res.tempFilePaths
           var lists = that.data.lists
-          if(tempFilePaths.length>1){
+          if (tempFilePaths.length > 1) {
+            console.log('大于1')
             lists = lists.concat(tempFilePaths)
-          }else{
+            // for (let x in lists) {
+            //   wx.uploadFile({
+            //     url: app.globalData.ip+'/spc/api/res/upload', //仅为示例，非真实的接口地址
+            //     filePath: lists[x],
+            //     name: 'res',
+            //     formData: {
+            //       'user': 'test'
+            //     },
+            //     success(res) {
+            //       var data = JSON.parse(res.data).data
+            //       console.log(JSON.parse(res.data).data)
+            //       data = data.split('/');
+            //       data = data[data.length - 1];
+            //       console.log(data)
+            //       var img1 = that.data.img
+            //       img1.push(data)
+            //       that.setData({
+            //         img: img1
+            //       })
+            //       if (img1.length == list.length) {
+            //         wx.showToast({
+            //           title: '',
+            //           icon: 'success',
+            //           duration: 2000
+            //         })
+            //       }
+            //     },
+            //     fail(res) {
+            //       console.log(res);
+            //     }
+            //   })
+            // }
+  
+          } else {
+            console.log('小于1')
             lists.push(tempFilePaths.toString())
+            // wx.uploadFile({
+            //   url: app.globalData.ip+'/spc/api/res/upload', //仅为示例，非真实的接口地址
+            //   filePath: tempFilePaths.toString(),
+            //   name: 'res',
+            //   formData: {
+            //     'user': 'test'
+            //   },
+            //   success(res) {
+            //     var data = JSON.parse(res.data).data
+            //     console.log(JSON.parse(res.data).data)
+            //     data = data.split('/');
+            //     data = data[data.length - 1];
+            //     console.log(data)
+            //     var img1 = that.data.img
+            //     img1.push(data)
+            //     that.setData({
+            //       img: img1
+            //     })
+            //     wx.showToast({
+            //       title: '',
+            //       icon: 'success',
+            //       duration: 2000
+            //     })
+            //   },
+            //   fail(res) {
+            //     console.log(res);
+            //   }
+            // })
           }
+          
           console.log(lists)
           var limit = that.data.total-lists.length
           that.setData({
@@ -125,10 +190,6 @@ Page({
     this.setData({
       index:e.detail.value
     })
-      this.setData({
-        title:!e.detail.value?'添加备注':'异常描述',
-        content:!e.detail.value?'无异常':'异常情况'
-      })
   },
   delete(e){
     var index = e.currentTarget.dataset.index
@@ -148,9 +209,12 @@ Page({
     })
   },
   handleCancel() {
-    this.setData({
-        visible: false
-    });
+    const action = [...this.data.actions];
+    action[0].loading = false;
+      this.setData({
+        visible: false,
+        actions: action
+      });
 },
 
 handleClickItem({
@@ -181,7 +245,6 @@ handleClickItem({
             action[0].loading = false;
             that.setData({
               visible: false,
-              ifInput: false,
               actions: action
             });
             $Toast({
@@ -197,7 +260,13 @@ handleClickItem({
           showCancel: false,
           confirmText: '知道了',
           confirmColor: '#1890FF'
-        })
+        });
+          const action = [...this.data.actions];
+          action[0].loading = false;
+            this.setData({
+              visible: false,
+              actions: action
+            });
       });
   }
 },

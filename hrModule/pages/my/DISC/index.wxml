@@ -1,0 +1,10 @@
+<view class="container">
+  <view class="title">DISC性格测试</view>
+  <view class="line"></view>
+  <text class="content">DISC性格测评是国内外企业广泛应用的一种行为风格测试，用于测评、评估和帮助人们改善其行为方式、人际关系、工作绩效、团队合作、领导风格等。在本系统中，将人的性格分为四种类型，分别是Dominance-支配、 Influence-影响、Steady-稳健、以及Compliance-服从，而DISC, 正是代表了这四个英文单词的首字母。\n\n本测试采用40题问卷版本，并结合大样本统计分析方法运算出行为风格的强度指标。在测试时，请从每一题中的四个选择题中选择一个最符合你自己的，请第一印象快速作答，整个测试时间大约需要10分钟左右。</text>
+
+  <button class="btn" disabled="{{!ifTest}}" bindtap="toPage" data-url="test">开始测试</button>
+  <button class="btn" disabled="{{!ifResult}}" bindtap="toPage" data-url="report">我的报告</button>
+</view>
+<i-toast id="toast" />
+<view style="height:100rpx;width:100%"></view>

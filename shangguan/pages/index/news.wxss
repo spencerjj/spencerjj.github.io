@@ -12,7 +12,7 @@
   color:#555;
   font-size: 35rpx;
   margin-top: 20rpx;
-  margin-bottom: 50rpx;
+  margin-bottom: 30rpx;
 }
 .text{
   font-size: 30rpx;

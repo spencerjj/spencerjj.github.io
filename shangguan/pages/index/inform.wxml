@@ -5,7 +5,7 @@
     <i-tab key="3" title="我发起的"></i-tab>
 </i-tabs>
 
-<view class="lists" bindtap='showDetail1' data-id="{{item.id}}" data-status="{{item.status}}" data-key="{{item.procIns.procDef.key?item.procIns.procDef.key:item.formKey}}" data-biz="{{item.procIns.bizKey?item.procIns.bizKey:item.bizKey}}" hover-class='hover1' hover-stay-time='50'>
+<view class="lists" bindtap='showDetail' data-mark="check1" hover-class='hover1' hover-stay-time='50'>
 
   <view class="right">
     <view class="title" wx:if="{{current==3}}">
@@ -74,7 +74,7 @@
   </view>
   <view style="height:10rpx;width:100%;clear:both"></view>
 </view>
-<view class="lists" bindtap='showDetail' data-id="{{item.id}}" data-status="{{item.status}}" data-key="{{item.procIns.procDef.key?item.procIns.procDef.key:item.formKey}}" data-biz="{{item.procIns.bizKey?item.procIns.bizKey:item.bizKey}}" hover-class='hover1' hover-stay-time='50'>
+<view class="lists" bindtap='showDetail' data-mark="check"  hover-class='hover1' hover-stay-time='50'>
   <!-- <view class="left">
     <image src="../../images/add.png" wx:if="{{current==1}}"></image>
     <image src="../../images/finish.png" wx:if="{{current==2}}"></image>
@@ -227,6 +227,6 @@
   <image src="../../images/noData.png"></image>
   <view class="notext">当前暂无流程</view>
 </view> -->
-<view class="add" bindtap='showDetail'>
+<view class="add" bindtap='showDetail' data-mark="guide">
   <image src="../../images/add.png"></image>
 </view>

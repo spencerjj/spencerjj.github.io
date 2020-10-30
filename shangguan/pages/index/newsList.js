@@ -113,13 +113,13 @@ Page({
       __ajax: 'json',
       empCode: that.data.userDetails.userId
     }
-    getRequest(getApiHost(), 'api/tag/TagAllByEmpCodeForMobile.json', 'body', data, 0, false, false).then(
-      res => {
-        if (res.result && res.result == 'login') {
-          that.login()
-          console.log('登录失效')
-          return;
-        }
+    // getRequest(getApiHost(), 'api/tag/TagAllByEmpCodeForMobile.json', 'body', data, 0, false, false).then(
+    //   res => {
+    //     if (res.result && res.result == 'login') {
+    //       that.login()
+    //       console.log('登录失效')
+    //       return;
+    //     }
         // if(res.data.list.length==0){
           //     that.setData({
           //       loading:false,
@@ -191,11 +191,11 @@ Page({
           loading:true
         })
       }
-    ).catch(res => {
-      that.setData({
-        ifYearData: false
-      })
-    });
-  }
+  //   ).catch(res => {
+  //     that.setData({
+  //       ifYearData: false
+  //     })
+  //   });
+  // }
 
 })

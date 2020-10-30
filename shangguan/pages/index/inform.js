@@ -227,32 +227,9 @@ Page({
     })
   },
   showDetail:function(e){
+    var url = e.currentTarget.dataset.mark
     wx.navigateTo({
-      url: 'check',
-    })
-    var url = ''
-    var current = this.data.current
-    if(e.currentTarget.dataset.key=='entry'){
-      url = 'progress/entry'
-    }else if(e.currentTarget.dataset.key=='out'){
-      url = 'progress/leave'
-    }else if(e.currentTarget.dataset.key=='recruitment'){
-      url = 'progress/apply'
-    }else if(e.currentTarget.dataset.key=='regular'){
-      url = 'progress/regular'
-    }else if(e.currentTarget.dataset.key=='transfer'){
-      url = 'progress/transfer'
-    }else if(e.currentTarget.dataset.key=='continue'){
-      url = 'progress/renew'
-    }
-    console.log(url+'?id='+e.currentTarget.dataset.id+'&status='+e.currentTarget.dataset.status+'&current='+current+'&biz='+e.currentTarget.dataset.biz+'&key='+e.currentTarget.dataset.key)
-    wx.navigateTo({
-      url: url+'?id='+e.currentTarget.dataset.id+'&status='+e.currentTarget.dataset.status+'&current='+current+'&biz='+e.currentTarget.dataset.biz+'&key='+e.currentTarget.dataset.key
-    })
-  },
-  showDetail1:function(e){
-    wx.navigateTo({
-      url: 'check1',
+      url: url,
     })
   },
   handleChange({detail}){

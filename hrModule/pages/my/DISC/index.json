@@ -1,0 +1,10 @@
+{
+  "navigationBarTitleText": "DISC性格测试",
+  "navigationBarTextStyle": "white",
+  "navigationBarBackgroundColor": "#69bcf9",
+  "enablePullDownRefresh": false,
+    "usingComponents": {
+      "resultC" : "../../../component/result/resultC",
+      "resultD" : "../../../component/result/resultD"
+    }
+}

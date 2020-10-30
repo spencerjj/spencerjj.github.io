@@ -1,0 +1,12 @@
+{
+  "navigationBarTitleText": "测试结果",
+  "navigationBarTextStyle": "white",
+  "navigationBarBackgroundColor": "#69bcf9",
+  "enablePullDownRefresh": false,
+    "usingComponents": {
+      "resultC" : "../../../component/result/resultC",
+      "resultD" : "../../../component/result/resultD",
+      "resultS" : "../../../component/result/resultS",
+      "resultI" : "../../../component/result/resultI"
+    }
+}

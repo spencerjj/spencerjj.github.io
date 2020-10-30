@@ -1,0 +1,11 @@
+/* component/result/resultC.wxss */
+.title{
+  font-size: 37rpx;
+  font-weight: bolder;
+  margin-top: 50rpx;
+  margin-bottom: 50rpx;
+}
+text{
+  font-size: 35rpx;
+  line-height: 60rpx;
+}

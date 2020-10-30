@@ -1,15 +1,18 @@
 {
   "pages": [
-    "pages/index/inform",
+    "pages/index/dailyCheck",
     "pages/index/inspection",
-    "pages/index/report",
+    "pages/index/inform",
     "pages/index/call",
+    "pages/index/guide",
+    "pages/index/news",
     "pages/index/newsList",
+    "pages/index/check1",
+    "pages/index/report",
     "pages/my/my",
     "pages/index/shopLists",
     "pages/index/check",
-    "pages/index/news",
-    "pages/index/check1"
+    "pages/index/back"
   ],
   "tabBar": {
     "color": "#bfbfbf",

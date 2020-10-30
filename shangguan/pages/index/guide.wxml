@@ -1,0 +1,29 @@
+<view class="main">
+<view>
+<view class="title">
+  普通故障
+</view>
+<view class="selection" bindtap='toPage' data-name="1" hover-class="tap" hover-stay-time=".5">
+  　电脑故障
+</view>
+<view class="selection" bindtap='toPage' data-name="1" hover-class="tap" hover-stay-time=".5">
+  　收银故障
+</view>
+<view class="selection" bindtap='toPage' data-name="1" hover-class="tap" hover-stay-time=".5">
+  　线路故障
+</view>
+</view>
+<view>
+  <view class="title">
+  物业故障
+</view>
+<view class="selection" bindtap='toPage' data-name="1" hover-class="tap" hover-stay-time=".5">
+  　大门故障
+</view>
+<view class="selection" bindtap='toPage' data-name="1" hover-class="tap" hover-stay-time=".5">
+  　水管故障
+</view>
+</view>
+<view style='height:50rpx;width:100%;background:#fff'></view>
+</view>
+
