@@ -3,7 +3,7 @@
 		<view class="section"  bindtap="toPage" data-url="../index/guide">
 			<view class="secIcon">
 				<image
-					src="http://tiebapic.baidu.com/forum/w%3D580/sign=eba740a96e310a55c424defc87444387/8cd3e61190ef76c6bb7e21718a16fdfaae5167ce.jpg">
+					src="/images/05-12.png">
 				</image>
 			</view>
 			故障上报
@@ -15,15 +15,15 @@
 		<view class="section" bindtap="toPage" data-url="../index/call">
 			<view class="secIcon">
 				<image
-					src="http://tiebapic.baidu.com/forum/w%3D580/sign=213c194eaf99a9013b355b3e2d950a58/e90418d8bc3eb1350df672e1b11ea8d3fd1f4441.jpg">
+					src="/images/05-13.png">
 				</image>
 			</view>
 			紧急呼叫
 		</view>
-		<view class="section">
+		<view class="section" bindtap="toPage" data-url="../index/report/reportContact">
 			<view class="secIcon">
 				<image
-					src="http://tiebapic.baidu.com/forum/w%3D580/sign=213f398002ce36d3a20483380af23a24/662a43a7d933c895abc95d21c61373f0830200c7.jpg">
+					src="/images/05-14.png">
 				</image>
 			</view>
 			工作联系单
@@ -31,7 +31,7 @@
 		<view class="section" bindtap="toPage" data-url="../index/newsList">
 			<view class="secIcon">
 				<image
-					src="http://tiebapic.baidu.com/forum/w%3D580/sign=70d947b9ea1f4134e0370576151e95c1/12c50b46f21fbe09bda4194e7c600c338644ad85.jpg">
+					src="/images/05-11.png">
 				</image>
 			</view>
 			通知公告
@@ -39,15 +39,15 @@
 		<view class="section" bindtap="toPage" data-url="../index/inspection">
 			<view class="secIcon">
 				<image
-					src="http://tiebapic.baidu.com/forum/w%3D580/sign=70d947b9ea1f4134e0370576151e95c1/12c50b46f21fbe09bda4194e7c600c338644ad85.jpg">
+					src="/images/05-7.png">
 				</image>
 			</view>
 			物业巡检
 		</view>
-		<view class="section" bindtap="toPage" data-url="../index/inspection">
+		<view class="section" bindtap="toPage" data-url="../index/dailyCheck">
 			<view class="secIcon">
 				<image
-					src="http://tiebapic.baidu.com/forum/w%3D580/sign=70d947b9ea1f4134e0370576151e95c1/12c50b46f21fbe09bda4194e7c600c338644ad85.jpg">
+					src="/images/05-6.png">
 				</image>
 			</view>
 			楼管巡场
@@ -55,7 +55,7 @@
 		<view class="section">
 			<view class="secIcon">
 				<image
-					src="http://tiebapic.baidu.com/forum/w%3D580/sign=70d947b9ea1f4134e0370576151e95c1/12c50b46f21fbe09bda4194e7c600c338644ad85.jpg">
+					src="/images/05-10.png">
 				</image>
 			</view>
 			总值班
@@ -63,7 +63,7 @@
 		<view class="section" bindtap="toPage" data-url="../index/shopLists">
 			<view class="secIcon">
 				<image
-					src="http://tiebapic.baidu.com/forum/w%3D580/sign=70d947b9ea1f4134e0370576151e95c1/12c50b46f21fbe09bda4194e7c600c338644ad85.jpg">
+					src="/images/05-5.png">
 				</image>
 			</view>
 			店铺管理
@@ -71,10 +71,11 @@
 		<view class="section">
 			<view class="secIcon">
 				<image
-					src="http://tiebapic.baidu.com/forum/w%3D580/sign=70d947b9ea1f4134e0370576151e95c1/12c50b46f21fbe09bda4194e7c600c338644ad85.jpg">
+					src="/images/05-9.png">
 				</image>
 			</view>
 			实时销售
 		</view>
 	</view>
 </view>
+<view style="position:absolute;bottom:10rpx;right:10rpx;font-size:28rpx;color:#af9d7f">版本:{{appVersion}}</view>

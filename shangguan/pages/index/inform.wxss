@@ -302,3 +302,6 @@ i-tabs {
   height: 60rpx;
   vertical-align: middle;
 }
+.addTap{
+  background: #eee;
+}

@@ -20,7 +20,8 @@ Page({
     loading: false,
     showNo: false,
     pageNo: 1,
-    pageSize: 10
+    pageSize: 10,
+    isMore:true
 
   },
 
@@ -47,7 +48,7 @@ Page({
     that.setData({
       userDetails: userDetails
     })
-    that.getTag()
+    that.getNews()
   },
 
   /**
@@ -86,7 +87,18 @@ Page({
   /**
    * 页面上拉触底事件的处理函数
    */
-  onReachBottom: function () {},
+  onReachBottom: function () {
+    var that = this;
+    console.log('到底了')
+    if (that.data.isMore) {
+      var pageNo = that.data.pageNo;
+      pageNo++;
+      that.setData({
+        pageNo: pageNo
+      })
+      that.showList()
+    }
+  },
 
   /**
    * 用户点击右上角分享
@@ -102,100 +114,82 @@ Page({
   toPage: function (e) {
     var data = e.currentTarget.dataset;
     wx.navigateTo({
-      url: 'news?id='+data.id
+      url: 'news?id=' + data.id
     })
   },
-  getTag(e) {
+  getNews(e) {
     var that = this
     var data = {
-      __sid: app.globalData.__sid,
-      // __sid:app.globalData.tempSid,
+      __sid: that.data.userDetails.sid,
       __ajax: 'json',
-      empCode: that.data.userDetails.userId
+      pageNo: that.data.pageNo,
+      pageSize: that.data.pageSize
     }
-    // getRequest(getApiHost(), 'api/tag/TagAllByEmpCodeForMobile.json', 'body', data, 0, false, false).then(
-    //   res => {
-    //     if (res.result && res.result == 'login') {
-    //       that.login()
-    //       console.log('登录失效')
-    //       return;
-    //     }
-        // if(res.data.list.length==0){
-          //     that.setData({
-          //       loading:false,
-          //       listIsFull:false,
-          //       showNo:true,
-          //       loadAll:false
-          //     })
-          // }else{
-          //   if(that.data.pageNo>1){
-          //     console.log('第'+that.data.pageNo+'页')
-          //     var list = that.data.lists
-          //     list = list.concat(res.data.list)
-          //     that.setData({
-          //       lists:list,
-          //       showNo:false,
-          //       loadAll:false
-          //     })
-          //     console.log(that.data.lists)
-          //   }else{
-          //     that.setData({
-          //     lists:res.data.list,
-          //     showNo:false,
-          //     loadAll:false
-          //   })
-          //   }
-            
-            
-          //   if(res.data.count>10){
-          //     that.setData({
-          //       loading:true,
-          //       listIsFull:false
-          //     })
-          //     if(Math.ceil(res.data.count/10)>that.data.pageNo){
-          //       that.setData({
-          //         isMore:true
-          //       })
-          //     }else{
-          //       that.setData({
-          //         isMore:false,
-          //         loading:false,
-          //         listIsFull:true
-          //       })
-          //     }
-          //   }else{
-          //     that.setData({
-          //       loading:false,
-          //       listIsFull:true
-          //     })
-          //   }
-          // }
-        var lists = [{
-            id: 1,
-            date: '9月18日 20:00',
-            content: '金秋十月非常乐观'
-          },
-          {
-            id: 2,
-            date: '9月18日 20:00',
-            content: '金秋十月非常乐观'
-          },
-          {
-            id: 3,
-            date: '9月18日 20:00',
-            content: '金秋十月非常乐观'
+    getRequest(getApiHost(), 'api/merchant/merchantNoticeList', 'body', data, 0, false, false).then(
+      res => {
+        if (res.result && res.result == 'login') {
+          that.login()
+          console.log('登录失效')
+          return;
+        }
+        if (res.data.list.length == 0) {
+          that.setData({
+            loading: false,
+            listIsFull: false,
+            showNo: true,
+            loadAll: false
+          })
+        } else {
+          if (that.data.pageNo > 1) {
+            console.log('第' + that.data.pageNo + '页')
+            var list = that.data.lists
+            list = list.concat(res.data.list)
+            that.setData({
+              lists: list,
+              showNo: false,
+              loadAll: false
+            })
+            console.log(that.data.list)
+          } else {
+            that.setData({
+              lists: res.data.list,
+              showNo: false,
+              loadAll: false
+            })
           }
-        ]
-        that.setData({
-          lists: lists,
-          loading:true
-        })
+          if (res.data.count > that.data.pageSize) {
+            that.setData({
+              loading: true,
+              listIsFull: false
+            })
+            if (Math.ceil(res.data.count / that.data.pageSize) > that.data.pageNo) {
+              that.setData({
+                isMore: true
+              })
+            } else {
+              that.setData({
+                isMore: false,
+                loading: false,
+                listIsFull: true
+              })
+            }
+          } else {
+            that.setData({
+              loading: false,
+              listIsFull: true
+            })
+          }
+        }
       }
-  //   ).catch(res => {
-  //     that.setData({
-  //       ifYearData: false
-  //     })
-  //   });
-  // }
+    ).catch(res => {
+      wx.showModal({
+        title: '错误',
+        content: res.message,
+        showCancel: false,
+        confirmText: '知道了',
+        confirmColor: '#1890FF'
+      });
+    });
+  }
 
 })

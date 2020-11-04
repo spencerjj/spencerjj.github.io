@@ -12,7 +12,7 @@
 			<text>退回节点</text>
 		</view>
 	</view>
-	<view class="lists {{item.sel?'selected':''}}" bindtap='select' wx:for="{{list}}" data-actid="{{item.activityId}}" data-actid="{{item.activityId}}" wx:for-index="index" data-index="{{index}}">
+	<view class="lists {{item.sel?'selected':''}}" bindtap='select' wx:for="{{list}}" data-actid="{{item.activityId}}" data-actid="{{item.activityId}}" wx:for-index="index" data-index="{{index}}" wx:key="index">
 		<view class="right">
 			<view class="time1">
 				<text>环节名称:</text>
@@ -23,8 +23,8 @@
 				{{item.activityName}}
 			</view>
 			<view class="count">
-				<image src="../../../images/01-27.jpg" wx:if="{{item.sel==1}}"></image>
-				<image src="../../../images/01-26.jpg" wx:else></image>
+				<image src="/images/01-27.jpg" wx:if="{{item.sel==1}}"></image>
+				<image src="/images/01-26.jpg" wx:else></image>
 			</view>
 		</view>
 	</view>

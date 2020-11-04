@@ -7,6 +7,9 @@ import {
   postRequest,
   getRequest
 } from '../../utils/api.js'
+import {
+  HOST_URI
+} from '../../config.js'
 Page({
 
   /**
@@ -29,10 +32,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    wx.setNavigationBarTitle({
-      title: '流程列表'
-    })
- 
+
   },
 
   /**
@@ -47,8 +47,9 @@ Page({
    */
   onShow: function () {
     var that = this;
+    let userDetails = wx.getStorageSync('userDetails')
       that.setData({
-          __sid:app.globalData.__sid,
+        userDetails: userDetails,
           lists:[]
         })
       that.showList()
@@ -118,31 +119,23 @@ Page({
   showList:function(){
     console.log('获取列表了了来了')
     var that = this;
-    var requestData = ''
     var requestUrl = ''
-    if(that.data.status==1||that.data.status==2){
-      requestData = {
-        __sid: that.data.__sid,
-        pageNo: that.data.pageNo,
-        pageSize: that.data.pageSize,
-        status:that.data.status,
-        __ajax:'json'
-      }
+    var data = {
+      __sid: that.data.userDetails.sid,
+      __ajax: 'json',
+      pageNo: that.data.pageNo,
+      pageSize: that.data.pageSize,
+      status:that.data.status
+    }
+    if(that.data.current!=3){
       requestUrl = 'bpm/bpmMyTask/listData.json'
-
     }else{
-      requestData = {
-        __sid: that.data.__sid,
-        pageNo: that.data.pageNo,
-        pageSize: that.data.pageSize,
-        __ajax:'json'
-      }
       requestUrl = 'bpm/bpmMyRuntime/listData.json'
     }
     
     wx.request({
-      url: app.globalData.url+requestUrl,
-      data: requestData,
+      url: HOST_URI+requestUrl,
+      data: data,
       header: {
         'content-type': 'application/json' // 默认值
       },
@@ -156,14 +149,12 @@ Page({
           }
         if(res.data.list){
           if(res.data.list.length==0){
-            // setTimeout(()=>{
               that.setData({
                 loading:false,
                 listIsFull:false,
                 showNo:true,
                 loadAll:false
               })
-            // },500)
           }else{
             if(that.data.pageNo>1){
               console.log('第'+that.data.pageNo+'页')
@@ -182,14 +173,12 @@ Page({
               loadAll:false
             })
             }
-            
-            
-            if(res.data.count>10){
+            if(res.data.count>that.data.pageSize){
               that.setData({
                 loading:true,
                 listIsFull:false
               })
-              if(Math.ceil(res.data.count/10)>that.data.pageNo){
+              if(Math.ceil(res.data.count/that.data.pageSize)>that.data.pageNo){
                 that.setData({
                   isMore:true
                 })
@@ -227,9 +216,13 @@ Page({
     })
   },
   showDetail:function(e){
-    var url = e.currentTarget.dataset.mark
+    var url = e.currentTarget.dataset.type
+    console.log(url)
+    if(url=='reportFail'){
+      url = 'checkFail'
+    }
     wx.navigateTo({
-      url: url,
+      url: url+'?id='+e.currentTarget.dataset.id+'&current='+this.data.current,
     })
   },
   handleChange({detail}){
@@ -239,7 +232,6 @@ Page({
     })
     this.setData({
       pageNo: 1,
-      pageSize:10,
       listIsFull: false,
       loading: false,
       loadAll:true,
@@ -247,6 +239,21 @@ Page({
       isMore:false,
       lists:''
     })
+    if(detail.key==1){
+      wx.setNavigationBarTitle({
+        title: '待办事项'
+      })
+    }else if(detail.key==2){
+      wx.setNavigationBarTitle({
+        title: '已办事项'
+      })
+    }else{
+      wx.setNavigationBarTitle({
+        title: '我发起的'
+      })
+    }
+    
+ 
     this.showList();
     wx.pageScrollTo({
       scrollTop: 0

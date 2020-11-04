@@ -1,18 +1,20 @@
 {
   "pages": [
-    "pages/index/dailyCheck",
-    "pages/index/inspection",
-    "pages/index/inform",
-    "pages/index/call",
     "pages/index/guide",
-    "pages/index/news",
-    "pages/index/newsList",
-    "pages/index/check1",
-    "pages/index/report",
+    "pages/index/report/reportContact", 
     "pages/my/my",
+    "pages/index/inform",
+    "pages/index/report/reportFail", 
+    "pages/index/inspection",
+    "pages/index/checkFail",
+    "pages/index/workContact",
+    "pages/index/newsList",
+    "pages/index/news",
+    "pages/index/dailyCheck",
+    "pages/index/call",
     "pages/index/shopLists",
-    "pages/index/check",
-    "pages/index/back"
+    "pages/index/back",
+    "pages/index/publish"
   ],
   "tabBar": {
     "color": "#bfbfbf",
@@ -62,7 +64,9 @@
     "i-step": "component/iview/step/index",
     "i-progress": "component/iview/progress/index",
     "i-drawer": "component/iview/drawer/index",
-    "i-input-number": "component/iview/input-number/index"
+    "i-drawer1": "component/iview/drawer1/index",
+    "i-input-number": "component/iview/input-number/index",
+    "i-card": "component/iview/card/index"
   },
   "sitemapLocation": "sitemap.json"
 }

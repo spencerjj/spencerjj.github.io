@@ -24,14 +24,15 @@ Page({
     loadAll: true,
     lists: '',
     appVersion: APP_VER,
-    voteCount: 0,
-    resCount: 0
+    pageNo:1,
+    pageSize:10
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    // this.getTag()
 
   },
 
@@ -54,6 +55,7 @@ Page({
     that.setData({
       userDetails: userDetails,
     })
+    console.log(userDetails)
     that.getTag()
   },
 
@@ -103,12 +105,12 @@ Page({
   getTag(e) {
     var that = this 
     var data={
-        __sid: app.globalData.__sid,
-        // __sid:app.globalData.tempSid,
+        __sid: that.data.userDetails.sid,
         __ajax: 'json',
-        empCode: that.data.userDetails.userId
+        pageNo:that.data.pageNo,
+        pageSize:that.data.pageSize
       }
-      getRequest(getApiHost(), 'api/tag/TagAllByEmpCodeForMobile.json', 'body', data, 0, false, false).then(
+      getRequest(getApiHost(), 'api/merchant/merchantNoticeList', 'body', data, 0, false, false,false).then(
         res => {
             if (res.result && res.result == 'login') {
                 that.login()
@@ -118,11 +120,7 @@ Page({
             let list = res.data
             console.log(list)
         }
-    ).catch(res => {
-        that.setData({
-            ifYearData: false
-        })
-    });
+    )
   }
 
 })

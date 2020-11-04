@@ -37,14 +37,14 @@ Page({
     var that = this;
     console.log(options.id)
     var id = options.id
+    let userDetails = wx.getStorageSync('userDetails')
     that.setData({
-      id:id
+      userDetails: userDetails,
     })
     wx.request({
       url: app.globalData.url + 'bpm/bpmTask/back.json',
       data: {
-        // __sid: app.globalData.__sid,
-        __sid: app.globalData.tempSid,
+        __sid: userDetails.sid,
         __ajax: 'json',
         id: id
       },
@@ -196,8 +196,7 @@ handleClick ({ detail }) {
     wx.request({
       url: app.globalData.url + 'bpm/bpmTask/backTask.json',
       data: {
-        // __sid: app.globalData.__sid,
-        __sid: app.globalData.tempSid,
+        __sid: that.data.userDetails.sid,
         __ajax: 'json',
         id: that.data.id,
         comment:that.data.hint,

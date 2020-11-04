@@ -1,18 +1,19 @@
 <view class="container">
   <view class="newsItem" wx:for="{{lists}}" wx:key="index" bindtap="toPage" data-id="{{item.id}}">
-    <view class="date">{{item.date}}</view>
+    <view class="date">{{item.createDate}}</view>
     <view class="content">
       <view class="top">
-        <image src='http://tiebapic.baidu.com/forum/w%3D580/sign=cb059115dd8065387beaa41ba7dda115/11fef636afc3793152439272fcc4b74543a9114b.jpg' mode="aspectFill"></image>
+        <!-- <image src='http://tiebapic.baidu.com/forum/w%3D580/sign=cb059115dd8065387beaa41ba7dda115/11fef636afc3793152439272fcc4b74543a9114b.jpg' mode="aspectFill"></image> -->
+        <image src='/images/news.jpg' mode="aspectFill"></image>
       </view>
       <view class="text">
-        {{item.content}}
+        {{item.title}}
       </view>
     </view>
   </view>
 </view>
-<view wx:if="{{!listIsFull}}" class='nullDataInfo'><i-load-more tip="无更多数据了" loading="{{ false }}" /></view>
-<view wx:if="{{!loading}}" class='buskmark'><image src='../../images/00-12.png'></image></view>
+<view wx:if="{{listIsFull}}" class='nullDataInfo'><i-load-more tip="无更多数据了" loading="{{ false }}" /></view>
+<view wx:if="{{loading}}" class='buskmark'><image src='../../images/00-12.png'></image></view>
 <view class="nodata" wx:if="{{showNo}}">
   <image src="../../images/noData.png"></image>
   <view class="notext">暂无资讯</view>

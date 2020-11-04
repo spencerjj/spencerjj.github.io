@@ -10,7 +10,8 @@ const {
   $Toast
 } = require('../../component/iview/base/index');
 import {
-  APP_VER
+  APP_VER,
+  URI
 } from '../../config.js'
 Page({
 
@@ -18,29 +19,21 @@ Page({
    * 页面的初始数据
    */
   data: {
-    imgPath: '',
     userDetails: '',
     loadAll: true,
-    nodes:'',
-
+    nodes: '',
+    id: '',
+    detail:''
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
-  var data = '<div><h3>javascript - <em>js同步编程</em>与异步编程的区别,异步有哪些优点,为什么...</h3><div><span>2016年5月20日 - </span>从编程方式来讲当然是<em>同步编程</em>的方式更为简单,但是同步有其局限性一是假如是单线程那么一旦遇到阻塞调用,会造成整个线程阻塞,导致cpu无法得到有效利用...</div><div><div></div><span ><span ></span></span> - 百度快照</div><div ><img src="/images/office.png"><span>为您推荐：</span>js同步和异步ajax异步和同步的区别</div></div>';
-  data = data
-  .replace(/<p([\s\w"=\/\.:;]+)((?:(style="[^"]+")))/ig, '<p')
-  .replace(/<div>/ig, '<div style="font-size: 15px; line-height: 25px;">')
-  .replace(/<img([\s\w"-=\/\.:;]+)((?:(height="[^"]+")))/ig, '<img$1')
-  .replace(/<img([\s\w"-=\/\.:;]+)((?:(width="[^"]+")))/ig, '<img$1')
-  .replace(/<img([\s\w"-=\/\.:;]+)((?:(style="[^"]+")))/ig, '<img$1')
-  .replace(/<img([\s\w"-=\/\.:;]+)((?:(alt="[^"]+")))/ig, '<img$1')
-  .replace(/<img([\s\w"-=\/\.:;]+)/ig, '<img$1 style="width: 100%; border-radius: 2px;"');
-
-   this.setData({ nodes:data })
+    var id = options.id;
+    this.setData({
+      id: id
+    })
   },
 
   /**
@@ -59,7 +52,7 @@ Page({
     that.setData({
       userDetails: userDetails
     })
-    // that.getTag()
+    that.getDetail()
   },
 
   /**
@@ -104,34 +97,39 @@ Page({
       this.onShow()
     })
   },
-  toPage: function (e) {
-    var data = e.currentTarget.dataset;
-    wx.navigateTo({
-      url: data.url
-    })
-  },
-  getTag(e) {
-    var that = this 
-    var data={
-        __sid: app.globalData.__sid,
-        // __sid:app.globalData.tempSid,
-        __ajax: 'json',
-        empCode: that.data.userDetails.userId
-      }
-      getRequest(getApiHost(), 'api/tag/TagAllByEmpCodeForMobile.json', 'body', data, 0, false, false).then(
-        res => {
-            if (res.result && res.result == 'login') {
-                that.login()
-                console.log('登录失效')
-                return;
-            }
-            let list = res.data
-            console.log(list)
+  getDetail(e) {
+    var that = this
+    var data = {
+      __sid: that.data.userDetails.sid,
+      __ajax: 'json',
+      id: this.options.id
+    }
+    getRequest(getApiHost(), 'api/merchant/merchantNoticeForm', 'body', data, 0, false, false).then(
+      res => {
+        if (res.result && res.result == 'login') {
+          that.login()
+          console.log('登录失效')
+          return;
         }
-    ).catch(res => {
-        that.setData({
-            ifYearData: false
+        let detail = res.data
+        console.log(detail)
+        var content = detail.content
+          .replace(/<p([\s\w"=\/\.:;]+)((?:(style="[^"]+")))/ig, '<p')
+          .replace(/<div>/ig, '<div style="font-size: 15px; line-height: 25px;color:#777;letter-spacing:1.5px">')
+          content= content.replace(new RegExp(/src=\"/g), `style="width: 100%; border-radius: 2.5px;" mode="aspectFill" src="`+URI)
+        this.setData({
+          detail:detail,
+          nodes: content
         })
+      }
+    ).catch(res => {
+      wx.showModal({
+        title: '错误',
+        content: res.message,
+        showCancel: false,
+        confirmText: '知道了',
+        confirmColor: '#1890FF'
+      });
     });
   }
 

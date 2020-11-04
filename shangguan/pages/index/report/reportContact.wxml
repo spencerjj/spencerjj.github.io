@@ -1,0 +1,80 @@
+<view class="content">
+  <input class="main" value="协同办公上报" placeholder-style='color:#af9d7f'
+    disabled></input>
+  <view class="title">
+		<view class="c1">
+			<text><text style="color:red;font-size:25rpx">*</text> 工作联系类型</text>
+		</view>
+		<picker value="{{index}}" range="{{array}}" bindchange="pickChange">
+			<view class="timePicker">
+				{{array[index]}}
+				<image class="arraw" src="http://img.gagctv.com/17112314452261654"></image>
+			</view>
+		</picker>
+  </view>
+  <view class="title">
+    <view class="c1" style="margin-bottom:20rpx">
+      <text>处理人</text>
+      <text style="float:right;font-weight:bolder;color:#0384ff;margin-top:5rpx" bindtap="showDrawer"  wx:if="{{user.name}}">修改</text>
+    </view>
+  </view>
+  <view class="add" wx:if="{{!user.name}}">
+    <text class="doAdd" bindtap="showDrawer">+添加</text>
+  </view>
+  <i-card wx:if="{{user.name}}" title="{{user.name}}" extra="{{user.office}}"
+    thumb="{{user.sex=='2'?'/images/nv.png':'/images/nan.png'}}">
+    <view slot="content">
+      手机号： {{user.phone}}
+      </view>
+  </i-card>
+  <i-drawer1 mode="top" wx:if="{{visibility}}" visible="true" bind:close="showDrawer">
+    <view class="sonLists" wx:if="{{sonvisibility}}">
+      <view wx:for="{{codeLists}}" class="sonItem" bindtap="selectItem" hover-class='hover1' hover-stay-time='50' data-name="{{item.name}}" data-office="{{item.office}}" data-phone="{{item.phone}}" data-code="{{item.code}}" data-sex="{{item.sex}}" wx:key="index">{{item.name}}({{item.office}})</view>
+    </view>
+    <view class="dtitle">
+      添加处理人
+    </view>
+    <view class="addDrawer">
+      <view class="title" style="z-index:1 !important">
+        <input class="c1Input" placeholder="请填写处理人姓名" placeholder-style='color:#af9d7f;padding:0' bindinput='checkInput'
+          value="{{keywords}}" bindconfirm="confirm" confirm-type="done" style="text-align:center;margin-top:30rpx" maxlength="20"></input>
+      </view>
+      <button class="progress1 btnwid" bindtap='addOne' hover-class='hover1' hover-stay-time='50'>添加</button>
+    </view>
+  </i-drawer1>
+
+  <view class="title">
+    <view class="c1">
+      <text> 添加图片</text>
+    </view>
+    <view class="codePicker">
+      <image
+        src="http://tiebapic.baidu.com/forum/w%3D580/sign=4c36fa524443fbf2c52ca62b807fca1e/cd014afbfbedab648925929ae036afc379311e27.jpg" class="up"  bindtap="upload" wx:if="{{imgLists.length<1}}">
+      </image>
+      <view class="photo photo1"  bindtap="upload"  wx:if="{{imgLists.length>0&&imgLists.length<total}}">
+        <image
+        src="/images/add3.png"  mode="aspectFill">
+        </image>
+      </view>
+      <view wx:for="{{imgLists}}" class="photo"  wx:if="{{imgLists.length>0}}" wx:key="index">
+        <image src="{{item}}" mode="aspectFill" bindtap="showPic" data-url="{{item}}"></image>
+        <image src="/images/delete.png" class="delete" bindtap="delete" data-index="{{index}}"></image>
+      </view>
+    </view>
+  </view>
+  <view class="title">
+    <view class="c1">
+      <text><text style="color:red;font-size:25rpx">*</text> 工作内容</text>
+    </view>
+    <textarea class="codePicker1" bindinput="input" placeholder="工作内容具体描述" placeholder-style="color:#af9d7f">
+    </textarea>
+  </view>
+
+  <view class="progress" bindtap="handleOpen">
+    提交
+  </view>
+</view>
+<i-toast id="toast" />
+<i-message id="message" />
+<i-action-sheet visible="{{visible}}" actions="{{actions}}" show-cancel bind:cancel="handleCancel"
+  bind:click="handleClickItem" />

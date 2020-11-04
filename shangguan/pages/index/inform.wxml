@@ -4,77 +4,7 @@
     <i-tab key="2" title="已办事项"></i-tab>
     <i-tab key="3" title="我发起的"></i-tab>
 </i-tabs>
-
-<view class="lists" bindtap='showDetail' data-mark="check1" hover-class='hover1' hover-stay-time='50'>
-
-  <view class="right">
-    <view class="title" wx:if="{{current==3}}">
-      楼道巡检
-    </view>
-    <view class="title" wx:else style="color:red">
-      紧急事故
-    </view>
-    
-    <!-- <view class="date">
-      2019-10-13 一禾
-    </view>
-    <view class="content">
-      讨论讨论具体流程
-    </view> -->
-    <view class="time1" wx:if="{{current==1}}">
-      <text>当前状态:</text>
-      待巡检
-    </view>
-    <view class="time1" wx:if="{{current==1}}">
-      <text>处理人:</text>
-      王某某
-    </view>
-    <view class="time1"  wx:if="{{current==2}}">
-      <text>环节名称:</text>
-      {{item.name}}
-    </view>
-    <view class="time1"  wx:if="{{current==3}}">
-      <text>发起类型:</text>
-      报障
-    </view>
-    <view class="time1"  wx:if="{{current==3}}">
-      <text>发起人:</text>
-      某人
-    </view>
-    <view class="time1" wx:if="{{current!=3}}">
-      <text>{{item.assigneeInfo}}</text>
-      
-    </view>
-    <view class="time1" wx:if="{{current!=3}}">
-      <text>创建时间:</text>
-      2020-09-10
-    </view>
-    <view class="time1" wx:if="{{current!=3}}">
-      <text>截止时间:</text>
-      2020-09-11
-    </view>
-    <view class="time1" wx:if="{{current==2}}">
-      <text>完成时间:</text>
-      {{item.endTime}}
-    </view>
-
-     <view class="time1" wx:if="{{current==3}}">
-      <text>发起时间:</text>
-      2020-09-10 18:00
-    </view>
-    <view class="time1" wx:if="{{current==3}}">
-      <text>结束时间:</text>
-      2020-09-10 20:00
-    </view>
-    
-    <view class="count1" wx:if="{{current==4}}">重要</view>
-    <view class="count2" wx:if="{{current==1||current==2}}">紧急</view>
-    <view class="count3" wx:if="{{current==3}}">进行</view>
-    <view class="count4" wx:if="{{current==3&&item.status==2}}">结束</view>
-  </view>
-  <view style="height:10rpx;width:100%;clear:both"></view>
-</view>
-<view class="lists" bindtap='showDetail' data-mark="check"  hover-class='hover1' hover-stay-time='50'>
+<view class="lists" bindtap='showDetail'  data-id="{{item.id}}" hover-class='hover1' hover-stay-time='50' wx:for="{{lists}}" data-status="{{item.status}}" wx:key="index" data-type="{{item.procIns?item.procIns.formKey:item.procDef.key}}">
   <!-- <view class="left">
     <image src="../../images/add.png" wx:if="{{current==1}}"></image>
     <image src="../../images/finish.png" wx:if="{{current==2}}"></image>
@@ -83,25 +13,14 @@
   </view> -->
   <view class="right">
     <view class="title" wx:if="{{current==3}}">
-      楼道巡检
+      {{item.name}}
     </view>
     <view class="title" wx:else>
-      1号楼道巡检
-    </view>
-    
-    <!-- <view class="date">
-      2019-10-13 一禾
-    </view>
-    <view class="content">
-      讨论讨论具体流程
-    </view> -->
-    <view class="time1" wx:if="{{current==1}}">
-      <text>当前状态:</text>
-      待巡检
+      {{item.procIns.name}}
     </view>
     <view class="time1" wx:if="{{current==1}}">
-      <text>处理人:</text>
-      王某某
+      <text>当前环节:</text>
+      {{item.name}}
     </view>
     <view class="time1"  wx:if="{{current==2}}">
       <text>环节名称:</text>
@@ -121,11 +40,7 @@
     </view>
     <view class="time1" wx:if="{{current!=3}}">
       <text>创建时间:</text>
-      2020-09-10
-    </view>
-    <view class="time1" wx:if="{{current!=3}}">
-      <text>截止时间:</text>
-      2020-09-11
+      {{item.createTime}}
     </view>
     <view class="time1" wx:if="{{current==2}}">
       <text>完成时间:</text>
@@ -141,7 +56,7 @@
       {{item.endTime}}
     </view>
     
-    <view class="count">日常</view>
+    <view class="count" wx:if="{{item.priority==50}}">一般</view>
     <view class="count1" wx:if="{{item.priority==100}}">重要</view>
     <view class="count2" wx:if="{{item.priority==150}}">紧急</view>
     <view class="count3" wx:if="{{current==3&&item.status==1}}">进行</view>
@@ -149,84 +64,14 @@
   </view>
   <view style="height:10rpx;width:100%;clear:both"></view>
 </view>
-<!-- <view class="lists" bindtap='showDetail'>
-  <view class="left">
-    <image src="../../images/about.png"></image>
-    <view class="mark1 hide1"></view>
-  </view>
-  <view class="right">
-    <view class="title">
-      大会议
-    </view>
-    <view class="date">
-      2019-10-13 一禾
-    </view>
-    <view class="content">
-      讨论讨论具体流程
-    </view>
-    <view class="time1">
-      <text>会议时间:</text>
-      10：14-11：15
-    </view>
-    <view class="time1">
-      <text>缴费项目:</text>
-      吃喝玩乐
-    </view>
-    <view class="time1">
-      <text>缴费金额:</text>
-      ￥1000
-    </view>
-    <view class="time2" wx:if="{{item.deadlineTime}}">
-      <text>提交时间:</text>
-      2018.19.11
-    </view>
-    <view class="count2">紧急</view>
-  </view>
-  <view style="height:10rpx;width:100%;clear:both"></view>
-</view>
-<view class="lists" bindtap='showDetail'>
-  <view class="left">
-    <image src="../../images/finish.png"></image>
-    <view class="mark1 hide1"></view>
-  </view>
-  <view class="right">
-    <view class="title">
-      大会议
-    </view>
-    <view class="date">
-      2019-10-13 一禾
-    </view>
-    <view class="content">
-      讨论讨论具体流程
-    </view>
-    <view class="time1">
-      <text>会议时间:</text>
-      10：14-11：15
-    </view>
-    <view class="time1">
-      <text>缴费项目:</text>
-      吃喝玩乐
-    </view>
-    <view class="time1">
-      <text>缴费金额:</text>
-      ￥1000
-    </view>
-    <view class="time2" wx:if="{{item.deadlineTime}}">
-      <text>提交时间:</text>
-      2018.19.11
-    </view>
-    <view class="count">一般</view>
-  </view>
-  <view style="height:10rpx;width:100%;clear:both"></view>
-</view> -->
-<!-- <i-spin fix wx:if="{{loadAll}}"></i-spin> -->
+<i-spin fix wx:if="{{loadAll}}"></i-spin>
 
-<view wx:if="{{!listIsFull}}" class='nullDataInfo'><i-load-more tip="无更多数据了" loading="{{ false }}" /></view>
+<view wx:if="{{listIsFull}}" class='nullDataInfo'><i-load-more tip="无更多数据了" loading="{{ false }}" /></view>
 <view wx:if="{{loading}}" class='buskmark'><image src='../../images/00-12.png'></image></view>
-<!-- <view class="nodata" wx:if="{{!showNo}}">
+<view class="nodata" wx:if="{{showNo}}">
   <image src="../../images/noData.png"></image>
   <view class="notext">当前暂无流程</view>
-</view> -->
-<view class="add" bindtap='showDetail' data-mark="guide">
+</view>
+<view class="add" bindtap='showDetail' hover-class="addTap" hover-stay-time=".5s" data-type="guide">
   <image src="../../images/add.png"></image>
 </view>

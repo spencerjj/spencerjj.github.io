@@ -1,27 +1,18 @@
-<view class="main">
+<view class="main" wx:if="{{typeLists1}}">
 <view>
 <view class="title">
-  普通故障
+  物业报障上报
 </view>
-<view class="selection" bindtap='toPage' data-name="1" hover-class="tap" hover-stay-time=".5">
-  　电脑故障
-</view>
-<view class="selection" bindtap='toPage' data-name="1" hover-class="tap" hover-stay-time=".5">
-  　收银故障
-</view>
-<view class="selection" bindtap='toPage' data-name="1" hover-class="tap" hover-stay-time=".5">
-  　线路故障
+<view class="selection" bindtap='toPage' data-name="2" hover-class="tap" hover-stay-time=".5" wx:for="{{typeLists1}}" data-type="{{item.dictCode}}" data-index="{{index}}">
+  　{{item.treeNames}}相关
 </view>
 </view>
 <view>
   <view class="title">
-  物业故障
+    协同办公上报
 </view>
-<view class="selection" bindtap='toPage' data-name="1" hover-class="tap" hover-stay-time=".5">
-  　大门故障
-</view>
-<view class="selection" bindtap='toPage' data-name="1" hover-class="tap" hover-stay-time=".5">
-  　水管故障
+<view class="selection" bindtap='toPage' data-name="1" hover-class="tap" hover-stay-time=".5" wx:for="{{typeLists2}}" data-type="{{item.dictCode}}" data-index="{{index}}">
+  　{{item.treeNames}}
 </view>
 </view>
 <view style='height:50rpx;width:100%;background:#fff'></view>

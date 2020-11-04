@@ -38,7 +38,6 @@ App({
     },
     statusCode: 0,
     __sid: '',
-    tempSid:'',
     userInfo: null,
     url: HOST_URI
   },
@@ -55,7 +54,7 @@ App({
             title: '自动登录中',
           })
           wx.request({
-            url: that.globalData.url + 'wx/cp/qywxLogin.json',
+            url: that.globalData.url + 'api/cp/qywxLogin',
             data: {
               code: code,
               param_deviceType: 'mobileApp',
@@ -90,11 +89,11 @@ App({
                 userDetails.officeName = res.data.officeName;
                 userDetails.officeCode = res.data.officeCode;
                 userDetails.loginCode = res.data.loginCode;
-                userDetails.__sid = res.data.__sid;
+                userDetails.sid = res.data.sid;
                 wx.removeStorageSync('userDetails');
                 wx.setStorageSync('userDetails', userDetails);
-                that.globalData.__sid = res.data.__sid;
-                resolve(res.data.__sid)
+                that.globalData.sid = res.data.sid;
+                resolve(res.data.sid)
               } else {
                 wx.showModal({
                   title: '登录失败',

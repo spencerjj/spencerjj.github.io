@@ -1,19 +1,18 @@
 <view class="content">  
-  <view class="list expired" wx:for="{{lists}}" data-index="{{index}}">
+  <view class="list expired" wx:for="{{lists}}" data-index="{{index}}" wx:for-item="itemName" wx:key="index">
     <view class="top" hover-class='hover1' hover-stay-time='50' bindtap="showDetail" data-index="{{index}}">
-    <text class="title">公司:<text class="active"> {{item.companyName}}</text></text>
-    <text class="name">职责:<text class="active"> {{item.title}}</text></text>
-    <image class="arraw {{item.mark==1?'selected':''}}" src="/images/lan.png"></image>
+    <text class="title">公司:<text class="active"> {{itemName.companyName}}</text></text>
+    <text class="name">职责:<text class="active"> {{itemName.title}}</text></text>
+    <image class="arraw {{itemName.mark?'selected':''}}" src="/images/lan.png"></image>
     </view>
-    <view class="details {{item.mark==1?'show':''}}">
-      <view class="detail"><text class="dtitle">联系人:</text><text class="active"> {{item.userName}}</text></view>
-      <view class="detail" bindtap="call" data-mark="{{item.phone}}"><text class="dtitle">手机号码:</text><text class="active"> {{item.phone}}</text><image class="call" src="/images/call1.png"></image></view>
-      <view class="detail" bindtap="call" data-mark="{{item.phone}}"><text class="dtitle">座机号码:</text><text class="active"> {{item.tel}}</text><image class="call" src="/images/call1.png"></image></view>
-      <view class="detail"><text class="dtitle">备注:</text><text class="active"> {{item.remark}}</text></view>
+    <view class="details {{itemName.mark?'show':''}}" wx:for="{{itemName.merchantContactDetailList}}" wx:for-item="son" wx:key="index">
+      <view class="detail"><text class="dtitle">联系人:</text><text class="active"> {{son.userName}}</text></view>
+      <view class="detail" bindtap="call" data-mark="{{son.phone}}"><text class="dtitle">手机号码:</text><text class="active"> {{son.phone}}</text><image class="call" src="/images/call1.png"></image></view>
+      <view class="detail" bindtap="call" data-mark="{{son.phone}}"><text class="dtitle">座机号码:</text><text class="active"> {{son.tel}}</text><image class="call" src="/images/call1.png"></image></view>
+      <view class="detail"><text class="dtitle">备注:</text><text class="active"> {{son.remark.length!=0?son.remark:'无备注'}}</text></view>
     </view>
   </view>
 </view>
 <i-toast id="toast" />
-<i-spin fix wx:if="{{loadAll}}"></i-spin>
 <view wx:if="{{listIsFull}}" class='nullDataInfo'><i-load-more tip="无更多数据了" loading="{{ false }}" /></view>
 <view wx:if="{{loading}}" class='buskmark'><image src='../../../images/00-12.png'></image></view>

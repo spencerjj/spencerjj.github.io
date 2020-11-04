@@ -85,7 +85,7 @@
 }
 
 .codePicker1 {
-  width: 100%;
+  width: 99%;
   height: 380rpx;
   color: #af9d7f;
   padding-left: 10rpx;
@@ -97,18 +97,36 @@
   font-weight: bolder;
 }
 
-.progress {
+.bottom{
+  width: 92%;
+  margin-left:4%;
+  background:white;
+  z-index: 99;
+  margin-top:50rpx;
+  display: flex;
+  justify-content: center;
+}
+.publish{
+  font-size: 35rpx;
+  background: #af9d7f;
+  color:white;
+  height: 80rpx;
+  line-height: 80rpx;
+  
+}
+.progress{
   font-size: 35rpx;
   background: white;
-  color: #af9d7f;
+  color:#af9d7f;
   border: 2rpx solid #af9d7f;
   height: 80rpx;
   line-height: 80rpx;
-  width: 99%;
-  text-align: center;
-  border-radius: 10rpx;
-  margin-top: 50rpx;
-  margin-bottom: 100rpx;
+}
+.btnwid{
+  width: 100%;
+}
+.btnwid1{
+  width: 40%;
 }
 
 .timePicker {
@@ -149,10 +167,7 @@
 }
 
 .up {
-  width: 150rpx;
-  height: 150rpx;
-  margin-top: 140rpx;
-  margin-left: 40%;
+  width: 100%;
 }
 
 .codePicker .photo {
@@ -198,4 +213,48 @@
 
 .red {
   color: red !important
+}
+.proShow{
+  height: 100%;
+  width: 100%;
+  background: #f7f7f7;
+}
+.lists{
+  position: relative; 
+  padding-left: 20rpx;
+  padding-top:10rpx;
+  clear: both;
+  padding-bottom: 20rpx;
+  z-index: 3;
+  background: white;
+  border-radius: 20rpx;
+  width: 98%;
+  margin:0 auto;
+  margin-bottom: 30rpx;
+  border: 2rpx solid #f3f3f3;
+  box-sizing: border-box;
+  box-shadow: 0 0 5px #ccc;
+  margin-left: -20rpx;
+  top:-50rpx
+}
+.right{
+  width: 100%;
+}
+.time1{
+  font-size: 30rpx;
+  line-height: 35rpx;
+  padding-top:15rpx;
+  font-weight: bolder;
+  color:#69bcf9
+}
+.time1 text{
+  display: inline-block;
+}
+.timeLeft{
+  width: 30%;
+  color:#666;
+  float: left;
+}
+.timeRight{
+  width: 65%;
 }

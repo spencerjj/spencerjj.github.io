@@ -228,6 +228,22 @@ handleClickItem({
   detail
 }) {
   var that = this
+  var lists = that.data.lists
+  for(let x in lists){
+    if(lists[x].pic.length==0||!lists[x].pic){
+      $Toast({
+        content:'请完成上传巡检照片',
+        type:'warning'
+      })
+      const action = [...this.data.actions];
+      action[0].loading = false;
+        this.setData({
+          visible: false,
+          actions: action
+        });
+      return;
+    }
+  }
   const index = detail.index + 1;
   // 提交操作
   if (index == 1) {

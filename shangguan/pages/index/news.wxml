@@ -1,9 +1,9 @@
 <view class="container">
   <view class="title">
-    嘉奖!
+    {{detail.title}}
   </view>
   <view class="date">
-    2020-09-30  　企业简讯
+    {{detail.createDate}}  {{detail.companyName}}
   </view>
   <!-- <view class="text">
     　　9月10日至9月16日，常州购物中心举行了秋季VIP盛典活动。在活动前夕，门店进行了大量预热和宣传，尤其是对高端VIP客户进行了一对一精准邀约，并且针对高端会员到店增设高金额满额赠礼等一系列精准举措，提高了高端会员返店率。

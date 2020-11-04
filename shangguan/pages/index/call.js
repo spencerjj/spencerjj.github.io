@@ -1,6 +1,7 @@
 // pages/index/progress/voteList.js
 const {
-  $Message,$Toast
+  $Message,
+  $Toast
 } = require('../../component/iview/base/index');
 var app = getApp();
 import {
@@ -14,12 +15,11 @@ Page({
    * 页面的初始数据
    */
   data: {
-    lists:'',
-    pageSize:20,
-    pageNo:1,
-    loadAll:true,
-    loading:false,
-    listIsFull:false,
+    lists: '',
+    pageSize: 20,
+    pageNo: 1,
+    loading: false,
+    listIsFull: false,
   },
 
   /**
@@ -27,12 +27,11 @@ Page({
    */
   onLoad: function (options) {
     var that = this
-      let userDetails = wx.getStorageSync('userDetails')
-      that.setData({
-        userDetails: userDetails,
-      })
-      that.showList()
-     
+    let userDetails = wx.getStorageSync('userDetails')
+    that.setData({
+      userDetails: userDetails,
+    })
+    that.showList()
   },
 
   /**
@@ -46,7 +45,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    this.onLoad()
+
   },
 
   /**
@@ -62,27 +61,11 @@ Page({
   onUnload: function () {
     // this.gotoHomePage();
   },
-  gotoHomePage: function () {//自定义页面跳转方法
-    let that = this;
-    if (that.data.clickFlag) {
-        return;
-    } else {
-        that.setData({ clickFlag: true });
-    }
-    wx.switchTab({
-        url: '../my/my',
-    });
-},
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-    this.setData({
-      pageNo: 1,
-      listIsFull: false,
-      loading: false,
-      loadAll:true
-    })
+
     this.onLoad();
 
     wx.showNavigationBarLoading()
@@ -96,16 +79,7 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-    var that = this;
-    console.log('到底了')
-    if (that.data.isMore) {
-      var pageNo = that.data.pageNo;
-      pageNo++;
-      that.setData({
-        pageNo: pageNo
-      })
-      that.showList()
-    }
+
   },
 
   /**
@@ -114,69 +88,57 @@ Page({
   onShareAppMessage: function () {
 
   },
-  login(e){
+  login(e) {
     app.doLogin().then(data => {
       this.onLoad()
     })
   },
-  toPage(e){
-      wx.navigateTo({
-      url: 'estimate?id='+e.currentTarget.dataset.id
-    })
-  },
-  showList(e){
+  showList(e) {
     var that = this
-    var  data = {
-        __sid: app.globalData.__sid,
-        __ajax: 'json',
-        operatorId: that.data.userDetails.userId,
-        pageNo:that.data.pageNo,
-        pageSize:that.data.pageSize
+    var data = {
+      __sid: that.data.userDetails.sid,
+      __ajax: 'json',
+      operatorId: that.data.userDetails.userId,
+    }
+    getRequest(getApiHost(), 'api/merchant/merchantContact', 'body', data, 0, false, false).then(
+      res => {
+        if (res.result && res.result == 'login') {
+          that.login()
+          console.log('登录失效')
+          return;
+        }
+        let lists = res.data
+        console.log(lists)
+        lists.map((item) => {
+          item.mark = 0
+        })
+        that.setData({
+          lists: lists,
+          listIsFull: true
+        })
       }
-    var lists = [
-      {
-        companyName:'百货',
-        title:'报障',
-        userName:'联系人',
-        phone:'131123123123',
-        tel:'0510-89887838',
-        remark:'专业人员'
-      },
-      {
-        companyName:'蓝豹',
-        title:'检修',
-        userName:'联系人',
-        phone:'131123123123',
-        tel:'0510-89887838',
-        remark:'专业人员'
-      },
-      {
-        companyName:'新世纪',
-        title:'维护',
-        userName:'联系人',
-        phone:'131123123123',
-        tel:'0510-89887838',
-        remark:'专业人员'
-      }]
-      lists.map((item)=>{
-        item.mark = 0
-      })
-      that.setData({
-      lists:lists,
-      loadAll:false,
-      listIsFull:true
-    })
+    ).catch(res => {
+      wx.showModal({
+        title: '错误',
+        content: res.message,
+        showCancel: false,
+        confirmText: '知道了',
+        confirmColor: '#1890FF'
+      });
+    });
   },
-  showDetail(e){
+  
+  showDetail(e) {
     var that = this;
     var lists = that.data.lists;
     var index = e.currentTarget.dataset.index
-    lists[index].mark = !lists[index].mark 
+    lists[index].mark = !lists[index].mark
+    console.log(lists)
     that.setData({
-      lists:lists
+      lists: lists
     })
   },
-  call(e){
+  call(e) {
     wx.makePhoneCall({
       phoneNumber: e.currentTarget.dataset.mark //仅为示例，并非真实的电话号码
     })

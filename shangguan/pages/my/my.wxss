@@ -40,21 +40,30 @@ page{
     margin-top: 30rpx;
 }
 .section:first-child .secIcon{
-    background: rgb(124, 3, 3);
+    background: rgb(183, 36, 30);
 }
 .section:nth-child(2) .secIcon{
-    background: rgb(2, 2, 116)
+    background: rgb(245, 195, 83)
 }
 .section:nth-child(3) .secIcon{
-    background: rgb(1, 99, 1)
+    background: rgb(153, 203, 196)
 }
 .section:nth-child(4) .secIcon{
-    background: darkgoldenrod
+    background: rgb(80, 172, 102)
 }
 .section:nth-child(5) .secIcon{
-    background: rgb(105, 34, 141)
+    background: rgb(77, 159, 206)
 }
 .section:nth-child(n+6) .secIcon{
-    background: darkolivegreen
+    background: rgb(235, 108, 62)
+}
+.section:nth-child(n+7) .secIcon{
+    background: rgb(103, 53, 149)
+}
+.section:nth-child(n+8) .secIcon{
+    background: rgb(169,168, 172)
+}
+.section:nth-child(n+9) .secIcon{
+    background: rgb(125, 65, 31)
 }
 
