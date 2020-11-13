@@ -1,40 +1,56 @@
 <view class='container'>
-  <input class="main" value="故障上报" placeholder-style='color:#af9d7f' bindinput='mainInput'></input>
+  <input class="main" value="{{name}}" placeholder-style='color:#af9d7f' bindinput='mainInput'></input>
   <view class="title">
 		<view class="c1">
-			<text>报障时间</text>
+			<text>发起时间</text>
 		</view>
 			<view class="timePicker">
-				{{lists.createDate}}
-			</view>
-	</view>
-  <view class="title">
-		<view class="c1">
-			<text>报障部门</text>
-		</view>
-			<view class="timePicker">
-				{{lists.officeName}}
+				{{list.createDate}}
 			</view>
 	</view>
 	<view class="title">
 		<view class="c1">
-			<text>报障人员</text>
+			<text>发起人公司</text>
 		</view>
 			<view class="timePicker">
-				{{lists.userName}}
+				{{list.companyName}}
+			</view>
+	</view>
+  <view class="title">
+		<view class="c1">
+			<text>发起人部门</text>
+		</view>
+			<view class="timePicker">
+				{{list.officeName}}
+			</view>
+	</view>
+	<view class="title">
+		<view class="c1">
+			<text>发起人</text>
+		</view>
+			<view class="timePicker">
+				{{list.userName}}
+			</view>
+	</view>
+	<view class="title">
+		<view class="c1">
+			<text>报障类型</text>
+		</view>
+			<view class="timePicker">
+				{{array[list.type]}}
 			</view>
 	</view>
 	<view class="title">
     <view class="c1">
-      <text>故障描述</text>
+      <text>报障内容</text>
     </view>
     <view class="codePicker1">
-			{{lists.remark}}
+			{{list.remark}}
 		</view>
   </view>
   <view class="title" wx:if="{{imgLists.length>0}}">
     <view class="c1">
-      <text>现场照片</text>
+      <text>图片</text>
     </view>
     <view class="codePicker">
 			<image
@@ -45,9 +61,9 @@
       </view>
     </view>
 	</view>
-	<view class="title">
+	<!-- <view class="title" wx:if="{{current==1&&list.bpm.activityId=='gwzx_deal'}}">
 		<view class="c1">
-			<text><text style="color:red;font-size:25rpx">*</text> 故障类型</text>
+			<text><text style="color:red;font-size:25rpx">*</text> 报障类型</text>
 		</view>
 		<picker value="{{index}}" range="{{array}}" bindchange="pickChange" disabled="{{current!=1}}">
 			<view class="timePicker">
@@ -55,6 +71,30 @@
 				<image class="arraw" src="http://img.gagctv.com/17112314452261654"></image>
 			</view>
 		</picker>
+	</view> -->
+	<view class="title" wx:if="{{current==1&&can&&list.bpm.activityId=='gwzx_deal'}}">
+    <view class="c1">
+      <text><text style="color:red;font-size:25rpx"  wx:if="{{current==1}}">*</text> 备注</text>
+    </view>
+    <textarea class="codePicker1" bindinput="input" placeholder-style="color:#af9d7f" placeholder="请填写备注信息">
+
+    </textarea>
+    
+  </view>
+	<view class="title" wx:if="{{list.bpm.activityId=='evaluate'||list.status==0}}">
+		<view class="c1">
+			<text><text style="color:red;font-size:25rpx"  wx:if="{{current==1}}">*</text> 打分</text>
+		</view>
+		<view style="text-align:center;padding-top:20rpx">
+			<i-cell title="自定义星星大小">
+        <i-rate
+            bind:change="onChange" 
+            value="{{starIndex}}" 
+						size="32"
+						disabled="{{current!=1}}">
+        </i-rate>
+    	</i-cell>
+		</view>
 	</view>
 	<view class="bottom">
 	<button class="progress {{current==1&&can?'btnwid1':'btnwid'}}" bindtap='progress' hover-class='hover1' hover-stay-time='50'>流程追踪</button>

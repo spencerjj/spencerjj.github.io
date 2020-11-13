@@ -217,12 +217,12 @@ Page({
   },
   showDetail:function(e){
     var url = e.currentTarget.dataset.type
-    console.log(url)
+    console.log(e.currentTarget.dataset.biz)
     if(url=='reportFail'){
       url = 'checkFail'
     }
     wx.navigateTo({
-      url: url+'?id='+e.currentTarget.dataset.id+'&current='+this.data.current,
+      url: url+'?id='+e.currentTarget.dataset.id+'&current='+this.data.current+'&bizKey='+e.currentTarget.dataset.biz+'&name='+e.currentTarget.dataset.name,
     })
   },
   handleChange({detail}){

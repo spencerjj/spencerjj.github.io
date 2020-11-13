@@ -3,12 +3,11 @@ import {
   getApiHost,
   postRequest,
   getRequest
-} from '../../../utils/api.js'
-const md5 = require('../../../utils/md5')
+} from '../../utils/api.js'
 var app = getApp();
 const {
   $Toast
-} = require('../../../component/iview/base/index');
+} = require('../../component/iview/base/index');
 Page({
 
   /**
@@ -29,16 +28,16 @@ Page({
     keycode: '',
     keyname: '',
     imgLists: [],
-    imgIdLists:[],
     total: 6,
-    limit: 1,
+    limit: 6,
     array: [],
     index: 0,
     userDetails: '',
     remark: '',
     typeLists: [],
     userName: '',
-    type:0
+    id:'',
+    task:''
   },
 
   /**
@@ -50,8 +49,9 @@ Page({
     that.setData({
       userDetails: userDetails,
       index:options.index,
+      type:options.type,
+      id:options.id
     })
-    this.showList()
   },
 
   /**
@@ -65,8 +65,8 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    
-    
+    this.showDetail()
+    this.showContact()
   },
 
   /**
@@ -105,45 +105,41 @@ Page({
   },
   login(e) {
     app.doLogin().then(data => {
-      this.onLoad()
+      this.onShow()
     })
   },
-  showList(e) {
+  showDetail(e){
     var that = this
-    var data = {
-      __sid: wx.getStorageSync('userDetails').sid,
-      __ajax: 'json',
-      type: 'work_contact_type'
-    }
-    postRequest(getApiHost(), 'api/merchant/getDicTypeList', 'url', data, 0, false, false).then(
-      res => {
-        if (res.result && res.result == 'login') {
-          that.login()
-          console.log('登录失效')
-          return;
+    wx.request({
+      url: app.globalData.url + 'bpm/bpmTask/back.json',
+      data: {
+        __sid: that.data.userDetails.sid,
+        __ajax: 'json',
+        id: that.data.id
+      },
+      header: {
+        'content-type': 'application/json' // 默认值
+      },
+      success(res) {
+        if(res.statusCode==200){
+          if(res.data.result&&res.data.result=='login'){
+            that.login()
+            console.log('未登录')
+            return;
+          }
+          console.log(res)
+          var task = res.data.task.name
+          that.setData({
+            task:task
+          })
+        }else{
+          $Toast({
+            content:'系统错误',
+            type:'error'
+          })
         }
-        let lists = res.data
-        let array = []
-        console.log(lists)
-        lists.map((item) => {
-          array.push(item.treeNames)
-        })
-        that.setData({
-          typeLists: lists,
-          array: array,
-          type:lists[0].dictValue
-        })
-
       }
-    ).catch(res => {
-      wx.showModal({
-        title: '错误',
-        content: res.message,
-        showCancel: false,
-        confirmText: '知道了',
-        confirmColor: '#1890FF'
-      });
-    });
+    })
   },
   showContact(e) {
     var that = this
@@ -248,20 +244,6 @@ Page({
       sonvisibility: false
     })
   },
-  delete(e) {
-    var index = e.currentTarget.dataset.index
-    console.log(index)
-    var imgLists = this.data.imgLists
-    imgLists.splice(index, 1)
-    var imgIdLists = this.data.imgIdLists
-    imgIdLists.splice(index, 1)
-    var limit = this.data.total - imgLists.length
-    this.setData({
-      imgLists: imgLists,
-      imgIdLists: imgIdLists,
-      limit: limit
-    })
-  },
   handleCancel() {
     this.setData({
       visible: false
@@ -291,14 +273,6 @@ Page({
         that.setData({
           visible: false
         })
-      } else if (that.data.remark.length < 1) {
-        $Toast({
-          content: '请填写工作内容',
-          type: 'warning'
-        })
-        that.setData({
-          visible: false
-        })
       } else {
         const action = [...this.data.actions];
         action[0].loading = true;
@@ -308,15 +282,12 @@ Page({
         var data = {
           __sid: that.data.userDetails.sid,
           __ajax: 'json',
-          dealUserName: that.data.user.name,
-          dealUserCode: that.data.user.code,
-          type: that.data.type,
-          remark: that.data.remark,
-          merchantWorkContact_image:that.data.imgIdLists.toString(),
-          status: 4,
+          id: that.data.id,
+          userCode: that.data.user.code,
+          comment: that.data.remark,
         }
         console.log(data)
-        postRequest(getApiHost(), 'api/merchant/merchantWorkContactSave', 'url', data, 0, false, false, false).then(
+        getRequest(getApiHost(), 'bpm/bpmTask/turnTask', 'body', data, 0, false, false).then(
           res => {
             if (res.result && res.result == 'login') {
               that.login()
@@ -336,7 +307,7 @@ Page({
               });
               setTimeout(()=>{
                 wx.switchTab({
-                  url: '/pages/index/inform',
+                  url: 'inform',
                 })
               },1000)
             }, 1000);
@@ -359,75 +330,6 @@ Page({
       }
     }
   },
-  upload() {
-    var that = this
-    if (that.data.limit > 0) {
-      wx.chooseImage({
-        count: that.data.limit,
-        sizeType: ['original', 'compressed'],
-        sourceType: ['album', 'camera'],
-        success(res) {
-          // tempFilePath可以作为img标签的src属性显示图片
-          const tempFilePaths = res.tempFilePaths
-          var imgLists = that.data.imgLists
-          if (tempFilePaths.length > 1) {
-            imgLists = imgLists.concat(tempFilePaths)
-          } else {
-            var timestamp = Date.parse(new Date())
-            wx.uploadFile({
-              url: getApiHost() + 'file/upload', //仅为示例，非真实的接口地址
-              filePath: tempFilePaths.toString(),
-              name: 'file',
-              formData: {
-                fileMd5: timestamp+'.png',
-                fileName:timestamp+'.png',
-                __sid: that.data.userDetails.sid,
-                __ajax: 'json',
-              },
-              success(res) {
-                console.log(JSON.parse(res.data))
-                var res = JSON.parse(res.data)
-                if(res.result=='true'){
-                  var imgIdLists = that.data.imgIdLists
-                  imgIdLists.push(res.fileUpload.id)
-                  imgLists.push(tempFilePaths.toString())
-                  var limit = that.data.total - imgLists.length
-                  that.setData({
-                    imgIdLists:imgIdLists,
-                    imgLists: imgLists,
-                    limit: limit
-                  })
-                }else{
-                  wx.showModal({
-                    title: '错误',
-                    content: res.message,
-                    showCancel: false,
-                    confirmText: '知道了',
-                    confirmColor: '#1890FF'
-                  });
-                }
-              },
-              fail(res) {
-                wx.showModal({
-                  title: '错误',
-                  content: '上传失败，请稍后再试',
-                  showCancel: false,
-                  confirmText: '知道了',
-                  confirmColor: '#1890FF'
-                });
-              }
-            })
-          }
-        }
-      })
-    }
-  },
-  showPic(e) {
-    wx.previewImage({
-      current: e.currentTarget.dataset.url,
-      urls: this.data.imgLists
-    })
-  },
   input(e) {
     var content = e.detail.value
     console.log(content)
@@ -436,10 +338,9 @@ Page({
     })
   },
   pickChange(e) {
-    console.log(this.data.typeLists[e.detail.value].dictValue)
     this.setData({
       index: e.detail.value,
-      type: this.data.typeLists[e.detail.value].dictValue
+      type: this.data.typeLists[e.detail.value].dictCode
     })
   },
 })

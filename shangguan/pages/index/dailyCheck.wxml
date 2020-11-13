@@ -1,40 +1,82 @@
 <view class='container'>
-  <input class="main" value="日常巡检" placeholder-style='color:#af9d7f' bindinput='mainInput'></input>
+  <input class="main" value="{{title?title:'日常巡检'}}" placeholder-style='color:#af9d7f' bindinput='mainInput'></input>
   <view class="title">
 		<view class="c1">
-			<text><text style="color:red;font-size:25rpx">*</text> 巡检时间</text>
+			<text><text style="color:red;font-size:25rpx">*</text> 班次</text>
 		</view>
-		<picker bindchange="timeChange" mode="time" value="{{time}}">
+		<picker value="{{cindex}}" range="{{class}}" bindchange="classChange">
 			<view class="timePicker">
-				{{today}} {{time}}
+        <text wx:if="{{cindex==5}}" style="color:#af9d7f">请选择班次</text>
+				{{class[cindex]}}
 				<image class="arraw" src="http://img.gagctv.com/17112314452261654"></image>
 			</view>
 		</picker>
-  </view>
-  <view wx:for="{{lists}}" wx:key="index" class="area">
-    <view class="title">
-		<view class="c1">
-			<text>巡检地点({{index+1}}/{{lists.length}})</text>
-		</view>
-			<view class="timePicker">
-				{{item.area}}
-			</view>
 	</view>
-  <view class="title">
-    <view class="c1">
-      <text><text style="color:red;font-size:25rpx">*</text> {{item.area}}巡检照片</text>
+
+  <view style="height:15rpx;width:100%;background:#f9f9f9" wx:if="{{cindex!=5}}"></view>
+  <view wx:for="{{lists}}" wx:key="index" class="area {{item.mark?'areaAll':''}}" wx:if="{{cindex!=5}}">
+    <view class="list">
+      <view class="top {{item.error?'error':''}}" hover-class='hover1' hover-stay-time='50' bindtap="showAll" data-index="{{index}}">
+        <text class="title">{{index+1}}、巡检地点:<text class="active"> {{item.area}}</text></text>
+				  <image src="/images/01-27.jpg" wx:if="{{item.pic.length>0}}" class="count"></image>
+				  <image src="/images/01-26.jpg" wx:else class="count"></image>
+        <image class="arraw {{item.mark?'selected':''}}" src="/images/lan.png"></image>
+      </view>
     </view>
-    <view class="codePicker"  bindtap="upload" data-index="{{index}}">
-      <image
-        src="http://tiebapic.baidu.com/forum/w%3D580/sign=4c36fa524443fbf2c52ca62b807fca1e/cd014afbfbedab648925929ae036afc379311e27.jpg" class="up" data-index="{{index}}" wx:if="{{item.pic.length==0}}"></image>
-        <image src="{{item.pic}}" wx:if="{{item.pic.length>0}}" class="rightPhoto" mode="aspectFill" bindtap="showPic" data-url="{{item.pic}}"></image>
-        <image src="/images/delete.png" class="delete" catchtap="delete" data-index="{{index}}"  wx:if="{{item.pic.length>0}}"></image>
+    <view class="title">
+      <view class="c1">
+        <text>巡检地点({{index+1}}/{{lists.length}})</text>
+      </view>
+      <view class="timePicker">
+        {{item.area}}
+      </view>
     </view>
-    <!-- <view class="tip">(南区、北区、西区、东区、楼道、天台)</view> -->
-  </view>
+    <view class="title">
+      <view class="c1">
+        <text>建议巡检时间</text>
+      </view>
+      <view class="timePicker">
+        {{item.time}}
+      </view>
+      <view class="tip" wx:if="{{item.over}}">*已超时，请尽快完成巡检</view>
+    </view>
+    <view class="title">
+      <view class="c1">
+        <text><text style="color:red;font-size:25rpx">*</text> {{item.area}}巡检照片</text>
+      </view>
+      <view class="codePicker" bindtap="upload" data-index="{{index}}">
+        <image
+          src="http://tiebapic.baidu.com/forum/w%3D580/sign=4c36fa524443fbf2c52ca62b807fca1e/cd014afbfbedab648925929ae036afc379311e27.jpg"
+          class="up" data-index="{{index}}" wx:if="{{item.pic.length==0}}"></image>
+        <image src="{{item.pic}}" wx:if="{{item.pic.length>0}}" class="rightPhoto" mode="aspectFill" bindtap="showPic"
+          data-url="{{item.pic}}"></image>
+        <image src="/images/delete.png" class="delete" catchtap="delete" data-index="{{index}}"
+          wx:if="{{item.pic.length>0}}"></image>
+      </view>
+    </view>
+    <view class="title" wx:if="{{proLists.length>0}}">
+      <view class="c1">
+        <text><text style="color:red;font-size:25rpx">*</text> 考核项目</text>
+      </view>
+      <picker value="{{item.index1}}" range="{{array}}" bindchange="pickChange" data-index="{{index}}">
+        <view class="timePicker">
+          {{array[item.index1]}}
+          <image class="arraw" src="http://img.gagctv.com/17112314452261654"></image>
+        </view>
+      </picker>
+    </view>
+    <view class="title">
+      <view class="c1">
+        <text><text style="color:red;font-size:25rpx">*</text> {{item.area}}现场情况描述</text>
+      </view>
+      <textarea class="codePicker1" placeholder="请输入现场情况描述，如:无异常" placeholder-class="placeholder" data-index="{{index}}"
+        bindinput="areaInput" value="{{item.remark}}">
+
+		</textarea>
+    </view>
   </view>
 
-  <view class="title">
+  <!-- <view class="title">
 		<view class="c1">
 			<text><text style="color:red;font-size:25rpx">*</text> 巡检情况</text>
 		</view>
@@ -52,10 +94,11 @@
     <textarea class="codePicker1" placeholder="请输入备注" placeholder-class="placeholder">
 
 		</textarea>
-  </view>
-  <view class="progress" bindtap="handleOpen">
+  </view> -->
+  <view class="progress" bindtap="handleOpen" wx:if="{{cindex!=5&&lists.length>0}}">
     提交
   </view>
 </view>
-<i-action-sheet visible="{{visible}}" actions="{{actions}}" show-cancel bind:cancel="handleCancel" bind:click="handleClickItem" />
+<i-action-sheet visible="{{visible}}" actions="{{actions}}" show-cancel bind:cancel="handleCancel"
+  bind:click="handleClickItem" />
 <i-toast id="toast" />

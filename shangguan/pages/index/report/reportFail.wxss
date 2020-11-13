@@ -1,6 +1,7 @@
 .container {
   width: 90%;
   margin-left: 5%;
+  padding-bottom: 120rpx;
 }
 
 .title {
@@ -93,7 +94,7 @@
   margin-top: 10rpx;
   position: relative;
   border: 1rpx solid #ccc;
-  font-size: 35rpx;
+  font-size: 40rpx;
   font-weight: bolder;
 }
 
@@ -119,7 +120,7 @@
   padding-left: 10rpx;
   margin-top: 10rpx;
   position: relative;
-  font-size: 35rpx;
+  font-size: 40rpx;
   border-bottom: 1rpx solid #eee;
   font-weight: bolder;
 }

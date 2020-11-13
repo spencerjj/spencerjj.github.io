@@ -113,14 +113,15 @@
 .departPicker{
   width: 97%;
   height: 80rpx;
-  border:2rpx dashed #ccc;
-  border-radius: 10rpx;
+  border-bottom: 1rpx solid #ccc;
   line-height: 80rpx;
-  color:#af9d7f;
-  padding-left: 20rpx;
-  margin-top:20rpx;
+  color: #af9d7f;
+  padding-left: 10rpx;
+  margin-top: 10rpx;
   position: relative;
-  font-size: 35rpx;
+  font-size: 40rpx;
+  background: white;
+  font-weight: bolder;
 }
 .c3{
   margin-top:30rpx;
@@ -218,7 +219,7 @@
 
 .codePicker1 {
   width: 98%;
-  min-height: 180rpx;
+  height: 380rpx;
   color: #af9d7f;
   padding-left: 10rpx;
   padding-top: 10rpx;
@@ -314,9 +315,6 @@
   white-space: nowrap;
   text-overflow:ellipsis;
   overflow:hidden;
-}
-.sonItem:last-child{
-  border-bottom: none;
 }
 ::-webkit-scrollbar
 {

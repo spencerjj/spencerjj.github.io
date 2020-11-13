@@ -1,6 +1,7 @@
 // pages/index/check.js
 const {
-  $Message,$Toast
+  $Message,
+  $Toast
 } = require('../../component/iview/base/index');
 const md5 = require('../../utils/md5')
 var app = getApp();
@@ -10,79 +11,85 @@ import {
   getRequest
 } from '../../utils/api.js'
 Page({
-
   /**
    * 页面的初始数据
    */
   data: {
-    index:0,
-    array:['正常','异常'],
-    array1:['南区','北区','西区','东区','楼道','天台'],
-    lists:[
-      {
-        id:111,
-        area:'南区',
-        pic:''
-      },
-      {
-        id:222,
-        area:'北区',
-        pic:''
-      },
-      {
-        id:333,
-        area:'西区',
-        pic:''
-      },
-      {
-        id:444,
-        area:'东区',
-        pic:''
-      },
-      {
-        id:555,
-        area:'楼道',
-        pic:''
-      },
-      {
-        id:666,
-        area:'南区',
-        pic:''
-      },
-      {
-        id:777,
-        area:'天台',
-        pic:''
-      },
-    ],
-    img:[],
-    total:9,
-    limit:9,
-    actions: [
-      {
-          name: '提交',
-          color:'#2d8cf0',
-          loading:false
-      }
-    ],
-    visible:false,
-    today:'',
-    time:''
+    class: ['早班', '中班', '晚班', '全天班'],
+    cindex: 5,
+    array: [],
+    lists: [],
+    img: [],
+    total: 9,
+    limit: 1,
+    actions: [{
+      name: '提交',
+      color: '#2d8cf0',
+      loading: false
+    }],
+    visible: false,
+    today: '',
+    time: '',
+    title: '',
+    classes: 0,
+    isRec:false,
+    proLists:[]
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    var that = this
     this.getToday()
-    console.log(md5.b64Md5('1B2M2Y8AsgTpgAmY7PhCfg'))
-    var lists = wx.getStorageSync('checkLists')
-    if(lists){
-      this.setData({
-        lists:lists
-      })
+    let userDetails = wx.getStorageSync('userDetails')
+    var type = options.type
+    var title = ''
+    console.log(type)
+    switch (type) {
+      case '1':
+        title = '物业巡检'
+        break;
+      case '2':
+        title = '楼管巡检'
+        break;
+      case '3':
+        title = '总值班巡检'
+        break;
+      case '4':
+        title = '安保巡检'
+        break;
     }
+    wx.setNavigationBarTitle({
+      title: title
+    })
+    this.setData({
+      title: title,
+      type: type,
+      userDetails: userDetails,
 
+    })
+    this.showList2()
+    var lists = wx.getStorageSync('checkLists')
+    if (lists&&wx.getStorageSync('type')==type) {
+      wx.showModal({
+        title: '提示',
+        content: '你有未保存巡检记录，是否重新编辑',
+        success (res) {
+          if (res.confirm) {
+            that.setData({
+              lists: lists,
+              isRec:true,
+              cindex:wx.getStorageSync('cindex')
+            })
+          } else if (res.cancel) {
+            wx.removeStorageSync('checkLists')
+            wx.removeStorageSync('cindex')
+            wx.removeStorageSync('type')
+          }
+        }
+      })      
+    }
   },
 
   /**
@@ -133,81 +140,204 @@ Page({
   onShareAppMessage: function () {
 
   },
-  login(e){
+  login(e) {
     app.doLogin().then(data => {
-        this.onLoad()
+      this.onLoad()
     })
   },
-  upload(e){
+  showList1(e) {
+    var that = this
+    var data = {
+      __sid: that.data.userDetails.sid,
+      __ajax: 'json',
+      checkType: that.data.type,
+      companyCode: that.data.userDetails.companyCode,
+      classes: that.data.classes
+    }
+    postRequest(getApiHost(), 'api/merchant/findSignatureList', 'url', data, 0, false, false).then(
+      res => {
+        if (res.result && res.result == 'login') {
+          that.login()
+          console.log('登录失效')
+          return;
+        }
+        var data = res.data
+        if(data.length<1){
+          $Toast({
+            content:'暂无签字点',
+            type:'warning'
+          })
+        }
+        var lists = []
+        console.log(data)
+        var date = new Date()
+        var hour = date.getHours()
+        var minute = date.getMinutes()
+        data.map((item)=>{
+          console.log(hour<item.signatureTime.slice(0,2))
+          if(hour>item.signatureTime.slice(0,2)){
+            var over = true
+          }else{
+            if(minute>item.signatureTime.slice(3,5)){
+              var over = true
+            }else{
+              var over = false
+            }
+          }
+          var x = {
+            id: item.id,
+            code:item.signatureCode,
+            area: item.signatureName,
+            time: item.signatureTime,
+            pic: '',
+            remark: '',
+            index1: 0,
+            mark: false,
+            error:false,
+            over:over
+          }
+          lists.push(x)
+        })
+        that.setData({
+          lists:lists
+        })
+      }
+    ).catch(res => {
+      wx.showModal({
+        title: '错误',
+        content: res.message,
+        showCancel: false,
+        confirmText: '知道了',
+        confirmColor: '#1890FF'
+      });
+    });
+  },
+  showList2(e) {
+    var that = this
+    var data = {
+      __sid: that.data.userDetails.sid,
+      __ajax: 'json',
+      type: that.data.type,
+      companyCode: that.data.userDetails.companyCode,
+    }
+    postRequest(getApiHost(), 'api/merchant/findMerchantProjectList', 'url', data, 0, false, false).then(
+      res => {
+        if (res.result && res.result == 'login') {
+          that.login()
+          console.log('登录失效')
+          return;
+        }
+        let proLists = res.data
+        console.log(proLists)
+        if(proLists.length>0){
+          let array = []
+          proLists.map((item)=>{
+            array.push(item.projectName)
+          })
+          that.setData({
+            proLists:proLists,
+            array:array
+          })
+        }
+      }
+    ).catch(res => {
+      wx.showModal({
+        title: '错误',
+        content: res.message,
+        showCancel: false,
+        confirmText: '知道了',
+        confirmColor: '#1890FF'
+      });
+    });
+  },
+  upload(e) {
     var that = this
     console.log(e.currentTarget.dataset.index)
     var index = e.currentTarget.dataset.index
     var lists = that.data.lists
-    if(lists[index].pic.length==0){
+    if (lists[index].pic.length == 0) {
       wx.chooseImage({
         count: 1,
         sizeType: ['original', 'compressed'],
         sourceType: ['camera'],
-        success (res) {
+        success(res) {
           // tempFilePath可以作为img标签的src属性显示图片
           const tempFilePaths = res.tempFilePaths
           console.log(tempFilePaths)
-          lists[index].pic = tempFilePaths.toString()
-          that.setData({
-            lists:lists
+          var timestamp = Date.parse(new Date())
+          wx.uploadFile({
+            url: getApiHost() + 'file/upload', //仅为示例，非真实的接口地址
+            filePath: tempFilePaths.toString(),
+            name: 'file',
+            formData: {
+              fileMd5: timestamp + '.png',
+              fileName: timestamp + '.png',
+              __sid: that.data.userDetails.sid,
+              __ajax: 'json',
+            },
+            success(res) {
+              console.log(JSON.parse(res.data))
+              var res = JSON.parse(res.data)
+              if (res.result == 'true') {
+                lists[index].pic = tempFilePaths.toString()
+                lists[index].imgId = res.fileUpload.id
+                lists[index].error = false
+                that.setData({
+                  lists: lists
+                })
+                wx.removeStorageSync('checkLists')
+                wx.setStorageSync('checkLists', lists)
+              } else {
+                wx.showModal({
+                  title: '错误',
+                  content: res.message,
+                  showCancel: false,
+                  confirmText: '知道了',
+                  confirmColor: '#1890FF'
+                });
+              }
+            },
+            fail(res) {
+              wx.showModal({
+                title: '错误',
+                content: '上传失败，请稍后再试',
+                showCancel: false,
+                confirmText: '知道了',
+                confirmColor: '#1890FF'
+              });
+            }
           })
-          console.log(lists)
-          wx.removeStorageSync('checkLists')
-          wx.setStorageSync('checkLists', lists)
-            // wx.uploadFile({
-            //   url: app.globalData.ip+'/spc/api/res/upload', //仅为示例，非真实的接口地址
-            //   filePath: tempFilePaths.toString(),
-            //   name: 'res',
-            //   formData: {
-            //     'user': 'test'
-            //   },
-            //   success(res) {
-            //     var data = JSON.parse(res.data).data
-            //     console.log(JSON.parse(res.data).data)
-            //     data = data.split('/');
-            //     data = data[data.length - 1];
-            //     console.log(data)
-            //     var img1 = that.data.img
-            //     img1.push(data)
-            //     that.setData({
-            //       img: img1
-            //     })
-            //     wx.showToast({
-            //       title: '',
-            //       icon: 'success',
-            //       duration: 2000
-            //     })
-            //   },
-            //   fail(res) {
-            //     console.log(res);
-            //   }
-            // })
-          
+
 
         }
       })
     }
   },
-  pickChange(e){
+  pickChange(e) {
+    console.log(e.currentTarget.dataset.index)
+    var index = e.currentTarget.dataset.index
+    var lists = this.data.lists
+    lists[index].index1 = e.detail.value
     this.setData({
-      index:e.detail.value
+      lists: lists
     })
+    wx.setStorageSync('checkLists', lists)
+    wx.setStorageSync('type', this.data.type)
+
   },
-  delete(e){
+  delete(e) {
     var index = e.currentTarget.dataset.index
     console.log(index)
     var lists = this.data.lists
-    lists[index].pic=''
+    lists[index].pic = ''
+    lists[index].imgId = ''
     this.setData({
-      lists:lists
+      lists: lists
     })
+    wx.setStorageSync('checkLists', lists)
+    wx.setStorageSync('type', this.data.type)
   },
-  showPic(e){
+  showPic(e) {
     var array = []
     array.push(e.currentTarget.dataset.url)
     wx.previewImage({
@@ -218,108 +348,317 @@ Page({
   handleCancel() {
     const action = [...this.data.actions];
     action[0].loading = false;
-      this.setData({
-        visible: false,
-        actions: action
-      });
-},
+    this.setData({
+      visible: false,
+      actions: action
+    });
+  },
 
-handleClickItem({
-  detail
-}) {
-  var that = this
-  var lists = that.data.lists
-  for(let x in lists){
-    if(lists[x].pic.length==0||!lists[x].pic){
-      $Toast({
-        content:'请完成上传巡检照片',
-        type:'warning'
-      })
-      const action = [...this.data.actions];
-      action[0].loading = false;
+  handleClickItem({
+    detail
+  }) {
+    var that = this
+    var lists = that.data.lists
+    lists.map((item)=>{
+      item.mark = false
+    })
+    that.setData({
+      lists:lists
+    })
+    for (let x in lists) {
+      if (lists[x].imgId.length == 0 || !lists[x].imgId) {
+        $Toast({
+          content: '请上传' + lists[x].area + '巡检照片',
+          type: 'warning'
+        })
+        lists[x].error = true
+        that.setData({
+          lists:lists
+        })
+        const action = [...this.data.actions];
+        action[0].loading = false;
         this.setData({
           visible: false,
           actions: action
         });
-      return;
-    }
-  }
-  const index = detail.index + 1;
-  // 提交操作
-  if (index == 1) {
-      const action = [...this.data.actions];
-      action[0].loading = true;
-      this.setData({
-        actions: action
-      });
-      var data = {
-        __sid: that.data.sid,
-        __ajax: 'json',
+        return;
       }
-      getRequest(getApiHost(), 'platform/v1/api/minireport/lampo/findAreaDetailList', 'body', data, 0, false, false).then(
-        res => {
-          if (res.result && res.result == 'login') {
-            that.login()
-            console.log('登录失效')
-            return;
-          }
-          console.log(res)
-          setTimeout(() => {
+      if (lists[x].remark.length == 0 || !lists[x].remark) {
+        $Toast({
+          content: '请填写' + lists[x].area + '现场情况描述',
+          type: 'warning'
+        })
+        lists[x].error = true
+        that.setData({
+          lists:lists
+        })
+        const action = [...this.data.actions];
+        action[0].loading = false;
+        this.setData({
+          visible: false,
+          actions: action
+        });
+        return;
+      }
+    }
+    const action = [...this.data.actions];
+    action[0].loading = true;
+    this.setData({
+      actions: action
+    });
+    console.log(that.data.lists)
+    var array = []
+    var proArray = []
+    var imgLists = []
+    var lists = that.data.lists
+    var proLists = that.data.proLists
+    lists.map((item,index)=>{
+      var x = {
+        signatureId:item.id,
+        signatureName:item.area,
+        remark:item.remark
+      }
+      if(item.index1){
+        var y = {
+          projectCode:proLists[item.index1].id,
+          projectName:proLists[item.index1].projectName,
+          remark:item.remark,
+          score:proLists[item.index1].score
+        }
+      }else{
+        var y = {
+          projectCode:proLists[0].id,
+          projectName:proLists[0].projectName,
+          remark:item.remark,
+          score:proLists[0].score
+        }
+      }
+      proArray.push(y)
+      array.push(x)
+      imgLists.push(item.imgId)
+    })
+    imgLists = imgLists.toString()
+    let postData = []
+    postData.__sid = that.data.userDetails.sid
+    postData.__ajax = 'json'
+    postData.type = that.data.type
+    postData.companyName = that.data.userDetails.companyName
+    postData.companyCode = that.data.userDetails.companyCode
+    postData.merchantCheckupOrder_image = imgLists
+    for (let x in array) {
+      postData['merchantCheckupOrderDetailList[' + x + '].signatureId'] = array[x].signatureId
+      postData['merchantCheckupOrderDetailList[' + x + '].signatureName'] = array[x].signatureName
+      postData['merchantCheckupOrderDetailList[' + x + '].remark'] = array[x].remark
+    }
+    for(let y in proArray){
+      postData['merchantCheckupOrderProList[' + y + '].projectCode'] = proArray[y].projectCode
+      postData['merchantCheckupOrderProList[' + y + '].projectName'] = proArray[y].projectName
+      postData['merchantCheckupOrderProList[' + y + '].remark'] = proArray[y].remark
+      postData['merchantCheckupOrderProList[' + y + '].score'] = proArray[y].score
+    }
+
+    // var data = {
+    //   __sid: that.data.userDetails.sid,
+    //   __ajax: 'json',
+    //   type:that.data.type,
+    //   merchantCheckupOrderDetailList:array,
+    //   merchantCheckupOrder_image:imgLists,
+    //   merchantCheckupOrderProList:proArray
+    // }
+    console.log(postData)
+    wx.request({
+      url: getApiHost() + 'api/merchant/merchantCheckupOrderSave',
+      method: 'post',
+      data: postData,
+      header: {
+        'content-type': 'application/x-www-form-urlencoded',
+      },
+      success(res) {
+        console.log(res)
+        if(res.statusCode==200){
+          if (res.data.result == 'login') {
             action[0].loading = false;
             that.setData({
               visible: false,
               actions: action
             });
             $Toast({
-              content: '提交成功！',
-              type: 'success'
-            });
-          }, 1000);
-        }
-      ).catch(res => {
-        wx.showModal({
-          title: '错误',
-          content: res.message,
-          showCancel: false,
-          confirmText: '知道了',
-          confirmColor: '#1890FF'
-        });
+              content:'登录失效，自动登录后重新提交',
+              type:'error'
+            })
+            that.login()
+            console.log('登录失效')
+            return;
+          }
+          if (res.data.result == 'false') {
+            $Toast({
+              content: res.data.data.message,
+              type:'error'
+            })
+            return;
+          }
+          if(res.data.result=='true'){
+            console.log(res)
+            setTimeout(() => {
+              action[0].loading = false;
+              that.setData({
+                visible: false,
+                actions: action
+              });
+              $Toast({
+                content: '提交成功！',
+                type: 'success'
+              });
+              setTimeout(()=>{
+                wx.switchTab({
+                  url: '/pages/my/my',
+                })
+                wx.removeStorageSync('checkLists')
+                wx.removeStorageSync('cindex')
+                wx.removeStorageSync('type')
+              },1000)
+            }, 1000);
+          }
+        }else{
+          $Toast({
+            content: '系统错误，请稍后再试',
+            type: 'error'
+          });
           const action = [...this.data.actions];
           action[0].loading = false;
-            this.setData({
-              visible: false,
-              actions: action
-            });
-      });
-  }
-},
-handleOpen() {
-  this.setData({
+          this.setData({
+            visible: false,
+            actions: action
+          });
+        }
+      }
+    })
+    // postRequest(getApiHost(), 'api/merchant/merchantCheckupOrderSave', 'url', postData, 0, false, false).then(
+    //   res => {
+    //     if (res.result && res.result == 'login') {
+    //       that.login()
+    //       console.log('登录失效')
+    //       return;
+    //     }
+    //     console.log(res)
+    //     setTimeout(() => {
+    //       action[0].loading = false;
+    //       that.setData({
+    //         visible: false,
+    //         actions: action
+    //       });
+    //       $Toast({
+    //         content: '提交成功！',
+    //         type: 'success'
+    //       });
+    //       setTimeout(()=>{
+    //         wx.switchTab({
+    //           url: '/pages/index/inform',
+    //         })
+    //       },1000)
+    //     }, 1000);
+    //   }
+    // ).catch(res => {
+    //   wx.showModal({
+    //     title: '错误',
+    //     content: res.message,
+    //     showCancel: false,
+    //     confirmText: '知道了',
+    //     confirmColor: '#1890FF'
+    //   });
+    //   const action = [...this.data.actions];
+    //   action[0].loading = false;
+    //   this.setData({
+    //     visible: false,
+    //     actions: action
+    //   });
+    // });
+  },
+  handleOpen() {
+    this.setData({
       visible: true
-  });
-},
-placeChange(e){
-  this.setData({
-    index1:e.detail.value
-  })
-},
-timeChange(e){
-  this.setData({
-    time:e.detail.value
-  })
-},
-getToday(e){
-  var date = new Date()
-  var year = date.getFullYear()>=10?date.getFullYear():'0'+date.getFullYear()
-  var month = (date.getMonth()-1+2)>=10?(date.getMonth()-1+2):'0'+(date.getMonth()-1+2)
-  var day = date.getDate()>=10?date.getDate():'0'+date.getDate()
-  var hour = date.getHours()>=10?date.getHours():'0'+date.getHours()
-  var second = date.getMinutes()>=10?date.getMinutes():'0'+date.getMinutes()
-  var today = year+'-'+month+'-'+day
-  var time = hour+':'+second
-  this.setData({
-    today:today,
-    time:time
-})
-}
+    });
+  },
+  placeChange(e) {
+    this.setData({
+      index1: e.detail.value
+    })
+  },
+  timeChange(e) {
+    this.setData({
+      time: e.detail.value
+    })
+  },
+  areaInput(e) {
+    var that = this;
+    console.log(e.currentTarget.dataset.index);
+    var index = e.currentTarget.dataset.index;
+    var lists = that.data.lists;
+    lists[index].remark = e.detail.value;
+    lists[index].error = false;
+    that.setData({
+      lists: lists
+    })
+    wx.setStorageSync('checkLists', lists)
+    wx.setStorageSync('type', that.data.type)
+  },
+  getToday(e) {
+    var date = new Date()
+    var year = date.getFullYear() >= 10 ? date.getFullYear() : '0' + date.getFullYear()
+    var month = (date.getMonth() - 1 + 2) >= 10 ? (date.getMonth() - 1 + 2) : '0' + (date.getMonth() - 1 + 2)
+    var day = date.getDate() >= 10 ? date.getDate() : '0' + date.getDate()
+    var hour = date.getHours() >= 10 ? date.getHours() : '0' + date.getHours()
+    var second = date.getMinutes() >= 10 ? date.getMinutes() : '0' + date.getMinutes()
+    var today = year + '-' + month + '-' + day
+    var time = hour + ':' + second
+    this.setData({
+      today: today,
+      time: time
+    })
+  },
+  showAll(e) {
+    var that = this
+    var lists = that.data.lists
+    var index = e.currentTarget.dataset.index
+    lists[index].mark = !lists[index].mark
+
+    that.setData({
+      lists: lists
+    })
+    wx.setStorageSync('checkLists', lists)
+    wx.setStorageSync('type', that.data.type)
+  },
+  classChange(e) {
+    var that = this
+    if(that.data.isRec){
+      wx.showModal({
+        title: '提示',
+        content: '切换班次将会清除当前记录，是否确认',
+        success (res) {
+          if (res.confirm) {
+            that.setData({
+              cindex: e.detail.value,
+              classes: e.detail.value -1+2
+            })
+            wx.removeStorageSync('checkLists')
+            wx.setStorageSync('cindex', e.detail.value)
+            wx.setStorageSync('type', that.data.type)
+            that.showList1()
+            that.showList2()
+          }
+        }
+      }) 
+    }else{
+      that.setData({
+        cindex: e.detail.value,
+        classes: e.detail.value -1+2
+      })
+      wx.setStorageSync('cindex', e.detail.value)
+      wx.setStorageSync('type', that.data.type)
+      that.showList1()
+      that.showList2()
+    }
+
+
+  }
 })

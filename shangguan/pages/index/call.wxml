@@ -8,7 +8,7 @@
     <view class="details {{itemName.mark?'show':''}}" wx:for="{{itemName.merchantContactDetailList}}" wx:for-item="son" wx:key="index">
       <view class="detail"><text class="dtitle">联系人:</text><text class="active"> {{son.userName}}</text></view>
       <view class="detail" bindtap="call" data-mark="{{son.phone}}"><text class="dtitle">手机号码:</text><text class="active"> {{son.phone}}</text><image class="call" src="/images/call1.png"></image></view>
-      <view class="detail" bindtap="call" data-mark="{{son.phone}}"><text class="dtitle">座机号码:</text><text class="active"> {{son.tel}}</text><image class="call" src="/images/call1.png"></image></view>
+      <view class="detail" bindtap="call" data-mark="{{son.tel}}"><text class="dtitle">座机号码:</text><text class="active"> {{son.tel}}</text><image class="call" src="/images/call1.png"></image></view>
       <view class="detail"><text class="dtitle">备注:</text><text class="active"> {{son.remark.length!=0?son.remark:'无备注'}}</text></view>
     </view>
   </view>

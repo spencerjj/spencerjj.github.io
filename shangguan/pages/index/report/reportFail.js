@@ -5,6 +5,7 @@ import {
   getRequest
 } from '../../../utils/api.js'
 var app = getApp();
+const md5 = require('../../../utils/md5')
 const {
   $Toast
 } = require('../../../component/iview/base/index');
@@ -14,23 +15,23 @@ Page({
    * 页面的初始数据
    */
   data: {
-    index:0,
-    array:[],
-    content:'',
-    imgLists:[],
-    total:6,
-    limit:6,
-    actions: [
-      {
-          name: '提交',
-          color:'#2d8cf0',
-          loading:false
-      }
-    ],
-    visible:false,
-    remark:'',
-    type:'',
-    userDetails:''
+    index: 0,
+    array: [],
+    content: '',
+    imgLists: [],
+    imgIdLists:[],
+    total: 6,
+    limit: 6,
+    actions: [{
+      name: '提交',
+      color: '#2d8cf0',
+      loading: false
+    }],
+    visible: false,
+    remark: '',
+    type: '',
+    userDetails: '',
+    name:''
   },
 
   /**
@@ -41,9 +42,8 @@ Page({
     let userDetails = wx.getStorageSync('userDetails')
     that.setData({
       userDetails: userDetails,
-      index:options.index,
-      type:options.type
     })
+    this.showList()
   },
 
   /**
@@ -57,7 +57,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    this.showList()
+    
   },
 
   /**
@@ -94,17 +94,17 @@ Page({
   onShareAppMessage: function () {
 
   },
-  login(e){
+  login(e) {
     app.doLogin().then(data => {
-      this.onShow()
+      this.onLoad()
     })
   },
-  showList(e){
+  showList(e) {
     var that = this
     var data = {
       __sid: that.data.userDetails.sid,
       __ajax: 'json',
-      type:'report_fail_type'
+      type: 'report_fail_type'
     }
     postRequest(getApiHost(), 'api/merchant/getDicTypeList', 'url', data, 0, false, false).then(
       res => {
@@ -114,14 +114,15 @@ Page({
           return;
         }
         let lists = res.data
-        let array = that.data.array
+        let array = []
         console.log(lists)
-        lists.map((item)=>{
+        lists.map((item) => {
           array.push(item.treeNames)
         })
         that.setData({
-          lists:lists,
-          array:array
+          lists: lists,
+          array: array,
+          type: lists[0].dictValue
         })
 
       }
@@ -135,51 +136,90 @@ Page({
       });
     });
   },
-  upload(){
+  upload() {
     var that = this
-    if(that.data.limit>0){
+    if (that.data.limit > 0) {
       wx.chooseImage({
         count: that.data.limit,
         sizeType: ['original', 'compressed'],
         sourceType: ['album', 'camera'],
-        success (res) {
+        success(res) {
           // tempFilePath可以作为img标签的src属性显示图片
           const tempFilePaths = res.tempFilePaths
           var imgLists = that.data.imgLists
-          if(tempFilePaths.length>1){
+          if (tempFilePaths.length > 1) {
             imgLists = imgLists.concat(tempFilePaths)
-          }else{
-            imgLists.push(tempFilePaths.toString())
+          } else {
+            var timestamp = Date.parse(new Date())
+            wx.uploadFile({
+              url: getApiHost() + 'file/upload', //仅为示例，非真实的接口地址
+              filePath: tempFilePaths.toString(),
+              name: 'file',
+              formData: {
+                fileMd5: timestamp+'.png',
+                fileName:timestamp+'.png',
+                __sid: that.data.userDetails.sid,
+                __ajax: 'json',
+              },
+              success(res) {
+                console.log(JSON.parse(res.data))
+                var res = JSON.parse(res.data)
+                if(res.result=='true'){
+                  var imgIdLists = that.data.imgIdLists
+                  imgIdLists.push(res.fileUpload.id)
+                  imgLists.push(tempFilePaths.toString())
+                  var limit = that.data.total - imgLists.length
+                  that.setData({
+                    imgIdLists:imgIdLists,
+                    imgLists: imgLists,
+                    limit: limit
+                  })
+                }else{
+                  wx.showModal({
+                    title: '错误',
+                    content: res.message,
+                    showCancel: false,
+                    confirmText: '知道了',
+                    confirmColor: '#1890FF'
+                  });
+                }
+              },
+              fail(res) {
+                wx.showModal({
+                  title: '错误',
+                  content: '上传失败，请稍后再试',
+                  showCancel: false,
+                  confirmText: '知道了',
+                  confirmColor: '#1890FF'
+                });
+              }
+            })
           }
-          console.log(imgLists)
-          var limit = that.data.total-imgLists.length
-          that.setData({
-            imgLists:imgLists,
-            limit:limit
-          })
         }
       })
     }
   },
-  pickChange(e){
+  pickChange(e) {
     this.setData({
-      index:e.detail.value,
-      type:this.data.lists[e.detail.value].dictCode
+      index: e.detail.value,
+      type: this.data.lists[e.detail.value].dictValue
     })
-
   },
-  delete(e){
+  delete(e) {
     var index = e.currentTarget.dataset.index
     console.log(index)
     var imgLists = this.data.imgLists
     imgLists.splice(index, 1)
-    var limit = this.data.total-imgLists.length
+    var imgIdLists = this.data.imgIdLists
+    imgIdLists.splice(index, 1)
+    var limit = this.data.total - imgLists.length
     this.setData({
-      imgLists:imgLists,
-      limit:limit
+      imgLists: imgLists,
+      imgIdLists: imgIdLists,
+      limit: limit
     })
   },
-  showPic(e){
+  showPic(e) {
     wx.previewImage({
       current: e.currentTarget.dataset.url,
       urls: this.data.imgLists
@@ -187,21 +227,24 @@ Page({
   },
   handleCancel() {
     this.setData({
-        visible: false
+      visible: false
     });
-},
+  },
 
-handleClickItem({
-  detail
-}) {
-  var that = this
-  const index = detail.index + 1;
-  // 提交操作
-  if (index == 1) {
-      if(that.data.remark.length<1){
+  handleClickItem({
+    detail
+  }) {
+    var that = this
+    const index = detail.index + 1;
+    // 提交操作
+    if (index == 1) {
+      if (that.data.remark.length < 1) {
         $Toast({
-          content:'请填写报障内容',
-          type:'error'
+          content: '请填写报障内容',
+          type: 'error'
+        })
+        that.setData({
+          visible: false
         })
         return;
       }
@@ -213,49 +256,68 @@ handleClickItem({
       var data = {
         __sid: that.data.userDetails.sid,
         __ajax: 'json',
-        remark:that.data.remark,
-        type:that.data.type,
-        status:4
+        remark: that.data.remark,
+        type: that.data.type,
+        merchantReportFail_image:that.data.imgIdLists.toString(),
+        status: 4
       }
-      // wx.request({
-      //   url: app.globalData.url + 'oa/oaPostRecruitment/save.json',
-      //   method: 'post',
-
-      //   data: data,
-      //   header: {
-      //     'content-type': 'application/x-www-form-urlencoded',
-      //   },
-      //   success(res) {
-      //     console.log(res)
-      //     if (res.data.result=='true') {
-            setTimeout(() => {
-              action[0].loading = false;
-              that.setData({
-                visible: false,
-                ifInput: false,
-                actions: action
-              });
-              $Toast({
-                content: '提交成功！',
-                type: 'success'
-              });
-            }, 1000);
-          // }
-
-        // }
-      // })
-  }
-},
-handleOpen() {
-  this.setData({
+      console.log(data)
+      postRequest(getApiHost(), 'api/merchant/merchantReportFailSave', 'url', data, 0, false, false, false).then(
+        res => {
+          if (res.result && res.result == 'login') {
+            that.login()
+            console.log('登录失效')
+            return;
+          }
+          console.log(res)
+          setTimeout(() => {
+            action[0].loading = false;
+            that.setData({
+              visible: false,
+              actions: action
+            });
+            $Toast({
+              content: '提交成功！',
+              type: 'success'
+            });
+            setTimeout(()=>{
+              wx.switchTab({
+                url: '/pages/index/inform',
+              })
+            },1000)
+          }, 1000);
+        }
+      ).catch(res => {
+        wx.showModal({
+          title: '错误',
+          content: res.message,
+          showCancel: false,
+          confirmText: '知道了',
+          confirmColor: '#1890FF'
+        });
+        const action = [...this.data.actions];
+        action[0].loading = false;
+        that.setData({
+          visible: false,
+          actions: action
+        });
+      });
+    }
+  },
+  handleOpen() {
+    this.setData({
       visible: true
-  });
-},
-input(e){
-  var content = e.detail.value
-  console.log(content)
-  this.setData({
-    remark:content
-  })
-}
+    });
+  },
+  input(e) {
+    var content = e.detail.value
+    this.setData({
+      remark: content
+    })
+  },
+  mainInput(e){
+    this.setData({
+      name:e.detail.value
+    })
+  }
 })

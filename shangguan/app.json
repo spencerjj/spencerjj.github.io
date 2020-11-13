@@ -1,20 +1,21 @@
 {
   "pages": [
-    "pages/index/guide",
-    "pages/index/report/reportContact", 
     "pages/my/my",
     "pages/index/inform",
-    "pages/index/report/reportFail", 
-    "pages/index/inspection",
+    "pages/index/dailyCheck",
+    "pages/index/report/reportFail",
+    "pages/index/guide",
     "pages/index/checkFail",
+    "pages/index/report/reportContact",
+    "pages/index/inspection",
     "pages/index/workContact",
     "pages/index/newsList",
     "pages/index/news",
-    "pages/index/dailyCheck",
     "pages/index/call",
     "pages/index/shopLists",
     "pages/index/back",
-    "pages/index/publish"
+    "pages/index/publish",
+    "pages/index/transfer"
   ],
   "tabBar": {
     "color": "#bfbfbf",

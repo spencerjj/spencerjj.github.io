@@ -64,7 +64,7 @@
 
 .codePicker {
   width: 100%;
-  min-height: 440rpx;
+  min-height: 220rpx;
   color: #af9d7f;
   margin-top: 10rpx;
   position: relative;
@@ -86,14 +86,14 @@
 
 .codePicker1 {
   width: 99%;
-  height: 380rpx;
+  min-height: 180rpx;
   color: #af9d7f;
   padding-left: 10rpx;
   padding-top: 10rpx;
   margin-top: 10rpx;
   position: relative;
   border: 1rpx solid #ccc;
-  font-size: 35rpx;
+  font-size: 40rpx;
   font-weight: bolder;
 }
 
@@ -137,7 +137,7 @@
   padding-left: 10rpx;
   margin-top: 10rpx;
   position: relative;
-  font-size: 35rpx;
+  font-size: 40rpx;
   border-bottom: 1rpx solid #eee;
   font-weight: bolder;
 }

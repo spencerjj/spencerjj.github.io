@@ -4,7 +4,7 @@
     <i-tab key="2" title="已办事项"></i-tab>
     <i-tab key="3" title="我发起的"></i-tab>
 </i-tabs>
-<view class="lists" bindtap='showDetail'  data-id="{{item.id}}" hover-class='hover1' hover-stay-time='50' wx:for="{{lists}}" data-status="{{item.status}}" wx:key="index" data-type="{{item.procIns?item.procIns.formKey:item.procDef.key}}">
+<view class="lists" bindtap='showDetail'  data-id="{{item.id}}" hover-class='hover1' hover-stay-time='50' wx:for="{{lists}}" data-status="{{item.status}}" wx:key="index" data-type="{{item.procIns?item.procIns.formKey:item.procDef.key}}" data-biz="{{current==3?item.bizKey:item.procIns.bizKey}}" data-name="{{item.name}}">
   <!-- <view class="left">
     <image src="../../images/add.png" wx:if="{{current==1}}"></image>
     <image src="../../images/finish.png" wx:if="{{current==2}}"></image>
@@ -17,6 +17,10 @@
     </view>
     <view class="title" wx:else>
       {{item.procIns.name}}
+    </view>
+    <view class="time1">
+      <text>流程编号:</text>
+      {{item.id}}
     </view>
     <view class="time1" wx:if="{{current==1}}">
       <text>当前环节:</text>
@@ -72,6 +76,6 @@
   <image src="../../images/noData.png"></image>
   <view class="notext">当前暂无流程</view>
 </view>
-<view class="add" bindtap='showDetail' hover-class="addTap" hover-stay-time=".5s" data-type="guide">
+<!-- <view class="add" bindtap='showDetail' hover-class="addTap" hover-stay-time=".5s" data-type="guide">
   <image src="../../images/add.png"></image>
-</view>
+</view> -->

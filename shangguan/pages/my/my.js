@@ -97,9 +97,17 @@ Page({
     })
   },
   toPage: function (e) {
-    var data = e.currentTarget.dataset;
+    var url = e.currentTarget.dataset.url;
+    if(url==0){
+      $Toast({
+        content:'页面暂未开放',
+        type:'warning'
+      })
+      return;
+    }
+    var type = e.currentTarget.dataset.type
     wx.navigateTo({
-      url: data.url
+      url: url+'?type='+type
     })
   },
   getTag(e) {
@@ -117,8 +125,7 @@ Page({
                 console.log('登录失效')
                 return;
             }
-            let list = res.data
-            console.log(list)
+            // console.log(res)
         }
     )
   }

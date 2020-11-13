@@ -19,9 +19,9 @@ Page({
    */
   data: {
     index: 0,
-    array: ['一般故障', '物业故障', '紧急故障'],
-    index1: 0,
-    array1: ['天台', '楼道', '储物间'],
+    array: [],
+    lists:[],
+    list:[],
     title: '添加备注',
     content: '无异常',
     imgLists: [],
@@ -29,6 +29,11 @@ Page({
     limit: 9,
     actions: [{
         name: '提交',
+        color: '#2d8cf0',
+        loading: false
+      },
+      {
+        name: '转办',
         color: '#2d8cf0',
         loading: false
       },
@@ -46,7 +51,10 @@ Page({
     can:false,
     showRight1:false,
     proLists:'',
-    url:''
+    url:'',
+    bizKey:'',
+    hint:'',
+    name:''
   },
 
   /**
@@ -55,16 +63,21 @@ Page({
   onLoad: function (options) {
     var url = ''
     var current = options.current
+    var name = options.name
     if(current==3){
       url='bpm/bpmMyRuntime/form.json'
     }else{
       url='bpm/bpmMyTask/form.json'
     }
+    console.log(options.bizKey)
     this.setData({
       id: options.id,
       current:current,
-      url:url
+      url:url,
+      bizKey:options.bizKey,
+      name:name
     })
+    console.log(options.bizKey)
   },
 
   /**
@@ -85,6 +98,7 @@ Page({
     })
     that.getToday()
     that.getDetail()
+    that.showList()
   },
 
   /**
@@ -126,6 +140,44 @@ Page({
       this.onShow()
     })
   },
+  showList(e) {
+    var that = this
+    var data = {
+      __sid: that.data.userDetails.sid,
+      __ajax: 'json',
+      type: 'work_contact_type'
+    }
+    postRequest(getApiHost(), 'api/merchant/getDicTypeList', 'url', data, 0, false, false).then(
+      res => {
+        if (res.result && res.result == 'login') {
+          that.login()
+          console.log('登录失效')
+          return;
+        }
+        let lists = res.data
+        let array = []
+        console.log(lists)
+        lists.map((item) => {
+          array.push(item.treeNames)
+        })
+        that.setData({
+          lists: lists,
+          array: array,
+          index:0,
+          type: lists[0].dictValue
+        })
+
+      }
+    ).catch(res => {
+      wx.showModal({
+        title: '错误',
+        content: res.message,
+        showCancel: false,
+        confirmText: '知道了',
+        confirmColor: '#1890FF'
+      });
+    });
+  },
   getDetail(e) {
     var that = this;
     var data = {
@@ -155,8 +207,11 @@ Page({
           },
           success(res) {
             console.log(res.data.merchantWorkContact)
+            var list = res.data.merchantWorkContact
+            list.type = list.type - 1
             that.setData({
-              lists:res.data.merchantWorkContact,
+              list:list,
+              starIndex:list.score?list.score:'-1'
               // imgLists:res.data.merchantReportFail.imgLists?res.data.merchantReportFail.imgLists:''
             })
             wx.hideLoading({
@@ -197,6 +252,34 @@ Page({
         confirmColor: '#1890FF'
       })
     });
+
+
+    wx.request({
+      url: getApiHost()+'file/fileList',
+      data: {
+        __sid: that.data.userDetails.sid,
+        __ajax: 'json',
+        bizKey: that.data.bizKey,
+        bizType:'merchantWorkContact_image'
+      },
+      header: {
+        'content-type': 'application/json'
+      },
+      success: function (res) {
+        console.log(res.data)
+        if(res.data.result!='false'){
+          let array  = res.data
+          let imgLists = []
+          array.map((item)=>{
+            imgLists.push(URI+'platform/'+item.fileUrl)
+          })
+          that.setData({
+            imgLists:imgLists
+          })
+        }
+        
+      }
+    })
   },
   pickChange(e) {
     this.setData({
@@ -231,11 +314,46 @@ Page({
       this.setData({
         actions: action
       });
-      var data = {
-        __sid: that.data.userDetails.sid,
-        __ajax: 'json',
+      if(that.data.list.bpm.activityId=='pj_work_contact'){
+        if(that.data.starIndex==-1){
+          $Toast({
+            content:'请进行打分',
+            type:'warning'
+          })
+          action[0].loading = false;
+            that.setData({
+              visible: false,
+              ifInput: false,
+              actions: action
+            });
+          return;
+        }
+        var data = {
+          __sid: that.data.userDetails.sid,
+          __ajax: 'json',
+          score:that.data.starIndex,
+          id: that.data.list.id,
+          'bpm.comment': that.data.hint,
+          'bpm.taskId':that.data.list.bpm.taskId,
+          'bpm.procInsId':that.data.list.bpm.procInsId,
+          'bpm.activityId':that.data.list.bpm.activityId,
+          dealUserCode:that.data.list.dealUserCode,
+          status:4
+        }
+      }else{
+        var data = {
+          __sid: that.data.userDetails.sid,
+          __ajax: 'json',
+          id: that.data.list.id,
+          'bpm.comment': that.data.hint,
+          'bpm.taskId':that.data.list.bpm.taskId,
+          'bpm.procInsId':that.data.list.bpm.procInsId,
+          'bpm.activityId':that.data.list.bpm.activityId,
+          dealUserCode:that.data.list.dealUserCode,
+          status:4
+        }
       }
-      getRequest(getApiHost(), 'platform/v1/api/minireport/lampo/findAreaDetailList', 'body', data, 0, false, false).then(
+      postRequest(getApiHost(), 'api/merchant/merchantWorkContactSave', 'url', data, 0, false, false, false).then(
         res => {
           if (res.result && res.result == 'login') {
             that.login()
@@ -254,6 +372,11 @@ Page({
               content: '提交成功！',
               type: 'success'
             });
+            setTimeout(()=>{
+              wx.switchTab({
+                url: '/pages/index/inform',
+              })
+            },1000)
           }, 1000);
         }
       ).catch(res => {
@@ -264,8 +387,19 @@ Page({
           confirmText: '知道了',
           confirmColor: '#1890FF'
         })
+        action[0].loading = false;
+            that.setData({
+              visible: false,
+              ifInput: false,
+              actions: action
+            });
       });
-    } else if (index == 2) {
+    } else if (index ==2) {
+      console.log(that.data.id)
+      wx.navigateTo({
+        url: 'transfer?id='+that.data.id,
+      })
+    }else if (index ==3) {
       console.log(that.data.id)
       wx.navigateTo({
         url: 'back?id='+that.data.id,
@@ -294,7 +428,7 @@ Page({
         title: '加载中',
       })
     }
-    var tempurl = that.data.lists.bpm.procInsId
+    var tempurl = that.data.list.bpm.procInsId
     that.setData({
         showRight1: !that.data.showRight1
     });
@@ -333,5 +467,16 @@ Page({
       today: today,
       time: time
     })
-  }
+  },
+  input(e){
+    this.setData({
+      hint:e.detail.value
+    })
+  },
+  onChange(e){
+    const index = e.detail.index;
+    this.setData({
+        starIndex: index
+    })
+},
 })

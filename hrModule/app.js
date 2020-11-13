@@ -66,10 +66,10 @@ App({
               console.log(res)
               that.globalData.statusCode = res.statusCode
               if (res.statusCode == 200) {
-                if(res.data.data.result=='false'){
+                if(res.data.result=='false'){
                   wx.showModal({
                     title: '登录失败',
-                    content: res.data.data.message,
+                    content: res.data.message,
                     showCancel: false,
                     confirmText: '知道了',
                     confirmColor: '#1890FF'

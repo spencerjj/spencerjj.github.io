@@ -39,7 +39,7 @@ page{
     vertical-align: middle;
     margin-top: 30rpx;
 }
-.section:first-child .secIcon{
+.section:nth-child(1) .secIcon{
     background: rgb(183, 36, 30);
 }
 .section:nth-child(2) .secIcon{
@@ -54,16 +54,18 @@ page{
 .section:nth-child(5) .secIcon{
     background: rgb(77, 159, 206)
 }
-.section:nth-child(n+6) .secIcon{
+.section:nth-child(6) .secIcon{
     background: rgb(235, 108, 62)
 }
-.section:nth-child(n+7) .secIcon{
+.section:nth-child(7) .secIcon{
     background: rgb(103, 53, 149)
 }
-.section:nth-child(n+8) .secIcon{
+.section:nth-child(8) .secIcon{
     background: rgb(169,168, 172)
 }
-.section:nth-child(n+9) .secIcon{
+.section:nth-child(9) .secIcon{
     background: rgb(125, 65, 31)
 }
-
+.section:nth-child(10) .secIcon{
+    background: rgb(183, 36, 30);
+}

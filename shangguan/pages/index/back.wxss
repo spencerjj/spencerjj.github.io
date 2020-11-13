@@ -92,7 +92,7 @@ page {
   padding-left: 10rpx;
   margin-top: 10rpx;
   position: relative;
-  font-size: 35rpx;
+  font-size: 40rpx;
   background: white;
   font-weight: bolder;
 }

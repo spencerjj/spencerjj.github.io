@@ -1,16 +1,19 @@
 /* pages/index/news.wxss */
+page{
+  background: #f9f9f9;
+}
 .container{
   width: 94%;
   margin-left: 3%;
 }
 .title{
-  font-size: 50rpx;
+  font-size: 45rpx;
   font-weight: bolder;
   margin-top:20rpx
 }
 .date{
   color:#555;
-  font-size: 35rpx;
+  font-size: 30rpx;
   margin-top: 20rpx;
   margin-bottom: 30rpx;
 }
