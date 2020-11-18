@@ -72,7 +72,7 @@
 			</view>
 		</picker>
 	</view> -->
-	<view class="title" wx:if="{{current==1&&can&&list.bpm.activityId=='gwzx_deal'}}">
+	<view class="title" wx:if="{{current==1&&can&&list.bpm.activityId!='evaluate'}}">
     <view class="c1">
       <text><text style="color:red;font-size:25rpx"  wx:if="{{current==1}}">*</text> 备注</text>
     </view>

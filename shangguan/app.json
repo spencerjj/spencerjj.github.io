@@ -15,7 +15,10 @@
     "pages/index/shopLists",
     "pages/index/back",
     "pages/index/publish",
-    "pages/index/transfer"
+    "pages/index/transfer",
+    "pages/index/group",
+    "pages/index/dailyList",
+    "pages/index/dailyRecord"
   ],
   "tabBar": {
     "color": "#bfbfbf",
@@ -24,16 +27,16 @@
     "backgroundColor": "#f3f3f3",
     "list": [
       {
-        "pagePath": "pages/index/inform",
-        "iconPath": "images/job.png",
-        "selectedIconPath": "images/jobed.png",
-        "text": "事项"
-      },
-      {
         "pagePath": "pages/my/my",
         "iconPath": "images/my.png",
         "selectedIconPath": "images/myed.png",
         "text": "功能"
+      },
+      {
+        "pagePath": "pages/index/inform",
+        "iconPath": "images/job.png",
+        "selectedIconPath": "images/jobed.png",
+        "text": "流程"
       }
     ]
   },

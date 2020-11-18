@@ -1,6 +1,6 @@
 {
-  "navigationBarTitleText": "流程中心",
+  "navigationBarTitleText": "会签",
   "navigationBarTextStyle": "white",
   "navigationBarBackgroundColor": "#69bcf9",
-  "enablePullDownRefresh": true
+  "enablePullDownRefresh": false
 }

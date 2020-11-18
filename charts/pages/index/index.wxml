@@ -4,7 +4,7 @@
 	<view class="first">
 		<view class="title">数据发生时间：</view>
 		<view class="time">
-			<picker mode="date" fields="day" value="{{date}}" start="{{thisYear}}-01-01" end="{{yestoday}}" bindchange="bindDateChange">
+			<picker mode="date" fields="day" value="{{date}}" start="2013-01-01" end="{{yestoday}}" bindchange="bindDateChange">
 				<view class="date">
 					{{showDate}}
 				</view>

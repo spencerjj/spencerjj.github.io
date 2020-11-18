@@ -1,0 +1,108 @@
+<view class='container'>
+  <input class="main" value="{{title?title:'日常巡检'}}" placeholder-style='color:#af9d7f' bindinput='mainInput'></input>
+  <view class="title">
+    <view class="c1">
+      <text>公司</text>
+    </view>
+      <view class="timePicker">
+        {{companyName}}
+      </view>
+  </view>
+  <view class="title">
+    <view class="c1">
+      <text>巡检时间</text>
+    </view>
+      <view class="timePicker">
+        {{time}}
+      </view>
+  </view>
+  <view class="title" wx:if="{{imgLists.length>0}}">
+    <view class="c1">
+      <text>图片</text>
+    </view>
+    <view class="codePicker">
+			<image
+        src="{{imgLists[0]}}" class="up" wx:if="{{imgLists.length==1}}" mode="aspectFill" bindtap="showPic" data-url="{{imgLists[0]}}">
+      </image>
+      <view wx:for="{{imgLists}}" class="photo"  wx:if="{{imgLists.length>1}}">
+        <image src="{{item}}" mode="aspectFill" bindtap="showPic" data-url="{{item}}"></image>
+      </view>
+    </view>
+	</view>
+
+
+  <view style="height:15rpx;width:100%;background:#f9f9f9"></view>
+  <view wx:for="{{mainLists}}" wx:key="index" class="area {{item.mark?'areaAll':''}}" wx:for-index="childindex">
+    <view class="list">
+      <view class="top" hover-class='hover1' hover-stay-time='50' bindtap="showAll"
+        data-index="{{childindex}}">
+        <text class="title">{{childindex+1}}、巡检地点:<text class="active"> {{item.signatureName}}</text></text>
+        <image src="/images/01-27.jpg" wx:if="{{item.pic.length>0}}" class="count"></image>
+        <image src="/images/01-26.jpg" wx:else class="count"></image>
+        <image class="arraw {{item.mark?'selected':''}}" src="/images/lan.png"></image>
+      </view>
+    </view>
+    <view class="title">
+      <view class="c1">
+        <text>巡检地点({{childindex+1}}/{{mainLists.length}})</text>
+      </view>
+      <view class="timePicker">
+        {{item.signatureName}}
+      </view>
+    </view>
+    <view class="title" wx:if="{{proLists.length>0}}">
+      <view class="c1">
+        <text>考核项目</text>
+      </view>
+        <view class="timePicker">
+          {{proLists[childindex].projectName?proLists[childindex].projectName:'无'}}
+        </view>
+    </view>
+    <view class="title" wx:if="{{item.index2}}">
+      <view class="c1">
+        <text><text style="color:red;font-size:25rpx">*</text> 处理人</text>
+      </view>
+      <input class="timePicker" placeholder="请填写姓名并选择处理人" placeholder-style='color:#af9d7f;padding:0'
+        bindinput='checkInput' value="{{item.keywords}}" bindconfirm="confirm" confirm-type="done" maxlength="20"></input>
+      <view class="sonLists" wx:if="{{sonvisibility}}">
+        <view wx:for="{{codeLists}}" wx:for-item="sonItem" class="sonItem" bindtap="selectItem" hover-class='hover1' hover-stay-time='50'
+          data-name="{{sonItem.name}}" data-code="{{sonItem.code}}"
+          data-office="{{sonItem.office}}" wx:key="index" data-index="{{childindex}}">{{sonItem.name}}({{sonItem.office}})</view>
+      </view>
+    </view>
+    <view class="title">
+      <view class="c1">
+        <text>{{item.area}}现场情况描述</text>
+      </view>
+      <textarea class="codePicker1" placeholder="请输入现场情况描述，如:无异常" placeholder-class="placeholder" data-index="{{childindex}}"
+        bindinput="areaInput" value="{{item.remark?item.remark:' '}}">
+		</textarea>
+    </view>
+  </view>
+
+  <!-- <view class="title">
+		<view class="c1">
+			<text><text style="color:red;font-size:25rpx">*</text> 巡检情况</text>
+		</view>
+		<picker value="{{index}}" range="{{array}}" bindchange="pickChange">
+			<view class="timePicker">
+				{{array[index]}}
+        <image class="arraw" src="http://img.gagctv.com/17112314452261654"></image>
+			</view>
+		</picker>
+	</view>
+  <view class="title">
+    <view class="c1">
+      <text>备注</text>
+    </view>
+    <textarea class="codePicker1" placeholder="请输入备注" placeholder-class="placeholder">
+
+		</textarea>
+  </view> -->
+  <view class="progress" bindtap="handleOpen" wx:if="{{cindex!=5&&lists.length>0}}">
+    提交
+  </view>
+</view>
+<i-action-sheet visible="{{visible}}" actions="{{actions}}" show-cancel bind:cancel="handleCancel"
+  bind:click="handleClickItem" />
+<i-toast id="toast" />

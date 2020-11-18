@@ -6,7 +6,7 @@
 		<!-- <view class="first">
 			<view class="title">数据发生时间：</view>
 			<view class="time">
-				<picker mode="date" fields="day" value="{{date}}" start="{{thisYear}}-01-01" end="{{yestoday}}" bindchange="bindDateChange">
+				<picker mode="date" fields="day" value="{{date}}" start="2013-01-01" end="{{yestoday}}" bindchange="bindDateChange">
 				<view class="date">
 					{{showDate}}
 				</view>
@@ -19,7 +19,7 @@
 		</view> -->
 		<view class="middle">
 			<view class="topTitle">
-				<picker mode="date" fields="day" value="{{date}}" start="{{thisYear}}-01-01" end="{{yestoday}}"
+				<picker mode="date" fields="day" value="{{date}}" start="2013-01-01" end="{{yestoday}}"
 					bindchange="bindDateChange">
 					<view class="date">
 						数据发生日期 - {{showDate}}
@@ -35,7 +35,7 @@
 				<view class="section" wx:if="{{ifVipCardCot}}">
 					<view class="stitle">招新人数</view>
 					<view class="sdata">{{vipCardCot2020}}</view>
-					<view class="stype">同比：<text class="{{vipCardCompare>=0?'rise':'down'}}">{{vipCardCompare?'+':''}}{{vipCardCompare}}</text></view>
+					<view class="stype">同比：<text class="{{vipCardCompare>=0?'rise':'down'}}">{{vipCardCompare>=0?'+':''}}{{vipCardCompare}}</text></view>
 				</view>
 				<!-- <view class="section">
 						<view class="stitle">2019同期总招新人数</view>

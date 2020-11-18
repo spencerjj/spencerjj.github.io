@@ -106,9 +106,10 @@ Page({
       return;
     }
     var type = e.currentTarget.dataset.type
-    wx.navigateTo({
-      url: url+'?type='+type
-    })
+      wx.navigateTo({
+        url: url+'?type='+type
+      })
+    
   },
   getTag(e) {
     var that = this 

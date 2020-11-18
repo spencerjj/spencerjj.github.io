@@ -139,11 +139,15 @@ Page({
   upload() {
     var that = this
     if (that.data.limit > 0) {
+      wx.showLoading({
+      })
       wx.chooseImage({
         count: that.data.limit,
         sizeType: ['original', 'compressed'],
-        sourceType: ['album', 'camera'],
+        sourceType: ['camera'],
         success(res) {
+          wx.hideLoading({
+          })
           // tempFilePath可以作为img标签的src属性显示图片
           const tempFilePaths = res.tempFilePaths
           var imgLists = that.data.imgLists
@@ -185,6 +189,8 @@ Page({
                 }
               },
               fail(res) {
+                wx.hideLoading({
+                })
                 wx.showModal({
                   title: '错误',
                   content: '上传失败，请稍后再试',

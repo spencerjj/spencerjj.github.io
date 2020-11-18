@@ -18,7 +18,7 @@
 			工作联系单
 		</view>
 
-		<view class="section" bindtap="toPage" data-url="../index/dailyCheck" data-type="1">
+		<view class="section" bindtap="toPage" data-url="../index/dailyList" data-type="1">
 			<view class="secIcon">
 				<image
 					src="/images/05-7.png">
@@ -26,7 +26,7 @@
 			</view>
 			物业巡检
 		</view>
-		<view class="section" bindtap="toPage" data-url="../index/dailyCheck" data-type="2">
+		<view class="section" bindtap="toPage" data-url="../index/dailyList" data-type="2">
 			<view class="secIcon">
 				<image
 					src="/images/05-6.png">
@@ -34,7 +34,7 @@
 			</view>
 			楼管巡检
 		</view>
-		<view class="section" bindtap="toPage" data-url="../index/dailyCheck" data-type="3">
+		<view class="section" bindtap="toPage" data-url="../index/dailyList" data-type="3">
 			<view class="secIcon">
 				<image
 					src="/images/05-10.png">
@@ -42,7 +42,7 @@
 			</view>
 			总值班巡检
 		</view>
-		<view class="section" bindtap="toPage" data-url="../index/dailyCheck" data-type="4">
+		<view class="section" bindtap="toPage" data-url="../index/dailyList" data-type="4">
 			<view class="secIcon">
 				<image
 					src="/images/05-15.png">

@@ -240,6 +240,7 @@ Page({
                 vipCompare:((res.data.list[0].rate*100).toFixed(2)-(res.data.list[1].rate*100).toFixed(2)).toFixed(2),
                 ifVipCardCot:true
             })
+            console.log(res.data.list[0].vipCardCot-res.data.list[1].vipCardCot)
 
        }
      ).catch(res => {

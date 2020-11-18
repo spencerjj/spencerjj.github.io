@@ -33,7 +33,8 @@ Page({
     title: '',
     classes: 0,
     isRec:false,
-    proLists:[]
+    proLists:[],
+    codeLists:[]
   },
 
   /**
@@ -189,9 +190,13 @@ Page({
             code:item.signatureCode,
             area: item.signatureName,
             time: item.signatureTime,
+            dealUserName:'',
+            dealUserCode:'',
+            keywords:'',
             pic: '',
             remark: '',
-            index1: 0,
+            index1: -1,
+            index2:false,
             mark: false,
             error:false,
             over:over
@@ -256,6 +261,8 @@ Page({
     var index = e.currentTarget.dataset.index
     var lists = that.data.lists
     if (lists[index].pic.length == 0) {
+      wx.showLoading({
+      })
       wx.chooseImage({
         count: 1,
         sizeType: ['original', 'compressed'],
@@ -276,6 +283,8 @@ Page({
               __ajax: 'json',
             },
             success(res) {
+              wx.hideLoading({
+              })
               console.log(JSON.parse(res.data))
               var res = JSON.parse(res.data)
               if (res.result == 'true') {
@@ -315,9 +324,18 @@ Page({
   },
   pickChange(e) {
     console.log(e.currentTarget.dataset.index)
+    var proLists = this.data.proLists
     var index = e.currentTarget.dataset.index
     var lists = this.data.lists
     lists[index].index1 = e.detail.value
+    if(proLists[e.detail.value].flow=="workContact"){
+      lists[index].index2 = true 
+    }else{
+      lists[index].index2 = false
+      lists[index].dealUserCode = ''
+      lists[index].dealUserName = ''
+      lists[index].keywords = ''
+    }
     this.setData({
       lists: lists
     })
@@ -365,42 +383,134 @@ Page({
     that.setData({
       lists:lists
     })
+    console.log(lists)
     for (let x in lists) {
-      if (lists[x].imgId.length == 0 || !lists[x].imgId) {
-        $Toast({
-          content: '请上传' + lists[x].area + '巡检照片',
-          type: 'warning'
-        })
-        lists[x].error = true
-        that.setData({
-          lists:lists
-        })
-        const action = [...this.data.actions];
-        action[0].loading = false;
-        this.setData({
-          visible: false,
-          actions: action
-        });
+      if (lists[x].index2) {
+        if(lists[x].dealUserCode.length<1){
+          $Toast({
+            content: '请正确选择' + lists[x].area + '处理人',
+            type: 'warning'
+          })
+          const action = [...this.data.actions];
+          action[0].loading = false;
+          this.setData({
+            visible: false,
+            actions: action
+          });
         return;
-      }
-      if (lists[x].remark.length == 0 || !lists[x].remark) {
-        $Toast({
-          content: '请填写' + lists[x].area + '现场情况描述',
-          type: 'warning'
-        })
-        lists[x].error = true
-        that.setData({
-          lists:lists
-        })
-        const action = [...this.data.actions];
-        action[0].loading = false;
-        this.setData({
-          visible: false,
-          actions: action
-        });
+        }
+       
+        if(lists[x].remark.length<1){
+          $Toast({
+            content: '请填写' + lists[x].area + '现场情况描述',
+            type: 'warning'
+          })
+          const action = [...this.data.actions];
+          action[0].loading = false;
+          this.setData({
+            visible: false,
+            actions: action
+          });
         return;
+        }
+        // lists[x].mark = true
+        // that.setData({
+        //   lists:lists
+        // })
       }
     }
+    var proLists = that.data.proLists
+    for(let x in lists){
+      if(lists[x].index1!='-1'){
+        console.log(proLists[lists[x].index1].flow)
+        if(proLists[lists[x].index1].flow=='reportFail'){
+          var data = {
+            __sid: that.data.userDetails.sid,
+            __ajax: 'json',
+            remark: lists[x].remark,
+            type: 1,
+            merchantReportFail_image:lists[x].imgId,
+            status: 4
+          }
+          console.log(data)
+          postRequest(getApiHost(), 'api/merchant/merchantReportFailSave', 'url', data, 0, false, false, false).then(
+            res => {
+              console.log(res)
+            }
+          ).catch(res => {
+            wx.showModal({
+              title: '错误',
+              content: res.message,
+              showCancel: false,
+              confirmText: '知道了',
+              confirmColor: '#1890FF'
+            });
+          });
+
+        }else if(proLists[lists[x].index1].flow=='workContact'){
+          var data = {
+            __sid: that.data.userDetails.sid,
+            __ajax: 'json',
+            dealUserName: lists[x].dealUserName,
+            dealUserCode: lists[x].dealUserCode,
+            type: 1,
+            remark: lists[x].remark,
+            merchantWorkContact_image:lists[x].imgId,
+            status: 4,
+          }
+          console.log(data)
+          postRequest(getApiHost(), 'api/merchant/merchantWorkContactSave', 'url', data, 0, false, false, false).then(
+            res => {
+              console.log(res)
+            }
+          ).catch(res => {
+            wx.showModal({
+              title: '错误',
+              content: res.message,
+              showCancel: false,
+              confirmText: '知道了',
+              confirmColor: '#1890FF'
+            });
+          });
+        }
+      }
+    }
+    // for (let x in lists) {
+    //   if ( !lists[x].imgId||lists[x].imgId.length == 0) {
+    //     $Toast({
+    //       content: '请上传' + lists[x].area + '巡检照片',
+    //       type: 'warning'
+    //     })
+    //     lists[x].error = true
+    //     that.setData({
+    //       lists:lists
+    //     })
+    //     const action = [...this.data.actions];
+    //     action[0].loading = false;
+    //     this.setData({
+    //       visible: false,
+    //       actions: action
+    //     });
+    //     return;
+    //   }
+    //   if (lists[x].remark.length == 0 || !lists[x].remark) {
+    //     $Toast({
+    //       content: '请填写' + lists[x].area + '现场情况描述',
+    //       type: 'warning'
+    //     })
+    //     lists[x].error = true
+    //     that.setData({
+    //       lists:lists
+    //     })
+    //     const action = [...this.data.actions];
+    //     action[0].loading = false;
+    //     this.setData({
+    //       visible: false,
+    //       actions: action
+    //     });
+    //     return;
+    //   }
+    // }
     const action = [...this.data.actions];
     action[0].loading = true;
     this.setData({
@@ -418,7 +528,14 @@ Page({
         signatureName:item.area,
         remark:item.remark
       }
-      if(item.index1){
+      if(item.index1=='-1'){
+        var y = {
+          projectCode:'',
+          projectName:'',
+          remark:'',
+          score:''
+        }
+      }else if(item.index1>0){
         var y = {
           projectCode:proLists[item.index1].id,
           projectName:proLists[item.index1].projectName,
@@ -435,7 +552,9 @@ Page({
       }
       proArray.push(y)
       array.push(x)
-      imgLists.push(item.imgId)
+      if(item.imgId&&item.imgId.length>0&&item.index1=='-1'){
+        imgLists.push(item.imgId)
+      }
     })
     imgLists = imgLists.toString()
     let postData = []
@@ -516,8 +635,8 @@ Page({
                 wx.removeStorageSync('checkLists')
                 wx.removeStorageSync('cindex')
                 wx.removeStorageSync('type')
-              },1000)
-            }, 1000);
+              },500)
+            }, 3000);
           }
         }else{
           $Toast({
@@ -658,7 +777,104 @@ Page({
       that.showList1()
       that.showList2()
     }
+  },
+  checkInput(e) {
+    console.log(e.detail.value)
+    if (e.detail.value.length < 1) {
+      this.setData({
+        sonvisibility: false
+      })
+    } else {
+      this.setData({
+        sonvisibility: true,
+        keywords: e.detail.value,
+        userName: e.detail.value
+      })
 
-
+      this.showContact()
+    }
+  },
+  confirm(e) {
+    console.log(123)
+    this.setData({
+      sonvisibility: false
+    })
+  },
+  showContact(e) {
+    var that = this
+    var data = {
+      __sid: that.data.userDetails.sid,
+      __ajax: 'json',
+      pageNo: 1,
+      pageSize: 30,
+      userName: that.data.userName
+    }
+    wx.request({
+      url: getApiHost() + 'sys/empUser/listData',
+      method: 'post',
+      data: data,
+      header: {
+        'content-type': 'application/x-www-form-urlencoded',
+      },
+      success(res) {
+        if (res.statusCode == 200) {
+          var list = res.data.list
+          var codeLists = []
+          list.map((item) => {
+            codeLists.push({
+              name: item.userName,
+              office: item.employee.office.officeName,
+              code: item.userCode,
+              phone: item.mobile,
+              sex:item.sex
+            })
+          })
+          console.log(codeLists)
+          that.setData({
+            codeLists: codeLists
+          })
+        } else {
+          $Toast({
+            content: '处理人列表获取失败',
+            type: 'warning'
+          })
+        }
+      }
+    })
+  },
+  showDrawer(e) {
+    this.setData({
+      visibility: !this.data.visibility,
+      keywords: '',
+      code: '',
+      name: '',
+    })
+  },
+  selectItem(e) {
+    console.log(e.currentTarget.dataset.index)
+    var index = e.currentTarget.dataset.index
+    var lists = this.data.lists
+    lists[index].dealUserCode = e.currentTarget.dataset.code
+    lists[index].dealUserName = e.currentTarget.dataset.name
+    lists[index].keywords = e.currentTarget.dataset.name + '(' + e.currentTarget.dataset.office + ')'
+    this.setData({
+      sonvisibility: false,
+      keywords: e.currentTarget.dataset.name + '(' + e.currentTarget.dataset.office + ')',
+      lists:lists
+    })
+    wx.setStorageSync('checkLists', lists)
+  },
+  onChange(e){
+    var x = e.detail.value
+    var index = e.currentTarget.dataset.index
+    var lists = this.data.lists
+    lists[index].index3 = x
+    if(!x){
+      lists[index].index1 = -1
+    }
+    this.setData({
+      lists:lists
+    })
+    wx.setStorageSync('checkLists', lists)
   }
 })

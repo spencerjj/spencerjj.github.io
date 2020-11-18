@@ -20,6 +20,7 @@ Page({
     pageNo: 1,
     loading: false,
     listIsFull: false,
+    type:''
   },
 
   /**
@@ -30,6 +31,7 @@ Page({
     let userDetails = wx.getStorageSync('userDetails')
     that.setData({
       userDetails: userDetails,
+      type:options.type
     })
     that.showList()
   },
@@ -98,20 +100,39 @@ Page({
     var data = {
       __sid: that.data.userDetails.sid,
       __ajax: 'json',
-      operatorId: that.data.userDetails.userId,
+      type:that.data.type,
+      companyCode: that.data.userDetails.companyCode,
     }
-    getRequest(getApiHost(), 'api/merchant/merchantContact', 'body', data, 0, false, false).then(
+    postRequest(getApiHost(), 'api/merchant/merchantCheckupOrderList', 'url', data, 0, false, false).then(
       res => {
         if (res.result && res.result == 'login') {
           that.login()
           console.log('登录失效')
           return;
         }
-        let lists = res.data
+        let lists = res.data.list
         console.log(lists)
-        lists.map((item) => {
-          item.mark = 1
-        })
+        // lists.map((item) => {
+        //   item.mark = 1
+        // })
+        if(!lists||lists.length<1){
+          wx.showModal({
+            title: '提示',
+            content: '暂无巡检记录，立即发起一条',
+            success (res) {
+              if (res.confirm) {
+                wx.navigateTo({
+                  url: 'dailyCheck?type='+that.data.type
+                })
+              } else if (res.cancel) {
+                wx.navigateBack({
+                  delta: 1,
+                })
+              }
+            }
+
+          })  
+        }
         that.setData({
           lists: lists,
           listIsFull: true
@@ -141,6 +162,16 @@ Page({
   call(e) {
     wx.makePhoneCall({
       phoneNumber: e.currentTarget.dataset.mark //仅为示例，并非真实的电话号码
+    })
+  },
+  toPage(e){
+    wx.navigateTo({
+      url: 'dailyRecord?type='+this.data.type+'&no='+e.currentTarget.dataset.no,
+    })
+  },
+  goCheck(e){
+    wx.navigateTo({
+      url: 'dailyCheck?type='+this.data.type
     })
   }
 })

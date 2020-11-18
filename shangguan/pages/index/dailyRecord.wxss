@@ -163,19 +163,42 @@ page{
   display: flex;
   justify-content: left;
   flex-wrap: wrap;
-  margin-bottom: 30rpx;
 }
-
 .up {
-  width: 150rpx;
-  height: 150rpx;
-  margin-top: 140rpx;
-  margin-left: 40%;
+  width: 100%;
 }
 
+.codePicker .photo {
+  width: 32.3%;
+  height: 220rpx;
+  margin-left: 1.5%;
+  padding-top: 0;
+  position: relative;
+}
 
-.codePicker .rightPhoto{
+.codePicker .photo:nth-child(3n+1) {
+  margin-left: 0;
+}
+
+.codePicker .photo:nth-child(n+4) {
+  margin-top: 10rpx;
+}
+
+.photo image {
   width: 100%;
+  height: 100%;
+}
+
+.codePicker .photo1 {
+  background: #eee;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.codePicker .photo1 image {
+  width: 100rpx;
+  height: 100rpx;
+  margin-top: 60rpx;
 }
 
 .area{
@@ -191,8 +214,8 @@ page{
   border-radius: 10rpx;
 }
 .areaAll{
-  height: 1700rpx !important;
-  /* height: 1300rpx; */
+  /* height: 1500rpx !important; */
+  height: 750rpx;
 }
 .area:first-child{
   border-bottom:none !important
@@ -319,7 +342,4 @@ background-color: #999;
 }
 .hover1{
   background: #ddd;
-}
-.switch{
-  background: #af9d7f;
 }

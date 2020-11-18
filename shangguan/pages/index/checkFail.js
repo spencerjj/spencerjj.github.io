@@ -39,6 +39,11 @@ Page({
         loading: false
       },
       {
+        name: '会签',
+        color: '#2d8cf0',
+        loading: false
+      },
+      {
         name: '退回',
         color: '#ff0000',
         loading: false
@@ -393,6 +398,20 @@ Page({
         url: 'transfer?id='+that.data.id,
       })
     }else if (index ==3) {
+      console.log(that.data.id)
+      if(that.data.list.bpm.activityId=='xsj_deal'||that.data.list.bpm.activityId=='gwzx_deal'||that.data.list.bpm.activityId=='bhdl_deal'){
+        var url = 'api/merchant/merchantReportFailSave'
+        wx.navigateTo({
+          url: 'group?id='+that.data.id+'&url='+url+'&taskId='+that.data.list.bpm.taskId+'&procInsId='+that.data.list.bpm.procInsId+'&activityId='+that.data.list.bpm.activityId+'&ifDeal=0',
+        })
+      }else{
+        $Toast({
+          content:'当前节点无法会签',
+          type:'error'
+        })
+      }
+      
+    }else if (index ==4) {
       console.log(that.data.id)
       wx.navigateTo({
         url: 'back?id='+that.data.id,
