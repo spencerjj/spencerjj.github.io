@@ -67,8 +67,7 @@ Page({
    */
   onLoad: function (options) {
     var url = ''
-    var current = options.current
-    var name = options.name
+    var current = options.c
     if(current==3){
       url='bpm/bpmMyRuntime/form.json'
     }else{
@@ -80,7 +79,6 @@ Page({
       current:current,
       url:url,
       bizKey:options.bizKey,
-      name:name
     })
     console.log(options.bizKey)
   },
@@ -232,6 +230,11 @@ Page({
                   'content-type': 'application/json' // 默认值
                 },
                 success(res) {
+                  if(res.data.name){
+                    wx.setNavigationBarTitle({
+                      title: res.data.name
+                    })
+                  }
                   if(res.data.status=='1'){
                     console.log('can action')
                     that.setData({
@@ -401,9 +404,16 @@ Page({
       });
     } else if (index ==2) {
       console.log(that.data.id)
+      if(that.data.list.bpm.activityId=='deal_work_contact'||that.data.list.status=='0'){
       wx.navigateTo({
         url: 'transfer?id='+that.data.id,
       })
+    }else{
+      $Toast({
+        content:'当前节点无法转办',
+        type:'error'
+      })
+    }
     }else if (index ==3) {
       console.log(that.data.id)
       if(that.data.list.bpm.activityId=='deal_work_contact'||that.data.list.status=='0'){

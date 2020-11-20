@@ -37,8 +37,8 @@
       <view class="top" hover-class='hover1' hover-stay-time='50' bindtap="showAll"
         data-index="{{childindex}}">
         <text class="title">{{childindex+1}}、巡检地点:<text class="active"> {{item.signatureName}}</text></text>
-        <image src="/images/01-27.jpg" wx:if="{{item.pic.length>0}}" class="count"></image>
-        <image src="/images/01-26.jpg" wx:else class="count"></image>
+        <!-- <image src="/images/01-27.jpg" wx:if="{{item.pic.length>0}}" class="count"></image>
+        <image src="/images/01-26.jpg" wx:else class="count"></image> -->
         <image class="arraw {{item.mark?'selected':''}}" src="/images/lan.png"></image>
       </view>
     </view>

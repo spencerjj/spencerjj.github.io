@@ -89,6 +89,7 @@ App({
                 userDetails.officeName = res.data.officeName;
                 userDetails.officeCode = res.data.officeCode;
                 userDetails.loginCode = res.data.loginCode;
+                userDetails.sex = res.data.sex;
                 userDetails.sid = res.data.sid;
                 wx.removeStorageSync('userDetails');
                 wx.setStorageSync('userDetails', userDetails);

@@ -121,6 +121,9 @@ Page({
           detail:detail,
           nodes: content
         })
+        wx.setNavigationBarTitle({
+          title: detail.title
+        })
       }
     ).catch(res => {
       wx.showModal({

@@ -1,88 +1,102 @@
+<view class="main1" wx:if="{{userDetails.companyCode==601}}">
+</view>
+<view class="main2" wx:elif="{{userDetails.companyCode==602}}">
+</view>
+<view class="main3" wx:elif="{{userDetails.companyCode==603}}">
+</view>
+
+
 <view class="container">
+	<view class="top">
+		<view class="profile" bindtap="toPage" data-url="myInfos">
+			<image src="{{userDetails.sex==2?'../../images/nv.png':'../../images/nan.png'}}" mode="aspectFill"></image>
+		</view>
+		<view class="infoCon" style="color:#000;font-weight:bolder;font-size:35rpx">{{userDetails.userName}}</view>
+		<view class="infoCon"  style="color:#666">{{userDetails.companyName}}</view>
+	</view>
 	<view class="allSecion">
-		<view class="section"  bindtap="toPage" data-url="../index/report/reportFail">
+		<view class="section" bindtap="toPage" data-url="../index/call"  hover-class="shover" hover-stay-time=".5">
 			<view class="secIcon">
 				<image
-					src="/images/05-12.png">
-				</image>
-			</view>
-			故障上报
-		</view>
-
-		<view class="section" bindtap="toPage" data-url="../index/report/reportContact">
-			<view class="secIcon">
-				<image
-					src="/images/05-14.png">
-				</image>
-			</view>
-			工作联系单
-		</view>
-
-		<view class="section" bindtap="toPage" data-url="../index/dailyList" data-type="1">
-			<view class="secIcon">
-				<image
-					src="/images/05-7.png">
-				</image>
-			</view>
-			物业巡检
-		</view>
-		<view class="section" bindtap="toPage" data-url="../index/dailyList" data-type="2">
-			<view class="secIcon">
-				<image
-					src="/images/05-6.png">
-				</image>
-			</view>
-			楼管巡检
-		</view>
-		<view class="section" bindtap="toPage" data-url="../index/dailyList" data-type="3">
-			<view class="secIcon">
-				<image
-					src="/images/05-10.png">
-				</image>
-			</view>
-			总值班巡检
-		</view>
-		<view class="section" bindtap="toPage" data-url="../index/dailyList" data-type="4">
-			<view class="secIcon">
-				<image
-					src="/images/05-15.png">
-				</image>
-			</view>
-			安保巡检
-		</view>
-		<view class="section" bindtap="toPage" data-url="../index/call">
-			<view class="secIcon">
-				<image
-					src="/images/05-13.png">
+					src="/images/05-23.png">
 				</image>
 			</view>
 			紧急呼叫
 		</view>
-		<view class="section" bindtap="toPage" data-url="../index/newsList">
+		<view class="section" bindtap="toPage" data-url="../index/newsList"  hover-class="shover" hover-stay-time=".5">
 			<view class="secIcon">
 				<image
-					src="/images/05-11.png">
+					src="/images/05-24.png">
 				</image>
 			</view>
 			通知公告
 		</view>
-		<view class="section" bindtap="toPage" data-url="0">
+		<view class="section"  bindtap="toPage" data-url="../index/report/reportFail" hover-class="shover" hover-stay-time=".5">
 			<view class="secIcon">
 				<image
-					src="/images/05-5.png">
+					src="/images/05-20.png">
+				</image>
+			</view>
+			故障上报
+		</view>
+		<view class="section" bindtap="toPage" data-url="../index/report/reportContact"  hover-class="shover" hover-stay-time=".5">
+			<view class="secIcon">
+				<image
+					src="/images/05-21.png">
+				</image>
+			</view>
+			工作联系单
+		</view>
+		<view class="section" bindtap="toPage" data-url="../index/dailyList" data-type="1"  hover-class="shover" hover-stay-time=".5">
+			<view class="secIcon">
+				<image
+					src="/images/05-28.png">
+				</image>
+			</view>
+			物业巡检
+		</view>
+		<view class="section" bindtap="toPage" data-url="../index/dailyList" data-type="2"  hover-class="shover" hover-stay-time=".5">
+			<view class="secIcon">
+				<image
+					src="/images/05-27.png">
+				</image>
+			</view>
+			楼管巡检
+		</view>
+		<view class="section" bindtap="toPage" data-url="../index/dailyList" data-type="3"  hover-class="shover" hover-stay-time=".5">
+			<view class="secIcon">
+				<image
+					src="/images/05-22.png">
+				</image>
+			</view>
+			总值班巡检
+		</view>
+		<view class="section" bindtap="toPage" data-url="../index/dailyList" data-type="4"  hover-class="shover" hover-stay-time=".5">
+			<view class="secIcon">
+				<image
+					src="/images/05-29.png">
+				</image>
+			</view>
+			安保巡检
+		</view>
+		<view class="section" bindtap="toPage" data-url="0"  hover-class="shover" hover-stay-time=".5">
+			<view class="secIcon">
+				<image
+					src="/images/05-25.png">
 				</image>
 			</view>
 			店铺管理
 		</view>
-		<view class="section"  bindtap="toPage" data-url="0">
+		<view class="section"  bindtap="toPage" data-url="0"  hover-class="shover" hover-stay-time=".5">
 			<view class="secIcon">
 				<image
-					src="/images/05-9.png">
+					src="/images/05-26.png">
 				</image>
 			</view>
 			实时销售
 		</view>
 	</view>
 </view>
-<view style="position:absolute;bottom:10rpx;right:10rpx;font-size:28rpx;color:#af9d7f">版本:{{appVersion}}</view>
+
+<view style="position:absolute;bottom:10rpx;right:10rpx;font-size:28rpx;color:#fff">版本:{{appVersion}}</view>
 <i-toast id="toast" />

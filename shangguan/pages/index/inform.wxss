@@ -35,8 +35,8 @@ page{
 .lists{
   margin-top: 30rpx;
 position: relative;
-padding-left: 30rpx;
-padding-top: 10rpx;
+/* padding-left: 20rpx; */
+/* padding-top: 10rpx; */
 clear: both;
 padding-bottom: 10rpx;
 z-index: 3;
@@ -44,7 +44,7 @@ background: #fff;
 width: 94%;
 box-sizing: border-box;
 margin-left: 3%;
-border-radius: 10rpx;
+border-radius: 5rpx;
 box-shadow: 0 0 3px #ccc;
 }
 .left{
@@ -69,7 +69,7 @@ box-shadow: 0 0 3px #ccc;
 }
 .right{
   float: left;
-  width: 80%;
+  width: 100%;
 }
 .date{
   font-size: 25rpx;
@@ -79,69 +79,68 @@ box-shadow: 0 0 3px #ccc;
 .count{
   position: absolute;
   font-size: 25rpx;
-  top:30rpx;
+  top:15rpx;
   right: 30rpx;
   /* color: white; */
   /* background: #5cadff; */
-  border-radius: 5rpx;
-  padding:1rpx 10rpx 1rpx 10rpx;
-  border:2rpx solid #5cadff;
-  color:#5cadff;
-  font-weight: bolder;
+  border-radius: 20rpx;
+  padding:1rpx 15rpx 1rpx 15rpx;
+  background-image: linear-gradient(to right, #5cadff , #aad0f7);
+  color:#fff;
 }
 .count1{
   position: absolute;
-  font-size: 25rpx;
-  top:30rpx;
+  top:15rpx;
   right: 30rpx;
-  /* color: white;
-  background: #f0f; */
-  border-radius: 5rpx;
-  padding:1rpx 10rpx 1rpx 10rpx;
-  border:2rpx solid #f0f;
-  color:#f0f;
+  /* color: white; */
+  /* background: #5cadff; */
+  border-radius: 20rpx;
+  padding:1rpx 15rpx 1rpx 15rpx;
+  background-image: linear-gradient(to right, #f0f , #f78bf7);
+  color:#fff;
 }
 .count2{
   position: absolute;
   font-size: 25rpx;
-  top:30rpx;
+  top:15rpx;
   right: 30rpx;
-  /* color: white;
-  background: #f00; */
-  border-radius: 5rpx;
-  padding:1rpx 10rpx 1rpx 10rpx;
-  border:2rpx solid #f00;
-  color:#f00;
+  /* color: white; */
+  /* background: #5cadff; */
+  border-radius: 20rpx;
+  padding:1rpx 15rpx 1rpx 15rpx;
+  background-image: linear-gradient(to right, red , #f78c8c);
+  color:#fff;
 }
 .count3{
   position: absolute;
   font-size: 25rpx;
-  top:30rpx;
+  top:15rpx;
   right: 30rpx;
-  /* color: white;
-  background: #f00; */
-  border-radius: 5rpx;
-  padding:1rpx 10rpx 1rpx 10rpx;
-  border:2rpx solid #f00;
-  color:#f00;
+  /* color: white; */
+  /* background: #5cadff; */
+  border-radius: 20rpx;
+  padding:1rpx 15rpx 1rpx 15rpx;
+  background-image: linear-gradient(to right, red , #f78c8c);
+  color:#fff;
 }
 .count4{
   position: absolute;
   font-size: 25rpx;
-  top:30rpx;
+  top:15rpx;
   right: 30rpx;
-  /* color: white;
-  background: #f00; */
-  border-radius: 5rpx;
-  padding:1rpx 10rpx 1rpx 10rpx;
-  border:2rpx solid #999;
-  color:#999;
+  /* color: white; */
+  /* background: #5cadff; */
+  border-radius: 20rpx;
+  padding:1rpx 15rpx 1rpx 15rpx;
+  background:#999;
+  color:#fff;
 }
 .title{
-  font-size: 32rpx;
+  font-size: 28rpx;
   padding-top:15rpx;
   color:#5cadff;
   font-weight: bolder;
+  /* padding-left: 20rpx; */
 }
 .content{
   width: 120%;
@@ -157,6 +156,7 @@ box-shadow: 0 0 3px #ccc;
   padding-top:10rpx;
   font-weight: bolder;
   letter-spacing: 1rpx;
+  padding-left: 20rpx;
 }
 .time2{
   font-size: 25rpx;
@@ -304,4 +304,37 @@ i-tabs {
 }
 .addTap{
   background: #eee;
+}
+.check{
+  position: absolute;
+  bottom:20rpx;
+  right:20rpx;
+  border-radius: 30rpx;
+  background: #5cadff;
+  color:white;
+  padding:5rpx 20rpx 5rpx 20rpx;
+  font-size: 25rpx;
+  box-shadow: 0 0 0 5rpx #eee;
+}
+.check1{
+  position: absolute;
+  bottom:20rpx;
+  right:20rpx;
+  border-radius: 30rpx;
+  background: #35d0a3;
+  color:white;
+  padding:5rpx 20rpx 5rpx 20rpx;
+  font-size: 25rpx;
+  box-shadow: 0 0 0 5rpx #eee;
+}
+.check2{
+  position: absolute;
+  bottom:20rpx;
+  right:20rpx;
+  border-radius: 30rpx;
+  background: #85bbf1;
+  color:white;
+  padding:5rpx 20rpx 5rpx 20rpx;
+  font-size: 25rpx;
+  box-shadow: 0 0 0 5rpx #eee;
 }

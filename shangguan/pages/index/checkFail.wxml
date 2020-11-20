@@ -1,5 +1,4 @@
 <view class='container'>
-  <input class="main" value="{{name}}" placeholder-style='color:#af9d7f' bindinput='mainInput'></input>
   <view class="title">
 		<view class="c1">
 			<text>发起时间</text>

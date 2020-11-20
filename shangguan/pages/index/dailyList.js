@@ -33,7 +33,6 @@ Page({
       userDetails: userDetails,
       type:options.type
     })
-    that.showList()
   },
 
   /**
@@ -47,7 +46,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    this.showList()
   },
 
   /**
@@ -68,7 +67,7 @@ Page({
    */
   onPullDownRefresh: function () {
 
-    this.onLoad();
+    this.onShow();
 
     wx.showNavigationBarLoading()
     setTimeout(function () {
@@ -92,7 +91,7 @@ Page({
   },
   login(e) {
     app.doLogin().then(data => {
-      this.onLoad()
+      this.onShow()
     })
   },
   showList(e) {

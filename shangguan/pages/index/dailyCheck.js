@@ -32,9 +32,25 @@ Page({
     time: '',
     title: '',
     classes: 0,
-    isRec:false,
-    proLists:[],
-    codeLists:[]
+    isRec: false,
+    proLists: [],
+    codeLists: [],
+    current: 1,
+    swiperHeight: '',
+    secLists: [],
+    departLists: [{
+        departName: '名品部',
+        departCode: '601'
+      },
+      {
+        departName: '女装部',
+        departCode: '602'
+      },
+      {
+        departName: '男装部',
+        departCode: '603'
+      }
+    ]
   },
 
   /**
@@ -64,6 +80,28 @@ Page({
     wx.setNavigationBarTitle({
       title: title
     })
+    wx.getSystemInfo({
+      success: function (res) {
+        let clientHeight = res.windowHeight
+        let clientWidth = res.windowWidth
+        let ratio = 750 / clientWidth
+        let rpxHeight = ratio * clientHeight
+        that.setData({
+          swiperHeight: rpxHeight - 80
+        })
+      }
+    })
+    var departLists = that.data.departLists
+    if (departLists.length > 0) {
+      let array = []
+      departLists.map((item) => {
+        array.push(item.departName)
+      })
+      that.setData({
+        departLists: departLists,
+        array1: array
+      })
+    }
     this.setData({
       title: title,
       type: type,
@@ -72,24 +110,27 @@ Page({
     })
     this.showList2()
     var lists = wx.getStorageSync('checkLists')
-    if (lists&&wx.getStorageSync('type')==type) {
+    var secLists = wx.getStorageSync('secLists')
+    if (lists && wx.getStorageSync('type') == type) {
       wx.showModal({
         title: '提示',
         content: '你有未保存巡检记录，是否重新编辑',
-        success (res) {
+        success(res) {
           if (res.confirm) {
             that.setData({
               lists: lists,
-              isRec:true,
-              cindex:wx.getStorageSync('cindex')
+              secLists: secLists?secLists:[],
+              isRec: true,
+              cindex: wx.getStorageSync('cindex')
             })
           } else if (res.cancel) {
             wx.removeStorageSync('checkLists')
+            wx.removeStorageSync('secLists')
             wx.removeStorageSync('cindex')
             wx.removeStorageSync('type')
           }
         }
-      })      
+      })
     }
   },
 
@@ -163,10 +204,10 @@ Page({
           return;
         }
         var data = res.data
-        if(data.length<1){
+        if (data.length < 1) {
           $Toast({
-            content:'暂无签字点',
-            type:'warning'
+            content: '暂无签字点',
+            type: 'warning'
           })
         }
         var lists = []
@@ -174,37 +215,35 @@ Page({
         var date = new Date()
         var hour = date.getHours()
         var minute = date.getMinutes()
-        data.map((item)=>{
-          console.log(hour<item.signatureTime.slice(0,2))
-          if(hour>item.signatureTime.slice(0,2)){
+        data.map((item) => {
+          console.log(hour < item.signatureTime.slice(0, 2))
+          console.log(hour + ',,,,' + item.signatureTime.slice(0, 2))
+          if (hour > item.signatureTime.slice(0, 2)) {
             var over = true
-          }else{
-            if(minute>item.signatureTime.slice(3,5)){
+          } else {
+            var over = false
+          }
+          if (hour == item.signatureTime.slice(0, 2)) {
+            if (minute > item.signatureTime.slice(3, 5)) {
               var over = true
-            }else{
+            } else {
               var over = false
             }
           }
           var x = {
             id: item.id,
-            code:item.signatureCode,
+            code: item.signatureCode,
             area: item.signatureName,
             time: item.signatureTime,
-            dealUserName:'',
-            dealUserCode:'',
-            keywords:'',
             pic: '',
-            remark: '',
-            index1: -1,
-            index2:false,
+            imgId: '',
             mark: false,
-            error:false,
-            over:over
+            over: over
           }
           lists.push(x)
         })
         that.setData({
-          lists:lists
+          lists: lists
         })
       }
     ).catch(res => {
@@ -234,14 +273,14 @@ Page({
         }
         let proLists = res.data
         console.log(proLists)
-        if(proLists.length>0){
+        if (proLists.length > 0) {
           let array = []
-          proLists.map((item)=>{
+          proLists.map((item) => {
             array.push(item.projectName)
           })
           that.setData({
-            proLists:proLists,
-            array:array
+            proLists: proLists,
+            array: array
           })
         }
       }
@@ -259,10 +298,11 @@ Page({
     var that = this
     console.log(e.currentTarget.dataset.index)
     var index = e.currentTarget.dataset.index
+    var current = e.currentTarget.dataset.current
+    if(current=='1'){
     var lists = that.data.lists
     if (lists[index].pic.length == 0) {
-      wx.showLoading({
-      })
+      wx.showLoading({})
       wx.chooseImage({
         count: 1,
         sizeType: ['original', 'compressed'],
@@ -283,8 +323,7 @@ Page({
               __ajax: 'json',
             },
             success(res) {
-              wx.hideLoading({
-              })
+              wx.hideLoading({})
               console.log(JSON.parse(res.data))
               var res = JSON.parse(res.data)
               if (res.result == 'true') {
@@ -318,42 +357,134 @@ Page({
           })
 
 
+        },
+        fail(res){
+          wx.hideLoading({
+          })
         }
       })
     }
+  }else if(current==2){
+    var secLists = that.data.secLists
+    if (secLists[index].pic.length == 0) {
+      wx.showLoading({})
+      wx.chooseImage({
+        count: 1,
+        sizeType: ['original', 'compressed'],
+        sourceType: ['camera'],
+        success(res) {
+          // tempFilePath可以作为img标签的src属性显示图片
+          const tempFilePaths = res.tempFilePaths
+          console.log(tempFilePaths)
+          var timestamp = Date.parse(new Date())
+          wx.uploadFile({
+            url: getApiHost() + 'file/upload', //仅为示例，非真实的接口地址
+            filePath: tempFilePaths.toString(),
+            name: 'file',
+            formData: {
+              fileMd5: timestamp + '.png',
+              fileName: timestamp + '.png',
+              __sid: that.data.userDetails.sid,
+              __ajax: 'json',
+            },
+            success(res) {
+              wx.hideLoading({})
+              console.log(JSON.parse(res.data))
+              var res = JSON.parse(res.data)
+              if (res.result == 'true') {
+                secLists[index].pic = tempFilePaths.toString()
+                secLists[index].imgId = res.fileUpload.id
+                that.setData({
+                  secLists: secLists
+                })
+                wx.setStorageSync('secLists', secLists)
+              } else {
+                wx.showModal({
+                  title: '错误',
+                  content: res.message,
+                  showCancel: false,
+                  confirmText: '知道了',
+                  confirmColor: '#1890FF'
+                });
+              }
+            },
+            fail(res) {
+              wx.showModal({
+                title: '错误',
+                content: '上传失败，请稍后再试',
+                showCancel: false,
+                confirmText: '知道了',
+                confirmColor: '#1890FF'
+              });
+            }
+          })
+
+
+        },
+        fail(res){
+          wx.hideLoading({
+          })
+        }
+      })
+    }
+  }
   },
   pickChange(e) {
     console.log(e.currentTarget.dataset.index)
     var proLists = this.data.proLists
     var index = e.currentTarget.dataset.index
-    var lists = this.data.lists
-    lists[index].index1 = e.detail.value
-    if(proLists[e.detail.value].flow=="workContact"){
-      lists[index].index2 = true 
-    }else{
-      lists[index].index2 = false
-      lists[index].dealUserCode = ''
-      lists[index].dealUserName = ''
-      lists[index].keywords = ''
+    var secLists = this.data.secLists
+    secLists[index].index = e.detail.value
+    secLists[index].score = proLists[e.detail.value].score
+    if (proLists[e.detail.value].flow == "workContact") {
+      secLists[index].mark = true
+    } else {
+      secLists[index].mark = false
+      secLists[index].dealUserCode = ''
+      secLists[index].dealUserName = ''
+      secLists[index].keywords = ''
     }
     this.setData({
-      lists: lists
+      secLists: secLists
     })
-    wx.setStorageSync('checkLists', lists)
-    wx.setStorageSync('type', this.data.type)
-
+    wx.setStorageSync('secLists', secLists)
+  },
+  departChange(e) {
+    console.log(e.currentTarget.dataset.index)
+    var index = e.currentTarget.dataset.index
+    var secLists = this.data.secLists
+    var departLists = this.data.departLists
+    secLists[index].index1 = e.detail.value
+    secLists[index].departName = departLists[e.detail.value].departName
+    secLists[index].departCode = departLists[e.detail.value].departCode
+    this.setData({
+      secLists: secLists
+    })
+    wx.setStorageSync('secLists', secLists)
   },
   delete(e) {
     var index = e.currentTarget.dataset.index
-    console.log(index)
+    var current = e.currentTarget.dataset.current
     var lists = this.data.lists
-    lists[index].pic = ''
-    lists[index].imgId = ''
-    this.setData({
-      lists: lists
-    })
+    var secLists = this.data.secLists
+    if(current=='1'){
+      lists[index].pic = ''
+      lists[index].imgId = ''
+      this.setData({
+        lists: lists
+      })
     wx.setStorageSync('checkLists', lists)
     wx.setStorageSync('type', this.data.type)
+    }else if(current=='2'){
+      secLists[index].pic = ''
+      secLists[index].imgId = ''
+      this.setData({
+        secLists: secLists
+      })
+      wx.setStorageSync('secLists', secLists)
+      wx.setStorageSync('type', this.data.type)
+      }
+    
   },
   showPic(e) {
     var array = []
@@ -377,59 +508,68 @@ Page({
   }) {
     var that = this
     var lists = that.data.lists
-    lists.map((item)=>{
-      item.mark = false
-    })
-    that.setData({
-      lists:lists
-    })
+    var secLists = that.data.secLists
+    var proLists = that.data.proLists
     console.log(lists)
+    console.log(secLists)
     for (let x in lists) {
-      if (lists[x].index2) {
-        if(lists[x].dealUserCode.length<1){
-          $Toast({
-            content: '请正确选择' + lists[x].area + '处理人',
-            type: 'warning'
-          })
-          const action = [...this.data.actions];
-          action[0].loading = false;
-          this.setData({
-            visible: false,
-            actions: action
-          });
+      if (lists[x].imgId.length < 1) {
+        $Toast({
+          content: '请上传' + lists[x].area + '巡检照片',
+          type: 'warning'
+        })
+        const action = [...this.data.actions];
+        action[0].loading = false;
+        this.setData({
+          visible: false,
+          actions: action,
+          current: 1
+        });
         return;
-        }
-       
-        if(lists[x].remark.length<1){
-          $Toast({
-            content: '请填写' + lists[x].area + '现场情况描述',
-            type: 'warning'
-          })
-          const action = [...this.data.actions];
-          action[0].loading = false;
-          this.setData({
-            visible: false,
-            actions: action
-          });
-        return;
-        }
-        // lists[x].mark = true
-        // that.setData({
-        //   lists:lists
-        // })
       }
     }
-    var proLists = that.data.proLists
-    for(let x in lists){
-      if(lists[x].index1!='-1'){
-        console.log(proLists[lists[x].index1].flow)
-        if(proLists[lists[x].index1].flow=='reportFail'){
+    if (secLists.length > 0) {
+      for (let y in secLists) {
+          if (secLists[y].mark && secLists[y].dealUserCode.length < 1) {
+            $Toast({
+              content: '请正确选择处理人',
+              type: 'warning'
+            })
+            const action = [...this.data.actions];
+            action[0].loading = false;
+            this.setData({
+              visible: false,
+              actions: action
+            });
+            return;
+          }
+          console.log(secLists[y].remark.length)
+          if (secLists[y].remark.length < 1) {
+            $Toast({
+              content: '请填写问题描述',
+              type: 'warning'
+            })
+            const action = [...this.data.actions];
+            action[0].loading = false;
+            this.setData({
+              visible: false,
+              actions: action
+            });
+            return;
+          }
+      }
+    }
+    for (let x in secLists) {
+        console.log(proLists[secLists[x].index].flow)
+        if (proLists[secLists[x].index].flow == 'reportFail') {
+          var imgId = secLists[x].imgId
+          secLists[x].imgId = ''
           var data = {
             __sid: that.data.userDetails.sid,
             __ajax: 'json',
-            remark: lists[x].remark,
+            remark: secLists[x].remark,
+            merchantReportFail_image:imgId,
             type: 1,
-            merchantReportFail_image:lists[x].imgId,
             status: 4
           }
           console.log(data)
@@ -447,15 +587,17 @@ Page({
             });
           });
 
-        }else if(proLists[lists[x].index1].flow=='workContact'){
+        } else if (proLists[secLists[x].index].flow == 'workContact') {
+          var imgId = secLists[x].imgId
+          secLists[x].imgId = ''
           var data = {
             __sid: that.data.userDetails.sid,
             __ajax: 'json',
-            dealUserName: lists[x].dealUserName,
-            dealUserCode: lists[x].dealUserCode,
+            dealUserName: secLists[x].dealUserName,
+            dealUserCode: secLists[x].dealUserCode,
             type: 1,
-            remark: lists[x].remark,
-            merchantWorkContact_image:lists[x].imgId,
+            remark: secLists[x].remark,
+            merchantWorkContact_image: imgId,
             status: 4,
           }
           console.log(data)
@@ -473,44 +615,7 @@ Page({
             });
           });
         }
-      }
     }
-    // for (let x in lists) {
-    //   if ( !lists[x].imgId||lists[x].imgId.length == 0) {
-    //     $Toast({
-    //       content: '请上传' + lists[x].area + '巡检照片',
-    //       type: 'warning'
-    //     })
-    //     lists[x].error = true
-    //     that.setData({
-    //       lists:lists
-    //     })
-    //     const action = [...this.data.actions];
-    //     action[0].loading = false;
-    //     this.setData({
-    //       visible: false,
-    //       actions: action
-    //     });
-    //     return;
-    //   }
-    //   if (lists[x].remark.length == 0 || !lists[x].remark) {
-    //     $Toast({
-    //       content: '请填写' + lists[x].area + '现场情况描述',
-    //       type: 'warning'
-    //     })
-    //     lists[x].error = true
-    //     that.setData({
-    //       lists:lists
-    //     })
-    //     const action = [...this.data.actions];
-    //     action[0].loading = false;
-    //     this.setData({
-    //       visible: false,
-    //       actions: action
-    //     });
-    //     return;
-    //   }
-    // }
     const action = [...this.data.actions];
     action[0].loading = true;
     this.setData({
@@ -522,37 +627,20 @@ Page({
     var imgLists = []
     var lists = that.data.lists
     var proLists = that.data.proLists
-    lists.map((item,index)=>{
+    console.log(secLists)
+    lists.map((item, index) => {
       var x = {
-        signatureId:item.id,
-        signatureName:item.area,
-        remark:item.remark
+        signatureId: item.id,
+        signatureName: item.area,
+        remark: item.remark
       }
-      if(item.index1=='-1'){
-        var y = {
-          projectCode:'',
-          projectName:'',
-          remark:'',
-          score:''
-        }
-      }else if(item.index1>0){
-        var y = {
-          projectCode:proLists[item.index1].id,
-          projectName:proLists[item.index1].projectName,
-          remark:item.remark,
-          score:proLists[item.index1].score
-        }
-      }else{
-        var y = {
-          projectCode:proLists[0].id,
-          projectName:proLists[0].projectName,
-          remark:item.remark,
-          score:proLists[0].score
-        }
-      }
-      proArray.push(y)
       array.push(x)
-      if(item.imgId&&item.imgId.length>0&&item.index1=='-1'){
+      if (item.imgId && item.imgId.length > 0) {
+        imgLists.push(item.imgId)
+      }
+    })
+    secLists.map((item)=>{
+      if (item.imgId && item.imgId.length > 0) {
         imgLists.push(item.imgId)
       }
     })
@@ -567,13 +655,12 @@ Page({
     for (let x in array) {
       postData['merchantCheckupOrderDetailList[' + x + '].signatureId'] = array[x].signatureId
       postData['merchantCheckupOrderDetailList[' + x + '].signatureName'] = array[x].signatureName
-      postData['merchantCheckupOrderDetailList[' + x + '].remark'] = array[x].remark
     }
-    for(let y in proArray){
-      postData['merchantCheckupOrderProList[' + y + '].projectCode'] = proArray[y].projectCode
-      postData['merchantCheckupOrderProList[' + y + '].projectName'] = proArray[y].projectName
-      postData['merchantCheckupOrderProList[' + y + '].remark'] = proArray[y].remark
-      postData['merchantCheckupOrderProList[' + y + '].score'] = proArray[y].score
+    for (let y in secLists) {
+      postData['merchantCheckupOrderProList[' + y + '].projectCode'] = secLists[y].projectCode
+      postData['merchantCheckupOrderProList[' + y + '].projectName'] = secLists[y].projectName
+      postData['merchantCheckupOrderProList[' + y + '].remark'] = secLists[y].remark
+      postData['merchantCheckupOrderProList[' + y + '].score'] = secLists[y].score
     }
 
     // var data = {
@@ -594,7 +681,7 @@ Page({
       },
       success(res) {
         console.log(res)
-        if(res.statusCode==200){
+        if (res.statusCode == 200) {
           if (res.data.result == 'login') {
             action[0].loading = false;
             that.setData({
@@ -602,8 +689,8 @@ Page({
               actions: action
             });
             $Toast({
-              content:'登录失效，自动登录后重新提交',
-              type:'error'
+              content: '登录失效，自动登录后重新提交',
+              type: 'error'
             })
             that.login()
             console.log('登录失效')
@@ -612,11 +699,11 @@ Page({
           if (res.data.result == 'false') {
             $Toast({
               content: res.data.data.message,
-              type:'error'
+              type: 'error'
             })
             return;
           }
-          if(res.data.result=='true'){
+          if (res.data.result == 'true') {
             console.log(res)
             setTimeout(() => {
               action[0].loading = false;
@@ -628,17 +715,17 @@ Page({
                 content: '提交成功！',
                 type: 'success'
               });
-              setTimeout(()=>{
+              setTimeout(() => {
                 wx.switchTab({
                   url: '/pages/my/my',
                 })
                 wx.removeStorageSync('checkLists')
                 wx.removeStorageSync('cindex')
                 wx.removeStorageSync('type')
-              },500)
+              }, 500)
             }, 3000);
           }
-        }else{
+        } else {
           $Toast({
             content: '系统错误，请稍后再试',
             type: 'error'
@@ -712,14 +799,12 @@ Page({
     var that = this;
     console.log(e.currentTarget.dataset.index);
     var index = e.currentTarget.dataset.index;
-    var lists = that.data.lists;
-    lists[index].remark = e.detail.value;
-    lists[index].error = false;
+    var secLists = that.data.secLists;
+    secLists[index].remark = e.detail.value;
     that.setData({
-      lists: lists
+      secLists: secLists
     })
-    wx.setStorageSync('checkLists', lists)
-    wx.setStorageSync('type', that.data.type)
+    wx.setStorageSync('secLists', secLists)
   },
   getToday(e) {
     var date = new Date()
@@ -749,15 +834,15 @@ Page({
   },
   classChange(e) {
     var that = this
-    if(that.data.isRec){
+    if (that.data.isRec) {
       wx.showModal({
         title: '提示',
         content: '切换班次将会清除当前记录，是否确认',
-        success (res) {
+        success(res) {
           if (res.confirm) {
             that.setData({
               cindex: e.detail.value,
-              classes: e.detail.value -1+2
+              classes: e.detail.value - 1 + 2
             })
             wx.removeStorageSync('checkLists')
             wx.setStorageSync('cindex', e.detail.value)
@@ -766,11 +851,11 @@ Page({
             that.showList2()
           }
         }
-      }) 
-    }else{
+      })
+    } else {
       that.setData({
         cindex: e.detail.value,
-        classes: e.detail.value -1+2
+        classes: e.detail.value - 1 + 2
       })
       wx.setStorageSync('cindex', e.detail.value)
       wx.setStorageSync('type', that.data.type)
@@ -826,7 +911,7 @@ Page({
               office: item.employee.office.officeName,
               code: item.userCode,
               phone: item.mobile,
-              sex:item.sex
+              sex: item.sex
             })
           })
           console.log(codeLists)
@@ -853,28 +938,72 @@ Page({
   selectItem(e) {
     console.log(e.currentTarget.dataset.index)
     var index = e.currentTarget.dataset.index
-    var lists = this.data.lists
-    lists[index].dealUserCode = e.currentTarget.dataset.code
-    lists[index].dealUserName = e.currentTarget.dataset.name
-    lists[index].keywords = e.currentTarget.dataset.name + '(' + e.currentTarget.dataset.office + ')'
+    var secLists = this.data.secLists
+    secLists[index].dealUserCode = e.currentTarget.dataset.code
+    secLists[index].dealUserName = e.currentTarget.dataset.name
+    secLists[index].keywords = e.currentTarget.dataset.name + '(' + e.currentTarget.dataset.office + ')'
     this.setData({
       sonvisibility: false,
       keywords: e.currentTarget.dataset.name + '(' + e.currentTarget.dataset.office + ')',
-      lists:lists
+      secLists: secLists
     })
-    wx.setStorageSync('checkLists', lists)
+    wx.setStorageSync('secLists', secLists)
   },
-  onChange(e){
+  onChange(e) {
     var x = e.detail.value
     var index = e.currentTarget.dataset.index
     var lists = this.data.lists
     lists[index].index3 = x
-    if(!x){
+    if (!x) {
       lists[index].index1 = -1
     }
     this.setData({
-      lists:lists
+      lists: lists
     })
     wx.setStorageSync('checkLists', lists)
+  },
+  handleChange({
+    detail
+  }) {
+    this.setData({
+      current: detail.key
+    })
+  },
+  addPro(e) {
+    var that = this
+    var secLists = that.data.secLists
+    var departLists = that.data.departLists
+    var proLists = that.data.proLists
+    var array = {
+      projectCode: proLists[0].projectCode,
+      projectName: proLists[0].projectName,
+      departName: departLists[0].departName,
+      departCode: departLists[0].departCode,
+      dealUserCode: '',
+      dealUserName: '',
+      keywords: '',
+      remark: '',
+      pic:'',
+      imgId:'',
+      score: proLists[0].score,
+      mark: false,
+      index: 0,
+      index1: 0
+    }
+    secLists.push(array)
+    that.setData({
+      secLists: secLists
+    })
+    wx.setStorageSync('secLists', secLists)
+  },
+  remove(e) {
+    var that = this
+    var index = e.currentTarget.dataset.index
+    console.log(index)
+    var secLists = that.data.secLists
+    secLists.splice(index, 1)
+    that.setData({
+      secLists: secLists
+    })
   }
 })

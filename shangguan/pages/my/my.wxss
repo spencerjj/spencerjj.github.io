@@ -1,5 +1,53 @@
 page{
     background: #f7f7f7;
+    width: 100%;
+    height: 100%;
+    overflow-y: hidden;
+}
+/* 新世纪 */
+.main3{
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top:0;
+    background-image: url('http://tiebapic.baidu.com/forum/w%3D580/sign=1e17f8be6bd98d1076d40c39113eb807/501cb21bb051f819b6d26d08cdb44aed2f73e78f.jpg');
+}
+/* 百货 */
+.main2{
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top:0;
+    background-image: url('http://tiebapic.baidu.com/forum/w%3D580/sign=93d912261e23dd542173a760e108b3df/61f4503d269759ee65a70e89a5fb43166c22df8f.jpg');
+}
+/* 购物 */
+.main1{
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top:0;
+    background-image: url('http://tiebapic.baidu.com/forum/w%3D580/sign=75e37687f7fe9925cb0c695804a95ee4/3e2210dfa9ec8a132ced39a2e003918fa1ecc08f.jpg');
+}
+.container{
+    width: 96%;
+    margin-left: 2%;
+    box-shadow: 0 0 5rpx #ccc;
+    margin-top:10rpx;
+    border-radius: 10rpx;
+    background: rgb(255, 255, 255,.8);
+    position: relative;
+    padding-top: 200rpx;
+    margin-top: 100rpx;
+}
+.top{
+    width: 100%;
+    text-align: center;
+    position: absolute;
+    top:-50rpx;
+}
+.profile image{
+    width: 130rpx;
+    height: 130rpx;
 }
 .allSecion{
     width: 100%;
@@ -8,12 +56,11 @@ page{
     flex-wrap: wrap;
 }
 .section{
-    width: 33.2%;
-    border:1rpx solid #eee;
-    height: 230rpx;
+    width: 25%;
+    height: 160rpx;
     text-align: center;
-    font-size: 35rpx;
-    font-weight: bolder;
+    font-size: 33rpx;
+    /* font-weight: bolder; */
     padding-top: 30rpx;
 
 }
@@ -21,25 +68,38 @@ page{
     border-top: none;
     border-left: none;
 }
-/* .section:nth-child(n+4){
-    border-bottom: none;
-} */
+.section:nth-child(1){
+    border-top: 5rpx solid #f7f7f7;
+}
+.section:nth-child(2){
+    border-top: 5rpx solid #f7f7f7;
+}
+.section:nth-child(3){
+    border-top: 5rpx solid #f7f7f7;
+}
+.section:nth-child(4){
+    border-top: 5rpx solid #f7f7f7;
+}
 
 
 .secIcon{
     width: 150rpx;
-    height: 150rpx;
+    height: 100rpx;
     border-radius: 20rpx;
     margin:0 auto;
-    margin-bottom: 20rpx;
+    /* margin-bottom: 20rpx; */
 }
 .section image{
     width: 80rpx;
     height: 80rpx;
     vertical-align: middle;
-    margin-top: 30rpx;
+    /* margin-top: 30rpx; */
+    box-shadow: 0 0 5px #ccc;
 }
-.section:nth-child(1) .secIcon{
+.shover{
+    background: #eee;
+}
+/* .section:nth-child(1) .secIcon{
     background: rgb(183, 36, 30);
 }
 .section:nth-child(2) .secIcon{
@@ -68,4 +128,5 @@ page{
 }
 .section:nth-child(10) .secIcon{
     background: rgb(183, 36, 30);
-}
+} */
+

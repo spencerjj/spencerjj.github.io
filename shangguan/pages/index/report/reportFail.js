@@ -290,7 +290,7 @@ Page({
               wx.switchTab({
                 url: '/pages/index/inform',
               })
-            },1000)
+            },500)
           }, 1000);
         }
       ).catch(res => {

@@ -222,7 +222,7 @@ Page({
       url = 'checkFail'
     }
     wx.navigateTo({
-      url: url+'?id='+e.currentTarget.dataset.id+'&current='+this.data.current+'&bizKey='+e.currentTarget.dataset.biz+'&name='+e.currentTarget.dataset.name,
+      url: url+'?id='+e.currentTarget.dataset.id+'&c='+this.data.current+'&bizKey='+e.currentTarget.dataset.biz,
     })
   },
   handleChange({detail}){
