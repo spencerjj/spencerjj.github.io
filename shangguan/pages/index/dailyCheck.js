@@ -38,17 +38,17 @@ Page({
     current: 1,
     swiperHeight: '',
     secLists: [],
-    departLists: [{
-        departName: '名品部',
-        departCode: '601'
+    officeLists: [{
+        officeName: '名品部',
+        officeCode: '601'
       },
       {
-        departName: '女装部',
-        departCode: '602'
+        officeName: '女装部',
+        officeCode: '602'
       },
       {
-        departName: '男装部',
-        departCode: '603'
+        officeName: '男装部',
+        officeCode: '603'
       }
     ]
   },
@@ -91,17 +91,7 @@ Page({
         })
       }
     })
-    var departLists = that.data.departLists
-    if (departLists.length > 0) {
-      let array = []
-      departLists.map((item) => {
-        array.push(item.departName)
-      })
-      that.setData({
-        departLists: departLists,
-        array1: array
-      })
-    }
+
     this.setData({
       title: title,
       type: type,
@@ -119,7 +109,7 @@ Page({
           if (res.confirm) {
             that.setData({
               lists: lists,
-              secLists: secLists?secLists:[],
+              secLists: secLists ? secLists : [],
               isRec: true,
               cindex: wx.getStorageSync('cindex')
             })
@@ -145,7 +135,10 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    wx.showLoading()
+    setTimeout(()=>{
+      wx.hideLoading()
+    },2000)
   },
 
   /**
@@ -234,7 +227,7 @@ Page({
             id: item.id,
             code: item.signatureCode,
             area: item.signatureName,
-            time: item.signatureTime,
+            time: item.signatureTime.substring(0, 5),
             pic: '',
             imgId: '',
             mark: false,
@@ -293,141 +286,188 @@ Page({
         confirmColor: '#1890FF'
       });
     });
+    wx.request({
+      url: getApiHost() + 'api/merchant/listOffice',
+      data: {
+        __sid: that.data.userDetails.sid,
+        __ajax: 'json',
+      },
+      header: {
+        'content-type': 'application/json' // 默认值
+      },
+      success(res) {
+        if (res.statusCode == 200) {
+          if (res.data.result && res.data.result == 'login') {
+            that.login()
+            console.log('未登录')
+            return;
+          }
+          console.log(res.data)
+          var officeLists = res.data
+          if (officeLists.length > 0) {
+            let array = []
+            officeLists.map((item) => {
+              array.push(item.officeName)
+            })
+            that.setData({
+              officeLists: officeLists,
+              array1: array
+            })
+          }
+
+        } else {
+          $Toast({
+            content: '系统错误',
+            type: 'error'
+          })
+        }
+      }
+    })
   },
   upload(e) {
     var that = this
     console.log(e.currentTarget.dataset.index)
     var index = e.currentTarget.dataset.index
     var current = e.currentTarget.dataset.current
-    if(current=='1'){
-    var lists = that.data.lists
-    if (lists[index].pic.length == 0) {
-      wx.showLoading({})
-      wx.chooseImage({
-        count: 1,
-        sizeType: ['original', 'compressed'],
-        sourceType: ['camera'],
-        success(res) {
-          // tempFilePath可以作为img标签的src属性显示图片
-          const tempFilePaths = res.tempFilePaths
-          console.log(tempFilePaths)
-          var timestamp = Date.parse(new Date())
-          wx.uploadFile({
-            url: getApiHost() + 'file/upload', //仅为示例，非真实的接口地址
-            filePath: tempFilePaths.toString(),
-            name: 'file',
-            formData: {
-              fileMd5: timestamp + '.png',
-              fileName: timestamp + '.png',
-              __sid: that.data.userDetails.sid,
-              __ajax: 'json',
-            },
-            success(res) {
-              wx.hideLoading({})
-              console.log(JSON.parse(res.data))
-              var res = JSON.parse(res.data)
-              if (res.result == 'true') {
-                lists[index].pic = tempFilePaths.toString()
-                lists[index].imgId = res.fileUpload.id
-                lists[index].error = false
-                that.setData({
-                  lists: lists
-                })
-                wx.removeStorageSync('checkLists')
-                wx.setStorageSync('checkLists', lists)
-              } else {
+    if (current == '1') {
+      var lists = that.data.lists
+      if (lists[index].pic.length == 0) {
+        wx.chooseImage({
+          count: 1,
+          sizeType: ['original', 'compressed'],
+          sourceType: ['camera'],
+          success(res) {
+            // tempFilePath可以作为img标签的src属性显示图片
+            const tempFilePaths = res.tempFilePaths
+            console.log(tempFilePaths)
+            var timestamp = Date.parse(new Date())
+            // wx.getFileSystemManager().readFile({
+            //   filePath: tempFilePaths[0], //选择图片返回的相对路径
+            //   encoding: 'base64', //编码格式
+            //   success:(res) =>{
+            //     var baseImg = 'data:image/png;base64,' + res.data
+            //     lists[index].pic = baseImg
+            //   }
+            // })
+            wx.uploadFile({
+              url: getApiHost() + 'file/upload', //仅为示例，非真实的接口地址
+              filePath: tempFilePaths.toString(),
+              name: 'file',
+              formData: {
+                fileMd5: timestamp + '.png',
+                fileName: timestamp + '.png',
+                __sid: that.data.userDetails.sid,
+                __ajax: 'json',
+              },
+              success(res) {
+                wx.hideLoading()
+                console.log(JSON.parse(res.data))
+                var res = JSON.parse(res.data)
+                if (res.result == 'true') {
+                  lists[index].pic = tempFilePaths.toString()
+                  lists[index].imgId = res.fileUpload.id
+                  lists[index].error = false
+                  that.setData({
+                    lists: lists
+                  })
+                  wx.removeStorageSync('checkLists')
+                  wx.setStorageSync('checkLists', lists)
+                } else {
+                  wx.showModal({
+                    title: '错误',
+                    content: res.message,
+                    showCancel: false,
+                    confirmText: '知道了',
+                    confirmColor: '#1890FF'
+                  });
+                }
+
+              },
+              fail(res) {
                 wx.showModal({
                   title: '错误',
-                  content: res.message,
+                  content: '上传失败，请稍后再试',
                   showCancel: false,
                   confirmText: '知道了',
                   confirmColor: '#1890FF'
                 });
               }
-            },
-            fail(res) {
-              wx.showModal({
-                title: '错误',
-                content: '上传失败，请稍后再试',
-                showCancel: false,
-                confirmText: '知道了',
-                confirmColor: '#1890FF'
-              });
-            }
-          })
-
-
-        },
-        fail(res){
-          wx.hideLoading({
-          })
-        }
-      })
-    }
-  }else if(current==2){
-    var secLists = that.data.secLists
-    if (secLists[index].pic.length == 0) {
-      wx.showLoading({})
-      wx.chooseImage({
-        count: 1,
-        sizeType: ['original', 'compressed'],
-        sourceType: ['camera'],
-        success(res) {
-          // tempFilePath可以作为img标签的src属性显示图片
-          const tempFilePaths = res.tempFilePaths
-          console.log(tempFilePaths)
-          var timestamp = Date.parse(new Date())
-          wx.uploadFile({
-            url: getApiHost() + 'file/upload', //仅为示例，非真实的接口地址
-            filePath: tempFilePaths.toString(),
-            name: 'file',
-            formData: {
-              fileMd5: timestamp + '.png',
-              fileName: timestamp + '.png',
-              __sid: that.data.userDetails.sid,
-              __ajax: 'json',
-            },
-            success(res) {
-              wx.hideLoading({})
-              console.log(JSON.parse(res.data))
-              var res = JSON.parse(res.data)
-              if (res.result == 'true') {
-                secLists[index].pic = tempFilePaths.toString()
-                secLists[index].imgId = res.fileUpload.id
-                that.setData({
-                  secLists: secLists
-                })
-                wx.setStorageSync('secLists', secLists)
-              } else {
+            })
+          },
+          fail(res) {
+            wx.hideLoading()
+          }
+        })
+      }
+    } else if (current == 2) {
+      var secLists = that.data.secLists
+      if (secLists[index].pic.length == 0) {
+        wx.chooseImage({
+          count: 1,
+          sizeType: ['original', 'compressed'],
+          sourceType: ['camera'],
+          success(res) {
+            // tempFilePath可以作为img标签的src属性显示图片
+            const tempFilePaths = res.tempFilePaths
+            console.log(tempFilePaths)
+            var timestamp = Date.parse(new Date())
+            // wx.getFileSystemManager().readFile({
+            //   filePath: tempFilePaths[0], //选择图片返回的相对路径
+            //   encoding: 'base64', //编码格式
+            //   success:(res) =>{
+            //     var baseImg = 'data:image/png;base64,' + res.data
+            //     secLists[index].pic = baseImg
+            //   }
+            // })
+            wx.uploadFile({
+              url: getApiHost() + 'file/upload', //仅为示例，非真实的接口地址
+              filePath: tempFilePaths.toString(),
+              name: 'file',
+              formData: {
+                fileMd5: timestamp + '.png',
+                fileName: timestamp + '.png',
+                __sid: that.data.userDetails.sid,
+                __ajax: 'json',
+              },
+              success(res) {
+                wx.hideLoading()
+                console.log(JSON.parse(res.data))
+                var res = JSON.parse(res.data)
+                if (res.result == 'true') {
+                  secLists[index].pic = tempFilePaths.toString()
+                  secLists[index].imgId = res.fileUpload.id
+                  that.setData({
+                    secLists: secLists
+                  })
+                  wx.setStorageSync('secLists', secLists)
+                } else {
+                  wx.showModal({
+                    title: '错误',
+                    content: res.message,
+                    showCancel: false,
+                    confirmText: '知道了',
+                    confirmColor: '#1890FF'
+                  });
+                }
+              },
+              fail(res) {
                 wx.showModal({
                   title: '错误',
-                  content: res.message,
+                  content: '上传失败，请稍后再试',
                   showCancel: false,
                   confirmText: '知道了',
                   confirmColor: '#1890FF'
                 });
               }
-            },
-            fail(res) {
-              wx.showModal({
-                title: '错误',
-                content: '上传失败，请稍后再试',
-                showCancel: false,
-                confirmText: '知道了',
-                confirmColor: '#1890FF'
-              });
-            }
-          })
+            })
 
-
-        },
-        fail(res){
-          wx.hideLoading({
-          })
-        }
-      })
+          },
+          fail(res) {
+            wx.hideLoading()
+          }
+        })
+      }
     }
-  }
   },
   pickChange(e) {
     console.log(e.currentTarget.dataset.index)
@@ -436,6 +476,8 @@ Page({
     var secLists = this.data.secLists
     secLists[index].index = e.detail.value
     secLists[index].score = proLists[e.detail.value].score
+    secLists[index].projectName = proLists[e.detail.value].projectName
+    secLists[index].projectCode= proLists[e.detail.value].projectCode
     if (proLists[e.detail.value].flow == "workContact") {
       secLists[index].mark = true
     } else {
@@ -449,14 +491,14 @@ Page({
     })
     wx.setStorageSync('secLists', secLists)
   },
-  departChange(e) {
+  officeChange(e) {
     console.log(e.currentTarget.dataset.index)
     var index = e.currentTarget.dataset.index
     var secLists = this.data.secLists
-    var departLists = this.data.departLists
+    var officeLists = this.data.officeLists
     secLists[index].index1 = e.detail.value
-    secLists[index].departName = departLists[e.detail.value].departName
-    secLists[index].departCode = departLists[e.detail.value].departCode
+    secLists[index].officeName = officeLists[e.detail.value].officeName
+    secLists[index].officeCode = officeLists[e.detail.value].officeCode
     this.setData({
       secLists: secLists
     })
@@ -467,15 +509,15 @@ Page({
     var current = e.currentTarget.dataset.current
     var lists = this.data.lists
     var secLists = this.data.secLists
-    if(current=='1'){
+    if (current == '1') {
       lists[index].pic = ''
       lists[index].imgId = ''
       this.setData({
         lists: lists
       })
-    wx.setStorageSync('checkLists', lists)
-    wx.setStorageSync('type', this.data.type)
-    }else if(current=='2'){
+      wx.setStorageSync('checkLists', lists)
+      wx.setStorageSync('type', this.data.type)
+    } else if (current == '2') {
       secLists[index].pic = ''
       secLists[index].imgId = ''
       this.setData({
@@ -483,8 +525,8 @@ Page({
       })
       wx.setStorageSync('secLists', secLists)
       wx.setStorageSync('type', this.data.type)
-      }
-    
+    }
+
   },
   showPic(e) {
     var array = []
@@ -530,91 +572,91 @@ Page({
     }
     if (secLists.length > 0) {
       for (let y in secLists) {
-          if (secLists[y].mark && secLists[y].dealUserCode.length < 1) {
-            $Toast({
-              content: '请正确选择处理人',
-              type: 'warning'
-            })
-            const action = [...this.data.actions];
-            action[0].loading = false;
-            this.setData({
-              visible: false,
-              actions: action
-            });
-            return;
-          }
-          console.log(secLists[y].remark.length)
-          if (secLists[y].remark.length < 1) {
-            $Toast({
-              content: '请填写问题描述',
-              type: 'warning'
-            })
-            const action = [...this.data.actions];
-            action[0].loading = false;
-            this.setData({
-              visible: false,
-              actions: action
-            });
-            return;
-          }
+        if (secLists[y].mark && secLists[y].dealUserCode.length < 1) {
+          $Toast({
+            content: '请正确选择处理人',
+            type: 'warning'
+          })
+          const action = [...this.data.actions];
+          action[0].loading = false;
+          this.setData({
+            visible: false,
+            actions: action
+          });
+          return;
+        }
+        console.log(secLists[y].remark.length)
+        if (secLists[y].remark.length < 1) {
+          $Toast({
+            content: '请填写考核项目('+(y-1+2)+')的问题描述',
+            type: 'warning'
+          })
+          const action = [...this.data.actions];
+          action[0].loading = false;
+          this.setData({
+            visible: false,
+            actions: action
+          });
+          return;
+        }
       }
     }
     for (let x in secLists) {
-        console.log(proLists[secLists[x].index].flow)
-        if (proLists[secLists[x].index].flow == 'reportFail') {
-          var imgId = secLists[x].imgId
-          secLists[x].imgId = ''
-          var data = {
-            __sid: that.data.userDetails.sid,
-            __ajax: 'json',
-            remark: secLists[x].remark,
-            merchantReportFail_image:imgId,
-            type: 1,
-            status: 4
-          }
-          console.log(data)
-          postRequest(getApiHost(), 'api/merchant/merchantReportFailSave', 'url', data, 0, false, false, false).then(
-            res => {
-              console.log(res)
-            }
-          ).catch(res => {
-            wx.showModal({
-              title: '错误',
-              content: res.message,
-              showCancel: false,
-              confirmText: '知道了',
-              confirmColor: '#1890FF'
-            });
-          });
-
-        } else if (proLists[secLists[x].index].flow == 'workContact') {
-          var imgId = secLists[x].imgId
-          secLists[x].imgId = ''
-          var data = {
-            __sid: that.data.userDetails.sid,
-            __ajax: 'json',
-            dealUserName: secLists[x].dealUserName,
-            dealUserCode: secLists[x].dealUserCode,
-            type: 1,
-            remark: secLists[x].remark,
-            merchantWorkContact_image: imgId,
-            status: 4,
-          }
-          console.log(data)
-          postRequest(getApiHost(), 'api/merchant/merchantWorkContactSave', 'url', data, 0, false, false, false).then(
-            res => {
-              console.log(res)
-            }
-          ).catch(res => {
-            wx.showModal({
-              title: '错误',
-              content: res.message,
-              showCancel: false,
-              confirmText: '知道了',
-              confirmColor: '#1890FF'
-            });
-          });
+      console.log(proLists[secLists[x].index].flow)
+      if (proLists[secLists[x].index].flow == 'reportFail') {
+        var imgId = secLists[x].imgId
+        secLists[x].imgId = ''
+        var data = {
+          __sid: that.data.userDetails.sid,
+          __ajax: 'json',
+          remark: secLists[x].remark,
+          merchantReportFail_image: imgId,
+          type: 1,
+          status: 4
         }
+        console.log(data)
+        postRequest(getApiHost(), 'api/merchant/merchantReportFailSave', 'url', data, 0, false, false, false).then(
+          res => {
+            console.log(res)
+          }
+        ).catch(res => {
+          wx.showModal({
+            title: '错误',
+            content: res.message,
+            showCancel: false,
+            confirmText: '知道了',
+            confirmColor: '#1890FF'
+          });
+        });
+
+      } else if (proLists[secLists[x].index].flow == 'workContact') {
+        var imgId = secLists[x].imgId
+        secLists[x].imgId = ''
+        var data = {
+          __sid: that.data.userDetails.sid,
+          __ajax: 'json',
+          dealUserName: secLists[x].dealUserName,
+          dealUserCode: secLists[x].dealUserCode,
+          type: 1,
+          remark: secLists[x].remark,
+          merchantWorkContact_image: imgId,
+          status: 4,
+        }
+        console.log(data)
+        postRequest(getApiHost(), 'api/merchant/merchantWorkContactSave', 'url', data, 0, false, false, false).then(
+          res => {
+            console.log(res)
+          }
+        ).catch(res => {
+          wx.showModal({
+            title: '错误',
+            content: res.message,
+            showCancel: false,
+            confirmText: '知道了',
+            confirmColor: '#1890FF'
+          });
+        });
+      }
     }
     const action = [...this.data.actions];
     action[0].loading = true;
@@ -639,7 +681,7 @@ Page({
         imgLists.push(item.imgId)
       }
     })
-    secLists.map((item)=>{
+    secLists.map((item) => {
       if (item.imgId && item.imgId.length > 0) {
         imgLists.push(item.imgId)
       }
@@ -659,6 +701,8 @@ Page({
     for (let y in secLists) {
       postData['merchantCheckupOrderProList[' + y + '].projectCode'] = secLists[y].projectCode
       postData['merchantCheckupOrderProList[' + y + '].projectName'] = secLists[y].projectName
+      postData['merchantCheckupOrderProList[' + y + '].officeCode'] = secLists[y].officeCode
+      postData['merchantCheckupOrderProList[' + y + '].officeName'] = secLists[y].officeName
       postData['merchantCheckupOrderProList[' + y + '].remark'] = secLists[y].remark
       postData['merchantCheckupOrderProList[' + y + '].score'] = secLists[y].score
     }
@@ -730,9 +774,9 @@ Page({
             content: '系统错误，请稍后再试',
             type: 'error'
           });
-          const action = [...this.data.actions];
+          const action = [...that.data.actions];
           action[0].loading = false;
-          this.setData({
+          that.setData({
             visible: false,
             actions: action
           });
@@ -972,23 +1016,24 @@ Page({
   addPro(e) {
     var that = this
     var secLists = that.data.secLists
-    var departLists = that.data.departLists
+    var officeLists = that.data.officeLists
     var proLists = that.data.proLists
     var array = {
       projectCode: proLists[0].projectCode,
       projectName: proLists[0].projectName,
-      departName: departLists[0].departName,
-      departCode: departLists[0].departCode,
+      officeName: officeLists[0].officeName,
+      officeCode: officeLists[0].officeCode,
       dealUserCode: '',
       dealUserName: '',
       keywords: '',
       remark: '',
-      pic:'',
-      imgId:'',
+      pic: '',
+      imgId: '',
       score: proLists[0].score,
       mark: false,
       index: 0,
-      index1: 0
+      index1: 0,
+      opened: false
     }
     secLists.push(array)
     that.setData({
@@ -1004,6 +1049,23 @@ Page({
     secLists.splice(index, 1)
     that.setData({
       secLists: secLists
+    })
+    wx.setStorageSync('secLists', secLists)
+  },
+  showReport(e) {
+    var that = this
+    var secLists = that.data.secLists
+    var index = e.currentTarget.dataset.index
+    secLists[index].open = !secLists[index].open
+    that.setData({
+      secLists: secLists
+    })
+    wx.setStorageSync('secLists', secLists)
+  },
+  swiperChange(e){
+    console.log(e.detail.current)
+    this.setData({
+      current:e.detail.current+1
     })
   }
 })

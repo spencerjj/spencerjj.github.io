@@ -165,7 +165,7 @@ Page({
   },
   toPage(e){
     wx.navigateTo({
-      url: 'dailyRecord?type='+this.data.type+'&no='+e.currentTarget.dataset.no,
+      url: 'dailyRecord1?type='+this.data.type+'&no='+e.currentTarget.dataset.no,
     })
   },
   goCheck(e){

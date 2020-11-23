@@ -39,7 +39,7 @@
 		<view class="c1">
 			<text>退回原因</text>
 		</view>
-		<input class="number"  bindinput='hinput' value="{{hint}}" placeholder="请输入退回原因" placeholder-style="color:#af9d7f"></input>
+		<input class="number"  bindinput='hinput' value="{{hint}}" placeholder="请输入退回原因" placeholder-style="color:#af9d7f" cursor-spacing="100"></input>
 	</view>
 	<view class="bottom">
 		<button class="publish" bindtap='publish'>提 交</button>

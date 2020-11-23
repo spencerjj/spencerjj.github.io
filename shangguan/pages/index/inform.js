@@ -191,6 +191,7 @@ Page({
               }
             }else{
               that.setData({
+                isMore:false,
                 loading:false,
                 listIsFull:true
               })

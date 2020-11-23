@@ -65,8 +65,10 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    
-    
+    wx.showLoading()   
+    setTimeout(()=>{
+      wx.hideLoading()
+    },2000) 
   },
 
   /**
@@ -336,7 +338,7 @@ Page({
               });
               setTimeout(()=>{
                 wx.switchTab({
-                  url: '/pages/index/inform',
+                  url: '/pages/my/my',
                 })
               },500)
             }, 1000);
@@ -370,8 +372,7 @@ Page({
         sourceType: ['album', 'camera'],
         success(res) {
           // tempFilePath可以作为img标签的src属性显示图片
-          wx.hideLoading({
-          })
+   
           const tempFilePaths = res.tempFilePaths
           var imgLists = that.data.imgLists
           if (tempFilePaths.length > 1) {
@@ -389,6 +390,7 @@ Page({
                 __ajax: 'json',
               },
               success(res) {
+                wx.hideLoading()
                 console.log(JSON.parse(res.data))
                 var res = JSON.parse(res.data)
                 if(res.result=='true'){

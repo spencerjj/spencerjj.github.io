@@ -4,7 +4,7 @@
 </i-tabs>
 <view class='container'>
   <swiper indicator-dots="{{false}}" autoplay="{{false}}" interval="2000" duration="500"
-    style="height:{{swiperHeight}}rpx" current="{{current-1}}">
+    style="height:{{swiperHeight}}rpx" current="{{current-1}}" bindchange="swiperChange">
     <swiper-item style="overflow-y:auto">
       <view class="check">
         <view class="title">
@@ -26,7 +26,8 @@
           <view class="list">
             <view class="top {{item.error?'error':''}}" hover-class='hover1' hover-stay-time='50' bindtap="showAll"
               data-index="{{childindex}}">
-              <text class="title">{{childindex+1}}、巡检地点:<text class="active"> {{item.area}}</text></text>
+              <text class="title">{{childindex+1}}、地点:<text class="active"> {{item.area}}</text></text>
+              <text class="title1">时间: <text class="active {{item.over?'red':''}}">{{item.time}}</text></text>
               <image src="/images/01-27.jpg" wx:if="{{item.pic.length>0}}" class="count"></image>
               <image src="/images/01-26.jpg" wx:else class="count"></image>
               <image class="arraw {{item.mark?'selected':''}}" src="/images/lan.png"></image>
@@ -40,7 +41,7 @@
               {{item.area}}
             </view>
           </view> -->
-          <view class="title">
+          <!-- <view class="title">
             <view class="c1">
               <text>建议巡检时间</text>
             </view>
@@ -48,7 +49,7 @@
               {{item.time}}
             </view>
             <view class="tip" wx:if="{{item.over}}">*已超时，请尽快完成巡检</view>
-          </view>
+          </view> -->
           <view class="title">
             <view class="c1">
               <text>{{item.area}}巡检照片</text>
@@ -58,20 +59,30 @@
                 src="http://tiebapic.baidu.com/forum/w%3D580/sign=4c36fa524443fbf2c52ca62b807fca1e/cd014afbfbedab648925929ae036afc379311e27.jpg"
                 class="up" data-index="{{index}}" wx:if="{{item.pic.length==0}}"></image>
               <image src="{{item.pic}}" wx:if="{{item.pic.length>0}}" class="rightPhoto" mode="aspectFill"
-                bindtap="showPic" data-url="{{item.pic}}"></image>
+                catchtap="showPic" data-url="{{item.pic}}"></image>
               <image src="/images/delete.png" class="delete" catchtap="delete" data-index="{{childindex}}"
                 wx:if="{{item.pic.length>0}}" data-current="1"></image>
             </view>
+            <!-- <view class="tip">*照片预览三分钟内生效，预览过期不影响正常上传</view> -->
           </view>
         </view>
       </view>
     </swiper-item>
-    <swiper-item style="overflow-y:auto">
+    <swiper-item style="overflow-y:auto" id="j_page">
       <view class="report">
         <view class="add1" wx:if="{{secLists.length<1}}">
-          <text class="doAdd" bindtap="addPro">+新增考核项目</text>
+          <text class="doAdd" bindtap="addPro" wx:if="{{proLists.length>0}}">+新增考核项目</text>
+          <text class="doAdd" wx:else>暂无考核项目</text>
         </view>
-        <view class="reportItem" wx:for="{{secLists}}" :key="index" wx:for-index="childindex">
+
+        <view class="reportItem {{item.open?'opened':''}}" wx:for="{{secLists}}" :key="index" wx:for-index="childindex">
+          <view class="list">
+            <view class="top" hover-class='hover1' hover-stay-time='50' bindtap="showReport"
+              data-index="{{childindex}}">
+              <text class="title2">{{childindex+1}}、项目:<text class="active">{{array[item.index]}}</text></text>
+              <image class="arraw {{item.open?'selected':''}}" src="/images/lan.png"></image>
+            </view>
+          </view>
           <view class="title">
             <view class="c1">
               <text><text style="color:red;font-size:25rpx">*</text> 考核项目({{childindex+1}})</text>
@@ -88,7 +99,7 @@
             <view class="c1">
               <text><text style="color:red;font-size:25rpx">*</text> 部门</text>
             </view>
-            <picker value="{{item.index1}}" range="{{array1}}" bindchange="departChange" data-index="{{childindex}}">
+            <picker value="{{item.index1}}" range="{{array1}}" bindchange="officeChange" data-index="{{childindex}}">
               <view class="timePicker">
                 {{array1[item.index1]}}
                 <image class="arraw" src="http://img.gagctv.com/17112314452261654"></image>
@@ -100,8 +111,7 @@
               <text><text style="color:red;font-size:25rpx">*</text> 处理人</text>
             </view>
             <input class="timePicker" placeholder="请填写姓名并选择处理人" placeholder-style='color:#af9d7f;padding:0'
-              bindinput='checkInput' value="{{item.keywords}}" bindconfirm="confirm" confirm-type="done" maxlength="20"
-              adjust-position='true'></input>
+              bindinput='checkInput' value="{{item.keywords}}" bindconfirm="confirm" confirm-type="done" maxlength="20" cursor-spacing="200"></input>
             <view class="sonLists" wx:if="{{sonvisibility}}">
               <view wx:for="{{codeLists}}" wx:for-item="sonItem" class="sonItem" bindtap="selectItem"
                 hover-class='hover1' hover-stay-time='50' data-name="{{sonItem.name}}" data-code="{{sonItem.code}}"
@@ -118,7 +128,7 @@
                 src="http://tiebapic.baidu.com/forum/w%3D580/sign=4c36fa524443fbf2c52ca62b807fca1e/cd014afbfbedab648925929ae036afc379311e27.jpg"
                 class="up" data-index="{{childindex}}" wx:if="{{item.pic.length==0&&!item.pic}}"></image>
               <image src="{{item.pic}}" wx:if="{{item.pic.length>0}}" class="rightPhoto" mode="aspectFill"
-                bindtap="showPic" data-url="{{item.pic}}"></image>
+                catchtap="showPic" data-url="{{item.pic}}"></image>
               <image src="/images/delete.png" class="delete" catchtap="delete" data-index="{{childindex}}"
                 wx:if="{{item.pic.length>0}}" data-current="2"></image>
             </view>
@@ -127,15 +137,16 @@
             <view class="c1">
               <text><text style="color:red;font-size:25rpx">*</text> 问题描述</text>
             </view>
-            <textarea class="codePicker1" placeholder="请输入现场问题" placeholder-class="placeholder"
-              data-index="{{childindex}}" bindinput="areaInput" value="{{item.remark}}">
+            <textarea class="codePicker1 {{item.mark?'':'codeHeight'}}" placeholder="请输入现场问题" placeholder-class="placeholder"
+              data-index="{{childindex}}" bindinput="areaInput" value="{{item.remark}}" cursor-spacing="100">
 		        </textarea>
           </view>
         </view>
-        <view class="add" hover-class='hover1' hover-stay-time='50' bindtap="addPro" wx:if="{{secLists.length>0}}">+添加考核项目</view>
-        
+        <view class="add" hover-class='hover1' hover-stay-time='50' bindtap="addPro" wx:if="{{secLists.length>0}}">
+          +添加考核项目</view>
         <view class="progress" bindtap="handleOpen" wx:if="{{cindex!=5&&lists.length>0}}">
           <view>提交</view>
+          <view style="height:100rpx;width:100%"></view>
         </view>
       </view>
     </swiper-item>

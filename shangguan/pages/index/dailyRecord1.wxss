@@ -168,10 +168,7 @@ page{
 }
 
 .up {
-  width: 150rpx;
-  height: 150rpx;
-  margin-top: 140rpx;
-  margin-left: 40%;
+  width: 100%;
 }
 
 
@@ -294,7 +291,7 @@ page{
   height: 40rpx;
   top: 50%;
   margin-top: -20rpx;
-  right: 55rpx;
+  right: 15rpx;
   position: absolute;
 }
 .sonLists{
@@ -366,7 +363,7 @@ background-color: #999;
   transition: linear .2;
 }
 .opened{
-  height: 1450rpx;
+  height: 750rpx;
 }
 .add{
   border-radius: 30rpx;

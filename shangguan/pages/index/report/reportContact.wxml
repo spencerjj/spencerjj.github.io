@@ -57,7 +57,7 @@
         </image>
       </view>
       <view wx:for="{{imgLists}}" class="photo"  wx:if="{{imgLists.length>0}}" wx:key="index">
-        <image src="{{item}}" mode="aspectFill" data-url="{{item}}"></image>
+        <image src="{{item}}" mode="aspectFill" bindtap="showPic" data-url="{{item}}"></image>
         <image src="/images/delete.png" class="delete" bindtap="delete" data-index="{{index}}"></image>
       </view>
     </view>
@@ -66,7 +66,7 @@
     <view class="c1">
       <text><text style="color:red;font-size:25rpx">*</text> 工作内容</text>
     </view>
-    <textarea class="codePicker1" bindinput="input" placeholder="工作内容具体描述" placeholder-style="color:#af9d7f">
+    <textarea class="codePicker1" bindinput="input" placeholder="工作内容具体描述" placeholder-style="color:#af9d7f" cursor-spacing="100">
     </textarea>
   </view>
 

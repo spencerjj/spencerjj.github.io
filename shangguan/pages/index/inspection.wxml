@@ -57,7 +57,7 @@
     <view class="c1">
       <text><text style="color:red;font-size:25rpx">*</text> 故障描述</text>
     </view>
-    <textarea class="codePicker1" value="请输入故障详情">
+    <textarea class="codePicker1" value="请输入故障详情" cursor-spacing="100">
 
 		</textarea>
   </view>

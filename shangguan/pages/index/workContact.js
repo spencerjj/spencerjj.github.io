@@ -209,7 +209,8 @@ Page({
             'content-type': 'application/json' // 默认值
           },
           success(res) {
-            console.log(res.data.merchantWorkContact)
+            console.log(res)
+            if(res.statusCode=='200'){
             var list = res.data.merchantWorkContact
             list.type = list.type - 1
             that.setData({
@@ -243,6 +244,15 @@ Page({
                   }
                 }
               })
+              }else{
+              wx.showModal({
+                title: '错误',
+                content: res.data.message,
+                showCancel: false,
+                confirmText: '知道了',
+                confirmColor: '#1890FF'
+              })
+            }
             
 
           }

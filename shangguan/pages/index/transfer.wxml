@@ -42,7 +42,7 @@
     <view class="c1">
       <text>备注</text>
     </view>
-    <textarea class="codePicker1" bindinput="input" placeholder="请输入转办原因" placeholder-style="color:#af9d7f">
+    <textarea class="codePicker1" bindinput="input" placeholder="请输入转办原因" placeholder-style="color:#af9d7f" cursor-spacing="100">
     </textarea>
   </view>
 

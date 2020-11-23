@@ -1,0 +1,98 @@
+<i-tabs current="{{ current }}" color="#af9d7f" bindchange="handleChange" style="z-index:99">
+  <i-tab key="1" title="巡检打卡"></i-tab>
+  <i-tab key="2" title="考核项目"></i-tab>
+</i-tabs>
+<view class='container'>
+  <swiper indicator-dots="{{false}}" autoplay="{{false}}" interval="2000" duration="500"
+    style="height:{{swiperHeight}}rpx" current="{{current-1}}" bindchange="swiperChange">
+    <swiper-item style="overflow-y:auto">
+      <view class="check">
+        <view class="title">
+    <view class="c1">
+      <text>公司</text>
+    </view>
+    <view class="timePicker">
+      {{companyName}}
+    </view>
+  </view>
+  <view class="title">
+    <view class="c1">
+      <text>巡检时间</text>
+    </view>
+    <view class="timePicker">
+      {{time}}
+    </view>
+  </view>
+  <view class="title" wx:if="{{imgLists.length>0}}">
+    <view class="c1">
+      <text>图片</text>
+    </view>
+    <view class="codePicker">
+      <image src="{{imgLists[0]}}" class="up" wx:if="{{imgLists.length==1}}" mode="aspectFill" bindtap="showPic"
+        data-url="{{imgLists[0]}}">
+      </image>
+      <view wx:for="{{imgLists}}" class="photo" wx:if="{{imgLists.length>1}}">
+        <image src="{{item}}" mode="aspectFill" bindtap="showPic" data-url="{{item}}"></image>
+      </view>
+    </view>
+  </view>
+
+
+  <view style="height:15rpx;width:100%;background:#f9f9f9"></view>
+  <view wx:for="{{mainLists}}" wx:key="index" class="area {{item.mark?'areaAll':''}}" wx:for-index="childindex">
+    <view class="list">
+      <view class="top" data-index="{{childindex}}">
+        <text class="title">{{childindex+1}}、巡检地点:<text class="active"> {{item.signatureName}}</text></text>
+        <image src="/images/01-27.jpg" class="count"></image>
+      </view>
+    </view>
+  </view>
+      </view>
+    </swiper-item>
+    <swiper-item style="overflow-y:auto" id="j_page">
+      <view class="report">
+        <view class="add1" wx:if="{{proLists.length<1}}">
+          <text class="doAdd">暂无考核项目</text>
+        </view>
+
+        <view class="reportItem {{item.mark?'opened':''}}" wx:for="{{proLists}}" :key="index" wx:for-index="childindex">
+          <view class="list">
+            <view class="top" hover-class='hover1' hover-stay-time='50' bindtap="showReport"
+              data-index="{{childindex}}">
+              <text class="title2">{{childindex+1}}、项目:<text class="active">{{item.projectName}}</text></text>
+              <image class="arraw {{item.mark?'selected':''}}" src="/images/lan.png"></image>
+            </view>
+          </view>
+          <view class="title">
+            <view class="c1">
+              <text><text style="color:red;font-size:25rpx">*</text> 考核项目({{childindex+1}})</text>
+            </view>
+              <view class="timePicker">
+                {{item.projectName}}
+              </view>
+          </view>
+          <view class="title">
+            <view class="c1">
+              <text><text style="color:red;font-size:25rpx">*</text> 部门</text>
+            </view>
+              <view class="timePicker">
+                {{item.officeName}}
+              </view>
+          </view>
+          <view class="title">
+            <view class="c1">
+              <text><text style="color:red;font-size:25rpx">*</text> 问题描述</text>
+            </view>
+            <textarea class="codePicker1 {{item.mark?'':'codeHeight'}}" placeholder="请输入现场问题" placeholder-class="placeholder"
+              data-index="{{childindex}}" bindinput="areaInput" value="{{item.remark}}" cursor-spacing="100">
+		        </textarea>
+          </view>
+        </view>
+      </view>
+    </swiper-item>
+  </swiper>
+
+</view>
+<i-action-sheet visible="{{visible}}" actions="{{actions}}" show-cancel bind:cancel="handleCancel"
+  bind:click="handleClickItem" />
+<i-toast id="toast" />

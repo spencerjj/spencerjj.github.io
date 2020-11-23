@@ -18,7 +18,8 @@
     "pages/index/transfer",
     "pages/index/group",
     "pages/index/dailyList",
-    "pages/index/dailyRecord"
+    "pages/index/dailyRecord",
+    "pages/index/dailyRecord1"
   ],
   "tabBar": {
     "color": "#bfbfbf",

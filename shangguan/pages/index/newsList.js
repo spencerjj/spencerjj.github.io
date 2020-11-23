@@ -29,7 +29,12 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    var that = this;
+    let userDetails = wx.getStorageSync('userDetails')
+    that.setData({
+      userDetails: userDetails
+    })
+    that.getNews()
   },
 
   /**
@@ -43,12 +48,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    var that = this;
-    let userDetails = wx.getStorageSync('userDetails')
-    that.setData({
-      userDetails: userDetails
-    })
-    that.getNews()
+    
   },
 
   /**
@@ -96,7 +96,7 @@ Page({
       that.setData({
         pageNo: pageNo
       })
-      that.showList()
+      this.getNews()
     }
   },
 
@@ -132,6 +132,7 @@ Page({
           console.log('登录失效')
           return;
         }
+        console.log(res.data)
         if (res.data.list.length == 0) {
           that.setData({
             loading: false,
@@ -149,7 +150,6 @@ Page({
               showNo: false,
               loadAll: false
             })
-            console.log(that.data.list)
           } else {
             that.setData({
               lists: res.data.list,
@@ -175,6 +175,7 @@ Page({
             }
           } else {
             that.setData({
+              isMore: false,
               loading: false,
               listIsFull: true
             })

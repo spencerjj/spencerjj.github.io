@@ -209,40 +209,50 @@ Page({
             'content-type': 'application/json' // 默认值
           },
           success(res) {
-            console.log(res.data.merchantReportFail)
-            var list = res.data.merchantReportFail
-            list.type = list.type - 1
-            that.setData({
-              list:list,
-              starIndex:list.score?list.score:'-1'
-              // imgLists:res.data.merchantReportFail.imgLists?res.data.merchantReportFail.imgLists:''
-            })
-            wx.hideLoading({
-            })
-              wx.request({
-                url: app.globalData.url + 'bpm/bpmTask/getTask',
-                data: {
-                  __sid: that.data.userDetails.sid,
-                  __ajax: 'json',
-                  id: that.data.id
-                },
-                header: {
-                  'content-type': 'application/json' // 默认值
-                },
-                success(res) {
-                  if(res.data.name){
-                    wx.setNavigationBarTitle({
-                      title: res.data.name
-                    })
-                  }
-                  if(res.data.status=='1'){
-                    console.log('can action')
-                    that.setData({
-                      can:true
-                    })
-                  }
-                }
+            if(res.statusCode=='200'){
+              var list = res.data.merchantReportFail
+              list.type = list.type - 1
+              that.setData({
+                list:list,
+                starIndex:list.score?list.score:'-1'
+                // imgLists:res.data.merchantReportFail.imgLists?res.data.merchantReportFail.imgLists:''
               })
+              wx.hideLoading({
+              })
+                wx.request({
+                  url: app.globalData.url + 'bpm/bpmTask/getTask',
+                  data: {
+                    __sid: that.data.userDetails.sid,
+                    __ajax: 'json',
+                    id: that.data.id
+                  },
+                  header: {
+                    'content-type': 'application/json' // 默认值
+                  },
+                  success(res) {
+                    if(res.data.name){
+                      wx.setNavigationBarTitle({
+                        title: res.data.name
+                      })
+                    }
+                    if(res.data.status=='1'){
+                      console.log('can action')
+                      that.setData({
+                        can:true
+                      })
+                    }
+                  }
+                })
+            }else{
+              wx.showModal({
+                title: '错误',
+                content: res.data.message,
+                showCancel: false,
+                confirmText: '知道了',
+                confirmColor: '#1890FF'
+              })
+            }
+            
             
 
           }
