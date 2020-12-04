@@ -15,9 +15,12 @@ Page({
    * 页面的初始数据
    */
   data: {
-    class: ['早班', '中班', '晚班', '全天班'],
-    cindex: 5,
+    classLists: [],
+    classArray:[],
+    cindex: -1,
     array: [],
+    array2:[],
+    sonIndex:0,
     lists: [],
     img: [],
     total: 9,
@@ -35,6 +38,7 @@ Page({
     isRec: false,
     proLists: [],
     codeLists: [],
+    typeLists:[],
     current: 1,
     swiperHeight: '',
     secLists: [],
@@ -50,7 +54,8 @@ Page({
         officeName: '男装部',
         officeCode: '603'
       }
-    ]
+    ],
+    visibility:false
   },
 
   /**
@@ -118,6 +123,10 @@ Page({
             wx.removeStorageSync('secLists')
             wx.removeStorageSync('cindex')
             wx.removeStorageSync('type')
+            that.setData({
+              lists: [],
+              secLists:[]
+            })
           }
         }
       })
@@ -251,6 +260,43 @@ Page({
   },
   showList2(e) {
     var that = this
+    var data1 = {
+      __sid: that.data.userDetails.sid,
+      __ajax: 'json',
+      checkType: that.data.type,
+      companyCode: that.data.userDetails.companyCode,
+    }
+    postRequest(getApiHost(), 'api/merchant/findClassList', 'url', data1, 0, false, false).then(
+      res => {
+        if (res.result && res.result == 'login') {
+          that.login()
+          console.log('登录失效')
+          return;
+        }
+        
+        if (res.data) {
+          let classLists = res.data
+          console.log(classLists)
+
+          let classArray = []
+          classLists.map((item) => {
+            classArray.push(item.dictLabelOrig)
+          })
+          that.setData({
+            classLists,
+            classArray
+          })
+        }
+      }
+    ).catch(res => {
+      wx.showModal({
+        title: '错误',
+        content: res.message,
+        showCancel: false,
+        confirmText: '知道了',
+        confirmColor: '#1890FF'
+      });
+    });
     var data = {
       __sid: that.data.userDetails.sid,
       __ajax: 'json',
@@ -276,6 +322,39 @@ Page({
             array: array
           })
         }
+      }
+    ).catch(res => {
+      wx.showModal({
+        title: '错误',
+        content: res.message,
+        showCancel: false,
+        confirmText: '知道了',
+        confirmColor: '#1890FF'
+      });
+    });
+    var data3 = {
+      __sid: wx.getStorageSync('userDetails').sid,
+      __ajax: 'json',
+      type: 'work_contact_type'
+    }
+    postRequest(getApiHost(), 'api/merchant/getDicTypeList', 'url', data3, 0, false, false).then(
+      res => {
+        if (res.result && res.result == 'login') {
+          that.login()
+          console.log('登录失效')
+          return;
+        }
+        let lists = res.data
+        let array2 = []
+        console.log(lists)
+        lists.map((item) => {
+          array2.push(item.treeNames)
+        })
+        that.setData({
+          typeLists: lists,
+          array2,
+        })
+
       }
     ).catch(res => {
       wx.showModal({
@@ -504,6 +583,16 @@ Page({
     })
     wx.setStorageSync('secLists', secLists)
   },
+  typeChange(e){
+    console.log(e.currentTarget.dataset.index)
+    var index = e.currentTarget.dataset.index
+    var secLists = this.data.secLists
+    secLists[index].index2 = e.detail.value
+    this.setData({
+      secLists: secLists
+    })
+    wx.setStorageSync('secLists', secLists)
+  },
   delete(e) {
     var index = e.currentTarget.dataset.index
     var current = e.currentTarget.dataset.current
@@ -601,6 +690,17 @@ Page({
         }
       }
     }
+    secLists.map((item)=>{
+      item.open = false
+    })
+    that.setData({
+      secLists
+    })
+    const action = [...this.data.actions];
+    action[0].loading = true;
+    this.setData({
+      actions: action
+    });
     for (let x in secLists) {
       console.log(proLists[secLists[x].index].flow)
       if (proLists[secLists[x].index].flow == 'reportFail') {
@@ -637,7 +737,7 @@ Page({
           __ajax: 'json',
           dealUserName: secLists[x].dealUserName,
           dealUserCode: secLists[x].dealUserCode,
-          type: 1,
+          type: secLists[x].index2,
           remark: secLists[x].remark,
           merchantWorkContact_image: imgId,
           status: 4,
@@ -658,11 +758,7 @@ Page({
         });
       }
     }
-    const action = [...this.data.actions];
-    action[0].loading = true;
-    this.setData({
-      actions: action
-    });
+
     console.log(that.data.lists)
     var array = []
     var proArray = []
@@ -771,7 +867,7 @@ Page({
           }
         } else {
           $Toast({
-            content: '系统错误，请稍后再试',
+            content: res.data.message||'系统错误，请稍后再试',
             type: 'error'
           });
           const action = [...that.data.actions];
@@ -881,12 +977,12 @@ Page({
     if (that.data.isRec) {
       wx.showModal({
         title: '提示',
-        content: '切换班次将会清除当前记录，是否确认',
+        content: '切换类别将会清除当前记录，是否确认',
         success(res) {
           if (res.confirm) {
             that.setData({
               cindex: e.detail.value,
-              classes: e.detail.value - 1 + 2
+              classes: that.data.classLists[e.detail.value].dictValue
             })
             wx.removeStorageSync('checkLists')
             wx.setStorageSync('cindex', e.detail.value)
@@ -899,7 +995,7 @@ Page({
     } else {
       that.setData({
         cindex: e.detail.value,
-        classes: e.detail.value - 1 + 2
+        classes: that.data.classLists[e.detail.value].dictValue
       })
       wx.setStorageSync('cindex', e.detail.value)
       wx.setStorageSync('type', that.data.type)
@@ -1015,12 +1111,38 @@ Page({
   },
   addPro(e) {
     var that = this
+    let secLists = that.data.secLists
+    secLists.map((item)=>{
+      item.open = false
+    })
+    that.setData({
+    })
+    that.setData({
+      sonIndex:0,
+      visibility:true,
+      secLists
+    })
+  },
+  sonpickChange(e){
+    this.setData({
+      sonIndex:e.detail.value
+    })
+  },
+  addOne(e) {
+    var that = this
+    that.setData({
+      visibility:false
+    })
     var secLists = that.data.secLists
     var officeLists = that.data.officeLists
     var proLists = that.data.proLists
+    var mark = false
+    if(proLists[that.data.sonIndex].flow=='workContact'){
+      mark = true
+    }
     var array = {
-      projectCode: proLists[0].projectCode,
-      projectName: proLists[0].projectName,
+      projectCode: proLists[that.data.sonIndex].projectCode,
+      projectName: proLists[that.data.sonIndex].projectName,
       officeName: officeLists[0].officeName,
       officeCode: officeLists[0].officeCode,
       dealUserCode: '',
@@ -1030,10 +1152,11 @@ Page({
       pic: '',
       imgId: '',
       score: proLists[0].score,
-      mark: false,
-      index: 0,
+      mark: mark,
+      index: that.data.sonIndex,
       index1: 0,
-      opened: false
+      index2: 0,
+      open: true
     }
     secLists.push(array)
     that.setData({

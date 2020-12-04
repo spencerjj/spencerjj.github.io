@@ -40,6 +40,7 @@ Page({
     let userDetails = wx.getStorageSync('userDetails')
     that.setData({
       userDetails: userDetails,
+      id:options.id
     })
     wx.request({
       url: app.globalData.url + 'bpm/bpmTask/back.json',
@@ -223,7 +224,7 @@ handleClick ({ detail }) {
               });
               setTimeout(()=>{
                 wx.switchTab({
-                  url: '../inform',
+                  url: 'inform',
                 })
               },1000)
           }, 1000);

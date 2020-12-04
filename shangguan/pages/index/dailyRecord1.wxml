@@ -28,7 +28,7 @@
       <text>图片</text>
     </view>
     <view class="codePicker">
-      <image src="{{imgLists[0]}}" class="up" wx:if="{{imgLists.length==1}}" mode="aspectFill" bindtap="showPic"
+      <image src="{{imgLists[0]}}" class="up" wx:if="{{imgLists.length==1}}" mode="widthFix" bindtap="showPic"
         data-url="{{imgLists[0]}}">
       </image>
       <view wx:for="{{imgLists}}" class="photo" wx:if="{{imgLists.length>1}}">
@@ -83,9 +83,8 @@
             <view class="c1">
               <text><text style="color:red;font-size:25rpx">*</text> 问题描述</text>
             </view>
-            <textarea class="codePicker1 {{item.mark?'':'codeHeight'}}" placeholder="请输入现场问题" placeholder-class="placeholder"
-              data-index="{{childindex}}" bindinput="areaInput" value="{{item.remark}}" cursor-spacing="100">
-		        </textarea>
+            <view class="codePicker1">{{item.remark}}
+		        </view>
           </view>
         </view>
       </view>

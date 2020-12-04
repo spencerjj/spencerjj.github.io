@@ -43,8 +43,12 @@
     <view class="c1">
       <text>备注</text>
     </view>
-    <textarea class="codePicker1" bindinput="input" placeholder="请输入会签原因" placeholder-style="color:#af9d7f">
+    <textarea class="codePicker1" bindinput="input" value="{{remark}}" placeholder="请输入会签原因" placeholder-style="color:#af9d7f" cursor-spacing="100"  wx:if="{{!visible&&!visibility}}">
+
     </textarea>
+    <view class="codePicker1" wx:if="{{visible||visibility}}">
+      {{remark?remark:'请输入会签原因'}}
+    </view>
   </view>
 
   <view class="progress" bindtap="handleOpen">

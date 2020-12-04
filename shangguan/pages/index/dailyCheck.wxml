@@ -7,14 +7,14 @@
     style="height:{{swiperHeight}}rpx" current="{{current-1}}" bindchange="swiperChange">
     <swiper-item style="overflow-y:auto">
       <view class="check">
-        <view class="title">
+        <view class="title" wx:if="{{classLists.length}}">
           <view class="c1">
-            <text><text style="color:red;font-size:25rpx">*</text> 班次</text>
+            <text><text style="color:red;font-size:25rpx">*</text> 类别</text>
           </view>
-          <picker value="{{cindex}}" range="{{class}}" bindchange="classChange">
+          <picker value="{{cindex}}" range="{{classArray}}" bindchange="classChange">
             <view class="timePicker">
-              <text wx:if="{{cindex==5}}" style="color:#af9d7f">请选择班次</text>
-              {{class[cindex]}}
+              <text wx:if="{{cindex==-1}}" style="color:#af9d7f">请选择类别</text>
+              {{classArray[cindex]}}
               <image class="arraw" src="http://img.gagctv.com/17112314452261654"></image>
             </view>
           </picker>
@@ -70,8 +70,27 @@
     </swiper-item>
     <swiper-item style="overflow-y:auto" id="j_page">
       <view class="report">
+        <i-drawer1 mode="top" wx:if="{{visibility}}" visible="true" bind:close="showDrawer">
+          <view class="dtitle">
+            选择考核项目类型
+          </view>
+          <view class="addDrawer">
+            <view class="title">
+            <view class="c1">
+              <text><text style="color:red;font-size:25rpx">*</text> 考核项目</text>
+            </view>
+            <picker value="{{}}" range="{{array}}" bindchange="sonpickChange">
+              <view class="timePicker">
+                {{array[sonIndex]}}
+                <image class="arraw" src="http://img.gagctv.com/17112314452261654"></image>
+              </view>
+            </picker>
+          </view>
+            <button class="progress1 btnwid" bindtap='addOne' hover-class='hover1' hover-stay-time='50'>添加</button>
+          </view>
+        </i-drawer1>
         <view class="add1" wx:if="{{secLists.length<1}}">
-          <text class="doAdd" bindtap="addPro" wx:if="{{proLists.length>0}}">+新增考核项目</text>
+          <text class="doAdd" bindtap="addPro" wx:if="{{proLists.length>0&&lists.length>0}}">+新增考核项目</text>
           <text class="doAdd" wx:else>暂无考核项目</text>
         </view>
 
@@ -111,13 +130,25 @@
               <text><text style="color:red;font-size:25rpx">*</text> 处理人</text>
             </view>
             <input class="timePicker" placeholder="请填写姓名并选择处理人" placeholder-style='color:#af9d7f;padding:0'
-              bindinput='checkInput' value="{{item.keywords}}" bindconfirm="confirm" confirm-type="done" maxlength="20" cursor-spacing="200"></input>
+              bindinput='checkInput' value="{{item.keywords}}" bindconfirm="confirm" confirm-type="done" maxlength="20"
+              cursor-spacing="200"></input>
             <view class="sonLists" wx:if="{{sonvisibility}}">
               <view wx:for="{{codeLists}}" wx:for-item="sonItem" class="sonItem" bindtap="selectItem"
                 hover-class='hover1' hover-stay-time='50' data-name="{{sonItem.name}}" data-code="{{sonItem.code}}"
                 data-office="{{sonItem.office}}" wx:key="index" data-index="{{childindex}}">
                 {{sonItem.name}}({{sonItem.office}})</view>
             </view>
+          </view>
+          <view class="title"  wx:if="{{item.mark}}">
+            <view class="c1">
+              <text><text style="color:red;font-size:25rpx">*</text> 工作联系类型</text>
+            </view>
+            <picker value="{{item.index2}}" range="{{array2}}" bindchange="typeChange" data-index="{{childindex}}">
+              <view class="timePicker">
+                {{array2[item.index2]}}
+                <image class="arraw" src="http://img.gagctv.com/17112314452261654"></image>
+              </view>
+            </picker>
           </view>
           <view class="title">
             <view class="c1">
@@ -137,9 +168,9 @@
             <view class="c1">
               <text><text style="color:red;font-size:25rpx">*</text> 问题描述</text>
             </view>
-            <textarea class="codePicker1 {{item.mark?'':'codeHeight'}}" placeholder="请输入现场问题" placeholder-class="placeholder"
-              data-index="{{childindex}}" bindinput="areaInput" value="{{item.remark}}" cursor-spacing="100">
-		        </textarea>
+            <input class="timePicker" placeholder="请输入现场问题" placeholder-class="placeholder" data-index="{{childindex}}"
+              bindinput="areaInput" value="{{item.remark}}" cursor-spacing="100">
+            </input>
           </view>
         </view>
         <view class="add" hover-class='hover1' hover-stay-time='50' bindtap="addPro" wx:if="{{secLists.length>0}}">

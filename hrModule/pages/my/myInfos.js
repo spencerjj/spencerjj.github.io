@@ -59,14 +59,12 @@ Page({
    * 生命周期函数--监听页面隐藏
    */
   onHide: function () {
-
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-
   },
 
   /**
@@ -142,12 +140,19 @@ Page({
     var that = this;
     wx.chooseImage({
       count: 1,
-      sizeType: ['original', 'compressed'],
+      sizeType: ['compressed'],
       sourceType: ['album', 'camera'],
       success: function (res) {
         var tempFilePaths = res.tempFilePaths
+        var tempFilesSize = res.tempFiles[0].size;  //获取图片的大小，单位B
+        if(tempFilesSize > 5120000){   //图片小于或者等于2M时 可以执行获取图片
+          $Toast({
+            content: '图片过大，请上传小于5M的图片',
+            type: 'error'
+          })
+          return;
+        }
         that.setData({
-          path: tempFilePaths,
           loadAll:true
         })
         //拿到图片地址
@@ -171,6 +176,7 @@ Page({
             if(!email||email=='undefined'){
               email=''
             }
+            console.log(baseImg)
             wx.request({
               url: app.globalData.url + 'sys/user/infoSaveBase',
               method: 'post',
@@ -187,6 +193,9 @@ Page({
                 'content-type': 'application/x-www-form-urlencoded',
               },
               success(res) {
+                that.setData({
+                  loadAll:false
+                })
                 console.log(res)
                 if (res.statusCode != 200) {
                   $Toast({
@@ -195,20 +204,22 @@ Page({
                   })
                   return;
                 }
-                if (res.data.result == 'false') {
+                if (res.data.result == 'true') {
+                  that.setData({
+                    path: tempFilePaths
+                  })
                   $Toast({
-                    content: res.data.data.message,
+                    content:'上传成功',
+                    type:'success'
+                  })
+                }else{
+                  $Toast({
+                    content: res.data.message?res.data.data.message:'上传失败',
                     type: 'error'
                   })
                   return;
                 }
-                that.setData({
-                  loadAll:false
-                })
-                $Toast({
-                  content:'上传成功',
-                  type:'success'
-                })
+                
               }
             })
           }

@@ -75,7 +75,7 @@ Page({
       loading: false,
       showNo: false
     })
-    this.onShow();
+    this.onLoad();
 
     wx.showNavigationBarLoading()
     setTimeout(function () {

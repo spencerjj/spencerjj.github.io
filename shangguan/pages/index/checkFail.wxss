@@ -86,7 +86,7 @@
 
 .codePicker1 {
   width: 99%;
-  min-height: 180rpx;
+  height: 180rpx;
   color: #af9d7f;
   padding-left: 10rpx;
   padding-top: 10rpx;

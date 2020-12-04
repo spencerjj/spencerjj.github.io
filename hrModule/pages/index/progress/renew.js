@@ -163,6 +163,13 @@ Page({
             console.log('未登录')
             return;
           }
+          if(res.data.result=='false'){
+            $Toast({
+              content:res.data.message,
+              type:"error"
+            })
+            return;
+          }
           wx.request({
             url: app.globalData.pathurl+res.data.mobileUrl,
             data: {
@@ -175,6 +182,13 @@ Page({
             },
             success(res) {
               console.log(res)
+              if(res.data.result=='false'){
+                $Toast({
+                  content:res.data.message,
+                  type:"error"
+                })
+                return;
+              }
               // let x = res.data.oaContinue
               // x.startDate = x.startDate.slice(0,10)
               // x.endDate = x.startDate.slice(0,10)

@@ -354,9 +354,9 @@ background-color: #999;
 }
 .reportItem{
   padding-bottom: 30rpx;
-  padding-top:5rpx;
+  /* padding-top:5rpx; */
   margin-top: 20rpx;
-  height: 135rpx;
+  height: 130rpx;
   background: white;
   margin-bottom: 15rpx;
   width: 96%;
@@ -366,7 +366,7 @@ background-color: #999;
   transition: linear .2;
 }
 .opened{
-  height: 1450rpx;
+  height: auto;
 }
 .add{
   border-radius: 30rpx;
@@ -410,4 +410,29 @@ background-color: #999;
 }
 .red{
   color:red
+}
+.dtitle{
+  width: 100%;
+  text-align: center;
+  color:#000;
+  font-weight: bolder;
+  font-size: 35rpx;
+  padding-top: 10rpx;
+}
+.addDrawer{
+  width: 96%;
+  margin-left: 3%;
+}
+.progress1{
+  font-size: 35rpx;
+  background: white;
+  background-color:#af9d7f;
+  color:white;
+  height: 60rpx;
+  line-height: 60rpx;
+  position: absolute;
+  bottom: 30rpx;
+  width: 90%;
+  left: 5%;
+  margin:0 auto
 }

@@ -153,6 +153,13 @@ Page({
             console.log('未登录')
             return;
           }
+          if(res.data.result=='false'){
+            $Toast({
+              content:res.data.message,
+              type:"error"
+            })
+            return;
+          }
           wx.request({
             url: app.globalData.pathurl+res.data.mobileUrl,
             data: {
@@ -165,6 +172,13 @@ Page({
             },
             success(res) {
               console.log(res)
+              if(res.data.result=='false'){
+                $Toast({
+                  content:res.data.message,
+                  type:"error"
+                })
+                return;
+              }
               that.setData({
                 lists:res.data.oaEmployOut,
                 id:res.data.oaEmployOut.id,

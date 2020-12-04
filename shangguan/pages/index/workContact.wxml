@@ -45,7 +45,6 @@
 		</view>
 			<view class="timePicker">
 				{{array[list.type]}}
-				<image class="arraw" src="http://img.gagctv.com/17112314452261654"></image>
 			</view>
 	</view>
 	<view class="title">
@@ -73,8 +72,11 @@
     <view class="c1">
       <text><text style="color:red;font-size:25rpx"  wx:if="{{current==1}}">*</text> 备注</text>
     </view>
-    <textarea class="codePicker1" bindinput="input" placeholder-style="color:#af9d7f" placeholder="请填写备注信息" cursor-spacing="100">
+    <textarea class="codePicker1" bindinput="input" value="{{remark}}" placeholder-style="color:#af9d7f" placeholder="请填写备注信息" cursor-spacing="100"  wx:if="{{!visible&&!showRight1}}">
     </textarea>
+		<view class="codePicker1" wx:if="{{visible||showRight1}}">
+			{{remark?remark:'请填写备注信息'}}
+		</view>
   </view>
 	<view class="title"  wx:if="{{list.bpm.activityId=='pj_work_contact'||list.status==0}}">
 		<view class="c1">

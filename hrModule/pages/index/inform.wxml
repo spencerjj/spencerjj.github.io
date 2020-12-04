@@ -14,40 +14,16 @@
     <view class="mark1 hide1"></view>
   </view> -->
   <view class="right">
-  <view class="title" wx:if="{{current==3}}">
-      {{item.name}}
+    <view class="time1" style="border-bottom:2rpx solid #eee;height:50rpx;line-height:50rpx;">
+      <text>流程编号:</text>
+      {{item.id}}
     </view>
-    <view class="title" wx:else>
-      {{item.procIns.name}}
+
+    <view class="time1">
+      <text>流程名称:</text>
+      <text class="title"> {{current==3?item.name:item.procIns.name}}</text>
     </view>
-    
-    <!-- <view class="date">
-      2019-10-13 一禾
-    </view>
-    <view class="content">
-      讨论讨论具体流程
-    </view> -->
-    <view class="time1" wx:if="{{current==1}}">
-      <text>当前环节:</text>
-      {{item.name}}
-    </view>
-    <view class="time1"  wx:if="{{current==2}}">
-      <text>环节名称:</text>
-      {{item.name}}
-    </view>
-    <view class="time1"  wx:if="{{current==3}}">
-      <text>流程类型:</text>
-      {{item.procDef.name}}
-    </view>
-    <view class="time1"  wx:if="{{current==3}}">
-      <text>发起人:</text>
-      {{item.startUserName}}
-    </view>
-    <view class="time1" wx:if="{{current!=3}}">
-      <text>{{item.assigneeInfo}}</text>
-      
-    </view>
-    <view class="time1" wx:if="{{current!=3}}">
+    <view class="time1" wx:if="{{current!=3}}" >
       <text>创建时间:</text>
       {{item.createTime}}
     </view>
@@ -55,16 +31,45 @@
       <text>完成时间:</text>
       {{item.endTime}}
     </view>
-
-     <view class="time1" wx:if="{{current==3}}">
+    <view class="time1" wx:if="{{current==1}}" style="color:#999">
+      <text>当前环节:</text>
+      {{item.name}}
+    </view>
+    <view class="time1"  wx:if="{{current==2}}"  style="color:#999">
+      <text>环节名称:</text>
+      {{item.name}}
+    </view>
+    <view class="time1"  wx:if="{{current==3}}">
+      <text>流程类型:</text>
+      {{item.procDef.name}}
+    </view>
+    <view class="time1"  wx:if="{{current==3}}"  style="color:#999">
+      <text>发起人:</text>
+      {{item.startUserName}}
+    </view>
+    <view class="time1" wx:if="{{current!=3}}" style="color:#999">
+      <text>{{item.assigneeInfo}}</text>
+    </view>
+     <view class="time1" wx:if="{{current==3}}"  style="color:#999">
       <text>启动时间:</text>
       {{item.startTime}}
     </view>
-    <view class="time1" wx:if="{{current==3&&item.endTime}}">
+    <view class="time1" wx:if="{{current==3&&item.endTime}}"  style="color:#999">
       <text>结束时间:</text>
       {{item.endTime}}
     </view>
-    
+    <view class="check1" wx:if="{{current!=3&&item.procIns.formKey=='continue'}}">合同续签</view>
+    <view class="check1" wx:elif="{{current!=3&&item.procIns.formKey=='entry'}}">入职流程</view>
+    <view class="check1" wx:elif="{{current!=3&&item.procIns.formKey=='recruitment'}}">招聘申请</view>
+    <view class="check1" wx:elif="{{current!=3&&item.procIns.formKey=='out'}}">离职流程</view>
+    <view class="check1" wx:elif="{{current!=3&&item.procIns.formKey=='regular'}}">转正流程</view>
+    <view class="check1" wx:elif="{{current!=3&&item.procIns.formKey=='transfer'}}">转岗流程</view>
+    <view class="check1" wx:if="{{current==3&&item.formKey=='continue'}}">合同续签</view>
+    <view class="check1" wx:elif="{{current==3&&item.formKey=='entry'}}">入职流程</view>
+    <view class="check1" wx:elif="{{current==3&&item.formKey=='recruitment'}}">招聘申请</view>
+    <view class="check1" wx:elif="{{current==3&&item.formKey=='out'}}">离职流程</view>
+    <view class="check1" wx:elif="{{current==3&&item.formKey=='regular'}}">转正流程</view>
+    <view class="check1" wx:elif="{{current==3&&item.formKey=='transfer'}}">转岗流程</view>
     <view class="count" wx:if="{{item.priority==50}}">一般</view>
     <view class="count1" wx:if="{{item.priority==100}}">重要</view>
     <view class="count2" wx:if="{{item.priority==150}}">紧急</view>

@@ -35,9 +35,12 @@
     <view class="c1">
       <text><text style="color:red;font-size:25rpx">*</text> 报障内容</text>
     </view>
-    <textarea class="codePicker1" bindinput="input" placeholder="故障具体描述" placeholder-style="color:#af9d7f" cursor-spacing="100">
+    <textarea class="codePicker1" bindinput="input" value="{{remark}}" placeholder="故障具体描述" placeholder-style="color:#af9d7f" cursor-spacing="100"  wx:if="{{!visible}}">
 
     </textarea>
+    <view class="codePicker1" wx:if="{{visible}}">
+      {{remark?remark:'故障具体描述'}}
+    </view>
     
   </view>
   <view class="progress" bindtap="handleOpen">

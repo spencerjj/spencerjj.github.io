@@ -10,7 +10,7 @@ const {
   $Toast
 } = require('../../component/iview/base/index');
 import {
-  APP_VER
+  APP_VER,HOST_URI
 } from '../../config.js'
 Page({
 
@@ -112,23 +112,50 @@ Page({
     
   },
   getTag(e) {
-    var that = this 
-    var data={
-        __sid: that.data.userDetails.sid,
-        __ajax: 'json',
-        pageNo:that.data.pageNo,
-        pageSize:that.data.pageSize
-      }
-      getRequest(getApiHost(), 'api/merchant/merchantNoticeList', 'body', data, 0, false, false,false).then(
-        res => {
-            if (res.result && res.result == 'login') {
-                that.login()
-                console.log('登录失效')
-                return;
+    var that = this
+    var data = {
+      __sid: that.data.userDetails.sid,
+      __ajax: 'json',
+      pageNo: 1,
+      pageSize: 100,
+      status:1
+    }
+    wx.request({
+      url: HOST_URI+'bpm/bpmMyTask/listData.json',
+      data: data,
+      header: {
+        'content-type': 'application/json' // 默认值
+      },
+      success(res) {
+        console.log(res.data)
+        if(res.statusCode==200){
+          if(res.data.result&&res.data.result=='login'){
+            that.login()
+            console.log('未登录')
+            return;
+          }
+        if(res.data.list){
+          if(res.data.list.length!=0){
+            if(res.data.list.length>10){
+              wx.setTabBarBadge({
+                index: 1,
+                text: '10+'
+              })
+            }else{
+              wx.setTabBarBadge({
+                index: 1,
+                text: res.data.list.length+''	
+              })
             }
-            // console.log(res)
+          }else{
+            wx.removeTabBarBadge({
+              index: 1
+           })
+          }
         }
-    )
+      }
+    }
+    })
   }
 
 })

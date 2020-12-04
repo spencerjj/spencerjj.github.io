@@ -65,7 +65,7 @@ Page({
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-
+    
   },
 
   /**
@@ -75,7 +75,7 @@ Page({
     this.setData({
       imgPath: '../../images/back.png',
     })
-    this.onShow()
+    this.login()
     wx.showNavigationBarLoading()
     setTimeout(function () {
       wx.hideNavigationBarLoading()
@@ -104,6 +104,13 @@ Page({
   },
   toPage: function (e) {
     var data = e.currentTarget.dataset;
+    if(data.url=='money'){
+      $Toast({
+        content:'暂未开放',
+        type:'warning'
+      })
+      return;
+    }
     wx.navigateTo({
       url: data.url
     })

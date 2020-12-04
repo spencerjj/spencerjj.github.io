@@ -2,7 +2,7 @@
 <i-tabs current="{{ current }}" color="#af9d7f" bindchange="handleChange" style="z-index:99">
     <i-tab key="1" title="待办事项"></i-tab>
     <i-tab key="2" title="已办事项"></i-tab>
-    <i-tab key="3" title="我发起的"></i-tab>
+    <i-tab key="3" title="与我相关"></i-tab>
 </i-tabs>
 <view class="lists" bindtap='showDetail'  data-id="{{item.id}}" hover-class='hover1' hover-stay-time='50' wx:for="{{lists}}" data-status="{{item.status}}" wx:key="index" data-type="{{item.procIns?item.procIns.formKey:item.procDef.key}}" data-biz="{{current==3?item.bizKey:item.procIns.bizKey}}">
   <!-- <view class="left">

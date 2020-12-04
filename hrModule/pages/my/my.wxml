@@ -1,12 +1,5 @@
-<view class="content">
-
+<!-- <view class="content">
 	<view class="top">
-		<!-- <view class='v'>
-  <image src='../../images/timg.png' mode="aspectFill"></image>
-</view> -->
-		<!-- <view class="cover"></view>
-		<view class="cover1">
-		</view> -->
 		<view class="profile" bindtap="toPage" data-url="myInfos">
 			<image src="{{imgPath}}" mode="aspectFill"></image>
 		</view>
@@ -45,39 +38,59 @@
 		<view class="section" hover-class='hover1' hover-stay-time='50' data-url="DISC/index" bindtap="toPage">
 			<image src="../../images/disc.png" class="icon" style="width:45rpx;height:45rpx"></image>  DISC测评<image src="../../images/arraw1.png" class="arraw"></image>
 		</view>
-		<!-- <view class="detailInfo">
-			<view class="detailSection" data-url="myTag" bindtap="toPage">
-				<view class="detailIcon">
-					<image src="../../images/phone.png"></image>
-				</view>
-				<view class="detailTitle">
-					我的标签
-				</view>
-			</view>
-			<view class="detailSection">
-				<view class="detailIcon">
-					<image src="../../images/pinggu.png"></image>
-				</view>
-				<view class="detailTitle">
-					360评估
-				</view>
-			</view>
-			<view class="detailSection" data-url="../index/voteList" bindtap="toPage">
-				<view class="detailIcon">
-					<image src="../../images/toupiao1.png"></image>
-				</view>
-				<view class="detailTitle">
-					投票
-				</view>
-				<view class="count" wx:if="{{voteCount}}">{{voteCount}}</view>
-			</view>
-		</view> -->
-		<!-- <view class="title">
-			标题标题
+	</view>
+</view> -->
+<view class="main1">
+</view>
+<view class="container">
+	<view class="top">
+		<view class="profile" bindtap="toPage" data-url="myInfos">
+			<image src="{{imgPath}}" mode="aspectFill"></image>
 		</view>
-		<view class="addtion"><text>流程</text><image src="../../images/arraw.png" class="arraw"></image></view>
-		<view class="addtion"><text>360评估</text><image src="../../images/arraw.png" class="arraw"></image></view>
-		<view class="addtion"><text>我的标签</text><image src="../../images/arraw.png" class="arraw"></image></view> -->
+		<view class="infoCon" style="color:#000;font-weight:bolder;font-size:35rpx">{{userDetails.userName}}</view>
+		<view class="infoCon"  style="color:#666">{{userDetails.office}}</view>
+	</view>
+	<view class="allSecion">
+		<view class="section" bindtap="toPage" data-url="360/360Lists"  hover-class="shover" hover-stay-time=".5">
+			<view class="secIcon">
+				<image
+					src="/images/06-1.png">
+				</image>
+			</view>
+			360评估
+		</view>
+		<view class="section" bindtap="toPage" data-url="../index/voteList"  hover-class="shover" hover-stay-time=".5">
+			<view class="secIcon">
+				<image
+					src="/images/06-2.png">
+				</image>
+			</view>
+			我的投票
+		</view>
+		<view class="section"  bindtap="toPage" data-url="360/360result" hover-class="shover" hover-stay-time=".5">
+			<view class="secIcon">
+				<image
+					src="/images/06-3.png">
+				</image>
+			</view>
+			我的评估
+		</view>
+		<view class="section" bindtap="toPage" data-url="DISC/index"  hover-class="shover" hover-stay-time=".5">
+			<view class="secIcon">
+				<image
+					src="/images/06-4.png">
+				</image>
+			</view>
+			DISC测评
+		</view>
+		<view class="section" bindtap="toPage" data-url="money" data-type="1"  hover-class="shover" hover-stay-time=".5">
+			<view class="secIcon">
+				<image
+					src="/images/06-5.png">
+				</image>
+			</view>
+			薪资管理
+		</view>
 	</view>
 </view>
 <view class="version">当前版本: V {{appVersion}}</view>

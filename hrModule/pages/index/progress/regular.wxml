@@ -91,12 +91,12 @@
 		<view class="c1">
 			<text>审批意见</text>
 		</view>
-		<input class="number" placeholder='常用语: 同意  已阅' placeholder-style='color:#af9d7f' bindinput='hinput' value="{{hint}}"></input>
+		<input class="number" placeholder='常用语: 同意  已阅' placeholder-style='color:#af9d7f' bindinput='hinput' value="{{hint}}"></input> 
 	</view>
 </view>
 <view class="bottom">
 	<button class="progress {{current==1&&can?'btnwid1':'btnwid'}}" bindtap='progress' hover-class='hover1' hover-stay-time='50'>流程追踪</button>
-	<button class="publish btnwid1" bindtap='handleOpen' wx:if="1" hover-class='hover2' hover-stay-time='50'>审批操作</button>
+	<button class="publish btnwid1" bindtap='handleOpen' wx:if="{{current==1&&can}}" hover-class='hover2' hover-stay-time='50'>审批操作</button>
 </view>
 <i-action-sheet visible="{{visible}}" actions="{{actions}}" show-cancel bind:cancel="handleCancel" bind:click="handleClickItem" />
 <i-toast id="toast" />

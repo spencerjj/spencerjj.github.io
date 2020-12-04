@@ -148,6 +148,13 @@ that.getInfo()
             console.log('未登录')
             return;
           }
+          if(res.data.result=='false'){
+            $Toast({
+              content:res.data.message,
+              type:"error"
+            })
+            return;
+          }
           wx.request({
             url: app.globalData.pathurl+res.data.mobileUrl,
             data: {
@@ -160,6 +167,13 @@ that.getInfo()
             },
             success(res) {
               console.log(res)
+              if(res.data.result=='false'){
+                $Toast({
+                  content:res.data.message,
+                  type:"error"
+                })
+                return;
+              }
               var lists = res.data.oaPostRecruitment
               if(lists.bpm.activityId=='hrbp'&&lists.status!='1'){
                 let x = that.data.actions

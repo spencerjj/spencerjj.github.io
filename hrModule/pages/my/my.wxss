@@ -1,39 +1,22 @@
-page {
+/* page {
     background: #f7f7f7;
 }
 
 .animationSlow {
-    /* 动画区 */
     margin-top: -5555rpx;
-    /* 高度的-1/2 或 者高一点 */
     width: 10000rpx;
-    /* 彩色背景大小 可自定义 */
     height: 10000rpx;
-    /* 彩色背景大小 可自定义 */
     animation-name: myfirst;
     animation-duration: 15s;
     animation-timing-function: linear;
     animation-iteration-count: infinite;
     -webkit-animation-name: myfirst;
     -webkit-animation-duration: 15s;
-    /* 速度 */
     -webkit-animation-timing-function: linear;
     -webkit-animation-iteration-count: infinite;
     position: absolute;
     z-index: 4;
 }
-
-/* .v {
-    background-color: rgb(255, 255, 255);
-    margin: 0px auto auto;
-    left: 0px;
-    right: 0px;
-    top: 0px;
-    bottom: 0px;
-    position: absolute;
-    display: flex;
-    justify-content: center;
-} */
 .v {
     width: 100%;
     height: 100%;
@@ -597,7 +580,6 @@ page {
 }
 
 .tag1 {
-    /* background: #1a9eeb; */
     background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(rgb(205, 231, 253)), to(#1a9eeb));
     box-shadow: 0 0 10px rgb(205, 231, 253);
     position: absolute;
@@ -743,7 +725,6 @@ page {
 }
 
 .moreDetails {
-    /* border-top:15rpx solid #eee; */
     padding-top: 40rpx;
     min-height: 300rpx;
     height: auto;
@@ -756,9 +737,7 @@ page {
 }
 
 .moreDetails .detailInfo {
-    /* display: flex; */
     flex-direction: row;
-    /* justify-content: center; */
     width: 100%;
     margin-top: 40rpx;
     margin-bottom: 50rpx;
@@ -812,6 +791,126 @@ page {
     margin-top: -12.5rpx;
     right: 20rpx;
     position: absolute
+}
+
+.addtion {
+    width: 100%;
+    height: 100rpx;
+    position: relative;
+    line-height: 100rpx;
+    font-size: 35rpx;
+    color: #4e4e4e;
+}
+
+.version {
+    position: absolute;
+    bottom: 20rpx;
+    right: 20rpx;
+    color: #af9d7f;
+    font-size: 25rpx;
+}
+
+.count {
+    position: absolute;
+    width: 40rpx;
+    height: 40rpx;
+    line-height: 40rpx;
+    color: white;
+    background: red;
+    text-align: center;
+    font-size: 25rpx;
+    font-weight: bolder;
+    top: 50%;
+    right: 60rpx;
+    border-radius: 50%;
+    margin-top: -20rpx;
+
+}
+
+.hover1 {
+    background: #eee
+} */
+
+.main1{
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top:0;
+    background-image: url('http://tiebapic.baidu.com/forum/w%3D580/sign=9ff70f2f073853438ccf8729a312b01f/33a1a50f4bfbfbed01b9ca3c6ff0f736aec31f9b.jpg');
+    background-size: cover;
+}
+page{
+    width: 100%;
+    height: 100%;
+    overflow-y: hidden;
+}
+.container{
+    width: 96%;
+    margin-left: 2%;
+    box-shadow: 0 0 5rpx #ccc;
+    margin-top:10rpx;
+    border-radius: 10rpx;
+    background: rgb(255, 255, 255,.8);
+    position: relative;
+    padding-top: 200rpx;
+    margin-top: 100rpx;
+}
+.top{
+    width: 100%;
+    text-align: center;
+    position: absolute;
+    top:-50rpx;
+}
+.profile image{
+    width: 130rpx;
+    height: 130rpx;
+    border-radius: 50%;
+}
+.allSecion{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+.section{
+    width: 25%;
+    height: 160rpx;
+    text-align: center;
+    font-size: 33rpx;
+    padding-top: 30rpx;
+
+}
+.section{
+    border-top: none;
+    border-left: none;
+}
+.section:nth-child(1){
+    border-top: 5rpx solid #f7f7f7;
+}
+.section:nth-child(2){
+    border-top: 5rpx solid #f7f7f7;
+}
+.section:nth-child(3){
+    border-top: 5rpx solid #f7f7f7;
+}
+.section:nth-child(4){
+    border-top: 5rpx solid #f7f7f7;
+}
+
+
+.secIcon{
+    width: 150rpx;
+    height: 100rpx;
+    margin:0 auto;
+}
+.section image{
+    width: 80rpx;
+    height: 80rpx;
+    vertical-align: middle;
+    box-shadow: 0 0 5px #ccc;
+}
+.shover{
+    background: #eee;
 }
 
 .addtion {
