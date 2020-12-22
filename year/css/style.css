@@ -1,0 +1,310 @@
+    *{
+      margin: 0;
+      padding: 0;
+    }
+    html,body{
+      width:100%;
+      height:100%;
+      font-family: "microsoft yahei", "Times New Roman", "宋体", Times, serif;
+    }
+    .swiper-container{
+      height:100%;
+      background:black
+    }
+    .swiper-slide{
+      width: 100%;
+      position:relative;
+    }
+    .myback1{
+      background:url(../images/light/12.1-01.jpg) no-repeat top;
+      background-size:100%;
+      background-color: #f18421
+    }
+    .myback2{
+      background:url(../images/light/12.1-02.jpg) no-repeat top;
+      background-size:100%;
+      background-color: #aca3a0
+    }
+/*     .myback2no{
+      background:url(../images/light/12.1-05.jpg) no-repeat top;
+      background-size:100%;
+      background-color: #aca3a0
+    } */
+      .tab{
+        position: absolute;
+        width: 7rem;
+        height: 7rem;
+        top: 20rem;
+        left: 50%;
+        margin-left: -3.5rem;
+        animation-iteration-count:infinite;
+        -webkit-animation: small 2s linear infinite;
+        animation: small 2s linear infinite;
+      }
+    .myback3{
+      background:url(../images/light/12.1-03.jpg) no-repeat top;
+      background-size:100%;
+      background-color: #aca3a0;
+      position: relative
+    }
+    .myback3 .number{
+        width: 5rem;
+        height: 1rem;
+        position: absolute;
+        top: 8.12rem;
+        right: 4rem;
+        font-weight: bolder;
+        color: #c5bdb7;
+        font-size: 1rem;
+        background: #efede9;
+        text-align: center;
+        font-family: 'Arial'
+    }
+      .myback3 .userName{
+        position: absolute;
+        color: #ee6b01;
+        top: 12.45rem;
+        left: 12rem;
+      }
+      .myback3 .officeName{
+        position: absolute;
+        color: #ee6b01;
+        top: 14.85rem;
+        left: 12rem;
+
+      }
+      .myback3 .nativePlace{
+        position: absolute;
+        color: #ee6b01;
+        top: 17.25rem;
+        left: 12rem;
+      }
+      .myback3 .age{
+        position: absolute;
+        color: #ee6b01;
+        top: 20.1rem;
+        left: 12rem;
+      }
+      .myback3 .constellation{
+        position: absolute;
+        color: #ee6b01;
+        top: 22.1rem;
+        left: 12rem;
+      }
+      .myback3 .year{
+        position: absolute;
+        color: #ee6b01;
+        top: 25.35rem;
+        left: 3.2rem;
+      }
+    .myback4{
+      background:url(../images/light/12.1-04.jpg) no-repeat top;
+      background-size:100%;
+      background-color: #aca3a0
+    }
+      .myback4 .clockDays{
+        position: absolute;
+        top: 15.9rem;
+        left: 8rem;
+        font-size: 3.5rem;
+        font-weight: bolder;
+        color: #ee6b01;
+      }
+    .myback5{
+      background:url(../images/light/12.1-05.jpg) no-repeat top;
+      background-size:100%;
+      background-color: #aca3a0
+    }
+    .myback5 .emailNum{
+        position: absolute;
+        top: 18.7rem;
+        left: 4rem;
+        font-size: 3.5rem;
+        font-weight: bolder;
+        color: #ee6b01;
+    }
+    .myback5 .emailIcon{
+      position: absolute;
+      top: 21.8rem;
+      right: 0rem;
+      width: 13rem;
+      height: 13rem;
+      opacity: .2;
+    }
+    .myback6{
+      background:url(../images/light/12.1-06.jpg) no-repeat top;
+      background-size:100%;
+      background-color: #aca3a0
+    }
+      .myback6 .meetingNum{
+          position: absolute;
+          top: 15.9rem;
+          left: 8rem;
+          font-size: 3.5rem;
+          font-weight: bolder;
+          color: #ee6b01;
+      }
+    .myback7{
+      background:url(../images/light/12.1-07.jpg) no-repeat top;
+      background-size:100%;
+      background-color: #aca3a0
+    }
+      .myback7 .researchNum{
+          position: absolute;
+          top: 19rem;
+          left: 6.3rem;
+          font-size: 3.5rem;
+          font-weight: bolder;
+          color: #ee6b01;
+      }
+    .myback8{
+      background:url(../images/light/12.1-08.jpg) no-repeat top;
+      background-size:100%;
+      background-color: #aca3a0
+    }
+      .myback8 .oaNum{
+        position: absolute;
+        top: 15.6rem;
+        left: 9.5rem;
+        font-size: 3.5rem;
+        font-weight: bolder;
+        color: #ee6b01;
+      }
+    .myback9{
+      background:url(../images/light/12.1-09.jpg) no-repeat top;
+      background-size:100%;
+      background-color: #aca3a0
+    }
+      .myback9 .travelNum{
+        position: absolute;
+        top: 14.2rem;
+        left: 9.5rem;
+        font-size: 3.5rem;
+        font-weight: bolder;
+        color: #ee6b01;
+      }
+      .myback9 .travelPlace{
+        position: absolute;
+        top: 22.8rem;
+        left: 9.7rem;
+        font-size: 1rem;
+        font-weight: bolder;
+        color: #e07d27;
+      }
+    .myback10{
+      background:url(../images/light/12.1-10.jpg) no-repeat top;
+      background-size:100%;
+      background-color: #aca3a0
+    }
+      .myback10 .label1{
+        position: absolute;
+        top: 20.4rem;
+        left: 5.2rem;
+        font-size: 1rem;
+        font-weight: bolder;
+        color: #f0be8d;
+      }
+      .myback10 .label2{
+        position: absolute;
+        top: 20.7rem;
+        left: 11rem;
+        font-size: .8rem;
+        font-weight: bolder;
+        color: #de771d;
+      }
+      .myback10 .label3{
+        position: absolute;
+        top: 22.6rem;
+        left: 7.5rem;
+        font-size: .6rem;
+        font-weight: bolder;
+        color: #e17d26;
+      }
+      .myback10 .label4{
+        position: absolute;
+        top: 22.3rem;
+        left: 13.3rem;
+        font-size: 1.3rem;
+        font-weight: bolder;
+        color: #dd6f07;
+      }
+      .myback10 .label5{
+        position: absolute;
+        top: 23.5rem;
+        left: 3.8rem;
+        font-size: 1rem;
+        font-weight: bolder;
+        color: #f0c090;
+      }
+      .myback10 .label6{
+        position: absolute;
+        top: 23.9rem;
+        left: 9.2rem;
+        font-size: 1rem;
+        font-weight: bolder;
+        color: #f0be8d;
+      }
+      .myback10 .label7{
+        position: absolute;
+        top: 25.9rem;
+        font-size: .7rem;
+        font-weight: bolder;
+        color: #e39555;
+        width: 100%;
+        text-align: center;
+      }
+    .myback11{
+      background:url(../images/light/12.1-11.jpg) no-repeat top;
+      background-size:100%;
+      background-color: #aca3a0
+    }
+    .myback12{
+      background:url(../images/light/12.1-13.jpg) no-repeat top;
+      background-size:100%;
+      background-color: #aca3a0
+    }
+    .myback13{
+      background:url(../images/light/12.1-12.jpg) no-repeat top;
+      background-size:100%;
+      background-color: #aca3a0
+    }
+    .myback13 .start{
+      position: absolute;
+      width: 5.73rem;
+      height: 4.2rem;
+      top: 25.5rem;
+      left: 50%;
+      margin-left: -2.85rem;
+
+    }
+    .music {
+      position: absolute;
+      right: 0rem;
+      top: 0rem;
+      width: 3rem;
+      height: 3rem;
+      z-index: 99;
+    }
+    .play {
+      background-image: url('../images/logo2.png');
+      -webkit-animation: rotate 3.82s linear infinite;
+      animation: rotate 3.82s linear infinite;
+    }
+    @keyframes rotate{
+      0%{-webkit-transform:rotate(0deg)}
+      100%{-webkit-transform:rotate(360deg)}
+    }
+    @-webkit-keyframes rotate{
+      0%{-webkit-transform:rotate(0deg)}
+      100%{-webkit-transform:rotate(360deg)}
+    }
+    @keyframes small{
+      0%{-webkit-transform:scale(1);opacity: 1}
+      50%{-webkit-transform:scale(0.3);opacity: .2}
+      100%{-webkit-transform:scale(1);opacity: 1}
+    }
+    @-webkit-keyframes small{
+      0%{-webkit-transform:scale(1);opacity: 1}
+      50%{-webkit-transform:scale(0.3);opacity: .2}
+      100%{-webkit-transform:scale(1);opacity: 1}
+    }

@@ -1,0 +1,127 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>九宫格抽奖</title>
+    <link rel="stylesheet" href="css/common_mobile.css?version=1.0.0">
+    <link rel="stylesheet" href="css/index.css?version=1.0.0">
+</head>
+<body>
+<div id="wrap">
+    <!-- <p class="time">3.10-3.25</p> -->
+    <div class="title">
+        <p>感谢你2020年对公司的诚挚付出！</p>
+        <p>抽个奖</p>
+        <p>犒劳一下自己吧！</p>
+        <p>愿你好运常相伴！</p>
+    </div>
+    <!--星星-->
+    <div class="stars-box">
+        <span class="stars"></span>
+        <span class="stars"></span>
+        <span class="stars"></span>
+        <span class="stars"></span>
+        <span class="stars"></span>
+        <span class="stars"></span>
+        <span class="stars"></span>
+    </div>
+    <!--主体-->
+    <div class="main">
+        <!--游戏区域-->
+        <div class="box">
+            <span class="coin"></span>
+            <h2>您共有 <span id="change"> 1 </span> 次抽奖机会</h2>
+            <ul class="light clearfix">
+                <li class="fl">
+                    <p></p>
+                    <p class="blin"></p>
+                    <p></p>
+                    <p class="blin"></p>
+                </li>
+                <li class="fr">
+                    <p class="blin"></p>
+                    <p></p>
+                    <p class="blin"></p>
+                    <p></p>
+                </li>
+            </ul>
+            <!--九宫格-->
+            <ul class="play clearfix">
+                <li class="prize select">
+                    <div>
+                        <p>“紅紅”火火</p>
+                    </div>
+                </li>
+                <li class="prize">
+                    <div>
+                        <p>畅”饮“冬日</p>
+                    </div>
+                </li>
+                <li class="prize">
+                    <div>
+                        <p>好运如”影“</p>
+                    </div>
+                </li>
+                <li>
+                    <div>
+                        <p>谢谢参与</p>
+                    </div>
+                </li>
+                <!--开始按钮-->
+                <li id="btn"></li>
+                <!--开始按钮-->
+                <li class="prize">
+                    <div>
+                        <p>“盒盒”美美</p>
+                    </div>
+                </li>
+                <li class="prize">
+                    <div>
+                        <p>“薪“喜若狂</p>
+                    </div>
+                </li>
+                <li>
+                    <div>
+                        <p>”福“气冲天</p>
+                    </div>
+                </li>
+                <li class="prize">
+                    <div>
+                        <p>谢谢参与</p>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <!--奖品展示-->
+        <div class="awards">
+            <p style="font-weight: bolder;">活动规则：</p>1、活动时间: <span style="color:#fff;font-weight: bolder;"><span style="text-decoration:underline">2021.01.01 ~ 2021.01.03</span>，共计3天，3天后，系统自动关闭，不再开放抽奖</span> <br>
+            2、外区人员的奖品以电子红包，休假、盲盒，福袋为主，盲盒和福袋由HR统一随货邮寄给到获奖人员。<br>
+            3、电子红包即对即开，可直接在页面处领取，其他奖项，中奖人员凭中奖页面至相应门店或事业部HRBP处领取礼品。<br>
+        </div>
+    </div>
+    <!--中奖提示-->
+    <div id="mask">
+        <div class="blin"></div>
+        <div class="caidai"></div>
+        <div class="winning">
+            <div class="red-head"></div>
+            <div class="red-body"></div>
+            <div id="card">
+                <span class="win">
+                    奈雪抵用券2张
+                </span>
+            </div>
+            <span class="btn"></a>
+            <!-- <span id="close"></span> -->
+        </div>
+    </div>
+</div>
+
+<script src="js/jquery.min.js"></script>
+<script src="js/h5_game_common.js?version=1.0.0"></script>
+<script src="js/index.js?version=1.0.0"></script>
+</body>
+</html>

@@ -1,0 +1,72 @@
+<view class="container">
+  <van-tabs active="{{ active }}" color="#59d299" bind:change="onChange">
+    <van-tab title="申请信息"></van-tab>
+    <van-tab title="分配车辆"></van-tab>
+  </van-tabs>
+  <swiper indicator-dots="{{indicatorDots}}"
+    autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" current="{{active}}" style="height:550rpx" bindchange="swiperChange" >
+    <block>
+      <swiper-item style="width:100%">
+        <view class="action">
+          <view class="type">{{type}}</view>
+          <view class="date">{{date}} {{time}}</view>
+          <view class="detail">
+            <view class="num">{{num}}人</view>
+            <view class="comment">行李较多，早点过来</view>
+          </view>
+          <view class="place">
+            <view class="start">
+              <view class="point p1"></view>
+              <view class="sname">{{start}}</view>
+            </view>
+            <view class="end">
+              <view class="point p2"></view>
+              <view class="ename">{{end}}</view>
+            </view>
+            <view class="end">
+              <view class="point p3"></view>
+              <view class="ename">{{flight}}(航班号)</view>
+            </view>
+          </view>
+          <view class="userInfo">
+            <image src="/images/nan.png"></image>
+            <text class="userName">张三(信息部)</text>
+          </view>
+        </view>
+      </swiper-item>
+      <swiper-item style="width:100%">
+        <view class="action">
+          <view class="infos">
+            <view class="number">
+              <picker bindchange="bindPeoChange" value="{{peoIndex}}" range="{{array}}">
+                <image src="/images/01-2.png"></image>
+                <text class="notice {{peoIndex==-1?'':'dark'}}">{{peoIndex==-1?'选择车辆':array[peoIndex]}}</text>
+              </picker>
+            </view>
+            <view class="comment" bindtap="showComment">
+              <image src="/images/01-3.png"></image>
+              <text class="cnotice {{showCom.length==0?'':'dark'}}">{{showCom.length>0?showCom:'分配备注'}}</text>
+            </view>
+          </view>
+          <view class="btn" bindtap="confirm">
+            确认分配
+          </view>
+        </view>
+      </swiper-item>
+    </block>
+  </swiper>
+
+  <van-action-sheet show="{{ show }}" title="分配备注" bind:close="onClose">
+    <view class="comContent">
+      <textarea value="{{comment}}" class="myComment" placeholder-style="color:#999" placeholder="添加备注信息，便于司机提前准备" bindinput="commentInput" maxlength="50" cursor-spacing="100"></textarea>
+      <view class="count">{{num}}/50个字</view>
+      <view class="comBtn" bindtap="addComment">
+        确认添加
+      </view>
+    </view>
+  </van-action-sheet>
+  <view class="step">
+    <van-steps steps="{{ steps }}" active="1" active-color="#46b6b4" />
+  </view>
+</view>
+<van-dialog id="van-dialog" />

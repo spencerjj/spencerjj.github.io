@@ -45,6 +45,7 @@ Page({
       title: '个人中心'
     })
     let userDetails = wx.getStorageSync('userDetails')
+    console.log(app.globalData.pathurl.length)
     let path = app.globalData.pathurl + userDetails.avatarUrl
     that.setData({
       imgPath: path,

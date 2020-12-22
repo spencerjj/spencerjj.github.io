@@ -1,0 +1,9 @@
+/* views/myswiper/datePicker.wxss */
+.tnotice{
+  color:#ccc;
+  font-weight: bolder;
+  float: left;
+}
+.dark{
+  color:#000
+}

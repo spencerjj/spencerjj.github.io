@@ -1,0 +1,29 @@
+.components_swiper{
+  width:100%;
+  padding: 20rpx;
+}
+.components_swiper_item{
+  width: 100%;
+  overflow: hidden;
+}
+.components_swiper_item_view{
+  background-color: gainsboro;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  transform: scale(0.7);
+  transition: all 1s;
+  border-radius: 20rpx;
+}
+.components_swiper_item_view.act{
+  transform: scale(1);
+  transition: all 1s;
+}
+.components_swiper_item_view_img{
+  width: 100%;
+  height: 75%;
+  border-radius: 15rpx;
+}

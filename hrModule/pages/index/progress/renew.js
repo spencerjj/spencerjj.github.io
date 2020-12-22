@@ -297,6 +297,17 @@ Page({
     }
     // 提交操作
     if (index == 1) {
+        
+        if(!that.data.day||that.data.day.length<1){
+          $Toast({
+            content:"请填写续签年数",
+            type:"warning"
+          })
+          that.setData({
+            visible: false
+          });
+          return;
+        }
         const action = [...this.data.actions];
         action[0].loading = true;
         this.setData({

@@ -1,0 +1,11 @@
+<view>
+<swiper indicator-dots="{{indicatorDots}}" indicator-color="{{beforeColor}}" 
+         indicator-active-color="{{afterColor}}"
+    autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}">
+      <block wx:for="{{imgLists}}" wx:key="index">
+        <swiper-item style="width:100%">
+          <image src="{{item}}" class="slide-image" mode="widthFix" style="width:100%"></image>
+        </swiper-item>
+      </block>
+    </swiper>
+  </view>

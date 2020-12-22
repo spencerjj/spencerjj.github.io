@@ -45,7 +45,7 @@
 <view class="container">
 	<view class="top">
 		<view class="profile" bindtap="toPage" data-url="myInfos">
-			<image src="{{imgPath}}" mode="aspectFill"></image>
+			<image src="{{imgPath.length>24?imgPath:'/images/nan.png'}}" mode="aspectFill"></image>
 		</view>
 		<view class="infoCon" style="color:#000;font-weight:bolder;font-size:35rpx">{{userDetails.userName}}</view>
 		<view class="infoCon"  style="color:#666">{{userDetails.office}}</view>
@@ -90,6 +90,14 @@
 				</image>
 			</view>
 			薪资管理
+		</view>
+		<view class="section" bindtap="toPage" data-url="money" data-type="1"  hover-class="shover" hover-stay-time=".5">
+			<view class="secIcon">
+				<image
+					src="/images/06-6.png">
+				</image>
+			</view>
+			预约车辆
 		</view>
 	</view>
 </view>

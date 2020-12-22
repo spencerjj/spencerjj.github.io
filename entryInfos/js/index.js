@@ -2,7 +2,11 @@ var app = angular.module('myApp', []);
 
 
 app.controller('indexController', ['$scope', '$http', function($scope, $http) {
+	
 	var signPath=''
+	$scope.myCity =''
+	$scope.myRegister = ''
+	$scope.nowId = ''
 		$(document).on('ready', function() {
 			if ($('.js-signature').length) {
 				$('.js-signature').jqSignature();
@@ -43,14 +47,50 @@ app.controller('indexController', ['$scope', '$http', function($scope, $http) {
 		signShow = function(){
 			$('html,body').addClass('ovfHiden')
 			$('.sign').css	('left','0')
-			
 		}
 		signHide = function(){
 			$('html,body').removeClass('ovfHiden')
 			$('.sign').css	('left','100%')
 			setTimeout(()=>{$("html, body").scrollTop( document.body.scrollHeight)},1)
-			
 			console.log(321)
+		}
+		addressShow = function(id){
+			$('html,body').addClass('ovfHiden')
+			$('.cityPick').css	('left','0')
+			$scope.nowId = id
+		}
+		addressHide = function(){
+			setTimeout(()=>{$("html, body").scrollTop('500')},1)
+			$('html,body').removeClass('ovfHiden')
+			$('.cityPick').css	('left','100%')
+		}
+		getCity = function(id){
+			window.event.stopPropagation();  	
+			console.log($('#province1').val()+$('#city1').val()+$('#district1').val())
+			if($scope.nowId==1){
+				$scope.myCity = ''
+				$scope.myCity = $('#province1').val()+$('#city1').val()+$('#district1').val()
+				window.localStorage.setItem('lbmyCity', $scope.myCity);
+			}else{
+				$scope.myRegister = ''
+				$scope.myRegister = $('#province1').val()+$('#city1').val()+$('#district1').val()
+				console.log($scope.myRegister)
+				window.localStorage.setItem('lbmyRegister', $scope.myRegister);
+			}
+			$scope.$apply()
+			addressHide()
+		}
+		ifAdd = function(e){
+			if(e==1){
+				if($scope.myCity.length==0){
+					addressShow(1)
+				}
+			}else if(e==2){
+				if($scope.myRegister.length==0){
+					addressShow(2)
+				}
+			}
+			
 		}
 // window.localStorage.clear()
 	// 特效
@@ -89,8 +129,8 @@ app.controller('indexController', ['$scope', '$http', function($scope, $http) {
 	data.hasFriend = 0;
 	data.marry = 0;
 	data.hasRegulations = 0;
+	// var url = 'http://192.168.2.50:8083'
 	var url = 'https://hr.princesky.com'
-	// var url = 'http://192.168.0.45:8083'
 
 	// window.localStorage.setItem('lbsex', 1);
 	// window.localStorage.setItem('lbhasFriend', 0);
@@ -119,9 +159,9 @@ app.controller('indexController', ['$scope', '$http', function($scope, $http) {
 	var postOriList = []
 	
 	var keys = ['name', 'sex', 'sign', 'birthday', 'acceptPost', 'mobile', 'email', 'height', 'weight', 'birthAddress',
-		'address', 'marry',
-		'register', 'linkMan', 'relation', 'linkMobile', 'monMoney', 'monBaseMoney', 'reward', 'yearMoney', 'acceptMoney',
-		'englishLevel',
+		'address', 'marry', 'education', 'political', 'nation','characteristics','interests','achievement','expertise',
+		'register', 'linkMan', 'relation', 'linkMobile', 'monMoney', 'monBaseMoney', 'reward', 'yearMoney', 'acceptMoney','startMoney',
+		'endMoney','englishLevel','myCity','myRegister',
 		'languages', 'writing', 'listen', 'hasFriend', 'friendName', 'hasRegulations', 'regulationsReason', 'avatar',
 		'school', 'startDate', 'endDate', 'specialty', 'cert',
 		'school2', 'startDate2', 'endDate2', 'specialty2', 'cert2',
@@ -189,6 +229,12 @@ app.controller('indexController', ['$scope', '$http', function($scope, $http) {
 				if(window.localStorage.getItem('lbstartDate')&&window.localStorage.getItem('lbstartDate').length!=0){
 					$('#startDate').removeClass('show_placeholder');
 				}
+				if(window.localStorage.getItem('lbmyCity')&&window.localStorage.getItem('lbmyCity').length!=0){
+					$scope.myCity = window.localStorage.getItem('lbmyCity')
+				}
+				if(window.localStorage.getItem('lbmyRegister')&&window.localStorage.getItem('lbmyRegister').length!=0){
+					$scope.myRegister = window.localStorage.getItem('lbmyRegister')
+				}
 				if(window.localStorage.getItem('lbendDate')&&window.localStorage.getItem('lbendDate').length!=0){
 					$('#endDate').removeClass('show_placeholder');
 				}
@@ -234,7 +280,10 @@ app.controller('indexController', ['$scope', '$http', function($scope, $http) {
 	}
 
 	
-	
+	var moneyLists = ['1500以下','1500-1999','2000-2999','3000-4499','4500-5999','6000-7999','8000-9999','10000-14999',
+					  '15000-19999','20000-24999','25000-29999','30000-34999','35000-39999','40000-44999','45000-49999',
+					  '50000-69999','70000-99999','100000以上']
+	var familyLists = ['夫妻','父母','母子','父子','兄弟','姐妹','其他']
 	$("#sex").picker({
 		title: "请选择性别",
 		cols: [{
@@ -249,7 +298,48 @@ app.controller('indexController', ['$scope', '$http', function($scope, $http) {
 			values: ['未婚', '已婚']
 		}]
 	});
-
+	$("#acceptMoney").picker({
+		title: "请选择期望薪资",
+		cols: [{
+			textAlign: 'center',
+			values: moneyLists
+		}]
+	});
+	$("#education").picker({
+		title: "请选择文化程度",
+		cols: [{
+			textAlign: 'center',
+			values: ['初中及以下','中专/高中','大专','本科','硕士','博士']
+		}]
+	});
+	$("#political").picker({
+		title: "请选择政治面貌",
+		cols: [{
+			textAlign: 'center',
+			values: ['普通公民','无党派民主人士','民主党派人士','共青团员','中国预备党员','中国党员']
+		}]
+	});
+	$("#familyRelation").picker({
+		title: "请选择关系",
+		cols: [{
+			textAlign: 'center',
+			values: familyLists
+		}]
+	});
+	$("#familyRelation2").picker({
+		title: "请选择关系",
+		cols: [{
+			textAlign: 'center',
+			values: familyLists
+		}]
+	});
+	$("#familyRelation3").picker({
+		title: "请选择关系",
+		cols: [{
+			textAlign: 'center',
+			values: familyLists
+		}]
+	});
 	$.ajax({
 		url: url+'/hr/v1/lampo/postRecruitment/listAll',
 		type: 'POST',
@@ -259,11 +349,7 @@ app.controller('indexController', ['$scope', '$http', function($scope, $http) {
 			// console.log(data)
 			for (let x in data) {
 				postOriList = data;
-				if(data[x].post.companyName){
-					postList.push(data[x].post.postName+'('+data[x].post.companyName+')')
-				}else{
-					postList.push(data[x].post.postName)
-				}
+				postList.push(data[x].post.postName)
 			}
 			// console.log(postList)
 		},
@@ -502,6 +588,8 @@ app.controller('indexController', ['$scope', '$http', function($scope, $http) {
 	inputChange = function(id) {
 		console.log($("#" + id).val())
 		window.localStorage.setItem('lb' + id, $("#" + id).val());
+		$('.'+id+'Title').removeClass('error')
+		$('.'+id+'Title').parent().parent().find('i').addClass('hide')
 		if (id == 'name' || id == 'birthday' || id == 'sign' || id == 'mobile' || id == 'email' || id == 'acceptPost') {
 			if ($("#" + id).val().length == 0) {
 				$('.' + id + 'Title').addClass('error')
@@ -589,10 +677,42 @@ app.controller('indexController', ['$scope', '$http', function($scope, $http) {
 		if (id == 'yearMoney') {
 			data.yearMoney = $("#yearMoney").val()
 		}
-
-
+		if (id == 'education') {
+			data.education = $("#education").val()
+		} 
+		if (id == 'political') {
+			data.political = $("#political").val()
+		} 
+		if (id == 'nation') {
+			data.nation = $("#nation").val()
+		} 
+		
+		if (id == 'characteristics') {
+			data.characteristics = $("#characteristics").val()
+		} 
+		if (id == 'interests') {
+			data.interests = $("#interests").val()
+		} 
+		if (id == 'achievement') {
+			data.achievement = $("#achievement").val()
+		} 
+		if (id == 'expertise') {
+			data.expertise = $("#expertise").val()
+		} 
 		if (id == 'acceptMoney') {
 			data.acceptMoney = $("#acceptMoney").val()
+		}
+		if (id == 'startMoney') {
+			data.startMoney = $("#startMoney").val()
+			data.acceptMoney = $("#startMoney").val()+'-'+$("#endMoney").val()
+			$('.acceptMoneyTitle').removeClass('error')
+			$('.acceptMoneyTitle').parent().parent().find('i').addClass('hide')
+		}
+		if (id == 'endMoney') {
+			data.endMoney = $("#endMoney").val()
+			data.acceptMoney =$("#startMoney").val()+'-'+$("#endMoney").val()
+			$('.acceptMoneyTitle').removeClass('error')
+			$('.acceptMoneyTitle').parent().parent().find('i').addClass('hide')
 		}
 		if (id == 'englishLevel') {
 			data.englishLevel = $("#englishLevel").val()
@@ -655,11 +775,11 @@ app.controller('indexController', ['$scope', '$http', function($scope, $http) {
 		}
 	}
 	addEducation = function() {
-		if (educationMark < 3) {
+		if (educationMark < 2) {
 			educationMark++
 			window.localStorage.setItem('lbeducationMark', educationMark);
 		} else {
-			$.toptip('最多添加三条教育经历', 'warning')
+			$.toptip('最多添加两条教育经历', 'warning')
 		}
 		if (educationMark == 1) {
 			$('#deleteEdu').addClass('light')
@@ -670,37 +790,11 @@ app.controller('indexController', ['$scope', '$http', function($scope, $http) {
 				duration: 300,
 			})
 			$('#deleteEdu').removeClass('light')
-			$('#addEdu').removeClass('light')
-		}
-		if (educationMark == 3) {
-			// $('.edu3').removeClass('hide')
-			$('.edu3').show({
-				duration: 300,
-			})
 			$('#addEdu').addClass('light')
 		}
 	}
 	deleteEducation = function() {
 		if (educationMark == 1) {}
-		if (educationMark == 3) {
-			// $('.edu3').addClass('hide')
-			$('.edu3').hide({
-				duration: 300,
-			})
-			$('#addEdu').removeClass('light')
-			$('#school3').val('')
-			$('#startDate3').val('')
-			$('#endDate3').val('')
-			$('#specialty3').val('')
-			$('#cert3').val('')
-			window.localStorage.removeItem('lbschool3')
-			window.localStorage.removeItem('lbstartDate3')
-			window.localStorage.removeItem('lbendDate3')
-			window.localStorage.removeItem('lbspecialty3')
-			window.localStorage.removeItem('lbcert3')
-			$('#startDate3').addClass('show_placeholder');
-			$('#endDate3').addClass('show_placeholder');
-		}
 		if (educationMark == 2) {
 			// $('.edu2').addClass('hide')
 			$('.edu2').hide({
@@ -889,7 +983,7 @@ app.controller('indexController', ['$scope', '$http', function($scope, $http) {
 		var reg = new RegExp('(^|&)' + name + '=([^&]*)(&|$)', 'i');
 		var r = window.location.search.substr(1).match(reg);
 		if (r != null) {
-			return unescape(r[2]);
+			return decodeURI(r[2]);
 		}
 		return null;
 	}
@@ -960,18 +1054,18 @@ app.controller('indexController', ['$scope', '$http', function($scope, $http) {
 			ifAll = false
 			return;
 		}
-		if (data.email && (/^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/.test(data.email))) {
-			ifAll = true
-		} else {
-			$.toptip('请正确填写您的邮箱', 'warning')
-			$body.animate({
-				scrollTop: $('#email').offset().top - 50
-			}, 1000);
-			$('.emailTitle').addClass('error')
-			$('.emailTitle').parent().parent().find('i').removeClass('hide')
-			ifAll = false
-			return;
-		}
+		// if (data.email && (/^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/.test(data.email))) {
+		// 	ifAll = true
+		// } else {
+		// 	$.toptip('请正确填写您的邮箱', 'warning')
+		// 	$body.animate({
+		// 		scrollTop: $('#email').offset().top - 50
+		// 	}, 1000);
+		// 	$('.emailTitle').addClass('error')
+		// 	$('.emailTitle').parent().parent().find('i').removeClass('hide')
+		// 	ifAll = false
+		// 	return;
+		// }
 		if (data.acceptPost && data.acceptPost.length != 0) {
 			ifAll = true
 		} else {
@@ -984,6 +1078,164 @@ app.controller('indexController', ['$scope', '$http', function($scope, $http) {
 			ifAll = false
 			return;
 		}
+		if (data.acceptMoney && data.acceptMoney.length != 0) {
+			ifAll = true
+		} else {
+			$.toptip('请正确填写您的期望薪资', 'warning')
+			$body.animate({
+				scrollTop: $('.acceptMoneyTitle').offset().top - 50
+			}, 1000);
+			$('.acceptMoneyTitle').addClass('error')
+			$('.acceptMoneyTitle').parent().parent().find('i').removeClass('hide')
+			ifAll = false
+			return;
+		}
+		if (data.height && data.height.length != 0) {
+			ifAll = true
+		} else {
+			$.toptip('请正确填写您的身高', 'warning')
+			$body.animate({
+				scrollTop: $('#height').offset().top - 50
+			}, 1000);
+			$('.heightTitle').addClass('error')
+			$('.heightTitle').parent().parent().find('i').removeClass('hide')
+			ifAll = false
+			return;
+		}
+
+		if (data.weight && data.weight.length != 0) {
+			ifAll = true
+		} else {
+			$.toptip('请正确填写您的体重', 'warning')
+			$body.animate({
+				scrollTop: $('#weight').offset().top - 50
+			}, 1000);
+			$('.weightTitle').addClass('error')
+			$('.weightTitle').parent().parent().find('i').removeClass('hide')
+			ifAll = false
+			return;
+		}
+
+		if (data.education && data.education.length != 0) {
+			ifAll = true
+		} else {
+			$.toptip('请选择填写您的文化程度', 'warning')
+			$body.animate({
+				scrollTop: $('#education').offset().top - 50
+			}, 1000);
+			$('.educationTitle').addClass('error')
+			$('.educationTitle').parent().parent().find('i').removeClass('hide')
+			ifAll = false
+			return;
+		}
+		if (data.political && data.political.length != 0) {
+			ifAll = true
+		} else {
+			$.toptip('请选择您的整治面貌', 'warning')
+			$body.animate({
+				scrollTop: $('#political').offset().top - 50
+			}, 1000);
+			$('.politicalTitle').addClass('error')
+			$('.politicalTitle').parent().parent().find('i').removeClass('hide')
+			ifAll = false
+			return;
+		}
+		if (data.nation && data.nation.length != 0) {
+			ifAll = true
+		} else {
+			$.toptip('请正确填写您的民族', 'warning')
+			$body.animate({
+				scrollTop: $('#nation').offset().top - 50
+			}, 1000);
+			$('.nationTitle').addClass('error')
+			$('.nationTitle').parent().parent().find('i').removeClass('hide')
+			ifAll = false
+			return;
+		}
+		if (data.address && data.address.length != 0 &&$scope.myCity.length!=0) {
+			ifAll = true
+			if(data.address.indexOf($scope.myCity)==-1){
+				data.address = $scope.myCity+data.address
+			}
+		} else {
+			$.toptip('请完整填写您的家庭地址', 'warning')
+			$body.animate({
+				scrollTop: $('#address').offset().top - 50
+			}, 1000);
+			$('.addressTitle').addClass('error')
+			$('.addressTitle').parent().parent().find('i').removeClass('hide')
+			ifAll = false
+			return;
+		}
+
+		if (data.birthAddress && data.birthAddress.length != 0) {
+			ifAll = true
+		} else {
+			$.toptip('请正确填写您的籍贯', 'warning')
+			$body.animate({
+				scrollTop: $('#birthAddress').offset().top - 50
+			}, 1000);
+			$('.birthAddressTitle').addClass('error')
+			$('.birthAddressTitle').parent().parent().find('i').removeClass('hide')
+			ifAll = false
+			return;
+		}
+
+		if (data.register && data.register != 0) {
+			ifAll = true
+			if(data.register.indexOf($scope.myRegister)==-1){
+				data.register = $scope.myRegister+data.register
+			}
+		} else {
+			$.toptip('请正确填写您的户籍地', 'warning')
+			$body.animate({
+				scrollTop: $('#register').offset().top - 50
+			}, 1000);
+			$('.registerTitle').addClass('error')
+			$('.registerTitle').parent().parent().find('i').removeClass('hide')
+			ifAll = false
+			return;
+		}
+
+		if (data.linkMan && data.linkMan.length != 0) {
+			ifAll = true
+		} else {
+			$.toptip('请正确填写您的紧急联系人姓名', 'warning')
+			$body.animate({
+				scrollTop: $('#linkMan').offset().top - 50
+			}, 1000);
+			$('.linkManTitle').addClass('error')
+			$('.linkManTitle').parent().parent().find('i').removeClass('hide')
+			ifAll = false
+			return;
+		}
+		if (data.relation && data.relation.length != 0) {
+			ifAll = true
+		} else {
+			$.toptip('请正确填写您的紧急联系人关系', 'warning')
+			$body.animate({
+				scrollTop: $('#relation').offset().top - 50
+			}, 1000);
+			$('.relationTitle').addClass('error')
+			$('.relationTitle').parent().parent().find('i').removeClass('hide')
+			ifAll = false
+			return;
+		}
+		if (data.linkMobile && (/^1[3456789]\d{9}$/.test(data.linkMobile))){
+			ifAll = true
+		} else {
+			$.toptip('请正确填写您的紧急联系人电话', 'warning')
+			$body.animate({
+				scrollTop: $('#linkMobile').offset().top - 50
+			}, 1000);
+			$('.linkMobileTitle').addClass('error')
+			$('.linkMobileTitle').parent().parent().find('i').removeClass('hide')
+			ifAll = false
+			return;
+		}
+
+
+
 
 		// 学历内容获取
 		if ($('#school').val().length != 0 && $('#specialty').val().length != 0 && $('#startDate').val().length != 0 && $(
@@ -1109,7 +1361,16 @@ app.controller('indexController', ['$scope', '$http', function($scope, $http) {
 				return;
 			}
 		}
-
+		if (data.avatar && data.avatar.length != 0) {
+			ifAll = true
+		} else {
+			$.toptip('请上传您的照片', 'warning')
+			$body.animate({
+				scrollTop: $('#uploaderInput').offset().top - 100
+			}, 1000);
+			ifAll = false
+			return;
+		}
 
 		// 家庭成员内容获取
 		if ($('#familyName').val().length != 0 && $('#familyRelation').val().length != 0) {
@@ -1255,12 +1516,19 @@ app.controller('indexController', ['$scope', '$http', function($scope, $http) {
 				'acceptPost': data.acceptPost,
 				'height': data.height,
 				'weight': data.weight,
+				'education': data.education,
+				'political': data.political,
+				'nation': data.nation,
+				'characteristics': data.characteristics,
+				'interests': data.interests,
+				'achievement': data.achievement,
+				'expertise': data.expertise,
 				'birhtAddress': data.birthAddress,
 				'sign': data.sign,
 				'address': data.address,
 				'marry': data.marry,
 				'register': data.register,
-				'email': data.register,
+				'email': data.email,
 				'linkMan': data.linkMan,
 				'relation': data.relation,
 				'linkMobile': data.linkMobile,
@@ -1362,16 +1630,14 @@ app.controller('indexController', ['$scope', '$http', function($scope, $http) {
 			
 			// temp['signPath'] = signPath
 			// $.showLoading("数据提交中");
-			if(getQueryString('flag')==2){
+			if(getQueryString('flag')){
 				if(signPath.length!=0){
 				temp['signPath'] = signPath
-				temp['flag'] = 2
+				temp['flag'] = getQueryString('flag')
 			}else{
 				signShow();
 				return;
 			}
-			}else{
-				temp['flag'] = 1
 			}
 			if(getQueryString('isSchool')=='Y'){
 				temp['isSchool'] = 'Y'
@@ -1380,7 +1646,7 @@ app.controller('indexController', ['$scope', '$http', function($scope, $http) {
 			}
 			console.log(temp)
 			$.confirm("确认提交应聘登记表吗", function() {
-				
+
 				$('#waiting').removeClass('hide')
 			  $.ajax({
 			  	url: url+'/hr/v1/lampo/candidateInfo/save',
@@ -1403,7 +1669,6 @@ app.controller('indexController', ['$scope', '$http', function($scope, $http) {
 			  	}
 			  })
 			  }, function() {
-			  //点击取消后的回调函数
 			  });
 			
 

@@ -1,0 +1,31 @@
+<view class="container">
+  <view class="item" wx:for="{{lists}}" wx:key="index">
+    <view class="date section s1">
+      <view class="left"><image src="/images/01-4.png"></image></view>
+      <view class="right">{{item.date}}</view>
+    </view>
+    <view class="detail">
+      <view class="num">{{num}}人</view>
+      <view class="comment">{{comment}}</view>
+    </view>
+    <view class="start section">
+      <view class="left"><view class="point p1"></view></view>
+      <view class="right">{{item.start}}</view>
+    </view>
+    <view class="end section">
+      <view class="left"><view class="point p2"></view></view>
+      <view class="right">{{item.end}}</view>
+    </view>
+    <view class="join section">
+      <view class="left"><image src="/images/01-7.png"></image></view>
+      <view class="right">{{item.driver}}</view>
+    </view>
+    <view class="state">已完成</view>
+  </view>
+</view>
+<view wx:if="{{!listIsFull}}" class='nullDataInfo'><van-divider contentPosition="center">无更多数据了</van-divider></view>
+<view wx:if="{{loading}}" class='buskmark'><image src='../../images/00-12.png'></image></view>
+<view class="nodata" wx:if="{{showNo}}">
+  <image src="../../images/noData.png"></image>
+  <view class="notext">暂无用车记录</view>
+</view>

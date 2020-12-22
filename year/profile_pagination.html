@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<meta name="viewport" content="width=device-width">
+	<link rel="stylesheet" href="css/swiper.css">
+	<link rel="stylesheet" href="css/animate.min.css">
+	<script src="js/swiper.animate1.0.2.min.js"></script>
+	<style>
+		html,body{
+			position: relative;
+			height: 100%;
+		}
+		body{
+			margin: 0;
+			padding: 0;
+		}
+		.swiper-container{
+			width: 50%;
+			height: 70%;
+			z-index: 998;
+		}
+		.swiper-slide{
+			max-width: 100%;
+			height: 100%;
+			display: flex;
+			justify-content:center;
+			align-items:center;
+			position: relative;
+		}
+		.swiper-slide .img{
+			width: 500px;
+			height: 300px;
+			overflow: hidden;
+			background-size: cover;
+			border: 1px solid white;
+
+
+		}
+
+		/* 视差效果 */
+		.parallax-bg{
+			background-image: url(images/dota2bg.jpg);
+			position: absolute;
+			left: 0;
+			top: 0;
+			width: 130%;
+			height: 100%;
+			background-size: cover;
+			background-position: center;
+		}
+		
+		/* 自定义导航圆点样式 */
+		.swiper-pagination-bullet{
+			width: 75px;
+			height: 75px;
+			overflow: hidden;
+			opacity: 0.5;
+			border: 2px dashed white;
+			margin-right: 20px;
+		}
+
+		.swiper-pagination-bullet-active{
+			opacity: 1;
+		}
+		.swiper-button{
+			position: absolute;
+			bottom: 10px;
+		}
+
+		.swiper-slide .logo{
+			position: absolute;
+			top:5%;
+			right: 35%;
+			height: 20%;
+		}
+
+</style>
+		
+	</style>
+</head>
+<body>
+	
+	<div class="swiper-container">
+		<div class="parallax-bg" data-swiper-parallax="-23%"></div>
+		<div class="swiper-wrapper">
+		<div class="swiper-slide">
+				<div data-swiper-parallax="-100">
+				
+				<img src="images/dota13.jpg" class="img">
+				</div>
+				<img src="images/dota2logo.jpg" class="ani logo" swiper-animate-effect="bounceInLeft" swiper-animate-duration="2s" swiper-animate-delay="0.1s">
+				
+			</div>
+
+			<div class="swiper-slide">
+				<div data-swiper-parallax="-100">
+				<img src="images/dota11.jpg" class="img">
+				</div>	
+			</div>
+			<div class="swiper-slide">
+				<div data-swiper-parallax="-100">
+				<img src="images/dota12.jpg" class="img">
+				</div>
+			</div>
+			
+			<div class="swiper-slide">
+				<div data-swiper-parallax="-100">
+				<img src="images/dota14.jpg" class="img">
+				</div>	
+			</div>
+			<div class="swiper-slide">
+				<div data-swiper-parallax="-100">
+				<img src="images/dota15.jpg" class="img">
+				</div>	
+			</div>
+
+		</div>
+		<div class="swiper-pagination"></div>
+		<div class="swiper-button-prev swiper-button-white"></div>
+		<div class="swiper-button-next swiper-button-white"></div>
+	</div>
+	
+	<script src="js/jquery-1.10.1.min.js"></script>
+	<script src="js/swiper.jquery.min.js"></script>
+	<script>
+		var swiper=new Swiper(".swiper-container",{
+			pagination:".swiper-pagination",
+			paginationClickable:true,
+			spaceBetween:20,
+			prevButton:".swiper-button-prev",
+			nextButton:".swiper-button-next",
+			effect:"coverflow",
+			// slidesPerView:3,
+
+			//视差效果
+			parallax:true,
+
+			loop:true,
+
+			keyboardControl:true, //键盘控制
+
+			mousewheelControl:true, //鼠标滚轮控制
+
+			preloadImages:false, //关闭预加载图像，默认为true
+			lazyLoading:true, //延迟加载
+
+			//自定义导航
+			paginationBulletRender:function(swiper,index,className){
+				return "<span class='"+className+"'><img src='images/dota"+(index+1)+".png'></span>";
+			},
+			onInit:function(swiper){
+					swiperAnimateCache(swiper);
+					swiperAnimate(swiper);
+			},
+			onSlideChangeEnd:function(swiper){
+					swiperAnimate(swiper);
+			},
+
+
+		});
+		var mySwiper = new Swiper('.swiper-container',{
+  on:{
+    slideNextTransitionStart: function(swiper){
+      alert('开始切换');
+    },
+  },
+})
+
+	</script>
+</body>
+</html>

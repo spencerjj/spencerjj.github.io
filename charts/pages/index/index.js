@@ -94,7 +94,7 @@ Page({
         now1.setTime(now1.getTime()-24*60*60*1000);
         console.log(now1.getFullYear())
         var month1 = (now1.getMonth() + 1) >= 10 ? (now1.getMonth() + 1) : '0' + (now1.getMonth() + 1)
-        var day1 = now1.getDate()>10?now1.getDate():'0'+now1.getDate()
+        var day1 = now1.getDate()>=10?now1.getDate():'0'+now1.getDate()
         var t2 = now1.getFullYear()+'-'+month1+'-'+day1
         
         var yestoday = now.getFullYear() + '-' + (month) + '-' + (day)

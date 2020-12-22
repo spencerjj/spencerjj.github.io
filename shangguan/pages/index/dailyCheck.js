@@ -787,6 +787,7 @@ Page({
     postData.__sid = that.data.userDetails.sid
     postData.__ajax = 'json'
     postData.type = that.data.type
+    postData.classes = that.data.classes
     postData.companyName = that.data.userDetails.companyName
     postData.companyCode = that.data.userDetails.companyCode
     postData.merchantCheckupOrder_image = imgLists

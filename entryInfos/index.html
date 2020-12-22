@@ -195,7 +195,7 @@
 			    display: block;
 			    background: rgba(0,0,0,.9);
 			    position: fixed;
-			    z-index: 100;
+			    z-index: 999;
 			    top: 0;
 			    left: 0;
 			}
@@ -215,7 +215,7 @@
 			    height: 40px;
 			    bottom: 60px;
 			    right: 0px;
-			    z-index: 999;
+			    z-index: 888;
 			    opacity: 0;
 			}
 			.waiting{
@@ -243,8 +243,8 @@
 				line-height: 40px;
 				border-radius: 10px;
 				box-shadow: none;
+				border:none;
 				background: white;
-				border: 1px splid #af9d7f;
 			}
 			.signAct{
 				display: flex;
@@ -256,10 +256,48 @@
 				width: 100%;
 				height: 100%;
 				background: rgba(0,0,0,.9);
-				top:0;
+				bottom:0;
 				left: 100%;
 				z-index: 99;
 				padding-top:20px
+			}
+			.cityPick{
+				position: fixed;
+				width: 100%;
+				height: 100%;
+				background: rgba(0,0,0,.9);
+				top:0;
+				left:100%;
+				z-index: 900;
+				padding-top:20px;
+
+			}
+			.cityPick .container{
+				width: 100%;
+				min-height: 130px;
+				position: absolute;
+				top:0;
+				background:white;
+				border-radius: 0 0 10px 10px;
+				/* box-shadow: 0 0 5px 5px #eee; */
+			}
+			.form-control{
+				display: block;
+				width: 100%;
+				height: 34px;
+				padding: 6px 12px;
+				font-size: 14px;
+				line-height: 1.42857143;
+				color: #555;
+				background-color: #fff;
+				background-image: none;
+				border: 1px solid #ccc;
+				border-radius: 4px;
+				-webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+				box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+				-webkit-transition: border-color ease-in-out .15s, -webkit-box-shadow ease-in-out .15s;
+				-o-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+				transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
 			}
 			.ovfHiden{overflow: hidden;height: 100%;}
 		</style>
@@ -274,8 +312,8 @@
 			<div class="gif"><img src="img/loader.gif" style="left: 10px; opacity: 1;"></div>
 		</div>
 		<div class="totop"><img src="img/top.png"></div>
-		<div class="weui-panel__hd bigTitle" style="">{{title}}<img src="img/logo.png" alt=""></div>
-		<div class="weui-panel__hd smallTitle" style="">{{welcome}}！请您认真填写本表的每一项内容。本公司将为表格内容保密。</div>
+		<div class="weui-panel__hd bigTitle">{{title}}<img src="img/logo.png" alt=""></div>
+		<div class="weui-panel__hd smallTitle">{{welcome}}！请您认真填写本表的每一项内容。本公司将为表格内容保密。</div>
 		<div class="weui-cells weui-cells_form" style="margin-top: 0;border-top: 5px solid #e5e5e5;">
 			<div class="weui-cells__title">应聘信息<span style="font-size: 15px;">(<span class="mark2">&nbsp;*</span>为必填项目)</span></div>
 		<div class="weui-cell specialCell">
@@ -305,7 +343,7 @@
 				<label class="weui-label signTitle">身份证号<span class="mark2">&nbsp;*</span></label>
 			</div>
 			<div class="weui-cell__bd">
-				<input class="weui-input" type="number" placeholder="请输入您的身份证号" id="sign" oninput="inputChange(this.id)">
+				<input class="weui-input" type="text" placeholder="请输入您的身份证号" id="sign" oninput="inputChange(this.id)">
 			</div>
 			<div class="weui-cell__ft">
 				<i class="weui-icon-warn hide"></i>
@@ -337,7 +375,7 @@
 		</div>
 		<div class="weui-cell">
 			<div class="weui-cell__hd">
-				<label class="weui-label emailTitle">邮箱<span class="mark2">&nbsp;*</span></label>
+				<label class="weui-label emailTitle">邮箱</label>
 			</div>
 			<div class="weui-cell__bd">
 				<input class="weui-input" type="email" placeholder="请输入您的邮箱" id="email" oninput="inputChange(this.id)">
@@ -360,20 +398,20 @@
 		</div>
 		<div class="weui-cells weui-cells_form" style="margin-top: 0;border-top: 5px solid #e5e5e5;">
 			<div class="weui-cells__title">基本信息</div>
-		<div class="weui-cell specialCell">
+		<div class="weui-cell specialCell" style="display: flex;flex-direction: row;">
 			<div class="weui-cell__hd">
-				<label class="weui-label acceptMoneyTitle">期望薪资</label>
+				<label class="weui-label acceptMoneyTitle">期望薪资<span class="mark2">&nbsp;*</span></label>
 			</div>
 			<div class="weui-cell__bd">
-				<input class="weui-input" type="number" placeholder="请输入您的期望薪资" id="acceptMoney" oninput="inputChange(this.id)">
+				<input class="weui-input" type="text" placeholder="请选择您的期望薪资" id="acceptMoney" onchange="inputChange(this.id)">
 			</div>
 			<div class="weui-cell__ft">
-				<i class="weui-icon-warn hide"></i>
+				<img src="img/down.png" alt="" class="arraw">
 			</div>
 		</div>
 		<div class="weui-cell">
 			<div class="weui-cell__hd">
-				<label class="weui-label heightTitle">身高<span class="mark1">(cm)</span></label>
+				<label class="weui-label heightTitle">身高<span class="mark1">(cm)</span><span class="mark2">&nbsp;*</span></label>
 			</div>
 			<div class="weui-cell__bd">
 				<input class="weui-input" type="tel" placeholder="请输入您的身高" maxlength="3" id="height" oninput="inputChange(this.id)">
@@ -384,7 +422,7 @@
 		</div>
 		<div class="weui-cell">
 			<div class="weui-cell__hd">
-				<label class="weui-label weightTitle">体重<span class="mark1">(kg)</span></label>
+				<label class="weui-label weightTitle">体重<span class="mark1">(kg)</span><span class="mark2">&nbsp;*</span></label>
 			</div>
 			<div class="weui-cell__bd">
 				<input class="weui-input" type="tel" placeholder="请输入您的体重" maxlength="3" id="weight" oninput="inputChange(this.id)">
@@ -395,34 +433,45 @@
 		</div>
 		<div class="weui-cell">
 			<div class="weui-cell__hd">
-				<label class="weui-label addressTitle">家庭地址</label>
+				<label class="weui-label educationTitle">文化程度<span class="mark2">&nbsp;*</span></label>
 			</div>
 			<div class="weui-cell__bd">
-				<input class="weui-input" type="text" placeholder="请输入您的家庭地址" id="address" oninput="inputChange(this.id)">
+				<input class="weui-input" type="tel" placeholder="请选择您的文化程度" maxlength="3" id="education" onchange="inputChange(this.id)">
 			</div>
 			<div class="weui-cell__ft">
-				<i class="weui-icon-warn hide"></i>
+				<img src="img/down.png" alt="" class="arraw">
 			</div>
 		</div>
 		<div class="weui-cell">
 			<div class="weui-cell__hd">
-				<label class="weui-label birthAddressTitle">出生地</label>
+				<label class="weui-label politicalTitle">政治面貌<span class="mark2">&nbsp;*</span></label>
 			</div>
 			<div class="weui-cell__bd">
-				<input class="weui-input" type="text" placeholder="请输入您的出生地" id="birthAddress" oninput="inputChange(this.id)">
+				<input class="weui-input" type="tel" placeholder="请选择您的政治面貌" maxlength="3" id="political" onchange="inputChange(this.id)">
+			</div>
+			<div class="weui-cell__ft">
+				<img src="img/down.png" alt="" class="arraw">
+			</div>
+		</div>
+		<div class="weui-cell">
+			<div class="weui-cell__hd">
+				<label class="weui-label nationTitle">民族<span class="mark2">&nbsp;*</span></label>
+			</div>
+			<div class="weui-cell__bd">
+				<input class="weui-input" type="text" placeholder="请输入您的民族" maxlength="3" id="nation" oninput="inputChange(this.id)">
 			</div>
 			<div class="weui-cell__ft">
 				<i class="weui-icon-warn hide"></i>
 			</div>
 		</div>
 
-
 		<div class="weui-cell">
 			<div class="weui-cell__hd">
-				<label class="weui-label registerTitle">户籍地</label>
+				<label class="weui-label addressTitle">家庭地址<span class="mark2">&nbsp;*</span></label>
 			</div>
 			<div class="weui-cell__bd">
-				<input class="weui-input" type="text" placeholder="请输入您的户籍地" id="register" oninput="inputChange(this.id)">
+				<div class="weui-input" type="text" onclick="addressShow(1)" style="font-size: 12px;{{myCity?'color:#af9d7f':'color:#999'}}">{{myCity?myCity:'请选择您的城市'}}</div>
+				<input class="weui-input" type="text" placeholder="请输入您的详细地址" id="address" oninput="inputChange(this.id)"  onfocus="ifAdd(1)">
 			</div>
 			<div class="weui-cell__ft">
 				<i class="weui-icon-warn hide"></i>
@@ -430,7 +479,31 @@
 		</div>
 		<div class="weui-cell">
 			<div class="weui-cell__hd">
-				<label class="weui-label marryTitle">婚姻状况</label>
+				<label class="weui-label birthAddressTitle">籍贯<span class="mark2">&nbsp;*</span></label>
+			</div>
+			<div class="weui-cell__bd">
+				<input class="weui-input" type="text" placeholder="请输入您的籍贯" id="birthAddress" oninput="inputChange(this.id)">
+			</div>
+			<div class="weui-cell__ft">
+				<i class="weui-icon-warn hide"></i>
+			</div>
+		</div>
+		<div class="weui-cell">
+			<div class="weui-cell__hd">
+				<label class="weui-label registerTitle">户籍地<span class="mark2">&nbsp;*</span></label>
+			</div>
+			<div class="weui-cell__bd">
+				<!-- <input class="weui-input" type="text" placeholder="请输入您的户籍地" id="register" oninput="inputChange(this.id)"> -->
+				<div class="weui-input" type="text" onclick="addressShow(2)" style="font-size: 12px;{{myRegister?'color:#af9d7f':'color:#999'}}">{{myRegister?myRegister:'请选择您的户籍地'}}</div>
+				<input class="weui-input" type="text" placeholder="请输入您的户籍地址" id="register" oninput="inputChange(this.id)"  onfocus="ifAdd(2)">
+			</div>
+			<div class="weui-cell__ft">
+				<i class="weui-icon-warn hide"></i>
+			</div>
+		</div>
+		<div class="weui-cell">
+			<div class="weui-cell__hd">
+				<label class="weui-label marryTitle">婚姻状况<span class="mark2">&nbsp;*</span></label>
 			</div>
 			<div class="weui-cell__bd">
 				<input class="weui-input" type="text" id="marry" value="未婚" onchange="inputChange(this.id)">
@@ -445,7 +518,7 @@
 			<div class="weui-cells__title">紧急联系人</div>
 			<div class="weui-cell specialCell">
 				<div class="weui-cell__hd">
-					<label class="weui-label linkManTitle">联系人姓名</label>
+					<label class="weui-label linkManTitle">联系人姓名<span class="mark2">&nbsp;*</span></label>
 				</div>
 				<div class="weui-cell__bd">
 					<input class="weui-input" type="text" placeholder="请输入紧急联系人姓名" id="linkMan" oninput="inputChange(this.id)">
@@ -456,7 +529,7 @@
 			</div>
 			<div class="weui-cell ">
 				<div class="weui-cell__hd">
-					<label class="weui-label relationTitle">关系</label>
+					<label class="weui-label relationTitle">关系<span class="mark2">&nbsp;*</span></label>
 				</div>
 				<div class="weui-cell__bd">
 					<input class="weui-input" type="text" placeholder="请输入紧急联系人关系" id="relation" oninput="inputChange(this.id)">
@@ -467,7 +540,7 @@
 			</div>
 			<div class="weui-cell ">
 				<div class="weui-cell__hd">
-					<label class="weui-label linkMobileTitle">联系人电话</label>
+					<label class="weui-label linkMobileTitle">联系人电话<span class="mark2">&nbsp;*</span></label>
 				</div>
 				<div class="weui-cell__bd">
 					<input class="weui-input" type="number" placeholder="请输入紧急联系人电话" id="linkMobile" oninput="inputChange(this.id)">
@@ -814,9 +887,9 @@
 		
 			<!-- <div class="weui-cell weui-cell_link" style="border-bottom:5px solid #e5e5e5"> -->
 				<div class="weui-cell weui-cell_link">
-				<a href="javascript:;" class="addIcon" onclick="addJobList()" id="addJob"><img src="img/add1.png" alt=""></a>
+				<a href="javascript:;" class="addIcon" onclick="addJobList()" id="addJob"><img src="img/add1.png" alt=""><div style="font-size:12px;color:#af9d7f;font-weight:bolder">新增</div></a>
 				<a href="javascript:;" class="deleteIcon light" id="deleteJob" onclick="deleteJobList()"><img src="img/delete1.png"
-					 alt=""></a>
+					 alt=""><div style="font-size:12px;color:red;font-weight:bolder;margin-left:2px">删除</div></a>
 			</div>
 		</div>
 		<!-- 教育经历 -->
@@ -943,74 +1016,11 @@
 				</div>
 			</div>
 		
-		
-			<!-- 第三条学历 -->
-			<div class="edu3 hide">
-				<div class="weui-cell" style="border-top:2px solid #e5e5e5">
-					<div class="weui-cell__hd">
-						<label class="weui-label school3Title">学校<span class="mark2">&nbsp;*</span></label>
-					</div>
-					<div class="weui-cell__bd">
-						<input class="weui-input" type="text" placeholder="请输入您的学校" id="school3" oninput="inputChange(this.id)">
-					</div>
-					<div class="weui-cell__ft">
-						<i class="weui-icon-warn hide"></i>
-					</div>
-				</div>
-				<div class="weui-cell">
-					<div class="weui-cell__hd">
-						<label for="" class="weui-label startDate3Title">开始时间<span class="mark2">&nbsp;*</span></label>
-					</div>
-					<div class="weui-cell__bd">
-						<!-- <div class="timeNotice">请输入开始时间</div> -->
-						<input class="weui-input show_placeholder" type="month" id="startDate3" onchange="inputChange(this.id)"
-						 placeholder="请输入开始时间" min="1949-12" max="2030-10">
-					</div>
-					<div class="weui-cell__ft">
-						<img src="img/down.png" alt="" class="arraw">
-					</div>
-				</div>
-				<div class="weui-cell">
-					<div class="weui-cell__hd">
-						<label for="" class="weui-label endDate3Title">结束时间<span class="mark2">&nbsp;*</span></label>
-					</div>
-					<div class="weui-cell__bd">
-						<input class="weui-input show_placeholder" type="month" id="endDate3" onchange="inputChange(this.id)" placeholder="请输入结束时间"
-						 min="1949-12" max="2030-10">
-					</div>
-					<div class="weui-cell__ft">
-						<img src="img/down.png" alt="" class="arraw">
-					</div>
-				</div>
-				<div class="weui-cell">
-					<div class="weui-cell__hd">
-						<label class="weui-label specialty3Title">专业<span class="mark2">&nbsp;*</span></label>
-					</div>
-					<div class="weui-cell__bd">
-						<input class="weui-input" type="text" placeholder="请输入您的专业" id="specialty3" oninput="inputChange(this.id)">
-					</div>
-					<div class="weui-cell__ft">
-						<i class="weui-icon-warn hide"></i>
-					</div>
-				</div>
-				<div class="weui-cell">
-					<div class="weui-cell__hd">
-						<label class="weui-label cert3Title">学位</label>
-					</div>
-					<div class="weui-cell__bd">
-						<input class="weui-input" type="text" placeholder="请输入您的学位" id="cert3" oninput="inputChange(this.id)">
-					</div>
-					<div class="weui-cell__ft">
-						<i class="weui-icon-warn hide"></i>
-					</div>
-				</div>
-			</div>
-		
 			<!-- <div class="weui-cell weui-cell_link" style="border-bottom:5px solid #e5e5e5"> -->
 				<div class="weui-cell weui-cell_link">
-				<a href="javascript:;" class="addIcon" onclick="addEducation()" id="addEdu"><img src="img/add1.png" alt=""></a>
+				<a href="javascript:;" class="addIcon" onclick="addEducation()" id="addEdu"><img src="img/add1.png" alt=""><div style="font-size:12px;color:#af9d7f;font-weight:bolder">新增</div></a>
 				<a href="javascript:;" class="deleteIcon light" id="deleteEdu" onclick="deleteEducation()"><img src="img/delete1.png"
-					 alt=""></a>
+					 alt=""><div style="font-size:12px;color:red;font-weight:bolder;margin-left:2px">删除</div></a>
 			</div>
 		</div>
 		
@@ -1056,6 +1066,50 @@
 			</div>
 			<div class="weui-cell__bd">
 				<input class="weui-input" type="text" placeholder="请输入您的听力水平" id="listen" oninput="inputChange(this.id)">
+			</div>
+			<div class="weui-cell__ft">
+				<i class="weui-icon-warn hide"></i>
+			</div>
+		</div>
+		<div class="weui-cell">
+			<div class="weui-cell__hd">
+				<label class="weui-label characteristicsTitle">性格特点</label>
+			</div>
+			<div class="weui-cell__bd">
+				<input class="weui-input" type="text" placeholder="请输入您的性格特点" id="characteristics" oninput="inputChange(this.id)">
+			</div>
+			<div class="weui-cell__ft">
+				<i class="weui-icon-warn hide"></i>
+			</div>
+		</div>
+		<div class="weui-cell">
+			<div class="weui-cell__hd">
+				<label class="weui-label interestsTitle">兴趣爱好</label>
+			</div>
+			<div class="weui-cell__bd">
+				<input class="weui-input" type="text" placeholder="请输入您的兴趣爱好" id="interests" oninput="inputChange(this.id)">
+			</div>
+			<div class="weui-cell__ft">
+				<i class="weui-icon-warn hide"></i>
+			</div>
+		</div>
+		<div class="weui-cell">
+			<div class="weui-cell__hd">
+				<label class="weui-label achievementTitle">工作业绩及获奖情况</label>
+			</div>
+			<div class="weui-cell__bd">
+				<input class="weui-input" type="text" placeholder="请输入您的工作业绩及获奖情况" id="achievement" oninput="inputChange(this.id)">
+			</div>
+			<div class="weui-cell__ft">
+				<i class="weui-icon-warn hide"></i>
+			</div>
+		</div>
+		<div class="weui-cell">
+			<div class="weui-cell__hd">
+				<label class="weui-label expertiseTitle">其它专长</label>
+			</div>
+			<div class="weui-cell__bd">
+				<input class="weui-input" type="text" placeholder="请输入您的其它专长" id="expertise" oninput="inputChange(this.id)">
 			</div>
 			<div class="weui-cell__ft">
 				<i class="weui-icon-warn hide"></i>
@@ -1113,7 +1167,7 @@
 		</div>
 		</div>
 		<div class="weui-cells weui-cells_form" style="margin-top: 0 !important;border-bottom:5px solid #e5e5e5;border-top:5px solid #e5e5e5">
-			<div class="weui-cells__title">上传照片</div>
+			<div class="weui-cells__title">上传照片<span class="mark2">&nbsp;*</span></div>
 			<div class="weui-cell specialCell">
 				<div class="weui-cell__bd">
 					<div class="weui-uploader__input-box">
@@ -1123,6 +1177,7 @@
 					<img src="" alt="" id="showIMG" class="hide">
 					<!-- <img src="img/delete.png" alt="" id="deleteIMG" onclick="deleteImg()" class="hide"> -->
 					<!-- </div> -->
+					<div style="text-align:right;color:#af9d7f;font-size:12px;width:100%;margin-top:5px">*请上传正面、免冠照片</div>
 				</div>
 			</div>
 		</div>
@@ -1149,10 +1204,10 @@
 					<label class="weui-label familyRelationTitle">关系<span class="mark2">&nbsp;*</span></label>
 				</div>
 				<div class="weui-cell__bd">
-					<input class="weui-input" type="text" placeholder="请输入家庭成员关系" id="familyRelation" oninput="inputChange(this.id)">
+					<input class="weui-input" type="text" placeholder="请选择家庭成员关系" id="familyRelation" onchange="inputChange(this.id)">
 				</div>
 				<div class="weui-cell__ft">
-					<i class="weui-icon-warn hide"></i>
+					<img src="img/down.png" alt="" class="arraw">
 				</div>
 			</div>
 			<div class="weui-cell">
@@ -1207,10 +1262,10 @@
 						<label class="weui-label familyRelation2Title">关系<span class="mark2">&nbsp;*</span></label>
 					</div>
 					<div class="weui-cell__bd">
-						<input class="weui-input" type="text" placeholder="请输入家庭成员关系" id="familyRelation2" oninput="inputChange(this.id)">
+						<input class="weui-input" type="text" placeholder="请选择家庭成员关系" id="familyRelation2" onchange="inputChange(this.id)">
 					</div>
 					<div class="weui-cell__ft">
-						<i class="weui-icon-warn hide"></i>
+						<img src="img/down.png" alt="" class="arraw">
 					</div>
 				</div>
 				<div class="weui-cell">
@@ -1267,10 +1322,10 @@
 						<label class="weui-label familyRelation3Title">关系<span class="mark2">&nbsp;*</span></label>
 					</div>
 					<div class="weui-cell__bd">
-						<input class="weui-input" type="text" placeholder="请输入家庭成员关系" id="familyRelation3" oninput="inputChange(this.id)">
+						<input class="weui-input" type="text" placeholder="请选择家庭成员关系" id="familyRelation3" onchange="inputChange(this.id)">
 					</div>
 					<div class="weui-cell__ft">
-						<i class="weui-icon-warn hide"></i>
+						<img src="img/down.png" alt="" class="arraw">
 					</div>
 				</div>
 				<div class="weui-cell">
@@ -1310,9 +1365,9 @@
 
 			<!-- <div class="weui-cell weui-cell_link" style="border-bottom:5px solid #e5e5e5"> -->
 				<div class="weui-cell weui-cell_link">
-				<a href="javascript:;" class="addIcon" onclick="addFamilyList()" id="addFamily"><img src="img/add1.png" alt=""></a>
+				<a href="javascript:;" class="addIcon" onclick="addFamilyList()" id="addFamily"><img src="img/add1.png" alt=""><div style="font-size:12px;color:#af9d7f;font-weight:bolder">新增</div></a>
 				<a href="javascript:;" class="deleteIcon light" id="deleteFamily" onclick="deleteFamilyList()"><img src="img/delete1.png"
-					 alt=""></a>
+					 alt=""><div style="font-size:12px;color:red;font-weight:bolder;margin-left:2px">删除</div></a>
 			</div>
 		</div>
 
@@ -1336,10 +1391,38 @@
 				<div class="row">
 					<div class="col-xs-12">
 						<h3 style="margin-left:2%;color:#af9d7f">请签名确认上述资料属实：</h3>
-						<div class="js-signature" style="width:96%;margin:0 auto"data-width="600" data-height="200" data-border="1px solid #af9d7f" data-line-color="#bc0000" data-auto-fit="true"></div>
+						<div class="js-signature" style="width:96%;margin:0 auto"data-width="600" data-height="200" data-border="1px solid #af9d7f" data-line-color="#000000" data-auto-fit="true"></div>
 						<div class="signAct"><button id="clearBtn" class="signBtn" onclick="clearCanvas();">清空</button>&nbsp;<button id="saveBtn" class="signBtn" onclick="saveSignature();" disabled>保存签名</button></div>
 					</div>
 				</div>
+			</div>
+		</div>
+		<div class="cityPick">
+			<div class="container">
+				<form class="form-inline" style="width: 90%;margin-left: 5%;margin-top:30px">
+					<div data-toggle="distpicker">
+					  <div class="form-group" style="display: flex;margin-top: 10px;line-height: 30px;">
+						<label class="sr-only" for="province1" style="width: 20%;">省份:</label>
+						<select class="form-control" id="province1"></select>
+					  </div>
+					  <div class="form-group" style="display: flex;margin-top: 10px;line-height: 30px;">
+						<label class="sr-only" for="city1" style="width: 20%;">城市:</label>
+						<select class="form-control" id="city1"></select>
+					  </div>
+					  <div class="form-group mylast" style="display: flex;margin-top: 10px;line-height: 30px;">
+						<label class="sr-only" for="district1" style="width: 20%;">区/县:</label>
+						<select class="form-control" id="district1"></select>
+					  </div>
+					  <!-- <div class="form-group" style="display: flex;margin-top: 10px;line-height: 30px;">
+						<label class="sr-only" for="district1" style="width: 20%;">地址:</label>
+						<textarea class="form-control" name="" style="height:50px;resize: none;" id="addDetail"></textarea>
+					  </div> -->
+					</div>
+					<div style="display: flex;justify-content: center;">
+						<div class="weui-btn weui-btn_primary" id="confirm" style="background: #fff;color:#af9d7f;font-size: 15px;border: 1px solid #af9d7f;height:30px;line-height: 30px;width:45%"  onclick="addressHide()">关闭</div>
+						<div class="weui-btn weui-btn_primary" id="confirm" onclick="getCity()" style="background: #fff;color:#af9d7f;font-size: 15px;border: 1px solid #af9d7f;height:30px;line-height: 30px;width:45%">确认</div>
+					</div>
+				  </form>
 			</div>
 		</div>
 
@@ -1353,6 +1436,9 @@
 		<script src="js/jq-signature.js"></script>
 		<script src="js/angular.min.js"></script>
 		<script src="js/index.js"></script>
+		<script src="js/distpicker.data.js"></script>
+		<script src="js/distpicker.js"></script>
+		<script src="js/main.js"></script>
 		<script type="text/javascript">
 
 		</script>

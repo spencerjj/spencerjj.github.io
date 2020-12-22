@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>年度</title>
+	  <meta name="viewport" content="width=device-width,height=device-height,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	<link rel="stylesheet" href="css/swiper.css">
+	<link rel="stylesheet" href="css/animate.min.css">
+	<link rel="stylesheet" href="css/rem.css">
+	<link rel="stylesheet" href="css/style.css">
+	<link rel="shortcut icon" href="images/yutu1.png">
+	<script src="js/swiper.min.js"></script>
+	<script src="js/jquery-1.10.1.min.js"></script>
+	<script src="js/swiper.animate1.0.2.min.js"></script>
+	<script src="js/js.js"></script>
+	<script src="js/vue.js"></script>
+</head>
+<body>
+	
+		<div class="swiper-container" id="root">
+			<div class="swiper-wrapper">
+				<div class="swiper-slide myback1">
+				</div>
+				<div class="swiper-slide" :class="oaShow?'myback2':'myback2no'">
+					<img class="ani tab" src="images/light/17.png" @click="start"/>
+				</div>
+				<div class="swiper-slide myback3">
+					<div class="ani userName" swiper-animate-effect="bounceInRight" swiper-animate-duration="1s" swiper-animate-delay="0.1s"><em>{{myData.userName}}</em></div>
+					<div class="ani officeName" swiper-animate-effect="bounceInRight" swiper-animate-duration="1s" swiper-animate-delay="0.2s"><em>{{myData.officeName}}</em></div>
+					<div class="ani nativePlace" swiper-animate-effect="bounceInRight" swiper-animate-duration="1s" swiper-animate-delay="0.3s"><em>{{myData.nativePlace}}</em></div>
+					<div class="ani age" swiper-animate-effect="bounceInRight" swiper-animate-duration="1s" swiper-animate-delay="0.4s"><em>{{myData.age}}</em></div>
+					<div class="ani constellation" swiper-animate-effect="bounceInRight" swiper-animate-duration="1s" swiper-animate-delay="0.5s"><em>{{myData.constellation}}</em></div>
+					<div class="ani year" swiper-animate-effect="bounceInLeft" swiper-animate-duration="1s" swiper-animate-delay="0.6s"><em>{{myData.enterYear}}年</em></div>
+				</div>
+				<div class="swiper-slide myback4">
+					<div class="ani clockDays"><em>{{clockDays}}</em></div>
+				</div>
+				<div class="swiper-slide myback5">
+					<div class="ani emailNum"><em>{{emailNum}}</em></div>
+					<img class="ani emailIcon" src="images/light/18.png" alt="" swiper-animate-effect="bounceInDown" swiper-animate-duration="1s" swiper-animate-delay="0.1s">
+				</div>
+				<div class="swiper-slide myback6">
+					<div class="ani meetingNum"><em>{{meetingNum}}</em></div>
+				</div>
+				<div class="swiper-slide myback7">
+					<div class="ani researchNum"><em>{{researchNum}}</em></div>
+				</div>
+				<div class="swiper-slide myback8">
+					<div class="ani oaNum"><em>{{oaNum}}</em></div>
+				</div>
+				<div class="swiper-slide myback9">
+					<div class="ani travelNum"><em>{{travelNum}}</em></div>
+					<div class="ani travelPlace" swiper-animate-effect="rollIn" swiper-animate-duration="1s" swiper-animate-delay="0.5s"><em>{{myData.travelPlace}}</em></div>
+				</div>
+				<div class="swiper-slide myback10">
+					<div class="ani label1" swiper-animate-effect="zoomInDown" swiper-animate-duration="1s" swiper-animate-delay="0.1s"><em>{{myData.label1}}</em></div>
+					<div class="ani label2" swiper-animate-effect="zoomInRight" swiper-animate-duration="1s" swiper-animate-delay="0.2s"><em>{{myData.label2}}</em></div>
+					<div class="ani label3" swiper-animate-effect="zoomInLeft" swiper-animate-duration="1s" swiper-animate-delay="0.3s"><em>{{myData.label3}}</em></div>
+					<div class="ani label4" swiper-animate-effect="zoomInRight" swiper-animate-duration="1s" swiper-animate-delay="0.4s"><em>{{myData.label4}}</em></div>
+					<div class="ani label5" swiper-animate-effect="zoomInLeft" swiper-animate-duration="1s" swiper-animate-delay="0.5s"><em>{{myData.label5}}</em></div>
+					<div class="ani label6" swiper-animate-effect="zoomInRight" swiper-animate-duration="1s" swiper-animate-delay="0.6s"><em>{{myData.label6}}</em></div>
+					<div class="ani label7" swiper-animate-effect="zoomInDown" swiper-animate-duration="1s" swiper-animate-delay="0.7s"><em>{{myData.label7}}</em></div>
+				</div>
+				<div class="swiper-slide myback11">
+				</div>
+				<div class="swiper-slide myback12">
+				</div>
+				<div class="swiper-slide myback13">
+					<img src="award/image/start.png" alt="" class="ani flash" @click="toAward" swiper-animate-effect="zoomInDown" swiper-animate-duration="1s" swiper-animate-delay="0.5s">
+				</div>
+			</div>
+			<div class="swiper-pagination"></div>
+				<img class="music" :class="status?'play':''" src="images/logo2.png" @click="listen" />
+			</span>
+		</div>
+	<script>
+	new Vue({
+			el:'#root',
+			data:{
+				first:true,
+				emailNum:0,
+				clockDays:0,
+				meetingNum:0,
+				researchNum:0,
+				travelNum:0,
+				oaNum:0,
+				status:false,
+				oaShow:true,
+				// requestUrl:'https://hr.princesky.com/'
+				requestUrl:'http://192.168.2.50:8088/',
+				myData:''
+			},
+			computed:{
+				oaId(){
+					return this.getUrlKey('oaId',window.location.href)
+				}
+			},
+			watch:{
+	
+			},
+			mounted(){
+				this.getData()
+			},
+			updated(){
+			},
+			methods:{
+				async initSwiper(){
+					var that = this
+					// 初始化audio
+					var mp3Url = 'http://up_mp4.t57.cn/2016/1/07m/04/200042142033.m4a?st=Rl7fh5c3AVp2JoF-wPJ2NQ&e=1606892062'
+					that.audio = new Audio(mp3Url);
+					// 初始化swiper
+					that.swiper = new Swiper(".swiper-container",{
+						pagination:".swiper-pagination",
+						paginationClickable:true,
+						direction:"vertical",
+						observer:true,
+	    				observeParents:true,
+	    				effect: 'coverflow',
+					    grabCursor: true,
+					    centeredSlides: true,
+					    slidesPerView: 'auto',
+					    coverflowEffect: {
+					        rotate: 50,
+					        stretch: 0,
+					        depth: 100,
+					        modifier: 1,
+					        slideShadows: true,
+					    },
+						onInit:function(swiper){
+							swiperAnimateCache(swiper);
+							swiperAnimate(swiper);
+						},
+						onTransitionEnd:function(swiper){
+							swiperAnimate(swiper);
+							console.log(swiper.activeIndex)
+							// 下滑播放音乐
+							if(that.first){
+								that.listen()
+								that.first = false
+							}
+							// 判断页面动态数据
+							switch(swiper.activeIndex){
+								case 3:
+									var clockDays = that.clockDays
+									var clocktimer = setInterval(()=>{
+										if(clockDays<that.myData.clockDays-5){
+											clockDays = clockDays+5
+											that.clockDays = clockDays
+										}
+										else{
+											clearInterval(clocktimer)
+											console.log(that.myData.clockDays)
+											that.clockDays = that.myData.clockDays
+										}
+									},10)
+								break;
+								case 4:
+									var emailNum = that.emailNum
+									var emailtimer = setInterval(()=>{
+										if(emailNum<that.myData.emailNum-5){
+											emailNum = emailNum+5
+											that.emailNum = emailNum
+										}
+										else{
+											clearInterval(emailtimer)
+											console.log(that.myData.emailNum)
+											that.emailNum = that.myData.emailNum
+										}
+									},10)
+								break;
+								case 5:
+									var meetingNum = that.meetingNum
+									var meetingtimer = setInterval(()=>{
+										if(meetingNum<that.myData.meetingNum-5){
+											meetingNum = meetingNum+5
+											that.meetingNum = meetingNum
+										}
+										else{
+											clearInterval(meetingtimer)
+											console.log(that.myData.meetingNum)
+											that.meetingNum = that.myData.meetingNum
+										}
+									},10)
+								break;
+								case 6:
+									var researchNum = that.researchNum
+									var researchtimer = setInterval(()=>{
+										if(researchNum<that.myData.researchNum-5){
+											researchNum = researchNum+5
+											that.researchNum = researchNum
+										}
+										else{
+											clearInterval(researchtimer)
+											console.log(that.myData.researchNum)
+											that.researchNum = that.myData.researchNum
+										}
+									},10)
+								break;
+								case 7:
+									var oaNum = that.oaNum
+									var oatimer = setInterval(()=>{
+										if(oaNum<that.myData.oaNum-5){
+											oaNum = oaNum+5
+											that.oaNum = oaNum
+										}
+										else{
+											clearInterval(oatimer)
+											console.log(that.myData.oaNum)
+											that.oaNum = that.myData.oaNum
+										}
+									},10)
+								break;
+								case 8:
+									var travelNum = that.travelNum
+									var traveltimer = setInterval(()=>{
+										if(travelNum<that.myData.travelNum-5){
+											travelNum = travelNum+5
+											that.travelNum = travelNum
+										}
+										else{
+											clearInterval(traveltimer)
+											console.log(that.myData.travelNum)
+											that.travelNum = that.myData.travelNum
+										}
+									},10)
+								break;
+
+
+							}
+						},
+					});
+				},
+				async listen(){
+					var that = this;
+					if(!that.status) {
+						that.status = true
+						this.audio.play();
+						console.log(that.status)
+					}else{
+						that.status = false
+						this.audio.pause();
+						console.log(that.status)
+					}
+						
+				},
+				async start(){
+					this.swiper.slideNext();
+				},
+				async getData(data){
+					var that = this
+					await $.ajax({
+						url: this.requestUrl+'hr/v1/api/empYear/billEmpYearSummary?oaId='+this.oaId,
+						type: 'get',
+						data: '',
+						success: function(data) {
+							console.log(data)
+							that.myData = data.billEmpyearSummary
+						},
+						error: function(err) {
+							alert('系统错误，数据获取失败')
+						}
+					})
+					this.initSwiper()
+				},
+				toAward(e){
+					location.href = 'award/award.html'
+				},
+				getUrlKey(name,url){
+				　　return decodeURIComponent((new RegExp('[?|&]' + name + '=' + '([^&;]+?)(&|#|;|$)').exec(url) || [, ""])[1].replace(/\+/g, '%20')) || null
+
+				}
+				// listen(e){
+				// 	var _self = this
+				// 	let x = new Promise((resolve,reject)=>{
+				// 		setTimeout(()=>{
+				// 			console.log(123)
+				// 			if(!_self.status){
+				// 				resolve()
+				// 			}else{
+				// 				reject()
+				// 			}
+				// 		},1000)
+				// 	})
+				// 	console.log(x.then(()=>{console.log(456)}).catch(()=>{alert('error')}))
+				// }
+			}
+		})
+	</script>
+</body>
+</html>

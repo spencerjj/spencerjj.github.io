@@ -1,0 +1,62 @@
+<view class="container">
+  <view>
+    <my-swiper imgLists="{{imgLists}}"></my-swiper>
+    <image src="/images/fade.png" class="fadeImg"></image>
+  </view>
+  <view class="action">
+    <van-tabs active="{{ active }}" color="#59d299" bind:change="onChange">
+      <van-tab title="现在"></van-tab>
+      <van-tab title="预约"></van-tab>
+      <van-tab title="接机"></van-tab>
+      <van-tab title="送机"></van-tab>
+    </van-tabs>
+    <view class="place">
+      <view class="start" wx:if="{{active==2}}">
+        <view class="icon"><image src="/images/01-8.png"></image></view>
+        <input class="ecl" type="text" value="{{flight}}" placeholder="请输入航班号" bindinput="flightInput"/>
+      </view>
+      <view class="start">
+        <view class="point p1"></view>
+        <input class="ecl" type="text" value="{{start}}" placeholder="您从哪儿出发" bindinput="startInput"/>
+      </view>
+      <view class="end">
+        <view class="point p2"></view>
+        <input class="ecl" type="text" value="{{end}}" placeholder="您要去哪儿" bindinput="endInput"/>
+      </view>
+    </view>
+    <view class="time" wx:if="{{active!=0&&active!=2}}">
+      <image src="/images/01-1.png"></image>
+        <!-- <text class="notice">出发日期　——</text> -->
+        <date-picker bind:change="dChange" startDate="您什么时候想用车"></date-picker>
+    </view>
+    <view class="infos">
+      <view class="number">
+        <picker bindchange="bindPeoChange" value="{{peoIndex}}" range="{{array}}">
+          <image src="/images/01-2.png"></image>
+          <text class="notice {{peoIndex==-1?'':'dark'}}">{{peoIndex==-1?'乘车人数':array[peoIndex]+'人'}}</text>
+        </picker>
+      </view>
+      <view class="comment" bindtap="showComment">
+        <image src="/images/01-3.png"></image>
+        <text class="cnotice {{showCom.length==0?'':'dark'}}">{{showCom.length>0?showCom:'行程备注'}}</text>
+      </view>
+    </view>
+    <!-- <view style="margin-top:10rpx;margin-bottom:10rpx;background:#f1f1f1;height:10rpx;width:100%"></view> -->
+    <view class="btn" bindtap="confirm">
+      确认用车
+    </view>
+  </view>
+  <van-action-sheet show="{{ show }}" title="行程备注" bind:close="onClose">
+    <view class="comContent">
+      <textarea value="{{comment}}" class="myComment" placeholder-style="color:#999" placeholder="添加备注信息，便于车主提前准备" bindinput="commentInput" maxlength="50" cursor-spacing="100"></textarea>
+      <view class="num">{{num}}/50个字</view>
+      <view class="comBtn" bindtap="addComment">
+        确认添加
+      </view>
+    </view>
+  </van-action-sheet>
+  <view class="step">
+      <van-steps steps="{{ steps }}" active="0" active-color="#46b6b4"/>
+    </view>
+</view>
+<van-dialog id="van-dialog" />
