@@ -1,9 +1,9 @@
 @charset "utf-8";
-body {
-  background: #ffca00;
+html,body {
+  background: #fcab55;
 }
 #wrap {
-  margin-top: -0.01333333rem;
+  margin-top: 10%
   /* background-image: url("../image/bg.png"); */
 }
 #wrap .title{
@@ -14,12 +14,14 @@ body {
   text-shadow: 2px 2px 3px #fd9f04;
   position: absolute;
   left: 0rem;
-  top: .8rem;
+  top: .4rem;
 }
-.awards{top: 9.5rem;
+.awards{top: 8.5rem;
+      z-index: 5;
     padding: 0.3rem;
     margin-left: -4.6rem;
     width: 9.2rem;
+    font-size:0.35rem;
     background-color: #fd851f;
     box-shadow: 0 0.26666667rem 0.26666667rem rgba(248, 85, 40, 0.5) inset;
     border-radius: 0.13333333rem;
@@ -107,7 +109,7 @@ body {
 /*主体*/
 .main {
   position: absolute;
-  top: 3.2rem;
+  top: .2rem;
   bottom: 0;
   width: 100%;
   height: 12rem;
@@ -132,7 +134,7 @@ body {
 .box {
   position: absolute;
   left: 0.4rem;
-  top: 1.25333333rem;
+  /* top: 1.25333333rem; */
   width: 9.2rem;
   height: 8.02666667rem;
   background-image: url("../image/choujiang.png");
@@ -226,6 +228,7 @@ body {
   width: 100%;
   height: 100%;
   text-align: center;
+  overflow:hidden
 }
 /*奖品图片大小*/
 .play li div img {
@@ -253,9 +256,7 @@ body {
 }
 /*奖品展示*/
 .awards {
-  top:9.5rem;
   padding:0.3rem;
-  margin-left: -4.6rem;
   width: 9.2rem;
   background-color: #fd851f;
   box-shadow: 0 0.26666667rem 0.26666667rem rgba(248, 85, 40, 0.5) inset;

@@ -16,6 +16,9 @@ page{
   position: relative;
   font-size: 28rpx;
 }
+.itemHover{
+  background:#eee
+}
 .detail{
   width: 92%;
   margin-left: 20rpx;
@@ -82,6 +85,12 @@ page{
   right:20rpx;
   color:#999
 }
+.state1{
+  position:absolute;
+  top:35rpx;
+  right:20rpx;
+  color:#29b6be
+}
 .nullDataInfo{
   width: 100%;
   height: 30rpx;
@@ -126,4 +135,25 @@ page{
   font-weight: bolder;
   color: #999;
   text-align: center
+}
+.add{
+  position: fixed;
+  right:20rpx;
+  bottom: 100rpx;
+  z-index: 99;
+  width: 70rpx;
+  height: 70rpx;
+  line-height: 70rpx;
+  background: white;
+  text-align: center;
+  border-radius: 50%;
+  box-shadow: 0 0 5px 5px #eee;
+}
+.add image{
+  width: 40rpx;
+  height: 40rpx;
+  margin-top:15rpx
+}
+.addTap{
+  background: #eee;
 }

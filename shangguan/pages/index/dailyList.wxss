@@ -7,18 +7,29 @@ page {
   height: 100%;
   overflow: hidden;
 }
+.dateInput{
+  width: 94%;
+  margin-left: 3%;
+  height: 80rpx;
+  margin-top: 30rpx;
+  margin-bottom: 10rpx;
+  background: #fff;
+  color: #666;
+  text-align: center;
+  font-size: 35rpx;
+  line-height: 80rpx;
+  border:1rpx solid #eee;
+  box-shadow: 0 0 5rpx #eee;
+}
 .list .top{
   width: 94%;
   margin-left: 3%;
-  min-height: 100rpx;
   background: white;
   margin-top: 30rpx;
   color: #9b9b9b;
-  line-height: 100rpx;
   position: relative;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+  padding:20rpx 0 20rpx 0
+
 }
 .hover1{
   background:#eee
@@ -29,51 +40,43 @@ page {
 .expired{
   color:#9b9b9b
 }
-.list .date {
-  font-size: 23rpx;
-float: right;
-margin-right: 50rpx;
-font-weight: bolder;
-border: 2rpx solid #5cadff;
-height: 30rpx;
-line-height: 30rpx;
-margin-top: 35rpx;
-padding: 0rpx 5rpx 0rpx 5rpx;
-border-radius: 10rpx;
-}
-.list .date1 {
-  font-size: 23rpx;
-float: right;
-margin-right: 50rpx;
-font-weight: bolder;
-border: 2rpx solid red;
-height: 30rpx;
-line-height: 30rpx;
-margin-top: 35rpx;
-padding: 0rpx 5rpx 0rpx 5rpx;
-border-radius: 10rpx;
-color:red
-}
-
 .list .name {
   margin-left: 10rpx;
   font-size: 30rpx;
   font-weight: bolder;
-  min-width: 60%;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  float: left;
+  width: 100%;
+  height: 60rpx;
+  line-height: 60rpx;
 }
 .list .title{
   margin-left: 10rpx;
   font-size: 30rpx;
   font-weight: bolder;
-  min-width: 35%;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  float: left;
+  width: 100%;
+  height: 60rpx;
+  line-height: 60rpx;
+}
+.list .state{
+  position: absolute;
+  top:50%;
+  right:20rpx;
+  color:white;
+  width: 100rpx;
+  height: 40rpx;
+  margin-top:-20rpx;
+  line-height: 40rpx;
+  border-radius: 10rpx;
+  text-align: center;
+  font-size: 28rpx;
+}
+.bg1{
+  background: #5cadff;
+}
+.bg2{
+  background: #35d0a3;
+}
+.bg3{
+  background: red;
 }
 .arraw {
   width: 30rpx;

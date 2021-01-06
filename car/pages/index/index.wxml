@@ -46,6 +46,9 @@
       确认用车
     </view>
   </view>
+  <view class="add" bindtap='goCheck' hover-class="addTap" hover-stay-time=".5s" data-type="guide">
+    <image src="../../images/01-2.png"></image>
+  </view>
   <van-action-sheet show="{{ show }}" title="行程备注" bind:close="onClose">
     <view class="comContent">
       <textarea value="{{comment}}" class="myComment" placeholder-style="color:#999" placeholder="添加备注信息，便于车主提前准备" bindinput="commentInput" maxlength="50" cursor-spacing="100"></textarea>

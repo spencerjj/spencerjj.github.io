@@ -44,7 +44,7 @@ Page({
         desc: '司机确认',
       },
       {
-        desc: '用车结束',
+        desc: '结束行程',
       },
     ],
     startDate: "出发时间",

@@ -1,3 +1,4 @@
+import { resolve } from '../../libs/es6-promise.min.js';
 // pages/index/recordLists.js
 import {
   getApiHost,
@@ -18,7 +19,8 @@ Page({
         date:'2020年11月21日 10:35',
         start:'蓝豹集团办公楼',
         end:'常州奔牛机场',
-        driver:'王师傅'
+        driver:'王师傅',
+        type:1
       },
       {
         date:'2020年11月21日 10:35',
@@ -45,10 +47,15 @@ Page({
       date:'2020年11月21日 10:35',
       start:'蓝豹集团办公楼',
       end:'常州奔牛机场',
-      driver:'王师傅1'
+      driver:'王师傅1',
+      type:1
     }
-    let x = [...lists1,lists]
-    console.log(x)
+    let x = [lists1,...lists]
+    this.setData({
+      lists:x
+    })
+     this.set().then(x=>{console.log(x)})
+   
   },
 
   /**
@@ -99,6 +106,17 @@ Page({
   onShareAppMessage: function () {
 
   },
-  showDetail(e){
+  toPage(e){
+    wx.navigateTo({
+      url: 'finish'
+    })
+  },
+  async set(){
+    // return new Promise((resolve,reject)=>{
+    //   setTimeout(()=>{
+    //     resolve()
+        return 18927381723
+    //   },1000)
+    // })
   }
 })

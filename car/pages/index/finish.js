@@ -12,7 +12,8 @@ Page({
    * 页面的初始数据
    */
   data: {
-    active: 0,
+    state:2,
+    active: 3,
     date: '2020-12-16',
     time: '11:30',
     start: '普林仕集团办公楼门口',
@@ -21,11 +22,13 @@ Page({
     flight:'UK2356',
     type:'接机',
     disUser: '王总',
-    comment: '102931023',
+    comment: '同意',
     show: false,
     imgUrl: '',
     imgLists:[],
     km:'',
+    btnText:'开始行程',
+    photoText:'行程开始照片',
     steps: [{
         text: '11-10 11:10',
         desc: '预约用车',
@@ -39,12 +42,12 @@ Page({
         desc: '司机确认',
       },
       {
-        text: '11-10 15:10',
-        desc: '用车开始',
+        text: '　',
+        desc: '开始行程',
       },
       {
         text: '　',
-        desc: '用车结束',
+        desc: '结束行程',
       },
     ],
   },
@@ -61,6 +64,25 @@ Page({
       today: today
     })
     this.compare(this.data.date)
+    if(this.data.state==1){
+      wx.setNavigationBarTitle({
+        title: '开始行程',
+      })
+      this.setData({
+        btnText:'开始行程',
+        photoText:'行程开始照片',
+        active:3
+      })
+    }else{
+      wx.setNavigationBarTitle({
+        title: '结束行程',
+      })
+      this.setData({
+        btnText:'结束行程',
+        photoText:'行程结束照片',
+        active:4
+      })
+    }
   },
 
   /**

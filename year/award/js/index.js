@@ -6,22 +6,69 @@ $(function () {
         var width = html.getBoundingClientRect().width;
         html.style.fontSize = width / 10 + 'px';
     }
-            
-    $('.awards').append('<p style="font-weight: bolder;margin-top:.3rem">您的中奖记录：</p><span style="color:#fff;font-weight: bolder;">奶茶一杯</span>')
+    var requestUrl = 'https://web.princesky.com/'
     var $blin = $(".light p"),
         $prize = $(".play li").not("#btn"),
         $change = $("#change"),
         $btn = $("#btn"),
         length = $prize.length,
-        data = {count: 1},
+        count = 1,
         bool = true,
         mark = 0,
+        giftCode = 0,
+        oaId = getUrlKey('oaId',window.location.href),
+        userCode = getUrlKey('userCode',window.location.href),
+        userName = getUrlKey('userName',window.location.href),
         timer;
         $maskRule = $("#mask-rule"),
         $mask = $("#mask"),
         $winning = $(".winning"),
         $card = $("#card"),
         $close = $("#close");
+        $.ajax({
+            url: requestUrl+'platform/v1/api/gift/awards?activeCode=20201103&userCode='+userCode,
+            type: 'get',
+            data: '',
+            success: function(data) {
+                console.log(data)
+                $('.one').html(data.data[0].awardName)
+                $('.two').html(data.data[1].awardName)
+                $('.three').html(data.data[2].awardName)
+                $('.four').html(data.data[3].awardName)
+                $('.five').html(data.data[4].awardName)
+                $('.six').html(data.data[5].awardName)
+                $('.seven').html('谢谢参与')
+            },
+            error: function(err) {
+                $.alert('系统错误，数据获取失败')
+            }
+        })
+        $.ajax({
+            url: requestUrl+'platform/v1/api/gift/awardsRecord?activeCode=20201103&userCode='+userCode,
+            type: 'get',
+            data: '',
+            success: function(data) {
+                console.log(data)
+                if(data.errmsg){
+                    $.alert(data.errmsg)
+                    return;
+                }
+                if(data.data.length>0){
+                    count = 0
+                    $change.html(count);
+                    $('.record').append('<p style="font-weight: bolder;margin-bottom:.1rem">您的中奖记录：</p><span style="color:#fff;font-weight: bolder;text-decoration:underline">'
+                                +data.data[0].awardName+'</span>')
+                }else{
+                    count = 1
+                    $change.html(count);
+                    init();
+                }
+            },
+            error: function(err) {
+                $.alert('系统错误，数据获取失败')
+            }
+        })
+
 
         // $(".rule").click(function () {
         //     $maskRule.show();
@@ -30,7 +77,6 @@ $(function () {
         //     $maskRule.hide();
         // });
 
-    init();
     // 初始化动画
     function init() {
         timer = setInterval(function () {
@@ -47,45 +93,84 @@ $(function () {
     $btn.click(function () {
         if (bool) {
             bool = false;
-            if (data.count > 0) {
-                data.count--;
-                $change.html(data.count);
+            if (count > 0) {
                 clickFn();
             } else {
-                alert("每人只有一次抽奖机会哦");
+                $.alert("每人只有一次抽奖机会哦");
             }
         }
     });
     // 点击抽奖
     function clickFn() {
         clearInterval(timer);
-        // var random = [1, 2, 3, 4, 5, 6, 7, 8];
-        var text = '奈雪的茶'
-        // random = random[Math.floor(Math.random() * random.length)];
-        // 奖项index
-        random = 0;
-        mark += random;
-        mark %= 8;
-        console.log(mark)
-        // if (mark === 3) {
-        //     random++;
-        //     mark++;
-        // }
-        // if (mark === 6) {
-        //     random--;
-        //     mark--;
-        // }
-        random += 40-mark;
-        for (var i = 1; i <= random; i++) {
-            setTimeout(animate(), 2 * i * i);
-        }
-        setTimeout(function () {
-            console.log(mark);
-            setTimeout(function () {
-                bool = true;
-                win(text);
-            }, 1000);
-        }, 2 * random * random);
+        $.ajax({
+            url: requestUrl+'platform/v1/api/gift/draw?activeCode=20201103&userCode='+userCode+'&userName='+userName,
+            type: 'get',
+            data: '',
+            success: function(data) {
+                console.log(data)
+                var data = data
+                if(data.errmsg){
+                    $.alert(data.errmsg)
+                }else{
+                    var text = data.data.giftName
+                    var awardName = data.data.awardName
+                    giftCode = data.data.giftCode-1+1
+                    var result = 1
+                    switch (giftCode){
+                        case 1:
+                            result = 0
+                            break;
+                        case 2:
+                            result = 1
+                            break;
+                        case 3:
+                            result = 2
+                            break;
+                        case 4:
+                            result = 4
+                            break;
+                        case 5:
+                            result = 5
+                            break;
+                        case 6:
+                            result = 6
+                            break;
+                        case 7:
+                            result = 7
+                            break;
+                    }
+                    // 奖项index
+                    random = 0;
+                    mark += random;
+                    mark %= 8;
+                    random = random+40-mark;
+                    random += result
+                    for (var i = 1; i <= random; i++) {
+                        setTimeout(animate(), 2 * i * i);
+                    }
+                    setTimeout(function () {
+                        setTimeout(function () {
+                            bool = true;
+                            count--;
+                            $change.html(count);
+                            if(giftCode==7){
+                                $.alert('谢谢参与')
+                                $('.record').append('<p style="font-weight: bolder;margin-bottom:.1rem">您的中奖记录：</p><span style="color:#fff;font-weight: bolder;text-decoration:underline">谢谢参与</span>')
+                            }else{
+                                win(text);
+                                $('.record').append('<p style="font-weight: bolder;margin-bottom:.1rem">您的中奖记录：</p><span style="color:#fff;font-weight: bolder;text-decoration:underline">'
+                                +awardName+'</span>')
+                            }
+                        }, 1000);
+                    }, 2 * random * random);
+                    }
+            },
+            error: function(err) {
+                $.alert('系统错误，数据获取失败')
+            }
+        })
+
     }
     // 奖品弹窗
     function win(text) {
@@ -106,14 +191,16 @@ $(function () {
             $prize.eq(length).addClass("select");
         }
     }
+    function getUrlKey(name,url){
+    　　return decodeURIComponent((new RegExp('[?|&]' + name + '=' + '([^&;]+?)(&|#|;|$)').exec(url) || [, ""])[1].replace(/\+/g, '%20')) || null
+
+    }
     // 领奖
     $("#close,.win,.btn").click(function () {
-        // clearInterval(timer);
-        // init();
-        alert('抽奖结果统计完毕后将由人事部门统一发放奖品，敬请期待！')
-        $mask.hide();
-        $winning.removeClass("reback");
-        $card.removeClass("pull");
+           $.alert('1月4日起凭抽奖页面中奖记录至相应门店或事业部HRBP处领取礼品')
+            $mask.hide();
+            $winning.removeClass("reback");
+            $card.removeClass("pull"); 
     });
 
 });

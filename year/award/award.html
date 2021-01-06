@@ -5,20 +5,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>九宫格抽奖</title>
-    <link rel="stylesheet" href="css/common_mobile.css?version=1.0.0">
-    <link rel="stylesheet" href="css/index.css?version=1.0.0">
+    <title>新年礼品</title>
+    <link rel="stylesheet" href="css/common_mobile.css?version=1.3">
+    <link rel="stylesheet" href="css/index.css?version=1.3">
+    <link rel="stylesheet" href="https://cdn.bootcss.com/weui/1.1.3/style/weui.min.css">
+    <link rel="stylesheet" href="https://cdn.bootcss.com/jquery-weui/1.2.1/css/jquery-weui.min.css">
 </head>
 <body>
 <div id="wrap">
     <!-- <p class="time">3.10-3.25</p> -->
-    <div class="title">
+ <!--    <div class="title">
         <p>感谢你2020年对公司的诚挚付出！</p>
         <p>抽个奖</p>
         <p>犒劳一下自己吧！</p>
         <p>愿你好运常相伴！</p>
-    </div>
+    </div> -->
     <!--星星-->
+    <span>
+    </span>
     <div class="stars-box">
         <span class="stars"></span>
         <span class="stars"></span>
@@ -32,8 +36,8 @@
     <div class="main">
         <!--游戏区域-->
         <div class="box">
-            <span class="coin"></span>
-            <h2>您共有 <span id="change"> 1 </span> 次抽奖机会</h2>
+            <!-- <span class="coin"></span> -->
+            <h2>您共有 <span id="change">  </span> 次抽奖机会</h2>
             <ul class="light clearfix">
                 <li class="fl">
                     <p></p>
@@ -52,22 +56,22 @@
             <ul class="play clearfix">
                 <li class="prize select">
                     <div>
-                        <p>“紅紅”火火</p>
+                        <p class="one">对联礼盒</p>
                     </div>
                 </li>
                 <li class="prize">
                     <div>
-                        <p>畅”饮“冬日</p>
+                        <p class="two">暖心饮券</p>
                     </div>
                 </li>
                 <li class="prize">
                     <div>
-                        <p>好运如”影“</p>
+                        <p class="three">影券两张</p>
                     </div>
                 </li>
                 <li>
                     <div>
-                        <p>谢谢参与</p>
+                        <p class="seven">谢谢参与</p>
                     </div>
                 </li>
                 <!--开始按钮-->
@@ -75,17 +79,17 @@
                 <!--开始按钮-->
                 <li class="prize">
                     <div>
-                        <p>“盒盒”美美</p>
+                        <p class="four">人气盲盒</p>
                     </div>
                 </li>
                 <li class="prize">
                     <div>
-                        <p>“薪“喜若狂</p>
+                        <p class="five">带薪休假半天</p>
                     </div>
                 </li>
                 <li>
                     <div>
-                        <p>”福“气冲天</p>
+                        <p class="six">新年福袋</p>
                     </div>
                 </li>
                 <li class="prize">
@@ -97,11 +101,15 @@
         </div>
         <!--奖品展示-->
         <div class="awards">
-            <p style="font-weight: bolder;">活动规则：</p>1、活动时间: <span style="color:#fff;font-weight: bolder;"><span style="text-decoration:underline">2021.01.01 ~ 2021.01.03</span>，共计3天，3天后，系统自动关闭，不再开放抽奖</span> <br>
-            2、外区人员的奖品以电子红包，休假、盲盒，福袋为主，盲盒和福袋由HR统一随货邮寄给到获奖人员。<br>
-            3、电子红包即对即开，可直接在页面处领取，其他奖项，中奖人员凭中奖页面至相应门店或事业部HRBP处领取礼品。<br>
+            <div class="record"></div>
+            <p style="font-weight: bolder;">领奖说明：</p>1、抽奖时间为<span style="color:#fff;font-weight: bolder;"><span style="text-decoration:underline">2020.12.31 ~ 2021.01.03</span>，逾期不再参与。</span> <br>
+            2、1月4日起中奖人员凭手机中奖页面至相应HRBP处领取礼品，外区人员统一邮寄，带薪休假请与各处HR确认。<br>
+            3、每人一次抽奖互动，礼品不可更换，请在礼品有限期内使用完毕。
         </div>
     </div>
+        <div style="width:100%;position:fixed;bottom:0;left:0;z-index:1">
+            <img src="image/btm.png" alt="" style="width:100%">
+        </div>
     <!--中奖提示-->
     <div id="mask">
         <div class="blin"></div>
@@ -111,7 +119,7 @@
             <div class="red-body"></div>
             <div id="card">
                 <span class="win">
-                    奈雪抵用券2张
+                    
                 </span>
             </div>
             <span class="btn"></a>
@@ -123,5 +131,7 @@
 <script src="js/jquery.min.js"></script>
 <script src="js/h5_game_common.js?version=1.0.0"></script>
 <script src="js/index.js?version=1.0.0"></script>
+<script src="https://cdn.bootcss.com/jquery/1.11.0/jquery.min.js"></script>
+    <script src="https://cdn.bootcss.com/jquery-weui/1.2.1/js/jquery-weui.min.js"></script>
 </body>
 </html>

@@ -37,7 +37,7 @@
       </view>
     </view>
     <view style="background:#eee;height:2rpx;width:100%;margin-top:20rpx"></view>
-    <view class="title" style="margin-left:5%;margin-top:10rpx">行程照片</view>
+    <view class="title" style="margin-left:5%;margin-top:10rpx">{{photoText}}</view>
     <view class="pic" bindtap="upload">
       <image
         src="http://tiebapic.baidu.com/forum/w%3D580/sign=4c36fa524443fbf2c52ca62b807fca1e/cd014afbfbedab648925929ae036afc379311e27.jpg"
@@ -53,7 +53,7 @@
         <input class="ecl" type="text" value="{{km}}" placeholder="您的公里数" bindinput="kmInput"/>
      </view>
     <view class="btn" bindtap="confirm">
-      结束行程
+      {{btnText}}
     </view>
   </view>
   <van-calendar
@@ -68,7 +68,7 @@
     </view>
   </van-action-sheet>
   <view class="step">
-    <van-steps steps="{{ steps }}" active="3" active-color="#46b6b4" />
+    <van-steps steps="{{ steps }}" active="{{active}}" active-color="#46b6b4" />
   </view>
 </view>
 <van-dialog id="van-dialog" />

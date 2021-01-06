@@ -2,76 +2,168 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>年度</title>
+	<title>普灵仕集团2020年度工作账单</title>
 	  <meta name="viewport" content="width=device-width,height=device-height,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
 	<link rel="stylesheet" href="css/swiper.css">
 	<link rel="stylesheet" href="css/animate.min.css">
 	<link rel="stylesheet" href="css/rem.css">
-	<link rel="stylesheet" href="css/style.css">
-	<link rel="shortcut icon" href="images/yutu1.png">
+	<link rel="stylesheet" href="css/style.css?v=1.4">
+	<link rel="shortcut icon" href="image/yutu1.png">
+	<!-- <link rel="stylesheet" href="https://cdn.bootcss.com/weui/1.1.3/style/weui.min.css"> -->
+	<!-- <link rel="stylesheet" href="https://cdn.bootcss.com/jquery-weui/1.2.1/css/jquery-weui.min.css"> -->
 	<script src="js/swiper.min.js"></script>
 	<script src="js/jquery-1.10.1.min.js"></script>
 	<script src="js/swiper.animate1.0.2.min.js"></script>
 	<script src="js/js.js"></script>
 	<script src="js/vue.js"></script>
+	<script src="https://cdn.bootcss.com/jquery/1.11.0/jquery.min.js"></script>
+	<script src="https://cdn.bootcss.com/jquery-weui/1.2.1/js/jquery-weui.min.js"></script>
+	<style>
+		[v-cloak] {
+	      display: none !important;
+	    }
+	</style>
 </head>
 <body>
 	
-		<div class="swiper-container" id="root">
+		<div class="swiper-container" id="root" v-cloak>
 			<div class="swiper-wrapper">
 				<div class="swiper-slide myback1">
+					<img src="image/light/16.png" alt="" class="ani" swiper-animate-effect="fadeIn" swiper-animate-duration="1s" swiper-animate-delay=".5s">
+					<img src="image/light/16.png" alt="" class="ani" swiper-animate-effect="fadeIn" swiper-animate-duration="1s" swiper-animate-delay=".4s">
+					<img src="image/light/16.png" alt="" class="ani" swiper-animate-effect="fadeIn" swiper-animate-duration="1s" swiper-animate-delay=".3s">
+					<img src="image/light/16.png" alt="" class="ani" swiper-animate-effect="fadeIn" swiper-animate-duration="1s" swiper-animate-delay=".2s">
+					<img src="image/light/16.png" alt="" class="ani" swiper-animate-effect="fadeIn" swiper-animate-duration="1s" swiper-animate-delay=".1s">
 				</div>
-				<div class="swiper-slide" :class="oaShow?'myback2':'myback2no'">
-					<img class="ani tab" src="images/light/17.png" @click="start"/>
+				<div class="swiper-slide  swiper-no-swiping" :class="oaShow?'myback2':'myback2no'">
+					<img class="ani tab" src="image/light/1.png" @click="start"/>
 				</div>
 				<div class="swiper-slide myback3">
-					<div class="ani userName" swiper-animate-effect="bounceInRight" swiper-animate-duration="1s" swiper-animate-delay="0.1s"><em>{{myData.userName}}</em></div>
-					<div class="ani officeName" swiper-animate-effect="bounceInRight" swiper-animate-duration="1s" swiper-animate-delay="0.2s"><em>{{myData.officeName}}</em></div>
-					<div class="ani nativePlace" swiper-animate-effect="bounceInRight" swiper-animate-duration="1s" swiper-animate-delay="0.3s"><em>{{myData.nativePlace}}</em></div>
-					<div class="ani age" swiper-animate-effect="bounceInRight" swiper-animate-duration="1s" swiper-animate-delay="0.4s"><em>{{myData.age}}</em></div>
-					<div class="ani constellation" swiper-animate-effect="bounceInRight" swiper-animate-duration="1s" swiper-animate-delay="0.5s"><em>{{myData.constellation}}</em></div>
-					<div class="ani year" swiper-animate-effect="bounceInLeft" swiper-animate-duration="1s" swiper-animate-delay="0.6s"><em>{{myData.enterYear}}年</em></div>
+					<div class="ani year" swiper-animate-effect="bounceInLeft" swiper-animate-duration="1.5s" swiper-animate-delay="0s">{{myData.enterYear}}</div>
+					<div class="ani userName" swiper-animate-effect="bounceInRight" swiper-animate-duration="1.5s" swiper-animate-delay=".2s">{{myData.userName}}</div>
+					<div class="ani officeName" swiper-animate-effect="bounceInRight" swiper-animate-duration="1.5s" swiper-animate-delay=".5s">{{myData.officeName}}</div>
+					<div class="ani age" swiper-animate-effect="bounceInRight" swiper-animate-duration="1.5s" swiper-animate-delay=".8s">{{myData.birthday}}</div>
+					<div class="ani constellation" swiper-animate-effect="bounceInRight" swiper-animate-duration="1.5s" swiper-animate-delay="1.1s">{{myData.constellation}}</div>
+					<div class="ani lucky" swiper-animate-effect="bounceInRight" swiper-animate-duration="1.5s" swiper-animate-delay="1.4s">{{myData.xingyun||'把握时机 面向未来'}}</div>
 				</div>
-				<div class="swiper-slide myback4">
-					<div class="ani clockDays"><em>{{clockDays}}</em></div>
+				<div class="swiper-slide myback4" v-if="myData.emailNum">
+					<div class="ani emailNum1" swiper-animate-effect="fadeInUp" swiper-animate-duration="1.5s" swiper-animate-delay=".2s">{{myData.emailNum}}</div>
+					<div class="ani emailNum2" swiper-animate-effect="fadeInDown" swiper-animate-duration="1.5s" swiper-animate-delay="1s">{{myData.seout||0}}</div>
+					<div class="ani emailNum3" swiper-animate-effect="fadeInDown" swiper-animate-duration="1.5s" swiper-animate-delay="1.3s">{{myData.reout||0}}</div>
+					<div class="ani emailNum4" swiper-animate-effect="fadeInDown" swiper-animate-duration="1.5s" swiper-animate-delay="2s">{{myData.sein||0}}</div>
+					<div class="ani emailNum5" swiper-animate-effect="fadeInDown" swiper-animate-duration="1.5s" swiper-animate-delay="2.3s">{{myData.rein||0}}</div>
+					<img class="ani emailNum6" src="image/light/17.png" swiper-animate-effect="fadeInUp" swiper-animate-duration="1.5s" swiper-animate-delay=".6s"></img>
+					<img class="ani emailNum7" src="image/light/18.png" swiper-animate-effect="fadeInUp" swiper-animate-duration="1.5s" swiper-animate-delay="1.6s"></img>
+					<img class="ani emailIcon" src="image/light/2.png" alt="" swiper-animate-effect="slideInDown" swiper-animate-duration="2s" swiper-animate-delay="0.1s">
 				</div>
-				<div class="swiper-slide myback5">
-					<div class="ani emailNum"><em>{{emailNum}}</em></div>
-					<img class="ani emailIcon" src="images/light/18.png" alt="" swiper-animate-effect="bounceInDown" swiper-animate-duration="1s" swiper-animate-delay="0.1s">
+				<div class="swiper-slide myback41" v-else>
+					<img class="ani emailText" src="image/light/8.png" alt="" swiper-animate-effect="fadeInUp" swiper-animate-duration="1.5s" swiper-animate-delay="0.1s">
+					<img class="ani emailIcon" src="image/light/2.png" alt="" swiper-animate-effect="slideInDown" swiper-animate-duration="2s" swiper-animate-delay="0.1s">
 				</div>
-				<div class="swiper-slide myback6">
-					<div class="ani meetingNum"><em>{{meetingNum}}</em></div>
+				<div class="swiper-slide myback7" v-if="myData.oaNum">
+					<div class="ani oaNum1" swiper-animate-effect="fadeInDown" swiper-animate-duration="1.5s" swiper-animate-delay=".2s">{{myData.oaNum}}</div>
+					<div class="ani oaNum2" swiper-animate-effect="fadeInUp" swiper-animate-duration="1.5s" swiper-animate-delay="1s">{{myData.oaStart||0}}</div>
+					<div class="ani oaNum3" swiper-animate-effect="fadeInUp" swiper-animate-duration="1.5s" swiper-animate-delay="1.3s">{{myData.oaDone||0}}</div>
+					<div class="ani oaNum4" swiper-animate-effect="fadeInUp" swiper-animate-duration="1.5s" swiper-animate-delay="1.6s">{{myData.oaUndone||0}}</div>
+					<div class="ani oaNum5" swiper-animate-effect="fadeInUp" swiper-animate-duration="1.5s" swiper-animate-delay="1.9s">{{myData.oaDonerate||0}}</div>
+					<img class="ani oaNum6" src="image/light/19.png" swiper-animate-effect="fadeInDown" swiper-animate-duration="1.5s" swiper-animate-delay=".4s"></img>
+					<img class="ani oaIcon" src="image/light/3.png" alt="" swiper-animate-effect="rotateInDownRight" swiper-animate-duration="2s" swiper-animate-delay="0.1s">
 				</div>
-				<div class="swiper-slide myback7">
-					<div class="ani researchNum"><em>{{researchNum}}</em></div>
+				<div class="swiper-slide myback71" v-else>
+					<img class="ani oaText" src="image/light/11.png" alt="" swiper-animate-effect="rotateInDownRight" swiper-animate-duration="1.5s" swiper-animate-delay="0.1s">
+					<img class="ani oaIcon" src="image/light/3.png" alt="" swiper-animate-effect="rotateInDownLeft" swiper-animate-duration="2s" swiper-animate-delay="0.1s">
 				</div>
-				<div class="swiper-slide myback8">
-					<div class="ani oaNum"><em>{{oaNum}}</em></div>
+				<div class="swiper-slide myback5" v-if="myData.meetingNum">
+					<!-- <div class="ani meetingNum1" swiper-animate-effect="fadeInUp" swiper-animate-duration="1.5s" swiper-animate-delay=".2s">{{myData.meetingMonth||1}}</div>
+					<div class="ani meetingNum2" swiper-animate-effect="fadeInUp" swiper-animate-duration="1.5s" swiper-animate-delay=".4s">{{myData.meetingDay||1}}</div> -->
+					<div class="ani meetingNum3" swiper-animate-effect="fadeInDown" swiper-animate-duration="1.5s" swiper-animate-delay="1s">{{myData.meetingNum||1}}</div>
+					<div class="ani meetingNum4" swiper-animate-effect="fadeInDown" swiper-animate-duration="1.5s" swiper-animate-delay="2s">{{myData.meetingSumtime||1}}</div>
+					<div class="ani meetingNum5" swiper-animate-effect="fadeInDown" swiper-animate-duration="1.5s" swiper-animate-delay="2.3s">{{myData.meetingMaxtime||1}}</div>
+					<div class="ani meetingNum6" swiper-animate-effect="fadeInDown" swiper-animate-duration="1.5s" swiper-animate-delay="2.6s">{{myData.meetingLatetime||'24:00'}}</div>
+					<img class="ani meetingNum7" src="image/light/20.png" swiper-animate-effect="fadeInUp" swiper-animate-duration="1.5s" swiper-animate-delay=".6s"></img>
+					<img class="ani meetingNum8" src="image/light/21.png" swiper-animate-effect="fadeInUp" swiper-animate-duration="1.5s" swiper-animate-delay="1.6s"></img>
+					<img class="ani meetingIcon" src="image/light/4.png" alt="" swiper-animate-effect="slideInRight" swiper-animate-duration="2s" swiper-animate-delay="0.1s">
 				</div>
-				<div class="swiper-slide myback9">
-					<div class="ani travelNum"><em>{{travelNum}}</em></div>
-					<div class="ani travelPlace" swiper-animate-effect="rollIn" swiper-animate-duration="1s" swiper-animate-delay="0.5s"><em>{{myData.travelPlace}}</em></div>
+				<div class="swiper-slide myback51" v-else>
+					<img class="ani meetingText" src="image/light/9.png" alt="" swiper-animate-effect="fadeInLeftBig" swiper-animate-duration="1.5s" swiper-animate-delay="0.1s">
+					<img class="ani meetingIcon" src="image/light/5.png" alt="" swiper-animate-effect="fadeInRightBig" swiper-animate-duration="2s" swiper-animate-delay="0.1s">
+				</div>
+				<div class="swiper-slide myback8" v-if="myData.travelNum">
+					<div class="ani travelNum1" swiper-animate-effect="fadeInDown" swiper-animate-duration="1.5s" swiper-animate-delay=".4s">{{myData.travelNum}}</div>
+					<div class="ani travelNum2" swiper-animate-effect="fadeInDown" swiper-animate-duration="1.5s" swiper-animate-delay=".6s">{{myData.travelDays||0}}</div>
+					<div class="ani travelNum3" swiper-animate-effect="fadeInUp" swiper-animate-duration="1.5s" swiper-animate-delay="1.6s">{{myData.travelCitysum||0}}</div>
+					<div class="ani travelNum4" swiper-animate-effect="fadeInUp" swiper-animate-duration="1.5s" swiper-animate-delay="1.9s">{{myData.travelPlace||'未知'}}</div>
+					<div class="ani travelNum5" swiper-animate-effect="fadeInUp" swiper-animate-duration="1.5s" swiper-animate-delay="2.2s">{{myData.travelPlacenum||1}}</div>
+					<img class="ani travelNum6" src="image/light/22.png" swiper-animate-effect="fadeInUp" swiper-animate-duration="1.5s" swiper-animate-delay=".1s"></img>
+					<img class="ani travelIcon" src="image/light/6.png" alt="" swiper-animate-effect="zoomInRight" swiper-animate-duration="3s" swiper-animate-delay="0.1s">
+				</div>
+				<div class="swiper-slide myback81" v-else>
+					<img class="ani travelText" src="image/light/10.png" alt="" swiper-animate-effect="lightSpeedIn" swiper-animate-duration="1.5s" swiper-animate-delay="0.1s">
+					<img class="ani travelIcon" src="image/light/3.png" alt="" swiper-animate-effect="bounceInUp" swiper-animate-duration="3s" swiper-animate-delay="0.1s">
+				</div>
+				<div class="swiper-slide myback6" v-if="myData.researchNum">
+					<div class="ani researchNum1" swiper-animate-effect="zoomInDown" swiper-animate-duration="1.5s" swiper-animate-delay=".8s">{{myData.researchNum}}</div>
+					<div class="ani researchNum2" swiper-animate-effect="zoomInUp" swiper-animate-duration="1.5s" swiper-animate-delay=".8s">{{myData.guandian||0}}</div>
+					<img class="ani researchNum3" src="image/light/23.png" swiper-animate-effect="fadeInDown" swiper-animate-duration="1.5s" swiper-animate-delay=".5s"></img>
+					<img class="ani researchNum4" src="image/light/24.png" swiper-animate-effect="fadeInUp" swiper-animate-duration="1.5s" swiper-animate-delay=".5s"></img>
+					<img class="ani researchIcon" src="image/light/5.png" alt="" swiper-animate-effect="lightSpeedIn" swiper-animate-duration="2s" swiper-animate-delay="0.1s">
+				</div>
+				<div class="swiper-slide myback61" v-else>
+					<img class="ani researchText" src="image/light/7.png" alt="" swiper-animate-effect="lightSpeedIn" swiper-animate-duration="1.5s" swiper-animate-delay="0.1s">
+					<img class="ani researchIcon" src="image/light/4.png" alt="" swiper-animate-effect="bounceInDown" swiper-animate-duration="2s" swiper-animate-delay="0.1s">
+				</div>
+				<div class="swiper-slide myback9" v-if="myData.labels">
+					<div class="ani label1 babo" swiper-animate-effect="zoomInDown" swiper-animate-duration="1.5s" swiper-animate-delay="0.2s">{{labelNew[0]}}</div>
+					<div class="ani label2 babo" swiper-animate-effect="zoomInRight" swiper-animate-duration="1.5s" swiper-animate-delay="0.6s">{{labelNew[1]}}</div>
+					<div class="ani label4 babo" :class="labelNew[2].length<=3?'big':''" swiper-animate-effect="zoomInRight" swiper-animate-duration="1.5s" swiper-animate-delay="1s">{{labelNew[2]}}</div>
+					<div class="ani label3 babo" :class="labelNew[2].length<=3?'big1':''" swiper-animate-effect="zoomInLeft" swiper-animate-duration="1.5s" swiper-animate-delay="1.4s">{{labelNew[3]}}</div>
+					<div class="ani label5 babo" swiper-animate-effect="zoomInLeft" swiper-animate-duration="1.5s" swiper-animate-delay="1.8s">{{labelNew[4]}}</div>
+					<div class="ani label6 babo" swiper-animate-effect="zoomInRight" swiper-animate-duration="1.5s" swiper-animate-delay="0.4s"></div>
+					<div class="ani label7 babo" swiper-animate-effect="zoomInLeft" swiper-animate-duration="1.5s" swiper-animate-delay="0.8s"></div>
+					<div class="ani label8 babo" swiper-animate-effect="zoomInRight" swiper-animate-duration="1.5s" swiper-animate-delay="1.2s"></div>
+					<div class="ani label9 babo" swiper-animate-effect="zoomInLeft" swiper-animate-duration="1.5s" swiper-animate-delay="1.6s"></div>
 				</div>
 				<div class="swiper-slide myback10">
-					<div class="ani label1" swiper-animate-effect="zoomInDown" swiper-animate-duration="1s" swiper-animate-delay="0.1s"><em>{{myData.label1}}</em></div>
-					<div class="ani label2" swiper-animate-effect="zoomInRight" swiper-animate-duration="1s" swiper-animate-delay="0.2s"><em>{{myData.label2}}</em></div>
-					<div class="ani label3" swiper-animate-effect="zoomInLeft" swiper-animate-duration="1s" swiper-animate-delay="0.3s"><em>{{myData.label3}}</em></div>
-					<div class="ani label4" swiper-animate-effect="zoomInRight" swiper-animate-duration="1s" swiper-animate-delay="0.4s"><em>{{myData.label4}}</em></div>
-					<div class="ani label5" swiper-animate-effect="zoomInLeft" swiper-animate-duration="1s" swiper-animate-delay="0.5s"><em>{{myData.label5}}</em></div>
-					<div class="ani label6" swiper-animate-effect="zoomInRight" swiper-animate-duration="1s" swiper-animate-delay="0.6s"><em>{{myData.label6}}</em></div>
-					<div class="ani label7" swiper-animate-effect="zoomInDown" swiper-animate-duration="1s" swiper-animate-delay="0.7s"><em>{{myData.label7}}</em></div>
+					<img class="ani btmText10" src="image/light/12.png" alt="" swiper-animate-effect="zoomInRight" swiper-animate-duration="1.5s" swiper-animate-delay="0.1s">
 				</div>
 				<div class="swiper-slide myback11">
+					<img class="ani btmText11" src="image/light/13.png" alt="" swiper-animate-effect="zoomInRight" swiper-animate-duration="1.5s" swiper-animate-delay="0.1s">
 				</div>
 				<div class="swiper-slide myback12">
-				</div>
-				<div class="swiper-slide myback13">
-					<img src="award/image/start.png" alt="" class="ani flash" @click="toAward" swiper-animate-effect="zoomInDown" swiper-animate-duration="1s" swiper-animate-delay="0.5s">
+					<img class="ani btmText12" src="image/light/14.png" alt="" swiper-animate-effect="zoomInRight" swiper-animate-duration="1.5s" swiper-animate-delay="0.1s">
+					<div class="ani flash" @click="toAward">点击抽奖</div>
 				</div>
 			</div>
 			<div class="swiper-pagination"></div>
-				<img class="music" :class="status?'play':''" src="images/logo2.png" @click="listen" />
-			</span>
+			<img class="music" :class="status?'play':''" src="image/logo2.png" @click="listen" />
+			 <!-- <div class="loading">
+			   <img src="image/light/loader.gif" class="move" />
+			   <div class="text">
+			    您的年度账单生成中...
+			   </div>
+			    <div class="back">
+			    <img src="image/light/logo2.png" />
+			   </div>
+			 </div> -->
+			 <div id="loading" :class="[{'move':ifMove, 'hide':ifHide}]">
+		        <div id="loading-center">
+		            <div id="loading-center-absolute">
+		                <div class="object" id="object_one"></div>
+		                <div class="object" id="object_two"></div>
+		                <div class="object" id="object_three"></div>
+		                <div class="object" id="object_four"></div>
+		                <div class="object" id="object_five"></div>
+		                <div class="object" id="object_six"></div>
+		                <div class="object" id="object_seven"></div>
+		                <div class="object" id="object_eight"></div>
+		                <div class="object" id="object_big"></div>
+		            </div>
+		        </div>
+		    	<div class="notice" bindtap="toPage">您的年度工作账单生成中...</div>
+		        <div class="back">
+			    	<img src="image/light/logo2.png" />
+			   	</div>
+		    </div>
 		</div>
 	<script>
 	new Vue({
@@ -86,17 +178,39 @@
 				oaNum:0,
 				status:false,
 				oaShow:true,
-				// requestUrl:'https://hr.princesky.com/'
-				requestUrl:'http://192.168.2.50:8088/',
-				myData:''
+				requestUrl:'https://hr.princesky.com/',
+				// requestUrl:'http://192.168.2.50:8088/',
+				myData:'',
+				ifHide:false,
+				ifMove:false,
 			},
 			computed:{
 				oaId(){
 					return this.getUrlKey('oaId',window.location.href)
+				},
+				labelNew(){
+					let label = this.myData.labels.split(',').sort(function(a,b){
+				　　　　return b.length-a.length
+				　　});
+					return label
 				}
 			},
 			watch:{
 	
+			},
+			created () {
+			    const that = this
+			    that.timer = setInterval(function () {
+			        console.log(document.readyState)
+			        if (document.readyState === 'complete') {
+			        	console.log(17623712)
+							that.ifMove = true
+							setTimeout(()=>{
+								that.ifHide = true
+							},500)
+			            window.clearInterval(that.timer)
+			        }
+			    }, 1000)
 			},
 			mounted(){
 				this.getData()
@@ -107,12 +221,14 @@
 				async initSwiper(){
 					var that = this
 					// 初始化audio
-					var mp3Url = 'http://up_mp4.t57.cn/2016/1/07m/04/200042142033.m4a?st=Rl7fh5c3AVp2JoF-wPJ2NQ&e=1606892062'
+					var mp3Url = 'image/music.mp3'
 					that.audio = new Audio(mp3Url);
+					that.audio.loop = true
 					// 初始化swiper
 					that.swiper = new Swiper(".swiper-container",{
 						pagination:".swiper-pagination",
-						paginationClickable:true,
+						// paginationClickable:true,
+						noSwiping : true,
 						direction:"vertical",
 						observer:true,
 	    				observeParents:true,
@@ -136,97 +252,9 @@
 							console.log(swiper.activeIndex)
 							// 下滑播放音乐
 							if(that.first){
-								that.listen()
+								that.status = true
+								that.audio.play();
 								that.first = false
-							}
-							// 判断页面动态数据
-							switch(swiper.activeIndex){
-								case 3:
-									var clockDays = that.clockDays
-									var clocktimer = setInterval(()=>{
-										if(clockDays<that.myData.clockDays-5){
-											clockDays = clockDays+5
-											that.clockDays = clockDays
-										}
-										else{
-											clearInterval(clocktimer)
-											console.log(that.myData.clockDays)
-											that.clockDays = that.myData.clockDays
-										}
-									},10)
-								break;
-								case 4:
-									var emailNum = that.emailNum
-									var emailtimer = setInterval(()=>{
-										if(emailNum<that.myData.emailNum-5){
-											emailNum = emailNum+5
-											that.emailNum = emailNum
-										}
-										else{
-											clearInterval(emailtimer)
-											console.log(that.myData.emailNum)
-											that.emailNum = that.myData.emailNum
-										}
-									},10)
-								break;
-								case 5:
-									var meetingNum = that.meetingNum
-									var meetingtimer = setInterval(()=>{
-										if(meetingNum<that.myData.meetingNum-5){
-											meetingNum = meetingNum+5
-											that.meetingNum = meetingNum
-										}
-										else{
-											clearInterval(meetingtimer)
-											console.log(that.myData.meetingNum)
-											that.meetingNum = that.myData.meetingNum
-										}
-									},10)
-								break;
-								case 6:
-									var researchNum = that.researchNum
-									var researchtimer = setInterval(()=>{
-										if(researchNum<that.myData.researchNum-5){
-											researchNum = researchNum+5
-											that.researchNum = researchNum
-										}
-										else{
-											clearInterval(researchtimer)
-											console.log(that.myData.researchNum)
-											that.researchNum = that.myData.researchNum
-										}
-									},10)
-								break;
-								case 7:
-									var oaNum = that.oaNum
-									var oatimer = setInterval(()=>{
-										if(oaNum<that.myData.oaNum-5){
-											oaNum = oaNum+5
-											that.oaNum = oaNum
-										}
-										else{
-											clearInterval(oatimer)
-											console.log(that.myData.oaNum)
-											that.oaNum = that.myData.oaNum
-										}
-									},10)
-								break;
-								case 8:
-									var travelNum = that.travelNum
-									var traveltimer = setInterval(()=>{
-										if(travelNum<that.myData.travelNum-5){
-											travelNum = travelNum+5
-											that.travelNum = travelNum
-										}
-										else{
-											clearInterval(traveltimer)
-											console.log(that.myData.travelNum)
-											that.travelNum = that.myData.travelNum
-										}
-									},10)
-								break;
-
-
 							}
 						},
 					});
@@ -255,7 +283,26 @@
 						data: '',
 						success: function(data) {
 							console.log(data)
-							that.myData = data.billEmpyearSummary
+							that.myData = data
+							if(that.myData.birthday){
+								let x = that.myData.birthday
+								x = new Date(x).getFullYear()+''
+								x = x.slice(2,3)
+								that.myData.birthday = x+'0后'
+							}
+							if(that.myData.meetingMintime){
+								that.myData.meetingMonth = new Date(that.myData.meetingMintime).getMonth()+1
+								that.myData.meetingDay = new Date(that.myData.meetingMintime).getDate()
+							}
+							if(that.myData.meetingSumtime){
+								that.myData.meetingSumtime = that.myData.meetingSumtime.split(':')[0]*60+Number(that.myData.meetingSumtime.split(':')[1])
+							}
+							if(that.myData.meetingMaxtime){
+								that.myData.meetingMaxtime = that.myData.meetingMaxtime.split(':')[0]*60+Number(that.myData.meetingMaxtime.split(':')[1])
+							}
+							if(that.myData.meetingLatetime){
+								that.myData.meetingLatetime = that.myData.meetingLatetime.split(':')[0]+':'+that.myData.meetingLatetime.split(':')[1]
+							}
 						},
 						error: function(err) {
 							alert('系统错误，数据获取失败')
@@ -264,7 +311,7 @@
 					this.initSwiper()
 				},
 				toAward(e){
-					location.href = 'award/award.html'
+					location.href = 'award/award.html?userCode='+this.myData.userCode+'&oaId='+this.myData.oaId+'&userName='+this.myData.userName
 				},
 				getUrlKey(name,url){
 				　　return decodeURIComponent((new RegExp('[?|&]' + name + '=' + '([^&;]+?)(&|#|;|$)').exec(url) || [, ""])[1].replace(/\+/g, '%20')) || null

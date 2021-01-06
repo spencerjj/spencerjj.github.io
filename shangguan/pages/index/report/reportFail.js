@@ -144,8 +144,8 @@ Page({
     if (that.data.limit > 0) {
       wx.chooseImage({
         count: that.data.limit,
-        sizeType: ['original', 'compressed'],
-        sourceType: ['camera'],
+        sizeType: ['compressed'],
+        sourceType: ['album','camera'],
         success(res) {
           // tempFilePath可以作为img标签的src属性显示图片
           const tempFilePaths = res.tempFilePaths

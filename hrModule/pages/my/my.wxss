@@ -907,7 +907,7 @@ page{
     width: 80rpx;
     height: 80rpx;
     vertical-align: middle;
-    box-shadow: 0 0 5px #ccc;
+    /* box-shadow: 0 0 5px #ccc; */
 }
 .shover{
     background: #eee;

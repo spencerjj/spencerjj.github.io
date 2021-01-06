@@ -1,9 +1,14 @@
-<view class="content">  
+<view class="content">
+  <picker mode="date" bindchange="pickerChange" end="{{today}}">
+    <view class='dateInput'>{{showDate.length==0?'请选择起始日期进行查询':'起始日期：'+showDate}}</view>
+  </picker>
   <view class="list expired" wx:for="{{lists}}" data-index="{{index}}" wx:for-item="itemName" wx:key="index" bindtap="toPage" data-no="{{itemName.checkupNo}}">
     <view class="top" hover-class='hover1' hover-stay-time='50' data-index="{{index}}">
-    <text class="title"><text class="active"> {{itemName.companyName}}</text></text>
-    <text class="name">时间:<text class="active"> {{itemName.createDate}}</text></text>
-    <image class="arraw" src="/images/lan.png"></image>
+      <view class="title">巡检类别:<text class="active"> {{itemName.typeName}}</text></view>
+      <view class="name">创建时间:<text class="active"> {{itemName.createDate}}</text></view>
+      <view class="state bg1" wx:if="{{itemName.status==0}}">已完成</view>
+      <view class="state bg2" wx:elif="{{itemName.status==2}}">进行中</view>
+      <view class="state bg3" wx:elif="{{itemName.status==1}}">已删除</view>
     </view>
   </view>
   <view class="add" bindtap='goCheck' hover-class="addTap" hover-stay-time=".5s" data-type="guide">
@@ -13,4 +18,4 @@
 
 <i-toast id="toast" />
 <view wx:if="{{listIsFull}}" class='nullDataInfo'><i-load-more tip="无更多数据了" loading="{{ false }}" /></view>
-<view wx:if="{{loading}}" class='buskmark'><image src='../../../images/00-12.png'></image></view>
+<view wx:if="{{loading}}" class='buskmark'><image src='../../images/00-12.png'></image></view>

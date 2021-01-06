@@ -261,7 +261,7 @@ page{
   margin-left: 10rpx;
   font-size: 30rpx;
   font-weight: bolder;
-  width: 50%;
+  width: 90%;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;

@@ -1,5 +1,5 @@
 <view class="container">
-  <view class="item" wx:for="{{lists}}" wx:key="index">
+  <view class="item" wx:for="{{lists}}" wx:key="index" bindtap="toPage" hover-class="itemHover" hover-stay-time=".5s">
     <view class="date section s1">
       <view class="left"><image src="/images/01-4.png"></image></view>
       <view class="right">{{item.date}}</view>
@@ -16,11 +16,16 @@
       <view class="left"><view class="point p2"></view></view>
       <view class="right">{{item.end}}</view>
     </view>
-    <view class="join section">
+    <view class="join section" wx:if="{{item.type==1}}">
       <view class="left"><image src="/images/01-7.png"></image></view>
       <view class="right">{{item.driver}}</view>
     </view>
-    <view class="state">已完成</view>
+    <view class="join section" wx:else>
+      <view class="left"><image src="/images/nan.png"></image></view>
+      <view class="right">张三</view>
+    </view>
+    <!-- <view class="state">已完成</view> -->
+    <view class="state1">订单分配</view>
   </view>
 </view>
 <view wx:if="{{!listIsFull}}" class='nullDataInfo'><van-divider contentPosition="center">无更多数据了</van-divider></view>

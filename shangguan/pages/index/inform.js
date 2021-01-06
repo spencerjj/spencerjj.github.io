@@ -175,7 +175,6 @@ Page({
               })
           }else{
             if(that.data.pageNo>1){
-
               console.log('第'+that.data.pageNo+'页')
               var list = that.data.lists
               list = list.concat(res.data.list)

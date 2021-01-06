@@ -34,7 +34,7 @@ Page({
     today: '',
     time: '',
     title: '',
-    classes: 0,
+    classes: 4,
     isRec: false,
     proLists: [],
     codeLists: [],
@@ -106,6 +106,8 @@ Page({
     this.showList2()
     var lists = wx.getStorageSync('checkLists')
     var secLists = wx.getStorageSync('secLists')
+    var classes = wx.getStorageSync('classes')
+    console.log(classes+'clsees')
     if (lists && wx.getStorageSync('type') == type) {
       wx.showModal({
         title: '提示',
@@ -115,21 +117,27 @@ Page({
             that.setData({
               lists: lists,
               secLists: secLists ? secLists : [],
+              classes:classes,
               isRec: true,
               cindex: wx.getStorageSync('cindex')
             })
+            that.showList3()
           } else if (res.cancel) {
             wx.removeStorageSync('checkLists')
             wx.removeStorageSync('secLists')
             wx.removeStorageSync('cindex')
             wx.removeStorageSync('type')
+            wx.removeStorageSync('classes')
             that.setData({
               lists: [],
               secLists:[]
             })
+            that.showList3()
           }
         }
       })
+    }else{
+      that.showList3()
     }
   },
 
@@ -218,8 +226,6 @@ Page({
         var hour = date.getHours()
         var minute = date.getMinutes()
         data.map((item) => {
-          console.log(hour < item.signatureTime.slice(0, 2))
-          console.log(hour + ',,,,' + item.signatureTime.slice(0, 2))
           if (hour > item.signatureTime.slice(0, 2)) {
             var over = true
           } else {
@@ -297,41 +303,7 @@ Page({
         confirmColor: '#1890FF'
       });
     });
-    var data = {
-      __sid: that.data.userDetails.sid,
-      __ajax: 'json',
-      type: that.data.type,
-      companyCode: that.data.userDetails.companyCode,
-    }
-    postRequest(getApiHost(), 'api/merchant/findMerchantProjectList', 'url', data, 0, false, false).then(
-      res => {
-        if (res.result && res.result == 'login') {
-          that.login()
-          console.log('登录失效')
-          return;
-        }
-        let proLists = res.data
-        console.log(proLists)
-        if (proLists.length > 0) {
-          let array = []
-          proLists.map((item) => {
-            array.push(item.projectName)
-          })
-          that.setData({
-            proLists: proLists,
-            array: array
-          })
-        }
-      }
-    ).catch(res => {
-      wx.showModal({
-        title: '错误',
-        content: res.message,
-        showCancel: false,
-        confirmText: '知道了',
-        confirmColor: '#1890FF'
-      });
-    });
+
     var data3 = {
       __sid: wx.getStorageSync('userDetails').sid,
       __ajax: 'json',
@@ -403,6 +375,46 @@ Page({
       }
     })
   },
+  showList3(){
+    console.log(123)
+    var that = this;
+    var data = {
+      __sid: that.data.userDetails.sid,
+      __ajax: 'json',
+      type: that.data.type,
+      companyCode: that.data.userDetails.companyCode,
+      classes:that.data.classes
+    }
+    postRequest(getApiHost(), 'api/merchant/findMerchantProjectList', 'url', data, 0, false, false).then(
+      res => {
+        if (res.result && res.result == 'login') {
+          that.login()
+          console.log('登录失效')
+          return;
+        }
+        let proLists = res.data
+        console.log(proLists)
+        if (proLists.length > 0) {
+          let array = []
+          proLists.map((item) => {
+            array.push(item.projectName)
+          })
+          that.setData({
+            proLists: proLists,
+            array: array
+          })
+        }
+      }
+    ).catch(res => {
+      wx.showModal({
+        title: '错误',
+        content: res.message,
+        showCancel: false,
+        confirmText: '知道了',
+        confirmColor: '#1890FF'
+      });
+    });
+  },
   upload(e) {
     var that = this
     console.log(e.currentTarget.dataset.index)
@@ -413,13 +425,13 @@ Page({
       if (lists[index].pic.length == 0) {
         wx.chooseImage({
           count: 1,
-          sizeType: ['original', 'compressed'],
+          sizeType: ['compressed'],
           sourceType: ['camera'],
           success(res) {
             // tempFilePath可以作为img标签的src属性显示图片
             const tempFilePaths = res.tempFilePaths
             console.log(tempFilePaths)
-            var timestamp = Date.parse(new Date())
+            var timestamp = Date.now()
             // wx.getFileSystemManager().readFile({
             //   filePath: tempFilePaths[0], //选择图片返回的相对路径
             //   encoding: 'base64', //编码格式
@@ -975,6 +987,7 @@ Page({
   },
   classChange(e) {
     var that = this
+    console.log(that.data.classLists[e.detail.value].dictValue)
     if (that.data.isRec) {
       wx.showModal({
         title: '提示',
@@ -988,8 +1001,10 @@ Page({
             wx.removeStorageSync('checkLists')
             wx.setStorageSync('cindex', e.detail.value)
             wx.setStorageSync('type', that.data.type)
+            wx.setStorageSync('classes', that.data.classLists[e.detail.value].dictValue)
             that.showList1()
             that.showList2()
+            that.showList3()
           }
         }
       })
@@ -1000,8 +1015,10 @@ Page({
       })
       wx.setStorageSync('cindex', e.detail.value)
       wx.setStorageSync('type', that.data.type)
+      wx.setStorageSync('classes', that.data.classLists[e.detail.value].dictValue)
       that.showList1()
       that.showList2()
+      that.showList3()
     }
   },
   checkInput(e) {
@@ -1152,7 +1169,7 @@ Page({
       remark: '',
       pic: '',
       imgId: '',
-      score: proLists[0].score,
+      score: proLists[that.data.sonIndex].score,
       mark: mark,
       index: that.data.sonIndex,
       index1: 0,

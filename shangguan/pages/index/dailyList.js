@@ -3,6 +3,7 @@ const {
   $Message,
   $Toast
 } = require('../../component/iview/base/index');
+import format from '../../utils/time.js'
 var app = getApp();
 import {
   getApiHost,
@@ -20,7 +21,10 @@ Page({
     pageNo: 1,
     loading: false,
     listIsFull: false,
-    type:''
+    type:'',
+    isMore:false,
+    startDate:'',
+    showDate:''
   },
 
   /**
@@ -29,9 +33,11 @@ Page({
   onLoad: function (options) {
     var that = this
     let userDetails = wx.getStorageSync('userDetails')
+    let now = new Date()
     that.setData({
       userDetails: userDetails,
-      type:options.type
+      type:options.type,
+      today: now.format('yyyy-MM-dd')
     })
   },
 
@@ -67,6 +73,11 @@ Page({
    */
   onPullDownRefresh: function () {
 
+    this.setData({
+      pageNo: 1,
+      listIsFull: false,
+      loading: false
+    })
     this.onShow();
 
     wx.showNavigationBarLoading()
@@ -80,7 +91,16 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-
+    var that = this;
+    console.log('到底了')
+    if (that.data.isMore) {
+      var pageNo = that.data.pageNo;
+      pageNo++;
+      that.setData({
+        pageNo: pageNo
+      })
+      that.showList()
+    }
   },
 
   /**
@@ -101,6 +121,9 @@ Page({
       __ajax: 'json',
       type:that.data.type,
       companyCode: that.data.userDetails.companyCode,
+      startDatelte:that.data.startDate,
+      pageSize:that.data.pageSize,
+      pageNo:that.data.pageNo
     }
     postRequest(getApiHost(), 'api/merchant/merchantCheckupOrderList', 'url', data, 0, false, false).then(
       res => {
@@ -111,9 +134,6 @@ Page({
         }
         let lists = res.data.list
         console.log(lists)
-        // lists.map((item) => {
-        //   item.mark = 1
-        // })
         if(!lists||lists.length<1){
           wx.showModal({
             title: '提示',
@@ -130,12 +150,47 @@ Page({
               }
             }
 
-          })  
+          })
+          return;
         }
-        that.setData({
-          lists: lists,
-          listIsFull: true
+        if(that.data.pageNo>1){
+          console.log('第'+that.data.pageNo+'页')
+          var list = that.data.lists
+          list = list.concat(res.data.list)
+          that.setData({
+            lists:list,
+            loadAll:false
+          })
+          console.log(that.data.lists)
+        }else{
+          that.setData({
+          lists:res.data.list,
+          loadAll:false
         })
+        }
+        if(res.data.count>that.data.pageSize){
+          that.setData({
+            loading:true,
+            listIsFull:false
+          })
+          if(Math.ceil(res.data.count/that.data.pageSize)>that.data.pageNo){
+            that.setData({
+              isMore:true
+            })
+          }else{
+            that.setData({
+              isMore:false,
+              loading:false,
+              listIsFull:true
+            })
+          }
+        }else{
+          that.setData({
+            isMore:false,
+            loading:false,
+            listIsFull:true
+          })
+        }
       }
     ).catch(res => {
       wx.showModal({
@@ -172,5 +227,21 @@ Page({
     wx.navigateTo({
       url: 'dailyCheck?type='+this.data.type
     })
+  },
+  pickerChange(e){
+    let showDate = new Date(e.detail.value).getFullYear()+'年'+(new Date(e.detail.value).getMonth()-1+2)+'月'+new Date(e.detail.value).getDate()+'日'
+    this.setData({
+      startDate:e.detail.value,
+      showDate,
+      pageNo: 1,
+      listIsFull: false,
+      loading: false
+    })
+    this.onShow();
+    wx.showNavigationBarLoading()
+    setTimeout(function () {
+      wx.hideNavigationBarLoading()
+      wx.stopPullDownRefresh()
+    }, 500);
   }
 })

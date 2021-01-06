@@ -184,8 +184,8 @@ Component({
     loadData: function (hours, minute) {
   
       var minuteIndex;
-      var currentMinute;
-      var currentHours = 0;
+      var currentHours = new Date().getHours();
+      var currentMinute = new Date().getMinutes();
       if (currentMinute > 0 && currentMinute <= 10) {
         minuteIndex = 10;
       } else if (currentMinute > 10 && currentMinute <= 20) {
@@ -234,8 +234,8 @@ Component({
   
     loadMinute: function (hours, minute) {
       var minuteIndex;
-      var currentMinute;
-      var currentHours = 0;
+      var currentHours = new Date().getHours();
+      var currentMinute = new Date().getMinutes();
       if (currentMinute > 0 && currentMinute <= 10) {
         minuteIndex = 10;
       } else if (currentMinute > 10 && currentMinute <= 20) {
