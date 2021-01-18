@@ -11,7 +11,7 @@ let chart = null;
 let chart1 = null;
 var chart1_data = ''
 
-function setOption(chart, xlist, ylist1, ylist2) {
+function setOption(chart, xlist, ylist1, ylist2,thisYear,lastYear) {
   var option = {
     color: ['#39a0ff', '#4ecb74'],
     tooltip: {
@@ -30,7 +30,7 @@ function setOption(chart, xlist, ylist1, ylist2) {
       }
     },
     legend: {
-      data: ['2020', '2019'],
+      data: [thisYear, lastYear],
       textStyle: {
         color: '#fff'
       },
@@ -75,7 +75,7 @@ function setOption(chart, xlist, ylist1, ylist2) {
       }
     }],
     series: [{
-        name: '2020',
+        name: thisYear,
         type: 'bar',
         // formatter: '{b}:{c}',
         label: {
@@ -92,7 +92,7 @@ function setOption(chart, xlist, ylist1, ylist2) {
         }
       },
       {
-        name: '2019',
+        name: lastYear,
         type: 'bar',
         stack: '总量',
         // formatter: '{b}:{c}',
@@ -322,22 +322,22 @@ Page({
           chart1_data: chart,
           tableDate: tableDate.reverse()
         })
-        that.init1(area2020, arr2020, arr2019)
-        that.init2()
+        that.init1(area2020, arr2020, arr2019,that.data.thisYear+'',that.data.lastYear+'')
+        // that.init2()
       }
     )
   },
   onShow(e) {
 
   },
-  init1: function (xdata, ylist1, ylist2) { //初始化第一个图表
+  init1: function (xdata, ylist1, ylist2,thisYear,lastYear) { //初始化第一个图表
     this.oneComponent.init((canvas, width, height, dpr) => {
       const chart = echarts.init(canvas, null, {
         width: width,
         height: height,
         devicePixelRatio: dpr
       });
-      setOption(chart, xdata, ylist1, ylist2) //赋值给echart图表
+      setOption(chart, xdata, ylist1, ylist2,thisYear,lastYear) //赋值给echart图表
       this.chart = chart;
       return chart;
     });

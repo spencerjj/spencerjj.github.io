@@ -48,7 +48,9 @@ Page({
     filelist:'',
     ifOut:0,
     can:false,
-    lastDate:''
+    lastDate:'',
+    salaryDate:'',
+    ifClick:false
   },
 
   /**
@@ -183,7 +185,8 @@ Page({
                 lists:res.data.oaEmployOut,
                 id:res.data.oaEmployOut.id,
                 loadAll:false,
-                lastDate:res.data.oaEmployOut.lastDate
+                lastDate:res.data.oaEmployOut.lastDate||'',
+                salaryDate:res.data.oaEmployOut.salaryDate||''
               })
               if (res.data.oaEmployOut.outType&&res.data.oaEmployOut.outType.length>0) {
                   that.setData({
@@ -302,6 +305,12 @@ Page({
       lastDate: e.detail.value
     })
   },
+  bindSalaryChange: function(e) {
+    console.log( e.detail.value)
+    this.setData({
+      salaryDate: e.detail.value
+    })
+  },
   handleCancel() {
       this.setData({
           visible: false
@@ -322,6 +331,13 @@ Page({
     }
     // 提交操作
     if (index == 1) {
+      if(that.data.ifClick){
+        $Toast({
+          content: '数据提交中，请稍等',
+          type: 'warning'
+        })
+        return;
+      }
       if(that.data.lists.bpm.activityId=='hrbp'&&that.data.ifOut==0){
         $Toast({
           content:'请选择离职类型',
@@ -335,10 +351,21 @@ Page({
         })
         return;
       }
+      if(that.data.lists.bpm.activityId=='hrmsg'&&that.data.salaryDate.length<1){
+        $Toast({
+          content:'请选择最后结薪日',
+          type:'warning'
+        })
+        that.setData({
+          visible: false
+        })
+        return;
+      }
         const action = [...this.data.actions];
         action[0].loading = true;
         this.setData({
-          actions: action
+          actions: action,
+          ifClick:true
         });
         var type = ''
         var day = ''
@@ -358,6 +385,7 @@ Page({
           __ajax: 'json',
           remainHoliday:that.data.day,
           lastDate:that.data.lastDate,
+          salaryDate:that.data.salaryDate,
           'bpm.comment': that.data.hint,
           id: that.data.id,
           userCode:that.data.lists.userCode,
@@ -384,7 +412,8 @@ Page({
                 that.setData({
                   visible: false,
                   ifInput: false,
-                  actions: action
+                  actions: action,
+                  ifClick:false
                 });
                 $Toast({
                   content: '提交成功！',
@@ -405,7 +434,8 @@ Page({
                 that.setData({
                   visible: false,
                   ifInput: false,
-                  actions: action
+                  actions: action,
+                  ifClick:false
                 });
             }
           }

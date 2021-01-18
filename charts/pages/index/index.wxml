@@ -1,6 +1,9 @@
 
 
 <view class="container" wx:if="{{ifYearData||ifMonthData||ifDayData||ifAreaList||ifBrandList||ifFromList||ifTwoData}}">
+	<view class="select" bindtap="toSelect" hover-stay-time=".5s" hover-class="selectHover">
+		<image src="/images/change.png"></image>
+	</view>
 	<view class="first">
 		<view class="title">数据发生时间：</view>
 		<view class="time">

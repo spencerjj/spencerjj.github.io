@@ -5,8 +5,8 @@ import {
 } from '../../utils/api.js'
 var app = getApp();
 import Notify from '../../miniprogram_npm/@vant/weapp/notify/notify';
+import areaList from '../../utils/area.js'
 Page({
-
   /**
    * 页面的初始数据
    */
@@ -14,17 +14,29 @@ Page({
     role: '',
     storeList: [
       {
-        storeName:'蓝豹',
-        camNum:8
-      },
-      {
-        storeName:'百货',
-        camNum:10
+        storeName:'购物中心',
+        camNum:'1821',
+        month:'3334',
+        year:'11143'
       },
       {
         storeName:'新世纪',
-        camNum:1
+        camNum:'1101',
+        month:'34',
+        year:'143'
       },
+      {
+        storeName:'百货大楼',
+        camNum:'675',
+        month:'34',
+        year:'143'
+      },
+      {
+        storeName:'蓝豹',
+        camNum:'321',
+        month:'34',
+        year:'143'
+      }
     ],
     storeShow:false,
     goodsShow:false,
@@ -47,7 +59,8 @@ Page({
         desc: '2019-1-1 12:40',
       },
     ],
-    show:false
+    show:false,
+    areaList:''
   },
 
   /**
@@ -55,7 +68,8 @@ Page({
    */
   onLoad: function(options) {
     this.setData({
-      storeShow:true
+      storeShow:true,
+      areaList:areaList
     })
   },
 
@@ -145,9 +159,26 @@ Page({
 
   },
   onStoreSelected(e){
-    wx.switchTab({
-      url: 'index',
-    })
+    console.log(e.currentTarget.dataset.index)
+    let index = e.currentTarget.dataset.index
+    if(index==3){
+      wx.switchTab({
+        url: 'index',
+      })
+    }else if(index==0){
+      wx.redirectTo({
+        url: 'depart?mark=gou',
+      })
+    }else if(index==1){
+      wx.redirectTo({
+        url: 'depart?mark=xin',
+      })
+    }else if(index==2){
+      wx.redirectTo({
+        url: 'depart?mark=bai',
+      })
+    }
+   
   },
 
    onTypeSelected(e){

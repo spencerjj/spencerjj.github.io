@@ -51,7 +51,8 @@ Page({
     loadAll:true,
     url:'',
     can:false,
-    safeLevel:''
+    safeLevel:'',
+    ifClick:false
   },
 
   /**
@@ -219,7 +220,7 @@ Page({
                   })
                 } else {
                   that.setData({
-                    index1: 0
+                    index1: 1
                   })
                 }
               }
@@ -402,12 +403,20 @@ Page({
     }
     // 提交操作
     if (index == 1) {
+      if(that.data.ifClick){
+        $Toast({
+          content: '数据提交中，请稍等',
+          type: 'warning'
+        })
+        return;
+      }
       if (that.data.ifoa.length != 0 && that.data.ifdoor.length != 0 && that.data.ifemail.length != 0) {
         const action = [...this.data.actions];
         action[0].loading = true;
 
         this.setData({
-          actions: action
+          actions: action,
+          ifClick:true
         });
         var data = {
           // __sid: app.globalData.__sid,
@@ -444,7 +453,8 @@ Page({
                 that.setData({
                   visible: false,
                   ifInput: false,
-                  actions: action
+                  actions: action,
+                  ifClick:false
                 });
                 $Toast({
                   content: '提交成功！',
@@ -465,7 +475,8 @@ Page({
                 that.setData({
                   visible: false,
                   ifInput: false,
-                  actions: action
+                  actions: action,
+                  ifClick:false
                 });
             }
 

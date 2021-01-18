@@ -29,6 +29,7 @@ Page({
     receiverName:'',
     receiverTel:'',
     departName:'',
+    time:'',
     id:'',
     remark:''
   },
@@ -41,15 +42,16 @@ Page({
     console.log(options.remark)
     var userInfo = wx.getStorageSync('userInfo');
     that.setData({
-      brandName:options.brandName!='undefined'?options.brandName:'',
-      itemTitle:options.itemTitle!='undefined'?options.itemTitle:'',
-      itemNo:options.itemNo!='undefined'?options.itemNo:'',
-      price:options.price!='undefined'?options.price:'',
-      num:options.num!='undefined'?options.num:'',
-      payment:options.payment!='undefined'?options.payment:'',
-      receiverName:options.receiverName!='undefined'?options.receiverName:'',
-      receiverTel:options.receiverTel!='undefined'?options.receiverTel:'',
-      departName:options.departName!='undefined'?options.departName:'',
+      brandName:options.brandName!='undefined'?options.brandName:'未知',
+      itemTitle:options.itemTitle!='undefined'?options.itemTitle:'未知',
+      itemNo:options.itemNo!='undefined'?options.itemNo:'未知',
+      price:options.price!='undefined'?options.price:'未知',
+      num:options.num!='undefined'?options.num:'未知',
+      payment:options.payment!='undefined'?options.payment:'未知',
+      receiverName:options.receiverName!='undefined'?options.receiverName:'未知',
+      receiverTel:options.receiverTel!='undefined'?options.receiverTel:'未知',
+      departName:options.departName!='undefined'?options.departName:'未知',
+      time:options.time!='undefined'?options.time:'未知',
       id:options.id,
       remark:options.remark!='undefined'?options.remark:'',
       sid:userInfo.sid

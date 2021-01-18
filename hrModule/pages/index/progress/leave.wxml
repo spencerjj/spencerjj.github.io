@@ -53,7 +53,7 @@
       <text>{{lists.officeName}}</text>
     </view>
   </view>
-  <view class="sub">
+  <view class="sub" wx:if="{{lists.bpm.activityId!='start'}}">
     <view class="c1">
       <text>最后工作日期<text style="color:red;font-size:25rpx">*</text></text>
     </view>
@@ -67,7 +67,21 @@
 		</picker>
     </view>
   </view>
-  <view class="title">
+  <view class="sub" wx:if="{{lists.bpm.activityId=='hrmsg'}}">
+    <view class="c1">
+      <text>最后结薪日<text style="color:red;font-size:25rpx">*</text></text>
+    </view>
+    <view class="codePicker">
+      <picker mode="date" value="{{lists.salaryDate}}" bindchange="bindSalaryChange" disabled="{{current==1?false:true}}">
+			<view class="timePicker">
+				<text wx:if="{{salaryDate.length==0}}" style="color:#af9d7f">请选择...</text>
+        {{salaryDate}}
+				<image class="arraw" src="http://img.gagctv.com/17112314452261654"></image>
+			</view>
+		</picker>
+    </view>
+  </view>
+  <view class="title" wx:if="{{lists.bpm.activityId=='hrmsg'}}">
     <view class="c1">
       <text>剩余假期天数<text style="color:red;font-size:25rpx">*</text></text>
     </view>

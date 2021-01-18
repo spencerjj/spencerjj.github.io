@@ -45,7 +45,8 @@ Page({
     loadAll:true,
     can:false,
     reason:'',
-    inputShow:false
+    inputShow:false,
+    ifClick:false
   },
 
   /**
@@ -341,10 +342,18 @@ that.getInfo()
     }
     // 提交操作
     if (index == 1) {
+      if(that.data.ifClick){
+        $Toast({
+          content: '数据提交中，请稍等',
+          type: 'warning'
+        })
+        return;
+      }
         const action = [...this.data.actions];
         action[0].loading = true;
         this.setData({
-          actions: action
+          actions: action,
+          ifClick:true
         });
         var data = {
           // __sid: app.globalData.__sid,
@@ -374,7 +383,8 @@ that.getInfo()
                 that.setData({
                   visible: false,
                   ifInput: false,
-                  actions: action
+                  actions: action,
+                  ifClick:false
                 });
                 $Toast({
                   content: '提交成功！',
@@ -395,7 +405,8 @@ that.getInfo()
                 that.setData({
                   visible: false,
                   ifInput: false,
-                  actions: action
+                  actions: action,
+                  ifClick:false
                 });
             }
 

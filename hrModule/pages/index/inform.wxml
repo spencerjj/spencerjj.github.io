@@ -5,7 +5,6 @@
     <i-tab key="3" title="与我相关"></i-tab>
 </i-tabs>
 
-
 <view class="lists" bindtap='showDetail' wx:for="{{lists}}"  wx:key="index" data-id="{{item.id}}" data-status="{{item.status}}" data-key="{{item.procIns.procDef.key?item.procIns.procDef.key:item.formKey}}" data-biz="{{item.procIns.bizKey?item.procIns.bizKey:item.bizKey}}" hover-class='hover1' hover-stay-time='50'>
   <!-- <view class="left">
     <image src="../../images/add.png" wx:if="{{current==1}}"></image>
@@ -64,6 +63,7 @@
     <view class="check1" wx:elif="{{current!=3&&item.procIns.formKey=='out'}}">离职流程</view>
     <view class="check1" wx:elif="{{current!=3&&item.procIns.formKey=='regular'}}">转正流程</view>
     <view class="check1" wx:elif="{{current!=3&&item.procIns.formKey=='transfer'}}">转岗流程</view>
+    <view class="check1" wx:elif="{{current!=3&&item.procIns.formKey=='out_transfer'}}">离职移交流程</view>
     <view class="check1" wx:if="{{current==3&&item.formKey=='continue'}}">合同续签</view>
     <view class="check1" wx:elif="{{current==3&&item.formKey=='entry'}}">入职流程</view>
     <view class="check1" wx:elif="{{current==3&&item.formKey=='recruitment'}}">招聘申请</view>

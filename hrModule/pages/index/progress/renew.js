@@ -59,7 +59,8 @@ Page({
     proLists:'',
     url:'',
     loadAll:true,
-    can:false
+    can:false,
+    ifClick:false
   },
 
   /**
@@ -297,7 +298,13 @@ Page({
     }
     // 提交操作
     if (index == 1) {
-        
+      if(that.data.ifClick){
+        $Toast({
+          content: '数据提交中，请稍等',
+          type: 'warning'
+        })
+        return;
+      }
         if(!that.data.day||that.data.day.length<1){
           $Toast({
             content:"请填写续签年数",
@@ -311,7 +318,8 @@ Page({
         const action = [...this.data.actions];
         action[0].loading = true;
         this.setData({
-          actions: action
+          actions: action,
+          ifClick:true
         });
         var data = {
           // __sid: app.globalData.__sid,
@@ -345,7 +353,8 @@ Page({
                 that.setData({
                   visible: false,
                   ifInput: false,
-                  actions: action
+                  actions: action,
+                  ifClick:false
                 });
                 $Toast({
                   content: '提交成功！',
@@ -366,7 +375,8 @@ Page({
                 that.setData({
                   visible: false,
                   ifInput: false,
-                  actions: action
+                  actions: action,
+                  ifClick:false
                 });
             }
 

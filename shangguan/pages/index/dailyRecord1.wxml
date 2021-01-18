@@ -9,10 +9,10 @@
       <view class="check">
         <view class="title">
     <view class="c1">
-      <text>公司</text>
+      <text>巡检类别</text>
     </view>
     <view class="timePicker">
-      {{companyName}}
+      {{typeName||'未知'}}
     </view>
   </view>
   <view class="title">
@@ -71,7 +71,7 @@
                 {{item.projectName}}
               </view>
           </view>
-          <view class="title">
+          <view class="title" wx:if="{{type==2||type==3}}">
             <view class="c1">
               <text><text style="color:red;font-size:25rpx">*</text> 部门</text>
             </view>

@@ -42,7 +42,8 @@ Page({
     swiperHeight: '',
     secLists: [],
     officeLists: [],
-    checkupNo:''
+    checkupNo:'',
+    typeName:''
   },
 
   /**
@@ -239,6 +240,7 @@ Page({
         var companyName = res.data.companyName
         var mainLists = res.data.merchantCheckupOrderDetailList
         var proLists = res.data.merchantCheckupOrderProList
+        var typeName = res.data.typeName
 
         mainLists.map((item)=>{
           item.mark = false
@@ -247,10 +249,11 @@ Page({
           item.mark = false
         })
         that.setData({
-          time:time,
-          companyName:companyName,
-          mainLists:mainLists,
-          proLists:proLists
+          time,
+          companyName,
+          mainLists,
+          proLists,
+          typeName
         })
 
       }

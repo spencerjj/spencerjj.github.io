@@ -332,7 +332,8 @@ Page({
         endDate:'',
         endTime1:'',
         startTime:'',
-        endTime:""
+        endTime:'',
+        dailyNo:''
       })
     }else if(mark==1){
       if(that.data.startTime1.length==0){

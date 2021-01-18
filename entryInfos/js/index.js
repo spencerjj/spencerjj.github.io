@@ -611,6 +611,7 @@ app.controller('indexController', ['$scope', '$http', function($scope, $http) {
 			}
 		}
 		if (id == 'marry') {
+			console.log($("#marry").val() == '已婚')
 			if ($("#marry").val() == '已婚' || $("#marry").val() == 1) {
 				data.marry = 1
 			} else {
@@ -1503,7 +1504,7 @@ app.controller('indexController', ['$scope', '$http', function($scope, $http) {
 				} else {
 					data.sex = 2
 				}
-				if (data.marry == '已婚') {
+				if (data.marry == '已婚'||data.marry==1) {
 					data.marry = 1
 				} else {
 					data.marry = 2

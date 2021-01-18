@@ -1,0 +1,159 @@
+<view class="content">
+    <!-- <input class="main" value="离职流程表" placeholder-style='color:#af9d7f' bindinput='mainInput' disabled></input> -->
+  <view class="title">
+    <view class="c1">
+      <text>员工姓名</text>
+    </view>
+    <view class="codePicker">
+      <text>{{lists.oaEmployOut.userName}}</text>
+       <!-- <image src="../../../images/file.png" bindtap="copy" data-cont="{{lists.userName}}" class="copyfile"></image> -->
+    </view>
+  </view>
+  <view class="title">
+    <view class="c1">
+      <text>所属公司</text>
+    </view>
+    <view class="codePicker">
+      <text>{{lists.oaEmployOut.companyName}}</text>
+    </view>
+  </view>
+  <view class="title">
+    <view class="c1">
+      <text>所属部门</text>
+    </view>
+    <view class="codePicker">
+      <text>{{lists.oaEmployOut.officeName}}</text>
+    </view>
+  </view>
+  <view class="sub">
+    <view class="c1">
+      <text>最后工作日期</text>
+    </view>
+    <view class="codePicker">
+			<view class="timePicker">
+        {{lists.oaEmployOut.lastDate}}
+			</view>
+    </view>
+  </view>
+  <view class="title" wx:if="{{lists.bpm.activityId=='hrbp'||index1!=3}}">
+		<view class="c1">
+			<text>是否财务审批 </text>
+		</view>
+		<picker value="{{index1}}" range="{{array1}}" bindchange="pickChange" data-mark="caiwu" disabled="{{current==1&&lists.bpm.activityId=='hrbp'?false:true}}">
+			<view class="timePicker  {{ifCaiwu?'':'pickerError'}}" style="padding-left:10rpx">
+				<text wx:if="{{index1==3&&lists.bpm.activityId=='hrbp'}}" style="color:#af9d7f">请选择...</text>
+				{{array1[index1]}}
+				<image class="arraw" src="http://img.gagctv.com/17112314452261654"></image>
+			</view>
+		</picker>
+  </view>
+  <view class="title" wx:if="{{lists.bpm.activityId=='hrbp'||index2!=3}}">
+		<view class="c1">
+			<text>是否统辖审批 </text>
+		</view>
+		<picker value="{{index1}}" range="{{array1}}" bindchange="pickChange"  data-mark="tongxia" disabled="{{current==1&&lists.bpm.activityId=='hrbp'?false:true}}">
+			<view class="timePicker  {{ifTongxia?'':'pickerError'}}" style="padding-left:10rpx">
+				<text wx:if="{{index2==3&&lists.bpm.activityId=='hrbp'}}" style="color:#af9d7f">请选择...</text>
+				{{array1[index2]}}
+				<image class="arraw" src="http://img.gagctv.com/17112314452261654"></image>
+			</view>
+		</picker>
+  </view>
+  <view class="title" wx:if="{{lists.bpm.activityId=='hrbp'||index4!=3}}">
+		<view class="c1">
+			<text>是否邮箱审批 </text>
+		</view>
+		<picker value="{{index1}}" range="{{array1}}" bindchange="pickChange"  data-mark="email" disabled="{{current==1&&lists.bpm.activityId=='hrbp'?false:true}}">
+			<view class="timePicker  {{ifEmail?'':'pickerError'}}" style="padding-left:10rpx">
+				<text wx:if="{{index4==3&&lists.bpm.activityId=='hrbp'}}" style="color:#af9d7f">请选择...</text>
+				{{array1[index4]}}
+				<image class="arraw" src="http://img.gagctv.com/17112314452261654"></image>
+			</view>
+		</picker>
+	</view>
+	<view class="title">
+		<view class="c1">
+			<text>是否OA审批<text style="color:red;font-size:25rpx">*</text> </text>
+		</view>
+		<picker value="{{index1}}" range="{{array1}}" bindchange="pickChange"  data-mark="oa" disabled="true">
+			<view class="timePicker" style="padding-left:10rpx">
+				{{array1[index3]}}
+				<image class="arraw" src="http://img.gagctv.com/17112314452261654"></image>
+			</view>
+		</picker>
+  </view>
+  <view class="title">
+		<view class="c1">
+			<text>是否SSC审批<text style="color:red;font-size:25rpx">*</text> </text>
+		</view>
+		<picker value="{{index1}}" range="{{array1}}" bindchange="pickChange"  data-mark="ssc" disabled="true">
+			<view class="timePicker" style="padding-left:10rpx">
+				{{array1[index5]}}
+				<image class="arraw" src="http://img.gagctv.com/17112314452261654"></image>
+			</view>
+		</picker>
+  </view>
+  <view class="title" wx:if="{{lists.bpm.activityId=='emp'||imgLists.length>1}}">
+    <view class="c1">
+      <text> 图片</text>
+    </view>
+    <view class="codePicker1">
+      <image
+        src="http://tiebapic.baidu.com/forum/w%3D580/sign=4c36fa524443fbf2c52ca62b807fca1e/cd014afbfbedab648925929ae036afc379311e27.jpg" class="up"  bindtap="upload" wx:if="{{imgLists.length<1}}">
+      </image>
+      <view class="photo"  wx:if="{{imgLists.length>0}}" wx:key="index">
+        <image src="{{imgLists}}" mode="aspectFill" bindtap="showPic" data-url="{{imgLists}}"></image>
+        <image src="/images/delete1.png" class="delete" bindtap="delete" data-index="{{index}}" wx:if="{{lists.bpm.activityId=='emp'&&current==1}}"></image>
+      </view>
+    </view>
+  </view>
+  <view class="title" style="z-index:1 !important" wx:if="{{current==1&&can}}">
+    <view class="c1">
+      <text>审批意见</text>
+    </view>
+    <input class="number" placeholder='常用语: 同意  已阅' placeholder-style='color:#af9d7f' bindinput='hinput' value="{{hint}}"></input>
+  </view>
+</view>
+<view class="bottom">
+	<button class="progress {{current==1&&can?'btnwid1':'btnwid'}}" bindtap='progress' hover-class='hover1' hover-stay-time='50'>流程追踪</button>
+	<button class="publish btnwid1" bindtap='handleOpen' wx:if="{{current==1&&can}}" hover-class='hover2' hover-stay-time='50'>审批操作</button>
+</view>
+<i-action-sheet visible="{{visible}}" actions="{{actions}}" show-cancel bind:cancel="handleCancel" bind:click="handleClickItem" />
+<i-toast id="toast" />
+<i-message id="message" />
+<i-drawer mode="right" visible="{{showRight1}}" bind:close="progress">
+	<scroll-view  class="proShow" scroll-y='true' catchtouchmove='true'>
+		<view class="c1" style="margin-bottom:20rpx">
+			<text style="font-weight:bolder;color:#1890ff;margin-left:10rpx;font-size:35rpx">流转信息</text>
+		</view>
+				<i-steps current="{{verticalCurrent}}" direction="vertical">
+			<i-step  wx:for="{{proLists}}" icon="{{index==proLists.length-1?'brush':''}}">
+			<view class="lists" slot="content">
+			<view class="right">
+				<view class="time1">
+					<text class="timeLeft">环节名称:</text>
+					<text class="timeRight">{{item.name}}</text>
+				</view>
+				<view class="time1">
+					<text class="timeLeft">创建时间:</text>
+					<text class="timeRight">{{item.createTime}}</text>
+				</view>
+				<view class="time1">
+					<text class="timeLeft">完成时间:</text>
+					<text class="timeRight">{{item.endTime}}</text>
+				</view>
+				<view class="time1">
+					<text class="timeLeft">分配人员:</text>
+					<text class="timeRight">{{item.assigneeInfo}}</text>
+				</view>
+				<view class="time1">
+					<text class="timeLeft">审批意见:</text>
+					<text class="timeRight">{{item.comment}}</text>
+				</view>
+			</view>
+		</view>
+			</i-step>
+		</i-steps>
+	</scroll-view >
+</i-drawer>
+<i-spin fix wx:if="{{loadAll}}"></i-spin>

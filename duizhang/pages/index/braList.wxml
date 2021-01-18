@@ -8,9 +8,10 @@
 			<view class="title">
 				{{phoneNo}}
 			</view>
+			<image src="/images/ques.png" catchtap="showDetail" data-mark='1' style="width:50rpx;height:50rpx;position:absolute;right:20rpx;top:40rpx"></image>
 		</view>
 		<view class="pointBar">
-			<view class="section" bindtap="toPage" data-type="1" hover-class="secTab" hover-stay-time="1s">
+			<view class="section" data-type="1" hover-class="secTab" hover-stay-time="1s">
 				<view class="num">
 					￥{{entryMoney?entryMoney:'0'}}
 				</view>
@@ -18,7 +19,7 @@
 					已提货已入账
 				</view>
 			</view>
-			<view class="section" bindtap="toPage" data-type="2" hover-class="secTab" hover-stay-time="1s">
+			<view class="section" data-type="2" hover-class="secTab" hover-stay-time="1s">
 				<view class="num">
 					￥{{deliveredMoney?deliveredMoney:'0'}}
 				</view>
@@ -26,7 +27,7 @@
 					未提货
 				</view>
 			</view>
-			<view class="section" bindtap="toPage" data-type="3" hover-class="secTab" hover-stay-time="1s">
+			<view class="section" data-type="3" hover-class="secTab" hover-stay-time="1s">
 				<view class="num">
 					￥{{unrecordedMoney?unrecordedMoney:'0'}}
 				</view>

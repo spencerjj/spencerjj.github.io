@@ -31,7 +31,8 @@ Page({
     remark: '',
     type: '',
     userDetails: '',
-    name:''
+    name:'',
+    ifClick:false
   },
 
   /**
@@ -245,6 +246,13 @@ Page({
     const index = detail.index + 1;
     // 提交操作
     if (index == 1) {
+      if(that.data.ifClick){
+        $Toast({
+          content: '数据提交中，请稍等',
+          type: 'warning'
+        })
+        return;
+      }
       if (that.data.remark.length < 1) {
         $Toast({
           content: '请填写报障内容',
@@ -258,7 +266,8 @@ Page({
       const action = [...this.data.actions];
       action[0].loading = true;
       this.setData({
-        actions: action
+        actions: action,
+        ifClick:true
       });
       var data = {
         __sid: that.data.userDetails.sid,
@@ -277,11 +286,11 @@ Page({
             return;
           }
           console.log(res)
-          setTimeout(() => {
             action[0].loading = false;
             that.setData({
               visible: false,
-              actions: action
+              actions: action,
+              ifClick:false
             });
             $Toast({
               content: '提交成功！',
@@ -291,8 +300,7 @@ Page({
               wx.switchTab({
                 url: '/pages/my/my',
               })
-            },500)
-          }, 1000);
+            },1000)
         }
       ).catch(res => {
         wx.showModal({
@@ -306,7 +314,8 @@ Page({
         action[0].loading = false;
         that.setData({
           visible: false,
-          actions: action
+          actions: action,
+          ifClick:false
         });
       });
     }

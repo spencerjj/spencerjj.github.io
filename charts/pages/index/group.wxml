@@ -1,0 +1,114 @@
+<view class="container">
+  <view class="top">
+    <view class="left">
+      <view class="ltop">
+        <view>月销售额</view>
+        <view>13 <text style="font-size:20rpx">万</text></view>
+      </view>
+      <view class="lbottom">
+        <view>年销售额</view>
+        <view>100 <text style="font-size:20rpx">万</text></view>
+      </view>
+    </view>
+    <view class="right">
+      <view class="ltop">
+        <view>月销售额</view>
+        <view>6 <text style="font-size:20rpx">万</text></view>
+      </view>
+      <view class="lbottom">
+        <view>年销售额</view>
+        <view>100 <text style="font-size:20rpx">万</text></view>
+      </view>
+    </view>
+  </view>
+  <view class="allTop">
+			<view class="allSection">
+				<view>50%</view>
+				<view>利润率</view>
+			</view>
+			<view class="allSection">
+				<view>1000</view>
+				<view>客流量</view>
+      </view>
+      <view class="allSection">
+				<view>300</view>
+				<view>门店数</view>
+			</view>
+    </view>
+  <view class="ttitle">
+    <view style="position:absolute;width:10rpx;height:40rpx;border-radius:10rpx;left:0;top:40rpx;background:#28aad2">
+    </view> 潮流运动部实时销售情况
+    <image src="/images/ai.png" style="width:40rpx;height:40rpx;position:absolute;left:500rpx;top:40rpx"></image>
+  </view>
+  <view class="table">
+    <view class="tr header">
+      <view class="th">厅房名称</view>
+      <view class="th">销售金额</view>
+      <view class="th">来客数</view>
+      <view class="th">客单价</view>
+      <view class="th">销售占比</view>
+      <view class="th">卡券使用</view>
+    </view>
+    <block>
+      <view class="tr bg-w" hover-class="trhover" hover-stay-time="0.5">
+        <view class="td">阿迪厅</view>
+        <view class="td">395</view>
+        <view class="td">3371</view>
+        <view class="td">291</view>
+        <view class="td">10%</view>
+        <view class="td">15</view>
+      </view>
+    </block>
+    <block>
+      <view class="tr bg-g" hover-class="trhover" hover-stay-time="0.5">
+        <view class="td">耐克厅</view>
+        <view class="td">395</view>
+        <view class="td">3371</view>
+        <view class="td">291</view>
+        <view class="td">10%</view>
+        <view class="td">15</view>
+      </view>
+    </block>
+    <block>
+      <view class="tr bg-w" hover-class="trhover" hover-stay-time="0.5">
+        <view class="td">李宁厅</view>
+        <view class="td">395</view>
+        <view class="td">3371</view>
+        <view class="td">291</view>
+        <view class="td">10%</view>
+        <view class="td">15</view>
+      </view>
+    </block>
+    <block>
+      <view class="tr bg-g" hover-class="trhover" hover-stay-time="0.5">
+        <view class="td">匡威厅</view>
+        <view class="td">395</view>
+        <view class="td">3371</view>
+        <view class="td">291</view>
+        <view class="td">10%</view>
+        <view class="td">15</view>
+      </view>
+    </block>
+    <block>
+      <view class="tr bg-w" hover-class="trhover" hover-stay-time="0.5">
+        <view class="td">耐克360厅</view>
+        <view class="td">395</view>
+        <view class="td">3371</view>
+        <view class="td">291</view>
+        <view class="td">10%</view>
+        <view class="td">15</view>
+      </view>
+    </block>
+  </view>
+  <view style="height:10rpx;width100%;background:#fff;margin-top:30rpx"></view>
+  <view class="ttitle">
+    <view style="position:absolute;width:10rpx;height:40rpx;border-radius:10rpx;left:0;top:40rpx;background:#28aad2">
+    </view> 实时数据分部
+    <image src="/images/ai.png" style="width:40rpx;height:40rpx;position:absolute;left:300rpx;top:40rpx"></image>
+  </view>
+  <view class="trend">
+    <canvas canvas-id="lineCanvas" class="canvas c2" bindtouchstart="touchHandler"></canvas>
+  </view>
+
+
+</view>

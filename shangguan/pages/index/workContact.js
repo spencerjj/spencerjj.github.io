@@ -59,7 +59,8 @@ Page({
     url:'',
     bizKey:'',
     hint:'',
-    name:''
+    name:'',
+    ifClick:false
   },
 
   /**
@@ -327,10 +328,18 @@ Page({
     const index = detail.index + 1;
     // 提交操作
     if (index == 1) {
+      if(that.data.ifClick){
+        $Toast({
+          content: '数据提交中，请稍等',
+          type: 'warning'
+        })
+        return;
+      }
       const action = [...this.data.actions];
       action[0].loading = true;
       this.setData({
-        actions: action
+        actions: action,
+        ifClick:true
       });
       if(that.data.list.bpm.activityId=='pj_work_contact'){
         if(that.data.starIndex==-1){
@@ -342,7 +351,8 @@ Page({
             that.setData({
               visible: false,
               ifInput: false,
-              actions: action
+              actions: action,
+              ifClick:false
             });
           return;
         }
@@ -379,12 +389,12 @@ Page({
             return;
           }
           console.log(res)
-          setTimeout(() => {
             action[0].loading = false;
             that.setData({
               visible: false,
               ifInput: false,
-              actions: action
+              actions: action,
+              ifClick:false
             });
             $Toast({
               content: '提交成功！',
@@ -395,7 +405,6 @@ Page({
                 url: '/pages/index/inform',
               })
             },1000)
-          }, 1000);
         }
       ).catch(res => {
         wx.showModal({
@@ -409,7 +418,8 @@ Page({
             that.setData({
               visible: false,
               ifInput: false,
-              actions: action
+              actions: action,
+              ifClick:false
             });
       });
     } else if (index ==2) {

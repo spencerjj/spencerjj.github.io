@@ -7,6 +7,28 @@ page{
 .container{
     width: 100%;
     overflow-x: hidden !important;
+    position: relative;
+}
+.select{
+    position: fixed;
+    right: 10rpx;
+    bottom: 10rpx;
+    width: 80rpx;
+    height: 80rpx;
+    border-radius: 50%;
+    border:#53e0f3 1px solid;
+    box-shadow: 0 0 15rpx 0 #53e0f3;
+    background: rgb(16, 39, 87,.6);
+    z-index: 999;
+    text-align: center;
+}
+.select image{
+    width: 80%;
+    height: 80%;
+    margin-top:10%
+}
+.selectHover{
+    background: #53e0f3;
 }
 .title{
     color:#fff;

@@ -97,10 +97,10 @@ App({
                     return;
                   }
                   var phoneNo = res.data.mobile
-                  
                   var data = {
                     loginCode:phoneNo,
                     param_deviceType:'mobileApp',
+                    param_userType:'wshop',
                     ajax: '_json',
                   }
                   wx.request({

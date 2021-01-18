@@ -10,6 +10,9 @@ import {
   postRequest,
   getRequest
 } from '../../utils/api.js'
+import {
+  URI
+} from '../../config.js'
 Page({
   /**
    * 页面的初始数据
@@ -55,7 +58,8 @@ Page({
         officeCode: '603'
       }
     ],
-    visibility:false
+    visibility:false,
+    ifClick:false
   },
 
   /**
@@ -104,41 +108,7 @@ Page({
 
     })
     this.showList2()
-    var lists = wx.getStorageSync('checkLists')
-    var secLists = wx.getStorageSync('secLists')
-    var classes = wx.getStorageSync('classes')
-    console.log(classes+'clsees')
-    if (lists && wx.getStorageSync('type') == type) {
-      wx.showModal({
-        title: '提示',
-        content: '你有未保存巡检记录，是否重新编辑',
-        success(res) {
-          if (res.confirm) {
-            that.setData({
-              lists: lists,
-              secLists: secLists ? secLists : [],
-              classes:classes,
-              isRec: true,
-              cindex: wx.getStorageSync('cindex')
-            })
-            that.showList3()
-          } else if (res.cancel) {
-            wx.removeStorageSync('checkLists')
-            wx.removeStorageSync('secLists')
-            wx.removeStorageSync('cindex')
-            wx.removeStorageSync('type')
-            wx.removeStorageSync('classes')
-            that.setData({
-              lists: [],
-              secLists:[]
-            })
-            that.showList3()
-          }
-        }
-      })
-    }else{
-      that.showList3()
-    }
+    this.showList3()
   },
 
   /**
@@ -245,6 +215,7 @@ Page({
             time: item.signatureTime.substring(0, 5),
             pic: '',
             imgId: '',
+            fileUrl:'',
             mark: false,
             over: over
           }
@@ -455,8 +426,9 @@ Page({
                 console.log(JSON.parse(res.data))
                 var res = JSON.parse(res.data)
                 if (res.result == 'true') {
-                  lists[index].pic = tempFilePaths.toString()
+                  lists[index].pic = URI+'platform/'+res.fileUpload.fileUrl
                   lists[index].imgId = res.fileUpload.id
+                  lists[index].fileUrl = res.fileUpload.fileUrl
                   lists[index].error = false
                   that.setData({
                     lists: lists
@@ -525,8 +497,9 @@ Page({
                 console.log(JSON.parse(res.data))
                 var res = JSON.parse(res.data)
                 if (res.result == 'true') {
-                  secLists[index].pic = tempFilePaths.toString()
+                  secLists[index].pic = URI+'platform/'+res.fileUpload.fileUrl
                   secLists[index].imgId = res.fileUpload.id
+                  secLists[index].fileUrl = res.fileUpload.fileUrl
                   that.setData({
                     secLists: secLists
                   })
@@ -570,9 +543,9 @@ Page({
     secLists[index].projectName = proLists[e.detail.value].projectName
     secLists[index].projectCode= proLists[e.detail.value].projectCode
     if (proLists[e.detail.value].flow == "workContact") {
-      secLists[index].mark = true
+      secLists[index].mark = 1
     } else {
-      secLists[index].mark = false
+      secLists[index].mark = 0
       secLists[index].dealUserCode = ''
       secLists[index].dealUserName = ''
       secLists[index].keywords = ''
@@ -613,19 +586,17 @@ Page({
     if (current == '1') {
       lists[index].pic = ''
       lists[index].imgId = ''
+      lists[index].fileUrl = ''
       this.setData({
         lists: lists
       })
-      wx.setStorageSync('checkLists', lists)
-      wx.setStorageSync('type', this.data.type)
     } else if (current == '2') {
       secLists[index].pic = ''
       secLists[index].imgId = ''
+      secLists[index].fileUrl = ''
       this.setData({
         secLists: secLists
       })
-      wx.setStorageSync('secLists', secLists)
-      wx.setStorageSync('type', this.data.type)
     }
 
   },
@@ -642,10 +613,111 @@ Page({
     action[0].loading = false;
     this.setData({
       visible: false,
-      actions: action
+      actions: action,
+      ifClick:false
     });
   },
-
+  save(e){
+    var that = this
+    var lists = that.data.lists
+    var secLists = that.data.secLists
+    console.log(lists)
+    console.log(secLists)
+    console.log(lists)
+    var array = []
+    console.log(secLists)
+    lists.map((item, index) => {
+      if(item.fileUrl.length>1){
+        var x = {
+          signatureId: item.id,
+          signatureName: item.area,
+          fileUrl: item.fileUrl+','+item.imgId
+        }
+        array.push(x)
+      }
+      
+    })
+    secLists.map((item) => {
+      if(item.fileUrl.length>1){
+        item.fileUrl=item.fileUrl+','+item.imgId
+      }
+    })
+    let postData = []
+    postData.__sid = that.data.userDetails.sid
+    postData.__ajax = 'json'
+    postData.type = that.data.type
+    postData.status = 3
+    postData.classes = that.data.classes
+    postData.companyName = that.data.userDetails.companyName
+    postData.companyCode = that.data.userDetails.companyCode
+    for (let x in array) {
+      postData['merchantCheckupOrderDetailList[' + x + '].signatureId'] = array[x].signatureId
+      postData['merchantCheckupOrderDetailList[' + x + '].signatureName'] = array[x].signatureName
+      postData['merchantCheckupOrderDetailList[' + x + '].fileUrl'] = array[x].fileUrl
+    }
+    for (let y in secLists) {
+      postData['merchantCheckupOrderProList[' + y + '].projectCode'] = secLists[y].projectCode
+      postData['merchantCheckupOrderProList[' + y + '].projectName'] = secLists[y].projectName
+      postData['merchantCheckupOrderProList[' + y + '].officeCode'] = secLists[y].officeCode
+      postData['merchantCheckupOrderProList[' + y + '].officeName'] = secLists[y].officeName
+      postData['merchantCheckupOrderProList[' + y + '].remark'] = secLists[y].remark
+      postData['merchantCheckupOrderProList[' + y + '].score'] = secLists[y].score
+      postData['merchantCheckupOrderProList[' + y + '].fileUrl'] = secLists[y].fileUrl
+      //显示人和类型/部门/人名/人编号/考核项目index(获取flow)
+      postData['merchantCheckupOrderProList[' + y + '].flow'] = secLists[y].mark+','+secLists[y].index2+','+secLists[y].dealUserName+','+secLists[y].dealUserCode+','+secLists[y].index  
+    }
+    console.log(postData)
+    wx.request({
+      url: getApiHost() + 'api/merchant/merchantCheckupOrderSave',
+      method: 'post',
+      data: postData,
+      header: {
+        'content-type': 'application/x-www-form-urlencoded',
+      },
+      success(res) {
+        if (res.statusCode == 200) {
+          if (res.data.result == 'login'){
+            action[0].loading = false;
+            that.setData({
+              visible: false,
+              actions: action,
+              ifClick:false
+            });
+            $Toast({
+              content: '登录失效，自动登录后重新提交',
+              type: 'error'
+            })
+            that.login()
+            console.log('登录失效')
+            return;
+          }
+          if (res.data.result == 'false') {
+            $Toast({
+              content: res.data.data.message,
+              type: 'error'
+            })
+            return;
+          }
+          if (res.data.result == 'true') {
+              $Toast({
+                content: '保存成功！',
+                type: 'success'
+              });
+              setTimeout(()=>{
+                wx.navigateBack({
+                  delta: 1,
+                })
+              },500)
+          }
+        } else {
+          $Toast({
+            content: res.data.message||'系统错误，请稍后再试',
+            type: 'error'
+          });
+        }
+      }
+    })
+  },
   handleClickItem({
     detail
   }) {
@@ -655,6 +727,13 @@ Page({
     var proLists = that.data.proLists
     console.log(lists)
     console.log(secLists)
+    if(that.data.ifClick){
+      $Toast({
+        content: '数据提交中，请稍等',
+        type: 'warning'
+      })
+      return;
+    }
     for (let x in lists) {
       if (lists[x].imgId.length < 1) {
         $Toast({
@@ -666,14 +745,15 @@ Page({
         this.setData({
           visible: false,
           actions: action,
-          current: 1
+          current: 1,
+          ifClick:false
         });
         return;
       }
     }
     if (secLists.length > 0) {
       for (let y in secLists) {
-        if (secLists[y].mark && secLists[y].dealUserCode.length < 1) {
+        if (secLists[y].mark==1 && secLists[y].dealUserCode.length < 1) {
           $Toast({
             content: '请正确选择处理人',
             type: 'warning'
@@ -682,7 +762,8 @@ Page({
           action[0].loading = false;
           this.setData({
             visible: false,
-            actions: action
+            actions: action,
+            ifClick:false
           });
           return;
         }
@@ -696,7 +777,8 @@ Page({
           action[0].loading = false;
           this.setData({
             visible: false,
-            actions: action
+            actions: action,
+            ifClick:false
           });
           return;
         }
@@ -711,12 +793,13 @@ Page({
     const action = [...this.data.actions];
     action[0].loading = true;
     this.setData({
-      actions: action
+      actions: action,
+      ifClick:true
     });
     for (let x in secLists) {
       console.log(proLists[secLists[x].index].flow)
       if (proLists[secLists[x].index].flow == 'reportFail') {
-        var imgId = secLists[x].imgId
+        var imgId = secLists[x].imgId||''
         secLists[x].imgId = ''
         var data = {
           __sid: that.data.userDetails.sid,
@@ -742,7 +825,7 @@ Page({
         });
 
       } else if (proLists[secLists[x].index].flow == 'workContact') {
-        var imgId = secLists[x].imgId
+        var imgId = secLists[x].imgId||''
         secLists[x].imgId = ''
         var data = {
           __sid: that.data.userDetails.sid,
@@ -782,7 +865,7 @@ Page({
       var x = {
         signatureId: item.id,
         signatureName: item.area,
-        remark: item.remark
+        fileUrl: item.fileUrl
       }
       array.push(x)
       if (item.imgId && item.imgId.length > 0) {
@@ -806,6 +889,7 @@ Page({
     for (let x in array) {
       postData['merchantCheckupOrderDetailList[' + x + '].signatureId'] = array[x].signatureId
       postData['merchantCheckupOrderDetailList[' + x + '].signatureName'] = array[x].signatureName
+      postData['merchantCheckupOrderDetailList[' + x + '].fileUrl'] = array[x].fileUrl
     }
     for (let y in secLists) {
       postData['merchantCheckupOrderProList[' + y + '].projectCode'] = secLists[y].projectCode
@@ -814,6 +898,7 @@ Page({
       postData['merchantCheckupOrderProList[' + y + '].officeName'] = secLists[y].officeName
       postData['merchantCheckupOrderProList[' + y + '].remark'] = secLists[y].remark
       postData['merchantCheckupOrderProList[' + y + '].score'] = secLists[y].score
+      postData['merchantCheckupOrderProList[' + y + '].fileUrl'] = secLists[y].fileUrl
     }
 
     // var data = {
@@ -839,7 +924,8 @@ Page({
             action[0].loading = false;
             that.setData({
               visible: false,
-              actions: action
+              actions: action,
+              ifClick:false
             });
             $Toast({
               content: '登录失效，自动登录后重新提交',
@@ -862,7 +948,8 @@ Page({
               action[0].loading = false;
               that.setData({
                 visible: false,
-                actions: action
+                actions: action,
+                ifClick:false
               });
               $Toast({
                 content: '提交成功！',
@@ -872,11 +959,8 @@ Page({
                 wx.switchTab({
                   url: '/pages/my/my',
                 })
-                wx.removeStorageSync('checkLists')
-                wx.removeStorageSync('cindex')
-                wx.removeStorageSync('type')
-              }, 500)
-            }, 3000);
+              }, 1000)
+            }, 2000);
           }
         } else {
           $Toast({
@@ -887,51 +971,12 @@ Page({
           action[0].loading = false;
           that.setData({
             visible: false,
-            actions: action
+            actions: action,
+            ifClick:false
           });
         }
       }
     })
-    // postRequest(getApiHost(), 'api/merchant/merchantCheckupOrderSave', 'url', postData, 0, false, false).then(
-    //   res => {
-    //     if (res.result && res.result == 'login') {
-    //       that.login()
-    //       console.log('登录失效')
-    //       return;
-    //     }
-    //     console.log(res)
-    //     setTimeout(() => {
-    //       action[0].loading = false;
-    //       that.setData({
-    //         visible: false,
-    //         actions: action
-    //       });
-    //       $Toast({
-    //         content: '提交成功！',
-    //         type: 'success'
-    //       });
-    //       setTimeout(()=>{
-    //         wx.switchTab({
-    //           url: '/pages/index/inform',
-    //         })
-    //       },1000)
-    //     }, 1000);
-    //   }
-    // ).catch(res => {
-    //   wx.showModal({
-    //     title: '错误',
-    //     content: res.message,
-    //     showCancel: false,
-    //     confirmText: '知道了',
-    //     confirmColor: '#1890FF'
-    //   });
-    //   const action = [...this.data.actions];
-    //   action[0].loading = false;
-    //   this.setData({
-    //     visible: false,
-    //     actions: action
-    //   });
-    // });
   },
   handleOpen() {
     this.setData({
@@ -957,7 +1002,6 @@ Page({
     that.setData({
       secLists: secLists
     })
-    wx.setStorageSync('secLists', secLists)
   },
   getToday(e) {
     var date = new Date()
@@ -982,8 +1026,6 @@ Page({
     that.setData({
       lists: lists
     })
-    wx.setStorageSync('checkLists', lists)
-    wx.setStorageSync('type', that.data.type)
   },
   classChange(e) {
     var that = this
@@ -998,10 +1040,6 @@ Page({
               cindex: e.detail.value,
               classes: that.data.classLists[e.detail.value].dictValue
             })
-            wx.removeStorageSync('checkLists')
-            wx.setStorageSync('cindex', e.detail.value)
-            wx.setStorageSync('type', that.data.type)
-            wx.setStorageSync('classes', that.data.classLists[e.detail.value].dictValue)
             that.showList1()
             that.showList2()
             that.showList3()
@@ -1013,9 +1051,6 @@ Page({
         cindex: e.detail.value,
         classes: that.data.classLists[e.detail.value].dictValue
       })
-      wx.setStorageSync('cindex', e.detail.value)
-      wx.setStorageSync('type', that.data.type)
-      wx.setStorageSync('classes', that.data.classLists[e.detail.value].dictValue)
       that.showList1()
       that.showList2()
       that.showList3()
@@ -1105,7 +1140,6 @@ Page({
       keywords: e.currentTarget.dataset.name + '(' + e.currentTarget.dataset.office + ')',
       secLists: secLists
     })
-    wx.setStorageSync('secLists', secLists)
   },
   onChange(e) {
     var x = e.detail.value
@@ -1154,9 +1188,9 @@ Page({
     var secLists = that.data.secLists
     var officeLists = that.data.officeLists
     var proLists = that.data.proLists
-    var mark = false
+    var mark = 0
     if(proLists[that.data.sonIndex].flow=='workContact'){
-      mark = true
+      mark = 1
     }
     var array = {
       projectCode: proLists[that.data.sonIndex].projectCode,
@@ -1169,6 +1203,7 @@ Page({
       remark: '',
       pic: '',
       imgId: '',
+      fileUrl:'',
       score: proLists[that.data.sonIndex].score,
       mark: mark,
       index: that.data.sonIndex,
@@ -1180,7 +1215,6 @@ Page({
     that.setData({
       secLists: secLists
     })
-    wx.setStorageSync('secLists', secLists)
   },
   remove(e) {
     var that = this
@@ -1191,7 +1225,6 @@ Page({
     that.setData({
       secLists: secLists
     })
-    wx.setStorageSync('secLists', secLists)
   },
   showReport(e) {
     var that = this
@@ -1201,7 +1234,6 @@ Page({
     that.setData({
       secLists: secLists
     })
-    wx.setStorageSync('secLists', secLists)
   },
   swiperChange(e){
     console.log(e.detail.current)

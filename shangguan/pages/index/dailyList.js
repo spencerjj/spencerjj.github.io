@@ -219,9 +219,24 @@ Page({
     })
   },
   toPage(e){
-    wx.navigateTo({
-      url: 'dailyRecord1?type='+this.data.type+'&no='+e.currentTarget.dataset.no,
-    })
+    console.log(e.currentTarget.dataset.status)
+    if(e.currentTarget.dataset.status==3){
+      if(e.currentTarget.dataset.code==this.data.userDetails.userCode){
+        wx.navigateTo({
+          url: 'conCheck?type='+this.data.type+'&no='+e.currentTarget.dataset.no
+        })
+      }else{
+        $Toast({
+          type:'warning',
+          content:'用户正在巡检中'
+        })
+      }
+    }else{
+      wx.navigateTo({
+        url: 'dailyRecord1?type='+this.data.type+'&no='+e.currentTarget.dataset.no,
+      })
+    }
+
   },
   goCheck(e){
     wx.navigateTo({

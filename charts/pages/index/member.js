@@ -198,7 +198,7 @@ Page({
                 if(that.data.rightTime!=0){
                     wx.showModal({
                         title: '提示',
-                        content: '当天暂无数据，当前为'+that.data.rightTime+'数据',
+                        content: '当天暂无数据，请重新选择日期',
                       })
                       
                 }else{
@@ -729,16 +729,20 @@ Page({
     },
     bindDateChange(e){
         var date = new Date(e.detail.value)
+        var thisYear = date.getFullYear()
+        var lastYear = date.getFullYear()-1
         var month =  (date.getMonth()+1)>=10?(date.getMonth()+1):'0'+(date.getMonth()+1)
         var day =  (date.getDate())>=10?(date.getDate()):'0'+(date.getDate())
         var today = date.getFullYear()+'年'+(month)+'月'+(day)+'日'
         var showDate = (month)+'/'+(day)
         var week = "日一二三四五六".charAt(new Date(date).getDay())
         this.setData({
-          showDate:showDate,
-          date:e.detail.value,
-          today:today,
-          week:week
+            date: e.detail.value,
+            showDate,
+            today,
+            week,
+            thisYear,
+            lastYear
         })
         this.getTop()
       },
@@ -768,6 +772,11 @@ Page({
           title:'口径说明',
           content:'会员总数：注册总人数(含潜客)\r\n招新人数：本年注册人数(含潜客)。\r\n招新转化率：招新消费人数/招新人数。\r\n招新复购率：招新消费2天及以上人数/招新消费人数\r\n老会员回购率：去年消费的会员，今年继续消费的比例。',
           showCancel:false
+        })
+    },
+    toSelect(e){
+        wx.redirectTo({
+          url: 'select',
         })
     }
 })

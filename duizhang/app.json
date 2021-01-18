@@ -1,8 +1,8 @@
 {
   "pages": [
     "pages/index/finList",
-    "pages/login/regist",
     "pages/index/braList",
+    "pages/login/regist",
     "pages/index/success",
     "pages/index/listDetail",
     "pages/index/deList",

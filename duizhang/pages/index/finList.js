@@ -336,6 +336,7 @@ Page({
         startTime: '',
         endTime: '',
         shopName: '',
+        dailyNo:'',
         index1:0
       })
     } else if (mark == 1) {

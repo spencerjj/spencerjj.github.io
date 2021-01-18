@@ -4,7 +4,7 @@
     <van-progress color="#ccc" text-color="black" percentage="{{pro}}" stroke-width="6px"/>
    </view>
    <view class="text">
-    欢迎进入蓝豹数据中心
+    MiniReport数据中心
    </view>
     <view class="back">
     <image src="../../images/logo2.png"></image>

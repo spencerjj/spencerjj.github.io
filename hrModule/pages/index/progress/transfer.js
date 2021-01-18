@@ -56,7 +56,8 @@ Page({
     url:'',
     loadAll:true,
     ifOut:0,
-    can:false
+    can:false,
+    ifClick:false
   },
 
   /**
@@ -292,6 +293,13 @@ Page({
     }
     // 提交操作
     if (index == 1) {
+      if(that.data.ifClick){
+        $Toast({
+          content: '数据提交中，请稍等',
+          type: 'warning'
+        })
+        return;
+      }
       if(that.data.lists.bpm.activityId=='hrbp'&&that.data.ifOut==0){
         $Toast({
           content:'请选择调动类型',
@@ -309,7 +317,8 @@ Page({
         const action = [...this.data.actions];
         action[0].loading = true;
         this.setData({
-          actions: action
+          actions: action,
+          ifClick:true
         });
         var type = ''
         if(!that.data.outType){
@@ -346,7 +355,8 @@ Page({
                 that.setData({
                   visible: false,
                   ifInput: false,
-                  actions: action
+                  actions: action,
+                  ifClick:false
                 });
                 $Toast({
                   content: '提交成功！',
@@ -367,7 +377,8 @@ Page({
                 that.setData({
                   visible: false,
                   ifInput: false,
-                  actions: action
+                  actions: action,
+                  ifClick:false
                 });
             }
           }

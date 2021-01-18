@@ -1,0 +1,58 @@
+<view class="content">
+    <!-- <input class="main" value="离职流程表" placeholder-style='color:#af9d7f' bindinput='mainInput' disabled></input> -->
+  <view class="title">
+    <view class="c1">
+      <text>离职员工</text>
+    </view>
+    <view class="codePicker">
+      <text>{{userInfo.userName}}</text>
+    </view>
+  </view>
+  <view class="title">
+    <view class="c1">
+      <text>工号</text>
+    </view>
+    <view class="codePicker">
+      <text>{{userInfo.loginCode}}</text>
+    </view>
+  </view>
+  <view class="title">
+    <view class="c1">
+      <text>所属公司</text>
+    </view>
+    <view class="codePicker">
+      <text>{{userInfo.employee.company.companyName}}</text>
+    </view>
+  </view>
+  <view class="title">
+    <view class="c1">
+      <text>所属部门</text>
+    </view>
+    <view class="codePicker">
+      <text>{{userInfo.refObj.office.officeName}}</text>
+    </view>
+  </view>
+  <view class="sub">
+    <view class="c1">
+      <text>离职申请时间</text>
+    </view>
+    <view class="codePicker">
+			<view class="timePicker">
+        {{today}}
+			</view>
+    </view>
+  </view>
+  <view class="title">
+    <view class="c1">
+      <text>离职原因<text style="color:red;font-size:25rpx">*</text></text>
+    </view>
+    <input class="number" placeholder-style='color:#af9d7f' bindinput='hinput' value="{{hint}}"></input>
+  </view>
+</view>
+<view class="bottom">
+	<button class="progress btnwid" bindtap='handleOpen' hover-class='hover1' hover-stay-time='50'>提交离职</button>
+</view>
+<i-action-sheet visible="{{visible}}" actions="{{actions}}" show-cancel bind:cancel="handleCancel" bind:click="handleClickItem" />
+<i-toast id="toast" />
+<i-message id="message" />
+<i-spin fix wx:if="{{loadAll}}"></i-spin>

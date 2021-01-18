@@ -216,6 +216,7 @@ page{
     width:50%;
     justify-content: center;
     text-align: center;
+    font-size: 35rpx;
    }
    .bg-w{
     background: snow;
@@ -226,12 +227,15 @@ page{
    .th {
     width: 50%;
     justify-content: center;
-    background: #69bcf9;
+    background: #8ecbf7;
     color: #fff;
     display: flex;
     min-height: 3rem;
     align-items: center;
    }
+   .tr .th:nth-child(1){
+     border-right: 5rpx solid snow;
+   } 
    .trhover{
     background: #ddd;
   }

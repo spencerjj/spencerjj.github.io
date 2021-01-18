@@ -27,7 +27,7 @@ page{
 .info-box {
   position: relative;
   width: 92%;
-  height: 140rpx;
+  height: 230rpx;
   margin-left: 4%;
   background: #1e315e;
   margin-bottom: 20rpx;
@@ -37,28 +37,29 @@ page{
 
 .info-box .storeIcon {
   float: left;
-  margin: 30rpx;
+  margin-left: 20rpx;
+  margin-top:75rpx;
   width: 80rpx;
   height: 80rpx;
 }
 
 .info-box .storeInfo {
-  width: auto;
-  max-width: 330rpx;
+  width: 32%;
   height: 140rpx;
   float: left;
+  text-align: center;
 }
 
 .info-box .storeInfo .storeName {
   width: auto;
-  height: 140rpx;
+  height:80rpx;
+  line-height: 230rpx;
   font-size: 36rpx;
-  line-height: 140rpx;
   color:#fff;
   font-weight: bolder;
 }
 
-.info-box .storeInfo .storeAdmin {
+/* .info-box .storeInfo .storeAdmin {
   width: auto;
   height: 34rpx;
   font-size: 24rpx;
@@ -67,22 +68,36 @@ page{
   text-overflow: ellipsis;
   overflow: hidden;
   white-space: nowrap;
+} */
+.info-box .sales{
+  float: left;
 }
-
+.info-box .saleSection{
+  color:white;
+  text-align: center;
+  margin-top:25rpx
+}
+.saleSection view:nth-child(2){
+  font-size:25rpx;
+}
+.saleSection view:nth-child(1){
+  font-size: 40rpx;
+  font-weight: bolder;
+}
 .info-box .camInfo {
   width: auto;
   height: 100rpx;
   float: right;
-  margin-top: 20rpx;
-  margin-right: 70rpx;
+  margin-top: 60rpx;
+  margin-right: 50rpx;
   text-align: center;
   color:#fff
 }
 
 .info-box .camInfo .camNum {
   color: #fff;
-  font-size: 36rpx;
-  margin-top:5rpx
+  font-size: 50rpx;
+  font-weight: bolder;
 }
 
 .info-box .camInfo .camTip {
@@ -101,10 +116,6 @@ page{
 }
 .hover1{
   background: #6c91e7 !important;
-}
-.store{
-  position: absolute;
-  width: 100%;
 }
 .goods{
   position: absolute;
@@ -129,4 +140,10 @@ page{
   position: absolute;
   top:500rpx;
   width: 100%;
+}
+.rise{
+  color:#fa5c5c
+}
+.down{
+  color:#4ecb74
 }

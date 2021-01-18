@@ -47,7 +47,6 @@ Page({
     status1:''
   },
   onLoad: function () {
-    console.log(this.options.dailyNo)
     this.setData({
       dailyNo: this.options.dailyNo,
       status1:this.options.status
@@ -76,7 +75,6 @@ Page({
       duration: 0
     })
     // that.getSelectLists()
-    that.getHead()
     that.getLists()
   },
   onPullDownRefresh: function () {
@@ -95,7 +93,6 @@ Page({
   },
   onReachBottom: function () {
     var that = this;
-    console.log('到底了')
     if (that.data.isMore) {
       var pageNo = that.data.pageNo;
       pageNo++;
@@ -120,7 +117,7 @@ Page({
       did: that.data.dailyNo,
       status: that.data.status,
       itemTitle: that.data.goodsName,
-      mfCode: that.data.officeCode
+      // mfCode: that.data.officeCode
     }
     getRequest(getApiHost(), 'platform/v1/api/dayily/getDailyOrderBody', 'body', data, 0, false, true).then(
       res => {
@@ -129,8 +126,8 @@ Page({
           console.log('登录失效')
           return;
         }
+        that.getHead()
         if (res.result) {
-          console.log(res)
           if (res.data.list) {
             if (res.data.list.length == 0) {
               // setTimeout(()=>{
@@ -143,7 +140,6 @@ Page({
               // },500)
             } else {
               if (that.data.pageNo > 1) {
-                console.log('第' + that.data.pageNo + '页')
                 var list = that.data.lists
                 list = list.concat(res.data.list)
                 that.setData({
@@ -151,7 +147,6 @@ Page({
                   showNo: false,
                   loadAll: false
                 })
-                console.log(that.data.lists)
               } else {
                 that.setData({
                   lists: res.data.list,
@@ -230,7 +225,6 @@ Page({
   },
   toPage(e) {
     app.doMessage()
-    console.log(e.currentTarget.dataset.type)
     wx.navigateTo({
       url: 'listDetail'
     })
@@ -258,7 +252,8 @@ Page({
         lists: '',
         listIsFull: false,
         loading: false,
-        goodsName: ''
+        goodsName: '',
+        dailyNo:''
       })
     }else if(mark==1){
     that.setData({
@@ -305,21 +300,23 @@ Page({
       __sid: that.data.sid,
       __ajax: 'json',
       dailyNo: that.data.dailyNo,
-      mfCode:that.data.officeCode
+      // mfCode:that.data.officeCode
     }
-    getRequest(getApiHost(), 'platform/v1/api/dayily/getDailyOrderDetailByNo', 'body', data, 0, false, false).then(
+
+    console.log(data)
+    getRequest(getApiHost(), 'platform/v1/api/dayily/getDailyOrderDetailByNo', 'body', data, 0, false, false,false).then(
       res => {
         console.log(res)
         that.setData({
-          entryMoney: res.data.entryMoney,
-          deliveredMoney: res.data.deliveredMoney,
-          unrecordedMoney: res.data.unrecordedMoney
+          entryMoney: res.data.entryMoney||0,
+          deliveredMoney: res.data.deliveredMoney||0,
+          unrecordedMoney: res.data.unrecordedMoney||0
         })
       }
     ).catch(res => {
       wx.showModal({
         title: '错误',
-        content: '获取数据失败',
+        content: '获取对账单明细汇总失败',
         showCancel: false,
         confirmText: '知道了',
         confirmColor: '#1890FF'
@@ -327,15 +324,13 @@ Page({
     });
   },
   toDetail(e) {
-    console.log(e.currentTarget.dataset.index)
     var lists = this.data.lists
     var index = e.currentTarget.dataset.index
     wx.navigateTo({
-      url: 'listDetail?brandName='+lists[index].brandName+'&itemNo='+lists[index].itemNo+'&price='+lists[index].price+'&num='+lists[index].num+'&payment='+lists[index].payment+'&receiverName='+lists[index].receiverName+'&receiverTel='+lists[index].receiverTel+'&departName='+lists[index].departName+'&remark='+lists[index].remark+'&id='+lists[index].id+'&itemTitle='+lists[index].itemTitle
+      url: 'listDetail?brandName='+lists[index].brandName+'&itemNo='+lists[index].itemNo+'&price='+lists[index].price+'&num='+lists[index].num+'&payment='+lists[index].payment+'&receiverName='+lists[index].receiverName+'&receiverTel='+lists[index].receiverTel+'&departName='+lists[index].departName+'&remark='+lists[index].remark+'&id='+lists[index].id+'&itemTitle='+lists[index].itemTitle+'&time='+lists[index].orderCreateTime
     })
   },
   onChange(event) {
-    console.log(event.detail.name)
     var that = this
     if (event.detail.name == 0) {
       that.setData({
@@ -395,5 +390,13 @@ Page({
         }
       }
     })
-  },
+  },    // 昨日到账金额
+  // 截止到昨日为止未发货金额
+  showDetail(e){
+    wx.showModal({
+      title:'口径说明',
+      content:'已提货已入账：昨日到账金额。\r\n未提货：截止到昨日为止未发货金额。\r\n已提货未入账：截止到昨日为止已提货未入账金额。',
+      showCancel:false
+    })
+},
 })

@@ -1,4 +1,7 @@
 <view class="container" wx:if="{{ifTotalVip||ifVipCardCot||ifReRate||ifOldRate||ifPieData||ifAreaData||ifTwoData}}">
+	<view class="select" bindtap="toSelect" hover-stay-time=".5s" hover-class="selectHover">
+		<image src="/images/change.png"></image>
+	</view>
 	<!-- <view class="{{!ifUp?'hideBar':'showBar'}} " bindtap="up">{{!ifUp?'收起':'展开'}}
 		<image class="actionImage {{ifUp?'upHide':''}}" src="{{!ifUp?'/images/hideUp.png':'/images/downShow.png'}}"></image>
 	</view> -->

@@ -14,9 +14,9 @@
 	<view  wx:for="{{tableDate}}" class="th {{index%2==0?'first':'second'}}">
 		<view class="th1">{{item.areaName}}</view>
 		<view class="th2">
-			<view class="th-title">2020</view>
+			<view class="th-title">{{thisYear}}</view>
 			<view class="th-title2">
-				2019
+				{{lastYear}}
 			</view>
 		</view>
 		<view class="th3">
@@ -30,7 +30,7 @@
 			<view class="th-title2">
 				{{item.rate2019}}%
 			</view>
-		</view>
+		</view>	
 		<view class="th1 {{item.compare>=0?'rise':'down'}}">
 			{{item.compare}}
 		</view>

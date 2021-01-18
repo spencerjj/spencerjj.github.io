@@ -1,66 +1,30 @@
-<!-- <starsTemplate>
-  <text slot="kun">锟锟</text>
-  <text slot="shuai">帅</text>
-</starsTemplate> -->
-<view class='tip'>请选择公司</view>
-
-<van-transition
-  show="{{ storeShow }}"
-  name="fade-left"
-  class="store"
->
-<view class="storeList">
-  <view class='info-box' wx:for="{{storeList}}" data-index="{{index}}" bindtap='onStoreSelected' wx:key="index" hover-class='hover1' hover-stay-time='50'>
-    <image class='storeIcon' src='/images/logo2.png'></image>
-    <view class='storeInfo'>
-      <view class='storeName'>{{item.storeName}}</view>
-      <!-- <view class='storeAdmin'>导购: ***</view> -->
+<view class='tip'>请选择门店</view>
+<!-- <van-area title="标题" area-list="{{areaList}}" bind:confirm="areaConfirm" /> -->
+<van-transition show="{{ storeShow }}" name="{{index % 2 == 0?'fade-left':'fade-right'}}" class="store"
+  wx:for="{{storeList}}" data-index="{{index}}" bindtap='onStoreSelected' wx:key="index" hover-class='hover1'
+  hover-stay-time='50'>
+  <view class="storeList">
+    <view class='info-box'>
+      <image class='storeIcon' src='/images/logo2.png'></image>
+      <view class='storeInfo'>
+        <view class='storeName'>{{item.storeName}}</view>
+        <!-- <view class="storeAdmin">会员人数: 9123</view> -->
+      </view>
+      <view class="sales">
+        <view class="saleSection">
+          <view>{{item.month}} <text style="font-size:20rpx">万</text></view>
+          <view>本月<text class="down" style="font-size:20rpx">　-13.88%</text></view>
+        </view>
+        <view class="saleSection">
+          <view>{{item.year}} <text style="font-size:20rpx">万</text></view>
+          <view>本年<text class="rise" style="font-size:20rpx">　+22.88%</text></view>
+        </view>
+      </view>
+      <view class='camInfo'>
+        <view class='camNum'>{{item.camNum}} <text style="font-size:20rpx">万</text></view>
+        <view class='camTip'>实时销售额</view>
+      </view>
+      <image class='arrow' src='http://img.gagctv.com/17112314452261654'></image>
     </view>
-    <view class='camInfo'>
-      <view class='camNum'>{{item.camNum}}</view>
-      <view class='camTip'>备注</view>
-    </view>
-    <image class='arrow' src='http://img.gagctv.com/17112314452261654'></image>
   </view>
-</view>
 </van-transition>
-<!-- <van-transition
-  show="{{ goodsShow }}"
-  name="fade-left"
- class="goods">
-<view class="storeList">
-  <view class='info-box' wx:for="{{goodsList}}" data-index="{{index}}" bindtap='onGoodsSelected' wx:key="index" hover-class='hover1' hover-stay-time='50'>
-    <image class='storeIcon' src='/images/profile.png'></image>
-    <view class='storeInfo'>
-      <view class='storeName'>{{item.goodsName}}</view>
-      <view class='storeAdmin'>导购: ***</view>
-    </view>
-    <view class='camInfo'>
-      <view class='camNum'>{{item.goodsNum}}</view>
-      <view class='camTip'>备注</view>
-    </view>
-    <image class='arrow' src='http://img.gagctv.com/17112314452261654'></image>
-  </view>
-</view>
-<van-button plain icon="exchange" type="info" class="back" bind:click="back" data-index="2" custom-style="color:#5cadff;border-color:#5cadff;font-size:34rpx">返回</van-button>
-</van-transition> -->
-<!-- <van-transition
-  show="{{ typeShow }}"
-  name="fade-left"
- class="goods">
-<view class="storeList">
-  <view class='info-box' wx:for="{{typeList}}" data-index="{{index}}" bindtap='onTypeSelected' wx:key="index" hover-class='hover1' hover-stay-time='50'>
-    <image class='storeIcon' src='/images/profile.png'></image>
-    <view class='storeInfo'>
-      <view class='storeName'>{{item.typeName}}</view>
-      <view class='storeAdmin'>导购: ***</view>
-    </view>
-    <view class='camInfo'>
-      <view class='camNum'>{{item.typeNum}}</view>
-      <view class='camTip'>备注</view>
-    </view>
-    <image class='arrow' src='http://img.gagctv.com/17112314452261654'></image>
-  </view>
-</view>
-<van-button plain icon="exchange" type="info" class="back" bind:click="back" data-index="3" custom-style="color:#5cadff;border-color:#5cadff;font-size: 34rpx">返回</van-button>
-</van-transition> -->

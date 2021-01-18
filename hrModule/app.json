@@ -1,11 +1,13 @@
 {
   "pages": [
     "pages/my/my",
+    "pages/index/inform",
+    "pages/index/progress/outTransfer",
+    "pages/index/progress/publishLeave",
     "pages/my/DISC/report",
     "pages/my/DISC/index",
     "pages/my/DISC/test",
     "pages/my/DISC/loading",
-    "pages/index/inform",
     "pages/index/check",
     "pages/index/progress/leave",
     "pages/my/select",

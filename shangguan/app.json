@@ -3,6 +3,7 @@
     "pages/my/my",
     "pages/index/inform",
     "pages/index/dailyCheck",
+    "pages/index/conCheck",
     "pages/index/report/reportFail",
     "pages/index/guide",
     "pages/index/checkFail",

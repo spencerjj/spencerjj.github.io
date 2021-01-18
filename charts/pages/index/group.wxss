@@ -1,0 +1,157 @@
+/* pages/index/group.wxss */
+page{
+  background-color: #f8f8f8;
+}
+.container{
+  width: 100%
+}
+.top{
+  width: 94%;
+  margin:auto;
+  display: flex;
+  justify-content: space-between;
+  margin-top: 30rpx;
+  margin-bottom: 30rpx;
+}
+.top .left{
+  width: 48%;
+  height: 170rpx;
+  border-radius: 20rpx;
+  background:#5992e8;
+  box-shadow: 0 0 10rpx 0 #5992e8;
+}
+.top .right{
+  width: 48%;
+  height: 170rpx;
+  border-radius: 20rpx;
+  background:#f0b470;
+  box-shadow: 0 0 10rpx 0 #f0b470;
+}
+.ltop{
+  margin-top: 30rpx;
+}
+.ltop,.lbottom{
+  display: flex;
+  color:white;
+  justify-content: space-between;
+}
+.ltop view,.lbottom view{
+  width: 48%;
+  line-height: 60rpx;
+}
+.ltop view:first-child,.lbottom view:first-child{
+  font-size: 25rpx;
+  text-align: right;
+}
+.middle{
+  display: flex;
+  justify-content: space-around;
+  height: 100rpx;
+  color:#999;
+  font-size: 30rpx;
+  line-height: 100rpx;
+  background:white
+}
+.middle text{
+  font-size: 40rpx;
+  color:#5992e8
+}
+.ttitle{
+  width: 94%;
+  margin-left:3%;
+  height:120rpx;
+  line-height: 120rpx;
+  font-size: 40rpx;
+  font-weight: bolder;
+  padding-left: 40rpx;
+  position: relative;
+}
+.table {
+  width: 94%;
+  margin:auto;
+  box-shadow: 0 0 10rpx 0rpx #dfe7fa; 
+ }
+ .tr {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  min-height: 2rem;
+  align-items: center;
+  font-size: 30rpx;
+
+ }
+ .header{
+   border-bottom: 5rpx solid #5992e8;
+ }
+ .td {
+  width:40%;
+  /* justify-content: center; */
+  text-align: center;
+  /* overflow: hidden;
+  text-overflow:ellipsis; */
+  white-space: wrap;
+  height:auto;
+  color:#666
+ }
+ .bg-w{
+  background: #fff;
+ }
+ .bg-g{
+  background: #ebeff7;
+ }
+ .th {
+  width: 40%;
+  justify-content: center;
+  color: #5992e8;
+  display: flex;
+  height: 2rem;
+  align-items: center;
+  font-size: 28rpx;
+  background:white
+ }
+ .trhover{
+  background: #ddd;
+}
+.rise{
+  color:red
+}
+.down{
+  color:#4ecb74
+}
+.trend{
+  width: 94%;
+  margin:auto;
+  height: 600rpx;
+  position: relative;
+}
+.canvas{
+  width: 100%;
+}
+.allTop{
+  width: 94%;
+  margin:auto;
+  display: flex;
+  justify-content: space-between;
+  color:#eee;
+  border-radius: 20rpx;
+}
+.allSection{
+  text-align: center;
+  height: 160rpx;
+  width: 31%;
+  background: #fff;
+  border-top:6rpx solid #4ba8df;
+  border-radius: 10rpx;
+  position: relative;
+  box-shadow: 0 0 10rpx 0rpx #4ba8df;  
+}
+.allSection view{
+  margin-top: 10rpx;
+  font-size:25rpx;
+  color:#4ba8df
+}
+.allSection view:nth-child(1){
+  font-size: 50rpx;
+  font-weight: bolder;
+  margin-top: 35rpx;
+}

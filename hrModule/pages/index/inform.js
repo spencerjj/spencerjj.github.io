@@ -246,6 +246,8 @@ Page({
       url = 'progress/transfer'
     }else if(e.currentTarget.dataset.key=='continue'){
       url = 'progress/renew'
+    }else if(e.currentTarget.dataset.key=='out_transfer'){
+      url = 'progress/outTransfer'
     }
     console.log(url+'?id='+e.currentTarget.dataset.id+'&status='+e.currentTarget.dataset.status+'&current='+current+'&biz='+e.currentTarget.dataset.biz+'&key='+e.currentTarget.dataset.key)
     wx.navigateTo({

@@ -27,7 +27,8 @@ Page({
           color: '#2d8cf0',
           loading: false
       }
-  ]
+  ],
+  ifClick:false
   },
 
   /**
@@ -187,11 +188,18 @@ handleClick ({ detail }) {
           ifInput:false
       });
   } else {
+    if(that.data.ifClick){
+      $Toast({
+        content: '数据提交中，请稍等',
+        type: 'warning'
+      })
+      return;
+    }
     const action = [...that.data.actions];
           action[1].loading = true;
-    
           that.setData({
-              actions: action
+              actions: action,
+              ifClick:true
           });
     wx.request({
       url: app.globalData.url + 'bpm/bpmTask/backTask.json',
@@ -216,7 +224,8 @@ handleClick ({ detail }) {
               that.setData({
                   visible: false,
                   ifInput:false,
-                  actions: action
+                  actions: action,
+                  ifClick:false
               });
               $Toast({
                   content: '退回成功！',
@@ -234,7 +243,8 @@ handleClick ({ detail }) {
           that.setData({
               visible: false,
               ifInput:false,
-              actions: action
+              actions: action,
+              ifClick:false
           });
           $Toast({
             content: res.data.message,

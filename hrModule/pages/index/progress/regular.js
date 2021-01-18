@@ -52,7 +52,8 @@ Page({
     loadAll:true,
     remarks:'',
     can:false,
-    ifAgree:3
+    ifAgree:3,
+    ifClick:false
   },
 
   /**
@@ -361,6 +362,13 @@ Page({
     }
     // 提交操作
     if (index == 1) {
+      if(that.data.ifClick){
+        $Toast({
+          content: '数据提交中，请稍等',
+          type: 'warning'
+        })
+        return;
+      }
       if(that.data.ifAgree==3){
         $Toast({
           content:"请选择是否转正",
@@ -374,7 +382,8 @@ Page({
       const action = [...this.data.actions];
       action[0].loading = true;
       this.setData({
-        actions: action
+        actions: action,
+        ifClick:true
       });
       console.log(that.data.remarks)
       
@@ -409,7 +418,8 @@ Page({
               that.setData({
                 visible: false,
                 ifInput: false,
-                actions: action
+                actions: action,
+                ifClick:false
               });
               $Toast({
                 content: '提交成功！',
@@ -427,7 +437,8 @@ Page({
               that.setData({
                 visible: false,
                 ifInput: false,
-                actions: action
+                actions: action,
+                ifClick:false
               });
             $Toast({
               content: res.data.message,

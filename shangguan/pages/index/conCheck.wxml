@@ -1,0 +1,173 @@
+<i-tabs current="{{ current }}" color="#af9d7f" bindchange="handleChange" style="z-index:99">
+  <i-tab key="1" title="巡检打卡"></i-tab>
+  <i-tab key="2" title="考核项目"></i-tab>
+</i-tabs>
+<view class='container'>
+  <swiper indicator-dots="{{false}}" autoplay="{{false}}" interval="2000" duration="500"
+    style="height:{{swiperHeight}}rpx" current="{{current-1}}" bindchange="swiperChange">
+    <swiper-item style="overflow-y:auto">
+      <view class="check">
+        <view class="title" wx:if="{{classes.length>0}}">
+          <view class="c1">
+            <text><text style="color:red;font-size:25rpx">*</text> 类别</text>
+          </view>
+            <view class="timePicker">
+              {{typeName||'未知'}}
+            </view>
+        </view>
+
+        <view style="height:15rpx;width:100%;background:#f9f9f9" wx:if="{{classes.length>0}}"></view>
+        <view wx:for="{{lists}}" wx:key="index" class="area {{item.mark?'areaAll':''}}" wx:if="{{classes.length>0}}"
+          wx:for-index="childindex">
+          <view class="list">
+            <view class="top {{item.error?'error':''}}" hover-class='hover1' hover-stay-time='50' bindtap="showAll"
+              data-index="{{childindex}}">
+              <text class="title">{{childindex+1}}、地点:<text class="active"> {{item.area}}</text></text>
+              <text class="title1">时间: <text class="active {{item.over?'red':''}}">{{item.time}}</text></text>
+              <image src="/images/01-27.jpg" wx:if="{{item.pic.length>0}}" class="count"></image>
+              <image src="/images/01-26.jpg" wx:else class="count"></image>
+              <image class="arraw {{item.mark?'selected':''}}" src="/images/lan.png"></image>
+            </view>
+          </view>
+          <view class="title">
+            <view class="c1">
+              <text>{{item.area}}巡检照片</text>
+            </view>
+            <view class="codePicker" bindtap="upload" data-index="{{childindex}}" data-current="1">
+              <image
+                src="http://tiebapic.baidu.com/forum/w%3D580/sign=4c36fa524443fbf2c52ca62b807fca1e/cd014afbfbedab648925929ae036afc379311e27.jpg"
+                class="up" data-index="{{index}}" wx:if="{{item.pic.length==0}}"></image>
+              <image src="{{ URI + 'platform/' + item.pic}}" wx:if="{{item.pic.length>0}}" class="rightPhoto" mode="aspectFill"
+                catchtap="showPic" data-url="{{ URI + 'platform/' + item.pic}}"></image>
+              <image src="/images/delete.png" class="delete" catchtap="delete" data-index="{{childindex}}"
+                wx:if="{{item.pic.length>0}}" data-current="1"></image>
+            </view>
+            <!-- <view class="tip">*照片预览三分钟内生效，预览过期不影响正常上传</view> -->
+          </view>
+        </view>
+        <view class="save" bindtap="save" wx:if="{{classes.length>0}}">
+          <view>临时保存</view>
+        </view>
+        <view style="height:200rpx;width:100%"></view>
+      </view>
+    </swiper-item>
+    <swiper-item style="overflow-y:auto" id="j_page">
+      <view class="report">
+        <i-drawer1 mode="top" wx:if="{{visibility}}" visible="true" bind:close="showDrawer">
+          <view class="dtitle">
+            选择考核项目类型
+          </view>
+          <view class="addDrawer">
+            <view class="title">
+              <view class="c1">
+                <text><text style="color:red;font-size:25rpx">*</text> 考核项目</text>
+              </view>
+              <picker value="{{}}" range="{{array}}" bindchange="sonpickChange">
+                <view class="timePicker">
+                  {{array[sonIndex]}}
+                  <image class="arraw" src="http://img.gagctv.com/17112314452261654"></image>
+                </view>
+              </picker>
+            </view>
+            <button class="progress1 btnwid" bindtap='addOne' hover-class='hover1' hover-stay-time='50'>添加</button>
+          </view>
+        </i-drawer1>
+        <view class="add1" wx:if="{{secLists.length<1}}">
+          <text class="doAdd" bindtap="addPro" wx:if="{{proLists.length>0&&lists.length>0}}">+新增考核项目</text>
+          <text class="doAdd" wx:else>暂无考核项目</text>
+        </view>
+
+        <view class="reportItem {{item.open?'opened':''}}" wx:for="{{secLists}}" :key="index" wx:for-index="childindex" wx:if="{{item.status==0}}">
+          <view class="list">
+            <view class="top" hover-class='hover1' hover-stay-time='50' bindtap="showReport"
+              data-index="{{childindex}}">
+              <text class="title2">{{childindex+1}}、项目:<text class="active">{{item.projectName.length>1?item.projectName:array[item.index]}}</text></text>
+              <image class="arraw {{item.open?'selected':''}}" src="/images/lan.png"></image>
+            </view>
+          </view>
+          <view class="title">
+            <view class="c1">
+              <text><text style="color:red;font-size:25rpx">*</text> 考核项目({{childindex+1}})</text>
+              <view class="remove" data-index="{{childindex}}" bindtap="remove">删除</view>
+            </view>
+            <picker value="{{item.index}}" range="{{array}}" bindchange="pickChange" data-index="{{childindex}}">
+              <view class="timePicker">
+                {{item.projectName.length>1?item.projectName:array[item.index]}}
+                <image class="arraw" src="http://img.gagctv.com/17112314452261654"></image>
+              </view>
+            </picker>
+          </view>
+          <view class="title" wx:if="{{type==2||type==3}}">
+            <view class="c1">
+              <text><text style="color:red;font-size:25rpx">*</text> 部门</text>
+            </view>
+            <picker value="{{item.index1}}" range="{{array1}}" bindchange="officeChange" data-index="{{childindex}}">
+              <view class="timePicker">
+                {{item.officeName.length>1?item.officeName:array1[item.index1]}}
+                <image class="arraw" src="http://img.gagctv.com/17112314452261654"></image>
+              </view>
+            </picker>
+          </view>
+          <view class="title" wx:if="{{item.mark==1}}">
+            <view class="c1">
+              <text><text style="color:red;font-size:25rpx">*</text> 处理人</text>
+            </view>
+            <input class="timePicker" placeholder="请填写姓名并选择处理人" placeholder-style='color:#af9d7f;padding:0'
+              bindinput='checkInput' value="{{item.dealUserName.length>1?item.dealUserName:item.keywords}}" bindconfirm="confirm" confirm-type="done" maxlength="20"
+              cursor-spacing="200"></input>
+            <view class="sonLists" wx:if="{{sonvisibility}}">
+              <view wx:for="{{codeLists}}" wx:for-item="sonItem" class="sonItem" bindtap="selectItem"
+                hover-class='hover1' hover-stay-time='50' data-name="{{sonItem.name}}" data-code="{{sonItem.code}}"
+                data-office="{{sonItem.office}}" wx:key="index" data-index="{{childindex}}">
+                {{sonItem.name}}({{sonItem.office}})</view>
+            </view>
+          </view>
+          <view class="title" wx:if="{{item.mark==1}}">
+            <view class="c1">
+              <text><text style="color:red;font-size:25rpx">*</text> 工作联系类型</text>
+            </view>
+            <picker value="{{item.index2}}" range="{{array2}}" bindchange="typeChange" data-index="{{childindex}}">
+              <view class="timePicker">
+                {{array2[item.index2]}}
+                <image class="arraw" src="http://img.gagctv.com/17112314452261654"></image>
+              </view>
+            </picker>
+          </view>
+          <view class="title">
+            <view class="c1">
+              <text>{{item.area}}现场照片</text>
+            </view>
+            <view class="codePicker" bindtap="upload" data-index="{{childindex}}" data-current="2">
+              <image
+                src="http://tiebapic.baidu.com/forum/w%3D580/sign=4c36fa524443fbf2c52ca62b807fca1e/cd014afbfbedab648925929ae036afc379311e27.jpg"
+                class="up" data-index="{{childindex}}" wx:if="{{item.pic.length==0&&!item.pic}}"></image>
+              <image src="{{ URI + 'platform/' + item.pic}}" wx:if="{{item.pic.length>0}}" class="rightPhoto" mode="aspectFill"
+                catchtap="showPic" data-url="{{ URI + 'platform' + item.pic}}"></image>
+              <image src="/images/delete.png" class="delete" catchtap="delete" data-index="{{childindex}}"
+                wx:if="{{item.pic.length>0}}" data-current="2"></image>
+            </view>
+          </view>
+          <view class="title">
+            <view class="c1">
+              <text><text style="color:red;font-size:25rpx">*</text> 问题描述</text>
+            </view>
+            <input class="timePicker" placeholder="请输入现场问题" placeholder-class="placeholder" data-index="{{childindex}}"
+              bindinput="areaInput" value="{{item.remark}}" cursor-spacing="100">
+            </input>
+          </view>
+        </view>
+        <view class="add" hover-class='hover1' hover-stay-time='50' bindtap="addPro" wx:if="{{secLists.length>0}}">
+          +添加考核项目</view>
+        <view class="progress" wx:if="{{classes.length>0}}">
+          <view bindtap="save">临时保存</view>
+          <view bindtap="handleOpen">提交</view>
+        </view>
+        <view style="height:200rpx;width:100%"></view>
+      </view>
+    </swiper-item>
+  </swiper>
+
+</view>
+<i-action-sheet visible="{{visible}}" actions="{{actions}}" show-cancel bind:cancel="handleCancel"
+  bind:click="handleClickItem" />
+<i-toast id="toast" />

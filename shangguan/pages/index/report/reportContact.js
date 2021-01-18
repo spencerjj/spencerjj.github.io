@@ -38,7 +38,8 @@ Page({
     remark: '',
     typeLists: [],
     userName: '',
-    type:0
+    type:0,
+    ifClick:false
   },
 
   /**
@@ -276,7 +277,8 @@ Page({
     const action = [...this.data.actions];
     action[0].loading = false;
     this.setData({
-      actions: action
+      actions: action,
+      ifClick:false
     });
   },
   handleClickItem({
@@ -285,6 +287,13 @@ Page({
     var that = this
     const index = detail.index + 1;
     if (index == 1) {
+        if(that.data.ifClick){
+          $Toast({
+            content: '数据提交中，请稍等',
+            type: 'warning'
+          })
+          return;
+        }
       if (!that.data.user.name) {
         $Toast({
           content: '请选择处理人',
@@ -305,7 +314,8 @@ Page({
         const action = [...this.data.actions];
         action[0].loading = true;
         this.setData({
-          actions: action
+          actions: action,
+          ifClick:true
         });
         var data = {
           __sid: that.data.userDetails.sid,
@@ -326,11 +336,11 @@ Page({
               return;
             }
             console.log(res)
-            setTimeout(() => {
               action[0].loading = false;
               that.setData({
                 visible: false,
-                actions: action
+                actions: action,
+                ifClick:false
               });
               $Toast({
                 content: '提交成功！',
@@ -340,8 +350,7 @@ Page({
                 wx.switchTab({
                   url: '/pages/my/my',
                 })
-              },500)
-            }, 1000);
+              },1000)
           }
         ).catch(res => {
           wx.showModal({
@@ -355,7 +364,8 @@ Page({
           action[0].loading = false;
           that.setData({
             visible: false,
-            actions: action
+            actions: action,
+            ifClick:false
           });
         });
       }

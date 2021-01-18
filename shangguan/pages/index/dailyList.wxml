@@ -1,13 +1,13 @@
 <view class="content">
-  <picker mode="date" bindchange="pickerChange" end="{{today}}">
+  <picker mode="date" bindchange="pickerChange" end="{{today}}" wx:if="{{lists.length>0}}">
     <view class='dateInput'>{{showDate.length==0?'请选择起始日期进行查询':'起始日期：'+showDate}}</view>
   </picker>
-  <view class="list expired" wx:for="{{lists}}" data-index="{{index}}" wx:for-item="itemName" wx:key="index" bindtap="toPage" data-no="{{itemName.checkupNo}}">
+  <view class="list expired" wx:for="{{lists}}" data-index="{{index}}" wx:for-item="itemName" wx:key="index" bindtap="toPage" data-no="{{itemName.checkupNo}}" data-code="{{itemName.createBy}}" data-status="{{itemName.status}}">
     <view class="top" hover-class='hover1' hover-stay-time='50' data-index="{{index}}">
-      <view class="title">巡检类别:<text class="active"> {{itemName.typeName}}</text></view>
+      <view class="title">巡检类别:<text class="active"> {{itemName.typeName||'未知'}}</text></view>
       <view class="name">创建时间:<text class="active"> {{itemName.createDate}}</text></view>
       <view class="state bg1" wx:if="{{itemName.status==0}}">已完成</view>
-      <view class="state bg2" wx:elif="{{itemName.status==2}}">进行中</view>
+      <view class="state bg2" wx:elif="{{itemName.status==3}}">进行中</view>
       <view class="state bg3" wx:elif="{{itemName.status==1}}">已删除</view>
     </view>
   </view>

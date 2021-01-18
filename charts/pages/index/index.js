@@ -174,7 +174,7 @@ Page({
                 if (res.data == undefined) {
                     wx.showModal({
                         title: '提示',
-                        content: '当天暂无数据',
+                        content: '当天暂无数据,请重新选择日期',
                     })
                     return;
                 } else {
@@ -617,16 +617,20 @@ Page({
     },
     bindDateChange(e) {
         var date = new Date(e.detail.value)
+        var thisYear = date.getFullYear()
+        var lastYear = date.getFullYear()-1
         var month = (date.getMonth() + 1) >= 10 ? (date.getMonth() + 1) : '0' + (date.getMonth() + 1)
         var day = (date.getDate()) >= 10 ? (date.getDate()) : '0' + (date.getDate())
         var today = date.getFullYear() + '年' + (month) + '月' + (day) + '日'
         var showDate = (month) + '/' + (day)
         var week = "日一二三四五六".charAt(new Date(date).getDay())
         this.setData({
-            showDate: showDate,
             date: e.detail.value,
-            today: today,
-            week: week
+            showDate,
+            today,
+            week,
+            thisYear,
+            lastYear
         })
         this.getTop()
     },
@@ -648,6 +652,11 @@ Page({
           title:'口径说明',
           content:'销售总计：折线图为当月销售额同比。\r\n区域统计：’总公司‘-上海广场bespoke店、公司内卖和内卖（LV0001）及经销售卡(LV0013)的卡提货。\r\n渠道统计：‘其他’-上海广场bespoke店、公司内卖和赠送。',
           showCancel:false
+        })
+    },
+    toSelect(e){
+        wx.redirectTo({
+          url: 'select',
         })
     }
 })

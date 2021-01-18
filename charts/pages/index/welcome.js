@@ -122,6 +122,25 @@ Page({
   loading(e){
     var set = setInterval(()=>{
       this.setData({
+        pro:this.data.pro==90?this.data.pro:this.data.pro+1,
+      })
+      if(this.data.gifLeft<82){
+        this.setData({
+          gifLeft:this.data.gifLeft+0.9
+        })
+      }
+      if(this.data.pro==90){
+        if(this.data.ifLogin){
+          console.log(123)
+          clearInterval(set)
+          this.toPage()
+        }
+      }
+    },15)
+  },
+  toPage(){
+    var go = setInterval(()=>{
+      this.setData({
         pro:this.data.pro==100?this.data.pro:this.data.pro+1,
       })
       if(this.data.gifLeft<90){
@@ -131,9 +150,10 @@ Page({
       }
       if(this.data.pro==100){
         if(this.data.ifLogin){
-          clearInterval(set)
+          clearInterval(go)
+          console.log(wx.getStorageSync('chartsUser'))
           wx.switchTab({
-            url: 'index',
+            // url: 'index',
           })
         }
       }
