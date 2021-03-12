@@ -21,10 +21,10 @@ Page({
     pageNo: 1,
     loading: false,
     listIsFull: false,
-    type:'',
-    isMore:false,
-    startDate:'',
-    showDate:''
+    type: '',
+    isMore: false,
+    startDate: '',
+    showDate: ''
   },
 
   /**
@@ -36,7 +36,7 @@ Page({
     let now = new Date()
     that.setData({
       userDetails: userDetails,
-      type:options.type,
+      type: options.type,
       today: now.format('yyyy-MM-dd')
     })
   },
@@ -119,11 +119,11 @@ Page({
     var data = {
       __sid: that.data.userDetails.sid,
       __ajax: 'json',
-      type:that.data.type,
+      type: that.data.type,
       companyCode: that.data.userDetails.companyCode,
-      startDatelte:that.data.startDate,
-      pageSize:that.data.pageSize,
-      pageNo:that.data.pageNo
+      startDatelte: that.data.startDate,
+      pageSize: that.data.pageSize,
+      pageNo: that.data.pageNo
     }
     postRequest(getApiHost(), 'api/merchant/merchantCheckupOrderList', 'url', data, 0, false, false).then(
       res => {
@@ -134,14 +134,14 @@ Page({
         }
         let lists = res.data.list
         console.log(lists)
-        if(!lists||lists.length<1){
+        if (!lists || lists.length < 1) {
           wx.showModal({
             title: '提示',
             content: '暂无巡检记录，立即发起一条',
-            success (res) {
+            success(res) {
               if (res.confirm) {
                 wx.navigateTo({
-                  url: 'dailyCheck?type='+that.data.type
+                  url: 'dailyCheck?type=' + that.data.type
                 })
               } else if (res.cancel) {
                 wx.navigateBack({
@@ -153,42 +153,60 @@ Page({
           })
           return;
         }
-        if(that.data.pageNo>1){
-          console.log('第'+that.data.pageNo+'页')
+        if (that.data.pageNo > 1) {
+          console.log('第' + that.data.pageNo + '页')
           var list = that.data.lists
           list = list.concat(res.data.list)
           that.setData({
-            lists:list,
-            loadAll:false
+            lists: list,
+            loadAll: false
           })
           console.log(that.data.lists)
-        }else{
+        } else {
           that.setData({
-          lists:res.data.list,
-          loadAll:false
-        })
-        }
-        if(res.data.count>that.data.pageSize){
-          that.setData({
-            loading:true,
-            listIsFull:false
+            lists: res.data.list,
+            loadAll: false
           })
-          if(Math.ceil(res.data.count/that.data.pageSize)>that.data.pageNo){
+          for (let x in lists) {
+            if (lists[x].status == 3 && lists[x].createBy == that.data.userDetails.userCode) {
+              console.log('有未完成')
+              wx.showModal({
+                title: '提示',
+                content: '您有进行中的巡检，是否继续完成该巡检？',
+                showCancel: true,
+                success(res) {
+                  if (res.confirm) {
+                    wx.navigateTo({
+                      url: 'conCheck?type=' + that.data.type + '&no=' + lists[x].checkupNo
+                    })
+                  }
+                }
+              })
+              break;
+            }
+          }
+        }
+        if (res.data.count > that.data.pageSize) {
+          that.setData({
+            loading: true,
+            listIsFull: false
+          })
+          if (Math.ceil(res.data.count / that.data.pageSize) > that.data.pageNo) {
             that.setData({
-              isMore:true
+              isMore: true
             })
-          }else{
+          } else {
             that.setData({
-              isMore:false,
-              loading:false,
-              listIsFull:true
+              isMore: false,
+              loading: false,
+              listIsFull: true
             })
           }
-        }else{
+        } else {
           that.setData({
-            isMore:false,
-            loading:false,
-            listIsFull:true
+            isMore: false,
+            loading: false,
+            listIsFull: true
           })
         }
       }
@@ -202,7 +220,7 @@ Page({
       });
     });
   },
-  
+
   showDetail(e) {
     var that = this;
     var lists = that.data.lists;
@@ -218,35 +236,35 @@ Page({
       phoneNumber: e.currentTarget.dataset.mark //仅为示例，并非真实的电话号码
     })
   },
-  toPage(e){
+  toPage(e) {
     console.log(e.currentTarget.dataset.status)
-    if(e.currentTarget.dataset.status==3){
-      if(e.currentTarget.dataset.code==this.data.userDetails.userCode){
+    if (e.currentTarget.dataset.status == 3) {
+      if (e.currentTarget.dataset.code == this.data.userDetails.userCode) {
         wx.navigateTo({
-          url: 'conCheck?type='+this.data.type+'&no='+e.currentTarget.dataset.no
+          url: 'conCheck?type=' + this.data.type + '&no=' + e.currentTarget.dataset.no
         })
-      }else{
+      } else {
         $Toast({
-          type:'warning',
-          content:'用户正在巡检中'
+          type: 'warning',
+          content: '用户正在巡检中'
         })
       }
-    }else{
+    } else {
       wx.navigateTo({
-        url: 'dailyRecord1?type='+this.data.type+'&no='+e.currentTarget.dataset.no,
+        url: 'dailyRecord1?type=' + this.data.type + '&no=' + e.currentTarget.dataset.no,
       })
     }
 
   },
-  goCheck(e){
+  goCheck(e) {
     wx.navigateTo({
-      url: 'dailyCheck?type='+this.data.type
+      url: 'dailyCheck?type=' + this.data.type
     })
   },
-  pickerChange(e){
-    let showDate = new Date(e.detail.value).getFullYear()+'年'+(new Date(e.detail.value).getMonth()-1+2)+'月'+new Date(e.detail.value).getDate()+'日'
+  pickerChange(e) {
+    let showDate = new Date(e.detail.value).getFullYear() + '年' + (new Date(e.detail.value).getMonth() - 1 + 2) + '月' + new Date(e.detail.value).getDate() + '日'
     this.setData({
-      startDate:e.detail.value,
+      startDate: e.detail.value,
       showDate,
       pageNo: 1,
       listIsFull: false,

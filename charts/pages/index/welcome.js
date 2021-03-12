@@ -16,54 +16,33 @@ Page({
   data: {
     pro:0,
     gifLeft:2,
-    ifLogin:false
+    ifLogin:false,
+    userStoreList:[
+      {
+        storeCode:'601',
+        ifStore:false,
+      },
+      {
+        storeCode:'602',
+        ifStore:false,
+      },
+      {
+        storeCode:'603',
+        ifStore:false,
+      },
+      {
+        storeCode:'lampo',
+        ifStore:false,
+      }
+    ]
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    var that = this
-    this.loading()
-    var chartsUser = wx.getStorageSync('chartsUser');
-    this.setData({
-        userName: chartsUser.userName,
-        userCode: chartsUser.userCode,
-        sid: chartsUser.sid,
-        loginCode: chartsUser.loginCode,
-        officeName:chartsUser.officeName
-    })
-    var data = {
-      __sid: that.data.sid,
-      __ajax: 'json',
-      lastDate:that.data.date,
-      pageNo:1,
-      pageSize:100
-    }
-    // 会员人数
-    getRequest(getApiHost(), 'platform/v1/api/minireport/lampo/findLampoMemberSum', 'body', data, 0, false, false,false).then(
-      res => {
-        // console.log(res)
-        if (res.result && res.result == 'login') {
-            that.login()
-            console.log('登录失效')
-            return;
-          }
-        if(res.result){
-          that.setData({
-            ifLogin:true
-          })
-        }
-      }
-    ).catch(res => {
-      wx.showModal({
-        title: '错误',
-        content: res.message,
-        showCancel: false,
-        confirmText: '知道了',
-        confirmColor: '#1890FF'
-      })
-    });
+    wx.removeStorageSync('chartsUser')
+    wx.removeStorageSync('userStoreList')
   },
 
   /**
@@ -78,11 +57,14 @@ Page({
    */
   login(e){
     app.doLogin().then(data => {
-      this.onLoad()
+      this.setData({
+        ifLogin:true
+      })
     })
   },
   onShow: function () {
-
+    this.loading()
+    this.login()
   },
 
   /**
@@ -152,8 +134,52 @@ Page({
         if(this.data.ifLogin){
           clearInterval(go)
           console.log(wx.getStorageSync('chartsUser'))
-          wx.switchTab({
-            // url: 'index',
+          let menus = wx.getStorageSync('chartsUser').userMenus
+          let userStoreList = this.data.userStoreList
+          menus.map((item)=>{
+            if(item.permission=='bhreport:601:view'){
+              userStoreList[0].ifStore = true
+            }else if(item.permission=='bhreport:602:view'){
+              userStoreList[1].ifStore = true
+            }else if(item.permission=='bhreport:603:view'){
+              userStoreList[2].ifStore = true
+            }else if(item.permission=='lampo'){
+              userStoreList[3].ifStore = true
+            }
+          })
+          wx.removeStorageSync('userStoreList')
+          wx.setStorageSync('userStoreList', userStoreList)
+          for(let x in menus){
+            if(menus[x].permission=='bhreport:group:view'){
+              app.globalData.changeShow = true
+              wx.redirectTo({
+                url: 'select'
+              })
+              console.log('集团')
+              return false;
+            }
+          }
+          for(let x in menus){
+            if(menus[x].permission=='bhreport:overview:view'){
+              console.log('百货')
+              wx.redirectTo({
+                url: 'depart'
+              })
+              return false;
+            }
+          }
+          for(let x in menus){
+            if(menus[x].permission=='lampo'){
+              console.log('蓝豹')
+              wx.switchTab({
+                url: 'index'
+              })
+              return false;
+            }
+          }
+          wx.showToast({
+            title: '暂无查看权限',
+            image: '/images/00-8.png'
           })
         }
       }

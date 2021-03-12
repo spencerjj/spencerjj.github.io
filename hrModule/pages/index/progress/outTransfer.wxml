@@ -6,7 +6,7 @@
     </view>
     <view class="codePicker">
       <text>{{lists.oaEmployOut.userName}}</text>
-       <!-- <image src="../../../images/file.png" bindtap="copy" data-cont="{{lists.userName}}" class="copyfile"></image> -->
+       <image src="../../../images/file.png" bindtap="copy" data-cont="{{lists.oaEmployOut.userName}}" class="copyfile"></image>
     </view>
   </view>
   <view class="title">
@@ -35,7 +35,21 @@
 			</view>
     </view>
   </view>
-  <view class="title" wx:if="{{lists.bpm.activityId=='hrbp'||index1!=3}}">
+	<view class="sub" wx:if="{{lists.bpm.activityId=='ssc'}}">
+    <view class="c1">
+      <text>最后结薪日<text style="color:red;font-size:25rpx">*</text></text>
+    </view>
+    <view class="codePicker">
+      <picker mode="date" value="{{salaryDate}}" bindchange="bindSalaryChange" disabled="{{current==1?false:true}}">
+			<view class="timePicker pickerError">
+				<text wx:if="{{salaryDate.length==0}}" style="color:#af9d7f">请选择...</text>
+        {{salaryDate}}
+				<image class="arraw" src="http://img.gagctv.com/17112314452261654"></image>
+			</view>
+		</picker>
+    </view>
+  </view>
+  <!-- <view class="title" wx:if="{{lists.bpm.activityId=='hrbp'||index1!=3}}">
 		<view class="c1">
 			<text>是否财务审批 </text>
 		</view>
@@ -92,7 +106,7 @@
 				<image class="arraw" src="http://img.gagctv.com/17112314452261654"></image>
 			</view>
 		</picker>
-  </view>
+  </view> -->
   <view class="title" wx:if="{{lists.bpm.activityId=='emp'||imgLists.length>1}}">
     <view class="c1">
       <text> 图片</text>

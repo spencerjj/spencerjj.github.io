@@ -15,62 +15,51 @@ Page({
     storeList: [
       {
         storeName:'购物中心',
-        camNum:'1821',
-        month:'3334',
-        year:'11143'
-      },
-      {
-        storeName:'新世纪',
-        camNum:'1101',
-        month:'34',
-        year:'143'
       },
       {
         storeName:'百货大楼',
-        camNum:'675',
-        month:'34',
-        year:'143'
+      },
+      {
+        storeName:'新世纪',
       },
       {
         storeName:'蓝豹',
-        camNum:'321',
-        month:'34',
-        year:'143'
       }
     ],
     storeShow:false,
     goodsShow:false,
     typeShow:false,
-    steps: [
-      {
-        text: '物流1',
-        desc: '2019-1-1 12:40',
-      },
-      {
-        text: '物流2',
-        desc: '2019-1-1 12:40',
-      },
-      {
-        text: '物流3',
-        desc: '2019-1-1 12:40',
-      },
-      {
-        text: '物流4',
-        desc: '2019-1-1 12:40',
-      },
-    ],
     show:false,
-    areaList:''
+    tab0:false,
+    tab1:false,
+    tab2:false,
+    tab3:false,
+    tab0List:[],
+    tab1List:[],
+    tab2List:[],
+    tab3List:[],
+    today:'',
+    lampoMonth:[],
+    lampoYear:[]
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
+    var now = new Date()
+    now.setTime(now.getTime()-24*60*60*1000);
+    var month = (now.getMonth() + 1) >= 10 ? (now.getMonth() + 1) : '0' + (now.getMonth() + 1)
+    var day = now.getDate()>=10?now.getDate():'0'+now.getDate()
+    var lastDay = now.getFullYear()+'-'+month+'-'+day
     this.setData({
-      storeShow:true,
-      areaList:areaList
+      lastDay
     })
+    setTimeout(()=>{
+      this.setData({
+        storeShow:true
+      })
+    },500)
   },
 
   /**
@@ -88,40 +77,34 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function() {
-
-    var data = {}
-    getRequest(getApiHost(), 'platform/v1/api/wxmini/getCompanyList', 'body', data, 0, false, false, false).then(
-      res => {
-        if (res.result) {
-          var lists = res.data
-          var array1 = []
-          lists.map((item) => {
-            array1.push(item.companyName)
-          })
-          that.setData({
-            companyLists: lists,
-            array1: array1
-            // companyCode: lists[0].companyCode
-          })
-        } else {
-          wx.showModal({
-            title: '错误',
-            content: res.message,
-            showCancel: false,
-            confirmText: '知道了',
-            confirmColor: '#1890FF'
-          })
-        }
-      }
-    ).catch(res => {
-      // wx.showModal({
-      //   title: '错误',
-      //   content: '获取公司列表失败，请联系管理员',
-      //   showCancel: false,
-      //   confirmText: '知道了',
-      //   confirmColor: '#1890FF'
-      // })
-    });
+    var that = this
+    var chartsUser = wx.getStorageSync('chartsUser');
+    var userStoreList = wx.getStorageSync('userStoreList')
+    console.log(userStoreList)
+    this.setData({
+      sid: chartsUser.sid,
+      userMenus: chartsUser.userMenus,
+      userStoreList
+    })
+    var tab1, tab2, tab3, tab0
+    if(userStoreList){
+        tab0 = userStoreList[0].ifStore
+        tab1 = userStoreList[1].ifStore
+        tab2 = userStoreList[2].ifStore
+        tab3 = userStoreList[3].ifStore
+    }else{
+      wx.redirectTo({
+        url: 'welcome',
+      })
+      return;
+    }
+    that.setData({
+      tab0,
+      tab1,
+      tab2,
+      tab3
+    })
+    this.getTab()
   },
 
   /**
@@ -158,52 +141,90 @@ Page({
   onShareAppMessage: function() {
 
   },
+  login(e){
+    // app.doLogin().then(data => {
+    //     this.onShow()
+    // })
+    wx.redirectTo({
+      url: 'welcome',
+    })
+  },
   onStoreSelected(e){
-    console.log(e.currentTarget.dataset.index)
-    let index = e.currentTarget.dataset.index
-    if(index==3){
+    let mark = e.currentTarget.dataset.mark
+    if(mark=='lampo'){
       wx.switchTab({
         url: 'index',
       })
-    }else if(index==0){
+    }else{
       wx.redirectTo({
-        url: 'depart?mark=gou',
-      })
-    }else if(index==1){
-      wx.redirectTo({
-        url: 'depart?mark=xin',
-      })
-    }else if(index==2){
-      wx.redirectTo({
-        url: 'depart?mark=bai',
+        url: 'depart?active='+mark,
       })
     }
-   
   },
 
    onTypeSelected(e){
  
 
    },
-   back(e){
-     let index = e.currentTarget.dataset.index
-     console.log(index)
-       index==3?this.setData({
-                  storeShow:true,
-                  typeShow:false
-                })
-                :
-                this.setData({
-                  goodsShow:true,
-                  typeShow:false
-                })
+   getTab() {
+    var that = this
+    var data = {
+      __sid: that.data.sid,
+      __ajax: 'json'
+    }
+    // 业务总览
+    getRequest(getApiHost(), 'platform/v1/api/minireport/bh/groupIndex', 'body', data, 0, false, false).then(
+      res => {
+        if (res.result && res.result == 'login') {
+          that.login()
+          console.log('登录失效')
+          return;
+        }
+        // console.log(res)
+        if (res.data == undefined) {
+          wx.showToast({
+            title:  '暂无销售数据',
+            image: '/images/00-8.png',
+          })
+          return;
+        } else {
+          var totalLists = res.data
+          console.log(totalLists)
+          var tab0List=[]
+          var tab1List=[]
+          var tab2List=[]
+          var tab3List=[]
+          totalLists.map((item) => {
+            if (item.storeName.indexOf('常州') != -1) {
+              item.storeName = item.storeName.substring(2, item.storeName.length)
+            }
+            item.moM = item.moM||0
+            item.yoY = item.yoY||0
+            if(item.storeId=='601'){
+              tab0List = item
+            }else if(item.storeId=='602'){
+              tab1List = item
+            }else if(item.storeId=='603'){
+              tab2List = item
+            }else if(item.storeId=='lampo'){
+              tab3List = item
+            }
+          })
 
-   },
-  showPopup() {
-    this.setData({ show: true });
-  },
-
-  onClose() {
-    this.setData({ show: false });
-  },
+          that.setData({
+            totalLists: res.data,
+            tab0List,
+            tab1List,
+            tab2List,
+            tab3List
+          })
+        }
+      }
+    ).catch(res => {
+      wx.showToast({
+        title:  res.message=="您的操作权限不足！"?'操作权限不足':res.message,
+        image: '/images/00-8.png',
+      })
+    });
+  }
 })

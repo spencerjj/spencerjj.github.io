@@ -33,10 +33,11 @@ page{
   margin-bottom: 20rpx;
   box-shadow: 0 0 5rpx #ccc;
   border-radius: 10rpx;
+  overflow: hidden;
+  display: flex;
+  justify-content: space-around;
 }
-
 .info-box .storeIcon {
-  float: left;
   margin-left: 20rpx;
   margin-top:75rpx;
   width: 80rpx;
@@ -44,10 +45,9 @@ page{
 }
 
 .info-box .storeInfo {
-  width: 32%;
   height: 140rpx;
-  float: left;
   text-align: center;
+  width:30%
 }
 
 .info-box .storeInfo .storeName {
@@ -70,7 +70,7 @@ page{
   white-space: nowrap;
 } */
 .info-box .sales{
-  float: left;
+  width: 35%;
 }
 .info-box .saleSection{
   color:white;
@@ -84,8 +84,34 @@ page{
   font-size: 40rpx;
   font-weight: bolder;
 }
+
+.info-box .saleslanbao{
+  position: absolute;
+  display: flex;
+  justify-content: space-between;
+  width: 60%;
+  top:40rpx;
+  line-height: 50rpx;
+  right: 30rpx;
+}
+.info-box .saleSection1{
+  color:white;
+  text-align: center;
+  margin-top:25rpx;
+  width: 50%;
+}
+.info-box .saleSection1:nth-child(2){
+  margin-left: 10rpx;
+}
+.saleSection1 view:nth-child(2){
+  font-size:25rpx;
+}
+.saleSection1 view:nth-child(1){
+  font-size: 40rpx;
+  font-weight: bolder;
+}
 .info-box .camInfo {
-  width: auto;
+  min-width: 30%;
   height: 100rpx;
   float: right;
   margin-top: 60rpx;

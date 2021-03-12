@@ -16,9 +16,12 @@ Page({
     isBottom: false,
     array1: ['是', '否'],
     index1: 0,
-    index2: 3,
-    index3: 3,
+    index2: 1,
+    index3: 1,
     index4: 3,
+    index5:-1,
+    array5:[],
+    trySalary:'',
     notice: '请输入终止原因',
     focus: false,
     myComment: '',
@@ -39,8 +42,6 @@ Page({
     visible: false,
     lists: '',
     ifoa: 0,
-    ifdoor: '',
-    ifemail: '',
     iftrain: '',
     current: '',
     id: '',
@@ -73,8 +74,6 @@ Page({
       if(current!=1){
         that.setData({
           ifoa:1,
-          ifdoor:1,
-          ifemail:1,
           iftrain:1
         })
       }
@@ -226,7 +225,6 @@ Page({
               }
               if (lists.isdoor != undefined) {
                 that.setData({
-                  ifdoor:1
                 })
                 if (lists.isdoor == 1) {
                   that.setData({
@@ -240,7 +238,6 @@ Page({
               }
               if (lists.isemail != undefined) {
                 that.setData({
-                  ifemail:1
                 })
                 if (lists.isemail == 1) {
                   that.setData({
@@ -252,21 +249,6 @@ Page({
                   })
                 }
               }
-              if (lists.istraining != undefined) {
-                that.setData({
-                  iftrain:1
-                })
-                if (lists.istraining == 1) {
-                  that.setData({
-                    index4: 0,
-                  })
-                } else {
-                  that.setData({
-                    index4: 1
-                  })
-                }
-              }
-
               that.setData({
                 lists: lists
               })
@@ -296,6 +278,29 @@ Page({
           console.log('can action')
           that.setData({
             can:true
+          })
+        }
+      }
+    })
+    wx.request({
+      url: app.globalData.url + 'oa/oaEmployEntry/insuranceAddressList',
+      data: {
+        // __sid: app.globalData.__sid,
+        __sid: app.globalData.tempSid,
+        __ajax: 'json'
+      },
+      header: {
+        'content-type': 'application/json' // 默认值
+      },
+      success(res) {
+        console.log(res)
+        if(res.data){
+          let array5 = []
+          res.data.map((item)=>{
+            array5.push(item.name)
+          })
+          that.setData({
+            array5
           })
         }
       }
@@ -349,6 +354,12 @@ Page({
       safeLevel: e.detail.value
     })
   },
+  hinput5: function (e) {
+    console.log(e.detail.value)
+    this.setData({
+      trySalary: e.detail.value
+    })
+  },
   pickChange1: function (e) {
     console.log(e.detail.value)
     this.setData({
@@ -360,14 +371,12 @@ Page({
     console.log(e.detail.value)
     this.setData({
       index2: e.detail.value,
-      ifdoor: e.detail.value,
     })
   },
   pickChange3: function (e) {
     console.log(e.detail.value)
     this.setData({
       index3: e.detail.value,
-      ifemail: e.detail.value
     })
   },
   pickChange4: function (e) {
@@ -375,6 +384,12 @@ Page({
     this.setData({
       index4: e.detail.value,
       iftrain: e.detail.value
+    })
+  },
+  pickChange5:function(e){
+    console.log(e.detail.value)
+    this.setData({
+      index5: e.detail.value  
     })
   },
   handleOpen() {
@@ -410,7 +425,19 @@ Page({
         })
         return;
       }
-      if (that.data.ifoa.length != 0 && that.data.ifdoor.length != 0 && that.data.ifemail.length != 0) {
+      if(that.data.lists.bpm.activityId == 'DeptManager'&&that.data.trySalary.length<1){
+        $Toast({
+          content:'请填写试用期工资',
+          type:'warning'
+        })
+        that.setData({
+          visible: false
+        })
+        wx.pageScrollTo({
+          scrollTop: 300
+        })
+        return;
+      }
         const action = [...this.data.actions];
         action[0].loading = true;
 
@@ -418,6 +445,7 @@ Page({
           actions: action,
           ifClick:true
         });
+        
         var data = {
           // __sid: app.globalData.__sid,
           __sid: app.globalData.tempSid,
@@ -425,11 +453,12 @@ Page({
           isoa: 1,
           isemail: Math.abs(that.data.index2 - 1),
           isdoor: Math.abs(that.data.index3 - 1),
-          istraining: Math.abs(that.data.index4 - 1),
           oaPwd:that.data.oaPwd,
           emailAccount:that.data.emailAccount,
           emailPwd:that.data.emailPwd,
-          safeLevel:that.data.safeLevel,
+          dependency:that.data.index5==-1?'':that.data.array5[that.data.index5],
+          trySalary:that.data.trySalary,
+          // safeLevel:that.data.safeLevel,
           'bpm.comment': that.data.hint,
           id: that.data.id,
           'bpm.taskId':that.data.lists.bpm.taskId,
@@ -483,16 +512,7 @@ Page({
           }
         })
 
-      } else {
-        $Toast({
-          content: "请完整选择需要开通的权限",
-          type: 'warning'
-        })
-        that.setData({
-          visible: false
-        })
-
-      }
+     
 
     }
     // 中止操作

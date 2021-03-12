@@ -9,7 +9,7 @@
 			<image src="../../../images/file.png" bindtap="copy" data-cont="{{lists.name}}"></image>
 		</view>
 	</view>
-		<view class="title">
+	<view class="title">
 		<view class="c1">
 			<text>员工性别</text>
 		</view>
@@ -78,17 +78,31 @@
 			<text>{{lists.conStartDate}}</text>
 		</view>
 	</view>
-		<view class="title" style="z-index:1 !important" wx:if="{{oaEmployEntry.bpm.activityId != 'anth'}}">
-		<view class="c1">
-			<text>OA安全级别<text style="color:red;font-size:25rpx">*</text></text>
-		</view>
-			<input class="c1Input"  placeholder='请输入...' placeholder-style='color:#af9d7f;padding:0;margin:0'  bindinput='hinput4' value="{{safeLevel}}" disabled="{{current==1&&lists.bpm.activityId=='DeptManager'?false:true}}"></input>
+	<view class="title" wx:if="{{lists.bpm.activityId == 'DeptManager'}}">
+    <view class="c1">
+      <text>试用期工资<text style="color:red;font-size:25rpx">*</text></text>
+    </view>
+    <input class="c1Input" placeholder-style='color:#af9d7f' type="number" maxlength="10" bindinput='hinput5'
+      value="{{lists.trySalary}}" disabled="{{current!=1}}" confirm-type="done"></input>
 	</view>
-	<view class="title">
+	<view class="title"  wx:if="{{lists.bpm.activityId == 'DeptManager'}}">
 		<view class="c1">
-			<text>是否开通OA<text style="color:red;font-size:25rpx">*</text></text>
+			<text>参保属地</text>
 		</view>
-		<picker value="{{index1}}" range="{{array1}}" bindchange="pickChange1"  disabled="true">
+		<picker value="{{index5}}" range="{{array5}}" bindchange="pickChange5"
+			disabled="{{current!=1}}">
+			<view class="timePicker">
+				<text wx:if="{{index5==-1}}" style="color:#af9d7f">请选择...</text>
+				{{array5[index5]}}
+				<image class="arraw" src="http://img.gagctv.com/17112314452261654"></image>
+			</view>
+		</picker>
+	</view>
+	<view class="title" wx:if="{{lists.bpm.activityId == 'DeptManager'}}">
+		<view class="c1">
+			<text>是否开通OA<text style="color:red;font-size:25rpx"></text></text>
+		</view>
+		<picker value="{{index1}}" range="{{array1}}" bindchange="pickChange1" disabled="true">
 			<view class="timePicker">
 				<text wx:if="{{index1==3}}" style="color:#af9d7f">请选择...</text>
 				{{array1[index1]}}
@@ -96,117 +110,123 @@
 			</view>
 		</picker>
 	</view>
-	<view class="title">
+	<!-- <view class="title" style="z-index:1 !important" wx:if="{{lists.bpm.activityId == 'DeptManager'}}">
+		<view class="c1">
+			<text>OA安全级别<text style="color:red;font-size:25rpx"></text></text>
+		</view>
+		<input class="c1Input" placeholder='请输入...' placeholder-style='color:#af9d7f;padding:0;margin:0' bindinput='hinput4'
+			value="{{safeLevel}}" disabled="{{current!=1}}"></input>
+	</view> -->
+
+	<view class="title"  wx:if="{{lists.bpm.activityId == 'DeptManager'}}">
 		<view class="c1">
 			<text>是否开通门禁<text style="color:red;font-size:25rpx">*</text></text>
 		</view>
-		<picker value="{{index2}}" range="{{array1}}" bindchange="pickChange2"  disabled="{{current==1&&lists.bpm.activityId=='DeptManager'?false:true}}">
-			<view class="timePicker  {{ifdoor?'':'pickerError'}}">
-				<text wx:if="{{index2==3}}" style="color:#af9d7f">请选择...</text>
+		<picker value="{{index2}}" range="{{array1}}" bindchange="pickChange2"
+			disabled="{{current!=1}}">
+			<view class="timePicker">
 				{{array1[index2]}}
 				<image class="arraw" src="http://img.gagctv.com/17112314452261654"></image>
 			</view>
 		</picker>
 	</view>
-	<view class="title">
+	<view class="title"  wx:if="{{lists.bpm.activityId == 'DeptManager'}}">
 		<view class="c1">
 			<text>是否开通邮箱<text style="color:red;font-size:25rpx">*</text></text>
 		</view>
-		<picker value="{{index3}}" range="{{array1}}" bindchange="pickChange3" disabled="{{current==1&&lists.bpm.activityId=='DeptManager'?false:true}}">
-			<view class="timePicker  {{ifemail?'':'pickerError'}}">
-				<text wx:if="{{index3==3}}" style="color:#af9d7f">请选择...</text>
+		<picker value="{{index3}}" range="{{array1}}" bindchange="pickChange3"
+			disabled="{{current!=1}}">
+			<view class="timePicker">
 				{{array1[index3]}}
 				<image class="arraw" src="http://img.gagctv.com/17112314452261654"></image>
 			</view>
 		</picker>
 	</view>
-	<!-- <view class="title">
+	<view class="title" style="z-index:1 !important" wx:if="{{lists.bpm.activityId == 'anth'}}">
 		<view class="c1">
-			<text>是否参加培训<text style="color:red;font-size:25rpx">*</text> </text>
+			<text>OA密码<text style="color:red;font-size:25rpx"></text></text>
 		</view>
-		<picker value="{{index4}}" range="{{array1}}" bindchange="pickChange4"  disabled="{{current==1&&lists.bpm.activityId=='DeptManager'?false:true}}">
-			<view class="timePicker  {{iftrain?'':'pickerError'}}">
-				<text wx:if="{{index4==3}}" style="color:#af9d7f">请选择...</text>
-				{{array1[index4]}}
-				<image class="arraw" src="http://img.gagctv.com/17112314452261654"></image>
-			</view>
-		</picker>
-	</view> -->
-	<view class="title" style="z-index:1 !important" wx:if="{{oaEmployEntry.bpm.activityId != 'anth'}}">
-		<view class="c1">
-			<text>OA密码<text style="color:red;font-size:25rpx">*</text></text>
-		</view>
-			<input class="c1Input"  placeholder='请输入...' placeholder-style='color:#af9d7f;padding:0;margin:0'  bindinput='hinput1' value="{{oaPwd}}" disabled="{{current!=1}}"></input>
+		<input class="c1Input" placeholder='请输入...' placeholder-style='color:#af9d7f;padding:0;margin:0' bindinput='hinput1'
+			value="{{oaPwd}}" disabled="{{current!=1}}"></input>
 	</view>
-	<view class="title" style="z-index:1 !important" wx:if="{{oaEmployEntry.bpm.activityId != 'anth'}}">
+	<view class="title" style="z-index:1 !important" wx:if="{{lists.bpm.activityId == 'anth'}}">
 		<view class="c1">
-			<text>邮箱账号<text style="color:red;font-size:25rpx">*</text></text>
+			<text>邮箱账号<text style="color:red;font-size:25rpx"></text></text>
 		</view>
-			<input class="c1Input"  placeholder='请输入...' placeholder-style='color:#af9d7f;padding:0;margin:0'  bindinput='hinput2' value="{{emailAccount}}" disabled="{{current!=1}}"></input>
+		<input class="c1Input" placeholder='请输入...' placeholder-style='color:#af9d7f;padding:0;margin:0' bindinput='hinput2'
+			value="{{emailAccount}}" disabled="{{current!=1}}"></input>
 	</view>
-	<view class="title" style="z-index:1 !important" wx:if="{{oaEmployEntry.bpm.activityId != 'anth'}}">
+	<view class="title" style="z-index:1 !important" wx:if="{{lists.bpm.activityId == 'anth'}}">
 		<view class="c1">
-			<text>邮箱密码<text style="color:red;font-size:25rpx">*</text></text>
+			<text>邮箱密码<text style="color:red;font-size:25rpx"></text></text>
 		</view>
-			<input class="c1Input" placeholder='请输入...' placeholder-style='color:#af9d7f;padding:0;margin:0' bindinput='hinput3' value="{{emailPwd}}" disabled="{{current!=1}}"></input>
+		<input class="c1Input" placeholder='请输入...' placeholder-style='color:#af9d7f;padding:0;margin:0' bindinput='hinput3'
+			value="{{emailPwd}}" disabled="{{current!=1}}"></input>
 	</view>
 	<view class="title" style="z-index:1 !important">
 		<view class="c1">
 			<text>备注</text>
 		</view>
-		<view class="c1Input">{{lists.remarks.length>0?lists.remarks:'无备注'}}</view>
+		<view class="codePicker">{{lists.remarks.length>0?lists.remarks:'无备注'}}</view>
 	</view>
 	<view class="title" style="z-index:1 !important" wx:if="{{current==1&&can}}">
 		<view class="c1">
 			<text>审批意见</text>
 		</view>
-		<input class="number" placeholder='常用语: 同意  已阅' placeholder-style='color:#af9d7f;padding:0;margin:0' bindinput='hinput' value="{{hint}}"></input>
+		<input class="number" placeholder='常用语: 同意  已阅' placeholder-style='color:#af9d7f;padding:0;margin:0'
+			bindinput='hinput' value="{{hint}}"></input>
 	</view>
 </view>
 <view class="bottom">
-	<button class="progress {{current==1&&can?'btnwid1':'btnwid'}}" bindtap='progress' hover-class='hover1' hover-stay-time='50'>流程追踪</button>
-	<button class="publish btnwid1" bindtap='handleOpen' wx:if="{{current==1&&can}}" hover-class='hover2' hover-stay-time='50'>审批操作</button>
+	<button class="progress {{current==1&&can?'btnwid1':'btnwid'}}" bindtap='progress' hover-class='hover1'
+		hover-stay-time='50'>流程追踪</button>
+	<button class="publish btnwid1" bindtap='handleOpen' wx:if="{{current==1&&can}}" hover-class='hover2'
+		hover-stay-time='50'>审批操作</button>
 </view>
-<i-action-sheet visible="{{visible}}" actions="{{actions}}" show-cancel bind:cancel="handleCancel" bind:click="handleClickItem" />
+<i-action-sheet visible="{{visible}}" actions="{{actions}}" show-cancel bind:cancel="handleCancel"
+	bind:click="handleClickItem" />
 <view class='pocket_input' wx:if="{{inputShow}}">
-	<input type='text' placeholder-style='input-placeholder' cursor='{{cursor_position}}' class='input_style' placeholder='{{notice}}' focus='{{focus}}' cursor-spacing="2" adjust-position='true' bindfocus="bindfocus" bindblur="bindblur" bindconfirm="sendComment" confirm-type="done" bindinput='getComment' maxlength='500'></input>
+	<input type='text' placeholder-style='input-placeholder' cursor='{{cursor_position}}' class='input_style'
+		placeholder='{{notice}}' focus='{{focus}}' cursor-spacing="2" adjust-position='true' bindfocus="bindfocus"
+		bindblur="bindblur" bindconfirm="sendComment" confirm-type="done" bindinput='getComment' maxlength='500'></input>
 </view>
-<view style="width:100%;height:100%;position:fixed;top:0;left:0;background:#333;opacity:.8;z-index:99" wx:if="{{inputShow}}"></view>
+<view style="width:100%;height:100%;position:fixed;top:0;left:0;background:#333;opacity:.8;z-index:99"
+	wx:if="{{inputShow}}"></view>
 <i-toast id="toast" />
 <i-message id="message" />
 <i-drawer mode="right" visible="{{showRight1}}" bind:close="progress">
-	<scroll-view  class="proShow" scroll-y='true' catchtouchmove='true'>
+	<scroll-view class="proShow" scroll-y='true' catchtouchmove='true'>
 		<view class="c1" style="margin-bottom:20rpx">
 			<text style="font-weight:bolder;color:#1890ff;margin-left:10rpx;font-size:35rpx">流转信息</text>
 		</view>
-				<i-steps current="{{verticalCurrent}}" direction="vertical">
-			<i-step  wx:for="{{proLists}}" icon="{{index==proLists.length-1?'brush':''}}">
-			<view class="lists" slot="content">
-			<view class="right">
-				<view class="time1">
-					<text class="timeLeft">环节名称:</text>
-					<text class="timeRight">{{item.name}}</text>
+		<i-steps current="{{verticalCurrent}}" direction="vertical">
+			<i-step wx:for="{{proLists}}" icon="{{index==proLists.length-1?'brush':''}}">
+				<view class="lists" slot="content">
+					<view class="right">
+						<view class="time1">
+							<text class="timeLeft">环节名称:</text>
+							<text class="timeRight">{{item.name}}</text>
+						</view>
+						<view class="time1">
+							<text class="timeLeft">创建时间:</text>
+							<text class="timeRight">{{item.createTime}}</text>
+						</view>
+						<view class="time1">
+							<text class="timeLeft">完成时间:</text>
+							<text class="timeRight">{{item.endTime}}</text>
+						</view>
+						<view class="time1">
+							<text class="timeLeft">分配人员:</text>
+							<text class="timeRight">{{item.assigneeInfo}}</text>
+						</view>
+						<view class="time1">
+							<text class="timeLeft">审批意见:</text>
+							<text class="timeRight">{{item.comment}}</text>
+						</view>
+					</view>
 				</view>
-				<view class="time1">
-					<text class="timeLeft">创建时间:</text>
-					<text class="timeRight">{{item.createTime}}</text>
-				</view>
-				<view class="time1">
-					<text class="timeLeft">完成时间:</text>
-					<text class="timeRight">{{item.endTime}}</text>
-				</view>
-				<view class="time1">
-					<text class="timeLeft">分配人员:</text>
-					<text class="timeRight">{{item.assigneeInfo}}</text>
-				</view>
-				<view class="time1">
-					<text class="timeLeft">审批意见:</text>
-					<text class="timeRight">{{item.comment}}</text>
-				</view>
-			</view>
-		</view>
 			</i-step>
 		</i-steps>
-	</scroll-view >
+	</scroll-view>
 </i-drawer>
 <i-spin fix wx:if="{{loadAll}}"></i-spin>

@@ -75,17 +75,19 @@ Page({
         ifAreaList: true,
         ifBrandList: true,
         ifFromList: true,
-        ifTwoData: true
+        ifTwoData: true,
+        changeShow:false
     },
     onLoad: function () {
         var chartsUser = wx.getStorageSync('chartsUser');
-        console.log(chartsUser)
+    console.log(app.globalData.changeShow)
         this.setData({
             userName: chartsUser.userName,
             userCode: chartsUser.userCode,
             sid: chartsUser.sid,
             loginCode: chartsUser.loginCode,
-            officeName: chartsUser.officeName
+            officeName: chartsUser.officeName,
+            changeShow:app.globalData.changeShow
         })
         var now = new Date()
         var now1 = new Date()

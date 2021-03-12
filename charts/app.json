@@ -1,9 +1,10 @@
 {
   "pages": [
     "pages/index/welcome",
-    "pages/index/select",
-    "pages/index/depart",
+    "pages/index/demember",
     "pages/index/group",
+    "pages/index/depart",
+    "pages/index/select",
     "pages/index/index",
     "pages/index/member",
     "pages/index/area",
@@ -69,7 +70,8 @@
     "van-dropdown-menu": "@vant/weapp/dropdown-menu/index",
     "van-dropdown-item": "@vant/weapp/dropdown-item/index",
     "van-popup": "@vant/weapp/popup/index",
-    "van-area": "@vant/weapp/area/index"
+    "van-area": "@vant/weapp/area/index",
+    "van-circle": "@vant/weapp/circle/index"
   },
   "sitemapLocation": "sitemap.json"
 }

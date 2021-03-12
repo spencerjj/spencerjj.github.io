@@ -6,21 +6,21 @@ import {
 var app = getApp();
 var wxCharts = require('../../utils/wxcharts2.js');
 var line = null;
+var pie = null
 Page({
   /**
    * 页面的初始数据
    */
   data: {
-    active: 'all',
+    active: '601',
     title: '购物中心',
     totalLists: [],
-    array: ['销售面板', '会员面板'],
+    array: ['会员详情', '销售面板'],
     index: 0,
     showDate: '',
     today: '',
     ifRound: false,
     tabList: [],
-    tab0:false,
     tab1: false,
     tab2: false,
     tab3: false,
@@ -33,7 +33,8 @@ Page({
     ifLineData:true,
     ifDeptData:true,
     ifStoreData:true,
-    changeShow:false
+    changeShow:false,
+    tempData:[]
   },
 
   /**
@@ -41,7 +42,7 @@ Page({
    */
   onLoad: function (options) {
     var that = this
-    let active = options.active || 'all'
+    let active = options.active || '601'
     if(active=='601'){
       this.setData({
         title: '购物中心',
@@ -100,9 +101,8 @@ Page({
       userStoreList
     })
     let totalLists = that.data.totalLists
-    var tab1, tab2, tab3, tab0
+    var tab1, tab2, tab3
     if(userStoreList){
-        tab0 = true
         tab1 = userStoreList[0].ifStore
         tab2 = userStoreList[1].ifStore
         tab3 = userStoreList[2].ifStore
@@ -114,17 +114,13 @@ Page({
     }
     that.setData({
       totalLists,
-      tab0,
       tab1,
       tab2,
       tab3,
       secondShow: true,
       firstShow: true
     })
-    this.getTab()
-    if(that.data.active!='all'){
-      that.getShopData()
-    }
+    that.getShopData()
   },
 
   /**
@@ -214,20 +210,6 @@ Page({
           title: '新世纪商城'
         })
       }, 300)
-    } else if (e.detail.name == 'all') {
-      wx.setNavigationBarTitle({
-        title: '业务总览'
-      })
-      setTimeout(() => {
-        this.getTab()
-        wx.setNavigationBarTitle({
-          title: '业务总览'
-        })
-        this.setData({
-          firstShow: true,
-        })
-      }, 300)
-
     }
     setTimeout(() => {
       this.setData({
@@ -243,89 +225,39 @@ Page({
       url: 'group?storeId='+storeId+'&departCode2='+departCode2,
     })
   },
-  getTab() {
-    var that = this
-    var data = {
-      __sid: that.data.sid,
-      __ajax: 'json'
-    }
-    // 业务总览
-    getRequest(getApiHost(), 'platform/v1/api/minireport/bh/findOverviewList', 'body', data, 0, false, false).then(
-      res => {
-        if (res.result && res.result == 'login') {
-          that.login()
-          console.log('登录失效')
-          return;
-        }
-        // console.log(res)
-        wx.stopPullDownRefresh();
-        if (res.data == undefined) {
-          wx.showModal({
-            title: '提示',
-            content: '当天暂无销售数据',
-          })
-          return;
-        } else {
-          var totalLists = res.data
-          totalLists.map((item) => {
-            if (item.storeName.indexOf('常州') != -1) {
-              item.storeName = item.storeName.substring(2, item.storeName.length)
-            }
-            item.moM = item.moM
-            item.yoY = item.yoY
-            item.sales = item.sales
-          })
-          that.setData({
-            totalLists: res.data
-          })
-        }
-      }
-    ).catch(res => {
-      wx.showToast({
-        title: res.message=="您的操作权限不足！"?'操作权限不足':res.message,
-        image:'/images/00-8.png'
-      })
-    });
-  },
   getShopData(e) {
     var that = this
     that.getDeptData();
-    that.getLineData()
     var data = {
       __sid: that.data.sid,
       __ajax: 'json',
-      storeId:that.data.active
+      leadStore:that.data.active
     }
-    getRequest(getApiHost(), 'platform/v1/api/minireport/bh/findShopDataByShopId', 'body', data, 0, false, false).then(
+    getRequest(getApiHost(), 'platform/v1/api/minireport/bh/vip/findShopNewVipShopId', 'body', data, 0, false, false).then(
       res => {
-        // console.log(res)
+        console.log(res)
         wx.stopPullDownRefresh();
         if (res.data == undefined) {
           wx.showToast({
-            title: '暂无销售数据',
+            title: '暂无会员数据',
             image: '/images/00-8.png',
           })
           return;
         } else {
-          var storeData =res.data
-          storeData.yearGoalRatio = storeData.yearGoalRatio + '%'
-          storeData.goalRatio = storeData.goalRatio + '%'
-          storeData.moM = storeData.moM
-          storeData.yoY = storeData.yoY
           that.setData({
             storeData:res.data,
             ifStoreData:true
           })
+            that.doPie()
+          // that.doLine()
         }
       }
     ).catch(res => {
-      // wx.showModal({
-      //   title: '错误',
-      //   content: res.message,
-      //   showCancel: false,
-      //   confirmText: '知道了',
-      //   confirmColor: '#1890FF'
-      // })
+      console.log(res.message)
+      wx.showToast({
+        title: res.message=="您的操作权限不足！"?'操作权限不足':res.message,
+        image:'/images/00-8.png'
+      })
       that.setData({
         ifStoreData:false
       })
@@ -341,79 +273,48 @@ Page({
       pageNo:1
     }
     // 业务总览
-    getRequest(getApiHost(), 'platform/v1/api/minireport/bh/findDeptDataByShopId', 'body', data, 0, false, false).then(
+    getRequest(getApiHost(), 'platform/v1/api/minireport/bh/vip/findDepartNewVipShopId', 'body', data, 0, false, false).then(
       res => {
-        console.log(res)
-        if (res.data == undefined) {
+        
+        if (res.data == undefined||res.data.length<1) {
           wx.showToast({
-            title: '当天暂部门销售排行数据',
+            title: '暂无会员销售数据',
             image: '/images/00-8.png',
           })
           return;
         } else {
+          console.log(res)
           var deptData = res.data
-          deptData.slice(0,5)
+          let tempData = []
+          for(let x in deptData){
+            let arr = {
+              departName:deptData[x].departName,
+              salesOldmemberMonth:deptData[x].salesOldmemberMonth||0,
+              ppmOldMonth:deptData[x].ppmOldMonth||0,
+              salesNewmemberMonth:deptData[x].salesNewmemberMonth||0,
+              ppmMonth:deptData[x].ppmMonth||0
+            }
+            tempData.push(arr)
+          }
+          tempData.sort(function(a, b) { return Number(a.salesOldmemberMonth) < Number(b.salesOldmemberMonth) ? 1 : -1;} );
+          console.log(tempData)
           that.setData({
             deptData,
+            tempData,
             ifDeptData:true
           })
         }
       }
     ).catch(res => {
-      // wx.showModal({
-      //   title: '错误',
-      //   content: res.message,
-      //   showCancel: false,
-      //   confirmText: '知道了',
-      //   confirmColor: '#1890FF'
-      // })
+      wx.showModal({
+        title: '错误',
+        content: res.message,
+        showCancel: false,
+        confirmText: '知道了',
+        confirmColor: '#1890FF'
+      })
       that.setData({
         ifDeptData:false
-      })
-    });
-  },
-  getLineData(){
-    var that = this
-    var data = {
-      __sid: that.data.sid,
-      __ajax: 'json',
-      storeId:that.data.active
-    }
-    getRequest(getApiHost(), 'platform/v1/api/minireport/bh/findMonthlyChartList', 'body', data, 0, false, false).then(
-      res => {
-        console.log(res)
-        if (res.data == undefined) {
-          wx.showToast({
-            title: '当天逐月销售趋势数据',
-            image: '/images/00-8.png',
-          })
-          return;
-        } else {
-          var lineData = res.data
-          var dataArray = []
-          var cateArray = []
-          lineData.map((item)=>{
-            dataArray.push(item.financeMonthSales.toFixed(2))
-            cateArray.push(item.salemonth+'月')
-          })
-          that.setData({
-            dataArray,
-            cateArray,
-            ifLineData:true
-          })
-          that.doLine()
-        }
-      }
-    ).catch(res => {
-      // wx.showModal({
-      //   title: '错误',
-      //   content: res.message,
-      //   showCancel: false,
-      //   confirmText: '知道了',
-      //   confirmColor: '#1890FF'
-      // })
-      that.setData({
-        ifLineData:false
       })
     });
   },
@@ -431,20 +332,21 @@ Page({
       canvasId: 'lineCanvas',
       type: 'line',
       background: '#000000',
-      categories: that.data.cateArray,
+      categories: ['1月','2月','3月'],
       series: [{
-        name: '销售额',
-        data: that.data.dataArray,
+        name: '销售占比',
+        data: ['22','33','44'],
         format: function (val) {
-          return val;
+          return val+'%';
         }
       }],
       yAxis: {
         title: '',
         format: function (val) {
-          return val;
+          return val+'%';
         },
-        min: 0
+        min: 0,
+        max: 100
       },
       width: windowWidth - 10,
       height: 200,
@@ -469,9 +371,9 @@ Page({
     // this.setData({
     //   index: e.detail.value
     // })
-    wx.navigateTo({
-      url: e.detail.value == 1 ? `demember?active=${this.data.active}` : ''
-    })
+    // wx.redirectTo({
+    //   url: e.detail.value == 1 ? `depart?active=${this.data.active}` : ''
+    // })
   },
   bindDateChange(e) {
     var date = new Date(e.detail.value)
@@ -485,8 +387,33 @@ Page({
       showDate,
     })
   },
-  fresh() {
-    
+  doPie(){
+    var that= this;
+    var windowWidth = 320;
+        try {
+            var res = wx.getSystemInfoSync();
+            windowWidth = res.windowWidth;
+        } catch (e) {
+            console.error('getSystemInfoSync failed!');
+        }
+
+        pie = new wxCharts({
+            animation: true,
+            canvasId: 'pieCanvas',
+            type: 'ring',
+            series: [{ name: '新会员', data: that.data.storeData.ratioStoreEntity.numMemberMonth,color: '#fa5c5c'}, { name: '老会员', data: that.data.storeData.ratioStoreEntity.salesOldmemberMonth,color: '#37a1df'}],
+            width: windowWidth,
+            height: 300,
+            dataLabel: true,
+        });
+  },
+  touchHandler: function (e) {
+    console.log(line.getCurrentDataIndex(e));
+    line.showToolTip(e, {
+      format: function (item, category) {
+        return item.name+':'+item.data
+      }
+    });
   },
   toTab(e) {
     this.setData({

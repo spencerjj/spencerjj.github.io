@@ -2,23 +2,13 @@
 	<view class="top">
 		<view class="table">
 			<view class="tr bg-w">
-				<view class="th"  style="width:100%;border:none">商品名称</view>
-			</view>
-			<block>
-				<view class="tr bg-g" hover-class="trhover" hover-stay-time="0.5">
-					<view class="td"  style="width:100%;border:none">{{itemTitle}}</view>
-				</view>
-			</block>
-		</view>
-		<view class="table">
-			<view class="tr bg-w">
+				<view class="th">商品名称</view>
 				<view class="th">商品编码</view>
-				<view class="th">下单时间</view>
 			</view>
 			<block>
 				<view class="tr bg-g" hover-class="trhover" hover-stay-time="0.5">
+					<view class="td">{{itemTitle}}</view>
 					<view class="td">{{itemNo}}</view>
-					<view class="td">{{time}}</view>
 				</view>
 			</block>
 		</view>
@@ -43,6 +33,18 @@
 				<view class="tr bg-g" hover-class="trhover" hover-stay-time="0.5">
 					<view class="td">{{price}}</view>
 					<view class="td">{{payment}}</view>
+				</view>
+			</block>
+		</view>
+		<view class="table">
+			<view class="tr bg-w">
+				<view class="th">下单时间</view>
+				<view class="th">退货金额</view>
+			</view>
+			<block>
+				<view class="tr bg-g" hover-class="trhover" hover-stay-time="0.5">
+					<view class="td">{{time}}</view>
+					<view class="td">{{refundFee}}</view>
 				</view>
 			</block>
 		</view>

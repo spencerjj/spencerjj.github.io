@@ -41,7 +41,9 @@ App({
     },
     globalData: {
         userInfo: null,
-        url: HOST_URI
+        url: HOST_URI,
+        userMenus:'',
+        changeShow:false
     },
     doLogin(e) {
       console.log('登录')
@@ -83,6 +85,8 @@ App({
                   chartsUser.userCode = res.data.userCode;
                   chartsUser.loginCode = res.data.loginCode;
                   chartsUser.officeName = res.data.officeName;
+                  chartsUser.userMenus = res.data.menus;
+                  that.globalData.userMenus = res.data.menus
                 //   chartsUser.officeCode = res.data.officeCode;
                   chartsUser.sid = res.data.sid;
                   wx.removeStorageSync('chartsUser');

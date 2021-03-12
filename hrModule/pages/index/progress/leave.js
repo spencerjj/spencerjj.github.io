@@ -13,8 +13,10 @@ Page({
     number: '',
     hint: '',
     isBottom: false,
-    array1:['辞职','淘汰','退休','返校','其他'],
-    index1:10,
+    array1:['主动','被动','其他'],
+    index1:1,
+    array2:['完整','简易'],
+    index2:10,
     notice:'请输入终止原因',
     focus:false,
     myComment:'',
@@ -46,7 +48,8 @@ Page({
     loadAll:true,
     url:'',
     filelist:'',
-    ifOut:0,
+    outType:0,
+    easyMode:'',
     can:false,
     lastDate:'',
     salaryDate:'',
@@ -190,10 +193,16 @@ Page({
               })
               if (res.data.oaEmployOut.outType&&res.data.oaEmployOut.outType.length>0) {
                   that.setData({
-                    index1: res.data.oaEmployOut.outType-1,
-                    ifOut:1
+                    index1: res.data.oaEmployOut.outType-1+1,
+                    outType:res.data.oaEmployOut.outType-1+2
                   })
               }
+              if (res.data.oaEmployOut.easyMode&&res.data.oaEmployOut.easyMode.length>0) {
+                that.setData({
+                  index2: res.data.oaEmployOut.easyMode-1+1,
+                  easyMode:res.data.oaEmployOut.easyMode-1+1
+                })
+            }
               if (res.data.oaEmployOut.remainHoliday&&res.data.oaEmployOut.remainHoliday.length>0) {
                 that.setData({
                   day: res.data.oaEmployOut.remainHoliday,
@@ -295,8 +304,14 @@ Page({
     console.log(e.detail.value)
     this.setData({
       index1: e.detail.value,
-      ifOut: 1,
       outType:e.detail.value-1+2
+    })
+  },
+  pickChange1: function (e) {
+    console.log(e.detail.value)
+    this.setData({
+      index2: e.detail.value,
+      easyMode:e.detail.value
     })
   },
   bindDateChange: function(e) {
@@ -338,9 +353,19 @@ Page({
         })
         return;
       }
-      if(that.data.lists.bpm.activityId=='hrbp'&&that.data.ifOut==0){
+      // if(that.data.lists.bpm.activityId=='hrmsg'&&that.data.salaryDate.length<1){
+      //   $Toast({
+      //     content:'请选择最后结薪日',
+      //     type:'warning'
+      //   })
+      //   that.setData({
+      //     visible: false
+      //   })
+      //   return;
+      // }
+      if(that.data.lists.bpm.activityId=='hrbp'&&that.data.index2==10){
         $Toast({
-          content:'请选择离职类型',
+          content:'请选择移交类型',
           type:'warning'
         })
         that.setData({
@@ -351,45 +376,24 @@ Page({
         })
         return;
       }
-      if(that.data.lists.bpm.activityId=='hrmsg'&&that.data.salaryDate.length<1){
-        $Toast({
-          content:'请选择最后结薪日',
-          type:'warning'
-        })
-        that.setData({
-          visible: false
-        })
-        return;
-      }
         const action = [...this.data.actions];
         action[0].loading = true;
         this.setData({
           actions: action,
           ifClick:true
         });
-        var type = ''
-        var day = ''
-        if(!that.data.outType){
-          type = ''
-        }else{
-          type = that.data.outType
-        }
-        if(that.data.day){
-          day = that.data.day
-        }else{
-          day = ''
-        }
         var data = {
           // __sid: app.globalData.__sid,
           __sid: app.globalData.tempSid,
           __ajax: 'json',
-          remainHoliday:that.data.day,
+          // remainHoliday:that.data.day,
           lastDate:that.data.lastDate,
-          salaryDate:that.data.salaryDate,
+          // salaryDate:that.data.salaryDate,
           'bpm.comment': that.data.hint,
           id: that.data.id,
           userCode:that.data.lists.userCode,
-          outType:type,
+          outType:that.data.outType,
+          easyMode:that.data.easyMode,
           'bpm.taskId':that.data.lists.bpm.taskId,
           'bpm.procInsId':that.data.lists.bpm.procInsId,
           'bpm.activityId':that.data.lists.bpm.activityId,

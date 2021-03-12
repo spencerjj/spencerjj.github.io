@@ -11,7 +11,7 @@ page{
 }
 .select{
     position: fixed;
-    right: 10rpx;
+    left: 10rpx;
     bottom: 10rpx;
     width: 80rpx;
     height: 80rpx;

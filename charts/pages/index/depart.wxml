@@ -1,20 +1,25 @@
 <view class="container">
-  <view class="select" bindtap="toSelect" hover-stay-time=".5s" hover-class="selectHover">
-		<image src="/images/change.png"></image>
+  <view class="select" bindtap="toSelect" hover-stay-time=".5s" hover-class="selectHover" wx:if="{{changeShow}}">
+    <image src="/images/change.png"></image>
   </view>
   <!-- <van-dropdown-menu>
     <van-dropdown-item value="{{ value }}" options="{{ options }}" bind:change="onSwitchChange"/>
   </van-dropdown-menu> -->
-  <van-tabs active="{{active}}" color="#28aad2" title-active-color="#28aad2" bind:change="onChange">
-    <van-tab title="业务总览" name="all"></van-tab>
-    <van-tab title="购物中心" name="gou"></van-tab>
-    <van-tab title="新世纪" name="xin"></van-tab>
-    <van-tab title="百货大楼" name="bai"></van-tab>
+  <van-tabs active="{{active}}" color="#6987fb" title-active-color="#6987fb" bind:change="onChange">
+    <van-tab title="业务总览" name="all" wx:if="{{tab0}}"></van-tab>
+    <!-- <van-tab title="{{item.title}}" name="{{item.name}}" wx:for="{{tabList}}"></van-tab> -->
+    <van-tab title="购物中心" name="601" wx:if="{{tab1}}"></van-tab>
+    <van-tab title="百货大楼" name="602" wx:if="{{tab2}}"></van-tab>
+    <van-tab title="新世纪商城" name="603" wx:if="{{tab3}}"></van-tab>
   </van-tabs>
   <view class="first" wx:if="{{active=='all'}}">
-    <van-transition show="{{showList[index]}}" name="{{index % 2 == 0?'fade-left':'fade-right'}}" wx:for="{{totalLists}}">
-      <view class="comItem">
+    <van-empty description="当天暂无销售数据" wx:if="{{totalLists.length==0}}" />
+    <van-transition show="{{firstShow}}" name="fade-left">
+      <view class="comItem" wx:for="{{totalLists}}" bindtap="toTab" data-name="{{item.storeId}}" wx:key="index">
         <view class="fleft">
+          <view class="comTitle">
+              {{item.storeName}}
+            </view>
           <view class="fIcon">
             <image src="/images/center.png" wx:if="{{index==0}}"></image>
             <image src="/images/gouwu.png" wx:elif="{{index==1}}"></image>
@@ -25,147 +30,143 @@
         </view>
         <view class="fright">
           <view class="intime">
-            <view class="comTitle">
-              {{item.name}}
-            </view>
             <view class="sales">
               {{item.sales}} <text style="font-size:20rpx">万</text>
               <view>实时销售</view>
             </view>
+            <view class="sales">
+              {{item.profit}} <text style="font-size:20rpx">万</text>
+              <view>毛利</view>
+            </view>
           </view>
           <view class="saleTop sale1">
             <view class="saleSection">
-              <view>{{item.month}} <text style="font-size:20rpx">万</text></view>
-              <view>本月<text class="down" style="font-size:20rpx">　-13.88%</text></view>
+              <view>{{item.financeMonthSales}} <text style="font-size:20rpx">万</text></view>
+              <view>本月<text class="{{item.moM>0?'rise':'down'}}" style="font-size:20rpx">　{{item.moM}}%</text></view>
             </view>
             <view class="saleSection">
-              <view>{{item.year}} <text style="font-size:20rpx">万</text></view>
-              <view>本年<text class="rise" style="font-size:20rpx">　+22.88%</text></view>
+              <view>{{item.financeYearSales}} <text style="font-size:20rpx">万</text></view>
+              <view>本年<text class="{{item.yoY>0?'rise':'down'}}" style="font-size:20rpx">　{{item.yoY}}%</text></view>
             </view>
           </view>
         </view>
+        <!-- <view class="fnew">
+          <view class="newSection">
+            <view>1234 <text style="font-size:20rpx">人</text></view>
+            <view>会员数<text class="rise" style="font-size:20rpx">　+133</text></view>
+          </view>
+          <view class="newSection">
+            <view>33%</view>
+            <view>会员销售占比</view>
+          </view>
+        </view> -->
+      </view>
+    <view style="width:94%;text-align:right;height:100rpx;line-height:100rpx;color:#313b6dcc;margin-left:3%;font-size:28rpx" wx:if="{{firstShow}}">*同期为2019年数据</view>
+    </van-transition>
+  </view>
+
+  <view class="second" wx:else>
+    <van-transition show="{{secondShow}}" name="fade-right">
+      <view class="top">
+        <!-- <view class="fresh" bindtap="fresh" hover-stay-time=".5s" bindtap="fresh">
+          <image src="/images/fresh.png" class="{{ifRound?'round':''}}"></image>
+        </view> -->
+        <view class="topTitle">
+          <picker bindchange="bindPickerChange" value="{{index}}" range="{{array}}">
+            <view class="topTitle">
+              {{title}}{{array[index]}} <image class="arraw" src="/images/arraw3.png"></image>
+            </view>
+          </picker>
+        </view>
+        <!-- <picker mode="date" fields="day" value="{{date}}" start="2013-01-01" bindchange="bindDateChange">
+        <view class="topDate">
+          数据更新日期 - {{showDate}}
+          <image class="arraw" src="/images/arraw3.png"></image>
+        </view>
+      </picker> -->
+        数据更新时间 - {{storeData.getTime||nowTime}}
+      </view>
+      <view class="mtop">
+        <view class="saleImg">
+          <image src="/images/sale.png"></image>
+        </view>
+        <view class="mtleft">
+          <view class="mtnum">{{storeData.sales||0}} <text style="font-size:20rpx">万</text></view>
+          <view class="mtitle">今日销售</view>
+        </view>
+        <view class="mtleft">
+          <view class="mtnum">{{storeData.profit||0}} <text style="font-size:20rpx">万</text></view>
+          <view class="mtitle">毛利</view>
+        </view>
+      </view>
+      <view class="middle" wx:if="{{ifStoreData}}">
+        <view class="allTop all1">
+          <view class="allSection">
+            <view>{{storeData.financeMonthSales||0}} <text style="font-size:20rpx">万</text></view>
+            <view>当月累计 <text class="{{storeData.moM>0?'rise':'down'}}" style="font-size:20rpx">{{storeData.moM||0}}%</text></view>
+          </view>
+          <view class="allSection">
+            <view>{{storeData.salesGoal||0}} <text style="font-size:20rpx">万</text></view>
+            <view>当月指标</view>
+          </view>
+          <view class="allSection">
+            <view>{{storeData.goalRatio||0}}</view>
+            <view>月完成率</view>
+          </view>
+        </view>
+        <view class="allTop all2">
+          <view class="allSection">
+            <view>{{storeData.financeYearSales||0}} <text style="font-size:20rpx">万</text></view>
+            <view>本年累计 <text class="{{storeData.yoY>0?'rise':'down'}}" style="font-size:20rpx">{{storeData.yoY||0}}%</text></view>
+          </view>
+          <view class="allSection">
+            <view>{{storeData.salesGoalYear||0}}  <text style="font-size:20rpx">万</text></view>
+            <view>本年指标</view>
+          </view>
+          <view class="allSection">
+            <view>{{storeData.yearGoalRatio||0}} </view>
+            <view>年完成率</view>
+          </view>
+        </view>
+      </view>
+      <view class="ttitle"  wx:if="{{ifDeptData}}">
+        <view
+          style="position:absolute;width:10rpx;height:40rpx;border-radius:10rpx;left:0;top:40rpx;background:#6987fb">
+        </view> 部门销售排行(万)
+      </view>
+      <view class="table"  wx:if="{{ifDeptData}}">
+        <view class="trh">
+          <view class="th" style="width:50%">部门</view>
+          <view class="th">本日</view>
+          <view class="th">毛利</view>
+          <view class="th">本月</view>
+          <view class="th">月目标</view>
+        </view>
+        <view wx:if="{{deptData.length==0||!deptData}}">
+          <view class="tr bg-w" hover-class="trhover" hover-stay-time="0.5" style="color:#666">
+            暂无数据
+          </view>
+        </view>
+        <view wx:for="{{deptData}}" data-code="{{item.departCode2}}" wx:key="index" bindtap="toPage">
+          <view class="tr {{index%2==0?'bg-w':'bg-g'}}" hover-class="trhover" hover-stay-time="0.5">
+            <view class="td depart">{{item.departName2}}</view>
+            <view class="td">{{item.sales}}</view>
+            <view class="td">{{item.profit}}</view>
+            <view class="td">{{item.financeMonthSales}}</view>
+            <view class="td">{{item.salesGoal}}</view>
+          </view>
+        </view>
+      </view>
+      <view style="height:10rpx;width100%;background:#fff;margin-top:30rpx"  wx:if="{{ifLineData}}"></view>
+      <view class="ttitle"  wx:if="{{ifLineData}}">
+        <view
+          style="position:absolute;width:10rpx;height:40rpx;border-radius:10rpx;left:0;top:40rpx;background:#6987fb">
+        </view> 逐月销售趋势(万)
+      </view>
+      <view class="trend"  wx:if="{{ifLineData}}">
+        <canvas canvas-id="lineCanvas" class="canvas c2" bindtouchstart="touchHandler"></canvas>
       </view>
     </van-transition>
-
-  </view>
-  <view class="second" wx:else>
-    <view class="top">
-      <view class="topTitle">
-        {{title}}销售面板
-      </view>
-      <view class="topDate">
-        数据发生日期 - 2021年1月1日
-        <image class="arraw" src="/images/arraw3.png"></image>
-      </view>
-    </view>
-    <view class="middle">
-      <view class="mtop">
-        <view class="mtleft">
-          <view class="mtnum">200169</view>
-          <view class="mtitle">今日销售额</view>
-        </view>
-        <view class="mtright">
-          <view class="mtnum">2165</view>
-          <view class="mtitle">今日注册会员</view>
-        </view>
-      </view>
-      <view class="allTop all1">
-        <view class="allSection">
-          <view>3212330</view>
-          <view>当月累计<text class="down" style="font-size:20rpx">　-13.88%</text></view>
-        </view>
-        <view class="allSection">
-          <view>6480000</view>
-          <view>当月指标</view>
-        </view>
-        <view class="allSection">
-          <view>73%</view>
-          <view>月完成率</view>
-        </view>
-      </view>
-      <view class="allTop all2">
-        <view class="allSection">
-          <view>5004587</view>
-          <view>本年累计<text class="rise" style="font-size:20rpx">　+17.65%</text></view>
-        </view>
-        <view class="allSection">
-          <view>80000000</view>
-          <view>本年指标</view>
-        </view>
-        <view class="allSection">
-          <view>13.55%</view>
-          <view>年完成率</view>
-        </view>
-      </view>
-    </view>
-    <view class="ttitle">
-      <view style="position:absolute;width:10rpx;height:40rpx;border-radius:10rpx;left:0;top:40rpx;background:#28aad2">
-      </view> 部门销售排行
-      <image src="/images/ai.png" style="width:40rpx;height:40rpx;position:absolute;left:300rpx;top:40rpx"></image>
-    </view>
-    <view class="table" bindtap="toPage">
-      <view class="trh">
-        <view class="th" style="width:20%">排名</view>
-        <view class="th" style="width:60%">门店名称</view>
-        <view class="th">销售金额</view>
-        <view class="th">当月销售</view>
-        <view class="th">当月指标</view>
-      </view>
-      <block>
-        <view class="tr bg-w" hover-class="trhover" hover-stay-time="0.5">
-          <view class="td" style="width:20%">1</view>
-          <view class="td depart">名品部</view>
-          <view class="td">123123</view>
-          <view class="td">123123</view>
-          <view class="td">123123</view>
-        </view>
-      </block>
-      <block>
-        <view class="tr bg-g" hover-class="trhover" hover-stay-time="0.5">
-          <view class="td" style="width:20%">2</view>
-          <view class="td depart">男性品类部</view>
-          <view class="td">123123</view>
-          <view class="td">123123</view>
-          <view class="td">123123</view>
-        </view>
-      </block>
-      <block>
-        <view class="tr bg-w" hover-class="trhover" hover-stay-time="0.5">
-          <view class="td" style="width:20%">3</view>
-          <view class="td depart">女性品类部</view>
-          <view class="td">123123</view>
-          <view class="td">123123</view>
-          <view class="td">123123</view>
-        </view>
-      </block>
-      <block>
-        <view class="tr bg-g" hover-class="trhover" hover-stay-time="0.5">
-          <view class="td" style="width:20%">4</view>
-          <view class="td depart">儿童部</view>
-          <view class="td">123123</view>
-          <view class="td">123123</view>
-          <view class="td">123123</view>
-        </view>
-      </block>
-      <block>
-        <view class="tr bg-w" hover-class="trhover" hover-stay-time="0.5">
-          <view class="td" style="width:20%">5</view>
-          <view class="td depart">超市部</view>
-          <view class="td">123123</view>
-          <view class="td">123123</view>
-          <view class="td">123123</view>
-        </view>
-      </block>
-    </view>
-    <view style="height:10rpx;width100%;background:#fff;margin-top:30rpx"></view>
-    <view class="ttitle">
-    <view style="position:absolute;width:10rpx;height:40rpx;border-radius:10rpx;left:0;top:40rpx;background:#28aad2">
-    </view> 逐月销售趋势
-    <image src="/images/ai.png" style="width:40rpx;height:40rpx;position:absolute;left:300rpx;top:36rpx"></image>
-  </view>
-    <view class="trend">
-    <canvas canvas-id="lineCanvas" class="canvas c2" bindtouchstart="touchHandler"></canvas>
-  </view>
   </view>
 
   <view style="width:100%;height:100rpx"></view>

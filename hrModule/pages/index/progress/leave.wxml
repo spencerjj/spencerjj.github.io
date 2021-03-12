@@ -30,9 +30,20 @@
 			<text>离职类型<text style="color:red;font-size:25rpx">*</text> </text>
 		</view>
 		<picker value="{{index1}}" range="{{array1}}" bindchange="pickChange" disabled="{{current==1&&lists.bpm.activityId=='hrbp'?false:true}}">
-			<view class="timePicker  {{ifOut?'':'pickerError'}}" style="padding-left:10rpx">
-				<text wx:if="{{index1==10}}" style="color:#af9d7f">请选择...</text>
+			<view class="timePicker" style="padding-left:10rpx">
 				{{array1[index1]}}
+				<image class="arraw" src="http://img.gagctv.com/17112314452261654"></image>
+			</view>
+		</picker>
+	</view>
+  <view class="title" wx:if="{{lists.bpm.activityId=='hrbp'}}">
+		<view class="c1">
+			<text>移交类型<text style="color:red;font-size:25rpx">*</text> </text>
+		</view>
+		<picker value="{{index2}}" range="{{array2}}" bindchange="pickChange1" disabled="{{current==1&&lists.bpm.activityId=='hrbp'?false:true}}">
+			<view class="timePicker pickerError" style="padding-left:10rpx">
+				<text wx:if="{{index2==10}}" style="color:#af9d7f">请选择...</text>
+				{{array2[index2]}}
 				<image class="arraw" src="http://img.gagctv.com/17112314452261654"></image>
 			</view>
 		</picker>
@@ -67,7 +78,7 @@
 		</picker>
     </view>
   </view>
-  <view class="sub" wx:if="{{lists.bpm.activityId=='hrmsg'}}">
+  <!-- <view class="sub" wx:if="{{lists.bpm.activityId=='hrmsg'}}">
     <view class="c1">
       <text>最后结薪日<text style="color:red;font-size:25rpx">*</text></text>
     </view>
@@ -86,7 +97,7 @@
       <text>剩余假期天数<text style="color:red;font-size:25rpx">*</text></text>
     </view>
      <input class="number1" placeholder-style='color:#af9d7f' bindinput='hinput1' value="{{lists.remainHoliday}}" placeholder="{{lists.remainHoliday?'':0}}" placeholder-style="padding:0;margin:0;color:#af9d7f" disabled="{{current==1?false:'true'}}" confirm-type="done" maxlength="2" type="number"></input>
-  </view>
+  </view> -->
   <view class="title" style="z-index:1 !important">
     <view class="c1">
       <text>离职原因</text>

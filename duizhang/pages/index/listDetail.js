@@ -52,6 +52,7 @@ Page({
       receiverTel:options.receiverTel!='undefined'?options.receiverTel:'未知',
       departName:options.departName!='undefined'?options.departName:'未知',
       time:options.time!='undefined'?options.time:'未知',
+      refundFee:options.refundFee!='undefined'?options.refundFee:'0',
       id:options.id,
       remark:options.remark!='undefined'?options.remark:'',
       sid:userInfo.sid

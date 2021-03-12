@@ -1,10 +1,10 @@
 {
   "pages": [
-    "pages/index/recordLists",
-    "pages/index/index",
+    "pages/index/distribution",
     "pages/index/finish",
     "pages/index/confirm",
-    "pages/index/distribution",
+    "pages/index/recordLists",
+    "pages/index/index",
     "views/myswiper/datePicker"
   ],
   "window": {

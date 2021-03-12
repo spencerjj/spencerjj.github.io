@@ -1,28 +1,99 @@
-<view class='tip'>请选择门店</view>
+<view class='tip'>请选择门店(同期为2019年数据)</view>
 <!-- <van-area title="标题" area-list="{{areaList}}" bind:confirm="areaConfirm" /> -->
-<van-transition show="{{ storeShow }}" name="{{index % 2 == 0?'fade-left':'fade-right'}}" class="store"
-  wx:for="{{storeList}}" data-index="{{index}}" bindtap='onStoreSelected' wx:key="index" hover-class='hover1'
-  hover-stay-time='50'>
-  <view class="storeList">
+<van-transition show="{{ storeShow }}" name="fade-right" class="store">
+  <view class="storeList" bindtap='onStoreSelected' data-mark="601" wx:if="{{tab0}}">
     <view class='info-box'>
-      <image class='storeIcon' src='/images/logo2.png'></image>
+      <!-- <image class='storeIcon' src='/images/logo2.png'></image> -->
       <view class='storeInfo'>
-        <view class='storeName'>{{item.storeName}}</view>
+        <view class='storeName'>购物中心</view>
         <!-- <view class="storeAdmin">会员人数: 9123</view> -->
       </view>
       <view class="sales">
         <view class="saleSection">
-          <view>{{item.month}} <text style="font-size:20rpx">万</text></view>
-          <view>本月<text class="down" style="font-size:20rpx">　-13.88%</text></view>
+          <view>{{tab0List.financeMonthSales||0}} <text style="font-size:20rpx">万</text></view>
+          <view>本月<text  class="{{tab0List.moM>0?'rise':'down'}}" style="font-size:20rpx">　{{tab0List.moM||0}}%</text></view>
         </view>
         <view class="saleSection">
-          <view>{{item.year}} <text style="font-size:20rpx">万</text></view>
-          <view>本年<text class="rise" style="font-size:20rpx">　+22.88%</text></view>
+          <view>{{tab0List.financeYearSales||0}} <text style="font-size:20rpx">万</text></view>
+          <view>本年<text class="{{tab0List.yoY>0?'rise':'down'}}" style="font-size:20rpx">　{{tab0List.yoY||0}}%</text></view>
         </view>
       </view>
       <view class='camInfo'>
-        <view class='camNum'>{{item.camNum}} <text style="font-size:20rpx">万</text></view>
+        <view class='camNum'>{{tab0List.sales||0}} <text style="font-size:20rpx">万</text></view>
         <view class='camTip'>实时销售额</view>
+      </view>
+      <image class='arrow' src='http://img.gagctv.com/17112314452261654'></image>
+    </view>
+  </view>
+
+  <view class="storeList" bindtap='onStoreSelected' data-mark="602" wx:if="{{tab1}}">
+    <view class='info-box'>
+      <!-- <image class='storeIcon' src='/images/logo2.png'></image> -->
+      <view class='storeInfo'>
+        <view class='storeName'>百货大楼</view>
+        <!-- <view class="storeAdmin">会员人数: 9123</view> -->
+      </view>
+      <view class="sales">
+        <view class="saleSection">
+          <view>{{tab1List.financeMonthSales||0}} <text style="font-size:20rpx">万</text></view>
+          <view>本月<text  class="{{tab1List.moM>0?'rise':'down'}}" style="font-size:20rpx">　{{tab1List.moM||0}}%</text></view>
+        </view>
+        <view class="saleSection">
+          <view>{{tab1List.financeYearSales||0}} <text style="font-size:20rpx">万</text></view>
+          <view>本年<text class="{{tab1List.yoY>0?'rise':'down'}}" style="font-size:20rpx">　{{tab1List.yoY||0}}%</text></view>
+        </view>
+      </view>
+      <view class='camInfo'>
+        <view class='camNum'>{{tab1List.sales||0}} <text style="font-size:20rpx">万</text></view>
+        <view class='camTip'>实时销售额</view>
+      </view>
+      <image class='arrow' src='http://img.gagctv.com/17112314452261654'></image>
+    </view>
+  </view>
+  <view class="storeList" bindtap='onStoreSelected' data-mark="603" wx:if="{{tab2}}">
+    <view class='info-box'>
+      <!-- <image class='storeIcon' src='/images/logo2.png'></image> -->
+      <view class='storeInfo'>
+        <view class='storeName'>新世纪商城</view>
+        <!-- <view class="storeAdmin">会员人数: 9123</view> -->
+      </view>
+      <view class="sales">
+        <view class="saleSection">
+          <view>{{tab2List.financeMonthSales||0}} <text style="font-size:20rpx">万</text></view>
+          <view>本月<text  class="{{tab2List.moM>0?'rise':'down'}}" style="font-size:20rpx">　{{tab2List.moM||0}}%</text></view>
+        </view>
+        <view class="saleSection">
+          <view>{{tab2List.financeYearSales||0}} <text style="font-size:20rpx">万</text></view>
+          <view>本年<text class="{{tab2List.yoY>0?'rise':'down'}}" style="font-size:20rpx">　{{tab2List.yoY||0}}%</text></view>
+        </view>
+      </view>
+      <view class='camInfo'>
+        <view class='camNum'>{{tab2List.sales||0}} <text style="font-size:20rpx">万</text></view>
+        <view class='camTip'>实时销售额</view>
+      </view>
+      <image class='arrow' src='http://img.gagctv.com/17112314452261654'></image>
+    </view>
+  </view>
+  <view class="storeList" bindtap='onStoreSelected' data-mark="lampo" wx:if="{{tab3}}">
+    <view class='info-box'>
+      <!-- <image class='storeIcon' src='/images/logo2.png'></image> -->
+      <view class='storeInfo'>
+        <view class='storeName'>蓝豹</view>
+        <!-- <view class="storeAdmin">会员人数: 9123</view> -->
+      </view>
+      <view class="sales">
+        <view class="saleSection">
+          <view>{{tab3List.financeMonthSales||0}} <text style="font-size:20rpx">万</text></view>
+          <view>本月<text  class="{{tab3List.moM>0?'rise':'down'}}" style="font-size:20rpx">　{{tab3List.moM||0}}%</text></view>
+        </view>
+        <view class="saleSection">
+          <view>{{tab3List.financeYearSales||0}} <text style="font-size:20rpx">万</text></view>
+          <view>本年<text class="{{tab3List.yoY>0?'rise':'down'}}" style="font-size:20rpx">　{{tab3List.yoY||0}}%</text></view>
+        </view>
+      </view>
+      <view class='camInfo'>
+        <view class='camNum'>{{tab3List.sales||0}} <text style="font-size:20rpx">万</text></view>
+        <view class='camTip'>昨日销售额</view>
       </view>
       <image class='arrow' src='http://img.gagctv.com/17112314452261654'></image>
     </view>

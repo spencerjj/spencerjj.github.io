@@ -1,114 +1,152 @@
 <view class="container">
-  <view class="top">
+  <view class="mtop">
+    <!-- <view class="fresh" bindtap="fresh" hover-stay-time=".5s" bindtap="fresh">
+          <image src="/images/fresh.png" class="{{ifRound?'round':''}}"></image>
+        </view> -->
+    <view class="saleImg">
+      <image src="/images/sale.png"></image>
+    </view>
+    <view class="mtleft">
+      <view class="mtnum">{{totalData.sales||0}} <text style="font-size:20rpx">万</text></view>
+      <view class="mtitle">今日销售额</view>
+    </view>
+    <view class="mtleft">
+      <view class="mtnum">{{totalData.profit||0}} <text style="font-size:20rpx">万</text></view>
+      <view class="mtitle">毛利</view>
+    </view>
+    <view style="font-size:28rpx;flex:auto;text-align:center;margin-top:20rpx">数据更新时间 - {{totalData.getTime||nowTime}}</view>
+  </view>
+  <!-- <view class="top">
     <view class="left">
       <view class="ltop">
-        <view>月销售额</view>
+        <view>本月销售额</view>
         <view>13 <text style="font-size:20rpx">万</text></view>
       </view>
       <view class="lbottom">
-        <view>年销售额</view>
+        <view>本月销售目标</view>
         <view>100 <text style="font-size:20rpx">万</text></view>
+      </view>
+      <view class="lbottom">
+        <view>本月完成率</view>
+        <view>100</view>
+      </view>
+      <view class="lbottom">
+        <view>月同比</view>
+        <view>100</view>
       </view>
     </view>
     <view class="right">
       <view class="ltop">
-        <view>月销售额</view>
+        <view>本年销售额</view>
         <view>6 <text style="font-size:20rpx">万</text></view>
       </view>
       <view class="lbottom">
-        <view>年销售额</view>
+        <view>本年销售目标</view>
         <view>100 <text style="font-size:20rpx">万</text></view>
       </view>
-    </view>
-  </view>
-  <view class="allTop">
-			<view class="allSection">
-				<view>50%</view>
-				<view>利润率</view>
-			</view>
-			<view class="allSection">
-				<view>1000</view>
-				<view>客流量</view>
+      <view class="lbottom">
+        <view>本年完成率</view>
+        <view>100</view>
       </view>
-      <view class="allSection">
-				<view>300</view>
-				<view>门店数</view>
-			</view>
+      <view class="lbottom">
+        <view>年同比</view>
+        <view>100</view>
+      </view>
     </view>
-  <view class="ttitle">
-    <view style="position:absolute;width:10rpx;height:40rpx;border-radius:10rpx;left:0;top:40rpx;background:#28aad2">
-    </view> 潮流运动部实时销售情况
-    <image src="/images/ai.png" style="width:40rpx;height:40rpx;position:absolute;left:500rpx;top:40rpx"></image>
+  </view> -->
+  <view class="allTop allTop1">
+    <view class="al">
+      <view class="alt">
+        <view class="altv">
+          <view>
+            {{totalData.financeMonthSales||0}}<text style="font-size:20rpx"> 万</text>
+          </view>
+          <view>
+            月销售额 <text class="{{totalData.moM>0?'rise':'down'}}" style="font-size:20rpx">{{totalData.moM||0}}%</text>
+          </view>
+        </view>
+      </view>
+      <view class="alb">
+        <view class="altv">
+          <view>
+            {{totalData.salesGoal||0}}<text style="font-size:20rpx"> 万</text>
+          </view>
+          <view>
+            月销售目标
+          </view>
+        </view>
+      </view>
+    </view>
+    <view class="ar">
+      <van-circle value="{{totalData.goalRatio||0}}" stroke-width="10" size="120" text="{{totalData.mround||0}}%" layer-color="#eeeeee"
+        color="#4ba8df" />
+        <view style="color:#4ba8df">月完成率</view>
+    </view>
   </view>
-  <view class="table">
+  <view class="allTop allTop2">
+    <view class="al">
+      <view class="alt">
+        <view class="altv">
+          <view>
+            {{totalData.financeYearSales||0}}<text style="font-size:20rpx"> 万</text>
+          </view>
+          <view>
+            年销售额 <text class="{{totalData.yoY>0?'rise':'down'}}" style="font-size:20rpx">{{totalData.yoY||0}}%</text>
+          </view>
+        </view>
+      </view>
+      <view class="alb">
+        <view class="altv">
+          <view>
+            {{totalData.salesGoalYear||0}}<text style="font-size:20rpx"> 万</text>
+          </view>
+          <view>
+            年销售目标
+          </view>
+        </view>
+      </view>
+    </view>
+    <view class="ar">
+      <van-circle value="{{totalData.yearGoalRatio||0}}" stroke-width="10" size="120" text="{{totalData.yround||0}}%" layer-color="#eeeeee"
+        color="#f0b470" />
+        <view style="color:#f0b470">年完成率</view>
+    </view>
+  </view>
+  <view class="ttitle" wx:if="{{ifStoreData}}">
+    <view style="position:absolute;width:10rpx;height:40rpx;border-radius:10rpx;left:0;top:40rpx;background:#28aad2">
+    </view> {{totalData.departName2}}实时销售情况(元)
+  </view>
+  <view class="table" wx:if="{{ifStoreData}}">
     <view class="tr header">
-      <view class="th">厅房名称</view>
-      <view class="th">销售金额</view>
-      <view class="th">来客数</view>
+      <view class="th">柜组名称</view>
+      <view class="th">今日销售</view>
+      <view class="th">消费笔数</view>
       <view class="th">客单价</view>
-      <view class="th">销售占比</view>
-      <view class="th">卡券使用</view>
+      <view class="th">毛利</view>
     </view>
-    <block>
-      <view class="tr bg-w" hover-class="trhover" hover-stay-time="0.5">
-        <view class="td">阿迪厅</view>
-        <view class="td">395</view>
-        <view class="td">3371</view>
-        <view class="td">291</view>
-        <view class="td">10%</view>
-        <view class="td">15</view>
+    <view wx:if="{{storeData.length==0||!storeData}}">
+      <view class="tr bg-g" hover-class="trhover" hover-stay-time="0.5" style="color:#666">
+        暂无数据
       </view>
-    </block>
-    <block>
-      <view class="tr bg-g" hover-class="trhover" hover-stay-time="0.5">
-        <view class="td">耐克厅</view>
-        <view class="td">395</view>
-        <view class="td">3371</view>
-        <view class="td">291</view>
-        <view class="td">10%</view>
-        <view class="td">15</view>
+    </view>
+    <view wx:for="{{storeData}}" wx:key="index">
+      <view class="tr {{index%2==0?'bg-g':'bg-w'}}" hover-class="trhover" hover-stay-time="0.5" >
+        <view class="td">{{item.brandName}}</view>
+        <view class="td">{{item.sales}}</view>
+        <view class="td">{{item.buyMember}}</view>
+        <view class="td">{{item.ppm}}</view>
+        <view class="td">{{item.profit}}</view>
       </view>
-    </block>
-    <block>
-      <view class="tr bg-w" hover-class="trhover" hover-stay-time="0.5">
-        <view class="td">李宁厅</view>
-        <view class="td">395</view>
-        <view class="td">3371</view>
-        <view class="td">291</view>
-        <view class="td">10%</view>
-        <view class="td">15</view>
-      </view>
-    </block>
-    <block>
-      <view class="tr bg-g" hover-class="trhover" hover-stay-time="0.5">
-        <view class="td">匡威厅</view>
-        <view class="td">395</view>
-        <view class="td">3371</view>
-        <view class="td">291</view>
-        <view class="td">10%</view>
-        <view class="td">15</view>
-      </view>
-    </block>
-    <block>
-      <view class="tr bg-w" hover-class="trhover" hover-stay-time="0.5">
-        <view class="td">耐克360厅</view>
-        <view class="td">395</view>
-        <view class="td">3371</view>
-        <view class="td">291</view>
-        <view class="td">10%</view>
-        <view class="td">15</view>
-      </view>
-    </block>
+    </view>
   </view>
-  <view style="height:10rpx;width100%;background:#fff;margin-top:30rpx"></view>
-  <view class="ttitle">
+  <view style="height:100rpx;width:100%;"></view>
+  <!-- <view class="ttitle" wx:if="{{ifStoreData}}">
     <view style="position:absolute;width:10rpx;height:40rpx;border-radius:10rpx;left:0;top:40rpx;background:#28aad2">
-    </view> 实时数据分部
-    <image src="/images/ai.png" style="width:40rpx;height:40rpx;position:absolute;left:300rpx;top:40rpx"></image>
+    </view> {{totalData.departName2}}日销售数据(元)
   </view>
-  <view class="trend">
-    <canvas canvas-id="lineCanvas" class="canvas c2" bindtouchstart="touchHandler"></canvas>
-  </view>
+  <view class="trend {{ifStoreData?'':'opa'}}">
+    <canvas canvas-id="lineCanvas" class="canvas c2"></canvas>
+  </view> -->
 
 
 </view>

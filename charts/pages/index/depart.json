@@ -1,6 +1,6 @@
 {
-  "navigationBarTitleText": "实时销售",
+  "navigationBarTitleText": "销售面板",
   "navigationBarTextStyle": "black",
   "navigationBarBackgroundColor": "#f8f8f8",
-  "enablePullDownRefresh": false
+  "enablePullDownRefresh": true
 }

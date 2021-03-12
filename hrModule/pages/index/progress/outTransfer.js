@@ -27,6 +27,7 @@ Page({
     notice:'请输入终止原因',
     focus:false,
     myComment:'',
+    salaryDate:'',
     actions: [
       {
           name: '提交',
@@ -193,31 +194,32 @@ Page({
               that.setData({
                 lists:res.data.oaEmployOutTransfer,
                 id:res.data.oaEmployOutTransfer.id,
+                salaryDate:res.data.oaEmployOutTransfer.salaryDate||'',
                 loadAll:false,
               })
               var lists = res.data.oaEmployOutTransfer
-              if (lists.sfCaiwu != undefined) {
-                if (lists.sfCaiwu == '1') {
-                  that.setData({
-                    index1: 0,
-                  })
-                } else if(lists.sfCaiwu == '0') {
-                  that.setData({
-                    index1: 1
-                  })
-                }
-              }
-              if (lists.sfTongxia != undefined) {
-                if (lists.sfTongxia == '1') {
-                  that.setData({
-                    index2: 0,
-                  })
-                } else if(lists.sfTongxia == '0') {
-                  that.setData({
-                    index2: 1
-                  })
-                }
-              }
+              // if (lists.sfCaiwu != undefined) {
+              //   if (lists.sfCaiwu == '1') {
+              //     that.setData({
+              //       index1: 0,
+              //     })
+              //   } else if(lists.sfCaiwu == '0') {
+              //     that.setData({
+              //       index1: 1
+              //     })
+              //   }
+              // }
+              // if (lists.sfTongxia != undefined) {
+              //   if (lists.sfTongxia == '1') {
+              //     that.setData({
+              //       index2: 0,
+              //     })
+              //   } else if(lists.sfTongxia == '0') {
+              //     that.setData({
+              //       index2: 1
+              //     })
+              //   }
+              // }
               // if (lists.sfOa != undefined) {
               //   if (lists.sfOa == '1') {
               //     that.setData({
@@ -229,17 +231,17 @@ Page({
               //     })
               //   }
               // }
-              if (lists.sfYouxiang != undefined) {
-                if (lists.sfYouxiang == '1') {
-                  that.setData({
-                    index4: 0,
-                  })
-                } else if(lists.sfYouxiang == '0'){
-                  that.setData({
-                    index4: 1
-                  })
-                }
-              }
+              // if (lists.sfYouxiang != undefined) {
+              //   if (lists.sfYouxiang == '1') {
+              //     that.setData({
+              //       index4: 0,
+              //     })
+              //   } else if(lists.sfYouxiang == '0'){
+              //     that.setData({
+              //       index4: 1
+              //     })
+              //   }
+              // }
             }
           })
         }else{
@@ -339,6 +341,16 @@ Page({
         })
         return;
       }
+      if(that.data.lists.bpm.activityId=='ssc'&&that.data.salaryDate.length<1){
+        $Toast({
+          content:'请选择最后结薪日',
+          type:'warning'
+        })
+        that.setData({
+          visible: false
+        })
+        return;
+      }
       // if(that.data.lists.bpm.activityId=='hrbp'&&that.data.index1==3){
       //   $Toast({
       //     content:'请选择是否财务审批',
@@ -385,12 +397,13 @@ Page({
           __sid: app.globalData.tempSid,
           __ajax: 'json',
           id: that.data.id,
-          // userCode:that.data.lists.userCode,
-          sfCaiwu:that.data.index1==3?'':Math.abs(that.data.index1 - 1),
-          sfTongxia:that.data.index2==3?'':Math.abs(that.data.index2 - 1),
-          sfOa:1,
-          sfYouxiang:that.data.index4==3?'':Math.abs(that.data.index4 - 1),
-          sfSsc:1,
+          userCode:that.data.lists.userCode,
+          // sfCaiwu:that.data.index1==3?'':Math.abs(that.data.index1 - 1),
+          // sfTongxia:that.data.index2==3?'':Math.abs(that.data.index2 - 1),
+          // sfOa:1,
+          // sfYouxiang:that.data.index4==3?'':Math.abs(that.data.index4 - 1),
+          // sfSsc:1,
+          salaryDate:that.data.salaryDate,
           oaEmployOutTransfer_image:that.data.imgId,
           'bpm.taskId':that.data.lists.bpm.taskId,
           'bpm.procInsId':that.data.lists.bpm.procInsId,
@@ -639,6 +652,12 @@ getToday(){
     wx.previewImage({
       current: e.currentTarget.dataset.url,
       urls: x
+    })
+  },
+  bindSalaryChange: function(e) {
+    console.log( e.detail.value)
+    this.setData({
+      salaryDate: e.detail.value
     })
   },
 })

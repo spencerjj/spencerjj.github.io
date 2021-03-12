@@ -104,7 +104,8 @@ Page({
         trend2020:600,
         trend2019:550,
         trend2019Des:false,
-        trend2020Des:false
+        trend2020Des:false,
+        changeShow:false
     },
     onLoad: function () {
         var chartsUser = wx.getStorageSync('chartsUser');
@@ -114,7 +115,8 @@ Page({
             userCode: chartsUser.userCode,
             sid: chartsUser.sid,
             loginCode: chartsUser.loginCode,
-            officeName:chartsUser.officeName
+            officeName:chartsUser.officeName,
+            changeShow:app.globalData.changeShow
         })
         var now = new Date()
         var now1 = new Date()

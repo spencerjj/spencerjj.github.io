@@ -327,7 +327,7 @@ Page({
     var lists = this.data.lists
     var index = e.currentTarget.dataset.index
     wx.navigateTo({
-      url: 'listDetail?brandName='+lists[index].brandName+'&itemNo='+lists[index].itemNo+'&price='+lists[index].price+'&num='+lists[index].num+'&payment='+lists[index].payment+'&receiverName='+lists[index].receiverName+'&receiverTel='+lists[index].receiverTel+'&departName='+lists[index].departName+'&remark='+lists[index].remark+'&id='+lists[index].id+'&itemTitle='+lists[index].itemTitle+'&time='+lists[index].orderCreateTime
+      url: 'listDetail?brandName='+lists[index].brandName+'&itemNo='+lists[index].itemNo+'&price='+lists[index].price+'&num='+lists[index].num+'&payment='+lists[index].payment+'&receiverName='+lists[index].receiverName+'&receiverTel='+lists[index].receiverTel+'&departName='+lists[index].departName+'&remark='+lists[index].remark+'&id='+lists[index].id+'&itemTitle='+lists[index].itemTitle+'&time='+lists[index].orderCreateTime+'&refundFee='+lists[index].refundFee
     })
   },
   onChange(event) {
@@ -357,6 +357,9 @@ Page({
         status: 'WAIT_BUYER_CONFIRM_GOODS'
       })
     }
+    that.setData({
+      active:event.detail.index
+    })
     that.getLists()
   },
   confirm(e){

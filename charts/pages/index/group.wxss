@@ -1,9 +1,78 @@
 /* pages/index/group.wxss */
 page{
   background-color: #f8f8f8;
+  overflow-x: hidden;
 }
 .container{
-  width: 100%
+  width: 100%;
+  overflow-x: hidden;
+}
+.mtop{
+  width: 94%;
+  margin-left:3%;
+  box-sizing: border-box;
+  color:#fff;
+  font-size: 50rpx;
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  padding:20rpx;
+  margin-top:30rpx;
+  background: #6987fb;
+  border-radius: 10rpx;
+  box-shadow: 0 0 10rpx 0rpx #6987fb; 
+  position: relative;
+}
+.mtop view{
+  text-align: center;
+}
+.saleImg image{
+  width: 80rpx;
+  height: 80rpx;
+  margin-top:5rpx;
+  animation: huang 2s linear infinite;
+}
+@keyframes huang{
+  0%{transform:rotate(0);transform-origin:top}
+  25%{transform:rotate(30deg);transform-origin:top}
+  50%{transform:rotate(0);transform-origin:top}
+  75%{transform:rotate(-30deg);transform-origin:top}
+  100%{transform:rotate(0);transform-origin:top}
+}
+.mtm{
+  height: 60rpx;
+  width: 4rpx;
+  margin-top: 20rpx;
+  background:white
+}
+.mtitle{
+  font-size:30rpx;
+  color:#fff
+}
+.mtnum{
+  font-weight: bolder;
+}
+.mtleft{
+  text-align: center;
+}
+.fresh{
+  position: absolute;
+  right: 10rpx;
+  top: 65rpx;
+  width: 80rpx;
+  height: 80rpx;
+  border-radius: 50%;
+  z-index: 999;
+  text-align: center;
+}
+.fresh image{
+  width: 80%;
+  height: 80%;
+  opacity: .6;
+}
+.round{
+  transition: linear 1s;
+  transform: rotate(1080deg);
 }
 .top{
   width: 94%;
@@ -15,14 +84,14 @@ page{
 }
 .top .left{
   width: 48%;
-  height: 170rpx;
+  height: 275rpx;
   border-radius: 20rpx;
   background:#5992e8;
   box-shadow: 0 0 10rpx 0 #5992e8;
 }
 .top .right{
   width: 48%;
-  height: 170rpx;
+  height: 275rpx;
   border-radius: 20rpx;
   background:#f0b470;
   box-shadow: 0 0 10rpx 0 #f0b470;
@@ -37,7 +106,7 @@ page{
 }
 .ltop view,.lbottom view{
   width: 48%;
-  line-height: 60rpx;
+  line-height: 55rpx;
 }
 .ltop view:first-child,.lbottom view:first-child{
   font-size: 25rpx;
@@ -91,7 +160,8 @@ page{
   text-overflow:ellipsis; */
   white-space: wrap;
   height:auto;
-  color:#666
+  color:#666;
+  overflow: hidden;
  }
  .bg-w{
   background: #fff;
@@ -106,7 +176,8 @@ page{
   display: flex;
   height: 2rem;
   align-items: center;
-  font-size: 28rpx;
+  font-size: 25rpx;
+  font-weight: bolder;
   background:white
  }
  .trhover{
@@ -121,19 +192,71 @@ page{
 .trend{
   width: 94%;
   margin:auto;
-  height: 600rpx;
+  height: 1000rpx;
   position: relative;
 }
 .canvas{
   width: 100%;
+  height:600rpx
 }
 .allTop{
   width: 94%;
   margin:auto;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   color:#eee;
   border-radius: 20rpx;
+  background:white;
+  border-radius: 10rpx;
+  box-shadow: 0 0 10rpx 0rpx #eee;
+  padding:30rpx 20rpx 20rpx 20rpx;
+  box-sizing: border-box;
+  margin-top:20rpx
+}
+.allTop image{
+  width: 100%;
+  height: 100%;
+}
+.alt,.alb{
+  height: 100rpx;
+  color:#888;
+  margin-top:30rpx;
+  padding-left: 20rpx;
+}
+.altv view:nth-child(2){
+  font-size:28rpx;
+}
+.allTop1 .altv view:nth-child(1){
+  font-size: 45rpx;
+  font-weight: bolder;
+  color:#4ba8df
+}
+.alti{
+  width:70rpx;
+  height: 70rpx;
+  padding:15rpx;
+}
+.al{
+  width: 50%;
+  text-align: center;
+}
+.ar{
+  width: 50%;
+  text-align: center;
+}
+.allTop1 .van-circle__text{
+  color:#4ba8df !important;
+  font-size:40rpx !important
+
+}
+.allTop2 .van-circle__text{
+  color:#f0b470 !important;
+  font-size:40rpx !important
+}
+.allTop2 .altv view:nth-child(1){
+  font-size: 45rpx;
+  font-weight: bolder;
+  color:#f0b470
 }
 .allSection{
   text-align: center;
@@ -154,4 +277,7 @@ page{
   font-size: 50rpx;
   font-weight: bolder;
   margin-top: 35rpx;
+}
+.opa{
+  opacity: 0;
 }
