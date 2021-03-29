@@ -1,0 +1,21 @@
+.add{
+  position: fixed;
+  right:20rpx;
+  bottom: 150rpx;
+  z-index: 99;
+  width: 70rpx;
+  height: 70rpx;
+  line-height: 70rpx;
+  background: white;
+  text-align: center;
+  border-radius: 50%;
+  box-shadow: 0 0 5px 5px #eee;
+}
+.add image{
+  width: 40rpx;
+  height: 40rpx;
+  margin-top:15rpx
+}
+.addTap{
+  background: #eee;
+}

@@ -4,7 +4,7 @@
     autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}">
       <block wx:for="{{imgLists}}" wx:key="index">
         <swiper-item style="width:100%">
-          <image src="{{item}}" class="slide-image" mode="widthFix" style="width:100%"></image>
+          <image src="{{item}}" class="slide-image" mode="bottom" style="width:100%"></image>
         </swiper-item>
       </block>
     </swiper>

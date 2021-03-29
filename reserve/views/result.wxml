@@ -1,0 +1,20 @@
+<view class="boss">
+  <view class="main">
+    <view class="top">
+      <view class="title">您已经成功预约！</view>
+      <van-icon name="cross" custom-style="font-size:50rpx" color="#666666" bindtap="close"/>
+    </view>
+    <view style="padding-bottom:50rpx">可进入<text style="color:red">“我的-我的门票”页面</text>查看具体预约信息</view>
+    <view class="details">活动名称：　<text style="color:#666">{{name}}</text></view>
+    <view class="details">活动地址：　<text style="color:#666">{{address}}</text></view>
+    <view class="details">预约日期：　<text style="color:#666">{{mydate}}</text></view>
+    <view class="details">预约时段：　<text style="color:#666">{{myqua}}</text></view>
+    <view class="details">报名人数：　<text style="color:#666">{{number}}人</text></view>
+    <view class="action">
+      <view  hover-class="hover1" hover-stay-time=".5s" bindtap="check">查看门票</view>
+      <view><label for="btnId">分享活动</label></view>
+    </view>
+  </view>
+</view>
+
+<button open-type="share" id="btnId" style="display:hidden" bindtap='share'></button>

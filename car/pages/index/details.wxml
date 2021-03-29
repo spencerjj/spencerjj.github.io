@@ -1,0 +1,83 @@
+<view class="container">
+  <view class="action">
+    <view class="type">{{type}}</view>
+    <view class="date">{{date}} {{time}}</view>
+    <view class="detail">
+      <view class="num">{{num}}人</view>
+      <view class="comment">行李较多，早点过来</view>
+    </view>
+    <view class="place">
+      <view class="start">
+        <view class="point p1"></view>
+        <view class="sname">{{start}}</view>
+      </view>
+      <view class="end">
+        <view class="point p2"></view>
+        <view class="ename">{{end}}</view>
+      </view>
+      <view class="end">
+        <view class="point p3"></view>
+        <view class="ename">{{flight}}(航班号)</view>
+      </view>
+    </view>
+    <view class="userInfo">
+      <image src="/images/nan.png"></image>
+      <text class="userName">张三(信息部)</text>
+    </view>
+    <view style="background:#eee;height:2rpx;width:100%;margin-top:20rpx"></view>
+    <view class="infos">
+      <view class="title">分配信息</view>
+      <view class="number">
+        <image src="/images/01-2.png"></image>
+        <text class="notice {{disUser.length>=0?'dark':''}}">{{disUser||'无分配人员'}}</text>
+      </view>
+      <view class="comment1" bindtap="showComment">
+        <image src="/images/01-3.png"></image>
+        <text class="cnotice {{comment.length>0?'dark':''}}">{{comment||'无备注'}}</text>
+      </view>
+    </view>
+    <view style="background:#eee;height:2rpx;width:100%;margin-top:20rpx"></view>
+    <view class="title" style="margin-left:5%;margin-top:10rpx">行程开始照片</view>
+    <view class="pic" bindtap="upload">
+      <view class="photo">
+        <image src="/images/banner1.png" mode="aspectFill">
+        </image>
+      </view>
+    </view>
+    <view class="title" style="margin-left:5%;margin-top:10rpx">行程开始公里数</view>
+    <view class="km">
+      <view class="point p3"></view>
+      <input class="ecl" type="text" value="1234" disabled="true"/>
+    </view>
+    <view style="background:#eee;height:2rpx;width:100%;margin-top:20rpx"></view>
+    <view class="title" style="margin-left:5%;margin-top:10rpx">{{photoText}}</view>
+    <view class="pic" bindtap="upload">
+      <image
+        src="http://tiebapic.baidu.com/forum/w%3D580/sign=4c36fa524443fbf2c52ca62b807fca1e/cd014afbfbedab648925929ae036afc379311e27.jpg"
+        class="up" wx:if="{{imgUrl.length==0}}">
+      </image>
+      <view class="photo" wx:if="{{imgUrl.length>0}}">
+        <image src="{{imgUrl}}" mode="aspectFill">
+        </image>
+      </view>
+    </view>
+    <view class="title" style="margin-left:5%;margin-top:10rpx">行程结束公里数</view>
+    <view class="km">
+      <view class="point p3"></view>
+      <input class="ecl" type="text" value="{{km}}" placeholder="您的公里数" bindinput="kmInput" />
+    </view>
+    <view class="btn" bindtap="confirm">
+      {{btnText}}
+    </view>
+  </view>
+  <view style="background:none;height:200rpx;width:100%"></view>
+  <van-action-sheet show="{{ show }}" title="分配备注" bind:close="onClose">
+    <view class="comContent">
+      <view value="" class="myComment">{{comment}}</view>
+    </view>
+  </van-action-sheet>
+  <view class="step">
+    <van-steps steps="{{ steps }}" active="{{active}}" active-color="#46b6b4" />
+  </view>
+</view>
+<van-dialog id="van-dialog" />

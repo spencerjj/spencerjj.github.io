@@ -1,0 +1,71 @@
+<!--index.wxml-->
+<view class="container {{show1?'stop':''}}">
+  <button open-type="share" id="btnId" style="display:hidden" bindtap='share'></button>
+  <label for="btnId">
+    <image src="/images/share.png" class="share"></image>
+  </label>
+  <view class="banner">
+    <image src="/images/banner.png" mode="widthFix"></image>
+  </view>
+  <view class="top">
+    <view class="ttitle">新世纪半山书局 预约</view>
+    <view class="tdetail">
+      <van-icon name="clock-o" size="25" custom-style="vertical-align: -10%" /> {{today}}</view>
+    <view class="tdetail">
+      <van-icon name="location-o" size="25" custom-style="vertical-align: -10%" /> 常州市 钟楼区 新世纪半山书局</view>
+  </view>
+  <view class="footer">
+    <view class="notice">
+      本活动免费开放
+    </view>
+    <view class="reBtn" bindtap="reserve" hover-class="hover1" hover-stay-time=".5s">
+      立即预约
+    </view>
+  </view>
+  <view class="content">
+    <view class="btitle">
+      <view style="position:absolute;width:10rpx;height:40rpx;border-radius:10rpx;left:0;top:40rpx;background:#1989fa">
+      </view>活动介绍
+    </view>
+    <text class="intro">为了让顾客在新世纪半山书局拥有愉快、舒适的购物体验与环境，本店将暂时实行入店预约制。\r
+      点击以下的「立即预约」按钮，选择合适的时间进行预约。</text>
+  </view>
+  <view class="content">
+    <view class="btitle">
+      <view style="position:absolute;width:10rpx;height:40rpx;border-radius:10rpx;left:0;top:40rpx;background:#1989fa">
+      </view>活动门店
+    </view>
+    <view class="ctitle">新世纪半山书局</view>
+    <view class="caddress">常州市 钟楼区 新世纪半山书局</view>
+   <!-- <map id="myMap" style="width: 100%; height: 500rpx;" longitude="{{longitude}}" latitude="{{latitude}}" scale="17"
+      markers="{{markers}}" bindtap="showMap"></map>  -->
+  </view>
+
+  <van-toast id="van-toast" />
+  <van-dialog id="van-dialog" />
+  <my-tips tips="{{tips}}" wx:if="{{show2}}" />
+  <my-dia mydate="{{myDate}}" myqua="{{myQua}}" wx:if="{{show3}}" bind:do="do"/>
+  <my-result mydate="{{myDate}}" myqua="{{myQua}}" wx:if="{{show4}}" bind:check="check" bind:close="closeSucc"/>
+  <van-action-sheet show="{{ show1 }}" title="预约时间" bind:close="onClose">
+    <view class="timeTop">
+      <van-calendar poppable="{{ false }}" show-subtitle="{{false}}" show-confirm="{{ false }}" class="calendar"
+        show-title="{{false}}" row-height="40" color="#1989fa" formatter="{{ formatter }}" min-date="{{ minDate }}"
+        max-date="{{ maxDate }}" bind:select="datechange" />
+      <view class="timeCon">
+        <view class="{{item.ifPass?'cant':'timeItem'}} {{item.selected?'timeSelected':''}}" wx:for="{{timeQua}}"
+          wx:key="index" data-time="{{item.time}}" data-index="{{index}}" bindtap="selectTime">
+          {{item.time}}
+          <view class="mark" wx:if="{{item.ifPass}}">已售</view>
+        </view>
+      </view>
+    </view>
+    <view class="timeBtm">
+      <view class="timeShow">
+        {{myDate}} {{myQua}}
+      </view>
+      <view class="reserve" bindtap="confirm" hover-class="hover1" hover-stay-time=".5s">
+        立即预约
+      </view>
+    </view>
+  </van-action-sheet>
+</view>

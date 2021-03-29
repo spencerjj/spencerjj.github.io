@@ -15,7 +15,7 @@ Page({
     active:0,
     peoIndex:-1,
     array:['老王','老张','老范','老六','老五'],
-    date:'2020-12-16',
+    date:'2021-3-23',
     time:'11:30',
     start:'普林仕集团办公楼门口',
     end:'常州高铁总站',
@@ -42,7 +42,7 @@ Page({
       },
       {
         text: '　',
-        desc: '司机确认',
+        desc: '开始行程',
       },
       {
         text: '　',
@@ -149,12 +149,17 @@ Page({
   onClose() {
     this.setData({ show: false });
   },
+  switch(e){
+    this.setData({
+      active:1
+    })
+  },
   confirm(e){
     var that = this;
     if(that.data.peoIndex==-1){
       Dialog.alert({
         title: '提示',
-        message: '请选择分配车辆',
+        message: '请选择分配司机',
       })
       return;
     }
@@ -167,7 +172,7 @@ Page({
         setTimeout(() => {
           Dialog.close();
           wx.navigateTo({
-            url: 'confirm',
+            url: 'finish',
           })
         }, 2000);
       })

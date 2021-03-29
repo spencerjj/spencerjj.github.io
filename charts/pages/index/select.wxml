@@ -11,11 +11,11 @@
       <view class="sales">
         <view class="saleSection">
           <view>{{tab0List.financeMonthSales||0}} <text style="font-size:20rpx">万</text></view>
-          <view>本月<text  class="{{tab0List.moM>0?'rise':'down'}}" style="font-size:20rpx">　{{tab0List.moM||0}}%</text></view>
+          <view>本月<text  class="{{tab0List.moM>0?'rise':'down'}}" style="font-size:30rpx"> {{tab0List.moM||0}}%</text></view>
         </view>
         <view class="saleSection">
           <view>{{tab0List.financeYearSales||0}} <text style="font-size:20rpx">万</text></view>
-          <view>本年<text class="{{tab0List.yoY>0?'rise':'down'}}" style="font-size:20rpx">　{{tab0List.yoY||0}}%</text></view>
+          <view>本年<text class="{{tab0List.yoY>0?'rise':'down'}}" style="font-size:30rpx"> {{tab0List.yoY||0}}%</text></view>
         </view>
       </view>
       <view class='camInfo'>
@@ -36,11 +36,11 @@
       <view class="sales">
         <view class="saleSection">
           <view>{{tab1List.financeMonthSales||0}} <text style="font-size:20rpx">万</text></view>
-          <view>本月<text  class="{{tab1List.moM>0?'rise':'down'}}" style="font-size:20rpx">　{{tab1List.moM||0}}%</text></view>
+          <view>本月<text  class="{{tab1List.moM>0?'rise':'down'}}" style="font-size:30rpx"> {{tab1List.moM||0}}%</text></view>
         </view>
         <view class="saleSection">
           <view>{{tab1List.financeYearSales||0}} <text style="font-size:20rpx">万</text></view>
-          <view>本年<text class="{{tab1List.yoY>0?'rise':'down'}}" style="font-size:20rpx">　{{tab1List.yoY||0}}%</text></view>
+          <view>本年<text class="{{tab1List.yoY>0?'rise':'down'}}" style="font-size:30rpx"> {{tab1List.yoY||0}}%</text></view>
         </view>
       </view>
       <view class='camInfo'>
@@ -60,11 +60,11 @@
       <view class="sales">
         <view class="saleSection">
           <view>{{tab2List.financeMonthSales||0}} <text style="font-size:20rpx">万</text></view>
-          <view>本月<text  class="{{tab2List.moM>0?'rise':'down'}}" style="font-size:20rpx">　{{tab2List.moM||0}}%</text></view>
+          <view>本月<text  class="{{tab2List.moM>0?'rise':'down'}}" style="font-size:30rpx"> {{tab2List.moM||0}}%</text></view>
         </view>
         <view class="saleSection">
           <view>{{tab2List.financeYearSales||0}} <text style="font-size:20rpx">万</text></view>
-          <view>本年<text class="{{tab2List.yoY>0?'rise':'down'}}" style="font-size:20rpx">　{{tab2List.yoY||0}}%</text></view>
+          <view>本年<text class="{{tab2List.yoY>0?'rise':'down'}}" style="font-size:30rpx"> {{tab2List.yoY||0}}%</text></view>
         </view>
       </view>
       <view class='camInfo'>
@@ -84,11 +84,11 @@
       <view class="sales">
         <view class="saleSection">
           <view>{{tab3List.financeMonthSales||0}} <text style="font-size:20rpx">万</text></view>
-          <view>本月<text  class="{{tab3List.moM>0?'rise':'down'}}" style="font-size:20rpx">　{{tab3List.moM||0}}%</text></view>
+          <view>本月<text  class="{{tab3List.moM>0?'rise':'down'}}" style="font-size:30rpx"> {{tab3List.moM||0}}%</text></view>
         </view>
         <view class="saleSection">
           <view>{{tab3List.financeYearSales||0}} <text style="font-size:20rpx">万</text></view>
-          <view>本年<text class="{{tab3List.yoY>0?'rise':'down'}}" style="font-size:20rpx">　{{tab3List.yoY||0}}%</text></view>
+          <view>本年<text class="{{tab3List.yoY>0?'rise':'down'}}" style="font-size:30rpx"> {{tab3List.yoY||0}}%</text></view>
         </view>
       </view>
       <view class='camInfo'>
@@ -99,3 +99,7 @@
     </view>
   </view>
 </van-transition>
+<view class='water_top'>
+  <image src="{{temp}}" style="width:100%;height:100%;" mode="heightFix"></image>
+  <canvas canvas-id='myCanvas1' style='width:100%;height:100%;margin-left:-1000rpx'></canvas>
+</view>

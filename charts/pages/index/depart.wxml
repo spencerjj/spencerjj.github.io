@@ -36,24 +36,24 @@
             </view>
             <view class="sales">
               {{item.profit}} <text style="font-size:20rpx">万</text>
-              <view>毛利</view>
+              <view>毛利/率<text class="{{item.moM>0?'rise':'down'}}" style="font-size:30rpx"> {{item.moM}}%</text></view>
             </view>
           </view>
           <view class="saleTop sale1">
             <view class="saleSection">
               <view>{{item.financeMonthSales}} <text style="font-size:20rpx">万</text></view>
-              <view>本月<text class="{{item.moM>0?'rise':'down'}}" style="font-size:20rpx">　{{item.moM}}%</text></view>
+              <view>本月<text class="{{item.moM>0?'rise':'down'}}" style="font-size:30rpx"> {{item.moM}}%</text></view>
             </view>
             <view class="saleSection">
               <view>{{item.financeYearSales}} <text style="font-size:20rpx">万</text></view>
-              <view>本年<text class="{{item.yoY>0?'rise':'down'}}" style="font-size:20rpx">　{{item.yoY}}%</text></view>
+              <view>本年<text class="{{item.yoY>0?'rise':'down'}}" style="font-size:30rpx"> {{item.yoY}}%</text></view>
             </view>
           </view>
         </view>
         <!-- <view class="fnew">
           <view class="newSection">
             <view>1234 <text style="font-size:20rpx">人</text></view>
-            <view>会员数<text class="rise" style="font-size:20rpx">　+133</text></view>
+            <view>会员数<text class="rise" style="font-size:20rpx"> +133</text></view>
           </view>
           <view class="newSection">
             <view>33%</view>
@@ -61,7 +61,7 @@
           </view>
         </view> -->
       </view>
-    <view style="width:94%;text-align:right;height:100rpx;line-height:100rpx;color:#313b6dcc;margin-left:3%;font-size:28rpx" wx:if="{{firstShow}}">*同期为2019年数据</view>
+    <view style="width:94%;text-align:right;height:100rpx;line-height:100rpx;color:#313b6dcc;margin-left:3%;font-size:28rpx" wx:if="{{firstShow&&totalLists.length!=0}}">*同期为2019年数据</view>
     </van-transition>
   </view>
 
@@ -103,7 +103,7 @@
         <view class="allTop all1">
           <view class="allSection">
             <view>{{storeData.financeMonthSales||0}} <text style="font-size:20rpx">万</text></view>
-            <view>当月累计 <text class="{{storeData.moM>0?'rise':'down'}}" style="font-size:20rpx">{{storeData.moM||0}}%</text></view>
+            <view>当月累计 <text class="{{storeData.moM>0?'rise':'down'}}" style="font-size:25rpx">{{storeData.moM||0}}%</text></view>
           </view>
           <view class="allSection">
             <view>{{storeData.salesGoal||0}} <text style="font-size:20rpx">万</text></view>
@@ -117,7 +117,7 @@
         <view class="allTop all2">
           <view class="allSection">
             <view>{{storeData.financeYearSales||0}} <text style="font-size:20rpx">万</text></view>
-            <view>本年累计 <text class="{{storeData.yoY>0?'rise':'down'}}" style="font-size:20rpx">{{storeData.yoY||0}}%</text></view>
+            <view>本年累计 <text class="{{storeData.yoY>0?'rise':'down'}}" style="font-size:25rpx">{{storeData.yoY||0}}%</text></view>
           </view>
           <view class="allSection">
             <view>{{storeData.salesGoalYear||0}}  <text style="font-size:20rpx">万</text></view>
@@ -139,8 +139,9 @@
           <view class="th" style="width:50%">部门</view>
           <view class="th">本日</view>
           <view class="th">毛利</view>
+          <view class="th">毛利率</view>
           <view class="th">本月</view>
-          <view class="th">月目标</view>
+          <view class="th">月同期</view>
         </view>
         <view wx:if="{{deptData.length==0||!deptData}}">
           <view class="tr bg-w" hover-class="trhover" hover-stay-time="0.5" style="color:#666">
@@ -170,4 +171,8 @@
   </view>
 
   <view style="width:100%;height:100rpx"></view>
+</view>
+<view class='water_top'>
+  <image src="{{temp}}" style="width:100%;height:100%;" mode="heightFix"></image>
+  <canvas canvas-id='myCanvas1' style='width:100%;height:100%;margin-left:-1000rpx'></canvas>
 </view>

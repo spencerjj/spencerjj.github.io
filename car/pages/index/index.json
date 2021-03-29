@@ -5,6 +5,7 @@
   "enablePullDownRefresh": true,
   "usingComponents": {
     "my-swiper": "/views/myswiper/myswiper",
-    "date-picker":"/views/myswiper/datePicker"
+    "date-picker":"/views/myswiper/datePicker",
+    "my-center":"/views/myswiper/center"
   }
 }

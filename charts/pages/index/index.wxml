@@ -133,3 +133,7 @@
 	<image src="/images/nodata.png" style="width:298rpx;height:206rpx"></image>
 	<view style="margin-top:30rpx;margin-left:-10rpx">暂无数据权限</view>
 </view>
+<view class='water_top'>
+  <image src="{{temp}}" style="width:100%;height:100%;" mode="heightFix"></image>
+  <canvas canvas-id='myCanvas1' style='width:100%;height:100%;margin-left:-1000rpx'></canvas>
+</view>

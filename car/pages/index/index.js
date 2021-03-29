@@ -16,7 +16,7 @@ Page({
    */
   data: {
     active:0,
-    imgLists:['/images/banner1.png','/images/banner1.png'],
+    imgLists:['http://tiebapic.baidu.com/forum/w%3D580/sign=1e17f8be6bd98d1076d40c39113eb807/501cb21bb051f819b6d26d08cdb44aed2f73e78f.jpg','http://tiebapic.baidu.com/forum/w%3D580/sign=93d912261e23dd542173a760e108b3df/61f4503d269759ee65a70e89a5fb43166c22df8f.jpg','http://tiebapic.baidu.com/forum/w%3D580/sign=75e37687f7fe9925cb0c695804a95ee4/3e2210dfa9ec8a132ced39a2e003918fa1ecc08f.jpg'],
     minHour: 10,
     maxHour: 20,
     minDate: new Date().getTime(),
@@ -41,7 +41,7 @@ Page({
         desc: '分配处理',
       },
       {
-        desc: '司机确认',
+        desc: '开始行程',
       },
       {
         desc: '结束行程',
@@ -179,7 +179,7 @@ Page({
       start:that.data.start,
       end:that.data.end,
       people:that.data.peoIndex+1,
-      comment:comment
+      comment:that.data.comment
     }
 
     if(that.data.active==1||that.data.active==3&&that.data.trueDate.length==0){
@@ -238,5 +238,5 @@ Page({
       showCom:'',
       peoIndex:-1
     })
-  },
+  }
 })

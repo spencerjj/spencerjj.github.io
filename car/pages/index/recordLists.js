@@ -54,7 +54,7 @@ Page({
     this.setData({
       lists:x
     })
-     this.set().then(x=>{console.log(x)})
+     this.set().then(x=>{console.log(123+x)})
    
   },
 
@@ -108,15 +108,17 @@ Page({
   },
   toPage(e){
     wx.navigateTo({
-      url: 'finish'
+      url: 'detail'
     })
   },
   async set(){
-    // return new Promise((resolve,reject)=>{
-    //   setTimeout(()=>{
-    //     resolve()
-        return 18927381723
-    //   },1000)
-    // })
+    let x =  new Promise((resolve,reject)=>{
+      setTimeout(()=>{
+        resolve(18927381723)
+      },1000)
+    })
+    x.then((res)=>{
+      console.log(res)
+    })
   }
 })

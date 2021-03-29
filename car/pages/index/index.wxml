@@ -33,7 +33,7 @@
       <view class="number">
         <picker bindchange="bindPeoChange" value="{{peoIndex}}" range="{{array}}">
           <image src="/images/01-2.png"></image>
-          <text class="notice {{peoIndex==-1?'':'dark'}}">{{peoIndex==-1?'乘车人数':array[peoIndex]+'人'}}</text>
+          <text class="notice {{peoIndex==-1?'':'dark'}}">{{peoIndex==-1?'乘车人数':array[peoIndex]+' 人'}}</text>
         </picker>
       </view>
       <view class="comment" bindtap="showComment">
@@ -45,9 +45,7 @@
     <view class="btn" bindtap="confirm">
       确认用车
     </view>
-  </view>
-  <view class="add" bindtap='goCheck' hover-class="addTap" hover-stay-time=".5s" data-type="guide">
-    <image src="../../images/01-2.png"></image>
+    <my-center></my-center>
   </view>
   <van-action-sheet show="{{ show }}" title="行程备注" bind:close="onClose">
     <view class="comContent">

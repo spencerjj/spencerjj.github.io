@@ -123,3 +123,7 @@
 		{{describe}}
 	</view>
 </van-popup>
+<view class='water_top'>
+  <image src="{{temp}}" style="width:100%;height:100%;" mode="heightFix"></image>
+  <canvas canvas-id='myCanvas1' style='width:100%;height:100%;margin-left:-1000rpx'></canvas>
+</view>

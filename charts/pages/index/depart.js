@@ -33,7 +33,8 @@ Page({
     ifLineData:true,
     ifDeptData:true,
     ifStoreData:true,
-    changeShow:false
+    changeShow:false,
+    waterShow:false
   },
 
   /**
@@ -41,6 +42,7 @@ Page({
    */
   onLoad: function (options) {
     var that = this
+    this.drowsyUserInfo()
     let active = options.active || 'all'
     if(active=='601'){
       this.setData({
@@ -77,13 +79,25 @@ Page({
       nowTime,
       changeShow:app.globalData.changeShow
     })
+
   },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-
+  //   var that = this
+  //   wx.onUserCaptureScreen(function(res) {
+  //     that.setData({
+  //       waterShow:true
+  //     })
+  //     setTimeout(()=>{
+  //       that.setData({
+  //         waterShow:false
+  //       })
+  //     },500)
+  //     console.log('用户截屏了')
+  // })
   },
 
   /**
@@ -515,5 +529,56 @@ Page({
       })
     }
     this.getShopData()
-  }
+  },
+      // 添加水印
+      drowsyUserInfo () {
+        var that= this
+        // var userInfo = wx.getStorageSync('userInfo');
+        // var name_xx = userInfo.username || userInfo.nickName;
+        var ctx = wx.createCanvasContext("myCanvas1");
+     
+        ctx.rotate(45 * Math.PI / 180);//设置文字的旋转角度，角度为45°；
+     
+        //对斜对角线以左部分进行文字的填充
+        for (let j = 1; j < 10; j++) { //用for循环达到重复输出文字的效果，这个for循环代表纵向循环
+          ctx.beginPath();
+          ctx.setFontSize(20);
+          ctx.setFillStyle("rgba(0,0,0,.2)");
+     
+          ctx.fillText(wx.getStorageSync('chartsUser').userName, 0, 50 * j);
+          for (let i = 1; i < 10; i++) {//这个for循环代表横向循环，
+            ctx.beginPath();
+            ctx.setFontSize(20);
+            ctx.setFillStyle("rgba(0,0,0,.2)");
+            ctx.fillText(wx.getStorageSync('chartsUser').userName, 100 * i, 100 * j);
+          }
+        }//两个for循环的配合，使得文字充满斜对角线的左下部分
+     
+        //对斜对角线以右部分进行文字的填充逻辑同上
+        for (let j = 0; j < 10; j++) {
+          ctx.beginPath();
+          ctx.setFontSize(20);
+          ctx.setFillStyle("rgba(0,0,0,.2)");
+     
+          ctx.fillText(wx.getStorageSync('chartsUser').userName, 0, -50 * j);
+          for (let i = 1; i < 10; i++) {
+            ctx.beginPath();
+            ctx.setFontSize(20);
+            ctx.setFillStyle("rgba(0,0,0,.2)");
+            ctx.fillText(wx.getStorageSync('chartsUser').userName, 100 * i, -100 * j);
+          }
+        }
+      ctx.draw(true, function () {
+        //保存临时文件
+        wx.canvasToTempFilePath({
+          canvasId: 'myCanvas1',
+          success: function (res) {
+            console.log(res.tempFilePath)
+            that.setData({
+              temp:res.tempFilePath
+            })
+          }
+        },this)
+      })
+    }
 })

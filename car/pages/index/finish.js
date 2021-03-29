@@ -6,6 +6,8 @@ import {
 } from '../../utils/api.js'
 var app = getApp();
 import Dialog from '../../miniprogram_npm/@vant/weapp/dialog/dialog'
+import Toast from '../../miniprogram_npm/@vant/weapp/toast/toast';
+import format from '../../utils/time.js'
 Page({
 
   /**
@@ -22,7 +24,7 @@ Page({
     flight:'UK2356',
     type:'接机',
     disUser: '王总',
-    comment: '同意',
+    comment: '普林仕集团办公楼门口',
     show: false,
     imgUrl: '',
     imgLists:[],
@@ -39,17 +41,13 @@ Page({
       },
       {
         text: '11-10 13:10',
-        desc: '司机确认',
-      },
-      {
-        text: '　',
         desc: '开始行程',
       },
       {
         text: '　',
         desc: '结束行程',
       },
-    ],
+    ]
   },
 
   /**
@@ -60,6 +58,8 @@ Page({
     var month = (date.getMonth() + 1) >= 10 ? (date.getMonth() + 1) : '0' + (date.getMonth() + 1)
     var day = (date.getDate()) >= 10 ? (date.getDate()) : '0' + (date.getDate())
     var today = date.getFullYear() + '-' + (month) + '-' + (day)
+    var hour = date.getHours()
+    var minutes = date.getMinutes()
     this.setData({
       today: today
     })
@@ -71,7 +71,7 @@ Page({
       this.setData({
         btnText:'开始行程',
         photoText:'行程开始照片',
-        active:3
+        active:2
       })
     }else{
       wx.setNavigationBarTitle({
@@ -80,7 +80,7 @@ Page({
       this.setData({
         btnText:'结束行程',
         photoText:'行程结束照片',
-        active:4
+        active:3
       })
     }
   },
@@ -287,10 +287,5 @@ Page({
     var day = (date.getDate()) >= 10 ? (date.getDate()) : '0' + (date.getDate())
     var date = date.getFullYear() + '年' + (month) + '月' + (day) + '日'
     return date
-  },
-  showDate(e){
-    this.setData({
-      cashow:true
-    })
   }
 })

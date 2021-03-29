@@ -18,6 +18,8 @@
             <!-- <image class="arraw" src="/images/arraw3.png"></image> -->
           <!-- </view>
         </picker> -->
+      <image src="/images/ques.png" style="width:50rpx;height:50rpx;position:absolute;right:60rpx;top:50rpx" catchtap="showDetail"></image>
+
       </view>
       <!-- <picker mode="date" fields="day" value="{{date}}" start="2013-01-01" bindchange="bindDateChange">
         <view class="topDate">
@@ -25,59 +27,59 @@
           <image class="arraw" src="/images/arraw3.png"></image>
         </view>
       </picker> -->
-      数据更新日期 - {{storeData.ratioStoreEntity.getDate}}
+      数据更新日期 - {{storeData.ratioStoreEntity.getDate||today}}
     </view>
     <view class="mtop"  wx:if="{{ifStoreData}}">
       <view class="mtleft">
-        <view class="mtnum">{{storeData.newMember.zrs}}</view>
-        <view class="mtitle">会员总数 <text class="rise" style="font-size:20rpx">+{{storeData.newMember.jnxz}}</text></view>
+        <view class="mtnum">{{storeData.newMember.zrs||0}}</view>
+        <view class="mtitle">会员总数 <text class="rise" style="font-size:20rpx">+{{storeData.newMember.jnxz||0}}</text></view>
       </view>
       <view class="mtm"></view>
       <view class="mtright">
-        <view class="mtnum">{{storeData.ratioStoreEntity.memberSalesRatio}}%</view>
+        <view class="mtnum">{{storeData.ratioStoreEntity.memberSalesRatio||0}}%</view>
         <view class="mtitle">实时会员销售占比</view>
       </view>
     </view>
     <view class="middle" wx:if="{{ifStoreData}}">
       <view class="allTop all1">
         <view class="allSection">
-          <view>{{storeData.newMember.jnxz}}</view>
+          <view>{{storeData.newMember.jnxz||0}}</view>
           <view>本年招新人数</view>
         </view>
         <view class="allSection">
-          <view>{{storeData.newMember.qnxz}}</view>
+          <view>{{storeData.newMember.qnxz||0}}</view>
           <view>同期招新人数</view>
         </view>
         <view class="allSection">
-          <view>{{storeData.newMember.zzrs}}</view>
+          <view>{{storeData.newMember.zzrs||0}}</view>
           <view>招新增长人数</view>
         </view>
       </view>
       <view class="allTop all2">
         <view class="allSection">
-          <view>{{storeData.storeEntity.xjnrs}}</view>
+          <view>{{storeData.storeEntity.xjnrs||0}}</view>
           <view>本年新会员消费人数</view>
         </view>
         <view class="allSection">
-          <view>{{storeData.storeEntity.xjnxf}}<text style="font-size:20rpx">万</text></view>
+          <view>{{storeData.storeEntity.xjnxf||0}}<text style="font-size:20rpx">万</text></view>
           <view>本年新会员消费金额</view>
         </view>
         <view class="allSection">
-          <view>{{storeData.storeEntity.xjnkd}}</view>
+          <view>{{storeData.storeEntity.xjnkd||0}}</view>
           <view>本年新会员客单价</view>
         </view>
       </view>
       <view class="allTop all3">
         <view class="allSection">
-          <view>{{storeData.storeEntity.ljnrs}}</view>
+          <view>{{storeData.storeEntity.ljnrs||0}}</view>
           <view>本年老会员消费人数</view>
         </view>
         <view class="allSection">
-          <view>{{storeData.storeEntity.ljnxf}}<text style="font-size:20rpx">万</text></view>
+          <view>{{storeData.storeEntity.ljnxf||0}}<text style="font-size:20rpx">万</text></view>
           <view>本年老会员消费金额</view>
         </view>
         <view class="allSection">
-          <view>{{storeData.storeEntity.ljnkd}}</view>
+          <view>{{storeData.storeEntity.ljnkd||0}}</view>
           <view>本年老会员客单价</view>
         </view>
       </view>
@@ -86,8 +88,7 @@
 
     <view class="ttitle" wx:if="{{ifDeptData}}">
       <view style="position:absolute;width:10rpx;height:40rpx;border-radius:10rpx;left:0;top:40rpx;background:#6987fb">
-      </view> 本月部门会员销售排行
-      <!-- <image src="/images/ai.png" style="width:40rpx;height:40rpx;position:absolute;left:380rpx;top:38rpx"></image> -->
+      </view> 本年部门会员销售排行
     </view>
     <view class="table" wx:if="{{ifDeptData}}">
       <view class="trh">
@@ -107,12 +108,12 @@
     </view>
     <view style="height:10rpx;width100%;background:#fff;margin-top:30rpx" wx:if="{{ifDeptData}}"></view>
 
-    <view class="ttitle" wx:if="{{ifStoreData}}">
+    <view class="ttitle" wx:if="{{ifPie}}">
       <view style="position:absolute;width:10rpx;height:40rpx;border-radius:10rpx;left:0;top:40rpx;background:#6987fb">
       </view> 本月会员销售占比
       <!-- <image src="/images/ai.png" style="width:40rpx;height:40rpx;position:absolute;left:300rpx;top:36rpx"></image> -->
     </view>
-    <view class="trend1"  wx:if="{{ifStoreData}}">
+    <view class="trend1"  wx:if="{{ifPie}}">
       <canvas canvas-id="pieCanvas" class="canvas c1"></canvas>
     </view>
     <!-- <view style="height:10rpx;width100%;background:#fff;margin-top:30rpx"></view>
@@ -127,4 +128,8 @@
     </van-transition>
   </view>
   <view style="width:100%;height:100rpx"></view>
+</view>
+<view class='water_top'>
+  <image src="{{temp}}" style="width:100%;height:100%;" mode="heightFix"></image>
+  <canvas canvas-id='myCanvas1' style='width:100%;height:100%;margin-left:-1000rpx'></canvas>
 </view>

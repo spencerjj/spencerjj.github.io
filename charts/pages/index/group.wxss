@@ -281,3 +281,6 @@ page{
 .opa{
   opacity: 0;
 }
+.canvas{
+  width: 100%;
+}

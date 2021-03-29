@@ -1,6 +1,6 @@
-<view class="container">
+<view class="container>
   <view class="action">
-    <view class="type" bindtap="showDate">{{type}}</view>
+    <view class="type" bindtap="reserve">{{type}}</view>
     <view class="date">{{date}} {{time}}</view>
     <view class="detail">
       <view class="num">{{num}}人</view>
@@ -37,6 +37,19 @@
       </view>
     </view>
     <view style="background:#eee;height:2rpx;width:100%;margin-top:20rpx"></view>
+    <view class="title" style="margin-left:5%;margin-top:10rpx">行程开始照片</view>
+    <view class="pic" bindtap="upload">
+      <view class="photo">
+        <image src="/images/banner1.png" mode="aspectFill">
+        </image>
+      </view>
+    </view>
+    <view class="title" style="margin-left:5%;margin-top:10rpx">行程开始公里数(km)</view>
+    <view class="km">
+      <view class="point p3"></view>
+      <input class="ecl" type="text" value="1234" disabled="true" />
+    </view>
+    <view style="background:#eee;height:2rpx;width:100%;margin-top:20rpx"></view>
     <view class="title" style="margin-left:5%;margin-top:10rpx">{{photoText}}</view>
     <view class="pic" bindtap="upload">
       <image
@@ -48,19 +61,15 @@
         </image>
       </view>
     </view>
+    <view class="title" style="margin-left:5%;margin-top:10rpx">行程结束公里数(km)</view>
     <view class="km">
-    <view class="point p3"></view>
-        <input class="ecl" type="text" value="{{km}}" placeholder="您的公里数" bindinput="kmInput"/>
-     </view>
+      <view class="point p3"></view>
+      <input class="ecl" type="text" value="{{km}}" placeholder="您的公里数" bindinput="kmInput" />
+    </view>
     <view class="btn" bindtap="confirm">
       {{btnText}}
     </view>
   </view>
-  <van-calendar
-  show="{{ cashow }}"
-  min-date="2020-01-01"
-  max-date="2021-12-30"
-/>
   <view style="background:none;height:200rpx;width:100%"></view>
   <van-action-sheet show="{{ show }}" title="分配备注" bind:close="onClose">
     <view class="comContent">
@@ -71,4 +80,5 @@
     <van-steps steps="{{ steps }}" active="{{active}}" active-color="#46b6b4" />
   </view>
 </view>
+<van-toast id="van-toast" />
 <van-dialog id="van-dialog" />

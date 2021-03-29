@@ -97,7 +97,7 @@ page{
 }
 .userInfo{
   width: 100%;
-  border-top:1rpx solid #eee;
+  border-bottom:1rpx solid #eee;
   height: 100rpx;
   line-height: 100rpx;
 }
@@ -167,7 +167,7 @@ page{
 .btn{
   width: 92%;
   margin-left: 4%;
-  margin-top:10rpx;
+  margin-top:20rpx;
   height: 80rpx;
   background-image: linear-gradient(to right, #46b6b4 , #59d299);
   text-align: center;

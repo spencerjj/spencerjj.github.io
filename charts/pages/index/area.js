@@ -49,6 +49,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    this.drowsyUserInfo()
     var chartsUser = wx.getStorageSync('chartsUser');
     this.setData({
       userName: chartsUser.userName,
@@ -62,9 +63,9 @@ Page({
 
     var month = (now.getMonth() + 1) >= 10 ? (now.getMonth() + 1) : '0' + (now.getMonth() + 1)
     var day = (now.getDate()) >= 10 ? (now.getDate()) : '0' + (now.getDate())
-    var lastDate = (now.getFullYear() - 1) + '-' + (month) + '-' + (day)
+    var lastDate = (now.getFullYear() - 2) + '-' + (month) + '-' + (day)
     var thisYear = now.getFullYear()
-    var lastYear = now.getFullYear()-1
+    var lastYear = now.getFullYear()-2
     this.setData({
       thisDate: thisDate,
       lastDate: lastDate,
@@ -214,7 +215,7 @@ Page({
           moneyList = []
           categoriesList = []
         }
-        // console.log(chartList)
+        console.log(chartList)
         that.setData({
           chartList:chartList
         })
@@ -224,7 +225,7 @@ Page({
 
   },
   getChart(e) {
-    var length = this.data.chartList.length
+    var length = this.data.chartList.length>=10?10:this.data.chartList.length
     switch (length) {
       case 3:
         this.showchart1()
@@ -662,13 +663,13 @@ Page({
       console.error('getSystemInfoSync failed!');
     }
     var eastChart = new wxCharts({
-      canvasId: '#295aa6',
+      canvasId: 'canvas9',
       type: 'column',
       animation: true,
       categories: this.data.chartList[8].categories,
       series: [{
         name: this.data.chartList[8].name,
-        color: '#f4b374',
+        color: '#295aa6',
         data: this.data.chartList[8].money,
         format: function (val, name) {
           return val;
@@ -754,5 +755,56 @@ Page({
       })
       this.getTop()
     }
+  },
+    // 添加水印
+    drowsyUserInfo () {
+      var that= this
+      // var userInfo = wx.getStorageSync('userInfo');
+      // var name_xx = userInfo.username || userInfo.nickName;
+      var ctx = wx.createCanvasContext("myCanvas1");
+   
+      ctx.rotate(45 * Math.PI / 180);//设置文字的旋转角度，角度为45°；
+   
+      //对斜对角线以左部分进行文字的填充
+      for (let j = 1; j < 10; j++) { //用for循环达到重复输出文字的效果，这个for循环代表纵向循环
+        ctx.beginPath();
+        ctx.setFontSize(20);
+        ctx.setFillStyle("rgba(255,255,255,.1)");
+   
+        ctx.fillText(wx.getStorageSync('chartsUser').userName, 0, 50 * j);
+        for (let i = 1; i < 10; i++) {//这个for循环代表横向循环，
+          ctx.beginPath();
+          ctx.setFontSize(20);
+          ctx.setFillStyle("rgba(255,255,255,.1)");
+          ctx.fillText(wx.getStorageSync('chartsUser').userName, 100 * i, 100 * j);
+        }
+      }//两个for循环的配合，使得文字充满斜对角线的左下部分
+   
+      //对斜对角线以右部分进行文字的填充逻辑同上
+      for (let j = 0; j < 10; j++) {
+        ctx.beginPath();
+        ctx.setFontSize(20);
+        ctx.setFillStyle("rgba(255,255,255,.1)");
+   
+        ctx.fillText(wx.getStorageSync('chartsUser').userName, 0, -50 * j);
+        for (let i = 1; i < 10; i++) {
+          ctx.beginPath();
+          ctx.setFontSize(20);
+          ctx.setFillStyle("rgba(255,255,255,.1)");
+          ctx.fillText(wx.getStorageSync('chartsUser').userName, 100 * i, -100 * j);
+        }
+      }
+    ctx.draw(true, function () {
+      //保存临时文件
+      wx.canvasToTempFilePath({
+        canvasId: 'myCanvas1',
+        success: function (res) {
+          console.log(res.tempFilePath)
+          that.setData({
+            temp:res.tempFilePath
+          })
+        }
+      },this)
+    })
   }
 })

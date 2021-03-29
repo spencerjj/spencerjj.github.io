@@ -1,0 +1,107 @@
+<van-tabs animated swipeable color="#000000" title-inactive-color="#cccccc">
+  <van-tab title="未使用">
+    <view class="lists">
+      <view class="listItem">
+        <view class="left ball"></view>
+        <view class="right ball"></view>
+        <view class="title">新世纪半山书局 预约</view>
+        <view class="infos">
+          <view class="details"><text style="color:#000">门票序号：　</text><text style="color:#666">123123123123</text></view>
+          <view class="details"><text style="color:#000">预约时间：　</text><text style="color:#666">2021.03.12</text></view>
+          <view class="details"><text style="color:#000">预约门店：　</text><text style="color:#666">新世纪半山书局</text></view>
+          <view class="details"><text style="color:#000">预约时段：　</text><text style="color:#666">14:00-16:00</text></view>
+          <view class="details"><text style="color:#000">门票价格：　</text><text style="color:#666">￥0.00</text></view>
+          <view class="action">
+            <view hover-class="hover2" hover-stay-time=".5s" bindtap="cancel">取消预约</view>
+            <view hover-class="hover1" hover-stay-time=".5s" bindtap="use">立即使用</view>
+          </view>
+        </view>
+      </view>
+      <view class="listItem">
+        <view class="left ball"></view>
+        <view class="right ball"></view>
+        <view class="title">新世纪半山书局 预约</view>
+        <view class="infos">
+          <view class="details"><text style="color:#000">门票序号：　</text><text style="color:#666">123123123123</text></view>
+          <view class="details"><text style="color:#000">预约时间：　</text><text style="color:#666">2021.03.12</text></view>
+          <view class="details"><text style="color:#000">预约门店：　</text><text style="color:#666">新世纪半山书局</text></view>
+          <view class="details"><text style="color:#000">预约时段：　</text><text style="color:#666">14:00-16:00</text></view>
+          <view class="details"><text style="color:#000">门票价格：　</text><text style="color:#666">￥0.00</text></view>
+          <view class="action">
+            <view hover-class="hover2" hover-stay-time=".5s" bindtap="cancel">取消预约</view>
+            <view hover-class="hover1" hover-stay-time=".5s" bindtap="use" class="cant">立即使用</view>
+          </view>
+        </view>
+      </view>
+      <view class="listItem">
+        <view class="left ball"></view>
+        <view class="right ball"></view>
+        <view class="title">新世纪半山书局 预约</view>
+        <view class="infos">
+          <view class="details"><text style="color:#000">门票序号：　</text><text style="color:#666">123123123123</text></view>
+          <view class="details"><text style="color:#000">预约时间：　</text><text style="color:#666">2021.03.12</text></view>
+          <view class="details"><text style="color:#000">预约门店：　</text><text style="color:#666">新世纪半山书局</text></view>
+          <view class="details"><text style="color:#000">预约时段：　</text><text style="color:#666">14:00-16:00</text></view>
+          <view class="details"><text style="color:#000">门票价格：　</text><text style="color:#666">￥0.00</text></view>
+          <view class="action">
+            <view hover-class="hover2" hover-stay-time=".5s" bindtap="cancel">取消预约</view>
+            <view hover-class="hover1" hover-stay-time=".5s" bindtap="use" class="cant">立即使用</view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </van-tab>
+  <van-tab title="已使用/已失效">
+    <view class="lists">
+      <view class="listItem">
+        <view class="left ball"></view>
+        <view class="right ball"></view>
+        <view class="btitle"><view class="reason">已过期</view><view>新世纪半山书局 预约</view></view>
+        <view class="infos">
+          <view class="details"><text style="color:#000">门票序号：　</text><text style="color:#666">123123123123</text></view>
+          <view class="details"><text style="color:#000">预约时间：　</text><text style="color:#666">2021.03.12</text></view>
+          <view class="details"><text style="color:#000">预约门店：　</text><text style="color:#666">新世纪半山书局</text></view>
+          <view class="details"><text style="color:#000">预约时段：　</text><text style="color:#666">14:00-16:00</text></view>
+          <view class="details"><text style="color:#000">门票价格：　</text><text style="color:#666">￥0.00</text></view>
+        </view>
+      </view>
+      <view class="listItem">
+        <view class="left ball"></view>
+        <view class="right ball"></view>
+        <view class="btitle"><view class="reason">已过期</view><view>新世纪半山书局 预约</view></view>
+        <view class="infos">
+          <view class="details"><text style="color:#000">门票序号：　</text><text style="color:#666">123123123123</text></view>
+          <view class="details"><text style="color:#000">预约时间：　</text><text style="color:#666">2021.03.12</text></view>
+          <view class="details"><text style="color:#000">预约门店：　</text><text style="color:#666">新世纪半山书局</text></view>
+          <view class="details"><text style="color:#000">预约时段：　</text><text style="color:#666">14:00-16:00</text></view>
+          <view class="details"><text style="color:#000">门票价格：　</text><text style="color:#666">￥0.00</text></view>
+        </view>
+      </view>
+      <view class="listItem">
+        <view class="left ball"></view>
+        <view class="right ball"></view>
+        <view class="btitle"><view class="reason">已过期</view><view>新世纪半山书局 预约</view></view>
+        <view class="infos">
+          <view class="details"><text style="color:#000">门票序号：　</text><text style="color:#666">123123123123</text></view>
+          <view class="details"><text style="color:#000">预约时间：　</text><text style="color:#666">2021.03.12</text></view>
+          <view class="details"><text style="color:#000">预约门店：　</text><text style="color:#666">新世纪半山书局</text></view>
+          <view class="details"><text style="color:#000">预约时段：　</text><text style="color:#666">14:00-16:00</text></view>
+          <view class="details"><text style="color:#000">门票价格：　</text><text style="color:#666">￥0.00</text></view>
+        </view>
+      </view>
+    </view>
+  </van-tab>
+</van-tabs>
+<van-dialog
+  use-slot
+  closeOnClickOverlay="true"
+  show="{{ show }}"
+  bind:close="onClose"
+  confirmButtonText="关闭"
+  showConfirmButton="{{false}}"
+>
+<view class="code">
+  <image src="/images/code.png" mode="widthFix"/>
+</view>
+</van-dialog>
+<van-dialog id="van-dialog" />

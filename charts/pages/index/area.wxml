@@ -13,7 +13,7 @@
 		<view class="section" wx:for="{{showTopData}}" wx:key="index">
 			<view class="stitle">{{item.name}}</view>
 			<view class="sdata">{{item.money}} <text style="font-size:20rpx">万</text></view>
-			<view class="stype">同比：<text class="{{item.compare>=0?'rise':'down'}}">{{item.compare>0?'+':''}}{{item.compare}}</text></view>
+			<view class="stype">同比：<text class="{{item.compare>=0?'rise':'down'}}">{{item.compare>0?'+':''}}{{item.compare}} <text style="font-size:20rpx">万</text></text></view>
 		</view>
 	</view>
 	<!-- <view class="top">
@@ -87,4 +87,9 @@
 			<canvas canvas-id="canvas10" class="canvas" wx:if="{{chartList.length>=10}}"></canvas>
 		</view>
 	</view>
+	<view style="width:94%;text-align:right;margin-bottom:50rpx;color:#51bdbd;margin-right:5%;font-size:28rpx" wx:if="{{chartList.length>=10}}">*最多显示十条图表数据</view>
+</view>
+<view class='water_top'>
+  <image src="{{temp}}" style="width:100%;height:100%;" mode="heightFix"></image>
+  <canvas canvas-id='myCanvas1' style='width:100%;height:100%;margin-left:-1000rpx'></canvas>
 </view>

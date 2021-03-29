@@ -24,8 +24,8 @@
       <view class="left"><image src="/images/nan.png"></image></view>
       <view class="right">张三</view>
     </view>
-    <!-- <view class="state">已完成</view> -->
-    <view class="state1">订单分配</view>
+    <view class="state">已完成</view>
+    <!-- <view class="state1">订单分配</view> -->
   </view>
 </view>
 <view wx:if="{{!listIsFull}}" class='nullDataInfo'><van-divider contentPosition="center">无更多数据了</van-divider></view>

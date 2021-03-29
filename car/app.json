@@ -1,12 +1,19 @@
 {
   "pages": [
-    "pages/index/distribution",
     "pages/index/finish",
-    "pages/index/confirm",
-    "pages/index/recordLists",
     "pages/index/index",
-    "views/myswiper/datePicker"
+    "pages/index/distribution",
+    "pages/index/recordLists",
+    "pages/index/confirm",
+    "views/myswiper/datePicker",
+    "views/myswiper/center",
+    "pages/index/details"
   ],
+  "permission": {
+    "scope.userLocation": {
+      "desc": "你的位置信息将用于小程序位置接口的效果展示"
+    }
+  },
   "window": {
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#fff",

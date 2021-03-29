@@ -1,10 +1,10 @@
 <view class="container">
   <van-tabs active="{{ active }}" color="#59d299" bind:change="onChange">
     <van-tab title="申请信息"></van-tab>
-    <van-tab title="分配车辆"></van-tab>
+    <van-tab title="分配司机"></van-tab>
   </van-tabs>
-  <swiper indicator-dots="{{indicatorDots}}"
-    autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" current="{{active}}" style="height:550rpx" bindchange="swiperChange" >
+  <swiper indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}"
+    current="{{active}}" style="height:600rpx" bindchange="swiperChange">
     <block>
       <swiper-item style="width:100%">
         <view class="action">
@@ -27,10 +27,13 @@
               <view class="point p3"></view>
               <view class="ename">{{flight}}(航班号)</view>
             </view>
+            <view class="userInfo">
+              <image src="/images/nan.png"></image>
+              <text class="userName">张三(信息部)</text>
+            </view>
           </view>
-          <view class="userInfo">
-            <image src="/images/nan.png"></image>
-            <text class="userName">张三(信息部)</text>
+          <view class="btn" bindtap="switch">
+            分配司机
           </view>
         </view>
       </swiper-item>
@@ -40,7 +43,7 @@
             <view class="number">
               <picker bindchange="bindPeoChange" value="{{peoIndex}}" range="{{array}}">
                 <image src="/images/01-2.png"></image>
-                <text class="notice {{peoIndex==-1?'':'dark'}}">{{peoIndex==-1?'选择车辆':array[peoIndex]}}</text>
+                <text class="notice {{peoIndex==-1?'':'dark'}}">{{peoIndex==-1?'选择司机':array[peoIndex]}}</text>
               </picker>
             </view>
             <view class="comment" bindtap="showComment">
@@ -58,7 +61,8 @@
 
   <van-action-sheet show="{{ show }}" title="分配备注" bind:close="onClose">
     <view class="comContent">
-      <textarea value="{{comment}}" class="myComment" placeholder-style="color:#999" placeholder="添加备注信息，便于司机提前准备" bindinput="commentInput" maxlength="50" cursor-spacing="100"></textarea>
+      <textarea value="{{comment}}" class="myComment" placeholder-style="color:#999" placeholder="添加备注信息，便于司机提前准备"
+        bindinput="commentInput" maxlength="50" cursor-spacing="100"></textarea>
       <view class="count">{{num}}/50个字</view>
       <view class="comBtn" bindtap="addComment">
         确认添加

@@ -1,0 +1,3 @@
+<view class="add" bindtap='goCheck' hover-class="addTap" hover-stay-time=".5s" data-type="guide">
+    <image src="../../images/01-2.png"></image>
+  </view>

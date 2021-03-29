@@ -92,8 +92,9 @@
 		<picker value="{{index5}}" range="{{array5}}" bindchange="pickChange5"
 			disabled="{{current!=1}}">
 			<view class="timePicker">
-				<text wx:if="{{index5==-1}}" style="color:#af9d7f">请选择...</text>
-				{{array5[index5]}}
+				<text wx:if="{{index5==-1&&current==1}}" style="color:#af9d7f">请选择...</text>
+				<view wx:if="current==1">{{array5[index5]}}</view>
+				<view wx:if="current!=1">{{lists.dependency}}</view>
 				<image class="arraw" src="http://img.gagctv.com/17112314452261654"></image>
 			</view>
 		</picker>
