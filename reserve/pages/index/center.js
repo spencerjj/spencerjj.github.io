@@ -12,7 +12,8 @@ Page({
       "/images/banner.png",
       "/images/banner.png",
     ],
-    current:0
+    current:0,
+    isShow:false
   },
 
   /**
@@ -97,6 +98,11 @@ Page({
     this.setData({
       nowIdx: e.currentTarget.dataset.index,
       current:e.currentTarget.dataset.index,
+    })
+  },
+  show(){
+    this.setData({
+      isShow:true
     })
   }
 })

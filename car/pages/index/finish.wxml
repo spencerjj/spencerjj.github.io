@@ -1,4 +1,4 @@
-<view class="container>
+<view class="container">
   <view class="action">
     <view class="type" bindtap="reserve">{{type}}</view>
     <view class="date">{{date}} {{time}}</view>

@@ -11,8 +11,9 @@
   </view>
 <swiper style="height:400rpx" circular="true" bindchange="infoChange" current="{{current}}">
   <swiper-item wx:for='{{imgList}}' wx:key='index'>
-    <view style="width:100%;text-align:center;font-size:50rpx;margin-top:200rpx">白金会员</view>
+    <view style="width:100%;text-align:center;font-size:50rpx;margin-top:200rpx" bindtap="show">白金会员</view>
     <button open-type='contact' session-from=''>客服-联系我们</button>
+    <my-temp isShow="{{isShow}}"/>
   </swiper-item>
 </swiper>
 </view>
