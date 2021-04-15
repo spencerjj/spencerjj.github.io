@@ -40,18 +40,79 @@
 			<text>{{lists.tryEndDate}}</text>
 		</view>
 	</view>
-		<view class="title">
+	<view class="title">
 		<view class="c1">
-			<text>是否转正<text style="color:red;font-size:25rpx">*</text></text>
+			<text>部门长建议<text style="color:red;font-size:25rpx"
+					wx:if="{{lists.bpm.activityId == 'leader'}}">*</text></text>
 		</view>
-		<picker value="{{index1}}" range="{{array1}}" bindchange="pickChange1" disabled="{{current!=1}}">
-			<view class="timePicker  {{ifAgree==3?'pickerError':''}}">
+		<picker value="{{index1}}" range="{{array1}}" bindchange="pickChange1"
+			disabled="{{current==1&&lists.bpm.activityId == 'leader'?false:true}}">
+			<view class="timePicker">
 				<text wx:if="{{index1==3}}" style="color:#af9d7f">请选择...</text>
 				{{array1[index1]}}
 				<image class="arraw" src="http://img.gagctv.com/17112314452261654"></image>
 			</view>
 		</picker>
 	</view>
+	<view class="title" wx:if="{{lists.bpm.activityId == 'leader'||lists.remarks.length>1}}">
+    <view class="c1">
+      <text>试用期评语</text>
+    </view>
+    <input class="number1" placeholder-style='color:#af9d7f' type="text" maxlength="10" bindinput='hinput2'
+      value="{{lists.remarks}}" disabled="{{current==1&&lists.bpm.activityId == 'leader'?false:true}}"
+      confirm-type="done"></input>
+  </view>
+	<view class="title"  wx:if="{{lists.bpm.activityId == 'hrbp'||lists.bpm.activityId == 'ssc607'||lists.bpm.activityId == 'sscother'}}">
+		<view class="c1">
+			<text>{{lists.bpm.activityId == 'hrbp'?'是否转正':'hrbp建议'}}<text style="color:red;font-size:25rpx"
+					wx:if="{{lists.bpm.activityId == 'hrbp'}}">*</text></text>
+		</view>
+		<picker value="{{index2}}" range="{{array2}}" bindchange="pickChange2"
+			disabled="{{current==1&&lists.bpm.activityId == 'hrbp'?false:true}}">
+			<view class="timePicker">
+				<text wx:if="{{index2==-1}}" style="color:#af9d7f">请选择...</text>
+				{{array2[index2]}}
+				<image class="arraw" src="http://img.gagctv.com/17112314452261654"></image>
+			</view>
+		</picker>
+	</view>
+	<view class="title" wx:if="{{(lists.bpm.activityId == 'hrbp'||lists.bpm.activityId == 'ssc607'||lists.bpm.activityId == 'sscother')&&index2==0}}">
+		<view class="c1">
+			<text>是否调薪<text style="color:red;font-size:25rpx"
+					wx:if="{{lists.bpm.activityId == 'hrbp'}}">*</text></text>
+		</view>
+		<picker value="{{index3}}" range="{{array3}}" bindchange="pickChange3"
+			disabled="{{current==1&&lists.bpm.activityId == 'hrbp'?false:true}}">
+			<view class="timePicker">
+				<text wx:if="{{index3==-1}}" style="color:#af9d7f">请选择...</text>
+				{{array3[index3]}}
+				<image class="arraw" src="http://img.gagctv.com/17112314452261654"></image>
+			</view>
+		</picker>
+	</view>
+	<view class="sub" wx:if="{{(lists.bpm.activityId == 'hrbp'||lists.bpm.activityId == 'ssc607'||lists.bpm.activityId == 'sscother')&&index2==1}}">
+    <view class="c1">
+      <text>最后工作日<text style="font-size:28rpx;color:red">(系统将于该日期8:00准时发起离职移交流程到员工本人)</text><text style="color:red;font-size:25rpx" wx:if="{{lists.bpm.activityId == 'hrbp'}}">*</text></text>
+    </view>
+    <view class="codePicker">
+      <picker mode="date" value="{{lists.lastDate}}" bindchange="bindDateChange"
+        disabled="{{current==1&&lists.bpm.activityId == 'hrbp'?false:true}}">
+        <view class="timePicker" style="padding-left:0">
+          <text wx:if="{{leave.length>0}}">{{leave}}</text>
+          <text wx:else>{{lists.lastDate||'请选择...'}}</text>
+          <image class="arraw" src="http://img.gagctv.com/17112314452261654"></image>
+        </view>
+      </picker>
+    </view>
+	</view>
+	<view class="title" wx:if="{{(lists.bpm.activityId == 'hrbp'||lists.bpm.activityId == 'ssc607'||lists.bpm.activityId == 'sscother')&&index2==2}}">
+    <view class="c1">
+      <text>延长月数<text style="color:red;font-size:25rpx" wx:if="{{lists.bpm.activityId == 'hrbp'}}">*</text></text>
+    </view>
+    <input class="number1" placeholder-style='color:#af9d7f' type="number" maxlength="10" bindinput='hinput1'
+      value="{{lists.extensionMonth}}" disabled="{{current==1&&lists.bpm.activityId == 'hrbp'?false:true}}"
+      confirm-type="done"></input>
+  </view>
 
 	<view class="up" wx:if="{{imglist.length!=0}}">
 		<view class="c1">
@@ -69,7 +130,8 @@
 			<text>附件</text>
 		</view>
 		<view class="codePicker">
-			<view wx:for="{{filelist}}" data-url="{{item.fileUrl}}" bindtap="showFile" class="file" hover-class='hover3' hover-stay-time='50'>
+			<view wx:for="{{filelist}}" data-url="{{item.fileUrl}}" bindtap="showFile" class="file" hover-class='hover3'
+				hover-stay-time='50'>
 				<view>
 					<image src="../../../images/file.png"></image> {{item.fileName}}
 				</view>
@@ -79,26 +141,22 @@
 		</view>
 	</view>
 
-	<!-- <view class="title" style="z-index:1 !important">
-		<view class="c1">
-			<text>个人小结<text style="color:red;font-size:25rpx" wx:if="{{remarks.length==0}}">*</text></text>
-		</view>
-		<textarea class="c1Input {{remarks.length==0?'pickerError':''}}" placeholder='请填写个人小结' placeholder-class="oriColor" auto-height maxlength='1000' cursor-spacing='20' disabled="{{lists.remarks.length>=0?true:false}}" value="{{remarks}}" bindinput="remarkInput" wx:if="{{!visible&&!showRight1&&current==1}}"></textarea>
-		<rich-text class="c1Input1 {{remarks.length==0?'pickerError':''}}" wx:else>{{remarks?remarks:'请填写个人小结'}}</rich-text>
-	</view> -->
-
 	<view class="title" style="z-index:1 !important" wx:if="{{current==1&&can}}">
 		<view class="c1">
 			<text>审批意见</text>
 		</view>
-		<input class="number" placeholder='常用语: 同意  已阅' placeholder-style='color:#af9d7f' bindinput='hinput' value="{{hint}}"></input> 
+		<input class="number" placeholder='常用语: 同意  已阅' placeholder-style='color:#af9d7f' bindinput='hinput'
+			value="{{hint}}"></input>
 	</view>
 </view>
 <view class="bottom">
-	<button class="progress {{current==1&&can?'btnwid1':'btnwid'}}" bindtap='progress' hover-class='hover1' hover-stay-time='50'>流程追踪</button>
-	<button class="publish btnwid1" bindtap='handleOpen' wx:if="{{current==1&&can}}" hover-class='hover2' hover-stay-time='50'>审批操作</button>
+	<button class="progress {{current==1&&can?'btnwid1':'btnwid'}}" bindtap='progress' hover-class='hover1'
+		hover-stay-time='50'>流程追踪</button>
+	<button class="publish btnwid1" bindtap='handleOpen' wx:if="{{current==1&&can}}" hover-class='hover2'
+		hover-stay-time='50'>审批操作</button>
 </view>
-<i-action-sheet visible="{{visible}}" actions="{{actions}}" show-cancel bind:cancel="handleCancel" bind:click="handleClickItem" />
+<i-action-sheet visible="{{visible}}" actions="{{actions}}" show-cancel bind:cancel="handleCancel"
+	bind:click="handleClickItem" />
 <i-toast id="toast" />
 <i-message id="message" />
 <i-drawer mode="right" visible="{{showRight1}}" bind:close="progress">

@@ -1,6 +1,8 @@
 <view class="i-class i-spin i-spin-{{ size }} {{ fix ? 'i-spin-fix' : '' }} {{ custom ? 'i-spin-show-text' : '' }} {{ fullscreen ? 'i-spin-fullscreen' : '' }}">
     <div class="i-spin-main">
-        <view class="i-spin-dot"></view>
+        <view class="i-spin-dot"><image src="/images/load1.png" style="width:100%;height:100%"></image></view>
+        <view style="font-size:35rpx;margin-top:20rpx;font-weight: 500">页面加载中...</view>
+        <view style="font-size:25rpx;margin-top:10rpx;font-weight: 500;color:#ef5a5a">(若长时间加载请切换手机网络)</view>
         <div class="i-spin-text"><slot></slot></div>
     </div>
 </view>

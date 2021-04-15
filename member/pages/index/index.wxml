@@ -1,0 +1,140 @@
+<view class="container" style='padding-top:{{padtop+height}}px'>
+  <view class="nav" style='padding-top:{{padtop}}px;height:{{height}}px'>
+    <image src="/images/cut/t.png" bindtap="showNav"  hover-class="hover1"
+        hover-stay-time=".5s"></image>
+  </view>
+  <view class="top">
+    <my-turn  wx:if="{{userInfo}}">
+      <view slot="front" style="width:100%;height:auto">
+        <view class="timg">
+          <image src="/images/cut/c1.png" class="tback" wx:if="{{userInfo.level=='潜在顾客'}}"></image>
+          <image src="/images/cut/c2.png" class="tback" wx:elif="{{userInfo.level=='普卡会员'}}"></image>
+          <image src="/images/cut/c3.png" class="tback" wx:elif="{{userInfo.level=='金卡会员'}}"></image>
+          <image src="/images/cut/c4.png" class="tback" wx:elif="{{userInfo.level=='白金卡会员'}}"></image>
+          <image src="/images/cut/c5.png" class="tback" wx:elif="{{userInfo.level=='钻石卡会员'}}"></image>
+          <image src="/images/cut/4_04.png" class="logo"></image>
+          <view class="tleft" wx:if="{{userInfo}}">
+            <view class="profile" catchtap="change">
+              <image src="{{userInfo.avatarUrl}}"></image>
+            </view>
+            <view class="infos" wx:if="{{userInfo}}">
+              <view class="name">{{userInfo.name}}<text wx:if="{{userInfo.memberType!='会员'}}"> ({{userInfo.memberType}})</text> </view>
+              <view class="point">积分：{{userInfo.availablePoints}}</view>
+              <view  class="point">会员等级：{{userInfo.level}}</view>
+            </view>
+          </view>
+        </view>
+      </view>
+      <view slot="back" style="width:100%;height:auto">
+        <view class="timg">
+          <image src="/images/cut/c1.png" class="tback" wx:if="{{userInfo.level=='潜在顾客'}}"></image>
+          <image src="/images/cut/c2.png" class="tback" wx:elif="{{userInfo.level=='普卡会员'}}"></image>
+          <image src="/images/cut/c3.png" class="tback" wx:elif="{{userInfo.level=='金卡会员'}}"></image>
+          <image src="/images/cut/c4.png" class="tback" wx:elif="{{userInfo.level=='白金卡会员'}}"></image>
+          <image src="/images/cut/c5.png" class="tback" wx:elif="{{userInfo.level=='钻石卡会员'}}"></image>
+          <image src="/images/cut/4_04.png" class="logo"></image>
+          <view class="tleft">
+            <view class="infos" wx:if="{{userInfo}}">
+              <view class="name">{{userInfo.name}}</view>
+            </view>
+          </view>
+          <view class="tcode" catchtap="use">
+            <image src="{{imagePath}}" mode="widthFix"></image>
+            <canvas class='canvas1' canvas-id='canvas1' style="margin-left:1000rpx"></canvas>
+          </view>
+        </view>
+      </view>
+    </my-turn>
+    <!-- <view class="tleft" wx:if="{{userInfo}}">
+      <view class="profile">
+        <image src="{{userInfo.avatarUrl}}"></image>
+      </view>
+      <view class="infos" wx:if="{{userInfo}}">
+        <view class="name">{{userInfo.name}} <view>{{userInfo.level}}</view>
+        </view>
+        <view class="point">积分：{{userInfo.availablePoints}}</view>
+        <view class="detail">{{userInfo.upgrades}}</view>
+      </view>
+    </view>
+    <view class="tright" wx:if="{{userInfo}}">
+      <view class="myCode" bindtap="use">
+        <image src="/images/code.png"></image>
+      </view>
+    </view> -->
+    <view class="login" wx:if="{{!userInfo}}">
+      登录蓝豹，开启会员权益
+      <button open-type="getPhoneNumber" bindgetphonenumber="getPhone" hover-class="hover1"
+        hover-stay-time=".5s">登录/注册</button>
+    </view>
+  </view>
+  <view class="notice">{{userInfo?'点击卡片显示二维码':''}}</view>
+  <view class="sections">
+    <view hover-class="hover2" hover-stay-time="1s" bindtap="toPage" data-id="wei">
+      <image src="/images/cut/1_1.png"></image>
+      <view>微商城</view>
+    </view>
+    <view hover-class="hover2" hover-stay-time="1s" bindtap="toPage" data-id="ji">
+      <image src="/images/cut/1_2.png"></image>
+      <view class="mark" wx:if="{{userInfo.birthday.length<1}}"></view>
+      <view>积分商城</view>
+    </view>
+    <view hover-class="hover2" hover-stay-time="1s" bindtap="toPage" data-id="card" wx:if="{{sshow||userInfo.memberType=='会员'||(userInfo.memberType=='家庭卡成员'&&userInfo.familyMemIsCredits=='Y')}}">
+      <image src="/images/cut/1_3.png"></image>
+      <view>卡券包</view>
+    </view>
+    <view hover-class="hover2" hover-stay-time="1s" bindtap="toPage" data-id="order" wx:if="{{sshow||userInfo.memberType=='会员'||(userInfo.memberType=='家庭卡成员'&&userInfo.familyMemIsCoupons=='Y')}}">
+      <image src="/images/cut/1_4.png"></image>
+      <view>我的订单</view>
+    </view>
+    <view hover-class="hover2" hover-stay-time="1s" bindtap="toPage" data-id="infos"  wx:if="{{sshow||userInfo.memberType=='会员'}}">
+      <image src="/images/cut/1_5.png"></image>
+      <view>个人资料</view>
+    </view>
+    <view hover-class="hover2" hover-stay-time="1s" bindtap="toPage" data-id="center">
+      <image src="/images/cut/1_6.png"></image>
+      <view>会员权益</view>
+    </view>
+  </view>
+  <view class="banner">
+    <my-swiper imgLists="{{imgLists}}" />
+  </view>
+  <!-- <my-turn>
+    <view slot="front" style="width:100%;height:auto"><image src="/images/card.jpg" mode="widthFix"></image></view>
+    <view slot="back" style="width:100%;height:auto"><image src="/images/card1.jpg" mode="widthFix"></image></view>
+  </my-turn> -->
+
+</view>
+<view class="showCode" wx:if="{{show}}" bindtap="onClose">
+  <view class="pannel">
+    <view class="barcode">
+      <canvas canvas-id="barcode" />
+      <view class="barnum">{{userInfo.memberBarCode}}</view>
+    </view>
+    <view class="qrcode">
+      <canvas class='canvas' canvas-id='canvas'></canvas>
+    </view>
+  </view>
+</view>
+<van-popup
+  show="{{ leftShow }}"
+  position="left"
+  custom-style="width: 40%;height:100%;background:#ececec"
+  bind:close="leftClose"
+>
+  <view class="leftNav">
+    <view class="navItem" bindtap="toPage" data-id="point"  wx:if="{{sshow||userInfo.memberType=='会员'||(userInfo.memberType=='家庭卡成员'&&userInfo.familyMemIsCoupons=='Y')}}">
+      <image src="/images/cut/1_1.png"></image>
+      <view>积分明细</view>
+    </view>
+    <view  class="navItem" bindtap="toPage" data-id="exchange"  wx:if="{{sshow||userInfo.memberType=='会员'||(userInfo.memberType=='家庭卡成员'&&userInfo.familyMemIsCoupons=='Y')}}">
+      <image src="/images/cut/1_2.png"></image>
+      <view>积分兑换</view>
+    </view>
+    <view  class="navItem" bindtap="toPage" data-id="recommend" wx:if="{{sshow||userInfo.memberType=='会员'}}">
+      <image src="/images/cut/1_3.png"></image>
+      <view>荐客有礼</view>
+    </view>
+  </view>
+</van-popup>
+<van-toast id="van-toast" />
+<van-dialog id="van-dialog" />

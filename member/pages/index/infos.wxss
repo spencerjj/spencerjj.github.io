@@ -1,0 +1,53 @@
+/* pages/my/account/addAccount.wxss */
+page{
+  position: relative
+}
+.title1{
+  font-size: 28rpx;
+  color:#bfbfbf;
+  height: 60rpx;
+  line-height: 60rpx;
+  margin-left:30rpx
+}
+.content{
+  border-bottom: 1rpx solid rgb(202, 201, 201);
+}
+.section{
+  width: 96%;
+  margin-left: 4%;
+  border-bottom: 1rpx solid rgb(202, 201, 201);
+  height: 90rpx;
+  line-height: 90rpx;
+  display: flex;
+}
+.section view:first-child{
+  width: 25%;
+  text-align: right;
+  color:#666
+}
+.section view:nth-child(2){
+  width: 70%;
+  text-align: center;
+  font-weight: bolder;
+}
+.action{
+  text-align: center;
+  width: 80%;
+  margin-left:10%;
+  height: 70rpx;
+  font-size: 30rpx;
+  color:white;
+  line-height: 70rpx;
+  border-radius: 10rpx;
+  opacity: 0.5;
+  margin-top:30rpx
+}
+.save{
+  background: #096DD9;
+}
+.hide{
+  display: none
+}
+.hover1{
+  opacity: .8;
+}

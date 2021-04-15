@@ -1,0 +1,11 @@
+{
+  "navigationBarTitleText": "会员中心",
+  "navigationBarTextStyle": "black",
+  "navigationBarBackgroundColor": "#ffffff",
+  "enablePullDownRefresh": true,
+  "navigationStyle":"custom",
+  "usingComponents": {
+    "my-swiper":"../../views/myswiper",
+    "my-turn":"../../views/turn"
+  }
+}

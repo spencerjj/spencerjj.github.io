@@ -14,7 +14,13 @@
       <view class="mtnum">{{totalData.profit||0}} <text style="font-size:20rpx">万</text></view>
       <view class="mtitle">毛利</view>
     </view>
-    <view style="font-size:28rpx;flex:auto;text-align:center;margin-top:20rpx">数据更新时间 - {{totalData.getTime||nowTime}}</view>
+    <picker mode="date" fields="day" value="{{date}}" start="2013-01-01" end="{{today}}" bindchange="bindDateChange">
+          <view style="font-size:28rpx;flex:auto;text-align:center;margin-top:20rpx;display:flex;align-items:center">
+            数据更新时间 - {{showDate||totalData.getTime||nowTime}}
+            <image class="arraw" src="/images/arraw3.png"></image>
+          </view>
+        </picker>
+    <!-- <view style="font-size:28rpx;flex:auto;text-align:center;margin-top:20rpx">数据更新时间 - {{totalData.getTime||nowTime}}</view> -->
   </view>
   <!-- <view class="top">
     <view class="left">
@@ -146,7 +152,4 @@
     <canvas canvas-id="lineCanvas" class="canvas c2"></canvas>
   </view> -->
 </view>
-<view class='water_top'>
-  <image src="{{temp}}" style="width:100%;height:100%;" mode="heightFix"></image>
-  <canvas canvas-id='myCanvas1' style='width:100%;height:100%;margin-left:-1000rpx'></canvas>
-</view>
+<my-water />

@@ -14,11 +14,12 @@ Page({
     number: '',
     hint: '',
     isBottom: false,
-    array1: ['是', '否'],
+    array1: ['通过', '不通过'],
     index1: 3,
-    index2: 3,
-    index3: 3,
-    index4: 3,
+    array2: ['通过', '不通过', '延长试用期'],
+    index2: -1,
+    array3: ['是', '否'],
+    index3: -1,
     notice: '请输入终止原因',
     focus: false,
     myComment: '',
@@ -39,7 +40,7 @@ Page({
     visible: false,
     lists: '',
     current: '',
-    day: '',
+    month: '',
     id: "",
     oriId: '',
     showRight1: false,
@@ -47,13 +48,15 @@ Page({
     imglist: '',
     proLists: '',
     bizKey: '',
-    filelist:'',
-    url:'',
-    loadAll:true,
-    remarks:'',
-    can:false,
-    ifAgree:3,
-    ifClick:false
+    filelist: '',
+    url: '',
+    loadAll: true,
+    remarks: '',
+    can: false,
+    ifAgree: 3,
+    ifClick: false,
+    leave:'',
+    remarks:''
   },
 
   /**
@@ -66,19 +69,19 @@ Page({
     var current = options.current
     var bizKey = options.biz
 
-      var url = ''
-      if (current == 3) {
-        url = 'bpm/bpmMyRuntime/form.json'
-      } else {
-        url = 'bpm/bpmMyTask/form.json'
-      }
-      that.setData({
-        current: current,
-        oriId: id,
-        bizKey: bizKey,
-        url:url
-      })
-      that.getInfo()
+    var url = ''
+    if (current == 3) {
+      url = 'bpm/bpmMyRuntime/form.json'
+    } else {
+      url = 'bpm/bpmMyTask/form.json'
+    }
+    that.setData({
+      current: current,
+      oriId: id,
+      bizKey: bizKey,
+      url: url
+    })
+    that.getInfo()
   },
 
   /**
@@ -131,12 +134,12 @@ Page({
   onShareAppMessage: function () {
 
   },
-  login(e){
+  login(e) {
     app.doLogin().then(data => {
       this.getInfo()
     })
   },
-  getInfo(){
+  getInfo() {
     var that = this
     wx.request({
       url: app.globalData.url + that.data.url,
@@ -152,15 +155,15 @@ Page({
       success(res) {
         console.log(res)
         if (res.statusCode == 200) {
-          if(res.data.result&&res.data.result=='login'){
+          if (res.data.result && res.data.result == 'login') {
             that.login()
             console.log('未登录')
             return;
           }
-          if(res.data.result=='false'){
+          if (res.data.result == 'false') {
             $Toast({
-              content:res.data.message,
-              type:"error"
+              content: res.data.message,
+              type: "error"
             })
             return;
           }
@@ -176,43 +179,53 @@ Page({
             },
             success(res) {
               console.log(res)
-              if(res.data.result=='false'){
+              if (res.data.result == 'false') {
                 $Toast({
-                  content:res.data.message,
-                  type:"error"
+                  content: res.data.message,
+                  type: "error"
                 })
                 return;
               }
               that.setData({
                 lists: res.data.oaRegular,
                 id: res.data.oaRegular.id,
-                loadAll:false
+                loadAll: false
               })
-              if (res.data.oaRegular.regularState != undefined) {
+              var lists = res.data.oaRegular
+              if (lists.managerAdvise) {
                 that.setData({
-                  ifAgree:1
+                  index1: Math.abs(lists.managerAdvise - 1)
                 })
-                if (res.data.oaRegular.regularState == 1) {
-                  that.setData({
-                    index1: 0,
-                  })
-                } else {
-                  that.setData({
-                    index1: 1
-                  })
+              }
+              if (lists.regularState) {
+                let x = ''
+                if(lists.regularState==0){
+                  x = 1
+                }else if(lists.regularState==1){
+                  x = 0
+                }else if(lists.regularState==2){
+                  x = 2
                 }
-              }
-              if(res.data.oaRegular.remarks){
                 that.setData({
-                  remarks:res.data.oaRegular.remarks,
+                  index2: x
                 })
               }
-              console.log(that.data.current)
-              if(!res.data.oaRegular.remarks&&that.data.current==1){
+              if (lists.salaryChange) {
                 that.setData({
-                  remarks:wx.getStorageSync('remarks'),
+                  index3: Math.abs(lists.salaryChange - 1)
                 })
               }
+              // if(res.data.oaRegular.remarks){
+              //   that.setData({
+              //     remarks:res.data.oaRegular.remarks,
+              //   })
+              // }
+              // console.log(that.data.current)
+              // if(!res.data.oaRegular.remarks&&that.data.current==1){
+              //   that.setData({
+              //     remarks:wx.getStorageSync('remarks'),
+              //   })
+              // }
             }
           })
         } else {
@@ -223,92 +236,103 @@ Page({
         }
       }
     })
-  wx.request({
-    url: app.globalData.url + 'file/fileList',
-    data: {
-      // __sid: app.globalData.__sid,
-      __sid: app.globalData.tempSid,
-      __ajax: 'json',
-      bizKey: that.data.bizKey,
-      __t: new Date().getTime(),
-      bizType: 'oaRegular_image'
-    },
-    header: {
-      'content-type': 'application/json' // 默认值
-    },
-    success(res) {
-      console.log(res.data)
-      let arr = []
-      let data = res.data
-      if(data.length>0){
-        for (let x in data) {
-          arr.push(app.globalData.pathurl + '/hr' + data[x].fileUrl)
+    wx.request({
+      url: app.globalData.url + 'file/fileList',
+      data: {
+        // __sid: app.globalData.__sid,
+        __sid: app.globalData.tempSid,
+        __ajax: 'json',
+        bizKey: that.data.bizKey,
+        __t: new Date().getTime(),
+        bizType: 'oaRegular_image'
+      },
+      header: {
+        'content-type': 'application/json' // 默认值
+      },
+      success(res) {
+        console.log(res.data)
+        let arr = []
+        let data = res.data
+        if (data.length > 0) {
+          for (let x in data) {
+            arr.push(app.globalData.pathurl + '/hr' + data[x].fileUrl)
+          }
+          that.setData({
+            imglist: arr
+          })
         }
-        that.setData({
-          imglist: arr
-        })
+
       }
-      
-    }
-  })
-  wx.request({
-    url: app.globalData.url + 'file/fileList',
-    data: {
-      // __sid: app.globalData.__sid,
-      __sid: app.globalData.tempSid,
-      __ajax: 'json',
-      bizKey: that.data.bizKey,
-      __t: new Date().getTime(),
-      bizType: 'oaRegular_file'
-    },
-    header: {
-      'content-type': 'application/json' // 默认值
-    },
-    success(res) {
-      console.log(res.data)
-      let data = res.data
-      if(data.length>0){
-        for (let x in data) {
-          data[x].fileUrl = app.globalData.pathurl + '/hr' + data[x].fileUrl
+    })
+    wx.request({
+      url: app.globalData.url + 'file/fileList',
+      data: {
+        // __sid: app.globalData.__sid,
+        __sid: app.globalData.tempSid,
+        __ajax: 'json',
+        bizKey: that.data.bizKey,
+        __t: new Date().getTime(),
+        bizType: 'oaRegular_file'
+      },
+      header: {
+        'content-type': 'application/json' // 默认值
+      },
+      success(res) {
+        console.log(res.data)
+        let data = res.data
+        if (data.length > 0) {
+          for (let x in data) {
+            data[x].fileUrl = app.globalData.pathurl + '/hr' + data[x].fileUrl
+          }
+          that.setData({
+            filelist: data
+          })
         }
-        that.setData({
-          filelist: data
-        })
       }
-    }
-  })
-  wx.request({
-    url: app.globalData.url + 'bpm/bpmTask/getTask',
-    data: {
-      // __sid: app.globalData.__sid,
-      __sid: app.globalData.tempSid,
-      __ajax: 'json',
-      id: that.data.oriId
-    },
-    header: {
-      'content-type': 'application/json' // 默认值
-    },
-    success(res) {
-      if(res.data.status=='1'){
-        console.log('can action')
-        that.setData({
-          can:true
-        })
+    })
+    wx.request({
+      url: app.globalData.url + 'bpm/bpmTask/getTask',
+      data: {
+        // __sid: app.globalData.__sid,
+        __sid: app.globalData.tempSid,
+        __ajax: 'json',
+        id: that.data.oriId
+      },
+      header: {
+        'content-type': 'application/json' // 默认值
+      },
+      success(res) {
+        if (res.data.status == '1') {
+          console.log('can action')
+          that.setData({
+            can: true
+          })
+        }
       }
-    }
-  })
+    })
   },
   pickChange1: function (e) {
     console.log(e.detail.value)
     this.setData({
-      index1: e.detail.value,
-      ifAgree: e.detail.value
+      index1: e.detail.value
+    })
+  },
+  pickChange2: function (e) {
+    console.log(e.detail.value)
+    this.setData({
+      index2: e.detail.value
+    })
+  },
+  pickChange3: function (e) {
+    console.log(e.detail.value)
+    this.setData({
+      index3: e.detail.value
     })
   },
   bindDateChange: function (e) {
     console.log('picker发送选择改变，携带值为', e.detail.value)
     this.setData({
-      date1: e.detail.value
+      leave: e.detail.value
     })
   },
   remarkInput: function (e) {
@@ -333,7 +357,13 @@ Page({
   hinput1: function (e) {
     console.log(e.detail.value)
     this.setData({
-      day: e.detail.value
+      month: e.detail.value
+    })
+  },
+  hinput2: function (e) {
+    console.log(e.detail.value)
+    this.setData({
+      remarks: e.detail.value
     })
   },
   handleOpen() {
@@ -362,38 +392,18 @@ Page({
     }
     // 提交操作
     if (index == 1) {
-      if(that.data.ifClick){
+      if (that.data.ifClick) {
         $Toast({
           content: '数据提交中，请稍等',
           type: 'warning'
         })
         return;
       }
-      if(that.data.ifAgree==3){
-        $Toast({
-          content:"请选择是否转正",
-          type:"warning"
-        })
-        that.setData({
-          visible: false
-        });
-        return;
-      }
-      const action = [...this.data.actions];
-      action[0].loading = true;
-      this.setData({
-        actions: action,
-        ifClick:true
-      });
-      console.log(that.data.remarks)
-      
       var data = {
-        // __sid: app.globalData.__sid,
         __sid: app.globalData.tempSid,
         __ajax: 'json',
         'bpm.comment': that.data.hint,
-        // remarks:that.data.remarks,
-        regularState:Math.abs(that.data.index1-1),
+        // regularState:Math.abs(that.data.index1-1),
         id: that.data.id,
         empCode: that.data.lists.empCode,
         empName: that.data.lists.empName,
@@ -402,6 +412,87 @@ Page({
         'bpm.activityId': that.data.lists.bpm.activityId,
         status: 4
       }
+      if (that.data.lists.bpm.activityId == 'leader') {//主管节点
+        if (that.data.index1 == 3) {
+          $Toast({
+            content: "请选择是否转正",
+            type: "warning"
+          })
+          that.setData({
+            visible: false
+          });
+          return;
+        } else {
+          data.managerAdvise = Math.abs(that.data.index1 - 1)
+          data.remarks = that.data.remarks
+        }
+      }
+      if (that.data.lists.bpm.activityId == 'hrbp') { //hrbp节点
+        if (that.data.index2 == -1) {
+          $Toast({
+            content: "请选择是否转正",
+            type: "warning"
+          })
+          that.setData({
+            visible: false
+          });
+          return;
+        } else if(that.data.index2 == 0){//转正通过
+          if (that.data.index3 == -1) {
+            $Toast({
+              content: "请选择是否调薪",
+              type: "warning"
+            })
+            that.setData({
+              visible: false
+            });
+            return;
+          }else{
+            data.salaryChange = Math.abs(that.data.index3 - 1)
+          }
+        }else if(that.data.index2 == 1){//转正不通过
+          if(that.data.leave.length<1){
+            $Toast({
+              content: "请选择最后工作日",
+              type: "warning"
+            })
+            that.setData({
+              visible: false
+            });
+            return;
+          }else{
+            data.lastDate = that.data.leave
+          }
+        }else if(that.data.index2 == 2){//延长试用期
+          if(that.data.month.length<1){
+            $Toast({
+              content: "请选择延长月数",
+              type: "warning"
+            })
+            that.setData({
+              visible: false
+            });
+            return;
+          }else{
+            data.extensionMonth = that.data.month
+          }
+        }
+          let x = ''
+          if(that.data.index2==0){
+            x = 1
+          }else if(that.data.index2==1){
+            x = 0
+          }else if(that.data.index2==2){
+            x = 2
+          }
+          data.regularState = x
+      }
+      const action = [...this.data.actions];
+      action[0].loading = true;
+      this.setData({
+        actions: action,
+        ifClick: true
+      });
       wx.request({
         url: app.globalData.url + 'oa/oaRegular/save.json',
         method: 'post',
@@ -412,14 +503,14 @@ Page({
         },
         success(res) {
           console.log(res)
-          if (res.data.result=='true') {
+          if (res.data.result == 'true') {
             setTimeout(() => {
               action[0].loading = false;
               that.setData({
                 visible: false,
                 ifInput: false,
                 actions: action,
-                ifClick:false
+                ifClick: false
               });
               $Toast({
                 content: '提交成功！',
@@ -434,12 +525,12 @@ Page({
             }, 1000);
           } else {
             action[0].loading = false;
-              that.setData({
-                visible: false,
-                ifInput: false,
-                actions: action,
-                ifClick:false
-              });
+            that.setData({
+              visible: false,
+              ifInput: false,
+              actions: action,
+              ifClick: false
+            });
             $Toast({
               content: res.data.message,
               type: 'error'
@@ -508,18 +599,18 @@ Page({
           success: function (res) {
             console.log('打开文档成功')
           },
-          fail(e){
+          fail(e) {
             $Toast({
-              content:"该文件文法预览",
-              type:'error'
+              content: "该文件文法预览",
+              type: 'error'
             })
           }
         })
       },
-      fail(e){
+      fail(e) {
         $Toast({
-          content:"该文件文法预览",
-          type:'error'
+          content: "该文件文法预览",
+          type: 'error'
         })
       }
     })

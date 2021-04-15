@@ -1,0 +1,20 @@
+<view class="container">
+  <view class="lists">
+    <view class="listItem" wx:for="{{orderLists}}" wx:key="index">
+      <view class="status">{{item.usedValue}}</view>
+      <van-card
+      tag="{{item.channel}}"
+      desc="{{item.startDate}}"
+      title="{{item.comments}}"
+      thumb="/images/logo.png"
+    >
+    <view slot="price" style="font-size:30rpx;line-height:60rpx">
+      积分：<text style="color:red">{{item.usedValue=="应计"?'+':'-'}}{{item.accrualedValue}}</text>
+    </view>
+    </van-card>
+    </view>
+  </view>
+  <van-empty image="search" description="暂无明细" wx:if="{{orderLists.length<1}}"/>
+  <view class='nullDataInfo'><van-divider contentPosition="center"  wx:if="{{orderLists.length>=1}}">无更多记录了</van-divider></view>
+</view>
+<van-toast id="van-toast" />

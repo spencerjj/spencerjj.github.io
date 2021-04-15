@@ -110,5 +110,10 @@ Page({
       .catch(() => {
         // on cancel
       });
+  },
+  topage(){
+    wx.navigateTo({
+      url: 'index',
+    })
   }
 })

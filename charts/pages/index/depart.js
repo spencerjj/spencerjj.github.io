@@ -6,6 +6,7 @@ import {
 var app = getApp();
 var wxCharts = require('../../utils/wxcharts2.js');
 var line = null;
+import {getNow, getToday} from '../../utils/today.js'
 Page({
   /**
    * 页面的初始数据
@@ -33,6 +34,7 @@ Page({
     ifLineData:true,
     ifDeptData:true,
     ifStoreData:true,
+    ifTopData:true,
     changeShow:false,
     waterShow:false
   },
@@ -42,7 +44,6 @@ Page({
    */
   onLoad: function (options) {
     var that = this
-    this.drowsyUserInfo()
     let active = options.active || 'all'
     if(active=='601'){
       this.setData({
@@ -66,17 +67,11 @@ Page({
         title: '新世纪商城'
       })
     }
-    let now = new Date()
-    var today = now.getFullYear() + '年' + (now.getMonth() + 1) + '月' + (now.getDate()) + '日'
-    var hour = now.getHours() >= 10 ? now.getHours() : '0' + now.getHours()
-    var minute = now.getMinutes() >= 10 ? now.getMinutes() : '0' + now.getMinutes()
-    var second = now.getSeconds() >= 10 ? now.getSeconds() : '0' + now.getSeconds()
-    var nowTime = now.getFullYear() + '年' + (now.getMonth() + 1) + '月' + (now.getDate()) + '日 ' + hour + ':' + minute + ':' + second
     this.setData({
       active,
-      showDate: today,
-      today,
-      nowTime,
+      // showDate: getToday().todayTrue,
+      today:getToday().todayTrue,
+      nowTime:getNow().nowTrue,
       changeShow:app.globalData.changeShow
     })
 
@@ -160,6 +155,9 @@ Page({
    */
   onPullDownRefresh: function () {
     this.onShow()
+    this.setData({
+      showDate:''
+    })
   },
 
   /**
@@ -191,7 +189,7 @@ Page({
   onChange(e) {
     this.setData({
       active: e.detail.name,
-      showDate: this.data.today,
+      showDate: '',
       secondShow: false,
       firstShow: false
     })
@@ -290,7 +288,8 @@ Page({
             item.sales = item.sales
           })
           that.setData({
-            totalLists: res.data
+            totalLists: res.data,
+            ifTopData:true
           })
         }
       }
@@ -298,6 +297,9 @@ Page({
       wx.showToast({
         title: res.message=="您的操作权限不足！"?'操作权限不足':res.message,
         image:'/images/00-8.png'
+      })
+      that.setData({
+        ifTopData:false
       })
     });
   },
@@ -308,16 +310,27 @@ Page({
     var data = {
       __sid: that.data.sid,
       __ajax: 'json',
-      storeId:that.data.active
+      storeId:that.data.active,
+      lastDate:that.data.showDate
     }
     getRequest(getApiHost(), 'platform/v1/api/minireport/bh/findShopDataByShopId', 'body', data, 0, false, false).then(
       res => {
         // console.log(res)
         wx.stopPullDownRefresh();
+        if (res.result && res.result == 'login') {
+          wx.redirectTo({
+            url: 'welcome',
+          })
+          console.log('登录失效')
+          return;
+        }
         if (res.data == undefined) {
           wx.showToast({
             title: '暂无销售数据',
             image: '/images/00-8.png',
+          })
+          that.setData({
+            storeData:'',
           })
           return;
         } else {
@@ -351,6 +364,7 @@ Page({
       __sid: that.data.sid,
       __ajax: 'json',
       storeId:that.data.active,
+      lastDate:that.data.showDate,
       pageSize:10,
       pageNo:1
     }
@@ -391,7 +405,8 @@ Page({
     var data = {
       __sid: that.data.sid,
       __ajax: 'json',
-      storeId:that.data.active
+      storeId:that.data.active,
+      lastDate:that.data.showDate
     }
     getRequest(getApiHost(), 'platform/v1/api/minireport/bh/findMonthlyChartList', 'body', data, 0, false, false).then(
       res => {
@@ -483,9 +498,10 @@ Page({
     // this.setData({
     //   index: e.detail.value
     // })
-    wx.navigateTo({
-      url: e.detail.value == 1 ? `demember?active=${this.data.active}` : ''
-    })
+    if(e.detail.value == 1)
+      wx.navigateTo({
+        url:`demember?active=${this.data.active}`
+      })
   },
   bindDateChange(e) {
     var date = new Date(e.detail.value)
@@ -496,8 +512,9 @@ Page({
     var showDate = thisYear + '年' + month + '月' + day + '日'
     this.setData({
       date: e.detail.value,
-      showDate,
+      showDate:e.detail.value,
     })
+    this.getShopData()
   },
   fresh() {
     
@@ -529,56 +546,5 @@ Page({
       })
     }
     this.getShopData()
-  },
-      // 添加水印
-      drowsyUserInfo () {
-        var that= this
-        // var userInfo = wx.getStorageSync('userInfo');
-        // var name_xx = userInfo.username || userInfo.nickName;
-        var ctx = wx.createCanvasContext("myCanvas1");
-     
-        ctx.rotate(45 * Math.PI / 180);//设置文字的旋转角度，角度为45°；
-     
-        //对斜对角线以左部分进行文字的填充
-        for (let j = 1; j < 10; j++) { //用for循环达到重复输出文字的效果，这个for循环代表纵向循环
-          ctx.beginPath();
-          ctx.setFontSize(20);
-          ctx.setFillStyle("rgba(0,0,0,.2)");
-     
-          ctx.fillText(wx.getStorageSync('chartsUser').userName, 0, 50 * j);
-          for (let i = 1; i < 10; i++) {//这个for循环代表横向循环，
-            ctx.beginPath();
-            ctx.setFontSize(20);
-            ctx.setFillStyle("rgba(0,0,0,.2)");
-            ctx.fillText(wx.getStorageSync('chartsUser').userName, 100 * i, 100 * j);
-          }
-        }//两个for循环的配合，使得文字充满斜对角线的左下部分
-     
-        //对斜对角线以右部分进行文字的填充逻辑同上
-        for (let j = 0; j < 10; j++) {
-          ctx.beginPath();
-          ctx.setFontSize(20);
-          ctx.setFillStyle("rgba(0,0,0,.2)");
-     
-          ctx.fillText(wx.getStorageSync('chartsUser').userName, 0, -50 * j);
-          for (let i = 1; i < 10; i++) {
-            ctx.beginPath();
-            ctx.setFontSize(20);
-            ctx.setFillStyle("rgba(0,0,0,.2)");
-            ctx.fillText(wx.getStorageSync('chartsUser').userName, 100 * i, -100 * j);
-          }
-        }
-      ctx.draw(true, function () {
-        //保存临时文件
-        wx.canvasToTempFilePath({
-          canvasId: 'myCanvas1',
-          success: function (res) {
-            console.log(res.tempFilePath)
-            that.setData({
-              temp:res.tempFilePath
-            })
-          }
-        },this)
-      })
-    }
+  }
 })

@@ -56,10 +56,10 @@ App({
     currentTeacher: {
       pkTeacher: 123,
     },
-    url: 'http://192.168.2.50:8083/hr/v1/',
-    pathurl: 'http://192.168.2.50:8083',
-    // url:'https://hr.princesky.com/hr/v1/',
-    // pathurl:'https://hr.princesky.com',
+    // url: 'http://192.168.2.50:8083/hr/v1/',
+    // pathurl: 'http://192.168.2.50:8083',
+    url:'https://hr.princesky.com/hr/v1/',
+    pathurl:'https://hr.princesky.com',
     statusCode: 0,
     __sid: '',
     tempSid:''
@@ -72,7 +72,6 @@ App({
         success: function (res) {
           var code = res.code //返回code
           wx.setStorageSync('code', code)
-          console.log(code)
           wx.request({
             url: that.globalData.url + 'wx/cp/qywxLogin.json',
             data: {
@@ -85,7 +84,6 @@ App({
               'content-type': 'application/json'
             },
             success: function (res) {
-              console.log(res)
               that.globalData.statusCode = res.statusCode
               if (res.statusCode == 200) {
                 if(res.data.result=='false'){

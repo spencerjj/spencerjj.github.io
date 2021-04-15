@@ -1,7 +1,7 @@
 {
   "pages": [
-    "pages/my/my",
     "pages/index/inform",
+    "pages/my/my",
     "pages/index/progress/outTransfer",
     "pages/index/progress/publishLeave",
     "pages/my/DISC/report",
@@ -36,7 +36,8 @@
     "component/result/resultD",
     "component/result/resultC",
     "component/result/resultI",
-    "component/result/resultS"
+    "component/result/resultS",
+    "pages/index/progress/salary"
   ],
   "tabBar": {
     "color": "#bfbfbf",

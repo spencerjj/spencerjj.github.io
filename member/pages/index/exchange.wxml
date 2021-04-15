@@ -1,0 +1,46 @@
+<view class="container">
+  <view class="top">
+    <view class="tleft">
+      <view>
+        我的积分
+      </view>
+      <view>
+        {{point}}
+      </view>
+    </view>
+    <view class="tright" hover-class="hover1" hover-stay-time="1s" bindtap="toPage">
+      积分明细记录
+    </view>
+  </view>
+  <view class="middle">
+    <view class="title">
+      积分兑换
+    </view>
+    <van-empty image="search" description="暂无可兑换券" wx:if="{{point<3000}}"/>
+    <view class="lists" wx:if="{{point>3000}}">
+      <view class="item"  wx:for="{{exLists}}" wx:key="index" wx:if="{{point>=item.point}}">
+        <image src="/images/cut/c.png" mode="widthFix"></image>
+        <view class="tip">{{item.money}}元积分兑换券</view>
+        <view class="btn" hover-class="hover1" hover-stay-time="1s" bindtap="exchange" data-point="{{item.point}}">{{item.point}}积分</view>
+      </view>
+    </view>
+  </view>
+  <view class="footer">
+    <view>积分兑换礼券使用规则：</view>
+    <view class="info">
+      1、积分兑换成礼券后无法取消，礼券有效期为一个月；
+    </view>
+    <view class="info">
+      2、每笔订单中只可使用一张礼券，不可叠加使用；
+    </view>
+    <view class="info">
+      3、使用积分兑换礼券，贴现率不能低于实付金额的40%；
+    </view>
+    <view class="info">
+      4、礼券需一次性使用完毕，不得兑换现金、不找零；
+    </view>
+  </view>
+  <van-empty image="search" description="暂无可兑换优惠券" wx:if="{{orderLists.length<1}}" />
+</view>
+<van-toast id="van-toast" />
+<van-dialog id="van-dialog" />

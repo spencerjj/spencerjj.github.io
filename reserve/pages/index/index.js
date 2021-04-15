@@ -16,8 +16,8 @@ Page({
     show3: false,
     show4: false,
     today: '',
-    minDate: new Date(2021, 2, 24).getTime(),
-    maxDate: new Date(2021, 2, 30).getTime(),
+    minDate: new Date(2021, 3, 30).getTime(),
+    maxDate: new Date(2021, 3, 30).getTime(),
     timeQua: [{
         ifPass: false,
         time: '10:00-12:00',
@@ -78,6 +78,7 @@ Page({
     var month = (date.getMonth() + 1) >= 10 ? (date.getMonth() + 1) : '0' + (date.getMonth() + 1)
     var day = (date.getDate()) >= 10 ? (date.getDate()) : '0' + (date.getDate())
     var today = date.getFullYear() + '-' + (month) + '-' + (day)
+    var tomorrow =  new Date(date.getTime() + 48*60*60*1000);
     var hour = date.getHours()
     var minutes = date.getMinutes()
     let timeQua = this.data.timeQua
@@ -111,28 +112,9 @@ Page({
       today,
       myDate: this.dateForm1(today),
       timeQua,
-      myQua
-    })
-  },
-  getUserProfile(e) {
-    // 推荐使用wx.getUserProfile获取用户信息，开发者每次通过该接口获取用户个人信息均需用户确认，开发者妥善保管用户快速填写的头像昵称，避免重复弹窗
-    wx.getUserProfile({
-      desc: '展示用户信息', // 声明获取用户个人信息后的用途，后续会展示在弹窗中，请谨慎填写
-      success: (res) => {
-        console.log(res)
-        this.setData({
-          userInfo: res.userInfo,
-          hasUserInfo: true
-        })
-      }
-    })
-  },
-  getUserInfo(e) {
-    // 不推荐使用getUserInfo获取用户信息，预计自2021年4月13日起，getUserInfo将不再弹出弹窗，并直接返回匿名的用户个人信息
-    console.log(e)
-    this.setData({
-      userInfo: e.detail.userInfo,
-      hasUserInfo: true
+      myQua,
+      minDate:new Date(today).getTime(),
+      maxDate:new Date(tomorrow).getTime()
     })
   },
   dateForm1(e) { //yuyue
@@ -222,9 +204,9 @@ Page({
     console.log(this.data.myDate + ' ' + this.data.myQua)
     Dialog.confirm({
         message: '您14天内是否前往过新冠疫情高风险区域，或与新冠感染者有密切接触？',
-        cancelButtonText: '否',
+        cancelButtonText: '是',
         cancelButtonColor: '#eee',
-        confirmButtonText: '是',
+        confirmButtonText: '否',
         confirmButtonColor: '#000000',
       })
       .then(() => {
@@ -241,21 +223,21 @@ Page({
         }, 2000)
       });
   },
-  showMap() {
-    var that = this;
-    wx.getLocation({
-      type: 'gcj02', //默认为 wgs84 返回 gps 坐标，gcj02 返回可用于wx.openLocation的坐标
-      success: function (res) {
-        var latitude = that.data.latitude;
-        var longitude = that.data.longitude;
-        wx.openLocation({
-          latitude: that.data.latitude,
-          longitude: that.data.longitude,
-          scale: 16
-        })
-      }
-    })
-  },
+  // showMap() {
+  //   var that = this;
+  //   wx.getLocation({
+  //     type: 'gcj02', //默认为 wgs84 返回 gps 坐标，gcj02 返回可用于wx.openLocation的坐标
+  //     success: function (res) {
+  //       var latitude = that.data.latitude;
+  //       var longitude = that.data.longitude;
+  //       wx.openLocation({
+  //         latitude: that.data.latitude,
+  //         longitude: that.data.longitude,
+  //         scale: 16
+  //       })
+  //     }
+  //   })
+  // },
   onShareAppMessage: function () {
     return {
       "title": '半山书局预约'

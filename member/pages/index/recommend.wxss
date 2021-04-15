@@ -1,0 +1,19 @@
+/* pages/index/recommend.wxss */
+.action{
+  text-align: center;
+  width: 80%;
+  margin-left:10%;
+  height: 70rpx;
+  font-size: 30rpx;
+  color:white;
+  line-height: 70rpx;
+  border-radius: 10rpx;
+  opacity: 0.5;
+  margin-top:30rpx
+}
+.save{
+  background: #096DD9;
+}
+.hover1{
+  opacity: 1;
+}

@@ -1,0 +1,21 @@
+<view class="container">
+  <view class="lists">
+    <view class="listItem" bindtap="showDetail" data-index="{{index}}" wx:for="{{orderLists}}" wx:key="index">
+      <!-- <view class="status">已退货 ></view> -->
+      <van-card
+      num="{{item.listOfOrderDteailsEntry.orderDteailsEntry.length}}"
+      price="{{item.actAmount}}"
+      desc="{{item.salesShop}}"
+      title="订单编号：{{item.orderno}}"
+      thumb="/images/logo.png"
+    >
+    <view slot="price-top">
+      {{item.completeDate}}
+    </view>
+    </van-card>
+    </view>
+  </view>
+  <van-empty image="search" description="暂无订单" wx:if="{{orderLists.length<1}}"/>
+  <view class='nullDataInfo'><van-divider contentPosition="center"  wx:if="{{orderLists.length>=1}}">无更多订单了</van-divider></view>
+</view>
+<van-toast id="van-toast" />

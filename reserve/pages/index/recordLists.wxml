@@ -4,7 +4,7 @@
       <view class="listItem">
         <view class="left ball"></view>
         <view class="right ball"></view>
-        <view class="title">新世纪半山书局 预约</view>
+        <view class="title" bindtap="topage">新世纪半山书局 预约</view>
         <view class="infos">
           <view class="details"><text style="color:#000">门票序号：　</text><text style="color:#666">123123123123</text></view>
           <view class="details"><text style="color:#000">预约时间：　</text><text style="color:#666">2021.03.12</text></view>

@@ -18,8 +18,8 @@
       <view class="comItem" wx:for="{{totalLists}}" bindtap="toTab" data-name="{{item.storeId}}" wx:key="index">
         <view class="fleft">
           <view class="comTitle">
-              {{item.storeName}}
-            </view>
+            {{item.storeName}}
+          </view>
           <view class="fIcon">
             <image src="/images/center.png" wx:if="{{index==0}}"></image>
             <image src="/images/gouwu.png" wx:elif="{{index==1}}"></image>
@@ -61,7 +61,9 @@
           </view>
         </view> -->
       </view>
-    <view style="width:94%;text-align:right;height:100rpx;line-height:100rpx;color:#313b6dcc;margin-left:3%;font-size:28rpx" wx:if="{{firstShow&&totalLists.length!=0}}">*同期为2019年数据</view>
+      <view
+        style="width:94%;text-align:right;height:100rpx;line-height:100rpx;color:#313b6dcc;margin-left:3%;font-size:28rpx"
+        wx:if="{{firstShow&&totalLists.length!=0}}">*同期为2019年数据</view>
     </van-transition>
   </view>
 
@@ -78,15 +80,16 @@
             </view>
           </picker>
         </view>
-        <!-- <picker mode="date" fields="day" value="{{date}}" start="2013-01-01" bindchange="bindDateChange">
-        <view class="topDate">
-          数据更新日期 - {{showDate}}
-          <image class="arraw" src="/images/arraw3.png"></image>
-        </view>
-      </picker> -->
-        数据更新时间 - {{storeData.getTime||nowTime}}
+        <picker mode="date" fields="day" value="{{date}}" start="2013-01-01" end="{{today}}" bindchange="bindDateChange">
+          <view class="topDate">
+            数据更新时间 - {{showDate||storeData.getTime||nowTime}}
+            <!-- {{storeData.getTime||nowTime}} -->
+            <image class="arraw" src="/images/arraw3.png"></image>
+          </view>
+        </picker>
+        <!-- 数据更新时间 - {{storeData.getTime||nowTime}} -->
       </view>
-      <view class="mtop">
+      <view class="mtop" wx:if="{{ifTopData}}">
         <view class="saleImg">
           <image src="/images/sale.png"></image>
         </view>
@@ -103,7 +106,8 @@
         <view class="allTop all1">
           <view class="allSection">
             <view>{{storeData.financeMonthSales||0}} <text style="font-size:20rpx">万</text></view>
-            <view>当月累计 <text class="{{storeData.moM>0?'rise':'down'}}" style="font-size:25rpx">{{storeData.moM||0}}%</text></view>
+            <view>当月累计 <text class="{{storeData.moM>0?'rise':'down'}}"
+                style="font-size:25rpx">{{storeData.moM||0}}%</text></view>
           </view>
           <view class="allSection">
             <view>{{storeData.salesGoal||0}} <text style="font-size:20rpx">万</text></view>
@@ -117,10 +121,11 @@
         <view class="allTop all2">
           <view class="allSection">
             <view>{{storeData.financeYearSales||0}} <text style="font-size:20rpx">万</text></view>
-            <view>本年累计 <text class="{{storeData.yoY>0?'rise':'down'}}" style="font-size:25rpx">{{storeData.yoY||0}}%</text></view>
+            <view>本年累计 <text class="{{storeData.yoY>0?'rise':'down'}}"
+                style="font-size:25rpx">{{storeData.yoY||0}}%</text></view>
           </view>
           <view class="allSection">
-            <view>{{storeData.salesGoalYear||0}}  <text style="font-size:20rpx">万</text></view>
+            <view>{{storeData.salesGoalYear||0}} <text style="font-size:20rpx">万</text></view>
             <view>本年指标</view>
           </view>
           <view class="allSection">
@@ -129,12 +134,12 @@
           </view>
         </view>
       </view>
-      <view class="ttitle"  wx:if="{{ifDeptData}}">
+      <view class="ttitle" wx:if="{{ifDeptData}}">
         <view
           style="position:absolute;width:10rpx;height:40rpx;border-radius:10rpx;left:0;top:40rpx;background:#6987fb">
         </view> 部门销售排行(万)
       </view>
-      <view class="table"  wx:if="{{ifDeptData}}">
+      <view class="table" wx:if="{{ifDeptData}}">
         <view class="trh">
           <view class="th" style="width:50%">部门</view>
           <view class="th">本日</view>
@@ -158,13 +163,13 @@
           </view>
         </view>
       </view>
-      <view style="height:10rpx;width100%;background:#fff;margin-top:30rpx"  wx:if="{{ifLineData}}"></view>
-      <view class="ttitle"  wx:if="{{ifLineData}}">
+      <view style="height:10rpx;width100%;background:#fff;margin-top:30rpx" wx:if="{{ifLineData}}"></view>
+      <view class="ttitle" wx:if="{{ifLineData}}">
         <view
           style="position:absolute;width:10rpx;height:40rpx;border-radius:10rpx;left:0;top:40rpx;background:#6987fb">
         </view> 逐月销售趋势(万)
       </view>
-      <view class="trend"  wx:if="{{ifLineData}}">
+      <view class="trend" wx:if="{{ifLineData}}">
         <canvas canvas-id="lineCanvas" class="canvas c2" bindtouchstart="touchHandler"></canvas>
       </view>
     </van-transition>
@@ -172,7 +177,4 @@
 
   <view style="width:100%;height:100rpx"></view>
 </view>
-<view class='water_top'>
-  <image src="{{temp}}" style="width:100%;height:100%;" mode="heightFix"></image>
-  <canvas canvas-id='myCanvas1' style='width:100%;height:100%;margin-left:-1000rpx'></canvas>
-</view>
+<my-water />

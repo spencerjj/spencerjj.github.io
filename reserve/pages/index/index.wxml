@@ -50,7 +50,7 @@
     <view class="timeTop">
       <van-calendar poppable="{{ false }}" show-subtitle="{{false}}" show-confirm="{{ false }}" class="calendar"
         show-title="{{false}}" row-height="40" color="#1989fa" formatter="{{ formatter }}" min-date="{{ minDate }}"
-        max-date="{{ maxDate }}" bind:select="datechange" />
+        max-date="{{ maxDate }}" default-date="{{minDate}}" bind:select="datechange" />
       <view class="timeCon">
         <view class="{{item.ifPass?'cant':'timeItem'}} {{item.selected?'timeSelected':''}}" wx:for="{{timeQua}}"
           wx:key="index" data-time="{{item.time}}" data-index="{{index}}" bindtap="selectTime">

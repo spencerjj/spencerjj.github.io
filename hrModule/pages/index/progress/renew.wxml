@@ -24,14 +24,6 @@
       <text>{{lists.officeName}}</text>
     </view>
   </view>
-  <view class="title">
-    <view class="c1">
-      <text>岗位</text>
-    </view>
-    <view class="codePicker">
-      <text>{{lists.postName}}</text>
-    </view>
-  </view>
   <view class="sub">
     <view class="c1">
       <text>原合同结束日期</text>
@@ -40,26 +32,26 @@
       <text>{{lists.endDateOld}}</text>
     </view>
   </view>
-  <view class="title">
+  <view class="title" wx:if="{{lists.bpm.activityId!='emp'}}">
 		<view class="c1">
-			<text>期限类型<text style="color:red;font-size:25rpx">*</text></text>
+			<text>期限类型<text style="color:red;font-size:25rpx"  wx:if="{{lists.bpm.activityId!='hrmsg'}}">*</text></text>
 		</view>
 		<picker value="{{index1}}" range="{{array1}}" bindchange="pickChange1" disabled="{{current==1&&lists.bpm.activityId != 'hrmsg'?false:true}}">
-			<view class="timePicker">
+			<view class="timePicker" style="padding-left:10rpx">
 				{{array1[index1]}}
-				<image class="arraw" src="http://img.gagctv.com/17112314452261654"></image>
+				<image class="arraw" src="http://img.gagctv.com/17112314452261654"  wx:if="{{lists.bpm.activityId!='hrmsg'}}"></image>
 			</view>
 		</picker>
 	</view>
-  <view class="title" wx:if="{{index1==0}}">
+  <view class="title" wx:if="{{index1==0&&lists.bpm.activityId!='emp'}}">
     <view class="c1">
-      <text>续签年数<text style="color:red;font-size:25rpx">*</text></text>
+      <text>续签年数<text style="color:red;font-size:25rpx" wx:if="{{lists.bpm.activityId!='hrmsg'}}">*</text></text>
     </view>
     <input class="number1" placeholder-style='color:#af9d7f' type="number" maxlength="2" bindinput='hinput1'
       value="{{lists.continueYear}}" disabled="{{current==1&&lists.bpm.activityId != 'hrmsg'?false:true}}"
       confirm-type="done"></input>
   </view>
-  <view class="sub" wx:if="{{index1==0}}">
+  <view class="sub" wx:if="{{index1==0&&lists.bpm.activityId!='emp'}}">
     <view class="c1">
       <text>新合同开始日期</text>
     </view>
@@ -76,13 +68,13 @@
       <text wx:else>{{lists.endDate}}</text>
     </view>
   </view> -->
-  <view class="sub" wx:if="{{index1==0}}">
+  <view class="sub" wx:if="{{index1==0&&lists.bpm.activityId!='emp'}}">
     <view class="c1">
       <text>新合同结束日期<text style="color:red;font-size:25rpx">*</text></text>
     </view>
     <view class="codePicker">
       <picker mode="date" value="{{lists.endDate?lists.endDate:end}}" bindchange="bindDateChange"
-        disabled="{{current==1&&lists.bpm.activityId != 'hrmsg'?false:true}}">
+        disabled="{{current!=1}}">
         <view class="timePicker">
           <text wx:if="{{end.length>0}}">{{end}}</text>
           <text wx:else>{{lists.endDate}}</text>
@@ -91,6 +83,17 @@
       </picker>
     </view>
   </view>
+  <view class="title">
+		<view class="c1">
+			<text>个人意愿<text style="color:red;font-size:25rpx" wx:if="{{lists.bpm.activityId == 'emp'}}">*</text></text>
+		</view>
+		<picker value="{{index2}}" range="{{array2}}" bindchange="pickChange2" disabled="{{lists.bpm.activityId != 'emp'}}">
+			<view class="timePicker" style="padding-left:10rpx">
+				{{array2[index2]}}
+				<image class="arraw" src="http://img.gagctv.com/17112314452261654"  wx:if="{{lists.bpm.activityId == 'emp'}}"></image>
+			</view>
+		</picker>
+	</view>
   <view class="title" style="z-index:1 !important" wx:if="{{current==1&&can}}">
     <view class="c1">
       <text>审批意见</text>

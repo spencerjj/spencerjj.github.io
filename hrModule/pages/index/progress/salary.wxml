@@ -1,0 +1,185 @@
+<view class="content">
+  <!-- <input class="main" value="离职流程表" placeholder-style='color:#af9d7f' bindinput='mainInput' disabled></input> -->
+  <view class="title">
+    <view class="c1">
+      <text>调薪员工</text>
+    </view>
+    <view class="codePicker">
+      <text>{{lists.empName}}</text>
+      <image src="../../../images/file.png" bindtap="copy" data-cont="{{lists.userName}}" class="copyfile"></image>
+    </view>
+  </view>
+  <view class="title">
+    <view class="c1">
+      <text>工号</text>
+    </view>
+    <view class="codePicker">
+      <text>{{lists.empNo}}</text>
+    </view>
+  </view>
+  <view class="title">
+    <view class="c1">
+      <text>所属公司</text>
+    </view>
+    <view class="codePicker">
+      <text>{{lists.companyName}}</text>
+    </view>
+  </view>
+  <view class="title">
+    <view class="c1">
+      <text>所属部门</text>
+    </view>
+    <view class="codePicker">
+      <text>{{lists.officeName}}</text>
+    </view>
+  </view>
+  <view class="title">
+    <view class="c1">
+      <text>调薪前薪资</text>
+    </view>
+    <view class="codePicker">
+      <text>{{lists.salaryOld}}</text>
+    </view>
+  </view>
+  <view class="title">
+    <view class="c1">
+      <text>调薪前津贴</text>
+    </view>
+    <view class="codePicker">
+      <text>{{lists.allowanceOld}}</text>
+    </view>
+  </view>
+  <view class="title">
+    <view class="c1">
+      <text>调薪类型</text>
+    </view>
+    <view class="codePicker">
+      <text>{{lists.salaryType}}</text>
+    </view>
+  </view>
+  <view class="title">
+    <view class="c1">
+      <text>调整后薪资<text style="color:red;font-size:25rpx" wx:if="{{lists.bpm.activityId == 'hrbp'}}">*</text></text>
+    </view>
+    <input class="number1" placeholder-style='color:#af9d7f' type="number" maxlength="10" bindinput='hinput1'
+      value="{{lists.salaryNew}}" disabled="{{current==1&&lists.bpm.activityId == 'hrbp'?false:true}}"
+      confirm-type="done"></input>
+  </view>
+  <view class="title">
+    <view class="c1">
+      <text>调整后津贴<text style="color:red;font-size:25rpx" wx:if="{{lists.bpm.activityId == 'hrbp'}}">*</text></text>
+    </view>
+    <input class="number1" placeholder-style='color:#af9d7f' type="number" maxlength="10" bindinput='hinput3'
+      value="{{lists.allowanceNew}}" disabled="{{current==1&&lists.bpm.activityId == 'hrbp'?false:true}}"
+      confirm-type="done"></input>
+  </view>
+  <view class="sub">
+    <view class="c1">
+      <text>生效日期<text style="color:red;font-size:25rpx" wx:if="{{lists.bpm.activityId == 'hrbp'}}">*</text></text>
+    </view>
+    <view class="codePicker">
+      <picker mode="date" value="{{lists.salaryDate}}" bindchange="bindDateChange"
+        disabled="{{current==1&&lists.bpm.activityId == 'hrbp'?false:true}}">
+        <view class="timePicker" style="padding-left:0">
+          <text wx:if="{{start.length>0}}">{{start}}</text>
+          <text wx:else>{{lists.salaryDate}}</text>
+          <image class="arraw" src="http://img.gagctv.com/17112314452261654"></image>
+        </view>
+      </picker>
+    </view>
+  </view>
+  <view class="title" style="z-index:1 !important"  wx:if="{{lists.bpm.activityId == 'hrbp'||lists.remarks.length>1}}">
+    <view class="c1">
+      <text>调薪原因</text>
+    </view>
+    <input class="number1" placeholder-style='color:#af9d7f' bindinput='hinput2' value="{{lists.remarks}}"
+      disabled="{{current==1&&lists.bpm.activityId == 'hrbp'?false:true}}"></input>
+  </view>
+
+  <view class="title" wx:if="{{lists.bpm.activityId == 'hrbp'}}">
+    <view class="c1">
+      <text>一级分管领导<text style="color:red;font-size:25rpx">*</text></text>
+    </view>
+    <input class="timePicker" placeholder="请填写姓名并选择处理人" placeholder-style='color:#af9d7f;margin-left:-5rpx'
+      bindinput='checkInput' value="{{lists.m1Name||keywords}}" bindconfirm="confirm" confirm-type="done" maxlength="20"
+      cursor-spacing="200" disabled="{{current!=1}}"></input>
+    <view class="sonLists" wx:if="{{sonvisibility}}">
+      <view wx:for="{{codeLists}}" wx:for-item="sonItem" class="sonItem" bindtap="selectItem" hover-class='hover1'
+        hover-stay-time='50' data-name="{{sonItem.name}}" data-code="{{sonItem.code}}" data-office="{{sonItem.office}}"
+        wx:key="index" data-index="{{childindex}}">
+        {{sonItem.name}}({{sonItem.office}})</view>
+    </view>
+  </view>
+  <view class="title" wx:if="{{lists.bpm.activityId == 'hrbp'}}">
+    <view class="c1">
+      <text>二级分管领导<text style="color:red;font-size:25rpx">*</text></text>
+    </view>
+    <input class="timePicker" placeholder="请填写姓名并选择处理人" placeholder-style='color:#af9d7f;margin-left:-5rpx'
+      bindinput='checkInput1' value="{{lists.m2Name||keywords1}}" bindconfirm="confirm1" confirm-type="done" maxlength="20"
+      cursor-spacing="200"  disabled="{{current!=1}}"></input>
+    <view class="sonLists" wx:if="{{sonvisibility1}}">
+      <view wx:for="{{codeLists1}}" wx:for-item="sonItem" class="sonItem" bindtap="selectItem1" hover-class='hover1'
+        hover-stay-time='50' data-name="{{sonItem.name}}" data-code="{{sonItem.code}}" data-office="{{sonItem.office}}"
+        wx:key="index" data-index="{{childindex}}">
+        {{sonItem.name}}({{sonItem.office}})</view>
+    </view>
+  </view>
+
+
+
+
+
+  <view class="title" style="z-index:1 !important" wx:if="{{current==1&&can}}">
+    <view class="c1">
+      <text>审批意见</text>
+    </view>
+    <input class="number" placeholder='常用语: 同意  已阅' placeholder-style='color:#af9d7f' bindinput='hinput'
+      value="{{hint}}"></input>
+  </view>
+</view>
+<view class="bottom">
+  <button class="progress {{current==1&&can?'btnwid1':'btnwid'}}" bindtap='progress' hover-class='hover1'
+    hover-stay-time='50'>流程追踪</button>
+  <button class="publish btnwid1" bindtap='handleOpen' wx:if="{{current==1&&can}}" hover-class='hover2'
+    hover-stay-time='50'>审批操作</button>
+</view>
+<i-action-sheet visible="{{visible}}" actions="{{actions}}" show-cancel bind:cancel="handleCancel"
+  bind:click="handleClickItem" />
+<i-toast id="toast" />
+<i-message id="message" />
+<i-drawer mode="right" visible="{{showRight1}}" bind:close="progress">
+  <scroll-view class="proShow" scroll-y='true' catchtouchmove='true'>
+    <view class="c1" style="margin-bottom:20rpx">
+      <text style="font-weight:bolder;color:#1890ff;margin-left:10rpx;font-size:35rpx">流转信息</text>
+    </view>
+    <i-steps current="{{verticalCurrent}}" direction="vertical">
+      <i-step wx:for="{{proLists}}" icon="{{index==proLists.length-1?'brush':''}}">
+        <view class="lists" slot="content">
+          <view class="right">
+            <view class="time1">
+              <text class="timeLeft">环节名称:</text>
+              <text class="timeRight">{{item.name}}</text>
+            </view>
+            <view class="time1">
+              <text class="timeLeft">创建时间:</text>
+              <text class="timeRight">{{item.createTime}}</text>
+            </view>
+            <view class="time1">
+              <text class="timeLeft">完成时间:</text>
+              <text class="timeRight">{{item.endTime}}</text>
+            </view>
+            <view class="time1">
+              <text class="timeLeft">分配人员:</text>
+              <text class="timeRight">{{item.assigneeInfo}}</text>
+            </view>
+            <view class="time1">
+              <text class="timeLeft">审批意见:</text>
+              <text class="timeRight">{{item.comment}}</text>
+            </view>
+          </view>
+        </view>
+      </i-step>
+    </i-steps>
+  </scroll-view>
+</i-drawer>
+<i-spin fix wx:if="{{loadAll}}"></i-spin>

@@ -1,0 +1,49 @@
+<view class="container">
+      <view class="card">
+        <view class="section">
+          <view class="s1">姓名:</view>
+          <input class="fill1" value="{{familyInfo.name}}" placeholder="请输入姓名" placeholder-style="color:#ccc"
+            bindinput="nameInput"></input>
+        </view>
+        <view class="section">
+          <view class="s1">手机号:</view>
+          <input class="fill1" value="{{phone}}" type="number" maxlength="11" placeholder="请输入手机号" placeholder-style="color:#ccc" disabled="true" style="color:#999"></input>
+        </view>
+        <view class="section">
+          <view class="s1">关系:</view>
+          <picker bindchange="relationChange" value="{{index}}" range="{{array}}">
+            <view class="fill1"><text>{{array[index]}}</text>
+            </view>
+          </picker>
+          <image class="arraw1" src="/images/arraw.png"></image>
+        </view>
+        <view class="section">
+          <view class="s1">积分使用权:</view>
+          <picker bindchange="pointChange" value="{{index1}}" range="{{array1}}">
+            <view class="fill1"><text>{{array1[index1]}}</text></view>
+          </picker>
+          <image class="arraw1" src="/images/arraw.png"></image>
+        </view>
+        <view class="section">
+          <view class="s1">优惠券使用权:</view>
+          <picker bindchange="cardChange" value="{{index2}}" range="{{array1}}">
+            <view class="fill1"><text>{{array1[index2]}}</text></view>
+          </picker>
+          <image class="arraw1" src="/images/arraw.png"></image>
+        </view>
+        <view class="section">
+          <view class="s1">折扣权益:</view>
+          <view class="fill1" style="color:#999"><text>{{familyInfo.isDiscount=='Y'?'是':'否'}}</text></view>
+        </view>
+        <view class="section" style="border-bottom:1rpx solid #cac9c9">
+          <view class="s1">绑定状态:</view>
+          <view class="fill1" style="color:#999"><text>{{familyInfo.confirmStatus}}</text></view>
+        </view>
+        <view class="action save" bindtap='add' hover-class="hover1"
+        hover-stay-time=".5s">
+          修改成员信息
+        </view>
+      </view>
+</view>
+<van-toast id="van-toast" />
+<van-dialog id="van-dialog" />

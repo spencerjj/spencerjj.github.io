@@ -16,6 +16,8 @@ Page({
     isBottom: false,
     array1: ['有固定期限', '无固定期限'],
     index1: 0,
+    index2: 1,
+    array2: ['拒绝', '同意'],
     notice: '请输入终止原因',
     focus: false,
     myComment: '',
@@ -190,11 +192,12 @@ Page({
               // x.startDate = x.startDate.slice(0,10)
               // x.endDate = x.startDate.slice(0,10)
               // x.startDate = x.startDate.slice(0,10)
-              var limitType = res.data.oaContinue.limitType||'0'
+              var limitType = res.data.oaContinue.limitType || '0'
+              var remarks = res.data.oaContinue.remarks || 1
               var index1;
-              if(limitType=='B'){
+              if (limitType == 'B') {
                 index1 = 1
-              }else{
+              } else {
                 index1 = 0
               }
               that.setData({
@@ -204,6 +207,7 @@ Page({
                 startDate: res.data.oaContinue.startDate,
                 end: res.data.oaContinue.endDate,
                 day: res.data.oaContinue.continueYear,
+                index2: remarks,
                 index1
               })
             }
@@ -267,6 +271,12 @@ Page({
       index1: e.detail.value,
     })
   },
+  pickChange2: function (e) {
+    console.log(e.detail.value)
+    this.setData({
+      index2: e.detail.value
+    })
+  },
   hinput1: function (e) {
     console.log(e.detail.value)
     var that = this
@@ -278,10 +288,10 @@ Page({
     // end = end.slice(0, 8) + lastDay + end.slice(10, end.length)
     console.log(end)
     var da = new Date(end)
-    var yy = da.getFullYear()-1+1+Number(e.detail.value)
-    var mm = da.getMonth()+1
+    var yy = da.getFullYear() - 1 + 1 + Number(e.detail.value)
+    var mm = da.getMonth() + 1
     var dd = da.getDate()
-    console.log(mm,dd)
+    console.log(mm, dd)
     if (mm == '01' && dd == '01') {
       //如果是1-1,整N年
       end = (yy - 1) + "-12-31";
@@ -336,8 +346,8 @@ Page({
         })
         return;
       }
-      if(that.data.index1==0){
-        if (!that.data.day || that.data.day.length < 1||Number(that.data.day)==0) {
+      if (that.data.index1 == 0 && that.data.lists.bpm.activityId != 'emp') {
+        if (!that.data.day || that.data.day.length < 1 || Number(that.data.day) == 0) {
           $Toast({
             content: "请正确填写续签年数",
             type: "warning"
@@ -348,30 +358,48 @@ Page({
           return;
         }
       }
+      if (that.data.lists.bpm.activityId == 'emp') {
+        var data = {
+          // __sid: app.globalData.__sid,
+          __sid: app.globalData.tempSid,
+          __ajax: 'json',
+          'bpm.comment': that.data.hint,
+          id: that.data.id,
+          empCode: that.data.lists.empCode,
+          empName: that.data.lists.empName,
+          'bpm.taskId': that.data.lists.bpm.taskId,
+          'bpm.procInsId': that.data.lists.bpm.procInsId,
+          'bpm.activityId': that.data.lists.bpm.activityId,
+          remarks: that.data.index2,
+          status: 4
+        }
+      } else {
+        var limitType = that.data.index1 == 0 ? 'A' : 'B'
+        var day = that.data.index1 == 0 ? that.data.day : ''
+        var endDate = that.data.index1 == 0 ? that.data.end : ''
+        var data = {
+          __sid: app.globalData.tempSid,
+          __ajax: 'json',
+          continueYear: day || '',
+          startDate: that.data.startDate,
+          endDate: endDate || '',
+          'bpm.comment': that.data.hint,
+          id: that.data.id,
+          empCode: that.data.lists.empCode,
+          empName: that.data.lists.empName,
+          'bpm.taskId': that.data.lists.bpm.taskId,
+          'bpm.procInsId': that.data.lists.bpm.procInsId,
+          'bpm.activityId': that.data.lists.bpm.activityId,
+          limitType: limitType,
+          status: 4
+        }
+      }
       const action = [...this.data.actions];
       action[0].loading = true;
       this.setData({
         actions: action,
         ifClick: true
       });
-      var limitType=that.data.index1==0?'A':'B'
-      var data = {
-        // __sid: app.globalData.__sid,
-        __sid: app.globalData.tempSid,
-        __ajax: 'json',
-        continueYear: that.data.day||'',
-        startDate: that.data.startDate,
-        endDate: that.data.end||'',
-        'bpm.comment': that.data.hint,
-        id: that.data.id,
-        empCode: that.data.lists.empCode,
-        empName: that.data.lists.empName,
-        'bpm.taskId': that.data.lists.bpm.taskId,
-        'bpm.procInsId': that.data.lists.bpm.procInsId,
-        'bpm.activityId': that.data.lists.bpm.activityId,
-        limitType:limitType,
-        status: 4
-      }
       wx.request({
         url: app.globalData.url + 'oa/oaContinue/save.json',
         method: 'post',

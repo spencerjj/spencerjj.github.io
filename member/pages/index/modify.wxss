@@ -1,0 +1,68 @@
+/* pages/my/account/addAccount.wxss */
+page{
+  position: relative
+}
+.title1{
+  font-size: 28rpx;
+  color:#bfbfbf;
+  height: 60rpx;
+  line-height: 60rpx;
+  margin-left:30rpx
+}
+
+.dis{
+  background:#eee
+}
+.section{
+  width: 96%;
+  padding-left: 4%;
+  border-bottom: 1rpx solid rgb(202, 201, 201);
+  height: 90rpx;
+  line-height: 90rpx;
+  position: relative;
+}
+.s1{
+  float:left;
+  width: 25%;
+  text-align: right;
+  color:#666
+}
+.fill1{
+  float: left;
+  width: 70%;
+  text-align: center;
+  height:90rpx;
+  line-height: 90rpx;
+  font-weight: bolder;
+}
+.action{
+  text-align: center;
+  width: 80%;
+  margin-left:10%;
+  height: 70rpx;
+  font-size: 30rpx;
+  color:white;
+  line-height: 70rpx;
+  border-radius: 10rpx;
+  background: #ccc;
+  margin-top:100rpx;
+}
+.save{
+  background: #000 !important;
+}
+.hover1{
+  background:#ccc !important
+}
+
+.hide{
+  display: none
+}
+.arraw{
+  width: 30rpx;
+  height: 30rpx;
+  top:50%;
+  margin-top: -15rpx;
+  right: 30rpx;
+  position: absolute;
+  transform: rotate(-90deg);
+}

@@ -1,7 +1,7 @@
 {
   "pages": [
-    "pages/index/center",
     "pages/index/index",
+    "pages/index/center",
     "pages/index/recordLists"
   ],
   "permission": {
@@ -17,7 +17,6 @@
     "backgroundColor": "#f3f3f3"
   },
   "usingComponents": {
-    "van-notify": "@vant/weapp/notify/index",
     "van-cell": "@vant/weapp/cell/index",
     "van-tag": "@vant/weapp/tag/index",
     "van-cell-group": "@vant/weapp/cell-group/index",

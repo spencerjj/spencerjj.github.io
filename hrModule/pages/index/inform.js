@@ -88,7 +88,6 @@ Page({
    */
   onReachBottom: function () {
     var that = this;
-    console.log('到底了')
     if (that.data.isMore) {
       var pageNo = that.data.pageNo;
       pageNo++;
@@ -111,7 +110,6 @@ Page({
     })
   },
   showList:function(){
-    console.log('获取列表了了来了')
     var that = this;
     var requestData = ''
     var requestUrl = ''
@@ -152,11 +150,9 @@ Page({
         'content-type': 'application/json' // 默认值
       },
       success(res) {
-        console.log(res.data)
         if(res.statusCode==200){
           if(res.data.result&&res.data.result=='login'){
             that.login()
-            console.log('未登录')
             return;
           }
         if(res.data.list){
@@ -171,7 +167,6 @@ Page({
             // },500)
           }else{
             if(that.data.pageNo>1){
-              console.log('第'+that.data.pageNo+'页')
               var list = that.data.lists
               list = list.concat(res.data.list)
               that.setData({
@@ -179,7 +174,6 @@ Page({
                 showNo:false,
                 loadAll:false
               })
-              console.log(that.data.lists)
             }else{
               that.setData({
               lists:res.data.list,
@@ -248,8 +242,9 @@ Page({
       url = 'progress/renew'
     }else if(e.currentTarget.dataset.key=='out_transfer'){
       url = 'progress/outTransfer'
+    }else if(e.currentTarget.dataset.key=='salary'){
+      url = 'progress/salary'
     }
-    console.log(url+'?id='+e.currentTarget.dataset.id+'&status='+e.currentTarget.dataset.status+'&current='+current+'&biz='+e.currentTarget.dataset.biz+'&key='+e.currentTarget.dataset.key)
     wx.navigateTo({
       url: url+'?id='+e.currentTarget.dataset.id+'&status='+e.currentTarget.dataset.status+'&current='+current+'&biz='+e.currentTarget.dataset.biz+'&key='+e.currentTarget.dataset.key
     })

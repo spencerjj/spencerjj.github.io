@@ -64,12 +64,15 @@
     <view class="check1" wx:elif="{{current!=3&&item.procIns.formKey=='regular'}}">转正流程</view>
     <view class="check1" wx:elif="{{current!=3&&item.procIns.formKey=='transfer'}}">转岗流程</view>
     <view class="check1" wx:elif="{{current!=3&&item.procIns.formKey=='out_transfer'}}">离职移交流程</view>
+    <view class="check1" wx:elif="{{current!=3&&item.procIns.formKey=='salary'}}">调薪流程</view>
     <view class="check1" wx:if="{{current==3&&item.formKey=='continue'}}">合同续签</view>
     <view class="check1" wx:elif="{{current==3&&item.formKey=='entry'}}">入职流程</view>
     <view class="check1" wx:elif="{{current==3&&item.formKey=='recruitment'}}">招聘申请</view>
     <view class="check1" wx:elif="{{current==3&&item.formKey=='out'}}">离职流程</view>
     <view class="check1" wx:elif="{{current==3&&item.formKey=='regular'}}">转正流程</view>
     <view class="check1" wx:elif="{{current==3&&item.formKey=='transfer'}}">转岗流程</view>
+    <view class="check1" wx:elif="{{current==3&&item.formKey=='out_transfer'}}">离职移交流程</view>
+    <view class="check1" wx:elif="{{current==3&&item.formKey=='transfer'}}">调薪流程</view>
     <view class="count" wx:if="{{item.priority==50}}">一般</view>
     <view class="count1" wx:if="{{item.priority==100}}">重要</view>
     <view class="count2" wx:if="{{item.priority==150}}">紧急</view>

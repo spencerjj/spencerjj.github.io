@@ -6,6 +6,7 @@ import {
 } from '../../utils/api.js'
 var app = getApp();
 var wxCharts = require('../../utils/wxcharts2.js');
+import {getNow, getToday} from '../../utils/today.js'
 var line = null;
 Page({
 
@@ -23,25 +24,23 @@ Page({
     ifRound: false,
     noewTime:'',
     ifStoreData:true,
-    temp:''
+    temp:'',
+    showDate:'',
+    today:''
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    this.drowsyUserInfo()
     var storeId = options.storeId
     var departCode2 = options.departCode2
-    var now = new Date()
-    var hour = now.getHours() >= 10 ? now.getHours() : '0' + now.getHours()
-    var minute = now.getMinutes() >= 10 ? now.getMinutes() : '0' + now.getMinutes()
-    var second = now.getSeconds() >= 10 ? now.getSeconds() : '0' + now.getSeconds()
-    var nowTime = now.getFullYear() + '年' + (now.getMonth() + 1) + '月' + (now.getDate()) + '日 ' + hour + ':' + minute + ':' + second
     this.setData({
       storeId,
       departCode2,
-      nowTime
+      // showDate: getToday().todayTrue,
+      today:getToday().todayTrue,
+      nowTime:getNow().nowTrue,
     })
   },
 
@@ -82,6 +81,9 @@ Page({
    */
   onPullDownRefresh: function () {
     this.onShow()
+    this.setData({
+      showDate:''
+    })
   },
 
   /**
@@ -111,7 +113,8 @@ Page({
       __sid: that.data.sid,
       __ajax: 'json',
       departCode2:that.data.departCode2,
-      storeId:that.data.storeId
+      storeId:that.data.storeId,
+      lastDate:that.data.showDate
     }
     // 业务总览
     getRequest(getApiHost(), 'platform/v1/api/minireport/bh/findDeptSaleByCode', 'body', data, 0, false, false).then(
@@ -158,6 +161,7 @@ Page({
       __ajax: 'json',
       departId:that.data.departCode2,
       storeId:that.data.storeId,
+      lastDate:that.data.showDate,
       pageNo:1,
       pageSize:100
     }
@@ -225,6 +229,20 @@ Page({
       height: 300
   });
 },
+bindDateChange(e) {
+  var date = new Date(e.detail.value)
+  var thisYear = date.getFullYear()
+  var month = date.getMonth() + 1
+  var day = date.getDate()
+  var today = date.getFullYear() + '年' + (month) + '月' + (day) + '日'
+  var showDate = thisYear + '年' + month + '月' + day + '日'
+  this.setData({
+    date: e.detail.value,
+    showDate,
+  })
+  this.getData()
+  this.getStore()
+},
 fresh() {
   this.setData({
     ifRound: true
@@ -235,56 +253,5 @@ fresh() {
       ifRound: false
     })
   }, 1500)
-},
-    // 添加水印
-    drowsyUserInfo () {
-      var that= this
-      // var userInfo = wx.getStorageSync('userInfo');
-      // var name_xx = userInfo.username || userInfo.nickName;
-      var ctx = wx.createCanvasContext("myCanvas1");
-   
-      ctx.rotate(45 * Math.PI / 180);//设置文字的旋转角度，角度为45°；
-   
-      //对斜对角线以左部分进行文字的填充
-      for (let j = 1; j < 10; j++) { //用for循环达到重复输出文字的效果，这个for循环代表纵向循环
-        ctx.beginPath();
-        ctx.setFontSize(20);
-        ctx.setFillStyle("rgba(0,0,0,.2)");
-   
-        ctx.fillText(wx.getStorageSync('chartsUser').userName, 0, 50 * j);
-        for (let i = 1; i < 10; i++) {//这个for循环代表横向循环，
-          ctx.beginPath();
-          ctx.setFontSize(20);
-          ctx.setFillStyle("rgba(0,0,0,.2)");
-          ctx.fillText(wx.getStorageSync('chartsUser').userName, 100 * i, 100 * j);
-        }
-      }//两个for循环的配合，使得文字充满斜对角线的左下部分
-   
-      //对斜对角线以右部分进行文字的填充逻辑同上
-      for (let j = 0; j < 10; j++) {
-        ctx.beginPath();
-        ctx.setFontSize(20);
-        ctx.setFillStyle("rgba(0,0,0,.2)");
-   
-        ctx.fillText(wx.getStorageSync('chartsUser').userName, 0, -50 * j);
-        for (let i = 1; i < 10; i++) {
-          ctx.beginPath();
-          ctx.setFontSize(20);
-          ctx.setFillStyle("rgba(0,0,0,.2)");
-          ctx.fillText(wx.getStorageSync('chartsUser').userName, 100 * i, -100 * j);
-        }
-      }
-    ctx.draw(true, function () {
-      //保存临时文件
-      wx.canvasToTempFilePath({
-        canvasId: 'myCanvas1',
-        success: function (res) {
-          console.log(res.tempFilePath)
-          that.setData({
-            temp:res.tempFilePath
-          })
-        }
-      },this)
-    })
-  }
+}
 })

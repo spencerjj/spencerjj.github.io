@@ -1,5 +1,6 @@
 {
   "pages": [
+    "pages/move",
     "pages/index/welcome",
     "pages/index/demember",
     "pages/index/group",
@@ -9,7 +10,6 @@
     "pages/index/member",
     "pages/index/area",
     "pages/bar/index",
-    "pages/move",
     "pages/index/charts",
     "pages/index/from",
     "pages/index/brand",
@@ -71,7 +71,8 @@
     "van-dropdown-item": "@vant/weapp/dropdown-item/index",
     "van-popup": "@vant/weapp/popup/index",
     "van-area": "@vant/weapp/area/index",
-    "van-circle": "@vant/weapp/circle/index"
+    "van-circle": "@vant/weapp/circle/index",
+    "my-water": "/views/water"
   },
   "sitemapLocation": "sitemap.json"
 }

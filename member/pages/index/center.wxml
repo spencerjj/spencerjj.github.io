@@ -1,0 +1,22 @@
+<view class="container">
+  <van-tabs swipeable animated active="{{current}}" bind:change="onChange" color="#a4a3a3" title-inactive-color="#aaa">
+  <van-tab title="潜在">
+    <view class="card"><image src="/images/1.png" mode="widthFix"></image></view>
+  </van-tab>
+  <van-tab title="普卡">
+    <view class="card"><image src="/images/2.png" mode="widthFix"></image></view>
+  </van-tab>
+  <van-tab title="金卡">
+    <view class="card"><image src="/images/3.png" mode="widthFix"></image></view>
+  </van-tab>
+  <van-tab title="白金卡">
+    <view class="card"><image src="/images/4.png" mode="widthFix"></image></view>
+  </van-tab>
+  <van-tab title="钻石卡">
+    <view class="card"><image src="/images/5.png" mode="widthFix"></image></view>
+  </van-tab>
+</van-tabs>
+  <view class="mark">
+    <view class="markItem {{index==current?'active':''}}" wx:for="{{imgList}}" wx:key='index'></view>
+  </view>
+</view>

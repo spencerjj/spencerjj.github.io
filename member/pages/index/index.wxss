@@ -1,0 +1,245 @@
+/* yuyue */
+.container{
+  padding-bottom:100rpx;
+  position: relative;
+  background:#ececec
+}
+.nav{
+  width: 100%;
+  background:white;
+  height: 150rpx;
+  position: fixed;
+  top:0;
+  z-index: 999;
+}
+.nav image{
+  position: absolute;
+  width: 60rpx;
+  height: 60rpx;
+  bottom:20rpx;
+  left:30rpx
+}
+.top{
+  background:#ececec;
+  width:100%;
+  height: 450rpx;
+  padding:50rpx 50rpx 50rpx 50rpx;
+  box-sizing: border-box;
+  font-size: 28rpx;
+}
+.timg{
+  width: 100%;
+  height:380rpx;
+  overflow: hidden;
+  border-radius: 10rpx;
+  position: relative;
+}
+.tback{
+  width: 102%;
+  height: 101%;
+  margin-left: -10rpx;
+}
+.logo{
+  position: absolute;
+  width: 180rpx;
+  height: 30rpx;
+  top:50rpx;
+  left:50rpx;
+}
+.login{
+  width: 100%;
+  text-align: center;
+  font-size: 30rpx;
+  margin-top:120rpx
+}
+.login button{
+  width: 300rpx;
+  height: 80rpx;
+  line-height: 80rpx;
+  border-radius: 80rpx;
+  background-image: linear-gradient(to right, #ccc , #a4a3a3);
+  border:none !important;
+  box-shadow: 0rpx 0rpx 20rpx 5rpx #bbb;
+  color:#eee;
+  margin-top:20rpx
+}
+button::after{
+  border: none;
+}
+.hover1{
+  opacity: .6;
+}
+.hover2{
+  opacity: .4;
+}
+.tleft{
+  position: absolute;
+  bottom:40rpx;
+  left: 50rpx;
+  display: flex;
+  font-weight: bolder;
+}
+.infos>view{
+  font-size: 25rpx;
+}
+.name{
+  display: flex;
+  align-items: center;
+  margin-top:10rpx
+}
+.profile{
+  width: 100rpx;
+  height: 100rpx;
+  border-radius: 50%;
+  overflow: hidden;
+  margin-right: 20rpx;
+  margin-top: 10rpx;
+}
+.profile image{
+  width: 100%;
+  height: 100%;
+}
+.myCode{
+  width: 60rpx;
+  height: 60rpx;
+}
+.myCode image{
+  width: 100%;
+  height: 100%;
+}
+.notice{
+  width: 100%;
+  font-weight: bolder;
+  text-align: center;
+  font-size: 20rpx;
+}
+.tcode{
+  position: absolute;
+  bottom:40rpx;
+  right:50rpx;
+  width:250rpx;
+  height: 250rpx;
+  overflow: hidden;
+  border-radius: 10rpx;
+}
+.tcode image{
+  width:250%;
+  height: 250%;
+  margin-left: -30rpx;
+  margin-top:-30rpx
+}
+.middle{
+  display: flex;
+  padding:50rpx 5% 50rpx 5%;
+  justify-content: space-between;
+}
+.middle>view{
+  width: 22.5%;
+  font-size: 25rpx;
+  font-weight: bolder;
+  text-align: center;
+}
+.middle image{
+  width: 60rpx;
+  height: 60rpx;
+  margin-bottom:10rpx
+}
+.sections{
+  display: flex;
+  justify-items: left;
+  flex-wrap: wrap;
+}
+.sections>view{
+  width: 33.3%;
+  font-size: 25rpx;
+  font-weight: bolder;
+  text-align: center;
+  color:#000;
+  margin-top:100rpx;
+  position: relative;
+}
+.mark{
+  position: absolute;
+  top:-5rpx;
+  right:85rpx;
+  width: 20rpx;
+  height: 20rpx;
+  border-radius: 50%;
+  background:red
+}
+.sections image{
+  width: 50rpx;
+  height: 50rpx;
+  margin-bottom:15rpx
+}
+.showCode{
+  position: fixed;
+  top:0;
+  width: 100%;
+  height: 100%;
+  background:#e5e5e5;
+  padding-top:200rpx;
+}
+.pannel{
+  width: 94%;
+  margin-left:3%;
+  background:white;
+  height: 1100rpx;
+  border-radius: 20rpx;
+}
+.barnum{
+  width: 100%;
+  text-align: center;
+  font-size: 35rpx;
+  font-weight: bolder;
+  letter-spacing: 10rpx;
+  position: absolute;
+  top:450rpx
+}
+.barcode{
+  background:white;
+  border-radius: 30rpx;
+  margin:0 auto;
+  padding-top:50rpx;
+}
+.barcode>canvas{
+  margin:0 auto
+}
+.qrcode{
+  position: absolute;
+  top:600rpx;
+  left:50%;
+  margin-left:-135px;
+  padding:10px;
+  padding-bottom:10px;
+  background:white;
+  border-radius: 30rpx;
+}
+.canvas{
+  width: 255px;
+  height: 250px;
+  margin:0 auto
+}
+.banner{
+  width: 100%;
+  margin-top:100rpx
+}
+.leftNav{
+  margin-top:200rpx;
+  background:#ececec;
+  width: 100%;
+  text-align: center;
+}
+.leftNav image{
+  width: 60rpx;
+  height: 60rpx;
+}
+.navItem{
+  margin-top:50rpx
+}
+.show{
+  display: block;
+}
+.hide{
+  display: none;
+}

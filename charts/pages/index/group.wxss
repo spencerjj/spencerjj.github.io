@@ -281,6 +281,11 @@ page{
 .opa{
   opacity: 0;
 }
+.arraw{
+  width: 25rpx;
+  height: 25rpx;
+  margin-left: 10rpx;
+}
 .canvas{
   width: 100%;
 }

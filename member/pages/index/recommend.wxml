@@ -1,0 +1,10 @@
+<view class="container">
+  <image src="/images/logo.png">
+  </image>
+  <view class="action save" bindtap='save' hover-class="hover1"
+        hover-stay-time=".5s">
+  保存推荐码
+</view>
+</view>
+<van-toast id="van-toast" />
+<van-dialog id="van-dialog" />

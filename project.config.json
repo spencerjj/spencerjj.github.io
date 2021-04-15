@@ -42,7 +42,7 @@
   "compileType": "miniprogram",
   "libVersion": "2.14.1",
   "appid": "wx5fd9943700706f78",
-  "projectname": "car",
+  "projectname": "member",
   "debugOptions": {
     "hidedInDevtools": []
   },

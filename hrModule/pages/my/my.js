@@ -130,7 +130,6 @@ Page({
       success(res) {
         // tempFilePath可以作为img标签的src属性显示图片
         const tempFilePaths = res.tempFilePaths[0]
-        console.log(tempFilePaths)
       }
     })
   },
@@ -148,7 +147,6 @@ Page({
         'content-type': 'application/json' // 默认值
       },
       success(res) {
-        console.log(res)
         if (res.statusCode == 200) {
           if (res.data.result && res.data.result == 'login') {
             that.login()
@@ -210,7 +208,6 @@ Page({
         'content-type': 'application/json' // 默认值
       },
       success(res) {
-        console.log(res)
         if (res.statusCode != 200) {
           $Toast({
             content: '投票信息获取失败',
@@ -257,7 +254,6 @@ Page({
         'content-type': 'application/json' // 默认值
       },
       success(res) {
-        console.log(res)
 
         if (res.statusCode == 200) {
           if (res.data.result && res.data.result == 'login') {
@@ -273,7 +269,6 @@ Page({
             return;
           }
           let lists = res.data.data.list;
-          console.log(lists)
           let all = 0;
           lists.map((item) => {
             if (item.status == '0') {
