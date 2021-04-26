@@ -39,6 +39,18 @@ Page({
       {
         money: 2000,
         point: 40000
+      },
+      {
+        money: 3000,
+        point: 60000
+      },
+      {
+        money: 4000,
+        point: 80000
+      },
+      {
+        money: 5000,
+        point: 100000
       }
     ]
   },
@@ -47,6 +59,20 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    
+  },
+
+  /**
+   * 生命周期函数--监听页面初次渲染完成
+   */
+  onReady: function () {
+
+  },
+
+  /**
+   * 生命周期函数--监听页面显示
+   */
+  onShow: function () {
     var that = this;
     var phoneNo = wx.getStorageSync('phoneNo') || ''
     if (phoneNo.length > 1) {
@@ -62,20 +88,6 @@ Page({
         })
       }, 1000)
     }
-  },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-
   },
 
   /**
@@ -96,7 +108,7 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-    this.onLoad()
+    this.onShow()
   },
 
   /**
@@ -147,47 +159,8 @@ Page({
     })
   },
   exchange(e) {
-    var that = this;
-    let point = e.currentTarget.dataset.point
-    Dialog.confirm({
-        title: '提示',
-        message: `确认消耗${point}积分兑换吗？`,
-      })
-      .then(() => {
-        var data = {
-          phone: wx.getStorageSync('phoneNo'),
-          points:point,
-          ajax: '_json'
-        }
-        getRequest(getApiHost(), 'platform/v1/api/lampocrm/LPFixedpointsExcOneVoucher', 'body', data, 0, false, true).then(
-          res => {
-            console.log(res)
-            if(res.status==0){
-              Toast({
-                message: '兑换成功',
-                type: 'success'
-              });
-              setTimeout(()=>{
-                that.onLoad()
-              },500)
-            }else{
-              Toast({
-                message: res.msg,
-                type: 'error'
-              });
-            }
-          }
-        ).catch(res => {
-          console.log(res)
-          Toast({
-            message: '系统错误，请联系管理员',
-            type: 'warning'
-          });
-        });
-
-      })
-      .catch(() => {
-        // on cancel
-      });
+    wx.navigateTo({
+      url: 'cardDetail?point='+e.currentTarget.dataset.point
+    })
   }
 })

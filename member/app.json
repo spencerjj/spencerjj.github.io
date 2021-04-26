@@ -1,21 +1,25 @@
 {
   "pages": [
-    "pages/index/recommend",
     "pages/index/index",
-    "pages/index/register",
+    "pages/index/mission",
+    "pages/index/cardDetail",
+    "pages/index/exchange",
+    "pages/index/center",
+    "pages/index/recommend",
     "pages/index/infos",
+    "pages/index/modify",
+    "pages/index/car",
+    "pages/index/register",
     "pages/index/order",
     "pages/index/family",
     "pages/index/change",
     "pages/index/card",
-    "pages/index/exchange",
     "pages/index/point",
     "pages/index/orderDetail",
-    "pages/index/modify",
-    "pages/index/center",
-    "pages/index/mission",
     "pages/index/issus",
-    "pages/index/familyDetail"
+    "pages/index/familyDetail",
+    "pages/index/detail",
+    "pages/index/store"
   ],
   "permission": {
     "scope.userLocation": {

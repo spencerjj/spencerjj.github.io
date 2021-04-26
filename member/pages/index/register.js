@@ -20,7 +20,9 @@ Page({
     phoneNo: '',
     user: '',
     familyList:[],
-    show:false
+    show:false,
+    rePhone:'',
+    cardNo:''
   },
 
   /**
@@ -28,18 +30,41 @@ Page({
    */
   onLoad: function (options) {
     app.doLogin().then(data => {
-      var userInfo = wx.getStorageSync('userInfo')
+      // var userInfo = wx.getStorageSync('userInfo')
       this.setData({
-        index1: userInfo == '2' ? 1 : 0,
-        name: userInfo.nickName,
+        index1: 0,
+        name: '',
         user: data
       })
     })
+    if(options.scene){
+      let scene=decodeURIComponent(options.scene);
+      console.log(scene)
+      let rePhone=scene.split("/")[0];
+      let cardNo=scene.split('/')[1]||'';
+      console.log(rePhone+','+cardNo)
+      this.setData({
+        rePhone,
+        cardNo
+      })
+     }
+     if(options.cardNo){
+       console.log(options.cardNo)
+      this.setData({
+        cardNo:options.cardNo
+      })
+     }
+     if(options.rePhone){
+      console.log(options.rePhone)
+      this.setData({
+        rePhone:options.rePhone
+      })
+     }
   },
   login(e) {
-    app.doLogin().then(data => {
-      this.onLoad()
-    })
+    // app.doLogin().then(data => {
+    //   this.onLoad()
+    // })
   },
   /**
    * 生命周期函数--监听页面初次渲染完成
@@ -173,7 +198,6 @@ Page({
             familyList,
             show:true
           })
-          
         }else{
           that.save()
         }
@@ -228,9 +252,15 @@ Page({
       phone: that.data.phoneNo,
       gender: that.data.index1 == 0 ? '先生' : '女士',
       name: that.data.name,
-      parameter2: that.data.birthday,
+      birthday: that.data.birthday,
       openid: wx.getStorageSync('user').openid || '99999',
       ajax: '_json'
+    }
+    if(that.data.rePhone){
+      data.referPhone = that.data.rePhone
+    }
+    if(that.data.cardNo){
+      data.parameter1 = that.data.cardNo
     }
     getRequest(getApiHost(), 'platform/v1/api/lampocrm/LPMemberRegister', 'body', data, 0, false, false).then(
       res => {

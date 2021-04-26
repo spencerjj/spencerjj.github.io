@@ -15,7 +15,7 @@ Page({
     active:0,
     peoIndex:-1,
     array:['老王','老张','老范','老六','老五'],
-    date:'2021-3-23',
+    date:'2021-4-23',
     time:'11:30',
     start:'普林仕集团办公楼门口',
     end:'常州高铁总站',
@@ -183,6 +183,7 @@ Page({
   compare(e){
     var that = this
     var myDate = new Date(e)
+    console.log(myDate)
     var myYear = myDate.getFullYear()
     var myMonth = myDate.getMonth()+1
     var myDay = myDate.getDate()

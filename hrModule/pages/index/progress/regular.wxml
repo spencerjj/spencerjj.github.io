@@ -107,7 +107,7 @@
 	</view>
 	<view class="title" wx:if="{{(lists.bpm.activityId == 'hrbp'||lists.bpm.activityId == 'ssc607'||lists.bpm.activityId == 'sscother')&&index2==2}}">
     <view class="c1">
-      <text>延长月数<text style="color:red;font-size:25rpx" wx:if="{{lists.bpm.activityId == 'hrbp'}}">*</text></text>
+      <text>延长月数<text style="color:red;font-size:25rpx" wx:if="{{lists.bpm.activityId == 'hrbp'}}">*</text><text style="color:red">(以此为准)</text></text>
     </view>
     <input class="number1" placeholder-style='color:#af9d7f' type="number" maxlength="10" bindinput='hinput1'
       value="{{lists.extensionMonth}}" disabled="{{current==1&&lists.bpm.activityId == 'hrbp'?false:true}}"

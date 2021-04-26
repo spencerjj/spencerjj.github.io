@@ -80,7 +80,7 @@
 	</view>
 	<view class="title" wx:if="{{lists.bpm.activityId == 'DeptManager'}}">
     <view class="c1">
-      <text>试用期工资<text style="color:red;font-size:25rpx">*</text></text>
+      <text>试用期工资<text style="color:red">(非导购/工人岗位请填写)</text></text>
     </view>
     <input class="c1Input" placeholder-style='color:#af9d7f' type="number" maxlength="10" bindinput='hinput5'
       value="{{lists.trySalary}}" disabled="{{current!=1}}" confirm-type="done"></input>

@@ -1,9 +1,9 @@
 {
   "pages": [
-    "pages/index/confirm",
-    "pages/index/index",
-    "pages/index/finish",
     "pages/index/distribution",
+    "pages/index/index",
+    "pages/index/confirm",
+    "pages/index/finish",
     "pages/index/recordLists",
     "views/myswiper/datePicker",
     "views/myswiper/center",

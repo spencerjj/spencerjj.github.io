@@ -77,7 +77,7 @@ App({
         wx.login({
           success: function (res) {
             if (res.code) {
-              wx.getUserInfo({
+              wx.getUserProfile({
                 success: function (res) {
                   console.log(res)
                   var userInfo = {};

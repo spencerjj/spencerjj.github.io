@@ -35,8 +35,8 @@
               <view>实时销售</view>
             </view>
             <view class="sales">
-              {{item.profit}} <text style="font-size:20rpx">万</text>
-              <view>毛利/率<text class="{{item.moM>0?'rise':'down'}}" style="font-size:30rpx"> {{item.moM}}%</text></view>
+              {{item.profit}}<text style="font-size:20rpx">万 <text class="{{item.gpm>0?'rise':'down'}}" style="font-size:25rpx;font-weight:normal"> {{item.gpm}}%</text></text>
+              <view>毛利<text class="{{item.gpm>0?'rise':'down'}}" style="font-size:30rpx"> {{item.gpm}}%</text></view>
             </view>
           </view>
           <view class="saleTop sale1">
@@ -89,7 +89,7 @@
         </picker>
         <!-- 数据更新时间 - {{storeData.getTime||nowTime}} -->
       </view>
-      <view class="mtop" wx:if="{{ifTopData}}">
+      <view class="mtop" wx:if="{{ifStoreData}}">
         <view class="saleImg">
           <image src="/images/sale.png"></image>
         </view>
@@ -158,8 +158,9 @@
             <view class="td depart">{{item.departName2}}</view>
             <view class="td">{{item.sales}}</view>
             <view class="td">{{item.profit}}</view>
+            <view class="td">{{item.gpm}}%</view>
             <view class="td">{{item.financeMonthSales}}</view>
-            <view class="td">{{item.salesGoal}}</view>
+            <view class="td">{{item.financeLastMonthSales}}</view>
           </view>
         </view>
       </view>
@@ -177,4 +178,7 @@
 
   <view style="width:100%;height:100rpx"></view>
 </view>
-<my-water />
+<view class='water_top'>
+  <image src="{{temp}}" style="width:100%;height:100%;" mode="heightFix"></image>
+  <canvas canvas-id='myCanvas1' style='width:100%;height:100%;margin-left:-1000rpx'></canvas>
+</view>

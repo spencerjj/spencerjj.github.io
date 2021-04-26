@@ -168,7 +168,7 @@
   width: 94%;
   margin-left:3%;
   background:white;
-  height: 1000rpx;
+  height: 1040rpx;
   border-radius: 20rpx;
 }
 .barnum{
@@ -203,4 +203,10 @@
   width: 255px;
   height: 250px;
   margin:0 auto
+}
+.exit{
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  color:red
 }

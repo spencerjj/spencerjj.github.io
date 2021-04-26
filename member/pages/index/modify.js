@@ -241,6 +241,11 @@ Page({
               message: res.msg,
               type: 'success'
             })
+            setTimeout(()=>{
+              wx.navigateBack({
+                delta: 1,
+              })
+            },500)
           }else{
             Toast({
               message: res.msg,

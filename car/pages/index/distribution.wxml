@@ -9,7 +9,7 @@
       <swiper-item style="width:100%">
         <view class="action">
           <view class="type">{{type}}</view>
-          <view class="date">{{date}} {{time}}</view>
+          <view class="date">明天 {{time}}</view>
           <view class="detail">
             <view class="num">{{num}}人</view>
             <view class="comment">行李较多，早点过来</view>

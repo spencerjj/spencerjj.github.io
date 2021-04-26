@@ -23,8 +23,9 @@ page{
   box-shadow: 0 0 10rpx 0rpx #6987fb; 
   position: relative;
 }
-.mtop view{
+.mtop>view{
   text-align: center;
+  width: 30%;
 }
 .saleImg image{
   width: 80rpx;

@@ -223,21 +223,21 @@ Page({
         }, 2000)
       });
   },
-  // showMap() {
-  //   var that = this;
-  //   wx.getLocation({
-  //     type: 'gcj02', //默认为 wgs84 返回 gps 坐标，gcj02 返回可用于wx.openLocation的坐标
-  //     success: function (res) {
-  //       var latitude = that.data.latitude;
-  //       var longitude = that.data.longitude;
-  //       wx.openLocation({
-  //         latitude: that.data.latitude,
-  //         longitude: that.data.longitude,
-  //         scale: 16
-  //       })
-  //     }
-  //   })
-  // },
+  showMap() {
+    var that = this;
+    wx.getLocation({
+      type: 'gcj02', //默认为 wgs84 返回 gps 坐标，gcj02 返回可用于wx.openLocation的坐标
+      success: function (res) {
+        var latitude = that.data.latitude;
+        var longitude = that.data.longitude;
+        wx.openLocation({
+          latitude: that.data.latitude,
+          longitude: that.data.longitude,
+          scale: 16
+        })
+      }
+    })
+  },
   onShareAppMessage: function () {
     return {
       "title": '半山书局预约'

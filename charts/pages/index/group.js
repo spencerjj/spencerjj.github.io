@@ -114,7 +114,7 @@ Page({
       __ajax: 'json',
       departCode2:that.data.departCode2,
       storeId:that.data.storeId,
-      lastDate:that.data.showDate
+      saleDate:that.data.showDate
     }
     // 业务总览
     getRequest(getApiHost(), 'platform/v1/api/minireport/bh/findDeptSaleByCode', 'body', data, 0, false, false).then(
@@ -161,7 +161,7 @@ Page({
       __ajax: 'json',
       departId:that.data.departCode2,
       storeId:that.data.storeId,
-      lastDate:that.data.showDate,
+      salestime:that.data.showDate,
       pageNo:1,
       pageSize:100
     }
@@ -238,7 +238,7 @@ bindDateChange(e) {
   var showDate = thisYear + '年' + month + '月' + day + '日'
   this.setData({
     date: e.detail.value,
-    showDate,
+    showDate:e.detail.value,
   })
   this.getData()
   this.getStore()

@@ -17,6 +17,10 @@ Page({
     orderLists:[],
     show:false,
     nowNum:'',
+    name:'',
+    level:'',
+    point:0,
+    total:0,
     lists:[
       {
 
@@ -31,6 +35,12 @@ Page({
     var that = this;
     var phoneNo = wx.getStorageSync('phoneNo') || ''
     if(phoneNo.length>1){
+      console.log(options.point)
+      that.setData({
+        name:options.name||'',
+        point:options.point||0,
+        level:options.level||''
+      })
       that.getInfo()
     }else{
       Toast({
@@ -96,7 +106,8 @@ Page({
   getInfo(e){
     var that = this;
     var data = {
-      phone: wx.getStorageSync('phoneNo'),
+      phone: 15979129664,
+      // phone:wx.getStorageSync('phoneNo'),
       ajax: '_json'
     }
     getRequest(getApiHost(), 'platform/v1/api/lampocrm/QueryMemOrderInfo', 'body', data, 0, false, false,true).then(
@@ -104,6 +115,19 @@ Page({
         console.log(res)
         wx.stopPullDownRefresh()
         if(res.status==0||res.status==2){
+          let x = []
+          if(res.orderEntryList.length>0){
+            res.orderEntryList.map((item)=>{
+              x.push((item.actAmount||0)-1+1)
+            })
+            let total = x.reduce(function(prev,cur,index,array){
+              return prev + cur
+            })
+            that.setData({
+              total
+            })
+          }
+          
           that.setData({
             orderLists:res.orderEntryList
           })

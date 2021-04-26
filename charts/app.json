@@ -1,12 +1,12 @@
 {
   "pages": [
-    "pages/move",
     "pages/index/welcome",
+    "pages/index/index",
+    "pages/move",
     "pages/index/demember",
     "pages/index/group",
     "pages/index/depart",
     "pages/index/select",
-    "pages/index/index",
     "pages/index/member",
     "pages/index/area",
     "pages/bar/index",

@@ -415,7 +415,7 @@ Page({
       if (that.data.lists.bpm.activityId == 'leader') {//主管节点
         if (that.data.index1 == 3) {
           $Toast({
-            content: "请选择是否转正",
+            content: "请选择部门长建议",
             type: "warning"
           })
           that.setData({
@@ -464,9 +464,9 @@ Page({
             data.lastDate = that.data.leave
           }
         }else if(that.data.index2 == 2){//延长试用期
-          if(that.data.month.length<1){
+          if(that.data.month.length<1||!(/(^[1-9]\d*$)/.test(that.data.month))){
             $Toast({
-              content: "请选择延长月数",
+              content: "请正确填写延长月数",
               type: "warning"
             })
             that.setData({

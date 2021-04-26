@@ -74,7 +74,7 @@ Page({
       nowTime:getNow().nowTrue,
       changeShow:app.globalData.changeShow
     })
-
+this.drowsyUserInfo()
   },
 
   /**
@@ -311,7 +311,7 @@ Page({
       __sid: that.data.sid,
       __ajax: 'json',
       storeId:that.data.active,
-      lastDate:that.data.showDate
+      saleDate:that.data.showDate
     }
     getRequest(getApiHost(), 'platform/v1/api/minireport/bh/findShopDataByShopId', 'body', data, 0, false, false).then(
       res => {
@@ -364,7 +364,7 @@ Page({
       __sid: that.data.sid,
       __ajax: 'json',
       storeId:that.data.active,
-      lastDate:that.data.showDate,
+      saleDate:that.data.showDate,
       pageSize:10,
       pageNo:1
     }
@@ -380,7 +380,11 @@ Page({
           return;
         } else {
           var deptData = res.data
-          deptData.slice(0,5)
+          // deptData.slice(0,5)
+          for(let x in deptData){
+            deptData[x].financeMonthSales = deptData[x].financeMonthSales.toFixed(0)
+            deptData[x].financeLastMonthSales = deptData[x].financeLastMonthSales.toFixed(0)
+          }
           that.setData({
             deptData,
             ifDeptData:true
@@ -406,7 +410,7 @@ Page({
       __sid: that.data.sid,
       __ajax: 'json',
       storeId:that.data.active,
-      lastDate:that.data.showDate
+      salesYear:new Date(that.data.showDate).getFullYear()
     }
     getRequest(getApiHost(), 'platform/v1/api/minireport/bh/findMonthlyChartList', 'body', data, 0, false, false).then(
       res => {
@@ -523,21 +527,21 @@ Page({
     this.setData({
       active: e.currentTarget.dataset.name
     })
-    if(e.currentTarget.dataset.name=='601'){
+    if(e.currentTarget.dataset.name=='601'&&this.data.tab1){
       this.setData({
         title: '购物中心',
       })
       wx.setNavigationBarTitle({
         title: '购物中心'
       })
-    }else if(e.currentTarget.dataset.name=='602'){
+    }else if(e.currentTarget.dataset.name=='602'&&this.data.tab2){
       this.setData({
         title: '百货大楼',
       })
       wx.setNavigationBarTitle({
         title: '百货大楼'
       })
-    }else if(e.currentTarget.dataset.name=='603'){
+    }else if(e.currentTarget.dataset.name=='603'&&this.data.tab3){
       this.setData({
         title: '新世纪商城',
       })
@@ -546,5 +550,60 @@ Page({
       })
     }
     this.getShopData()
-  }
+  },
+  drowsyUserInfo () {
+    var that= this
+    // var userInfo = wx.getStorageSync('userInfo');
+    // var name_xx = userInfo.username || userInfo.nickName;
+    var ctx = wx.createCanvasContext("myCanvas1",that);
+ 
+    ctx.rotate(45 * Math.PI / 180);//设置文字的旋转角度，角度为45°；
+ 
+    //对斜对角线以左部分进行文字的填充
+    for (let j = 1; j < 10; j++) { //用for循环达到重复输出文字的效果，这个for循环代表纵向循环
+      ctx.beginPath();
+      ctx.setFontSize(15);
+      ctx.setFillStyle('rgba(0,0,0,.2)');
+ 
+      ctx.fillText(wx.getStorageSync('chartsUser').userName, 0, 50 * j);
+      for (let i = 1; i < 10; i++) {//这个for循环代表横向循环，
+        ctx.beginPath();
+        ctx.setFontSize(15);
+        ctx.setFillStyle('rgba(0,0,0,.2)');
+        ctx.fillText(wx.getStorageSync('chartsUser').userName, 100 * i, 100 * j);
+      }
+    }//两个for循环的配合，使得文字充满斜对角线的左下部分
+ 
+    //对斜对角线以右部分进行文字的填充逻辑同上
+    for (let j = 0; j < 10; j++) {
+      ctx.beginPath();
+      ctx.setFontSize(15);
+      ctx.setFillStyle(this.data.color);
+ 
+      ctx.fillText(wx.getStorageSync('chartsUser').userName, 0, -50 * j);
+      for (let i = 1; i < 10; i++) {
+        ctx.beginPath();
+        ctx.setFontSize(15);
+        ctx.setFillStyle(this.data.color);
+        ctx.fillText(wx.getStorageSync('chartsUser').userName, 100 * i, -100 * j);
+      }
+    }
+
+  ctx.draw(true, function () {
+    console.log('draw')
+      wx.canvasToTempFilePath({
+        canvasId: 'myCanvas1',
+        success: function (res) {
+          console.log(res.tempFilePath)
+          that.setData({
+            temp:res.tempFilePath
+          })
+        },
+        fail(e){
+          console.log(e)
+        }
+      },that)
+  })
+}
+
 })

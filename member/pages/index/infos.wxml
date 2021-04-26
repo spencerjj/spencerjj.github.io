@@ -1,7 +1,10 @@
 <view class="content">
-  <view class="name section">
+  <!-- <view class="name section">
     <view class="s1">会员编号:</view>
     <view class="fill">{{user.memberNo}}</view>
+  </view> -->
+  <view class="banner">
+    <image src="/images/cut/b3.png" mode="widthFix"></image>
   </view>
   <view class="number section">
     <view class="s1">姓名:</view>
@@ -28,7 +31,7 @@
     <view class="fill">{{user.gender}}</view>
   </view>
   <view class="number section">
-    <view class="s1">生日*:</view>
+    <view class="s1">生日:</view>
     <view class="fill">{{user.birthday}}</view>
   </view>
   <view class="number section">
@@ -37,24 +40,32 @@
   </view>
   <view class="number section">
     <view class="s1">推荐人:</view>
-    <view class="fill" wx:if="{{user}}">{{user.recommend||'无'}}</view>
+    <view class="fill"><text wx:if="{{user}}">{{user.recommend||'无'}}</text></view>
   </view>
   <view class="number section">
     <view class="s1">邮箱:</view>
     <view placeholder='请输入员工手机' class="fill">{{user.email}}</view>
   </view>
-  <view class="number section">
+  <!-- <view class="number section">
     <view class="s1">地址:</view>
     <view placeholder='请输入员工手机' class="fill">{{user.city}}</view>
-  </view>
+  </view> -->
 </view>
-<view class="action save" bindtap='save' hover-class="hover1"
+<!-- <view class="action save" bindtap='save' hover-class="hover1"
         hover-stay-time=".5s">
   完善个人信息
 </view>
 <view class="action save" bindtap='family' hover-class="hover1"
         hover-stay-time=".5s">
   新增家庭卡成员
+</view> -->
+<view class="bottom">
+  <view hover-class="hover2" hover-stay-time="1s" bindtap='save'>
+    完善个人信息
+  </view>
+  <view hover-class="hover2" hover-stay-time="1s" bindtap='family'>
+    新增家庭卡成员
+  </view>
 </view>
 <!-- <view class="action save" bindtap='change'>
   修改手机号码

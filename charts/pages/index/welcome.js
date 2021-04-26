@@ -137,11 +137,11 @@ Page({
           let menus = wx.getStorageSync('chartsUser').userMenus
           let userStoreList = this.data.userStoreList
           menus.map((item)=>{
-            if(item.permission=='bhreport:601:view'){
+            if(item.permission=='bhreport:601:view'||item.permission=='bhreport:601:deptview'){
               userStoreList[0].ifStore = true
-            }else if(item.permission=='bhreport:602:view'){
+            }else if(item.permission=='bhreport:602:view'||item.permission=='bhreport:602:deptview'){
               userStoreList[1].ifStore = true
-            }else if(item.permission=='bhreport:603:view'){
+            }else if(item.permission=='bhreport:603:view'||item.permission=='bhreport:603:deptview'){
               userStoreList[2].ifStore = true
             }else if(item.permission=='lampo'){
               userStoreList[3].ifStore = true

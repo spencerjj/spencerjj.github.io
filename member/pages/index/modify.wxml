@@ -1,4 +1,7 @@
 <view class="content">
+  <view class="banner">
+    <image src="/images/cut/b3.png" mode="widthFix"></image>
+  </view>
   <view class="dis section">
     <view class="s1">会员编号:</view>
     <view class="fill1">{{user.memberNo}}</view>
@@ -57,7 +60,9 @@
     <image class="arraw" src="/images/arraw.png"></image>
   </view>
 </view>
-<view class="action {{bchange||echange||nchange||lchange||gchange?'save':''}}" bindtap='save' hover-class="hover1" hover-stay-time=".5s">
-  提交信息
-</view>
+<view class="bottom" bindtap='save' hover-class="hover1" hover-stay-time=".5s">
+    <view hover-class="hover2" hover-stay-time="1s" bindtap='exchange'>
+      提交信息
+    </view>
+  </view>
 <van-toast id="van-toast" />

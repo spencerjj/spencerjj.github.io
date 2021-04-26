@@ -154,4 +154,9 @@ Page({
     })
     this.onLoad()
   },
+  recommend(e){
+    wx.navigateTo({
+      url: 'recommend?no='+e.currentTarget.dataset.no,
+    })
+  }
 })

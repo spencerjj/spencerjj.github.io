@@ -1,59 +1,35 @@
 /* pages/index/order.wxss */
 page{
-  background:white;
+  background:#ececec;
   padding-bottom:50rpx
 }
-.top {
+.banner{
   width: 100%;
-  height: 300rpx;
-  background: #feaf04;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  color: white;
+  height: 420rpx;
+  overflow: hidden;
   position: relative;
 }
-
-.top:after {
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: -11px;
-  content: "";
-  z-index: 1;
-  height: 20px;
+.banner image{
   width: 100%;
-  border-radius: 80%;
-  background: #fff;
 }
-
-.top>view {
-  text-align: center;
-  margin: 50rpx;
-}
-
-.tleft {
-  font-size: 32rpx;
-}
-
-.tleft view:nth-child(2) {
-  font-size: 40rpx;
+.point{
+  position: absolute;
+  left:40rpx;
+  bottom:30rpx;
+  color:white;
   font-weight: bolder;
 }
-
 .tright {
-  background: white;
-  color: #fc9506;
-  padding: 10rpx 20rpx 10rpx 20rpx;
-  border-radius: 30rpx;
-  box-shadow: 0rpx 0rpx 20rpx 5rpx #fc9506;
+  background: #ddd;
+  color: #333;
   font-size: 35rpx;
+  text-align: center;
+  height: 80rpx;
+  line-height: 80rpx;
 }
-
 .middle {
   width: 90%;
   margin-left: 5%;
-  padding-top:50rpx
 }
 .title{
   font-size: 40rpx;
@@ -65,26 +41,46 @@ page{
   flex-wrap: wrap;
 }
 .item{
-  width: 48%;
-  height: 420rpx;
+  width: 50%;
   text-align: center;
-  background:#f6f6f6;
   margin-top:30rpx
 }
 .item image{
-  width: 55%;
+  width: 100%;
   margin-top:50rpx
 }
-.tip{
-  margin-top:30rpx
+.itop{
+  position: relative;
+  width: 70%;
+  margin:0 auto
 }
-.btn{
-  border:1rpx solid #fab312;
-  color:#fab312;
-  width: 250rpx;
-  margin:0 auto;
-  margin-top:20rpx;
-  border-radius: 10rpx;
+.itop .money{
+  position: absolute;
+  bottom:20rpx;
+  left: 20rpx;
+  font-size: 28rpx;
+  font-weight: bolder;
+  color:#555
+}
+.tip{
+  font-size: 30rpx;
+}
+.ibottom{
+  display: flex;
+  justify-content: space-around;
+  text-align: left;
+  color:#555;
+  font-weight: 500;
+  font-size: 25rpx;
+  margin-top:30rpx;
+}
+.ibottom>view:first-child{
+  line-height: 50rpx;
+}
+.ibottom>view:nth-child(2){
+  font-size: 20rpx;
+  text-decoration:underline;
+  line-height: 150rpx;
 }
 .footer{
   border-top:10rpx solid #f6f6f6;

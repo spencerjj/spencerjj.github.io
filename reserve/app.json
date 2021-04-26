@@ -1,5 +1,6 @@
 {
   "pages": [
+    "pages/index/home",
     "pages/index/index",
     "pages/index/center",
     "pages/index/recordLists"
@@ -15,6 +16,26 @@
     "navigationBarTitleText": "WeChat",
     "navigationBarTextStyle": "black",
     "backgroundColor": "#f3f3f3"
+  },
+  "tabBar": {
+    "color": "#bfbfbf",
+    "selectedColor": "#af9d7f",
+    "borderStyle": "black",
+    "backgroundColor": "#f3f3f3",
+    "list": [
+      {
+        "pagePath": "pages/index/home",
+        "iconPath": "images/re.png",
+        "selectedIconPath": "images/reed.png",
+        "text": "首页"
+      },
+      {
+        "pagePath": "pages/index/recordLists",
+        "iconPath": "images/my.png",
+        "selectedIconPath": "images/myed.png",
+        "text": "预约记录"
+      }
+    ]
   },
   "usingComponents": {
     "van-cell": "@vant/weapp/cell/index",

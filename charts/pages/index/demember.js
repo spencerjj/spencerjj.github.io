@@ -231,7 +231,7 @@ Page({
       __sid: that.data.sid,
       __ajax: 'json',
       leadStore:that.data.active,
-      lastDate:that.data.showDate
+      // saleDate:that.data.showDate
     }
     getRequest(getApiHost(), 'platform/v1/api/minireport/bh/vip/findShopNewVipShopId', 'body', data, 0, false, false).then(
       res => {
@@ -273,7 +273,7 @@ Page({
       __sid: that.data.sid,
       __ajax: 'json',
       storeId:that.data.active,
-      lastDate:that.data.showDate,
+      // saleDate:that.data.showDate,
       pageSize:10,
       pageNo:1
     }

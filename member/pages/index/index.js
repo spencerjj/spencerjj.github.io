@@ -33,11 +33,15 @@ Page({
     })
   },
   onLoad: function (options) {
+    
+  },
+  onShow() {
     var that = this;
     var phoneNo = wx.getStorageSync('loginphone') || ''
     var userInfo = wx.getStorageSync('userInfo') || ''
-    console.log(userInfo)
-    if(!userInfo){
+    var user = wx.getStorageSync('user')
+    console.log(user)
+    if(!user){
       this.login()
     }else{
       console.log(phoneNo)
@@ -49,15 +53,12 @@ Page({
       }
     }
   },
-  onShow() {
-
-  },
   onPullDownRefresh(){
-    this.onLoad()
+    this.onShow()
   },
   login(e){
     app.doLogin().then(data => {
-      this.onLoad()
+      this.onShow()
     })
   },
   getPhone(e) {
@@ -129,7 +130,7 @@ Page({
     getRequest(getApiHost(), 'platform/v1/api/lampocrm/LPQueryMemberAllInfo', 'body', data, 0, false, true).then(
       res => {
         console.log(res)
-        if(res.status==2){
+        if(res.status==1||res.status==3){
           Dialog.confirm({
             title: '提示',
             message: `您尚未注册账号，立即注册吧`,
@@ -140,7 +141,7 @@ Page({
             })
           })
           return;
-        }else if(res.status==1||res.status==3){
+        }else if(res.status==2){
           Toast({
             message: res.msg,
             type: 'warning'
@@ -148,7 +149,7 @@ Page({
           return;
         }
         wx.stopPullDownRefresh()
-        res.avatarUrl = wx.getStorageSync('userInfo').avatarUrl
+        res.avatarUrl = wx.getStorageSync('userInfo').avatarUrl||''
         that.setData({
           userInfo:res,
           sshow:false
@@ -212,14 +213,19 @@ Page({
     }, 300)
   },
   toPage(e){
+    var that = this
     console.log(e.currentTarget.dataset.id)
     var id = e.currentTarget.dataset.id
-    if(id=='center'||id=="card"||id=="order"||id=="infos"||id=="mission"||id=="recommend"||id=="issus"||id=="point"||id=="exchange"){
+    if(id=='center'||id=="card"||id=="infos"||id=="mission"||id=="recommend"||id=="issus"||id=="point"||id=="exchange"||id=="store"){
       wx.navigateTo({
         url: id,
       })
     }else if(id=='wei'){
       wx.navigateToMiniProgram({ appId: 'wx342c05b4e39eda3b', path: '', success(res) {  } })
+    }else if(id=="order"){
+      wx.navigateTo({
+        url: 'order?name='+that.data.userInfo.name+'&point='+that.data.userInfo.availablePoints+'&level='+that.data.userInfo.level,
+      })
     }
   },
   showNav(e){
@@ -246,7 +252,7 @@ Page({
         imagePath:'',
         sshow:true
       })
-      that.onLoad()
+      that.onShow()
     })
   }
 })

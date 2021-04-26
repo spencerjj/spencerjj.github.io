@@ -547,16 +547,16 @@ Page({
           })
           return;
         }
-        if(that.data.m2Code.length<1||that.data.m2Name.length<1){
-          $Toast({
-            content:'请正确选择二级分管领导',
-            type:'warning'
-          })
-          that.setData({
-            visible: false
-          })
-          return;
-        }
+        // if(that.data.m2Code.length<1||that.data.m2Name.length<1){
+        //   $Toast({
+        //     content:'请正确选择二级分管领导',
+        //     type:'warning'
+        //   })
+        //   that.setData({
+        //     visible: false
+        //   })
+        //   return;
+        // }
         var data = {
           __sid: app.globalData.tempSid,
           __ajax: 'json',
@@ -566,8 +566,8 @@ Page({
           remarks:that.data.remarks,
           m1Code:that.data.m1Code,
           m1Name:that.data.m1Name,
-          m2Code:that.data.m2Code,
-          m2Name:that.data.m2Name,
+          m2Code:that.data.m2Code||'',
+          m2Name:that.data.m2Name||'',
           'bpm.comment': that.data.hint,
           id: that.data.id,
           'bpm.taskId':that.data.lists.bpm.taskId,

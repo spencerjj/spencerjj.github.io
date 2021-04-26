@@ -68,7 +68,7 @@
             {{totalData.financeMonthSales||0}}<text style="font-size:20rpx"> 万</text>
           </view>
           <view>
-            月销售额 <text class="{{totalData.moM>0?'rise':'down'}}" style="font-size:30rpx">{{totalData.moM||0}}%</text>
+            月同比 <text class="{{totalData.moM>0?'rise':'down'}}" style="font-size:30rpx">{{totalData.moM||0}}%</text>
           </view>
         </view>
       </view>
@@ -97,7 +97,7 @@
             {{totalData.financeYearSales||0}}<text style="font-size:20rpx"> 万</text>
           </view>
           <view>
-            年销售额 <text class="{{totalData.yoY>0?'rise':'down'}}" style="font-size:30rpx">{{totalData.yoY||0}}%</text>
+            年同比 <text class="{{totalData.yoY>0?'rise':'down'}}" style="font-size:30rpx">{{totalData.yoY||0}}%</text>
           </view>
         </view>
       </view>
@@ -124,10 +124,14 @@
   </view>
   <view class="table" wx:if="{{ifStoreData}}">
     <view class="tr header">
-      <view class="th">柜组名称</view>
-      <view class="th">今日销售</view>
-      <view class="th">客单价</view>
+      <view class="th">柜组</view>
+      <view class="th">今日</view>
       <view class="th">毛利</view>
+      <view class="th">毛利率</view>
+      <!-- <view class="th">日同期</view> -->
+      <view class="th">本月(万)</view>
+      <view class="th">月同期(万)</view>
+      <!-- <view class="th">同期毛利率</view> -->
     </view>
     <view wx:if="{{storeData.length==0||!storeData}}">
       <view class="tr bg-g" hover-class="trhover" hover-stay-time="0.5" style="color:#666">
@@ -138,8 +142,11 @@
       <view class="tr {{index%2==0?'bg-g':'bg-w'}}" hover-class="trhover" hover-stay-time="0.5" >
         <view class="td">{{item.brandName}}</view>
         <view class="td">{{item.sales}}</view>
-        <view class="td">{{item.ppm}}</view>
         <view class="td">{{item.profit}}</view>
+        <view class="td">{{item.gpm}}%</view>
+        <!-- <view class="td">{{item.monthSales}}</view> -->
+        <view class="td">{{item.monthSales}}</view>
+        <view class="td">{{item.lastMonthSales}}</view>
       </view>
     </view>
   </view>

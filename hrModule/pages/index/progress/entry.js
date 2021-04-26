@@ -198,7 +198,8 @@ Page({
                 oaPwd:res.data.oaEmployEntry.oaPwd?res.data.oaEmployEntry.oaPwd:'',
                 emailAccount:res.data.oaEmployEntry.emailAccount?res.data.oaEmployEntry.emailAccount:'',
                 emailPwd:res.data.oaEmployEntry.emailPwd?res.data.oaEmployEntry.emailPwd:'',
-                safeLevel:res.data.oaEmployEntry.safeLevel?res.data.oaEmployEntry.safeLevel:''
+                safeLevel:res.data.oaEmployEntry.safeLevel?res.data.oaEmployEntry.safeLevel:'',
+                trySalary:res.data.trySalary?res.data.trySalary:''
               })
               var post = res.data.postList
               var lists = res.data.oaEmployEntry
@@ -425,19 +426,19 @@ Page({
         })
         return;
       }
-      if(that.data.lists.bpm.activityId == 'DeptManager'&&that.data.trySalary.length<1){
-        $Toast({
-          content:'请填写试用期工资',
-          type:'warning'
-        })
-        that.setData({
-          visible: false
-        })
-        wx.pageScrollTo({
-          scrollTop: 300
-        })
-        return;
-      }
+      // if(that.data.lists.bpm.activityId == 'DeptManager'&&that.data.trySalary.length<1){
+      //   $Toast({
+      //     content:'请填写试用期工资',
+      //     type:'warning'
+      //   })
+      //   that.setData({
+      //     visible: false
+      //   })
+      //   wx.pageScrollTo({
+      //     scrollTop: 300
+      //   })
+      //   return;
+      // }
         const action = [...this.data.actions];
         action[0].loading = true;
 

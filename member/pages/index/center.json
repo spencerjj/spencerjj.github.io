@@ -2,5 +2,6 @@
   "navigationBarTitleText": "会员权益",
   "navigationBarTextStyle": "black",
   "navigationBarBackgroundColor": "#f8f8f8",
-  "enablePullDownRefresh": false
+  "enablePullDownRefresh": false,
+  "disableScroll": true
 }

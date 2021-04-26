@@ -21,11 +21,11 @@
       <image src="/images/ques.png" style="width:50rpx;height:50rpx;position:absolute;right:60rpx;top:50rpx" catchtap="showDetail"></image>
 
       </view>
-      <picker mode="date" fields="day" value="{{date}}" start="2013-01-01" end="{{today}}" bindchange="bindDateChange">
+      <picker mode="date" fields="day" value="{{date}}" start="2013-01-01" end="{{today}}" bindchange="bindDateChange" disabled="true">
         <view class="topDate">
           数据更新时间 - {{showDate||storeData.ratioStoreEntity.getDate||nowTime}}
           <!-- {{storeData.getTime||nowTime}} -->
-          <image class="arraw" src="/images/arraw3.png"></image>
+          <!-- <image class="arraw" src="/images/arraw3.png"></image> -->
         </view>
       </picker>
       <!-- 数据更新日期 - {{storeData.ratioStoreEntity.getDate||today}} -->

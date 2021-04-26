@@ -2,6 +2,7 @@
   <view class="nav" style='padding-top:{{padtop}}px;height:{{height}}px'>
     <image src="/images/cut/t.png" bindtap="showNav"  hover-class="hover1"
         hover-stay-time=".5s"></image>
+    <view>会员中心</view>
   </view>
   <view class="top">
     <my-turn  wx:if="{{userInfo}}">
@@ -15,7 +16,7 @@
           <image src="/images/cut/4_04.png" class="logo"></image>
           <view class="tleft" wx:if="{{userInfo}}">
             <view class="profile" catchtap="change">
-              <image src="{{userInfo.avatarUrl}}"></image>
+              <image src="{{userInfo.avatarUrl||'/images/profile.png'}}"></image>
             </view>
             <view class="infos" wx:if="{{userInfo}}">
               <view class="name">{{userInfo.name}}<text wx:if="{{userInfo.memberType!='会员'}}"> ({{userInfo.memberType}})</text> </view>
@@ -86,9 +87,9 @@
       <image src="/images/cut/1_4.png"></image>
       <view>我的订单</view>
     </view>
-    <view hover-class="hover2" hover-stay-time="1s" bindtap="toPage" data-id="infos"  wx:if="{{sshow||userInfo.memberType=='会员'}}">
+    <view hover-class="hover2" hover-stay-time="1s" bindtap="toPage" data-id="mission"  wx:if="{{sshow||userInfo.memberType=='会员'}}">
       <image src="/images/cut/1_5.png"></image>
-      <view>个人资料</view>
+      <view>会员任务</view>
     </view>
     <view hover-class="hover2" hover-stay-time="1s" bindtap="toPage" data-id="center">
       <image src="/images/cut/1_6.png"></image>
@@ -118,21 +119,25 @@
 <van-popup
   show="{{ leftShow }}"
   position="left"
-  custom-style="width: 40%;height:100%;background:#ececec"
+  custom-style="width: 40%;height:100%;background:#fff"
   bind:close="leftClose"
 >
   <view class="leftNav">
-    <view class="navItem" bindtap="toPage" data-id="point"  wx:if="{{sshow||userInfo.memberType=='会员'||(userInfo.memberType=='家庭卡成员'&&userInfo.familyMemIsCoupons=='Y')}}">
-      <image src="/images/cut/1_1.png"></image>
-      <view>积分明细</view>
+    <view class="navItem" bindtap="toPage" data-id="infos"  wx:if="{{sshow||userInfo.memberType=='会员'||(userInfo.memberType=='家庭卡成员'&&userInfo.familyMemIsCoupons=='Y')}}">
+      <view>个人资料</view>
+      <!-- <view class="btm"></view> -->
+    </view>
+    <view  class="navItem" bindtap="toPage" data-id="recommend" wx:if="{{sshow||userInfo.memberType=='会员'||(userInfo.memberType=='家庭卡成员'&&userInfo.familyMemIsCoupons=='Y')}}">
+      <view>荐客有礼</view>
+      <!-- <view class="btm"></view> -->
     </view>
     <view  class="navItem" bindtap="toPage" data-id="exchange"  wx:if="{{sshow||userInfo.memberType=='会员'||(userInfo.memberType=='家庭卡成员'&&userInfo.familyMemIsCoupons=='Y')}}">
-      <image src="/images/cut/1_2.png"></image>
-      <view>积分兑换</view>
+      <view>优惠券兑换</view>
+      <!-- <view class="btm"></view> -->
     </view>
-    <view  class="navItem" bindtap="toPage" data-id="recommend" wx:if="{{sshow||userInfo.memberType=='会员'}}">
-      <image src="/images/cut/1_3.png"></image>
-      <view>荐客有礼</view>
+    <view  class="navItem" bindtap="toPage" data-id="store"  wx:if="{{sshow||userInfo.memberType=='会员'||(userInfo.memberType=='家庭卡成员'&&userInfo.familyMemIsCoupons=='Y')}}">
+      <view>我的门店</view>
+      <!-- <view class="btm"></view> -->
     </view>
   </view>
 </van-popup>
