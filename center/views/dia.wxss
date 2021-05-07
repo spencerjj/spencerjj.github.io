@@ -1,0 +1,49 @@
+.boss{
+  position: fixed;
+  width: 100%;
+  height:100%;
+  top:0;
+  left:0;
+  background:rgba(0,0,0,.8);
+  z-index: 99;
+}
+.main{
+  width:80%;
+  position: fixed;
+  top:20%;
+  left:10%;
+  background:white;
+  text-align:center;
+  border-radius: 20rpx;
+  padding-top:30rpx;
+  color:#000;
+  font-size:30rpx;
+  box-sizing: border-box;
+  font-weight: 600;
+}
+.main image{
+  width: 100rpx;
+  height:100rpx;
+}
+.action{
+  display: flex;
+  justify-content: center;
+  height: 100rpx;
+  line-height: 100rpx;
+  border-top:1rpx solid #eee
+}
+.action view{
+  width: 50%;
+  text-align: center;
+}
+.action view:first-child{
+  border-right:1rpx solid #eee;
+  border-radius: 0 0 0 20rpx;
+}
+.action view:nth-child(2){
+  color:#1989fa;
+  border-radius: 0 0 20rpx 0;
+}
+.hover1{
+  background:#eee
+}

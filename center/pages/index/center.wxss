@@ -1,0 +1,129 @@
+
+.container{
+  position: relative;
+}
+.topSwiper{
+  position: fixed;
+  top:80rpx;
+  width: 100%;
+  height: 440rpx;
+  background:#e2e1e1;
+  padding-top:50rpx
+}
+.card{
+  width: 90%;
+  margin-left: 5%;
+  text-align: center;
+  margin-top:500rpx;
+}
+ .le-img {
+  width: 100%;
+  display: block;
+  transform: scale(0.85);
+  transition: all 0.3s ease;
+  border-radius: 6px;
+ }
+.le-active {
+  transform: scale(1);
+ }
+.mark1{
+  width: 100%;
+  text-align: center;
+  margin-top:20rpx;
+  display: flex;
+  justify-content: center;
+}
+ .mark{
+   width: 90%;
+   margin-left:5%;
+   text-align: center;
+   margin-top:30rpx
+ }
+ .markItem{
+   width: 50rpx;
+   height: 8rpx;
+   border-radius:10rpx;
+   background:#fff;
+   margin:0 5rpx 0 5rpx 
+ }
+ .active{
+  background:#333;
+  width: 80rpx;
+  transition:0.1s linear
+ }
+ .full{
+   background:#fff;
+   color:#5f5f5f;
+   height: 70rpx;
+   line-height: 70rpx;
+ }
+ .timg{
+  width: 100%;
+  height:380rpx;
+  overflow: hidden;
+  border-radius: 10rpx;
+  position: relative;
+}
+.tback{
+  width: 102%;
+  height: 101%;
+  margin-left: -10rpx;
+}
+ .logo{
+  position: absolute;
+  width: 180rpx;
+  height: 30rpx;
+  top:30rpx;
+  left:50rpx;
+}
+ .tleft{
+  position: absolute;
+  bottom:40rpx;
+  left: 50rpx;
+  display: flex;
+  font-weight: bolder;
+}
+.infos>view{
+  font-size: 25rpx;
+}
+.name{
+  display: flex;
+  align-items: center;
+  margin-top:10rpx
+}
+.profile{
+  width: 100rpx;
+  height: 100rpx;
+  border-radius: 50%;
+  overflow: hidden;
+  margin-right: 20rpx;
+  margin-top: 15rpx;
+}
+.profile image{
+  width: 100%;
+  height: 100%;
+}
+.sections{
+  display: flex;
+  justify-items: left;
+  flex-wrap: wrap;
+  width: 90%;
+  margin-left:5%
+}
+.sections>view{
+  width: 33.3%;
+  font-size: 25rpx;
+  font-weight: bolder;
+  text-align: center;
+  color:#000;
+  margin-top:100rpx;
+  position: relative;
+}
+.sections image{
+  width: 60rpx;
+  height: 60rpx;
+  margin-bottom:15rpx
+}
+.hover1{
+  background:#eee !important
+}

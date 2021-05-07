@@ -227,4 +227,11 @@ Page({
       })
     });
   },
+  showDetail(e){
+    wx.showModal({
+      title:'版本说明',
+      content:'版本号：1.0.24 \r\n1、业务总览新增毛利率与毛利同比\r\n2、柜组销售列表新增毛利、毛利率、月同期。\r\n3、水印颜色调浅',
+      showCancel:false
+    })
+},
 })

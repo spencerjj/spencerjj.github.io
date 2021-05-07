@@ -173,3 +173,7 @@ page{
 .down{
   color:#4ecb74
 }
+.notice{
+  color:yellow;
+  text-decoration: underline;
+}

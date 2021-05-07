@@ -33,6 +33,10 @@ Page({
       {
         storeCode:'lampo',
         ifStore:false,
+      },
+      {
+        storeCode:'view',
+        ifStore:false,
       }
     ]
   },
@@ -145,6 +149,8 @@ Page({
               userStoreList[2].ifStore = true
             }else if(item.permission=='lampo'){
               userStoreList[3].ifStore = true
+            }else if(item.permission=='bhreport:overview:view'){
+              userStoreList[4].ifStore = true
             }
           })
           wx.removeStorageSync('userStoreList')
@@ -160,7 +166,7 @@ Page({
             }
           }
           for(let x in menus){
-            if(menus[x].permission=='bhreport:overview:view'){
+            if(menus[x].permission=='bhreport:overview:view'||menus[x].permission=='bhreport:dept:view'){
               console.log('百货')
               wx.redirectTo({
                 url: 'depart'

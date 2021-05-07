@@ -3,9 +3,9 @@
     <!-- <view class="fresh" bindtap="fresh" hover-stay-time=".5s" bindtap="fresh">
           <image src="/images/fresh.png" class="{{ifRound?'round':''}}"></image>
         </view> -->
-    <view class="saleImg">
+    <!-- <view class="saleImg">
       <image src="/images/sale.png"></image>
-    </view>
+    </view> -->
     <view class="mtleft">
       <view class="mtnum">{{totalData.sales||0}} <text style="font-size:20rpx">万</text></view>
       <view class="mtitle">今日销售额</view>
@@ -13,6 +13,10 @@
     <view class="mtleft">
       <view class="mtnum">{{totalData.profit||0}} <text style="font-size:20rpx">万</text></view>
       <view class="mtitle">毛利</view>
+    </view>
+    <view class="mtleft">
+      <view class="mtnum">{{totalData.gpm||0}}<text style="font-size:35rpx">%</text></view>
+      <view class="mtitle">毛利率</view>
     </view>
     <picker mode="date" fields="day" value="{{date}}" start="2013-01-01" end="{{today}}" bindchange="bindDateChange">
           <view style="font-size:28rpx;flex:auto;text-align:center;margin-top:20rpx;display:flex;align-items:center">
@@ -128,7 +132,6 @@
       <view class="th">今日</view>
       <view class="th">毛利</view>
       <view class="th">毛利率</view>
-      <!-- <view class="th">日同期</view> -->
       <view class="th">本月(万)</view>
       <view class="th">月同期(万)</view>
       <!-- <view class="th">同期毛利率</view> -->
@@ -143,7 +146,7 @@
         <view class="td">{{item.brandName}}</view>
         <view class="td">{{item.sales}}</view>
         <view class="td">{{item.profit}}</view>
-        <view class="td">{{item.gpm}}%</view>
+        <view class="td">{{item.gpm||0}}%</view>
         <!-- <view class="td">{{item.monthSales}}</view> -->
         <view class="td">{{item.monthSales}}</view>
         <view class="td">{{item.lastMonthSales}}</view>

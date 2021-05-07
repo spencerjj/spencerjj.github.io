@@ -1,0 +1,34 @@
+<view class="container">
+  <view class="banner">
+    <image src="/images/cut/b3.png" mode="widthFix"></image>
+    <view class="point">积分余额　{{point}}</view>
+  </view>
+  <view class="tright" hover-class="hover1" hover-stay-time="1s" bindtap="toPage">
+    积分明细记录
+  </view>
+  <view class="middle">
+    <van-empty image="search" description="暂无可兑换券" wx:if="{{point<3000}}" />
+    <view class="lists" wx:if="{{point>3000}}">
+      <view class="item" wx:for="{{exLists}}" wx:key="index" wx:if="{{point>=item.point}}"  hover-class="hover1" hover-stay-time="1s" bindtap="exchange" data-point="{{item.point}}">
+        <view class="itop">
+          <image src="/images/cut/card1.png" mode="widthFix"></image>
+          <view class="money">￥{{item.money}}</view>
+        </view>
+        <view class="ibottom">
+          <view>
+            <view class="tip">{{item.money}}元代金券</view>
+            <view class="btn">
+              {{item.point}}积分</view>
+          </view>
+          <view>
+            立即兑换
+          </view>
+        </view>
+
+      </view>
+    </view>
+  </view>
+  <van-empty image="search" description="暂无可兑换优惠券" wx:if="{{orderLists.length<1}}" />
+</view>
+<van-toast id="van-toast" />
+<van-dialog id="van-dialog" />

@@ -43,7 +43,7 @@ page{
   box-shadow: 0 0 15rpx 0rpx #313b6dcc;
 }
 .fleft{
-  width: 35%;
+  width: 30%;
 }
 .fIcon{
   width: 110rpx;
@@ -59,7 +59,7 @@ page{
   margin-top:25%
 }
 .fright{
-  width: 80%;
+  width: 85%;
 }
 .fnew{
   width: 20%;
@@ -84,13 +84,10 @@ page{
 .intime{
   display: flex;
   justify-content: space-around;
-  margin-top:35rpx
+  margin-top:20rpx
 }
 
-.sales{
-  /* margin-top:20rpx; */
-  text-align:center
-}
+
 
 .sales view{
   font-size:25rpx;
@@ -100,6 +97,8 @@ page{
   color:white;
   font-weight: bolder;
   font-size: 40rpx;
+  text-align:center;
+  width: 45%;
 }
 .saleTop{
   display: flex;
@@ -139,10 +138,10 @@ page{
 } */
 .comTitle{
   color:white;
-  font-size: 40rpx;
+  font-size: 35rpx;
   text-align: center;
   font-weight: 900;
-  margin-top:30rpx
+  margin-top:20rpx
 }
 .top{
   height: 200rpx;
@@ -327,6 +326,9 @@ page{
 }
 .rise{
   color:#fa5c5c
+}
+.rise1{
+  color:#e83838
 }
 .down{
   color:#4ecb74

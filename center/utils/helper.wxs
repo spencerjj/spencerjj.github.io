@@ -1,0 +1,29 @@
+var formatURL = function(url, width, height, cut = 1) {
+  if (!url) {
+    return "";
+  }
+
+  if (url.indexOf(",") > 0) {
+    let items = url.split(",");
+    url = items[0];
+  }
+
+  if (url.indexOf("http") != 0) {
+    url = "https://img0.efitbox.com/" + url;
+  }
+
+  if (url.indexOf("?") > 0) {
+    let items = url.split("?");
+    url = items[0];
+  }
+
+  if (width && !height) {
+    return url + "?x-oss-process=style/w_" + width + "_jpg";
+  } else {
+    return url;
+  }
+}
+
+module.exports = {
+  formatURL: formatURL
+};

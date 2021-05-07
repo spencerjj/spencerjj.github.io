@@ -1,0 +1,250 @@
+// pages/index/index.js
+import {
+  getApiHost,
+  postRequest,
+  getRequest
+} from '../../utils/api.js'
+var app = getApp();
+import Dialog from '../../miniprogram_npm/@vant/weapp/dialog/dialog'
+import Toast from '../../miniprogram_npm/@vant/weapp/toast/toast';
+var QRCode = require('../../utils/code.js')
+var oricode = require('../../utils/qrcode.js')
+import {barcode} from '../../utils/index.js'
+import dialog from '../../miniprogram_npm/@vant/weapp/dialog/dialog';
+
+Page({
+  data: {
+   title:[
+     {
+      id:1,
+      title:'商场活动',
+      etitle:"WHAT'S NEW",
+      active:true
+     },
+     {
+      id:2,
+      title:'积分兑换',
+      etitle:"POINTS",
+      active:false
+     },
+     {
+      id:3,
+      title:'活动报名',
+      etitle:"SIGN UP",
+      active:false
+     },
+     {
+      id:4,
+      title:'种草笔记',
+      etitle:"NOTES",
+      active:false
+     }
+   ],
+   guideFix:false
+  },
+  onReady(e){
+    
+  },
+  onLoad: function (options) {
+    
+  },
+  onShow() {
+   
+  },
+ 
+  onPullDownRefresh(){
+    this.onShow()
+  },
+  login(e){
+    app.doLogin().then(data => {
+      this.onShow()
+    })
+  },
+  getPhone(e) {
+    console.log(e)
+    var that = this;
+    if (e.detail.errMsg != 'getPhoneNumber:ok') {
+      Toast({
+        message: '授权失败，请重新授权登录',
+        type: 'warning'
+      });
+    } else {
+      app.doLogin().then(myData => {
+        console.log(myData)
+        var data = {
+          openid: myData.openid,
+          sessionKey: myData.sessionKey,
+          iv: e.detail.iv,
+          encryptedData: e.detail.encryptedData,
+          ajax: '_json',
+        }
+        getRequest(getApiHost(), 'platform/v1/api/lampocrm/getPhoneNumber', 'body', data, 0, false, false,false).then(
+          res => {
+            that.setData({
+              phoneNo: res.data
+            })
+            wx.setStorageSync('loginphone', res.data)
+            that.getInfo()
+          }
+        ).catch(res => {
+          Toast({
+            message: '系统错误，登录失败',
+            type: 'warning'
+          });
+        });
+      })
+    }
+  },
+  // register() {
+  //   var that = this;
+  //     var data = {
+  //       phone: wx.getStorageSync('phoneNo'),
+  //       gender: wx.getStorageSync('userInfo').gender,
+  //       name: wx.getStorageSync('userInfo').nickName,
+  //       openid: wx.getStorageSync('user').openid||'99999',
+  //       ajax: '_json'
+  //     }
+  //     getRequest(getApiHost(), 'platform/v1/api/lampocrm/LPMemberRegister', 'body', data, 0, false, false).then(
+  //       res => {
+  //         console.log(res)
+  //           that.getInfo()
+  //       }
+  //     ).catch(res => {
+  //       wx.showModal({
+  //         title: '系统错误，登录失败',
+  //         showCancel: false,
+  //         confirmText: '知道了',
+  //         confirmColor: '#1890FF'
+  //       })
+  //     });
+  // },
+  getInfo(e){
+    var that = this;
+    var data = {
+      phone: that.data.phoneNo,
+      ajax: '_json'
+    }
+    console.log(data)
+    getRequest(getApiHost(), 'platform/v1/api/lampocrm/LPQueryMemberAllInfo', 'body', data, 0, false, true).then(
+      res => {
+        console.log(res)
+        if(res.status==1||res.status==3){
+          Dialog.confirm({
+            title: '提示',
+            message: `您尚未注册账号，立即注册吧`,
+          })
+          .then(() => {
+            wx.navigateTo({
+              url: 'register',
+            })
+          })
+          return;
+        }else if(res.status==2){
+          Toast({
+            message: res.msg,
+            type: 'warning'
+          });
+          return;
+        }
+        wx.stopPullDownRefresh()
+        res.avatarUrl = wx.getStorageSync('userInfo').avatarUrl||''
+        that.setData({
+          userInfo:res,
+          sshow:false
+        })
+        wx.setStorageSync('phoneNo', res.phone)
+        // var code = new QRCode('canvas1', res.memberBarCode,100,100);
+        that.createQrCode(res.memberBarCode,'canvas1',150,150)
+      }
+    ).catch(res => {
+      console.log(res)
+      Toast({
+        message: '系统错误，登录失败',
+        type: 'warning'
+      });
+    });
+  },
+  createQrCode: function (content, canvasId, cavW, cavH) {
+    QRCode.api.draw(content, canvasId, cavW, cavH, this, this.canvasToTempImage);
+  },
+  
+  //获取临时缓存图片路径，存入data中
+  canvasToTempImage: function (canvasId) {
+    let that = this;
+    wx.canvasToTempFilePath({
+      canvasId:'canvas1',
+      success: function (res) {
+        let tempFilePath = res.tempFilePath;
+        console.log(tempFilePath);
+        that.setData({
+          imagePath:tempFilePath,
+        });
+      },
+      fail: function (res) {
+        console.log(res);
+      }
+    });
+  },
+  onClose() {
+    this.setData({
+      show: false
+    })
+    wx.setNavigationBarTitle({
+      title: '会员中心'
+    })
+  },
+  use() {
+    var that = this;
+    wx.setNavigationBarTitle({
+      title: '会员码'
+    })
+    new oricode('canvas', that.data.userInfo.memberBarCode,250,250);
+    barcode('barcode', that.data.userInfo.memberBarCode, 700, 180);
+    wx.showLoading({
+      title: '加载中',
+    })
+    setTimeout(() => {
+      wx.hideLoading()
+      this.setData({
+        show: true
+      })
+    }, 300)
+  },
+  toPage(e){
+    var that = this
+    console.log(e.currentTarget.dataset.id)
+    var id = e.currentTarget.dataset.id
+    if(id=='center'||id=="card"||id=="infos"||id=="mission"||id=="recommend"||id=="issus"||id=="point"||id=="exchange"||id=="store"){
+      wx.navigateTo({
+        url: id,
+      })
+    }else if(id=='wei'){
+      wx.navigateToMiniProgram({ appId: 'wx342c05b4e39eda3b', path: '', success(res) {  } })
+    }else if(id=="order"){
+      wx.navigateTo({
+        url: 'order?name='+that.data.userInfo.name+'&point='+that.data.userInfo.availablePoints+'&level='+that.data.userInfo.level,
+      })
+    }
+  },
+  showNav(e){
+    this.setData({
+      leftShow:!this.data.leftShow
+    })
+  },
+  leftClose(e){
+    this.setData({
+      leftShow:false
+    })
+  },
+  select(e){
+    let title = this.data.title
+    if(!title[e.currentTarget.dataset.id-1].active)
+      title.map(item=>{
+        item.active = false
+      })
+      title[e.currentTarget.dataset.id-1].active = true
+    this.setData({
+      title
+    })
+  }
+})

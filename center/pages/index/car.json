@@ -1,0 +1,9 @@
+{
+  "navigationBarTitleText": "车牌",
+  "navigationBarTextStyle": "black",
+  "navigationBarBackgroundColor": "#f8f8f8",
+  "enablePullDownRefresh": true,
+  "usingComponents": {
+    "keyboard":"../../views/keyboard"
+  }
+}

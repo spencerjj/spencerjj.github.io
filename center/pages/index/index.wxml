@@ -1,0 +1,99 @@
+<view class="container">
+  <view class="banner">
+    <image src="/images/01-1.png" mode="widthFix"></image>
+  </view>
+  <view class="middle">
+    <view class="center">
+      <view class="ctop">
+        <image src="/images/01-2.png"></image>
+        <view class="info">
+          <view>常州购物中心<image src="/images/01-7.png" mode="widthFix"></image></view>
+          <view>我的积分:100</view>
+        </view>
+        <view class="code">
+          <image src="/images/code.png"></image>
+          <view>会员码</view>
+        </view>
+      </view>
+      <view class="cbottom">
+        <view>
+          <image src="/images/01-3.png" mode="widthFix"></image>
+          <view>停车缴费</view>
+        </view>
+        <view>
+          <image src="/images/01-4.png" mode="widthFix"></image>
+          <view>我的券包</view>
+        </view>
+        <view>
+          <image src="/images/01-5.png" mode="widthFix"></image>
+          <view>消费记录</view>
+        </view>
+        <view>
+          <image src="/images/01-6.png" mode="widthFix"></image>
+          <view>商场服务</view>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class="content">
+    <view class="guide guideFix">
+      <view class="guideItem" wx:for="{{title}}" wx:key="index" bindtap="select" data-id="{{item.id}}">
+        <view class="{{item.active?'vselect':''}}"></view>
+        <view class="gtitle {{item.active?'tselect':''}}">{{item.title}}</view>
+        <view class="etitle {{item.active?'eselect':''}}">{{item.etitle}}</view>
+      </view>
+    </view>
+    <view class="activity">
+      <view class="actItem">
+        <view><image src="/images/01-2.png" mode="scaleToFill"></image></view>
+        <view>美妆新品体验官</view>
+        <view><van-icon name="clock-o" size="15" custom-style="vertical-align: -8%" /> 2021/05/01-05/5</view>
+        <view>#进行中</view>
+        <view>立即参与</view>
+      </view>
+      <view class="actItem">
+        <view><image src="/images/01-2.png" mode="scaleToFill"></image></view>
+        <view>美妆新品体验官</view>
+        <view><van-icon name="clock-o" size="15" custom-style="vertical-align: -8%" /> 2021/05/01-05/5</view>
+        <view>#进行中</view>
+        <view>立即参与</view>
+      </view>
+      <view class="actItem">
+        <view><image src="/images/01-2.png" mode="scaleToFill"></image></view>
+        <view>美妆新品体验官</view>
+        <view><van-icon name="clock-o" size="15" custom-style="vertical-align: -8%" /> 2021/05/01-05/5</view>
+        <view>#进行中</view>
+        <view>立即参与</view>
+      </view>
+      <view class="actItem">
+        <view><image src="/images/01-2.png" mode="scaleToFill"></image></view>
+        <view>美妆新品体验官</view>
+        <view><van-icon name="clock-o" size="15" custom-style="vertical-align: -8%" /> 2021/05/01-05/5</view>
+        <view>#进行中</view>
+        <view>立即参与</view>
+      </view>
+      <view class="actItem">
+        <view><image src="/images/01-2.png" mode="scaleToFill"></image></view>
+        <view>美妆新品体验官</view>
+        <view><van-icon name="clock-o" size="15" custom-style="vertical-align: -8%" /> 2021/05/01-05/5</view>
+        <view>#进行中</view>
+        <view>立即参与</view>
+      </view>
+      <view class="actItem">
+        <view><image src="/images/01-2.png" mode="scaleToFill"></image></view>
+        <view>美妆新品体验官</view>
+        <view><van-icon name="clock-o" size="15" custom-style="vertical-align: -8%" /> 2021/05/01-05/5</view>
+        <view>#进行中</view>
+        <view>立即参与</view>
+      </view>
+      <view class="actItem">
+        <view><image src="/images/01-2.png" mode="scaleToFill"></image></view>
+        <view>美妆新品体验官</view>
+        <view><van-icon name="clock-o" size="15" custom-style="vertical-align: -8%" /> 2021/05/01-05/5</view>
+        <view>#进行中</view>
+        <view>立即参与</view>
+      </view>
+
+    </view>
+  </view>
+</view>

@@ -1,5 +1,6 @@
 {
   "pages": [
+    "pages/index/modify",
     "pages/index/index",
     "pages/index/mission",
     "pages/index/cardDetail",
@@ -7,7 +8,6 @@
     "pages/index/center",
     "pages/index/recommend",
     "pages/index/infos",
-    "pages/index/modify",
     "pages/index/car",
     "pages/index/register",
     "pages/index/order",

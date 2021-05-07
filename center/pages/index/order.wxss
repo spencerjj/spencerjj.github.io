@@ -1,0 +1,99 @@
+/* pages/index/order.wxss */
+.top{
+  background:#ececec;
+  width:100%;
+  padding:50rpx 50rpx 50rpx 50rpx;
+  box-sizing: border-box;
+  font-size: 28rpx;
+}
+.timg{
+  width: 100%;
+  height:380rpx;
+  overflow: hidden;
+  border-radius: 10rpx;
+  position: relative;
+}
+.tback{
+  width: 102%;
+  height: 101%;
+  margin-left: -10rpx;
+}
+.logo{
+  position: absolute;
+  width: 180rpx;
+  height: 30rpx;
+  top:50rpx;
+  left:50rpx;
+}
+.tleft{
+  position: absolute;
+  bottom:40rpx;
+  left: 50rpx;
+  display: flex;
+  font-weight: bolder;
+}
+.infos>view{
+  font-size: 25rpx;
+}
+.name{
+  display: flex;
+  align-items: center;
+  margin-top:30rpx
+}
+.profile{
+  width: 100rpx;
+  height: 100rpx;
+  border-radius: 50%;
+  overflow: hidden;
+  margin-right: 20rpx;
+  margin-top: 15rpx;
+}
+.profile image{
+  width: 100%;
+  height: 100%;
+}
+.tright {
+  background: #ddd;
+  color: #333;
+  font-size: 35rpx;
+  text-align: center;
+  height: 80rpx;
+  line-height: 80rpx;
+  margin-top:30rpx
+}
+.nullDataInfo{
+  width: 100%;
+  height: 30rpx;
+  text-align: center;
+  line-height: 30rpx;
+  font-size: 30rpx;
+  color: #ddd;
+  padding-top: 50rpx;
+  padding-bottom:30rpx
+}
+.lists{
+  width: 90%;
+  margin-left: 5%;
+}
+.listItem{
+  overflow: hidden;
+  margin-top:10rpx;
+  position: relative;
+}
+.listItem:first-child{
+  margin-top:0
+}
+.status{
+  position: absolute;
+  right:25rpx;
+  top:15rpx;
+  z-index: 99;
+  font-size: 25rpx;
+  color:#666
+}
+.van-card__img {
+  width: 70% !important;
+}
+.van-card{
+  background:#ddd !important
+}

@@ -1,7 +1,7 @@
 /* pages/my/account/addAccount.wxss */
 page{
   position: relative;
-  padding-bottom:100rpx
+  padding-bottom:200rpx
 }
 .banner{
   width: 100%;
@@ -84,4 +84,8 @@ page{
   background:#dcdcdc;
   text-align: center;
   z-index: 99;
+  opacity: 0;
+}
+.show{
+  opacity: 1;
 }

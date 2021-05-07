@@ -1,0 +1,44 @@
+<view class="container">
+  <view class="banner">
+    <image src="/images/cut/b3.png" mode="widthFix"></image>
+    <view class="point">积分余额　{{point}}</view>
+  </view>
+  <view class="tright">
+    会员任务
+  </view>
+  <view class="middle">
+    <view class="section" bindtap="toPage" data-id="modify">
+      <view>
+        <view style="font-size:35rpx;font-weight:500">完善个人资料</view>
+        <view style="margin-top:5rpx">完善信息送积分</view>
+        <view class="tiao"><view class="tiaozi"><view class="tiaoson"></view></view> 　0/1</view>
+      </view>
+      <view>
+        去填写 >
+      </view>
+    </view>
+    <view class="section" bindtap="toPage" data-id="recommend">
+      <view>
+        <view style="font-size:35rpx;font-weight:500">邀请好友</view>
+        <view style="margin-top:5rpx">邀请好友入会送积分</view>
+        <view class="tiao"><view class="tiaozi"><view class="tiaoson"></view></view> 　0/6</view>
+      </view>
+      <view>
+        去邀请 >
+      </view>
+    </view>
+    <view class="section" bindtap="toPage" data-id="sign">
+      <view>
+        <view style="font-size:35rpx;font-weight:500">每日签到</view>
+        <view style="margin-top:5rpx">每日签到领积分</view>
+        <view class="tiao"><view class="tiaozi"><view class="tiaoson"></view></view> 　0/1</view>
+      </view>
+      <view>
+        立即签到 >
+      </view>
+    </view>
+  </view>
+  <van-empty image="search" description="暂无可兑换优惠券" wx:if="{{orderLists.length<1}}" />
+</view>
+<van-toast id="van-toast" />
+<van-dialog id="van-dialog" />

@@ -1,4 +1,5 @@
-<view class='tip'>请选择门店(同期为2019年数据)</view>
+<view class='tip'>请选择门店(同期为2019年数据) <text class="notice" bindtap="showDetail">版本说明</text> </view>
+
 <!-- <van-area title="标题" area-list="{{areaList}}" bind:confirm="areaConfirm" /> -->
 <van-transition show="{{ storeShow }}" name="fade-right" class="store">
   <view class="storeList" bindtap='onStoreSelected' data-mark="601" wx:if="{{tab0}}">

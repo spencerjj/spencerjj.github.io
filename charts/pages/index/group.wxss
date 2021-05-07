@@ -187,6 +187,9 @@ page{
 .rise{
   color:red
 }
+.rise1{
+  color:#e83838
+}
 .down{
   color:#4ecb74
 }

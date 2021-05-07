@@ -45,6 +45,16 @@ Page({
   onLoad: function (options) {
     var that = this
     let active = options.active || 'all'
+    var userStoreList = wx.getStorageSync('userStoreList')
+    if(!userStoreList[4].ifStore){
+      if(userStoreList[0].ifStore){
+        active = '601'
+      }else if(userStoreList[1].ifStore){
+        active = '602'
+      }else if(userStoreList[2].ifStore){
+        active = '603'
+      }
+    }
     if(active=='601'){
       this.setData({
         title: '购物中心',
@@ -110,6 +120,9 @@ this.drowsyUserInfo()
     })
     let totalLists = that.data.totalLists
     var tab1, tab2, tab3, tab0
+    // if(userStoreList){
+    //   tab0 = userStoreList[4].ifStore
+    // }
     if(userStoreList){
         tab0 = true
         tab1 = userStoreList[0].ifStore
@@ -130,8 +143,12 @@ this.drowsyUserInfo()
       secondShow: true,
       firstShow: true
     })
-    this.getTab()
-    if(that.data.active!='all'){
+    if(userStoreList[4].ifStore){
+      this.getTab()
+    }else{
+      
+    }
+    if(that.data.active!='all'||!tab0){
       that.getShopData()
     }
   },
@@ -382,8 +399,13 @@ this.drowsyUserInfo()
           var deptData = res.data
           // deptData.slice(0,5)
           for(let x in deptData){
-            deptData[x].financeMonthSales = deptData[x].financeMonthSales.toFixed(0)
+            if(deptData[x].financeMonthSales){
+              deptData[x].financeMonthSales = deptData[x].financeMonthSales.toFixed(0)
+            }
+            if(deptData[x].financeLastMonthSales){
+
             deptData[x].financeLastMonthSales = deptData[x].financeLastMonthSales.toFixed(0)
+          }
           }
           that.setData({
             deptData,
@@ -563,13 +585,13 @@ this.drowsyUserInfo()
     for (let j = 1; j < 10; j++) { //用for循环达到重复输出文字的效果，这个for循环代表纵向循环
       ctx.beginPath();
       ctx.setFontSize(15);
-      ctx.setFillStyle('rgba(0,0,0,.2)');
+      ctx.setFillStyle('rgba(0,0,0,.1)');
  
       ctx.fillText(wx.getStorageSync('chartsUser').userName, 0, 50 * j);
       for (let i = 1; i < 10; i++) {//这个for循环代表横向循环，
         ctx.beginPath();
         ctx.setFontSize(15);
-        ctx.setFillStyle('rgba(0,0,0,.2)');
+        ctx.setFillStyle('rgba(0,0,0,.1)');
         ctx.fillText(wx.getStorageSync('chartsUser').userName, 100 * i, 100 * j);
       }
     }//两个for循环的配合，使得文字充满斜对角线的左下部分
