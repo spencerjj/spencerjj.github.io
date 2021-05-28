@@ -33,7 +33,7 @@
           <image src="/images/cut/c3.png" class="tback" wx:elif="{{userInfo.level=='金卡会员'}}"></image>
           <image src="/images/cut/c4.png" class="tback" wx:elif="{{userInfo.level=='白金卡会员'}}"></image>
           <image src="/images/cut/c5.png" class="tback" wx:elif="{{userInfo.level=='钻石卡会员'}}"></image>
-          <image src="/images/cut/4_04.png" class="logo"></image>
+          <image src="/images/logo1.png" class="logo1" mode="widthFix"></image>
           <view class="tleft">
             <view class="infos" wx:if="{{userInfo}}">
               <view class="name">{{userInfo.name}}</view>

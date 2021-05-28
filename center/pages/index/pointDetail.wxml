@@ -1,0 +1,27 @@
+<!--pages/index/pointDetail.wxml-->
+<view class="container">
+  <view class="top">
+    <view class="title">
+      确认订单
+    </view>
+    <view class="content">
+      <view>
+        <image src="/images/01-44.png" mode="aspectFill"></image>
+      </view>
+      <view>
+        <view class="title1">{{pointCard.vname}}</view>
+        <view class="mark">{{pointCard.useDesc||''}}</view>
+        <view class="point">{{pointCard.excPoint}}积分</view>
+      </view>
+      <view>
+        <view class="add"><van-stepper value="{{ num }}" min="1" max="10" bind:change="onChange"/></view>
+      </view>
+    </view>
+  </view>
+  <view class="bottom">
+    <view>{{totalPoint}}积分</view>
+    <view bindtap="confirm"  hover-class="hover1" hover-stay-time=".5s">确认兑换</view>
+  </view>
+</view>
+<van-toast id="van-toast" />
+<van-dialog id="van-dialog" />

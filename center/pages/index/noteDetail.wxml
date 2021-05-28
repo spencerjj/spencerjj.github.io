@@ -1,0 +1,20 @@
+<view class="container">
+  <my-swiper imgLists="{{imgLists}}" wx:if="{{fileLists.length<1}}" sheight="75vh" autoplay="true"/>
+  <view wx:else class="video">
+    <video src="{{fileLists[0]}}" style="width:100%" wx:if="{{fileLists.length>0}}"></video>
+  </view>
+  <view class="content">
+    <view class="auth">
+    <view>常州购物中心</view>  
+    <view>{{noteDetail.createDate}}</view>
+  </view>
+  <view class="title">
+    {{noteDetail.title}}
+  </view>
+  <view class="remarks">
+    <text>{{noteDetail.remarks}}</text>
+  </view>
+  </view>
+</view>
+<van-toast id="van-toast" />
+<van-dialog id="van-dialog" />

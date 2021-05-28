@@ -1,0 +1,86 @@
+/* pages/index/pointDetail.wxss */
+.top{
+  height: 350rpx;
+  background:white;
+  width: 94%;
+  margin-left: 3%;
+  border-radius: 20rpx;
+  margin-top:20rpx;
+  padding:30rpx 20rpx;
+  box-sizing: border-box;
+}
+.title{
+  height: 70rpx;
+  border-bottom:2rpx solid #999
+}
+.content{
+  display: flex;
+  margin-top:20rpx;
+  height: 200rpx;
+}
+.content>view:first-child{
+  width: 25%;
+  height: 180rpx;
+}
+.content>view:first-child image{
+  width: 100%;
+  height:180rpx;
+}
+.content>view:nth-child(2){
+  margin-left:20rpx;
+  height: 180rpx;
+  width: 45%;
+}
+.title1{
+  font-size: 30rpx;
+  font-weight: bolder;
+}
+.mark{
+  font-size: 25rpx;
+  color:#999
+}
+.point{
+  font-size: 30rpx;
+  font-weight: bolder;
+  color:#f29600;
+  margin-top:60rpx
+}
+.content>view:nth-child(3){
+  position: relative;
+  height: 180rpx;
+  width: 30%;
+}
+.add{
+  width: 200rpx;
+  position: absolute;
+  bottom:0;
+  right: 0;
+}
+.bottom{
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 150rpx;
+  background:white;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding:0 30rpx;
+  box-sizing: border-box;
+}
+.bottom>view:first-child{
+  margin-right: 30rpx;
+  color:#999
+}
+.bottom>view:nth-child(2){
+  height: 100rpx;
+  line-height: 100rpx;
+  width: 250rpx;
+  font-size: 35rpx;
+  text-align: center;
+  background-image: linear-gradient(to right,#e4c89b,#c7923d);
+  border-radius: 50rpx;
+  color:white
+}
+

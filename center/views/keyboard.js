@@ -15,7 +15,7 @@ Component({
 
     //显示
     show: false,
-
+    show1:false,
 
     //省份
     provinces: "京津沪冀豫云辽黑湘皖鲁新苏浙赣鄂桂甘晋蒙陕吉闽贵粤川青藏琼宁渝",
@@ -59,8 +59,14 @@ Component({
       this.setData({
         mode: index == 0 ? 1 : 2,
         activeIndex: index,
-        show: true
+        show1: true
       })
+        setTimeout(()=>{
+          this.setData({
+            show:true
+          })
+        },50)
+      
     },
 
     updateData(v){
@@ -81,14 +87,11 @@ Component({
     },
 
     tapKeyboard(e) {
-
       let val = e.currentTarget.dataset.val;
       let activeIndex = this.data.activeIndex;
       let plateNumber = this.data.plateNumber;
-
       plateNumber[activeIndex] = val;
       this.updateData(plateNumber);
-     
       if (activeIndex < 6) {
         this.inputKeyboard(++activeIndex);
       } else {
@@ -104,7 +107,11 @@ Component({
         mode: 0,
         activeIndex: -1
       });
-
+      setTimeout(()=>{
+        this.setData({
+          show1:false
+        })
+      },1000)
     },
   }
 

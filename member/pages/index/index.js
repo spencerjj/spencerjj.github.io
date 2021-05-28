@@ -33,9 +33,6 @@ Page({
     })
   },
   onLoad: function (options) {
-    
-  },
-  onShow() {
     var that = this;
     var phoneNo = wx.getStorageSync('loginphone') || ''
     var userInfo = wx.getStorageSync('userInfo') || ''
@@ -53,12 +50,15 @@ Page({
       }
     }
   },
+  onShow() {
+   
+  },
   onPullDownRefresh(){
-    this.onShow()
+    this.onLoad()
   },
   login(e){
     app.doLogin().then(data => {
-      this.onShow()
+      this.onLoad()
     })
   },
   getPhone(e) {
@@ -216,7 +216,7 @@ Page({
     var that = this
     console.log(e.currentTarget.dataset.id)
     var id = e.currentTarget.dataset.id
-    if(id=='center'||id=="card"||id=="infos"||id=="mission"||id=="recommend"||id=="issus"||id=="point"||id=="exchange"||id=="store"){
+    if(id=="card"||id=="infos"||id=="mission"||id=="recommend"||id=="issus"||id=="point"||id=="exchange"||id=="store"){
       wx.navigateTo({
         url: id,
       })
@@ -225,6 +225,12 @@ Page({
     }else if(id=="order"){
       wx.navigateTo({
         url: 'order?name='+that.data.userInfo.name+'&point='+that.data.userInfo.availablePoints+'&level='+that.data.userInfo.level,
+      })
+    }else if(id=='ji'){
+      wx.navigateToMiniProgram({ appId: 'wx342c05b4e39eda3b', path: '/pages/integral/goods/list', success(res) {  } })
+    }else if(id="center"){
+      wx.navigateTo({
+        url: 'center?avatarUrl='+that.data.userInfo.avatarUrl+'&name='+that.data.userInfo.name+'&point='+that.data.userInfo.availablePoints
       })
     }
   },

@@ -20,14 +20,14 @@
           </view>
         </view>
       </view> -->
-  <!-- <view class="section">
+  <view class="section">
     <view>成功邀请人数</view>
-    <view>0</view>
+    <view>{{num}}</view>
   </view>
   <view class="section">
     <view>累计获得积分</view>
-    <view>0</view>
-  </view> -->
+    <view>{{point}}</view>
+  </view>
   <view class="section1">
     <view>邀请记录</view>
     <view></view>
@@ -50,7 +50,7 @@
         </view>
       </view>
     </view>
-    <van-empty image="search" description="您还未成功邀请任何好友注册" wx:if="{{reLists.length==0}}" />
+    <van-empty image="/images/cut/null.png" description="您还未成功邀请任何好友注册" wx:if="{{reLists.length==0}}" />
     <view wx:if="{{reLists.length>0}}" class='nullDataInfo'>
       <van-divider contentPosition="center">无更多推荐人了</van-divider>
     </view>
@@ -67,10 +67,10 @@
 <view class="tab" wx:if="{{tshow}}" bindtap="tclose">
   <view class="tbottom">
     <button hover-class="hover2" hover-stay-time="1s" catchtap='share' open-type="share" bindtap="onShareAppMessage">
-      <van-icon name="share-o"  size="30" custom-style="vertical-align: -10%"/>　分享给好友
+      <image src="/images/cut/7_06.png" mode="widthFix" style="margin-top:-10rpx"></image>　分享给好友
     </button>
     <button hover-class="hover2" hover-stay-time="1s" catchtap='send'>
-      <van-icon name="photo-o"  size="30" custom-style="vertical-align: -10%"/>　生成海报
+      <image src="/images/cut/7_07.png" mode="widthFix"></image>　生成海报
     </button>
   </view>
 </view>

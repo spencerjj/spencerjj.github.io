@@ -1,6 +1,6 @@
 {
-  "navigationBarTitleText": "我的订单",
+  "navigationBarTitleText": "消费记录",
   "navigationBarTextStyle": "black",
-  "navigationBarBackgroundColor": "#f8f8f8",
+  "navigationBarBackgroundColor": "#fff",
   "enablePullDownRefresh": true
 }

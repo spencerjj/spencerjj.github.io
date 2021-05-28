@@ -1068,6 +1068,8 @@ app.controller('indexController', ['$scope', '$http', function($scope, $http) {
 		// 	return;
 		// }
 		if (data.acceptPost && data.acceptPost.length != 0) {
+			let index = postOriList.findIndex(item=>item.post.postName==data.acceptPost)
+			data.prId = postOriList[index].id
 			ifAll = true
 		} else {
 			$.toptip('请正确填写您的应聘岗位', 'warning')

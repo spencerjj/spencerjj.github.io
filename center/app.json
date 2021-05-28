@@ -1,25 +1,44 @@
 {
   "pages": [
-    "pages/index/store",
-    "pages/index/index",
-    "pages/index/modify",
-    "pages/index/mission",
-    "pages/index/cardDetail",
-    "pages/index/exchange",
-    "pages/index/center",
-    "pages/index/recommend",
-    "pages/index/infos",
+    "pages/index/my",
     "pages/index/car",
-    "pages/index/register",
-    "pages/index/order",
-    "pages/index/family",
-    "pages/index/change",
-    "pages/index/card",
+    "pages/index/index",
+    "pages/index/mainIndex",
+    "pages/index/reportDetail",
+    "pages/index/info",
+    "pages/index/carInfo",
     "pages/index/point",
-    "pages/index/orderDetail",
-    "pages/index/issus",
-    "pages/index/familyDetail",
-    "pages/index/detail"
+    "pages/index/pointInfo",
+    "pages/index/pointDetail",
+    "pages/index/order",
+    "pages/index/activityDetail",
+    "pages/index/borrowDetail",
+    "pages/index/borrow",
+    "pages/index/card",
+    "pages/index/activity",
+    "pages/index/center",
+    "pages/index/storeDetail",
+    "pages/index/store",
+    "pages/index/register",
+    "pages/index/detail",
+    "pages/index/shop",
+    "views/activityLists",
+    "views/activityDetailLists",
+    "views/actBox",
+    "views/carBox",
+    "views/recordLists",
+    "views/cardLists",
+    "views/borrowLists",
+    "views/cardBig",
+    "views/keyboard",
+    "views/listsItem",
+    "views/getInfo",
+    "pages/index/paySuccess",
+    "views/reportLists",
+    "pages/index/activityInfo",
+    "views/noteBox",
+    "views/noteLists",
+    "pages/index/noteDetail"
   ],
   "permission": {
     "scope.userLocation": {
@@ -28,9 +47,9 @@
   },
   "window": {
     "backgroundTextStyle": "light",
-    "navigationBarBackgroundColor": "#fff",
-    "navigationBarTitleText": "WeChat",
     "navigationBarTextStyle": "black",
+    "navigationBarBackgroundColor": "#f8f8f8",
+    "navigationBarTitleText": "WeChat",
     "backgroundColor": "#f3f3f3"
   },
   "tabBar": {
@@ -52,13 +71,13 @@
         "text": "楼层导览"
       },
       {
-        "pagePath": "pages/index/index",
+        "pagePath": "pages/index/shop",
         "iconPath": "/images/03.png",
         "selectedIconPath": "/images/03ed.png",
         "text": "线上商城"
       },
       {
-        "pagePath": "pages/index/index",
+        "pagePath": "pages/index/my",
         "iconPath": "/images/04.png",
         "selectedIconPath": "/images/04ed.png",
         "text": "我的"
@@ -89,6 +108,7 @@
     "van-icon": "@vant/weapp/icon/index",
     "van-card": "@vant/weapp/card/index",
     "van-popup": "@vant/weapp/popup/index",
+    "van-stepper": "@vant/weapp/stepper/index",
     "van-dropdown-menu": "@vant/weapp/dropdown-menu/index",
     "van-dropdown-item": "@vant/weapp/dropdown-item/index"
   },

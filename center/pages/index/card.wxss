@@ -1,212 +1,68 @@
-/* pages/index/card.wxss */
+/* pages/index/activity.wxss */
+.container{
+  position: relative;
+}
 .card{
-  width: 94%;
-  min-height: 500rpx;
-  margin-left:3%;
-  padding-bottom:100rpx;
+  padding-bottom: 100rpx;
 }
-.cardItems{
-  width: 100%;
-  height: 220rpx;
-  border-radius: 20rpx;
-  margin-top:40rpx;
-  box-shadow: 10rpx 10rpx 20rpx 0rpx #bbb;
-  position: relative;
-}
-.cardItems image{
-  width: 100%;
-  height: 100%;
-}
-.cardItems>view{
-  position: absolute;
-  color:white
-}
-.cardItems .notice{
-  font-size: 50rpx;
-  top:40rpx;
-  left: 30rpx;
-  font-weight: bolder;
-}
-.cardItems .rule{
-  color:#ff8d67;
-  left: 30rpx;
-  bottom:36rpx;
-  font-size: 25rpx;
-  font-weight: bolder;
-}
-.cardItems .rule1{
-  color:#999;
-  left: 30rpx;
-  bottom:36rpx;
-  font-size: 25rpx;
-  font-weight: bolder;
-}
-.cardItems .date{
-  left: 30rpx;
-  bottom:10rpx;
-  font-size: 20rpx;
-}
-.cardItems .count{
-  top:40rpx;
-  right:0rpx;
-  width: 200rpx;
-  font-size: 40rpx;
-  text-align: center;
-}
-.cardItems .count text{
-  font-size: 60rpx;
-  font-weight: bolder;
-}
-.listItem{
-  background:#f0f0f0;
-  padding-bottom:15rpx;
-  position: relative;
-  margin-top:30rpx;
-  border-radius: 10rpx;
-  box-shadow: 10rpx 10rpx 20rpx 0rpx #856145;
-  overflow: hidden;
-}
-.ball{
-  width: 30rpx;
-  height: 30rpx;
-  border-radius: 50%;
-  position: absolute;
-  background:#f0f0f0
-}
-.left{
-  left: -15rpx;
-  top: 50rpx;
-}
-.right{
-  right: -15rpx;
-  top: 50rpx;
-}
-.title{
-  height:60rpx;
-  line-height: 60rpx;
-  background-image: linear-gradient(to right, #f3b17c , #f08630);
-  color:#fff;
-  font-size: 35rpx;
-  padding:0 20rpx 0 20rpx;
-  box-sizing: border-box;
-  border-radius: 10rpx;
-  font-size: 20rpx;
-}
-.reason{
-  height: 40rpx;
-  background:#9c6435;
-  line-height: 40rpx;
-  padding:0 10rpx 0 10rpx;
-  font-size: 20rpx;
-  border-radius: 10rpx;
-  margin-top:10rpx;
-  float: left;
-}
-.title view:nth-child(2){
-  float: left;
-  margin-left: 10rpx;
-}
-.title view:nth-child(3){
-  float: right;
-}
-.infos{
-  padding:0 20rpx 0 20rpx;
-}
-.logo{
-  position: absolute;
-  width: 100rpx;
-  height: 100rpx;
-  bottom: 0;
-  left: 50%;
-  margin-left: -50rpx;
-  bottom:15rpx;
-  opacity: .3;
-}
-.details{
-  display:flex;
-  justify-content: space-between;
-}
-.infos{
-  display:flex;
-  justify-content: space-between;
-  height: 120rpx;
-}
-.infos>view:first-child{
-  margin-top:30rpx
-}
-.infos>view:first-child text{
-  font-size: 50rpx;
-  font-weight: bolder;
-}
-.infos>view:nth-child(2)>view:first-child{
-  font-size: 28rpx;
-  font-weight: bolder;
-  margin-top:35rpx
-}
-.infos>view:nth-child(2)>view:nth-child(2){
-  font-size: 20rpx;
-}
-.nullDataInfo{
-  width: 100%;
-  height: 30rpx;
-  text-align: center;
-  line-height: 30rpx;
-  font-size: 30rpx;
-  color: #ddd;
-  padding-top: 50rpx;
-  padding-bottom:30rpx
+.mark{
+  position: fixed;
+  width: 1rpx;
+  border-left:1rpx solid #a7a6a6;
+  left: 0;
+  right: 0;
+  height: 60rpx;
+  top:15rpx;
+  margin:0 auto;
+  z-index: 9;
 }
 .showCode{
   position: fixed;
   top:0;
   width: 100%;
   height: 100%;
-  background:#e5e5e5;
-  padding-top:130rpx;
+  background:rgba(0,0,0,.5);
+  z-index: 99;
 }
-.pannel{
-  width: 94%;
-  margin-left:3%;
-  background:white;
-  height: 1040rpx;
-  border-radius: 20rpx;
-}
-.barnum{
-  width: 100%;
+.codeCon{
   text-align: center;
-  font-size: 35rpx;
-  font-weight: bolder;
-  letter-spacing: 10rpx;
+  width: 90%;
+  margin-left: 5%;
   position: absolute;
-  top:400rpx
-}
-.barcode{
+  top:10vh;
   background:white;
+  padding:50rpx 0;
   border-radius: 30rpx;
-  margin:0 auto;
-  padding-top:50rpx;
 }
-.barcode>canvas{
+.rule{
+  width: 80%;
+  font-size: 22rpx;
+  color:#999;
   margin:0 auto
+}
+.rtitle{
+  color:#c79f62;
+  font-weight: bolder;
+  font-size: 40rpx;
+}
+.tnotice{
+  font-size: 40rpx;
+  color:#333;
+  font-weight: bolder;
+  letter-spacing:3rpx
+}
+.rtitle1{
+  font-size: 28rpx;
+  margin-bottom:10rpx
 }
 .qrcode{
-  position: absolute;
-  top:500rpx;
-  left:50%;
-  margin-left:-135px;
-  padding:10px;
-  padding-bottom:10px;
-  background:white;
   border-radius: 30rpx;
+  overflow: hidden;
+  box-sizing: border-box;
 }
 .canvas{
-  width: 255px;
-  height: 250px;
+  width: 230px;
+  height: 230px;
   margin:0 auto
 }
-.exit{
-  position: absolute;
-  right: 0;
-  bottom: 0;
-  color:red
-}
+

@@ -1,41 +1,44 @@
 <view class="container">
-  <view class="top">
-    <view class="timg">
-      <image src="/images/cut/c1.png" class="tback" wx:if="{{level=='潜在顾客'}}"></image>
-      <image src="/images/cut/c2.png" class="tback" wx:elif="{{level=='普卡会员'}}"></image>
-      <image src="/images/cut/c3.png" class="tback" wx:elif="{{level=='金卡会员'}}"></image>
-      <image src="/images/cut/c4.png" class="tback" wx:elif="{{level=='白金卡会员'}}"></image>
-      <image src="/images/cut/c5.png" class="tback" wx:elif="{{level=='钻石卡会员'}}"></image>
-      <image src="/images/cut/4_04.png" class="logo"></image>
-      <view class="tleft" wx:if="{{name}}">
-        <view class="profile" catchtap="change">
-          <image src="/images/profile.png"></image>
-        </view>
-        <view class="infos" wx:if="{{name}}">
-          <view class="name">{{name}}</view>
-          <view class="point">积分：{{point}}</view>
-        </view>
+  <view class="lists">
+    <view class="listItem" bindtap="showDetail" wx:key="index" wx:for="{{lists}}" data-index="{{index}}">
+      <view>{{item.saleDate}}</view>
+      <view>
+        <view>订单编号：{{item.orderno}}</view>
+        <view>￥{{item.actAmount}}</view>
+      </view>
+      <view>
+        <view>查看详情</view>
       </view>
     </view>
-    <view class="tright" hover-class="hover1" hover-stay-time="1s" bindtap="toPage">
-      总计金额：{{total}}
-    </view>
   </view>
-  <view style="width:100%;height:2rpx;background:#000;margin-bottom:30rpx"></view>
-  <view class="lists">
-    <view class="listItem" bindtap="showDetail" data-index="{{index}}" wx:for="{{orderLists}}" wx:key="index">
-      <!-- <view class="status">已退货 ></view> -->
-      <van-card num="{{item.listOfOrderDteailsEntry.orderDteailsEntry.length}}" price="{{item.actAmount}}"
-        desc="{{item.salesShop}}" title="订单编号：{{item.orderno}}" thumb="/images/logo.png">
-        <view slot="price-top">
-          {{item.completeDate}}
-        </view>
-      </van-card>
-    </view>
-  </view>
-  <van-empty image="search" description="暂无订单" wx:if="{{orderLists.length<1}}" />
+  <van-empty image="search" description="暂无消费记录" wx:if="{{lists.length<1}}" />
   <view class='nullDataInfo'>
-    <van-divider contentPosition="center" wx:if="{{orderLists.length>=1}}">无更多订单了</van-divider>
+    <van-divider contentPosition="center" wx:if="{{lists.length>=1}}">无更多记录了</van-divider>
   </view>
 </view>
+<view class="showPage {{show1?'show':''}}" wx:if="{{show}}"  bindtap="close">
+    <view class="detailInfo">
+      <view class="detailTitle">
+        订单明细
+      </view>
+      <view class="detailLists">
+        <view class="detailItem" wx:for="{{sonLists}}" wx:key="index">
+          <view>{{item.productName}}</view>
+          <view>￥{{item.actAmount}}</view>
+        </view>
+      </view>
+      <view class="detailTitle">
+        支付明细
+      </view>
+      <view class="detailLists">
+        <view class="detailItem" wx:for="{{payLists}}" wx:key="index">
+          <view>{{item.paymentM}}</view>
+          <view>￥{{item.paymentA}}</view>
+        </view>
+      </view>
+      <view class="btn {{sonLists.length<3?'btn1':'btn2'}}">
+        <view>确定</view>
+      </view>
+    </view>
+  </view>
 <van-toast id="van-toast" />

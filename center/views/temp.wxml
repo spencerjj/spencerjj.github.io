@@ -1,6 +1,0 @@
-<view class="boss" wx:if="{{isShow}}" bindtap="goCheck">
-  <view class="main">
-    <image src="/images/warn.png"></image>
-    <view>{{tips}}</view>
-  </view>
-</view>

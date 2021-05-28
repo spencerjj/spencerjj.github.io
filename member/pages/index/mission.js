@@ -15,7 +15,10 @@ Page({
   data: {
     current: 0,
     show: false,
-    point: 0
+    point: 0,
+    signState:0,
+    comState:0,
+    reState:0
   },
 
   /**
@@ -40,6 +43,7 @@ Page({
     var phoneNo = wx.getStorageSync('phoneNo') || ''
     if (phoneNo.length > 1) {
       that.getInfo()
+      that.getSign()
     } else {
       Toast({
         message: '登录失效，请重新授权登录',
@@ -99,8 +103,47 @@ Page({
         wx.stopPullDownRefresh()
         if(res.status==0){
           that.setData({
-            point: res.availablePoints
+            point: res.availablePoints,
+            reState:res.nInvFriends<=6?res.nInvFriends:6,
+            comState:res.perfect<15?0:100
           })
+        }else{
+          Toast({
+            message: res.msg,
+            type: 'warning'
+          });
+        }
+      }
+    ).catch(res => {
+      console.log(res)
+      Toast({
+        message: '系统错误，请联系管理员',
+        type: 'warning'
+      });
+    });
+  },
+  getSign(){
+    var that = this;
+    var today = new Date().getFullYear()+'-'+(new Date().getMonth()-1+2)+'-'+new Date().getDate()
+    var data = {
+      memPhone: wx.getStorageSync('phoneNo'),
+      startDate:today,
+      endDate:today,
+      ajax: '_json'
+    }
+    getRequest(getApiHost(), 'platform/v1/api/lampocrm/LPQueryMemberSign', 'body', data, 0, false, false,false).then(
+      res => {
+        console.log(res)
+        if(res.status==0){
+          if(res.signInfoList.length==0){
+            that.setData({
+              signState: 0
+            })
+          }else{
+            that.setData({
+              signState: 100
+            })
+          }
         }else{
           Toast({
             message: res.msg,
@@ -120,5 +163,33 @@ Page({
     wx.navigateTo({
       url: e.currentTarget.dataset.id,
     })
+  },
+  sign(){
+    var that = this;
+    var data = {
+      phone: wx.getStorageSync('phoneNo'),
+      reason:'SignIn',
+      value:10,
+      ajax: '_json'
+    }
+    getRequest(getApiHost(), 'platform/v1/api/lampocrm/LPAddPoints', 'body', data, 0, false, true).then(
+      res => {
+        console.log(res)
+        if(res.status==0){
+          that.getSign()
+        }else{
+          Toast({
+            message: res.msg,
+            type: 'warning'
+          });
+        }
+      }
+    ).catch(res => {
+      console.log(res)
+      Toast({
+        message: '系统错误，请联系管理员',
+        type: 'warning'
+      });
+    });
   }
 })

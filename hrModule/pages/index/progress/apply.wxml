@@ -151,7 +151,20 @@
 		<!-- <textarea class="c1Input" placeholder='' placeholder-style='color:#af9d7f' auto-height maxlength='1000' disabled="true" value="{{lists.candidateDirection}}"></textarea> -->
     <view class="c1Input">{{lists.candidateDirection}}</view>
 	</view>
-
+  <view class="title" wx:if="{{lists.bpm.activityId == 'zpleader'}}">
+    <view class="c1">
+      <text>添加招聘专员<text style="color:red;font-size:25rpx">*</text></text>
+    </view>
+    <input class="timePicker" placeholder="请填写姓名并选择招聘专员" placeholder-style='color:#af9d7f;margin-left:-5rpx'
+      bindinput='checkInput' value="{{lists.zpName||keywords}}" bindconfirm="confirm" confirm-type="done" maxlength="20"
+      cursor-spacing="200" disabled="{{current!=1}}"></input>
+    <view class="sonLists" wx:if="{{sonvisibility}}">
+      <view wx:for="{{codeLists}}" wx:for-item="sonItem" class="sonItem" bindtap="selectItem" hover-class='hover1'
+        hover-stay-time='50' data-name="{{sonItem.name}}" data-code="{{sonItem.code}}" data-office="{{sonItem.office}}"
+        wx:key="index" data-index="{{childindex}}">
+        {{sonItem.name}}({{sonItem.office}})</view>
+    </view>
+  </view>
 	<view class="title" style="z-index:1 !important" wx:if="{{current==1&&can}}">
 		<view class="c1">
 			<text>审批意见</text>

@@ -3,6 +3,7 @@
 var QRCode;
 
 (function () {
+
     /**
          * Get the type by string length
          * 
@@ -12,6 +13,7 @@ var QRCode;
          * @return {Number} type
          */
     function _getTypeNumber(sText, nCorrectLevel) {
+
         var nType = 1;
         var length = _getUTF8Length(sText);
 
@@ -320,10 +322,10 @@ var QRCode;
     QRCode.prototype.makeImage = function () {
         var _oContext
         if (this._htOption.usingIn) {
-            _oContext = wx.createCanvasContext(this.canvasId, this._htOption.usingIn)
+            _oContext = wx.createCanvasContext(this.canvasId, this._htOption.usingIn,this)
         }
         else {
-            _oContext = wx.createCanvasContext(this.canvasId)
+            _oContext = wx.createCanvasContext(this.canvasId,this)
         }
         var _htOption = this._htOption;
         var oQRCode = this._oQRCode
@@ -394,7 +396,6 @@ var QRCode;
                 // );
             }
         }
-
         _oContext.draw()
     };
 
@@ -416,7 +417,6 @@ var QRCode;
             }
         })
     }
-
     QRCode.CorrectLevel = QRErrorCorrectLevel;
 })();
 

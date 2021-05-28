@@ -1,6 +1,15 @@
 {
   "navigationBarTitleText": "常州购物中心",
   "navigationBarTextStyle": "black",
-  "navigationBarBackgroundColor": "#ffffff",
-  "enablePullDownRefresh": true
+  "navigationBarBackgroundColor": "#000000",
+  "enablePullDownRefresh": true,
+  "navigationStyle":"custom",
+  "usingComponents":{
+    "activity-lists":"/views/activityLists",
+    "act-box":"/views/actBox",
+    "card-box":"/views/cardBox",
+    "get-info":"/views/getInfo",
+    "note-box":"/views/noteBox",
+    "my-swiper":"/views/myswiper"
+  }
 }

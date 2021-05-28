@@ -7,9 +7,8 @@
     积分明细记录
   </view>
   <view class="middle">
-    <van-empty image="search" description="暂无可兑换券" wx:if="{{point<3000}}" />
-    <view class="lists" wx:if="{{point>3000}}">
-      <view class="item" wx:for="{{exLists}}" wx:key="index" wx:if="{{point>=item.point}}"  hover-class="hover1" hover-stay-time="1s" bindtap="exchange" data-point="{{item.point}}">
+    <view class="lists">
+      <view class="item" wx:for="{{exLists}}" wx:key="index" hover-class="hover1" hover-stay-time="1s" bindtap="exchange" data-point="{{item.point}}">
         <view class="itop">
           <image src="/images/cut/card1.png" mode="widthFix"></image>
           <view class="money">￥{{item.money}}</view>

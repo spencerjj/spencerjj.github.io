@@ -186,11 +186,11 @@ function request(requestMethod, host, path, paramsLocation, params, security_typ
         if (DEBUG) console.log("服务器返回数据：", res.data);
         if (showLoading) Toast.clear();
         var code = res.data.code;
-        if (code == 'S'||res.data.result=='true') {
+        if (res.statusCode=='200') {
           resolve(res.data);
         } 
          else {
-          console.log(res.data)
+          // console.log(res.data)
           console.log("请求失败：", res.msg);
           reject(res.data);
         }

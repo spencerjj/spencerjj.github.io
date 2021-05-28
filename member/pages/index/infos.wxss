@@ -46,7 +46,6 @@ page{
   /* background:#fff; */
   margin-top:30rpx;
   padding-left: 10rpx;
-  font-weight: bolder;
   text-align: center;
 }
 .action{

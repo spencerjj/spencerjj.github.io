@@ -29,10 +29,6 @@ Page({
         point: 10000
       },
       {
-        money: 750,
-        point: 15000
-      },
-      {
         money: 1000,
         point: 20000
       },

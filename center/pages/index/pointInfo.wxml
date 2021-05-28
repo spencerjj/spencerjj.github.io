@@ -1,0 +1,61 @@
+<!--pages/index/pointDetail.wxml-->
+<view class="container">
+  <view class="top">
+    <view class="content">
+      <view>
+        <image src="/images/01-2.png" mode="aspectFill"></image>
+      </view>
+      <view>
+        <view class="title1">20元餐饮券</view>
+      </view>
+      <view>
+        <view class="add">20积分</view>
+      </view>
+    </view>
+    <view class="infos">
+      <view>券码<text> 1023891823123</text></view>
+      <view bindtap="use">未使用 <image src="/images/code.png"></image></view>
+    </view>
+    <view class="detail">
+      <view class="title">
+        兑换明细
+      </view>
+      <view class="section">
+        <view>兑换编号</view>
+        <view>102931239123123</view>
+      </view>
+      <view class="section">
+        <view>兑换时间</view>
+        <view>2019-01-02</view>
+      </view>
+      <view class="section">
+        <view>兑换数量</view>
+        <view>1</view>
+      </view>
+      <view class="section">
+        <view>总价</view>
+        <view>20积分</view>
+      </view>
+      <view class="section">
+        <view>状态</view>
+        <view>兑换成功</view>
+      </view>
+      <view class="section">
+        <view>兑换方式</view>
+        <view>自提</view>
+      </view>
+    </view>
+  </view>
+</view>
+<view class="showCode {{show1?'show':''}}" wx:if="{{show}}" bindtap="onClose" catchtouchmove="ture">
+    <view class="codeCon" wx:if="{{show2}}">
+    <view class="rule rtitle">20元餐饮券</view>
+    <view class="qrcode">
+      <canvas class='canvas' canvas-id='canvas'></canvas>
+    </view>
+    <view class="rule tnotice">1231238123</view>
+    <view style="position:absolute;bottom:-150rpx;left:0;right:0;margin:0 auto"><van-icon name="clear" style="color:white" size="40"/></view>
+  </view>
+</view>
+<van-toast id="van-toast" />
+<van-dialog id="van-dialog" />

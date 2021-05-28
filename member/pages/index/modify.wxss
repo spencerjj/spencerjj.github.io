@@ -40,7 +40,6 @@ page{
   text-align: center;
   height:110rpx;
   line-height: 110rpx;
-  font-weight: bolder;
   color:#333
 }
 .action{

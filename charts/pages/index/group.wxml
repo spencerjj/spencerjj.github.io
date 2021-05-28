@@ -130,7 +130,7 @@
     <view class="tr header">
       <view class="th">柜组</view>
       <view class="th">今日</view>
-      <view class="th">毛利</view>
+      <view class="th">日同期</view>
       <view class="th">毛利率</view>
       <view class="th">本月(万)</view>
       <view class="th">月同期(万)</view>
@@ -145,7 +145,7 @@
       <view class="tr {{index%2==0?'bg-g':'bg-w'}}" hover-class="trhover" hover-stay-time="0.5" >
         <view class="td">{{item.brandName}}</view>
         <view class="td">{{item.sales}}</view>
-        <view class="td">{{item.profit}}</view>
+        <view class="td">{{item.lastSales||0}}</view>
         <view class="td">{{item.gpm||0}}%</view>
         <!-- <view class="td">{{item.monthSales}}</view> -->
         <view class="td">{{item.monthSales}}</view>

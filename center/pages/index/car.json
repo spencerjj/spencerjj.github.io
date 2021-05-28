@@ -1,7 +1,7 @@
 {
-  "navigationBarTitleText": "车牌",
+  "navigationBarTitleText": "停车缴费",
   "navigationBarTextStyle": "black",
-  "navigationBarBackgroundColor": "#f8f8f8",
+  "navigationBarBackgroundColor": "#fff",
   "enablePullDownRefresh": true,
   "usingComponents": {
     "keyboard":"../../views/keyboard"

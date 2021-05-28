@@ -1,12 +1,12 @@
 {
   "pages": [
-    "pages/index/modify",
     "pages/index/index",
+    "pages/index/recommend",
     "pages/index/mission",
+    "pages/index/modify",
     "pages/index/cardDetail",
     "pages/index/exchange",
     "pages/index/center",
-    "pages/index/recommend",
     "pages/index/infos",
     "pages/index/car",
     "pages/index/register",

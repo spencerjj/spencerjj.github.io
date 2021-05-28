@@ -1,68 +1,45 @@
 <view class="container">
-  <van-tabs swipeable animated bind:change="onChange" color="#a4a3a3" title-inactive-color="#aaa">
-    <van-tab title="代金券">
+  <van-tabs swipeable animated bind:change="onChange" color="#ececec" title-inactive-color="#aaa">
+    <van-tab title="现金券">
       <view class="card">
-        <van-empty image="search" description="暂无代金券" wx:if="{{cards.userfulVoucherEntryList.length==0}}" />
-        <view class="cardItems"  data-num="{{item.vnum}}" wx:for="{{cards.userfulVoucherEntryList}}" wx:key="index" bindtap="showCode" wx:if="{{item.vtype=='代金券'}}">
-          <image src="/images/card.jpg"></image>
+        <view class="state">
+          <view bindtap="changeState1" data-mark="1" class="{{state1==1?'state-active':''}}">未使用</view>
+          <view bindtap="changeState1" data-mark="2" class="{{state1==2?'state-active':''}}">已使用</view>
+          <view bindtap="changeState1" data-mark="3" class="{{state1==3?'state-active':''}}">已过期</view>
+        </view>
+        <van-empty image="/images/cut/7_05.png" description="暂无数据" wx:if="{{cardsLists1.length==0}}" />
+        <view class="cardItems"  data-num="{{item.vnum}}" data-status="{{item.vstatus}}" wx:for="{{cardsLists1}}" wx:key="index" bindtap="showCode" wx:if="{{item.vstatus==vstatus1}}">
+          <!-- <image src="/images/card.jpg"></image> -->
+          <view class="leftR"></view>
+          <view class="rightR"></view>
           <view class="notice">{{item.vname||item.vtype}}</view>
           <view class="rule">券不可叠加使用</view>
           <view class="date">有效期：{{item.vstartDate}}~{{item.vendDate}}</view>
           <view class="count">￥<text>{{item.vvalue||0}}</text></view>
+          <view class="use"><text wx:if="{{item.vstatus=='可用'}}">立即使用</text><text wx:elif="{{item.vstatus=='已使用'}}">已使用</text><text wx:else="{{item.vstatus=='已过期'}}">已过期</text></view>
         </view>
-        <view wx:if="{{cards.userfulVoucherEntryList.length>0}}" class='nullDataInfo'><van-divider contentPosition="center">无更多卡券了</van-divider></view>
+        <view wx:if="{{cardsLists1.length>0}}" class='nullDataInfo'><van-divider contentPosition="center">无更多卡券了</van-divider></view>
       </view>
     </van-tab>
-    <van-tab title="干洗券">
+    <van-tab title="礼品券">
       <view class="card">
-        <van-empty image="search" description="暂无干洗券" wx:if="{{cards.userfulVoucherEntryList.length==0}}" />
-        <view class="cardItems" data-num="{{item.vnum}}" wx:for="{{cards.userfulVoucherEntryList}}" wx:key="index" bindtap="showCode" wx:if="{{item.vtype=='干洗券'}}">
-          <image src="/images/card.jpg"></image>
+        <view class="state">
+          <view bindtap="changeState2" data-mark="1" class="{{state2==1?'state-active':''}}">未使用</view>
+          <view bindtap="changeState2" data-mark="2" class="{{state2==2?'state-active':''}}">已使用</view>
+          <view bindtap="changeState2" data-mark="3" class="{{state2==3?'state-active':''}}">已过期</view>
+        </view>
+        <van-empty image="/images/cut/7_05.png" description="暂无数据" wx:if="{{cardsLists2.length==0}}" />
+        <view class="cardItems" data-num="{{item.vnum}}" data-status="{{item.vstatus}}"  wx:for="{{cardsLists2}}" wx:key="index" bindtap="showCode" wx:if="{{item.vstatus==vstatus2}}">
+          <!-- <image src="/images/card.jpg"></image> -->
+          <view class="leftR"></view>
+          <view class="rightR"></view>
           <view class="notice">{{item.vname||item.vtype}}</view>
           <view class="rule">券不可叠加使用</view>
           <view class="date">有效期：{{item.vstartDate}}~{{item.vendDate}}</view>
           <view class="count">￥<text>{{item.vvalue||0}}</text></view>
+          <view class="use"><text wx:if="{{item.vstatus=='可用'}}">立即使用</text><text wx:elif="{{item.vstatus=='已使用'}}">已使用</text><text wx:else="{{item.vstatus=='已过期'}}">已过期</text></view>
         </view>
-        <view wx:if="{{cards.userfulVoucherEntryList.length>0}}" class='nullDataInfo'><van-divider contentPosition="center">无更多卡券了</van-divider></view>
-      </view>
-    </van-tab>
-    <!-- <van-tab title="推荐券">
-      <view class="card">
-        <van-empty image="search" description="暂无推荐券" wx:if="{{cards.userfulVoucherEntryList.length==0}}" />
-        <view class="cardItems" wx:for="{{cards.userfulVoucherEntryList}}" wx:key="index" bindtap="recommend" wx:if="{{item.vtype=='推荐券'}}" data-no="{{item.vnum}}">
-          <image src="/images/card.jpg"></image>
-          <view class="notice">{{item.vname||item.vtype}}</view>
-          <view class="rule">{{item.vnum}}</view>
-          <view class="date">有效期：{{item.vstartDate}}~{{item.vendDate}}</view>
-          <view class="count">可推荐<text></text></view>
-        </view>
-        <view wx:if="{{cards.userfulVoucherEntryList.length>0}}" class='nullDataInfo'><van-divider contentPosition="center">无更多卡券了</van-divider></view>
-      </view>
-    </van-tab> -->
-    <van-tab title="已使用">
-      <view class="card">
-        <van-empty image="search" description="暂无已使用卡券" wx:if="{{cards.useredVoucherEntryList.length==0}}"/>
-        <view class="cardItems"  data-num="{{item.vnum}}" wx:for="{{cards.useredVoucherEntryList}}" wx:key="index">
-          <image src="/images/card1.jpg"></image>
-          <view class="notice">{{item.vname||item.vtype}}</view>
-          <view class="rule1">券不可叠加使用</view>
-          <view class="date">有效期：{{item.vstartDate}}~{{item.vendDate}}</view>
-          <view class="count">￥<text>{{item.vvalue||0}}</text></view>
-        </view>
-      </view>
-      <view wx:if="{{cards.useredVoucherEntryList.length>0}}" class='nullDataInfo'><van-divider contentPosition="center">无更多卡券了</van-divider></view>
-    </van-tab>
-    <van-tab title="已过期">
-      <view class="card">
-        <van-empty image="search" description="暂无已过期卡券" wx:if="{{cards.expireVoucherEntryList.length==0}}"/>
-        <view class="cardItems"  data-num="{{item.vnum}}" wx:for="{{cards.expireVoucherEntryList}}" wx:key="index">
-          <image src="/images/card1.jpg"></image>
-          <view class="notice">{{item.vname||item.vtype}}</view>
-          <view class="rule1">券不可叠加使用</view>
-          <view class="date">有效期：{{item.vstartDate}}~{{item.vendDate}}</view>
-          <view class="count">￥<text>{{item.vvalue||0}}</text></view>
-        </view>
-        <view wx:if="{{cards.expireVoucherEntryList.length>0}}" class='nullDataInfo'><van-divider contentPosition="center">无更多卡券了</van-divider></view>
+        <view wx:if="{{cardsLists2.length>0}}" class='nullDataInfo'><van-divider contentPosition="center">无更多卡券了</van-divider></view>
       </view>
     </van-tab>
   </van-tabs>

@@ -57,6 +57,12 @@
   top:50rpx;
   left:50rpx;
 }
+.logo1{
+  position: absolute;
+  width: 50rpx;
+  top:30rpx;
+  left:50rpx;
+}
 .login{
   width: 100%;
   text-align: center;
@@ -165,7 +171,7 @@ button::after{
   font-size: 25rpx;
   font-weight: bolder;
   text-align: center;
-  color:#000;
+  color:#333;
   margin-top:100rpx;
   position: relative;
 }

@@ -4,22 +4,33 @@ import {
   postRequest,
   getRequest
 } from '../../utils/api.js'
+import {
+  store,
+  storeId
+} from '../../config.js'
 var app = getApp();
 import Dialog from '../../miniprogram_npm/@vant/weapp/dialog/dialog'
 import Toast from '../../miniprogram_npm/@vant/weapp/toast/toast';
 var QRCode = require('../../utils/code.js')
 var oricode = require('../../utils/qrcode.js')
-import {barcode} from '../../utils/index.js'
+import {
+  barcode
+} from '../../utils/index.js'
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    current:0,
-    cards:[],
-    show:false,
-    nowNum:''
+    current: 0,
+    cards: [],
+    show: false,
+    nowNum: '',
+    userInfo: '',
+    vStatus: '可用,待激活',
+    cardName: '',
+    array1:[],
+    array2:[]
   },
 
   /**
@@ -27,20 +38,12 @@ Page({
    */
   onLoad: function (options) {
     var that = this;
-    var phoneNo = wx.getStorageSync('phoneNo') || ''
-    if(phoneNo.length>1){
+    app.ifUser().then((data) => {
+      that.setData({
+        userInfo: data
+      })
       that.getInfo()
-    }else{
-      Toast({
-        message: '登录失效，请重新授权登录',
-        type: 'warning'
-      });
-      setTimeout(()=>{
-        wx.redirectTo({
-          url: 'index'
-        })
-      },1000)
-    }
+    }).then()
   },
 
   /**
@@ -91,72 +94,86 @@ Page({
   onShareAppMessage: function () {
 
   },
-  getInfo(e){
+  getInfo(e) {
     var that = this;
+    var userInfo = that.data.userInfo
     var data = {
-      phone: wx.getStorageSync('phoneNo'),
+      phone: userInfo.phone,
+      membership: '会员',
+      store: store,
       ajax: '_json'
     }
-    getRequest(getApiHost(), 'platform/v1/api/lampocrm/QueryVoucherInfo', 'body', data, 0, false, false,true).then(
+    getRequest(getApiHost(), 'customer/bh/api/crm/memberVoucherQuery', 'body', data, 0, false, false, true).then(
       res => {
         console.log(res)
         wx.stopPullDownRefresh()
-        if(res.status==0){
-        that.setData({
-            cards:res
+        if (res.code == 'SEL_000') {
+          let lists = res.vouchermessage
+          let array1 = []
+          let array2 = []
+          lists.map((item)=>{
+            if(item.status=='可用'||item.status=='待激活'){
+              array1.push(item)
+            }else{
+              array2.push(item)
+            }
           })
-        }else{
-          Toast({
-            message: res.msg,
-            type: 'warning'
-          });
+          that.setData({
+            array1,
+            array2
+          })
+          if (that.data.vStatus == '可用,待激活') {
+            wx.removeStorageSync('cardNum')
+            wx.setStorageSync('cardNum', array1.length)
+          }
+        } else {
+          that.setData({
+            cards: []
+          })
         }
       }
     ).catch(res => {
       Toast({
-        message: '系统错误，请联系管理员',
+        message: res.msg,
         type: 'warning'
       });
     });
   },
-  onChange(e){
+  onChange(e) {
     this.setData({
-      current:e.detail.index
+      current: e.detail.index,
     })
-  },
-  showCode(e){
-    console.log(e.currentTarget.dataset.num)
-      var that = this;
-      wx.setNavigationBarTitle({
-        title: '卡券码'
-      })
-      new oricode('canvas', e.currentTarget.dataset.num,250,250);
-      barcode('barcode', e.currentTarget.dataset.num, 700, 180);
-      wx.showLoading({
-        title: '加载中',
-      })
-      that.setData({
-        nowNum:e.currentTarget.dataset.num
-      })
-      setTimeout(() => {
-        wx.hideLoading()
-        this.setData({
-          show: true
-        })
-      }, 300)
   },
   onClose() {
     this.setData({
       show: false
     })
-    wx.setNavigationBarTitle({
-      title: '卡券包'
-    })
     this.onLoad()
   },
-  recommend(e){
+  recommend(e) {
     wx.navigateTo({
-      url: 'recommend?no='+e.currentTarget.dataset.no,
+      url: 'recommend?no=' + e.currentTarget.dataset.no,
     })
+  },
+  showCode(e) {
+    console.log(e.detail)
+    var that = this;
+    that.createQrCode(e.detail.no, 'canvas', 230, 230)
+    wx.showLoading({
+      title: '加载中',
+    })
+    that.setData({
+      nowNum: e.detail.no,
+      cardName: e.detail.name
+    })
+    setTimeout(() => {
+      wx.hideLoading()
+      this.setData({
+        show: true
+      })
+    }, 300)
+  },
+  createQrCode: function (content, canvasId, cavW, cavH) {
+    QRCode.api.draw(content, canvasId, cavW, cavH);
   }
 })

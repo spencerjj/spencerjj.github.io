@@ -1,4 +1,13 @@
 // pages/index/car.js
+import {
+  getApiHost,
+  postRequest,
+  getRequest
+} from '../../utils/api.js'
+import {store,storeId} from '../../config.js'
+var app = getApp();
+import Dialog from '../../miniprogram_npm/@vant/weapp/dialog/dialog'
+import Toast from '../../miniprogram_npm/@vant/weapp/toast/toast';
 Page({
 
   /**
@@ -6,25 +15,22 @@ Page({
    */
   data: {
     show:true,
-    plateNumber:"苏D".split('')
+    plateNumber:"苏".split(''),
+    ifFit:false,
+    carInfo:[]
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    console.log(new Date().getTime())
-    wx.requestPayment(
-      {
-      "timeStamp":new Date().getTime(),
-      "nonceStr": "",
-      "package": "prepay_id=123",
-      "signType": "MD5",
-      "paySign": "",
-      "success":function(res){},
-      "fail":function(res){},
-      "complete":function(res){}
+    var that = this;
+    app.ifUser().then((data)=>{
+      that.setData({
+        userInfo:data
       })
+      that.getInfo()
+    }).then()
   },
 
   /**
@@ -59,7 +65,7 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-
+    this.onLoad()
   },
 
   /**
@@ -76,9 +82,169 @@ Page({
 
   },
   onChange(e){
+    let that = this;
     this.setData({
       plateNumber:e.detail
     })
-    console.log(e.detail.join(''));
+    let index = e.detail.findIndex(item=>(item==undefined||item.length<1))
+    if(index>0){
+      that.setData({
+        ifFit:false
+      })
+      return false;
+    }
+    if(e.detail.length>=7){
+      that.setData({
+        ifFit:true
+      })
+    }
+ },
+ getInfo(e){
+  var that = this;
+  var userInfo = that.data.userInfo
+  var data = {
+    memNum:userInfo.memNum,
+    ajax: '_json'
+  }
+  getRequest(getApiHost(), 'customer/bh/api/crm/queryCarMem', 'body', data, 0, false, false,true).then(
+    res => {
+      console.log(res)
+      wx.stopPullDownRefresh()
+      if(res.code=='SEL_000'){
+        that.setData({
+          carInfo:res.carInfo
+        })
+      }else{
+        that.setData({
+          carInfo:[]
+        })
+      }
+    }
+  ).catch(res => {
+    Toast({
+      message: res.msg,
+      type: 'warning'
+    });
+  });
+},
+ confirm(e){
+   let plateNumber = this.data.plateNumber
+   if(e.currentTarget.dataset.carnum){
+    console.log(plateNumber)
+   }else{
+    if(plateNumber.length>=7){
+      plateNumber.map(item=>{
+        if(item.length<1){
+         Toast({  
+           message: '请正确输入车牌',
+           type: 'warning'
+         });
+         return;
+        }
+      })
+     }else{
+      Toast({
+        message: '请正确输入车牌',
+        type: 'warning'
+      });
+      return;
+     }
+   }
+  if(this.data.ifFit||e.currentTarget.dataset.carnum){
+    var that= this
+    var userInfo = that.data.userInfo
+    var  pnum = ''
+    if(e.currentTarget.dataset.carnum){
+      pnum = e.currentTarget.dataset.carnum.replace('·','')
+    }else{
+      pnum = plateNumber.join('')
+    }
+    var data = {
+      plateNo:pnum,
+      parkId:storeId,
+      ajax: '_json'
+    }
+    getRequest(getApiHost(), 'customer/bh/api/parking/GetParkingPaymentInfo', 'body', data, 0, false, false,true).then(
+      res => {
+        console.log(res)
+        wx.stopPullDownRefresh()
+        if(res.result=='true'){
+          that.addCar(pnum).then(res=>{
+            wx.navigateTo({
+              url: 'carInfo?pnum='+pnum
+            })
+          })
+        }else{
+          Toast({
+            message: res.message,
+            type: 'warning'
+          });
+        }
+      }
+    ).catch(res => {
+      Toast({
+        message: '无车辆信息',
+        type: 'warning'
+      });
+    });
+
+  }else{
+    Toast({
+          message: '请正确输入车牌',
+          type: 'warning'
+        });
+  }
+   console.log(this.data.plateNumber.join(''))
+ },
+ delete(e){
+  var that = this;
+  var userInfo = that.data.userInfo
+  var data = {
+    memNum:userInfo.memNum,
+    carNum:that.data.carInfo[0].carNum,
+    ajax: '_json'
+  }
+  getRequest(getApiHost(), 'customer/bh/api/crm/deleteMemberCar', 'body', data, 0, false, false,true).then(
+    res => {
+      console.log(res)
+      wx.stopPullDownRefresh()
+      if(res.code=='SEL_000'){
+        that.getInfo()
+      }else{
+        Toast({
+          message: res.msg,
+          type: 'warning'
+        });
+      }
+    }
+  ).catch(res => {
+    Toast({
+      message: res.msg,
+      type: 'warning'
+    });
+  });
+ },
+ addCar(carNum){
+  var that = this;
+  var userInfo = that.data.userInfo
+  console.log(123)
+  return new Promise((resolve,reject)=>{
+    var data = {
+      memNum:userInfo.memNum,
+      carNum:carNum,
+      // store:store,
+      ajax: '_json'
+    }
+    console.log(data)
+    getRequest(getApiHost(), 'customer/bh/api/crm/insertMemberCar', 'body', data, 0, false, false,true).then(
+      res => {
+        console.log(res)
+        resolve()
+      }
+    ).catch(res => {
+      resolve()
+    });
+  })
+
  }
 })

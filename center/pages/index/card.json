@@ -1,6 +1,9 @@
 {
-  "navigationBarTitleText": "卡券包",
+  "navigationBarTitleText": "我的券包",
   "navigationBarTextStyle": "black",
-  "navigationBarBackgroundColor": "#f8f8f8",
-  "enablePullDownRefresh": true
+  "navigationBarBackgroundColor": "#fff",
+  "enablePullDownRefresh": true,
+  "usingComponents":{
+    "card-lists":"/views/cardLists"
+  }
 }

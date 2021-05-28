@@ -1,0 +1,33 @@
+/* pages/index/noteDetail.wxss */
+page{
+  background:white
+}
+.video{
+  width: 100%;
+}
+.content{
+  width: 90%;
+  margin-left: 5%;
+  padding-bottom: 50rpx;
+}
+.auth{
+  height: 80rpx;
+  line-height: 80rpx;
+  font-weight: bolder;
+  display: flex;
+  justify-content: space-between;
+  font-size: 26rpx;
+}
+.auth>view:nth-child(2){
+  font-size: 22rpx;
+  color:#999
+}
+.title{
+  height: 50rpx;
+  font-weight: 500;
+  font-size: 32rpx;
+}
+.remarks{
+  color:#666;
+  font-size: 28rpx;
+}

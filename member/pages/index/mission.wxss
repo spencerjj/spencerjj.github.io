@@ -60,9 +60,9 @@ page{
   float: left;
 }
 .tiaoson{
-  width: 16.7%;
   height: 100%;
-  background:#999
+  background:#999;
+  transition: .5s linear;
 }
 .info{
   font-size: 25rpx;
@@ -70,4 +70,15 @@ page{
 }
 .hover1 {
   opacity: .5;
+}
+.sign{
+  height: 50rpx;
+  text-align: center;
+  line-height: 50rpx !important;
+  background:#aaa;
+  color:white;
+  font-weight: bolder;
+  padding:5rpx 20rpx 5rpx 20rpx;
+  border-radius: 10rpx;
+  margin-top:40rpx
 }

@@ -1,41 +1,36 @@
 <view class="container">
   <view class="topSwiper">
-    <swiper previous-margin='40px' next-margin='40px' bindchange="swiperChange" style="height:350rpx"
-          circular="true" current="{{current}}">
-          <swiper-item wx:for='{{imgList}}' wx:key='index'>
-            <image class='le-img {{current==index?"le-active":""}}' bindload='getHeight' src='{{item}}'
-              style='height:350rpx;'>
-            </image>
-            <image src="/images/cut/4_04.png" class="logo" wx:if="{{current==index}}"></image> 
-          </swiper-item>
-        </swiper>
-        <view class="mark1">
-          <view class="markItem {{current==index?'active':''}}" wx:for="{{imgList}}" wx:key='index'></view>
-        </view>
-        <view class="mark">
-          <view class="full" bindtap="toPage" hover-class="hover1" hover-stay-time="1s">
-            点击查看完整会员权益章程
+    <swiper previous-margin='40px' next-margin='40px' bindchange="swiperChange" style="height:350rpx" circular="true"
+      current="{{current}}">
+      <swiper-item wx:for='{{imgList}}' wx:key='index'>
+        <image class='le-img {{current==index?"le-active":""}}' bindload='getHeight' src='{{item}}'
+          style='height:350rpx;'>
+        </image>
+        <image src="/images/cut/4_04.png" class="logo" wx:if="{{current==index}}"></image>
+        <view class="tleft">
+          <view class="profile" wx:if="{{current==index}}">
+            <image src="{{avatarUrl||'/images/profile.png'}}"></image>
+          </view>
+          <view class="infos" wx:if="{{current==index}}">
+            <view class="name">{{name}}</view>
+            <view class="point">积分：{{availablePoints}}</view>
           </view>
         </view>
+      </swiper-item>
+    </swiper>
+    <view class="mark1">
+      <view class="markItem {{current==index?'active':''}}" wx:for="{{imgList}}" wx:key='index'></view>
+    </view>
+
+  </view>
+  <view class="mark">
+    <view class="full" bindtap="toPage" hover-class="hover1" hover-stay-time="1s">
+      点击查看完整会员权益章程
+    </view>
   </view>
   <van-tabs swipeable animated active="{{current}}" bind:change="onChange" color="#a4a3a3" title-inactive-color="#aaa">
     <van-tab title="潜在">
       <view class="card">
-        <!-- <view class="timg">
-          <image src="/images/cut/c1.png" class="tback"></image>
-          <image src="/images/cut/4_04.png" class="logo"></image> -->
-        <!-- <view class="tleft" wx:if="{{userInfo}}">
-            <view class="profile" catchtap="change">
-              <image src="{{userInfo.avatarUrl||'/images/profile.png'}}"></image>
-            </view>
-            <view class="infos" wx:if="{{userInfo}}">
-              <view class="name">{{userInfo.name}}<text wx:if="{{userInfo.memberType!='会员'}}">
-                  ({{userInfo.memberType}})</text> </view>
-              <view class="point">积分：{{userInfo.availablePoints}}</view>
-              <view class="point">会员等级：{{userInfo.level}}</view>
-            </view>
-          </view> -->
-        <!-- </view> -->
         <view class="sections">
           <view>
             <image src="/images/cut/3-1.png"></image>
@@ -43,7 +38,7 @@
           </view>
           <view>
             <image src="/images/cut/3-2.png"></image>
-            <view class="mark" wx:if="{{userInfo.birthday.length<1}}"></view>
+
             <view style="color:#d0d0d0">积分权益</view>
           </view>
           <view>
@@ -90,8 +85,8 @@
           </view>
           <view>
             <image src="/images/cut/2-2.png"></image>
-            <view class="mark" wx:if="{{userInfo.birthday.length<1}}"></view>
-            <view>积分权益</view>
+
+            <view style="color:#333">积分权益</view>
           </view>
           <view>
             <image src="/images/cut/3-3.png"></image>
@@ -103,7 +98,7 @@
           </view>
           <view>
             <image src="/images/cut/2-5.png"></image>
-            <view>会员礼</view>
+            <view style="color:#333">会员礼</view>
           </view>
           <view>
             <image src="/images/cut/3-6.png"></image>
@@ -111,7 +106,7 @@
           </view>
           <view>
             <image src="/images/cut/2-7.png"></image>
-            <view>专享服务</view>
+            <view style="color:#333">专享服务</view>
           </view>
           <view>
             <image src="/images/cut/3-8.png"></image>
@@ -119,7 +114,7 @@
           </view>
           <view>
             <image src="/images/cut/2-9.png"></image>
-            <view>专属导购</view>
+            <view style="color:#333">专属导购</view>
           </view>
         </view>
       </view>
@@ -133,40 +128,40 @@
         <view class="sections">
           <view>
             <image src="/images/cut/2-1.png"></image>
-            <view>专项折扣</view>
+            <view style="color:#333">专项折扣</view>
           </view>
           <view>
             <image src="/images/cut/2-2.png"></image>
-            <view class="mark" wx:if="{{userInfo.birthday.length<1}}"></view>
-            <view>积分权益</view>
+
+            <view style="color:#333">积分权益</view>
           </view>
           <view>
             <image src="/images/cut/2-3.png"></image>
-            <view>生日福利</view>
+            <view style="color:#333">生日福利</view>
           </view>
           <view>
             <image src="/images/cut/2-4.png"></image>
-            <view>双倍积分</view>
+            <view style="color:#333">双倍积分</view>
           </view>
           <view>
             <image src="/images/cut/2-5.png"></image>
-            <view>会员礼</view>
+            <view style="color:#333">会员礼</view>
           </view>
           <view>
             <image src="/images/cut/2-6.png"></image>
-            <view>晋级礼</view>
+            <view style="color:#333">晋级礼</view>
           </view>
           <view>
             <image src="/images/cut/2-7.png"></image>
-            <view>专享服务</view>
+            <view style="color:#333">专享服务</view>
           </view>
           <view>
             <image src="/images/cut/2-8.png"></image>
-            <view>VIP回馈活动</view>
+            <view style="color:#333">VIP回馈活动</view>
           </view>
           <view>
             <image src="/images/cut/2-9.png"></image>
-            <view>专属导购</view>
+            <view style="color:#333">专属导购</view>
           </view>
         </view>
       </view>
@@ -180,40 +175,40 @@
         <view class="sections">
           <view>
             <image src="/images/cut/2-1.png"></image>
-            <view>专项折扣</view>
+            <view style="color:#333">专项折扣</view>
           </view>
           <view>
             <image src="/images/cut/2-2.png"></image>
-            <view class="mark" wx:if="{{userInfo.birthday.length<1}}"></view>
-            <view>积分权益</view>
+
+            <view style="color:#333">积分权益</view>
           </view>
           <view>
             <image src="/images/cut/2-3.png"></image>
-            <view>生日福利</view>
+            <view style="color:#333">生日福利</view>
           </view>
           <view>
             <image src="/images/cut/2-4.png"></image>
-            <view>双倍积分</view>
+            <view style="color:#333">双倍积分</view>
           </view>
           <view>
             <image src="/images/cut/2-5.png"></image>
-            <view>会员礼</view>
+            <view style="color:#333">会员礼</view>
           </view>
           <view>
             <image src="/images/cut/2-6.png"></image>
-            <view>晋级礼</view>
+            <view style="color:#333">晋级礼</view>
           </view>
           <view>
             <image src="/images/cut/2-7.png"></image>
-            <view>专享服务</view>
+            <view style="color:#333">专享服务</view>
           </view>
           <view>
             <image src="/images/cut/2-8.png"></image>
-            <view>VIP回馈活动</view>
+            <view style="color:#333">VIP回馈活动</view>
           </view>
           <view>
             <image src="/images/cut/2-9.png"></image>
-            <view>专属导购</view>
+            <view style="color:#333">专属导购</view>
           </view>
         </view>
       </view>
@@ -227,40 +222,40 @@
         <view class="sections">
           <view>
             <image src="/images/cut/2-1.png"></image>
-            <view>专项折扣</view>
+            <view style="color:#333">专项折扣</view>
           </view>
           <view>
             <image src="/images/cut/2-2.png"></image>
-            <view class="mark" wx:if="{{userInfo.birthday.length<1}}"></view>
-            <view>积分权益</view>
+
+            <view style="color:#333">积分权益</view>
           </view>
           <view>
             <image src="/images/cut/2-3.png"></image>
-            <view>生日福利</view>
+            <view style="color:#333">生日福利</view>
           </view>
           <view>
             <image src="/images/cut/2-4.png"></image>
-            <view>双倍积分</view>
+            <view style="color:#333">双倍积分</view>
           </view>
           <view>
             <image src="/images/cut/2-5.png"></image>
-            <view>会员礼</view>
+            <view style="color:#333">会员礼</view>
           </view>
           <view>
             <image src="/images/cut/2-6.png"></image>
-            <view>晋级礼</view>
+            <view style="color:#333">晋级礼</view>
           </view>
           <view>
             <image src="/images/cut/2-7.png"></image>
-            <view>专享服务</view>
+            <view style="color:#333">专享服务</view>
           </view>
           <view>
             <image src="/images/cut/2-8.png"></image>
-            <view>VIP回馈活动</view>
+            <view style="color:#333">VIP回馈活动</view>
           </view>
           <view>
             <image src="/images/cut/2-9.png"></image>
-            <view>专属导购</view>
+            <view style="color:#333">专属导购</view>
           </view>
         </view>
       </view>

@@ -1,269 +1,44 @@
 <view class="container">
   <view class="topSwiper">
-    <swiper previous-margin='40px' next-margin='40px' bindchange="swiperChange" style="height:350rpx"
-          circular="true" current="{{current}}">
-          <swiper-item wx:for='{{imgList}}' wx:key='index'>
-            <image class='le-img {{current==index?"le-active":""}}' bindload='getHeight' src='{{item}}'
-              style='height:350rpx;'>
-            </image>
-            <image src="/images/cut/4_04.png" class="logo" wx:if="{{current==index}}"></image> 
-          </swiper-item>
-        </swiper>
-        <view class="mark1">
-          <view class="markItem {{current==index?'active':''}}" wx:for="{{imgList}}" wx:key='index'></view>
-        </view>
-        <view class="mark">
-          <view class="full" bindtap="toPage" hover-class="hover1" hover-stay-time="1s">
-            点击查看完整会员权益章程
-          </view>
-        </view>
+    <image src="/images/01-21.png" mode="widthFix" wx:if="{{userInfo.tier=='银星卡会员'}}"></image>
+    <image src="/images/01-22.png" mode="widthFix" wx:if="{{userInfo.tier=='金星卡会员'}}"></image>
+    <image src="/images/01-23.png" mode="widthFix" wx:if="{{userInfo.tier=='黑金卡会员'}}"></image>
+    <image src="/images/01-24.png" mode="widthFix" wx:if="{{userInfo.tier=='黑钻卡会员'}}"></image>
+    <view class="profile" >
+      <image src="{{avatarUrl||'/images/01-2.png'}}"></image>
+    </view>
   </view>
-  <van-tabs swipeable animated active="{{current}}" bind:change="onChange" color="#a4a3a3" title-inactive-color="#aaa">
-    <van-tab title="潜在">
-      <view class="card">
-        <!-- <view class="timg">
-          <image src="/images/cut/c1.png" class="tback"></image>
-          <image src="/images/cut/4_04.png" class="logo"></image> -->
-        <!-- <view class="tleft" wx:if="{{userInfo}}">
-            <view class="profile" catchtap="change">
-              <image src="{{userInfo.avatarUrl||'/images/profile.png'}}"></image>
-            </view>
-            <view class="infos" wx:if="{{userInfo}}">
-              <view class="name">{{userInfo.name}}<text wx:if="{{userInfo.memberType!='会员'}}">
-                  ({{userInfo.memberType}})</text> </view>
-              <view class="point">积分：{{userInfo.availablePoints}}</view>
-              <view class="point">会员等级：{{userInfo.level}}</view>
-            </view>
-          </view> -->
-        <!-- </view> -->
-        <view class="sections">
-          <view>
-            <image src="/images/cut/3-1.png"></image>
-            <view style="color:#d0d0d0">专项折扣</view>
-          </view>
-          <view>
-            <image src="/images/cut/3-2.png"></image>
-            <view class="mark" wx:if="{{userInfo.birthday.length<1}}"></view>
-            <view style="color:#d0d0d0">积分权益</view>
-          </view>
-          <view>
-            <image src="/images/cut/3-3.png"></image>
-            <view style="color:#d0d0d0">生日福利</view>
-          </view>
-          <view>
-            <image src="/images/cut/3-4.png"></image>
-            <view style="color:#d0d0d0">双倍积分</view>
-          </view>
-          <view>
-            <image src="/images/cut/3-5.png"></image>
-            <view style="color:#d0d0d0">会员礼</view>
-          </view>
-          <view>
-            <image src="/images/cut/3-6.png"></image>
-            <view style="color:#d0d0d0">晋级礼</view>
-          </view>
-          <view>
-            <image src="/images/cut/3-7.png"></image>
-            <view style="color:#d0d0d0">专享服务</view>
-          </view>
-          <view>
-            <image src="/images/cut/3-8.png"></image>
-            <view style="color:#d0d0d0">VIP回馈活动</view>
-          </view>
-          <view>
-            <image src="/images/cut/3-9.png"></image>
-            <view style="color:#d0d0d0">专属导购</view>
-          </view>
-        </view>
+  <view class="mark">
+    <text wx:if="{{userInfo.tier=='银星卡会员'}}">银星卡</text><text wx:elif="{{userInfo.tier=='金星卡会员'}}">金星卡</text><text wx:elif="{{userInfo.tier=='黑金卡会员'}}">黑金卡</text><text wx:elif="{{userInfo.tier=='黑钻卡会员'}}">黑钻卡</text>卡会员可享受以下专属权益
+  </view>
+  <view class="card">
+    <view class="sections">
+      <view>
+        <image src="/images/3-1.png"></image>
+        <view>时尚速递</view>
+        <view class="right">不定期推送最新时尚资讯</view>
       </view>
-    </van-tab>
-    <van-tab title="普卡">
-      <view class="card">
-        <!-- <view class="timg">
-          <image src="/images/cut/c2.png" class="tback"></image>
-          <image src="/images/cut/4_04.png" class="logo"></image>
-        </view> -->
-        <view class="sections">
-          <view>
-            <image src="/images/cut/3-1.png"></image>
-            <view style="color:#d0d0d0">专项折扣</view>
-          </view>
-          <view>
-            <image src="/images/cut/2-2.png"></image>
-            <view class="mark" wx:if="{{userInfo.birthday.length<1}}"></view>
-            <view>积分权益</view>
-          </view>
-          <view>
-            <image src="/images/cut/3-3.png"></image>
-            <view style="color:#d0d0d0">生日福利</view>
-          </view>
-          <view>
-            <image src="/images/cut/3-4.png"></image>
-            <view style="color:#d0d0d0">双倍积分</view>
-          </view>
-          <view>
-            <image src="/images/cut/2-5.png"></image>
-            <view>会员礼</view>
-          </view>
-          <view>
-            <image src="/images/cut/3-6.png"></image>
-            <view style="color:#d0d0d0">晋级礼</view>
-          </view>
-          <view>
-            <image src="/images/cut/2-7.png"></image>
-            <view>专享服务</view>
-          </view>
-          <view>
-            <image src="/images/cut/3-8.png"></image>
-            <view style="color:#d0d0d0">VIP回馈活动</view>
-          </view>
-          <view>
-            <image src="/images/cut/2-9.png"></image>
-            <view>专属导购</view>
-          </view>
-        </view>
+      <view>
+        <image src="/images/3-2.png"></image>
+        <view>会员沙龙</view>
+        <view class="right">定期举办主题丰富的VIP沙龙</view>
       </view>
-    </van-tab>
-    <van-tab title="金卡">
-      <view class="card">
-        <!-- <view class="timg">
-          <image src="/images/cut/c3.png" class="tback"></image>
-          <image src="/images/cut/4_04.png" class="logo"></image>
-        </view> -->
-        <view class="sections">
-          <view>
-            <image src="/images/cut/2-1.png"></image>
-            <view>专项折扣</view>
-          </view>
-          <view>
-            <image src="/images/cut/2-2.png"></image>
-            <view class="mark" wx:if="{{userInfo.birthday.length<1}}"></view>
-            <view>积分权益</view>
-          </view>
-          <view>
-            <image src="/images/cut/2-3.png"></image>
-            <view>生日福利</view>
-          </view>
-          <view>
-            <image src="/images/cut/2-4.png"></image>
-            <view>双倍积分</view>
-          </view>
-          <view>
-            <image src="/images/cut/2-5.png"></image>
-            <view>会员礼</view>
-          </view>
-          <view>
-            <image src="/images/cut/2-6.png"></image>
-            <view>晋级礼</view>
-          </view>
-          <view>
-            <image src="/images/cut/2-7.png"></image>
-            <view>专享服务</view>
-          </view>
-          <view>
-            <image src="/images/cut/2-8.png"></image>
-            <view>VIP回馈活动</view>
-          </view>
-          <view>
-            <image src="/images/cut/2-9.png"></image>
-            <view>专属导购</view>
-          </view>
-        </view>
+      <view>
+        <image src="/images/3-3.png"></image>
+        <view>停车礼遇</view>
+        <view class="right"><text wx:if="{{userInfo.tier=='银星卡会员'||userInfo.tier=='金星卡会员'}}">消费享专属停车减免</text><text wx:elif="{{userInfo.tier=='黑金卡会员'}}">全年享50次免费停车</text><text wx:elif="{{userInfo.tier=='黑钻卡会员'}}">全年免费停车</text></view>
+        <view  class="right"><text wx:if="{{userInfo.tier=='黑金卡会员'||userInfo.tier=='黑钻卡会员'}}">(享2小时/次)</text></view>
       </view>
-    </van-tab>
-    <van-tab title="白金卡">
-      <view class="card">
-        <!-- <view class="timg">
-          <image src="/images/cut/c4.png" class="tback"></image>
-          <image src="/images/cut/4_04.png" class="logo"></image>
-        </view> -->
-        <view class="sections">
-          <view>
-            <image src="/images/cut/2-1.png"></image>
-            <view>专项折扣</view>
-          </view>
-          <view>
-            <image src="/images/cut/2-2.png"></image>
-            <view class="mark" wx:if="{{userInfo.birthday.length<1}}"></view>
-            <view>积分权益</view>
-          </view>
-          <view>
-            <image src="/images/cut/2-3.png"></image>
-            <view>生日福利</view>
-          </view>
-          <view>
-            <image src="/images/cut/2-4.png"></image>
-            <view>双倍积分</view>
-          </view>
-          <view>
-            <image src="/images/cut/2-5.png"></image>
-            <view>会员礼</view>
-          </view>
-          <view>
-            <image src="/images/cut/2-6.png"></image>
-            <view>晋级礼</view>
-          </view>
-          <view>
-            <image src="/images/cut/2-7.png"></image>
-            <view>专享服务</view>
-          </view>
-          <view>
-            <image src="/images/cut/2-8.png"></image>
-            <view>VIP回馈活动</view>
-          </view>
-          <view>
-            <image src="/images/cut/2-9.png"></image>
-            <view>专属导购</view>
-          </view>
-        </view>
+      <view>
+        <image src="/images/3-4.png"></image>
+        <view>积分换礼</view>
+        <view class="right">全年不间断积分换礼</view>
       </view>
-    </van-tab>
-    <van-tab title="钻石卡">
-      <view class="card">
-        <!-- <view class="timg">
-          <image src="/images/cut/c5.png" class="tback"></image>
-          <image src="/images/cut/4_04.png" class="logo"></image>
-        </view> -->
-        <view class="sections">
-          <view>
-            <image src="/images/cut/2-1.png"></image>
-            <view>专项折扣</view>
-          </view>
-          <view>
-            <image src="/images/cut/2-2.png"></image>
-            <view class="mark" wx:if="{{userInfo.birthday.length<1}}"></view>
-            <view>积分权益</view>
-          </view>
-          <view>
-            <image src="/images/cut/2-3.png"></image>
-            <view>生日福利</view>
-          </view>
-          <view>
-            <image src="/images/cut/2-4.png"></image>
-            <view>双倍积分</view>
-          </view>
-          <view>
-            <image src="/images/cut/2-5.png"></image>
-            <view>会员礼</view>
-          </view>
-          <view>
-            <image src="/images/cut/2-6.png"></image>
-            <view>晋级礼</view>
-          </view>
-          <view>
-            <image src="/images/cut/2-7.png"></image>
-            <view>专享服务</view>
-          </view>
-          <view>
-            <image src="/images/cut/2-8.png"></image>
-            <view>VIP回馈活动</view>
-          </view>
-          <view>
-            <image src="/images/cut/2-9.png"></image>
-            <view>专属导购</view>
-          </view>
-        </view>
+      <view>
+        <image src="/images/3-5.png"></image>
+        <view>会员价商品</view>
+        <view class="right">VIP嘉宾可享会员价商品</view>
       </view>
-    </van-tab>
-  </van-tabs>
+    </view>
+  </view>
 </view>

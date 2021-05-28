@@ -4,12 +4,10 @@ import {
   postRequest,
   getRequest
 } from '../../utils/api.js'
+import {store,storeId} from '../../config.js'
 var app = getApp();
 import Dialog from '../../miniprogram_npm/@vant/weapp/dialog/dialog'
 import Toast from '../../miniprogram_npm/@vant/weapp/toast/toast';
-var QRCode = require('../../utils/code.js')
-var oricode = require('../../utils/qrcode.js')
-import {barcode} from '../../utils/index.js'
 Page({
 
   /**
@@ -27,20 +25,12 @@ Page({
    */
   onLoad: function (options) {
     var that = this;
-    var phoneNo = wx.getStorageSync('phoneNo') || ''
-    if(phoneNo.length>1){
+    app.ifUser().then((data)=>{
+      that.setData({
+        userInfo:data
+      })
       that.getInfo()
-    }else{
-      Toast({
-        message: '登录失效，请重新授权登录',
-        type: 'warning'
-      });
-      setTimeout(()=>{
-        wx.redirectTo({
-          url: 'index'
-        })
-      },1000)
-    }
+    }).then()
   },
 
   /**
@@ -94,16 +84,18 @@ Page({
   getInfo(e){
     var that = this;
     var data = {
-      phone: wx.getStorageSync('phoneNo'),
+      memNum: that.data.userInfo.memNum,
+      txnDateScope:'消费积分',
+      store:store,
       ajax: '_json'
     }
-    getRequest(getApiHost(), 'platform/v1/api/lampocrm/LPQueryMemberTxnInfo', 'body', data, 0, false, false).then(
+    getRequest(getApiHost(), 'customer/bh/api/crm/memberPointTxnQuery', 'body', data, 0, false, false).then(
       res => {
         console.log(res)
         wx.stopPullDownRefresh()
-        if(res.status==0){
+        if(res.code=='SEL_000'){
           that.setData({
-            orderLists:res.memberTxnInfoList
+            orderLists:res.pointmessage.listOfMemberPointTxnInfo.pointTxnEntry
           })
         }else{
           Toast({
@@ -119,5 +111,10 @@ Page({
         type: 'warning'
       });
     });
+  },
+  toPage(e){
+    wx.navigateTo({
+      url: e.currentTarget.dataset.url
+    })
   }
 })

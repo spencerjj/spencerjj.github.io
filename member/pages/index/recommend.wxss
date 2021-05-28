@@ -305,16 +305,35 @@ button[class="baocun"]::after{
   height: 200rpx;
   line-height: 200rpx;
   border-top:3rpx solid #9c9a9a;
-  background:#dcdcdc;
+  background:#e5e5e5;
   text-align: center;
   display: flex;
   justify-content: center;
+  align-items: center;
+}
+.tbottom image{
+  width: 50rpx;
+  margin-top:-5rpx
 }
 .tbottom button{
   width: 50%;
   border-radius: 0;
   line-height: 200rpx;
-  background:#dcdcdc;
+  background:#e5e5e5;
   display: inline-flex;
   justify-content: center;
+  align-items: center;
+  color:#333
+}
+.van-empty__image__img{
+  width: 35px !important;
+  height: 35px !important;
+  margin-top:30px
+}
+.van-empty__description{
+  color:#cccccc !important
+}
+.van-empty__image {
+  height: 70px !important;
+  text-align: center;
 }

@@ -29,11 +29,3 @@
   height: 75%;
   border-radius: 15rpx;
 }
-.logo{
-  position: absolute;
-  top:150rpx;
-  left:50%;
-  margin-left:-150rpx;
-  width: 300rpx;
-  height: 50rpx;
-}

@@ -33,7 +33,7 @@
       </van-card>
     </view>
   </view>
-  <van-empty image="search" description="暂无订单" wx:if="{{orderLists.length<1}}" />
+  <van-empty image="/images/cut/7_04.png" description="暂无数据" wx:if="{{orderLists.length<1}}" />
   <view class='nullDataInfo'>
     <van-divider contentPosition="center" wx:if="{{orderLists.length>=1}}">无更多订单了</van-divider>
   </view>

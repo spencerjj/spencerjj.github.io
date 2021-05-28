@@ -1,0 +1,3 @@
+<view class="container">
+  <image src="{{item}}" mode="widthFix" wx:for="{{fileLists}}" wx:key="index" />
+</view>

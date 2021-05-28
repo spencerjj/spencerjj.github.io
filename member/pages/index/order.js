@@ -106,8 +106,7 @@ Page({
   getInfo(e){
     var that = this;
     var data = {
-      phone: 15979129664,
-      // phone:wx.getStorageSync('phoneNo'),
+      phone:wx.getStorageSync('phoneNo'),
       ajax: '_json'
     }
     getRequest(getApiHost(), 'platform/v1/api/lampocrm/QueryMemOrderInfo', 'body', data, 0, false, false,true).then(

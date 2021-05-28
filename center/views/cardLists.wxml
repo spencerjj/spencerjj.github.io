@@ -1,0 +1,7 @@
+<view class="cardItems" bindtap="showCode" wx:for="{{cardLists}}" data-no="{{item.vnum}}" data-name="{{item.vname}}">
+  <image src="{{type=='disable'?'/images/card1.jpg':'/images/card.jpg'}}"></image>
+  <view class="notice">{{item.vname||item.type}}</view>
+  <view class="{{type=='disable'?'rule1':'rule'}}">全场满1元使用1元，不可折现</view>
+  <view class="date">有效期：{{item.startDate}}~{{item.endDate}}</view>
+  <view class="count">￥<text>{{item.denomination||0}}</text></view>
+</view>

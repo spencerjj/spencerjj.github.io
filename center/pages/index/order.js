@@ -4,6 +4,7 @@ import {
   postRequest,
   getRequest
 } from '../../utils/api.js'
+import {store,storeId} from '../../config.js'
 var app = getApp();
 import Dialog from '../../miniprogram_npm/@vant/weapp/dialog/dialog'
 import Toast from '../../miniprogram_npm/@vant/weapp/toast/toast';
@@ -14,18 +15,14 @@ Page({
    */
   data: {
     current:0,
-    orderLists:[],
+    orderLists:[
+      1
+    ],
     show:false,
-    nowNum:'',
-    name:'',
-    level:'',
-    point:0,
-    total:0,
-    lists:[
-      {
-
-      }
-    ]
+    userInfo:'',
+    lists:[],
+    sonLists:[],
+    payLists:[]
   },
 
   /**
@@ -33,26 +30,12 @@ Page({
    */
   onLoad: function (options) {
     var that = this;
-    var phoneNo = wx.getStorageSync('phoneNo') || ''
-    if(phoneNo.length>1){
-      console.log(options.point)
+    app.ifUser().then((data)=>{
       that.setData({
-        name:options.name||'',
-        point:options.point||0,
-        level:options.level||''
+        userInfo:data
       })
       that.getInfo()
-    }else{
-      Toast({
-        message: '登录失效，请重新授权登录',
-        type: 'warning'
-      });
-      setTimeout(()=>{
-        wx.redirectTo({
-          url: 'index'
-        })
-      },1000)
-    }
+    }).then()
   },
 
   /**
@@ -105,52 +88,63 @@ Page({
   },
   getInfo(e){
     var that = this;
+    var userInfo = that.data.userInfo
     var data = {
-      phone: 15979129664,
-      // phone:wx.getStorageSync('phoneNo'),
+      memNum: '1-106839358',
+      store:store,
       ajax: '_json'
     }
-    getRequest(getApiHost(), 'platform/v1/api/lampocrm/QueryMemOrderInfo', 'body', data, 0, false, false,true).then(
+    getRequest(getApiHost(), 'customer/bh/api/crm/queryMemOrderInfo', 'body', data, 0, false, false,true).then(
       res => {
         console.log(res)
         wx.stopPullDownRefresh()
-        if(res.status==0||res.status==2){
-          let x = []
-          if(res.orderEntryList.length>0){
-            res.orderEntryList.map((item)=>{
-              x.push((item.actAmount||0)-1+1)
-            })
-            let total = x.reduce(function(prev,cur,index,array){
-              return prev + cur
-            })
-            that.setData({
-              total
-            })
-          }
-          
-          that.setData({
-            orderLists:res.orderEntryList
+        if(res.code=='SEL_000'){
+        that.setData({
+            lists:res.orderInfo
           })
         }else{
-          Toast({
-            message: res.msg,
-            type: 'warning'
-          });
+          that.setData({
+            lists:''
+          })
         }
       }
     ).catch(res => {
       Toast({
-        message: '系统错误，请联系管理员',
+        message: res.msg,
         type: 'warning'
       });
     });
   },
   showDetail(e){
-    wx.removeStorageSync('orderdetail')
     let x = e.currentTarget.dataset.index
-    wx.setStorageSync('orderdetail', this.data.orderLists[x])
-    wx.navigateTo({
-      url: 'orderDetail',
+    this.setData({
+      sonLists:this.data.lists[x].listOfOrderDteailsEntry.orderDteailsEntry,
+      payLists:this.data.lists[x].listOfOrderPaymentEntry.orderPaymentEntry
     })
+    wx.showLoading({
+      title: '加载中',
+    })
+    setTimeout(() => {
+      wx.hideLoading()
+      this.setData({
+        show: true
+      })
+      setTimeout(()=>{
+        this.setData({
+          show1:true,
+        })
+      },50)
+    }, 300)
+  },
+  close(){
+    this.setData({
+      show1: false
+    })
+ 
+    setTimeout(()=>{
+      this.setData({
+        show:false
+      })
+    },300)
   }
 })

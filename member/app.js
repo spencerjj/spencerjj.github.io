@@ -64,8 +64,6 @@ App({
     })
   },
   globalData: {
-    appid: 'wx6fbd93cb284eee7c',
-    secret: '017a7a23c36490c594857502c7b68b4a'
   },
   doLogin: function () {
     console.log('登录')

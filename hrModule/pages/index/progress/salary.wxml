@@ -95,13 +95,19 @@
     <input class="number1" placeholder-style='color:#af9d7f' bindinput='hinput2' value="{{lists.remarks}}"
       disabled="{{current==1&&lists.bpm.activityId == 'hrbp'?false:true}}"></input>
   </view>
-
+  <view class="title" style="z-index:1 !important"  wx:if="{{lists.bpm.activityId == 'hrbp'||lists.txxxsm.length>1}}">
+    <view class="c1">
+      <text>调薪详细说明</text>
+    </view>
+    <input class="number1" placeholder-style='color:#af9d7f' bindinput='hinput4' value="{{lists.txxxsm}}"
+      disabled="{{current==1&&lists.bpm.activityId == 'hrbp'?false:true}}"></input>
+  </view>
   <view class="title" wx:if="{{lists.bpm.activityId == 'hrbp'}}">
     <view class="c1">
       <text>一级分管领导<text style="color:red;font-size:25rpx">*</text></text>
     </view>
     <input class="timePicker" placeholder="请填写姓名并选择处理人" placeholder-style='color:#af9d7f;margin-left:-5rpx'
-      bindinput='checkInput' value="{{lists.m1Name||keywords}}" bindconfirm="confirm" confirm-type="done" maxlength="20"
+      bindinput='checkInput' value="{{keywords||lists.m1Name}}" bindconfirm="confirm" confirm-type="done" maxlength="20"
       cursor-spacing="200" disabled="{{current!=1}}"></input>
     <view class="sonLists" wx:if="{{sonvisibility}}">
       <view wx:for="{{codeLists}}" wx:for-item="sonItem" class="sonItem" bindtap="selectItem" hover-class='hover1'
@@ -115,7 +121,7 @@
       <text>二级分管领导</text>
     </view>
     <input class="timePicker" placeholder="请填写姓名并选择处理人" placeholder-style='color:#af9d7f;margin-left:-5rpx'
-      bindinput='checkInput1' value="{{lists.m2Name||keywords1}}" bindconfirm="confirm1" confirm-type="done" maxlength="20"
+      bindinput='checkInput1' value="{{keywords1||lists.m2Name}}" bindconfirm="confirm1" confirm-type="done" maxlength="20"
       cursor-spacing="200"  disabled="{{current!=1}}"></input>
     <view class="sonLists" wx:if="{{sonvisibility1}}">
       <view wx:for="{{codeLists1}}" wx:for-item="sonItem" class="sonItem" bindtap="selectItem1" hover-class='hover1'

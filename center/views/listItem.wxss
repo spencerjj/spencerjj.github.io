@@ -1,0 +1,32 @@
+/* views/listItem.wxss */
+.listItem{
+  position: relative;
+  width: 94%;
+  height: 110rpx;
+  line-height: 110rpx;
+  margin-left: 3%;
+  background:white;
+  color:#666;
+  border-bottom:2rpx solid #ddd;
+  font-size: 28rpx;
+}
+.logo{
+  width: 60rpx;
+  height: 60rpx;
+  vertical-align: middle;
+  margin-top:-5rpx;
+  margin-left:50rpx;
+  margin-right: 20rpx;
+}
+.arraw{
+  width: 40rpx;
+  height: 40rpx;
+  top:50%;
+  margin-top: -20rpx;
+  right: 30rpx;
+  position: absolute;
+  transform: rotate(-90deg);
+}
+.hover1{
+  background:#eee
+}

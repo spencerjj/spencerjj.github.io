@@ -56,10 +56,10 @@ App({
     currentTeacher: {
       pkTeacher: 123,
     },
-    // url: 'http://192.168.2.50:8083/hr/v1/',
-    // pathurl: 'http://192.168.2.50:8083',
-    url:'https://hr.princesky.com/hr/v1/',
-    pathurl:'https://hr.princesky.com',
+    url: 'http://192.168.2.50:8083/hr/v1/',
+    pathurl: 'http://192.168.2.50:8083',
+    // url:'https://hr.princesky.com/hr/v1/',
+    // pathurl:'https://hr.princesky.com',
     statusCode: 0,
     __sid: '',
     tempSid:''

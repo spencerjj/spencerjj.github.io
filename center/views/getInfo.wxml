@@ -1,0 +1,4 @@
+<view>
+    <label for="getInfo" class="getInfo" wx:if="{{ifShow}}"></label>
+    <button id="getInfo" open-type="getUserInfo" lang="zh_CN" bindgetuserinfo="getUserInfo"></button>
+  </view>

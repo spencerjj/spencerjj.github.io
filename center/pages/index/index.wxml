@@ -1,34 +1,43 @@
 <view class="container">
+  <!-- <get-info bind:getInfo="getUser"/> -->
   <view class="banner">
-    <image src="/images/01-1.png" mode="widthFix"></image>
+    <my-swiper imgLists="{{banner}}" sheight="500rpx" autoplay="true"/>
   </view>
   <view class="middle">
     <view class="center">
       <view class="ctop">
-        <image src="/images/01-2.png"></image>
+        <image src="{{avatarUrl||'/images/01-41.png'}}"></image>
         <view class="info">
-          <view>常州购物中心<image src="/images/01-7.png" mode="widthFix"></image></view>
-          <view>我的积分:100</view>
+          <view class="name"  wx:if="{{userInfo}}"><text>{{userInfo.name}}</text>
+            <image src="/images/card1.png" mode="widthFix" style="" wx:if="{{userInfo.tier=='银星卡会员'}}"></image>
+            <image src="/images/card2.png" mode="widthFix" style="" wx:if="{{userInfo.tier=='金星卡会员'}}"></image>
+            <image src="/images/card3.png" mode="widthFix" style="" wx:if="{{userInfo.tier=='黑金卡会员'}}"></image>
+            <image src="/images/card4.png" mode="widthFix" style="" wx:if="{{userInfo.tier=='黑钻卡会员'}}"></image>
+          </view>
+          <view class="name" wx:if="{{!userInfo}}" style="font-size:35rpx;color:#C79F62;border-bottom:2rpx solid #bbb;letter-spacing:3rpx" bindtap="toMy">您尚未登录哦</view>
+          <view  wx:if="{{userInfo}}">我的积分: <text style="font-weight:bolder;color:#000;">{{userInfo.availConsumPoint}}</text> </view>
+          <view wx:if="{{!userInfo}}"  bindtap="toMy">登录后使用更多功能</view>
         </view>
-        <view class="code">
+        <view class="code" bindtap="use"  wx:if="{{userInfo}}">
           <image src="/images/code.png"></image>
           <view>会员码</view>
         </view>
       </view>
       <view class="cbottom">
-        <view>
+        <view bindtap="toPage" data-mark="car" hover-stay-time=".5s" hover-class="hover2">
           <image src="/images/01-3.png" mode="widthFix"></image>
           <view>停车缴费</view>
         </view>
-        <view>
+        <view bindtap="toPage" data-mark="card" hover-stay-time=".5s" hover-class="hover2">
+          <view class="mark" hidden="{{cardNum==0||!cardNum}}">{{cardNum}}</view>
           <image src="/images/01-4.png" mode="widthFix"></image>
           <view>我的券包</view>
         </view>
-        <view>
+        <view bindtap="toPage" data-mark="order" hover-stay-time=".5s" hover-class="hover2">
           <image src="/images/01-5.png" mode="widthFix"></image>
           <view>消费记录</view>
         </view>
-        <view>
+        <view bindtap="toPage" data-mark="borrow" hover-stay-time=".5s" hover-class="hover2">
           <image src="/images/01-6.png" mode="widthFix"></image>
           <view>商场服务</view>
         </view>
@@ -44,56 +53,21 @@
       </view>
     </view>
     <view class="activity">
-      <view class="actItem">
-        <view><image src="/images/01-2.png" mode="scaleToFill"></image></view>
-        <view>美妆新品体验官</view>
-        <view><van-icon name="clock-o" size="15" custom-style="vertical-align: -8%" /> 2021/05/01-05/5</view>
-        <view>#进行中</view>
-        <view>立即参与</view>
-      </view>
-      <view class="actItem">
-        <view><image src="/images/01-2.png" mode="scaleToFill"></image></view>
-        <view>美妆新品体验官</view>
-        <view><van-icon name="clock-o" size="15" custom-style="vertical-align: -8%" /> 2021/05/01-05/5</view>
-        <view>#进行中</view>
-        <view>立即参与</view>
-      </view>
-      <view class="actItem">
-        <view><image src="/images/01-2.png" mode="scaleToFill"></image></view>
-        <view>美妆新品体验官</view>
-        <view><van-icon name="clock-o" size="15" custom-style="vertical-align: -8%" /> 2021/05/01-05/5</view>
-        <view>#进行中</view>
-        <view>立即参与</view>
-      </view>
-      <view class="actItem">
-        <view><image src="/images/01-2.png" mode="scaleToFill"></image></view>
-        <view>美妆新品体验官</view>
-        <view><van-icon name="clock-o" size="15" custom-style="vertical-align: -8%" /> 2021/05/01-05/5</view>
-        <view>#进行中</view>
-        <view>立即参与</view>
-      </view>
-      <view class="actItem">
-        <view><image src="/images/01-2.png" mode="scaleToFill"></image></view>
-        <view>美妆新品体验官</view>
-        <view><van-icon name="clock-o" size="15" custom-style="vertical-align: -8%" /> 2021/05/01-05/5</view>
-        <view>#进行中</view>
-        <view>立即参与</view>
-      </view>
-      <view class="actItem">
-        <view><image src="/images/01-2.png" mode="scaleToFill"></image></view>
-        <view>美妆新品体验官</view>
-        <view><van-icon name="clock-o" size="15" custom-style="vertical-align: -8%" /> 2021/05/01-05/5</view>
-        <view>#进行中</view>
-        <view>立即参与</view>
-      </view>
-      <view class="actItem">
-        <view><image src="/images/01-2.png" mode="scaleToFill"></image></view>
-        <view>美妆新品体验官</view>
-        <view><van-icon name="clock-o" size="15" custom-style="vertical-align: -8%" /> 2021/05/01-05/5</view>
-        <view>#进行中</view>
-        <view>立即参与</view>
-      </view>
-
+      <view class="check" bindtap="toPage" data-mark="mainIndex">查看更多 ></view>
+      <act-box wx:if="{{titleIndex==1}}" type="activity"  lists="{{actLists}}"/>
+      <card-box wx:elif="{{titleIndex==2}}" lists="{{pointLists}}" />
+      <act-box wx:elif="{{titleIndex==3}}" type="report"  lists="{{repLists}}"/>
+      <note-box wx:elif="{{titleIndex==4}}" lists="{{noteLists}}" bind:like="like"/>
     </view>
   </view>
+
 </view>
+<view class="showCode {{show1?'show':''}}" wx:if="{{show}}" bindtap="onClose" catchtouchmove="ture">
+    <view class="qrcode" wx:if="{{show2}}">
+      <canvas class='canvas' canvas-id='canvas'></canvas>
+      <view style="position:absolute;bottom:-150rpx;left:50%;margin-left:-40rpx"><van-icon name="clear" style="color:#999" size="40"/></view>
+    </view>
+    
+  </view>
+<van-toast id="van-toast" />
+<van-dialog id="van-dialog" />

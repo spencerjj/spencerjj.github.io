@@ -4,6 +4,6 @@ module.exports = {
   CHANNEL_ID: 'MiniProgram',
   APPEND_WORD: 'dianshang!',
   PARTNER_TYPE: 'wechat_mp',
-  HOST_URI: 'http://192.168.2.81:8087/'
-  // HOST_URI:'https://web.princesky.com/'
+  // HOST_URI: 'http://192.168.2.81:8087/'
+  HOST_URI:'https://web.princesky.com/'
 };

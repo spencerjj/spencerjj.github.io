@@ -1,0 +1,52 @@
+/* pages/index/pointDetail.wxss */
+.top{
+  background:white;
+  width: 100%;
+  margin-top:30rpx;
+  box-sizing: border-box;
+}
+.section>view{
+  height: 120rpx;
+  line-height: 120rpx;
+  width: 90%;
+  margin-left: 5%;
+  border-bottom:2rpx solid #ddd;
+  font-weight: 500;
+}
+.section>view:last-child{
+  border-bottom:none
+}
+.section text{
+  font-weight: 400;
+  color:#666
+}
+.bottom{
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 150rpx;
+  background:white;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding:0 30rpx;
+  box-sizing: border-box;
+}
+.bottom>view:first-child{
+  margin-left: 30rpx;
+  font-weight: bolder;
+  font-size: 30rpx;
+  color:#C30D23
+}
+.bottom>view:nth-child(2){
+  height: 100rpx;
+  line-height: 100rpx;
+  width: 250rpx;
+  font-size: 35rpx;
+  text-align: center;
+  background-image: linear-gradient(to right,#f7c9ab,#c9a07e);
+  border-radius: 50rpx;
+  color:white
+}
+

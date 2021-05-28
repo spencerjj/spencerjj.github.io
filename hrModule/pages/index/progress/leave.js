@@ -353,16 +353,16 @@ Page({
         })
         return;
       }
-      // if(that.data.lists.bpm.activityId=='hrmsg'&&that.data.salaryDate.length<1){
-      //   $Toast({
-      //     content:'请选择最后结薪日',
-      //     type:'warning'
-      //   })
-      //   that.setData({
-      //     visible: false
-      //   })
-      //   return;
-      // }
+      if(that.data.lists.bpm.activityId!='start'&&that.data.lastDate.length<1){
+        $Toast({
+          content:'请选择最后工作日',
+          type:'warning'
+        })
+        that.setData({
+          visible: false
+        })
+        return;
+      }
       if(that.data.lists.bpm.activityId=='hrbp'&&that.data.index2==10){
         $Toast({
           content:'请选择移交类型',

@@ -10,8 +10,8 @@
     </van-dropdown-menu>
   </view>
   <view class="lists">
-    <view class="actItem">
-        <view><image src="/images/01-9.png" mode="widthFix"></image></view>
+    <view class="actItem" bindtap="toPage">
+        <view><image src="/images/01-9.png" mode="aspectFit"></image></view>
         <view>
           <view>MaxMara 麦丝玛拉</view>
           <view>奢侈品 购物中心1F</view>

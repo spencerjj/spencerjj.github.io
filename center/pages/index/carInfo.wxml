@@ -1,0 +1,86 @@
+<view class="container">
+  <view class='top'>
+    <view class="topTitle">
+      我的车辆
+    </view>
+    <view class="carInfo">
+      {{carInfo.plateNo}} <image src="/images/01-35.png" mode="widthFix" wx:if="{{carInfo.plateNo.length==8}}"></image>
+    </view>
+    <view class="midTitle">
+      <view>停车费用</view>
+      <view>停车时长</view>
+    </view>
+    <view class="midInfo">
+      <view>{{carInfo.totalAmount}}<text>元</text></view>
+      <view>{{carInfo.hour==0?'':carInfo.hour}}<text wx:if="{{carInfo.hour>0}}">小时</text>{{carInfo.minute}}<text>分</text></view>
+    </view>
+    <view class="midTitle" style="margin-top:20rpx">
+      <view>入场时间</view>
+      <view>出场时间</view>
+    </view>
+    <view class="midTitle1">
+      <view>{{carInfo.entryTime}}</view>
+      <view>未出场</view>
+    </view>
+  </view>
+  <view class="rights">
+      <!-- <view class="card card1">
+        <view>黑金会员权益</view>
+        <view>-2.00小时</view>
+      </view> -->
+      <view class="card card2" bindtap="showCard" hover-class="hover1" hover-stay-time=".5s">
+        <view><image src="/images/01-40.png" class="img2"></image>停车优惠券<image src="/images/01-36.png" mode="widthFix" class="img1"></image></view>
+        <view><text wx:if="{{nowDur.length<1}}">{{cardLists.length}}张可用 ></text><text wx:else>-{{nowDur}}分钟</text></view>
+      </view>
+      <!-- <view class="card card2">
+        <view><image src="/images/01-40.png" class="img2"></image>积分抵扣<van-stepper value="{{ 100 }}" step="100" min="100" max="1000" button-size="18"/><text style="font-size:22rpx;color:#999">可用积分2000分</text></view>
+        <view>-5.00元</view>
+      </view> -->
+  </view>
+  <view class="total">
+    <view class="card card3">
+      <view>应付总额</view>
+      <view>{{carInfo.totalAmount}}元</view>
+    </view>
+    <view class="card card3">
+      <view bindtap="tip">已支付金额<van-icon name="info-o" size="15" style="color:#F29600;margin-left:10rpx"/></view>
+      <view style="color:#F29600">-{{carInfo.paidAmount}}元</view>
+    </view>
+    <view class="card card3">
+      <view>累计扣减</view>
+      <view style="color:#F29600">-{{carInfo.deductionAmount}}元</view>
+    </view>
+  </view>
+  <view class="bottom">
+    <view>支付 <text style="color:#C30D23;font-size:38rpx;font-weight:900">{{carInfo.payable}}元</text> </view>
+    <view class="pay" hover-class="hover1" hover-stay-time=".5s" bindtap="pay">立即支付</view>
+  </view>
+</view>
+<van-popup
+  show="{{ show }}"
+  closeable
+  position="bottom"
+  custom-style="height: 70vh;"
+  bind:close="onClose"
+>
+  <view class="cardCon">
+    <view class="title">停车优惠券</view>
+    <view class='line'><van-divider contentPosition="center" customStyle="color:#666;border-color:#999">可用优惠券（{{cardLists.length}}）</van-divider></view>
+    <view class="listItem" wx:for="{{cardLists}}" wx:key="index" bindtap="select" data-id="{{item.parkId}}" data-dur="{{item.offerDuration}}" data-index="{{index}}">
+      <view class="leftR"></view>
+      <view class="rightR"></view>
+      <view class="status" wx:if="{{item.ifsel}}">已选</view>
+      <view class="listInfo">
+         <view>{{item.source}}</view>
+         <view>有效期至{{item.effecTime}}</view>
+      </view>
+      <view class="listTime">
+        <text>{{item.offerDuration}}</text>分钟
+      </view>
+    </view>
+    <view class="clear" bindtap="clear">
+      不使用优惠券
+    </view>
+  </view>
+</van-popup>
+<van-toast id="van-toast" />

@@ -150,7 +150,7 @@
         <view class="trh">
           <view class="th" style="width:50%">部门</view>
           <view class="th">本日</view>
-          <view class="th">毛利</view>
+          <view class="th">日同期</view>
           <view class="th">毛利率</view>
           <view class="th">本月</view>
           <view class="th">月同期</view>
@@ -164,7 +164,7 @@
           <view class="tr {{index%2==0?'bg-w':'bg-g'}}" hover-class="trhover" hover-stay-time="0.5">
             <view class="td depart">{{item.departName2}}</view>
             <view class="td">{{item.sales}}</view>
-            <view class="td">{{item.profit}}</view>
+            <view class="td">{{item.lastSales||0}}</view>
             <view class="td">{{item.gpm||0}}%</view>
             <view class="td">{{item.financeMonthSales||0}}</view>
             <view class="td">{{item.financeLastMonthSales||0}}</view>

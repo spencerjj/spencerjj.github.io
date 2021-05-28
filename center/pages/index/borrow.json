@@ -1,0 +1,9 @@
+{
+  "navigationBarTitleText": "商城租赁",
+  "navigationBarTextStyle": "black",
+  "navigationBarBackgroundColor": "#fff",
+  "enablePullDownRefresh": false,
+  "usingComponents":{
+    "borrow-lists":"/views/borrowLists"
+  }
+}

@@ -1,0 +1,58 @@
+/* views/cardLists.wxss */
+.cardItems{
+  width: 96%;
+  margin-left:2%;
+  height: 220rpx;
+  border-radius: 20rpx;
+  margin-top:40rpx;
+  box-shadow: 10rpx 10rpx 20rpx 0rpx #bbb;
+  position: relative;
+}
+.cardItems image{
+  width: 100%;
+  height: 100%;
+}
+.cardItems>view{
+  position: absolute;
+  color:white
+}
+.cardItems .notice{
+  font-size: 40rpx;
+  top:40rpx;
+  left: 30rpx;
+  font-weight: bolder;
+  width:65%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap
+}
+.cardItems .rule{
+  color:#ff8d67;
+  left: 30rpx;
+  bottom:36rpx;
+  font-size: 25rpx;
+  font-weight: bolder;
+}
+.cardItems .rule1{
+  color:#999;
+  left: 30rpx;
+  bottom:36rpx;
+  font-size: 25rpx;
+  font-weight: bolder;
+}
+.cardItems .date{
+  left: 30rpx;
+  bottom:10rpx;
+  font-size: 20rpx;
+}
+.cardItems .count{
+  top:40rpx;
+  right:0rpx;
+  width: 200rpx;
+  font-size: 40rpx;
+  text-align: center;
+}
+.cardItems .count text{
+  font-size: 60rpx;
+  font-weight: bolder;
+}

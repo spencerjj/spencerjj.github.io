@@ -1,0 +1,66 @@
+<view class="container">
+  <!-- <get-info bind:getInfo="getUser"/> -->
+  <view class="top">
+    <image src="/images/01-8.png" mode="scaleToFill" class="banner"></image>
+    
+    <view class="center">
+      <view class="ctop" >
+        <view class="login" wx:if="{{!userInfo}}">
+        您尚未登录哦
+      <button open-type="getPhoneNumber" bindgetphonenumber="getPhone" hover-class="hover1"
+        hover-stay-time=".5s">登录/注册</button>
+      </view>
+        <image src="{{avatarUrl||'/images/01-2.png'}}"  wx:if="{{userInfo}}"></image>
+        <view class="info"  wx:if="{{userInfo}}">
+          <view>
+            <image src="/images/card1.png" mode="widthFix" style="" wx:if="{{userInfo.tier=='银星卡会员'}}"></image>
+            <image src="/images/card2.png" mode="widthFix" style="" wx:if="{{userInfo.tier=='金星卡会员'}}"></image>
+            <image src="/images/card3.png" mode="widthFix" style="" wx:if="{{userInfo.tier=='黑金卡会员'}}"></image>
+            <image src="/images/card4.png" mode="widthFix" style="" wx:if="{{userInfo.tier=='黑钻卡会员'}}"></image>
+          </view>
+          <view>{{userInfo.name}}</view>
+        </view>
+        <view class="code" bindtap="use"  wx:if="{{userInfo}}">
+          <image src="/images/code.png"></image>
+          <view>会员码</view>
+        </view>
+      </view>
+      <view class="cbottom" wx:if="{{userInfo}}">
+        <!-- 积分: <text>{{userInfo.availConsumPoint}}</text>　l　钱包: ￥<text>{{userInfo.availConsumPoint}}</text> -->
+        积分: <text>{{userInfo.availConsumPoint}}</text>
+      </view>
+    </view>
+  </view>
+  <view class="middle">
+    <view hover-class="hover1" hover-stay-time=".5s" bindtap="toPage" data-url="card">
+      <view class="mark" hidden="{{cardNum==0}}">{{cardNum}}</view>
+      <image src="/images/01-10.png" style="margin-top:-10rpx"></image>
+      优惠券
+    </view>
+    <view hover-class="hover1" hover-stay-time=".5s" bindtap="toPage" data-url="center">
+      <image src="/images/01-11.png" style="margin-top:-10rpx"></image>
+      星级权益
+    </view>
+    <view hover-class="hover1" hover-stay-time=".5s"  bindtap="toPage" data-url="detail">
+      <image src="/images/01-12.png"></image>
+      会员章程
+    </view>
+  </view>
+  <view class="lists">
+    <list-item imgPath="/images/01-13.png" url="order" name="消费记录"/>
+    <list-item imgPath="/images/01-15.png" url="borrow" name="租借记录"/>
+    <list-item imgPath="/images/01-16.png" url="activity" name="报名记录"/>
+    <list-item imgPath="/images/01-34.png" url="point" name="积分兑换记录"/>
+    <list-item imgPath="/images/01-15.png" url="info" name="完善个人资料"/>
+    <list-item imgPath="/images/01-17.png" url="contact" name="联系客服"/>
+  </view>
+
+</view>
+  <view class="showCode {{show1?'show':''}}" wx:if="{{show}}" bindtap="onClose"  catchtouchmove="ture">
+    <view class="qrcode" wx:if="{{show2}}">
+      <canvas class='canvas' canvas-id='canvas'></canvas>
+      <view style="position:absolute;bottom:-150rpx;left:50%;margin-left:-40rpx"><van-icon name="clear" style="color:#999" size="40"/></view>
+    </view>
+</view>
+<van-toast id="van-toast" />
+<van-dialog id="van-dialog" />

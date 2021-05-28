@@ -14,14 +14,18 @@ Page({
     ],
     current:0,
     isShow:false,
-    swiperH:''
+    swiperH:'',
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    this.setData({
+      avatarUrl:options.avatarUrl,
+      name:options.name,
+      availablePoints:options.point
+    })
   },
 
   /**

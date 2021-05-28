@@ -12,6 +12,14 @@ Component({
         this.change(a,b)
       }// 属性被改变时执行的函数（可选），也可以写成在methods段中定义的方法名字符串, 如：'_propertyChange'
     },
+    sheight:{
+      type:String,
+      value:'500rpx'
+    },
+    autoplay:{
+      type:Boolean,
+      value:false
+    }
   },
   //组件的数据
   data: {
@@ -19,10 +27,9 @@ Component({
     goodsBuy:[],
     goodsExchange:[],
     indicatorDots: true,
-    autoplay: true,
     interval: 3000,
-    duration: 1000,
-    beforeColor: "white",
+    duration: 500,
+    beforeColor: "#eeeeee",
     afterColor: "#0DA8FF",
     userId: 3,
     code:0,

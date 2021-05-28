@@ -311,6 +311,7 @@ this.drowsyUserInfo()
         }
       }
     ).catch(res => {
+      wx.stopPullDownRefresh();
       wx.showToast({
         title: res.message=="您的操作权限不足！"?'操作权限不足':res.message,
         image:'/images/00-8.png'
@@ -363,6 +364,7 @@ this.drowsyUserInfo()
         }
       }
     ).catch(res => {
+      wx.stopPullDownRefresh();
       // wx.showModal({
       //   title: '错误',
       //   content: res.message,

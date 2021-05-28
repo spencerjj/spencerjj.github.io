@@ -19,6 +19,8 @@ Page({
     img: '',
     cshow: false,
     tshow: false,
+    point:0,
+    num:0,
     reLists: [
       // {
       // phone:123123123,
@@ -100,6 +102,7 @@ Page({
         phoneNo,
       })
       that.getInfo()
+      that.getNum()
     } else {
       Toast({
         message: '登录失效，请重新授权登录',
@@ -184,6 +187,36 @@ Page({
 
       }
     ).catch(res => {
+      Toast({
+        message: '系统错误，请联系管理员',
+        type: 'warning'
+      });
+    });
+  },
+  getNum(e) {
+    var that = this;
+    var data = {
+      phone: wx.getStorageSync('phoneNo'),
+      ajax: '_json'
+    }
+    getRequest(getApiHost(), 'platform/v1/api/lampocrm/LPQueryMemberAllInfo', 'body', data, 0, false, true).then(
+      res => {
+        console.log(res)
+        wx.stopPullDownRefresh()
+        if(res.status==0){
+          that.setData({
+            point: res.nInvPoints,
+            num:res.nInvFriends,
+          })
+        }else{
+          Toast({
+            message: res.msg,
+            type: 'warning'
+          });
+        }
+      }
+    ).catch(res => {
+      console.log(res)
       Toast({
         message: '系统错误，请联系管理员',
         type: 'warning'

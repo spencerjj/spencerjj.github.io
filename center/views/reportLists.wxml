@@ -1,0 +1,20 @@
+<view class="actItem" wx:for="{{lists}}" wx:key="index">
+  <view>
+    <image src="{{item.fileUrl}}" mode="aspectFill"></image>
+  </view>
+  <view class="aright">
+    <view>{{item.title}}</view>
+    <view>
+      <van-icon name="clock-o" size="15" custom-style="vertical-align: -8%" /> {{item.actTime}}</view>
+      <view><text>#{{item.compare}}</text></view>
+    <!-- <view class="people">
+      <image src="/images/01-30.png" mode="widthFix"></image>余<text style="color:#e95513">12</text>人
+    </view> -->
+    <view class="join" bindtap="itemTab" data-id="{{item.id}}" data-index="{{index}}" hover-class="hover1" hover-stay-time=".5s"><text>立即报名</text></view>
+    <view class="know" bindtap="know" data-id="{{item.id}}" data-index="{{index}}" hover-class="hover1" hover-stay-time=".5s"><text>了解详情</text></view>
+  </view>
+</view>
+<van-empty image="search" description="暂无活动" wx:if="{{lists&&lists.length<1}}"/>
+  <view wx:if="{{lists.length>0}}" class='nullDataInfo'><van-divider contentPosition="center">无更多活动了</van-divider></view>
+<van-toast id="van-toast" />
+<van-dialog id="van-dialog" />

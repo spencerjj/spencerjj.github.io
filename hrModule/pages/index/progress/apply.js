@@ -1,6 +1,7 @@
 // pages/publish/homework.js
 const {
-  $Message,$Toast
+  $Message,
+  $Toast
 } = require('../../../component/iview/base/index');
 var app = getApp();
 Page({
@@ -9,44 +10,51 @@ Page({
    * 页面的初始数据
    */
   data: {
-    title:'',
+    title: '',
     number: '',
     hint: '',
     isBottom: false,
-    array1:['是','否'],
-    index1:'',
-    index2:'',
-    index3:'',
-    index4:'',
-    notice:'请输入终止原因',
-    focus:false,
-    myComment:'',
-    actions: [
-      {
-          name: '提交',
-          color:'#2d8cf0',
-          loading:false
+    array1: ['是', '否'],
+    index1: '',
+    index2: '',
+    index3: '',
+    index4: '',
+    notice: '请输入终止原因',
+    focus: false,
+    myComment: '',
+    actions: [{
+        name: '提交',
+        color: '#2d8cf0',
+        loading: false
       },
       {
         name: '退回',
         color: 'red',
       }
     ],
-    visible:false,
-    lists:'',
-    current:'',
-    day:'',
-    id:"",
-    oriId:'',
+    visible: false,
+    lists: '',
+    current: '',
+    day: '',
+    id: "",
+    oriId: '',
     showRight1: false,
-    list:[],
-    proLists:'',
-    url:'',
-    loadAll:true,
-    can:false,
-    reason:'',
-    inputShow:false,
-    ifClick:false
+    list: [],
+    proLists: '',
+    url: '',
+    loadAll: true,
+    can: false,
+    reason: '',
+    inputShow: false,
+    ifClick: false,
+    codeLists: [],
+    keyword: '',
+    visibility: false,
+    userName: '',
+    keyword: '',
+    userName: '',
+    zpCode: '',
+    zpName: '',
   },
 
   /**
@@ -57,20 +65,20 @@ Page({
     var id = options.id
     var status = options.status
     var current = options.current
-    
+
     console.log(id)
-      var url = ''
-      if(current==3){
-        url='bpm/bpmMyRuntime/form.json'
-      }else{
-        url='bpm/bpmMyTask/form.json'
-      }
-      that.setData({
-        current:current,
-        oriId:id,
-        url:url
-      })
-that.getInfo()
+    var url = ''
+    if (current == 3) {
+      url = 'bpm/bpmMyRuntime/form.json'
+    } else {
+      url = 'bpm/bpmMyTask/form.json'
+    }
+    that.setData({
+      current: current,
+      oriId: id,
+      url: url
+    })
+    that.getInfo()
   },
 
   /**
@@ -123,83 +131,82 @@ that.getInfo()
   onShareAppMessage: function () {
 
   },
-  login(e){
+  login(e) {
     app.doLogin().then(data => {
       this.getInfo()
     })
   },
-  getInfo(){
+  getInfo() {
     var that = this
     wx.request({
-      url: app.globalData.url +that.data.url,
+      url: app.globalData.url + that.data.url,
       data: {
         // __sid: app.globalData.__sid,
-        __sid:app.globalData.tempSid,
-        __ajax:'json',
-        id:that.data.oriId
+        __sid: app.globalData.tempSid,
+        __ajax: 'json',
+        id: that.data.oriId
       },
       header: {
         'content-type': 'application/json' // 默认值
       },
       success(res) {
         console.log(res)
-        if(res.statusCode==200){
-          if(res.data.result&&res.data.result=='login'){
+        if (res.statusCode == 200) {
+          if (res.data.result && res.data.result == 'login') {
             that.login()
             console.log('未登录')
             return;
           }
-          if(res.data.result=='false'){
+          if (res.data.result == 'false') {
             $Toast({
-              content:res.data.message,
-              type:"error"
+              content: res.data.message,
+              type: "error"
             })
             return;
           }
           wx.request({
-            url: app.globalData.pathurl+res.data.mobileUrl,
+            url: app.globalData.pathurl + res.data.mobileUrl,
             data: {
               // __sid: app.globalData.__sid,
-              __sid:app.globalData.tempSid,
-              __ajax:'json',
+              __sid: app.globalData.tempSid,
+              __ajax: 'json',
             },
             header: {
               'content-type': 'application/json' // 默认值
             },
             success(res) {
               console.log(res)
-              if(res.data.result=='false'){
+              if (res.data.result == 'false') {
                 $Toast({
-                  content:res.data.message,
-                  type:"error"
+                  content: res.data.message,
+                  type: "error"
                 })
                 return;
               }
               var lists = res.data.oaPostRecruitment
-              if(lists.bpm.activityId=='hrbp'&&lists.status!='1'){
+              if (lists.bpm.activityId == 'hrbp' && lists.status != '1') {
                 let x = that.data.actions
-                let y =
-                {
-                    name: '终止',
-                    color:'red'
+                let y = {
+                  name: '终止',
+                  color: 'red'
                 }
                 x.push(y)
                 that.setData({
-                  actions:x
+                  actions: x
                 })
               }
               that.setData({
-                lists:lists,
-                id:lists.id,
-                loadAll:false
+                lists: lists,
+                id: lists.id,
+                loadAll: false
               })
-             that.showLabel()
+              that.showLabel()
             }
           })
-        }else{
+        } else {
           $Toast({
-            content:'系统错误，请稍后再试',
-            type:"error"
+            content: '系统错误，请稍后再试',
+            type: "error"
           })
         }
       }
@@ -216,72 +223,72 @@ that.getInfo()
         'content-type': 'application/json' // 默认值
       },
       success(res) {
-        if(res.data.status=='1'){
+        if (res.data.status == '1') {
           console.log('can action')
           that.setData({
-            can:true
+            can: true
           })
         }
       }
     })
   },
-  showLabel(){
+  showLabel() {
     var that = this
     var lists = that.data.lists
     wx.request({
-      url: app.globalData.url+'lampo/dict/getDictLabel',
+      url: app.globalData.url + 'lampo/dict/getDictLabel',
       data: {
         // __sid: app.globalData.__sid,
-        __sid:app.globalData.tempSid,
-        __ajax:'json',
-        dictType:'oa_recruitment_reason_type',
-        DictValue:lists.reasonType
+        __sid: app.globalData.tempSid,
+        __ajax: 'json',
+        dictType: 'oa_recruitment_reason_type',
+        DictValue: lists.reasonType
       },
       header: {
         'content-type': 'application/json' // 默认值
       },
       success(res) {
-        lists.reasonType=res.data.dictLabel
+        lists.reasonType = res.data.dictLabel
         that.setData({
-          lists:lists
+          lists: lists
         })
       }
     })
     wx.request({
-      url: app.globalData.url+'lampo/dict/getDictLabel',
+      url: app.globalData.url + 'lampo/dict/getDictLabel',
       data: {
         // __sid: app.globalData.__sid,
-        __sid:app.globalData.tempSid,
-        __ajax:'json',
-        dictType:'sys_post_type',
-        DictValue:lists.postType
+        __sid: app.globalData.tempSid,
+        __ajax: 'json',
+        dictType: 'sys_post_type',
+        DictValue: lists.postType
       },
       header: {
         'content-type': 'application/json' // 默认值
       },
       success(res) {
-        lists.postType=res.data.dictLabel
+        lists.postType = res.data.dictLabel
         that.setData({
-          lists:lists
+          lists: lists
         })
       }
     })
     wx.request({
-      url: app.globalData.url+'lampo/dict/getDictLabel',
+      url: app.globalData.url + 'lampo/dict/getDictLabel',
       data: {
         // __sid: app.globalData.__sid,
-        __sid:app.globalData.tempSid,
-        __ajax:'json',
-        dictType:'lampo_emp_education',
-        DictValue:lists.education
+        __sid: app.globalData.tempSid,
+        __ajax: 'json',
+        dictType: 'lampo_emp_education',
+        DictValue: lists.education
       },
       header: {
         'content-type': 'application/json' // 默认值
       },
       success(res) {
-        lists.education=res.data.dictLabel
+        lists.education = res.data.dictLabel
         that.setData({
-          lists:lists
+          lists: lists
         })
       }
     })
@@ -317,17 +324,86 @@ that.getInfo()
     })
   },
   handleOpen() {
-      this.setData({
-          visible: true
-      });
+    this.setData({
+      visible: true
+    });
   },
 
   handleCancel() {
-      this.setData({
-          visible: false
-      });
+    this.setData({
+      visible: false
+    });
   },
+  checkInput(e) {
+    console.log(e.detail.value)
+    if (e.detail.value.length < 1) {
+      this.setData({
+        sonvisibility: false
+      })
+    } else {
+      this.setData({
+        sonvisibility: true,
+        keywords: e.detail.value,
+        userName: e.detail.value
+      })
 
+      this.showContact()
+    }
+  },
+  confirm(e) {
+    console.log(123)
+    this.setData({
+      sonvisibility: false
+    })
+  },
+  selectItem(e) {
+    this.setData({
+      sonvisibility: false,
+      keywords: e.currentTarget.dataset.name + '(' + e.currentTarget.dataset.office + ')',
+      zpCode: e.currentTarget.dataset.code,
+      zpName: e.currentTarget.dataset.name,
+    })
+  },
+  showContact(e) {
+    var that = this
+    var data = {
+      __sid: app.globalData.tempSid,
+      __ajax: 'json',
+      pageNo: 1,
+      pageSize: 30,
+      empName: that.data.userName
+    }
+    wx.request({
+      url: app.globalData.url + 'lampo/employeeUser/mobileSelect',
+      method: 'post',
+      data: data,
+      header: {
+        'content-type': 'application/x-www-form-urlencoded',
+      },
+      success(res) {
+        if (res.statusCode == 200) {
+          var list = res.data
+          var codeLists = []
+          list.map((item) => {
+            codeLists.push({
+              name: item.empName,
+              office: item.office.officeName,
+              code: item.empCode,
+            })
+          })
+          console.log(codeLists)
+          that.setData({
+            codeLists: codeLists
+          })
+        } else {
+          $Toast({
+            content: '处理人列表获取失败',
+            type: 'warning'
+          })
+        }
+      }
+    })
+  },
   handleClickItem({
     detail
   }) {
@@ -337,81 +413,97 @@ that.getInfo()
     // 退回操作
     if (index == 2) {
       wx.navigateTo({
-        url: 'back?id='+that.data.oriId,
+        url: 'back?id=' + that.data.oriId,
       })
     }
     // 提交操作
     if (index == 1) {
-      if(that.data.ifClick){
+      if (that.data.ifClick) {
         $Toast({
           content: '数据提交中，请稍等',
           type: 'warning'
         })
         return;
       }
-        const action = [...this.data.actions];
-        action[0].loading = true;
-        this.setData({
-          actions: action,
-          ifClick:true
-        });
-        var data = {
-          // __sid: app.globalData.__sid,
-          __sid: app.globalData.tempSid,
-          __ajax: 'json',
-          'bpm.comment': that.data.hint,
-          id: that.data.id,
-          userCode:that.data.lists.userCode,
-          'bpm.taskId':that.data.lists.bpm.taskId,
-          'bpm.procInsId':that.data.lists.bpm.procInsId,
-          'bpm.activityId':that.data.lists.bpm.activityId,
-          status:4
+      var data = {
+        // __sid: app.globalData.__sid,
+        __sid: app.globalData.tempSid,
+        __ajax: 'json',
+        'bpm.comment': that.data.hint,
+        id: that.data.id,
+        userCode: that.data.lists.userCode,
+        'bpm.taskId': that.data.lists.bpm.taskId,
+        'bpm.procInsId': that.data.lists.bpm.procInsId,
+        'bpm.activityId': that.data.lists.bpm.activityId,
+        status: 4
+      }
+      if (that.data.lists.bpm.activityId == 'zpleader') {
+        if (that.data.zpCode.length < 1 || that.data.zpName.length < 1) {
+          $Toast({
+            content: '请正确选择招聘专员',
+            type: 'warning'
+          })
+          that.setData({
+            visible: false
+          })
+          return;
+        }else{
+          data.zpCode = that.data.zpCode
+          data.zpName = that.data.zpName
         }
-        wx.request({
-          url: app.globalData.url + 'oa/oaPostRecruitment/save.json',
-          method: 'post',
+      }
 
-          data: data,
-          header: {
-            'content-type': 'application/x-www-form-urlencoded',
-          },
-          success(res) {
-            console.log(res)
-            if (res.data.result=='true') {
-              setTimeout(() => {
-                action[0].loading = false;
-                that.setData({
-                  visible: false,
-                  ifInput: false,
-                  actions: action,
-                  ifClick:false
-                });
-                $Toast({
-                  content: '提交成功！',
-                  type: 'success'
-                });
-                setTimeout(() => {
-                  wx.switchTab({
-                    url: '../inform',
-                  })
-                },1000)
-              }, 1000);
-            }else{
-              $Toast({
-                content: res.data.message,
-                type: 'error'
-              });
+      const action = [...this.data.actions];
+      action[0].loading = true;
+      this.setData({
+        actions: action,
+        ifClick: true
+      });
+      wx.request({
+        url: app.globalData.url + 'oa/oaPostRecruitment/save.json',
+        method: 'post',
+
+        data: data,
+        header: {
+          'content-type': 'application/x-www-form-urlencoded',
+        },
+        success(res) {
+          console.log(res)
+          if (res.data.result == 'true') {
+            setTimeout(() => {
               action[0].loading = false;
-                that.setData({
-                  visible: false,
-                  ifInput: false,
-                  actions: action,
-                  ifClick:false
-                });
-            }
-
+              that.setData({
+                visible: false,
+                ifInput: false,
+                actions: action,
+                ifClick: false
+              });
+              $Toast({
+                content: '提交成功！',
+                type: 'success'
+              });
+              setTimeout(() => {
+                wx.switchTab({
+                  url: '../inform',
+                })
+              }, 1000)
+            }, 1000);
+          } else {
+            $Toast({
+              content: res.data.message,
+              type: 'error'
+            });
+            action[0].loading = false;
+            that.setData({
+              visible: false,
+              ifInput: false,
+              actions: action,
+              ifClick: false
+            });
           }
-        })
+
+        }
+      })
 
 
     }
@@ -423,99 +515,99 @@ that.getInfo()
         focus: true
       })
     }
-    
-},
-progress() {
-  var that = this;
-  var tempurl = that.data.lists.bpm.procInsId
-  that.setData({
-      showRight1: !that.data.showRight1
-  });
-  wx.request({
-    url: app.globalData.url+'bpm/display/app/rest/process-instances/'+tempurl+'/trace-json',
-    method:'post',
-    data: {
-      // __sid: app.globalData.__sid,
-      __sid:app.globalData.tempSid,
-      __ajax:'json'
-    },
-    header: {
-      'content-type': 'application/x-www-form-urlencoded' // 默认值
-    },
-    success(res) {
-      console.log(res)
-      if(res.statusCode==200){
-        that.setData({
-          proLists:res.data
-        })
-      }
-    }
-    })
-},
-getComment(e){
-  console.log(e.detail.value)
-  this.setData({
-    reason:e.detail.value
-  })
-},
-bindblur(e){
-  this.setData({
-    reason:'',
-    inputShow:false
-  })
-},
-cancelApply(e){
-  var that = this
-  that.setData({
-    loadAll:true
-  })
-        var data = {
-          // __sid: app.globalData.__sid,
-          __sid: app.globalData.tempSid,
-          __ajax: 'json',
-          remarks: that.data.reason,
-          id: that.data.lists.bpm.procInsId,
-          'bpm.taskId':that.data.lists.bpm.taskId,
-          'bpm.procInsId':that.data.lists.bpm.procInsId,
-          'bpm.activityId':that.data.lists.bpm.activityId
-        }
-        wx.request({
-          url: app.globalData.url + 'oa/oaPostRecruitment/stopBpm.json',
-          method: 'post',
-          data: data,
-          header: {
-            'content-type': 'application/x-www-form-urlencoded',
-          },
-          success(res) {
-            console.log(res)
-            if (res.data.result=='true') {
-              setTimeout(() => {
-                that.setData({
-                  inputShow: false,
-                  loadAll:false
-                });
-                $Toast({
-                  content: '终止成功！',
-                  type: 'success'
-                });
-                setTimeout(() => {
-                  wx.switchTab({
-                    url: '../inform',
-                  })
-                },1000)
-              }, 1000);
-            }else{
-              $Toast({
-                content: res.data.message,
-                type: 'error'
-              });
-                that.setData({
-                  inputShow: false,
-                  loadAll:false
-                });
-            }
 
-          }
-        })
-}
+  },
+  progress() {
+    var that = this;
+    var tempurl = that.data.lists.bpm.procInsId
+    that.setData({
+      showRight1: !that.data.showRight1
+    });
+    wx.request({
+      url: app.globalData.url + 'bpm/display/app/rest/process-instances/' + tempurl + '/trace-json',
+      method: 'post',
+      data: {
+        // __sid: app.globalData.__sid,
+        __sid: app.globalData.tempSid,
+        __ajax: 'json'
+      },
+      header: {
+        'content-type': 'application/x-www-form-urlencoded' // 默认值
+      },
+      success(res) {
+        console.log(res)
+        if (res.statusCode == 200) {
+          that.setData({
+            proLists: res.data
+          })
+        }
+      }
+    })
+  },
+  getComment(e) {
+    console.log(e.detail.value)
+    this.setData({
+      reason: e.detail.value
+    })
+  },
+  bindblur(e) {
+    this.setData({
+      reason: '',
+      inputShow: false
+    })
+  },
+  cancelApply(e) {
+    var that = this
+    that.setData({
+      loadAll: true
+    })
+    var data = {
+      // __sid: app.globalData.__sid,
+      __sid: app.globalData.tempSid,
+      __ajax: 'json',
+      remarks: that.data.reason,
+      id: that.data.lists.bpm.procInsId,
+      'bpm.taskId': that.data.lists.bpm.taskId,
+      'bpm.procInsId': that.data.lists.bpm.procInsId,
+      'bpm.activityId': that.data.lists.bpm.activityId
+    }
+    wx.request({
+      url: app.globalData.url + 'oa/oaPostRecruitment/stopBpm.json',
+      method: 'post',
+      data: data,
+      header: {
+        'content-type': 'application/x-www-form-urlencoded',
+      },
+      success(res) {
+        console.log(res)
+        if (res.data.result == 'true') {
+          setTimeout(() => {
+            that.setData({
+              inputShow: false,
+              loadAll: false
+            });
+            $Toast({
+              content: '终止成功！',
+              type: 'success'
+            });
+            setTimeout(() => {
+              wx.switchTab({
+                url: '../inform',
+              })
+            }, 1000)
+          }, 1000);
+        } else {
+          $Toast({
+            content: res.data.message,
+            type: 'error'
+          });
+          that.setData({
+            inputShow: false,
+            loadAll: false
+          });
+        }
+
+      }
+    })
+  }
 })

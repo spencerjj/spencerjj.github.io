@@ -1,17 +1,17 @@
 /* pages/index/card.wxss */
 .card{
-  width: 94%;
+  width: 100%;
   min-height: 500rpx;
-  margin-left:3%;
   padding-bottom:100rpx;
 }
 .cardItems{
-  width: 100%;
+  width: 94%;
+  margin-left: 3%;
   height: 220rpx;
   border-radius: 20rpx;
   margin-top:40rpx;
-  box-shadow: 10rpx 10rpx 20rpx 0rpx #bbb;
   position: relative;
+  background:rgb(172, 172, 172,.6);
 }
 .cardItems image{
   width: 100%;
@@ -19,23 +19,41 @@
 }
 .cardItems>view{
   position: absolute;
-  color:white
+  color:#5c5c5c
+}
+.leftR{
+  width: 30rpx;
+  height: 30rpx;
+  background:#ececec;
+  border-radius: 50%;
+  top:50%;
+  margin-top:-15rpx;
+  left:-15rpx
+}
+.rightR{
+  width: 30rpx;
+  height: 30rpx;
+  background:#ececec;
+  border-radius: 50%;
+  top:50%;
+  margin-top:-15rpx;
+  right:-15rpx
 }
 .cardItems .notice{
   font-size: 50rpx;
-  top:40rpx;
+  top:20rpx;
   left: 30rpx;
   font-weight: bolder;
 }
 .cardItems .rule{
-  color:#ff8d67;
+  color:#5c5c5c;
   left: 30rpx;
   bottom:36rpx;
   font-size: 25rpx;
   font-weight: bolder;
 }
 .cardItems .rule1{
-  color:#999;
+  color:#5c5c5c;
   left: 30rpx;
   bottom:36rpx;
   font-size: 25rpx;
@@ -47,11 +65,21 @@
   font-size: 20rpx;
 }
 .cardItems .count{
-  top:40rpx;
+  top:20rpx;
   right:0rpx;
   width: 200rpx;
   font-size: 40rpx;
   text-align: center;
+}
+.cardItems .use{
+  bottom:30rpx;
+  right:40rpx;
+  width: 100rpx;
+  font-size: 40rpx;
+  text-align: center;
+  border-radius: 20rpx;
+  border:2rpx solid #5c5c5c;
+  font-size: 20rpx;
 }
 .cardItems .count text{
   font-size: 60rpx;
@@ -209,4 +237,24 @@
   right: 0;
   bottom: 0;
   color:red
+}
+.van-tabs__nav{
+  background:#ececec;
+}
+.state{
+  height: 130rpx;
+  display: flex;
+  align-items: center;
+  border-top:1px solid #333;
+  border-bottom:1px solid #333
+}
+.state view{
+  padding:15rpx 30rpx;
+  border:2rpx solid #aaa;
+  margin-left:30rpx;
+  color:#aaa
+}
+.state .state-active{
+  color:#333;
+  background:#aaa
 }

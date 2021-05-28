@@ -1,0 +1,137 @@
+/* pages/index/pointDetail.wxss */
+.top{
+  background:white;
+  width: 94%;
+  margin-left: 3%;
+  border-radius: 20rpx;
+  margin-top:20rpx;
+  padding:20rpx 20rpx;
+  box-sizing: border-box;
+}
+.content{
+  display: flex;
+  height: 200rpx;
+  border-bottom:2rpx solid #ccc
+}
+.content>view:first-child{
+  width: 25%;
+  height: 180rpx;
+}
+.content>view:first-child image{
+  width: 100%;
+  height:180rpx;
+}
+.content>view:nth-child(2){
+  margin-left:20rpx;
+  height: 180rpx;
+  width: 45%;
+}
+.title1{
+  font-size: 30rpx;
+  font-weight: bolder;
+}
+.mark{
+  font-size: 25rpx;
+  color:#999
+}
+.content>view:nth-child(3){
+  position: relative;
+  height: 180rpx;
+  width: 30%;
+}
+.add{
+  position: absolute;
+  bottom:0;
+  right: 0;
+  font-size: 30rpx;
+  font-weight: bolder;
+  color:#f29600;
+}
+.infos{
+  height: 120rpx;
+  border-bottom:2rpx solid #ccc;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 30rpx;
+  font-weight: bolder;
+}
+.infos>view:first-child text{
+  color:#f29600
+}
+.infos>view:nth-child(2){
+  color:#036eb7;
+  display: flex;
+  align-items: center;
+}
+.infos image{
+  width: 40rpx;
+  height: 40rpx;
+  margin-left: 10rpx;
+}
+.detail{
+  padding-bottom: 30rpx;
+}
+.detail>view{
+  margin-top:30rpx;
+  display: flex;
+  justify-content: space-between;
+}
+.title{
+  font-size: 40rpx;
+  font-weight: bolder;
+}
+.section>view:nth-child(2){
+  color:#999
+}
+.showCode{
+  position: fixed;
+  top:0;
+  width: 100%;
+  height: 100%;
+  background:rgba(0,0,0,.5);
+  padding-top:10vh;
+  z-index: 99;
+  transform: scale(0) translateY(200%);
+  transition:all .3s
+}
+.show{
+  opacity: 1;
+  transform: scale(1) translateY(0);
+}
+.codeCon{
+  text-align: center;
+  width: 90%;
+  margin-left: 5%;
+  position: absolute;
+  background:white;
+  padding:50rpx 0;
+  border-radius: 30rpx;
+}
+.rtitle1{
+  width: 80%;
+  font-size: 35rpx;
+  color:#666;
+  margin:0 auto;
+  
+}
+.rtitle{
+  color:#c79f62;
+  font-size: 45rpx;
+}
+.tnotice{
+  font-size: 40rpx;
+  color:#333;
+  font-weight: bolder;
+  letter-spacing:3rpx
+}
+.qrcode{
+  border-radius: 30rpx;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+.canvas{
+  width: 230px;
+  height: 230px;
+  margin:0 auto
+}

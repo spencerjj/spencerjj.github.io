@@ -4,202 +4,292 @@ import {
   postRequest,
   getRequest
 } from '../../utils/api.js'
+import {
+  store,
+  storeId,
+  HOST_URI
+} from '../../config.js'
 var app = getApp();
-import Dialog from '../../miniprogram_npm/@vant/weapp/dialog/dialog'
 import Toast from '../../miniprogram_npm/@vant/weapp/toast/toast';
-var QRCode = require('../../utils/code.js')
 var oricode = require('../../utils/qrcode.js')
-import {barcode} from '../../utils/index.js'
-import dialog from '../../miniprogram_npm/@vant/weapp/dialog/dialog';
+import {doLogin} from '../../utils/login.js'
 
 Page({
   data: {
-   title:[
-     {
-      id:1,
-      title:'商场活动',
-      etitle:"WHAT'S NEW",
-      active:true
-     },
-     {
-      id:2,
-      title:'积分兑换',
-      etitle:"POINTS",
-      active:false
-     },
-     {
-      id:3,
-      title:'活动报名',
-      etitle:"SIGN UP",
-      active:false
-     },
-     {
-      id:4,
-      title:'种草笔记',
-      etitle:"NOTES",
-      active:false
-     }
-   ],
-   guideFix:false
+    title: [{
+        id: 1,
+        title: '商场活动',
+        etitle: "WHAT'S NEW",
+        active: true
+      },
+      {
+        id: 2,
+        title: '积分兑换',
+        etitle: "POINTS",
+        active: false
+      },
+      {
+        id: 3,
+        title: '活动报名',
+        etitle: "SIGN UP",
+        active: false
+      },
+      {
+        id: 4,
+        title: '种草笔记',
+        etitle: "NOTES",
+        active: false
+      }
+    ],
+    guideFix: false,
+    show: false,
+    titleIndex: 1,
+    userInfo: '',
+    avatarUrl:'',
+    actLists:[],
+    repLists:[],
+    noteLists:[],
+    pointLists:[],
+    banner:[]
   },
-  onReady(e){
-    
+  onReady(e) {
+
   },
   onLoad: function (options) {
-    
+    this.getInfo()
+    this.getRep()
+    this.getBanner()
+    this.getPoint()
   },
   onShow() {
-   
+    var that = this;
+    var user = wx.getStorageSync('user')
+    var userInfo = wx.getStorageSync('userInfo')
+    that.setData({
+      cardNum:wx.getStorageSync('cardNum')||0,
+      userInfo:userInfo||''
+    })
+    this.getNote()
+    if (!user) {
+      that.login()
+    } 
   },
- 
-  onPullDownRefresh(){
-    this.onShow()
+
+  onPullDownRefresh() {
+    var that = this
+    doLogin(wx.getStorageSync('userInfo').phone).then(data=>{
+      that.setData({
+        userInfo:wx.getStorageSync('userInfo')
+      })
+    })
   },
-  login(e){
+  login(e) {
     app.doLogin().then(data => {
       this.onShow()
     })
   },
-  getPhone(e) {
-    console.log(e)
-    var that = this;
-    if (e.detail.errMsg != 'getPhoneNumber:ok') {
-      Toast({
-        message: '授权失败，请重新授权登录',
-        type: 'warning'
-      });
-    } else {
-      app.doLogin().then(myData => {
-        console.log(myData)
-        var data = {
-          openid: myData.openid,
-          sessionKey: myData.sessionKey,
-          iv: e.detail.iv,
-          encryptedData: e.detail.encryptedData,
-          ajax: '_json',
-        }
-        getRequest(getApiHost(), 'platform/v1/api/lampocrm/getPhoneNumber', 'body', data, 0, false, false,false).then(
-          res => {
-            that.setData({
-              phoneNo: res.data
-            })
-            wx.setStorageSync('loginphone', res.data)
-            that.getInfo()
-          }
-        ).catch(res => {
-          Toast({
-            message: '系统错误，登录失败',
-            type: 'warning'
-          });
-        });
-      })
-    }
-  },
-  // register() {
-  //   var that = this;
-  //     var data = {
-  //       phone: wx.getStorageSync('phoneNo'),
-  //       gender: wx.getStorageSync('userInfo').gender,
-  //       name: wx.getStorageSync('userInfo').nickName,
-  //       openid: wx.getStorageSync('user').openid||'99999',
-  //       ajax: '_json'
-  //     }
-  //     getRequest(getApiHost(), 'platform/v1/api/lampocrm/LPMemberRegister', 'body', data, 0, false, false).then(
-  //       res => {
-  //         console.log(res)
-  //           that.getInfo()
-  //       }
-  //     ).catch(res => {
-  //       wx.showModal({
-  //         title: '系统错误，登录失败',
-  //         showCancel: false,
-  //         confirmText: '知道了',
-  //         confirmColor: '#1890FF'
-  //       })
-  //     });
-  // },
-  getInfo(e){
+  getBanner(e){
     var that = this;
     var data = {
-      phone: that.data.phoneNo,
-      ajax: '_json'
+      storeId:storeId,
+      ajax:'_json'
     }
-    console.log(data)
-    getRequest(getApiHost(), 'platform/v1/api/lampocrm/LPQueryMemberAllInfo', 'body', data, 0, false, true).then(
+    getRequest(getApiHost(), 'customer/bh/api/active/getBannerList', 'body', data, 0, false, false, true).then(
       res => {
         console.log(res)
-        if(res.status==1||res.status==3){
-          Dialog.confirm({
-            title: '提示',
-            message: `您尚未注册账号，立即注册吧`,
+        wx.stopPullDownRefresh()
+        if (res.result=='true') {
+          let lists = res.data[0].fileUrl
+          let array = []
+          lists = lists.split(',')
+          lists.map(item=>{
+            item = HOST_URI+'customer'+item
+            array.push(item)
           })
-          .then(() => {
-            wx.navigateTo({
-              url: 'register',
-            })
+          that.setData({
+            banner:array
           })
-          return;
-        }else if(res.status==2){
+        } else {
           Toast({
-            message: res.msg,
+            message: '活动获取失败',
             type: 'warning'
           });
-          return;
         }
-        wx.stopPullDownRefresh()
-        res.avatarUrl = wx.getStorageSync('userInfo').avatarUrl||''
-        that.setData({
-          userInfo:res,
-          sshow:false
-        })
-        wx.setStorageSync('phoneNo', res.phone)
-        // var code = new QRCode('canvas1', res.memberBarCode,100,100);
-        that.createQrCode(res.memberBarCode,'canvas1',150,150)
       }
     ).catch(res => {
-      console.log(res)
       Toast({
-        message: '系统错误，登录失败',
+        message: res.msg||'海报获取失败',
         type: 'warning'
       });
     });
   },
-  createQrCode: function (content, canvasId, cavW, cavH) {
-    QRCode.api.draw(content, canvasId, cavW, cavH, this, this.canvasToTempImage);
-  },
-  
-  //获取临时缓存图片路径，存入data中
-  canvasToTempImage: function (canvasId) {
-    let that = this;
-    wx.canvasToTempFilePath({
-      canvasId:'canvas1',
-      success: function (res) {
-        let tempFilePath = res.tempFilePath;
-        console.log(tempFilePath);
-        that.setData({
-          imagePath:tempFilePath,
-        });
-      },
-      fail: function (res) {
-        console.log(res);
+  getInfo(e) {
+    var that = this;
+    var data = {
+      storeId:storeId,
+      ajax:'_json'
+    }
+    getRequest(getApiHost(), 'customer/bh/api/active/getShoppingActiveTypeList', 'body', data, 0, false, false, true).then(
+      res => {
+        console.log(res)
+        wx.stopPullDownRefresh()
+        if (res.result=='true') {
+          let actLists = res.data
+          actLists.map(item=>{
+            item.fileUrl=HOST_URI+'customer'+item.fileUrl
+          })
+          that.setData({
+            actLists:res.data
+          })
+        } else {
+          Toast({
+            message: res.message,
+            type: 'warning'
+          });
+        }
       }
+    ).catch(res => {
+      Toast({
+        message: res.msg||'商场活动获取失败',
+        type: 'warning'
+      });
+    });
+  },
+  getPoint(e) {
+    var that = this;
+    var data = {
+      store:store,
+      vType:'',
+      ajax:'_json'
+    }
+    getRequest(getApiHost(), 'customer/bh/api/crm/queryVoucherDefinition', 'body', data, 0, false, false, true).then(
+      res => {
+        console.log(res)
+        wx.stopPullDownRefresh()
+        if (res.code=="SEL_000") {
+          that.setData({
+            pointLists:res.vdefinemessage
+          })
+        } else {
+          Toast({
+            message: '积分兑换获取失败',
+            type: 'warning'
+          });
+        }
+      }
+    ).catch(res => {
+      Toast({
+        message: res.msg||'积分兑换获取失败',
+        type: 'warning'
+      });
+    });
+  },
+  getRep(e) {
+    var that = this;
+    var data = {
+      storeId:storeId,
+      ajax:'_json'
+    }
+    getRequest(getApiHost(), 'customer/bh/api/active/getEventRegistrationList', 'body', data, 0, false, false, true).then(
+      res => {
+        console.log(res)
+        wx.stopPullDownRefresh()
+        if (res.result=='true') {
+          var weekDay = ["周日", "周一", "周二", "周三", "周四", "周五", "周六"];  
+          let actLists = res.data
+          actLists.map(item=>{
+            item.fileUrl=HOST_URI+'customer/'+item.fileUrl
+            if(item.startTime==item.endTime){
+              var myDate = new Date(Date.parse(item.startTime.slice(0,10)));  
+              item.actTime = item.startTime.slice(0,10).replace(/-/g,'/')+' '+weekDay[myDate.getDay()]+' '+item.startTime.slice(-5)
+            }else{
+              item.actTime = item.startTime.slice(0,10).replace(/-/g,'/')+' ~ '+item.endTime.slice(5,10).replace(/-/g,'/')
+            }
+          })
+          that.setData({
+            repLists:res.data
+          })
+        } else {
+          Toast({
+            message: res.message,
+            type: 'warning'
+          });
+        }
+      }
+    ).catch(res => {
+      Toast({
+        message: res.msg||'活动获取失败',
+        type: 'warning'
+      });
+    });
+  },
+  getNote(e) {
+    var that = this;
+    var data = {
+      storeId:storeId,
+      mobile:wx.getStorageSync('userInfo').phone||'',
+      ajax: '_json'
+    }
+    getRequest(getApiHost(), 'customer/bh/api/active/getNotesList', 'body', data, 0, false, false,false).then(
+      res => {
+        console.log(res)
+        wx.stopPullDownRefresh()
+        if (res.result=='true') {
+          let noteLists = res.data
+          noteLists.map(item=>{
+            if(item.fileUrl.split(',').length>1){
+              item.fileUrl = item.fileUrl.split(',')
+              for(let x in item.fileUrl){
+                item.fileUrl[x] =  HOST_URI+'customer'+item.fileUrl[x]
+              }
+            }else{
+              let array = []
+              array.push(HOST_URI+'customer/'+item.fileUrl)
+              item.fileUrl = array
+            }
+
+            if(item.imgUrl.split(',').length>1){
+              item.imgUrl = item.imgUrl.split(',')
+              for(let x in item.imgUrl){
+                item.imgUrl[x] =  HOST_URI+'customer'+item.imgUrl[x]
+              }
+            }else{
+              let array = []
+              array.push(HOST_URI+'customer'+item.imgUrl)
+              item.imgUrl = array
+            }
+          })
+          that.setData({
+            noteLists:res.data
+          })
+        } else {
+          Toast({
+            message: res.message,
+            type: 'warning'
+          });
+        }
+      }
+    ).catch(res => {
+      Toast({
+        message: res.msg||'种草笔记获取失败',
+        type: 'warning'
+      });
     });
   },
   onClose() {
     this.setData({
-      show: false
+      show1: false,
+      show2:false
     })
-    wx.setNavigationBarTitle({
-      title: '会员中心'
-    })
+    setTimeout(()=>{
+      this.setData({
+        show:false
+      })
+    },300)
   },
   use() {
     var that = this;
-    wx.setNavigationBarTitle({
-      title: '会员码'
-    })
-    new oricode('canvas', that.data.userInfo.memberBarCode,250,250);
-    barcode('barcode', that.data.userInfo.memberBarCode, 700, 180);
+    new oricode('canvas', that.data.userInfo.memNum, 250, 250);
     wx.showLoading({
       title: '加载中',
     })
@@ -208,43 +298,114 @@ Page({
       this.setData({
         show: true
       })
+      setTimeout(()=>{
+        this.setData({
+          show1:true,
+        })
+      },50)
+      setTimeout(()=>{
+        this.setData({
+          show2:true
+        })
+      },300)
     }, 300)
   },
-  toPage(e){
+  toPage(e) {
     var that = this
     console.log(e.currentTarget.dataset.id)
     var id = e.currentTarget.dataset.id
-    if(id=='center'||id=="card"||id=="infos"||id=="mission"||id=="recommend"||id=="issus"||id=="point"||id=="exchange"||id=="store"){
+    if (id == 'center' || id == "card" || id == "infos" || id == "mission" || id == "recommend" || id == "issus" || id == "point" || id == "exchange" || id == "store") {
       wx.navigateTo({
         url: id,
       })
-    }else if(id=='wei'){
-      wx.navigateToMiniProgram({ appId: 'wx342c05b4e39eda3b', path: '', success(res) {  } })
-    }else if(id=="order"){
+    } else if (id == 'wei') {
+      wx.navigateToMiniProgram({
+        appId: 'wx342c05b4e39eda3b',
+        path: '',
+        success(res) {}
+      })
+    } else if (id == "order") {
       wx.navigateTo({
-        url: 'order?name='+that.data.userInfo.name+'&point='+that.data.userInfo.availablePoints+'&level='+that.data.userInfo.level,
+        url: 'order?name=' + that.data.userInfo.name + '&point=' + that.data.userInfo.availablePoints + '&level=' + that.data.userInfo.level,
       })
     }
   },
-  showNav(e){
+  showNav(e) {
     this.setData({
-      leftShow:!this.data.leftShow
+      leftShow: !this.data.leftShow
     })
   },
-  leftClose(e){
+  leftClose(e) {
     this.setData({
-      leftShow:false
+      leftShow: false
     })
   },
-  select(e){
+  select(e) {
     let title = this.data.title
-    if(!title[e.currentTarget.dataset.id-1].active)
-      title.map(item=>{
+    if (!title[e.currentTarget.dataset.id - 1].active)
+      title.map(item => {
         item.active = false
       })
-      title[e.currentTarget.dataset.id-1].active = true
+    title[e.currentTarget.dataset.id - 1].active = true
     this.setData({
-      title
+      title,
+      titleIndex: e.currentTarget.dataset.id
     })
+  },
+  toPage(e) {
+    let that = this;
+    if(e.currentTarget.dataset.mark=='mainIndex'){
+      wx.navigateTo({
+        url: 'mainIndex?index='+that.data.titleIndex,
+      })
+    }else{
+      wx.navigateTo({
+        url: e.currentTarget.dataset.mark,
+      })
+    }
+    
+  },
+  getUser(e){
+    this.setData({
+      avatarUrl:e.detail.avatarUrl
+    })
+  },
+  toMy(e){
+    wx.switchTab({
+      url: 'my'
+    })
+  },
+  like(e){
+    var that = this;
+    let lists = this.data.noteLists
+    lists[e.detail.index].likesCountSelf = 1
+    lists[e.detail.index].likesCount++
+    this.setData({
+      noteLists:lists
+    })
+    var data = {
+      storeId:storeId,
+      noteId:e.detail.id,
+      mobile:that.data.userInfo.phone,
+      nickName:that.data.userInfo.name,
+      ajax: '_json'
+    }
+    getRequest(getApiHost(), 'customer/bh/api/active/saveNoteGiveLike', 'body', data, 0, false, false, false).then(
+      res => {
+        console.log(res)
+        if (res.result=='true') {
+        } else {
+          Toast({
+            message: '活动获取失败',
+            type: 'warning'
+          });
+        }
+      }
+    ).catch(res => {
+      Toast({
+        message: res.msg,
+        type: 'warning'
+      });
+    });
   }
 })

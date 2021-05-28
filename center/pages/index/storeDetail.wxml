@@ -1,0 +1,27 @@
+<view class="container">
+  <view class="top">
+    <view class="actItem" bindtap="toPage">
+      <view>
+        <image src="/images/01-9.png" mode="aspectFit"></image>
+      </view>
+      <view>
+        <view>MaxMara 麦丝玛拉</view>
+        <view>奢侈品 购物中心1F</view>
+      </view>
+    </view>
+    <view class="location">
+      <image src="/images/01-18.png"></image>  <text>   常州购物中心 1F ></text>
+    </view>
+    <image src="/images/01-19.png" class="phone" bindtap="call"></image>
+  </view>
+    <view class="title">
+      <view>
+        <text>BAND</text>
+        <text>品牌故事</text>
+      </view>
+      <view></view>
+    </view>
+    <view class="content">
+      品牌故事品牌故事品牌故事品牌故事品牌故事品牌故事品牌故事品牌故事品牌故事品牌故事品牌故事品牌故事品牌故事品牌故事品牌故事品牌故事
+    </view>
+</view>
