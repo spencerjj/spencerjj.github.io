@@ -24,6 +24,15 @@
   box-sizing: border-box;
   border-radius: 20rpx;
 }
+.ltop{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.ltop>view:last-child{
+  font-size: 22rpx;
+  color:#ccc
+}
 .listItem>view:first-child{
   color:#888;
   margin-top:10rpx
@@ -64,12 +73,12 @@
   display: flex;
   align-items: center;
   z-index: 99;
-  transform: scale(0) translateY(200%);
+  transform: scale(0);
   transition:all .3s
 }
 .show{
   opacity: 1;
-  transform: scale(1) translateY(0);
+  transform: scale(1);
 }
 .detailInfo{
   background:white;

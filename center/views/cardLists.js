@@ -74,6 +74,14 @@ Component({
         cardInfo.no = e.currentTarget.dataset.no
         this.triggerEvent('showCode',cardInfo)
       }
+    },
+    showDetail(e){
+      if(this.data.type=='able'&&e.currentTarget.dataset.desc.length>1){
+        let detailInfo = {}
+        detailInfo.name = e.currentTarget.dataset.name
+        detailInfo.desc = e.currentTarget.dataset.desc
+        this.triggerEvent('showDetail',detailInfo)
+      }
     }
   }
 })

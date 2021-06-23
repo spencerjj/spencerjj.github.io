@@ -60,7 +60,15 @@ Page({
     lastDate:'',
     imgLists:'',
     imgId:'',
-    ifClick:false
+    ifClick:false,
+    codeLists: [],
+    keyword: '',
+    visibility: false,
+    userName: '',
+    keyword: '',
+    userName: '',
+    zpCode: '',
+    zpName: ''
   },
 
   /**
@@ -198,50 +206,6 @@ Page({
                 loadAll:false,
               })
               var lists = res.data.oaEmployOutTransfer
-              // if (lists.sfCaiwu != undefined) {
-              //   if (lists.sfCaiwu == '1') {
-              //     that.setData({
-              //       index1: 0,
-              //     })
-              //   } else if(lists.sfCaiwu == '0') {
-              //     that.setData({
-              //       index1: 1
-              //     })
-              //   }
-              // }
-              // if (lists.sfTongxia != undefined) {
-              //   if (lists.sfTongxia == '1') {
-              //     that.setData({
-              //       index2: 0,
-              //     })
-              //   } else if(lists.sfTongxia == '0') {
-              //     that.setData({
-              //       index2: 1
-              //     })
-              //   }
-              // }
-              // if (lists.sfOa != undefined) {
-              //   if (lists.sfOa == '1') {
-              //     that.setData({
-              //       index3: 0,
-              //     })
-              //   } else if(lists.sfOa == '0'){
-              //     that.setData({
-              //       index3: 1
-              //     })
-              //   }
-              // }
-              // if (lists.sfYouxiang != undefined) {
-              //   if (lists.sfYouxiang == '1') {
-              //     that.setData({
-              //       index4: 0,
-              //     })
-              //   } else if(lists.sfYouxiang == '0'){
-              //     that.setData({
-              //       index4: 1
-              //     })
-              //   }
-              // }
             }
           })
         }else{
@@ -290,6 +254,46 @@ Page({
           console.log('can action')
           that.setData({
             can:true
+          })
+        }
+      }
+    })
+  },
+  showContact(e) {
+    var that = this
+    var data = {
+      __sid: app.globalData.tempSid,
+      __ajax: 'json',
+      pageNo: 1,
+      pageSize: 30,
+      empName: that.data.userName
+    }
+    wx.request({
+      url: app.globalData.url + 'lampo/employeeUser/mobileSelect',
+      method: 'post',
+      data: data,
+      header: {
+        'content-type': 'application/x-www-form-urlencoded',
+      },
+      success(res) {
+        if (res.statusCode == 200) {
+          var list = res.data
+          var codeLists = []
+          list.map((item) => {
+            codeLists.push({
+              name: item.empName,
+              office: item.office.officeName,
+              code: item.empCode,
+            })
+          })
+          console.log(codeLists)
+          that.setData({
+            codeLists: codeLists
+          })
+        } else {
+          $Toast({
+            content: '处理人列表获取失败',
+            type: 'warning'
           })
         }
       }
@@ -351,66 +355,41 @@ Page({
         })
         return;
       }
-      // if(that.data.lists.bpm.activityId=='hrbp'&&that.data.index1==3){
-      //   $Toast({
-      //     content:'请选择是否财务审批',
-      //     type:'warning'
-      //   })
-      //   that.setData({
-      //     ifCaiwu: false,
-      //     visible: false
-      //   })
-      //   return;
-      // }
-      // if(that.data.lists.bpm.activityId=='hrbp'&&that.data.index2==3){
-      //   $Toast({
-      //     content:'请选择是否统辖审批',
-      //     type:'warning'
-      //   })
-      //   that.setData({
-      //     ifTongxia: false,
-      //     visible: false
-      //   })
-      //   return;
-      // }
-       
-      // if(that.data.lists.bpm.activityId=='hrbp'&&that.data.index4==3){
-      //   $Toast({
-      //     content:'请选择是否邮箱审批',
-      //     type:'warning'
-      //   })
-      //   that.setData({
-      //     ifEmail: false,
-      //     visible: false
-      //   })
-      //   return;
-      // }
-       
+      var data = {
+        // __sid: app.globalData.__sid,
+        __sid: app.globalData.tempSid,
+        __ajax: 'json',
+        id: that.data.id,
+        userCode:that.data.lists.userCode,
+        salaryDate:that.data.salaryDate,
+        oaEmployOutTransfer_image:that.data.imgId,
+        'bpm.taskId':that.data.lists.bpm.taskId,
+        'bpm.procInsId':that.data.lists.bpm.procInsId,
+        'bpm.activityId':that.data.lists.bpm.activityId,
+        'bpm.comment': that.data.hint,
+        status:4
+      }
+      if (that.data.lists.bpm.activityId == 'officer') {
+        if (that.data.zpCode.length < 1 || that.data.zpName.length < 1) {
+          $Toast({
+            content: '请正确选择移交人',
+            type: 'warning'
+          })
+          that.setData({
+            visible: false
+          })
+          return;
+        }else{
+          data.transferCode = that.data.zpCode
+          data.transferName = that.data.zpName
+        }
+      }
         const action = [...this.data.actions];
         action[0].loading = true;
         this.setData({
           actions: action,
           ifClick:true
         });
-        var data = {
-          // __sid: app.globalData.__sid,
-          __sid: app.globalData.tempSid,
-          __ajax: 'json',
-          id: that.data.id,
-          userCode:that.data.lists.userCode,
-          // sfCaiwu:that.data.index1==3?'':Math.abs(that.data.index1 - 1),
-          // sfTongxia:that.data.index2==3?'':Math.abs(that.data.index2 - 1),
-          // sfOa:1,
-          // sfYouxiang:that.data.index4==3?'':Math.abs(that.data.index4 - 1),
-          // sfSsc:1,
-          salaryDate:that.data.salaryDate,
-          oaEmployOutTransfer_image:that.data.imgId,
-          'bpm.taskId':that.data.lists.bpm.taskId,
-          'bpm.procInsId':that.data.lists.bpm.procInsId,
-          'bpm.activityId':that.data.lists.bpm.activityId,
-          'bpm.comment': that.data.hint,
-          status:4
-        }
         wx.request({
           url: app.globalData.url + 'oa/oaEmployOutTransfer/save.json',
           method: 'post',
@@ -660,4 +639,34 @@ getToday(){
       salaryDate: e.detail.value
     })
   },
+  checkInput(e) {
+    console.log(e.detail.value)
+    if (e.detail.value.length < 1) {
+      this.setData({
+        sonvisibility: false
+      })
+    } else {
+      this.setData({
+        sonvisibility: true,
+        keywords: e.detail.value,
+        userName: e.detail.value
+      })
+
+      this.showContact()
+    }
+  },
+  confirm(e) {
+    console.log(123)
+    this.setData({
+      sonvisibility: false
+    })
+  },
+  selectItem(e) {
+    this.setData({
+      sonvisibility: false,
+      keywords: e.currentTarget.dataset.name + '(' + e.currentTarget.dataset.office + ')',
+      zpCode: e.currentTarget.dataset.code,
+      zpName: e.currentTarget.dataset.name,
+    })
+  }
 })

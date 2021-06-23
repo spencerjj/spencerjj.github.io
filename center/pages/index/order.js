@@ -90,7 +90,8 @@ Page({
     var that = this;
     var userInfo = that.data.userInfo
     var data = {
-      memNum: '1-106839358',
+      // memNum: '1-106839358',
+      memNum:userInfo.memNum,
       store:store,
       ajax: '_json'
     }

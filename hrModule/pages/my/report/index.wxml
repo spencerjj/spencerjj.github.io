@@ -1,0 +1,19 @@
+<view class="container">
+  <view class="title">{{detail.title}}</view>
+  <view class="line"></view>
+    <view class="tdetail">
+      <view>开始时间</view>
+      <view>{{detail.startTime}}</view>
+    </view>
+    <view class="tdetail">
+      <view>结束时间</view>
+      <view>{{detail.endTime}}</view>
+    </view>
+    <view class="tdetail">
+      <view>地点</view>
+      <view>{{detail.address}}</view>
+    </view>
+</view>
+<button class="btn" bindtap="toPage" data-url="test" disabled="{{!id}}">报名</button>
+<i-toast id="toast" />
+<i-spin fix wx:if="{{loadAll}}"></i-spin>

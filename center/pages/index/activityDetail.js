@@ -101,6 +101,7 @@ Page({
           var weekDay = ["周日", "周一", "周二", "周三", "周四", "周五", "周六"];  
           let actLists = res.data
           actLists.map(item=>{
+            item.goodsUrl =  HOST_URI+'customer'+item.goodsUrl
             if(item.fileUrl.split(',').length>1){
               item.fileUrl = item.fileUrl.split(',')
               for(let x in item.fileUrl){
@@ -108,7 +109,7 @@ Page({
               }
             }else{
               let array = []
-              array.push(HOST_URI+'customer/'+item.fileUrl)
+              array.push(HOST_URI+'customer'+item.fileUrl)
               item.fileUrl = array
             }
             item.compare = new Date().getTime()>new Date(item.startTime.replace(/-/g,'/')).getTime()?'进行中':'即将开始'
@@ -117,7 +118,7 @@ Page({
               console.log(item.startTime.slice(0,10).replace(/-/g,'/'))
               item.actTime = item.startTime.slice(0,10).replace(/-/g,'/')+' '+weekDay[myDate.getDay()]+' '+item.startTime.slice(-5)
             }else{
-              item.actTime = item.startTime.slice(0,10).replace(/-/g,'/')+'~'+item.endTime.slice(5,10).replace(/-/g,'/')
+              item.actTime = item.startTime.slice(0,10).replace(/-/g,'/')+' ~ '+item.endTime.slice(5,10).replace(/-/g,'/')
             }
           })
           that.setData({

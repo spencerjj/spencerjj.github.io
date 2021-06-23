@@ -1,5 +1,6 @@
 import Dialog from '../miniprogram_npm/@vant/weapp/dialog/dialog'
 import Toast from '../miniprogram_npm/@vant/weapp/toast/toast';
+var app = getApp()
 Component({
   options: {
     styleIsolation: 'apply-shared'
@@ -68,9 +69,13 @@ Component({
       let index = e.currentTarget.dataset.index
       let id = this.data.lists[index].id
       let title = this.data.lists[index].title
-      let time = this.data.lists[index].actTime
+      let array = []
+      array.id = id
+      array.title = title
+      array.event = this.data.lists[index].whyEventTimeList
+      app.globalData.eventDetail = array
       wx.navigateTo({
-        url: 'reportDetail?id='+id+'&title='+title+"&time="+time,
+        url: 'reportDetail'
       })
     },
     know(e){

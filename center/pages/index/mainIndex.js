@@ -144,6 +144,7 @@ Page({
           let actLists = res.data
           actLists.map(item=>{
             item.fileUrl=HOST_URI+'customer'+item.fileUrl
+            item.bannerUrl = HOST_URI+'customer'+item.bannerUrl
           })
           that.setData({
             actLists:res.data
@@ -178,10 +179,9 @@ Page({
             pointLists:res.vdefinemessage
           })
         } else {
-          Toast({
-            message: '活动获取失败',
-            type: 'warning'
-          });
+          that.setData({
+            pointLists:[]
+          })
         }
       }
     ).catch(res => {
@@ -206,12 +206,14 @@ Page({
           let actLists = res.data
           actLists.map(item=>{
             item.fileUrl=HOST_URI+'customer/'+item.fileUrl
-            item.compare = new Date().getTime()>new Date(item.startTime.replace(/-/g,'/')).getTime()?'进行中':'即将开始'
-            if(item.startTime==item.endTime){
-              var myDate = new Date(Date.parse(item.startTime.slice(0,10)));  
-              item.actTime = item.startTime.slice(0,10).replace(/-/g,'/')+' '+weekDay[myDate.getDay()]+' '+item.startTime.slice(-5)
-            }else{
-              item.actTime = item.startTime.slice(0,10).replace(/-/g,'/')+' ~ '+item.endTime.slice(5,10).replace(/-/g,'/')
+            if(item.whyEventTimeList.length>0){
+            item.compare = new Date().getTime()>new Date(item.whyEventTimeList[0].startTime.replace(/-/g,'/')).getTime()?'进行中':'即将开始'
+              if(item.whyEventTimeList[0].startTime==item.whyEventTimeList[item.whyEventTimeList.length-1].endTime){
+                var myDate = new Date(Date.parse(item.whyEventTimeList[0].startTime.slice(0,10)));  
+                item.whyEventTimeList[0].actTime = item.whyEventTimeList[0].startTime.slice(0,10).replace(/-/g,'/')+' '+weekDay[myDate.getDay()]+' '+item.whyEventTimeList[0].startTime.slice(-5)
+              }else{
+                item.whyEventTimeList[0].actTime = item.whyEventTimeList[0].startTime.slice(0,10).replace(/-/g,'/')+' ~ '+item.whyEventTimeList[item.whyEventTimeList.length-1].endTime.slice(5,10).replace(/-/g,'/')
+              }
             }
           })
           that.setData({
@@ -226,7 +228,7 @@ Page({
       }
     ).catch(res => {
       Toast({
-        message: res.msg,
+        message: res.message,
         type: 'warning'
       });
     });

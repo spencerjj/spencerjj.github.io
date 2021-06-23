@@ -5,6 +5,7 @@ import {
   getRequest
 } from '../../utils/api.js'
 var app = getApp();
+import {store,storeId,HOST_URI} from '../../config.js'
 import Dialog from '../../miniprogram_npm/@vant/weapp/dialog/dialog'
 import Toast from '../../miniprogram_npm/@vant/weapp/toast/toast';
 Page({
@@ -13,19 +14,21 @@ Page({
    * 页面的初始数据
    */
   data: {
-
+    storeDetail:[]
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    var that = this
-    app.ifUser().then((data)=>{
-      that.setData({
-        userInfo:data
-      })
-    }).then()
+    console.log(app.globalData.storeDetail)
+    let storeDetail = app.globalData.storeDetail
+    wx.setNavigationBarTitle({
+      title: storeDetail.shopName,
+    })
+    this.setData({
+      storeDetail
+    })
   },
 
   /**
@@ -78,7 +81,11 @@ Page({
   },
   call(e){
     wx.makePhoneCall({
-      phoneNumber: '123123123',
+      phoneNumber: this.data.storeDetail.shopPhone,
     })
+  },
+  enter(e){
+    console.log(this.data.storeDetail.shopLink)
+    wx.navigateToMiniProgram({ appId: 'wxf02c836c64be8566', path: this.data.storeDetail.shopLink, success(res) {  } })
   }
 })

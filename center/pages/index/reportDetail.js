@@ -10,14 +10,18 @@ import Dialog from '../../miniprogram_npm/@vant/weapp/dialog/dialog'
 import Toast from '../../miniprogram_npm/@vant/weapp/toast/toast';
 Page({
 
-  /**
+  /*
    * 页面的初始数据
    */
   data: {
     userInfo:'',
     title:'',
     time:'',
-    id:''
+    id:'',
+    index:0,
+    timeLists:[],
+    eventDetail:[],
+    oriLists:[]
   },
 
   /**
@@ -26,11 +30,28 @@ Page({
   onLoad: function (options) {
     var that = this
     app.ifUser().then((data)=>{
+      console.log(app.globalData.eventDetail)
+      let eventDetail = app.globalData.eventDetail
+      let timeLists = []
+      let oriLists = []
+      oriLists = eventDetail.event
+      oriLists.map(item=>{
+        if(item.startTime==item.endTime){
+            timeLists.push(item.startTime.slice(5,-3).replace(/-/g,'/'))
+        }else{
+           if(item.startTime.slice(5,-9)==item.endTime.slice(5,-9)){
+          timeLists.push(item.startTime.slice(5,-3).replace(/-/g,'/')+' ~ '+item.endTime.slice(11,-3).replace(/-/g,'/'))
+        }else{
+          timeLists.push(item.startTime.slice(5,-3).replace(/-/g,'/')+' ~ '+item.endTime.slice(5,-3).replace(/-/g,'/'))
+        }
+        }
+      })
       that.setData({
         userInfo:data,
-        title:options.title,
-        time:options.time,
-        id:options.id
+        eventDetail,
+        title:eventDetail.title,
+        timeLists,
+        oriLists
       })
     }).then()
   },
@@ -103,11 +124,13 @@ Page({
   report(e) {
     var that = this;
     var data = {
-      corp_code:storeId,
-      corp_name:store,
-      eventId:that.data.id,
+      storeId:storeId,
+      corpName:store,
+      eventId:that.data.eventDetail.id,
       mobile:that.data.userInfo.phone,
       nikeName:that.data.userInfo.name,
+      eventStartTime:that.data.oriLists[that.data.index].startTime,
+      eventEndTime:that.data.oriLists[that.data.index].endTime,
       ajax: '_json'
     }
     getRequest(getApiHost(), 'customer/bh/api/active/saveEventRegistration', 'body', data, 0, false, false, true).then(
@@ -137,5 +160,9 @@ Page({
       });
     });
   },
-
+  timeChange(e){
+    this.setData({
+      index:e.detail.value
+    })
+  }
 })

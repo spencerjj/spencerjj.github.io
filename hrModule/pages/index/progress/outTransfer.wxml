@@ -35,13 +35,27 @@
 			</view>
     </view>
   </view>
+	<view class="title">
+    <view class="c1">
+      <text>添加移交人<text style="color:red;font-size:25rpx" wx:if="{{lists.bpm.activityId=='officer'}}">*(如无人选请选择部门长本人)</text></text>
+    </view>
+    <input class="timePicker" placeholder="请填写姓名并选择移交人" placeholder-style='color:#af9d7f;margin-left:-5rpx;padding-left:10rpx'
+      bindinput='checkInput' value="{{lists.transferName||keywords}}" bindconfirm="confirm" confirm-type="done" maxlength="20"
+      cursor-spacing="200" disabled="{{current!=1||lists.bpm.activityId!='officer'}}"></input>
+    <view class="sonLists" wx:if="{{sonvisibility}}">
+      <view wx:for="{{codeLists}}" wx:for-item="sonItem" class="sonItem" bindtap="selectItem" hover-class='hover1'
+        hover-stay-time='50' data-name="{{sonItem.name}}" data-code="{{sonItem.code}}" data-office="{{sonItem.office}}"
+        wx:key="index" data-index="{{childindex}}">
+        {{sonItem.name}}({{sonItem.office}})</view>
+    </view>
+  </view>
 	<view class="sub" wx:if="{{lists.bpm.activityId=='ssc'}}">
     <view class="c1">
       <text>最后结薪日<text style="color:red;font-size:25rpx">*</text></text>
     </view>
     <view class="codePicker">
       <picker mode="date" value="{{salaryDate}}" bindchange="bindSalaryChange" disabled="{{current==1?false:true}}">
-			<view class="timePicker pickerError">
+			<view class="timePicker">
 				<text wx:if="{{salaryDate.length==0}}" style="color:#af9d7f">请选择...</text>
         {{salaryDate}}
 				<image class="arraw" src="http://img.gagctv.com/17112314452261654"></image>
@@ -49,64 +63,6 @@
 		</picker>
     </view>
   </view>
-  <!-- <view class="title" wx:if="{{lists.bpm.activityId=='hrbp'||index1!=3}}">
-		<view class="c1">
-			<text>是否财务审批 </text>
-		</view>
-		<picker value="{{index1}}" range="{{array1}}" bindchange="pickChange" data-mark="caiwu" disabled="{{current==1&&lists.bpm.activityId=='hrbp'?false:true}}">
-			<view class="timePicker  {{ifCaiwu?'':'pickerError'}}" style="padding-left:10rpx">
-				<text wx:if="{{index1==3&&lists.bpm.activityId=='hrbp'}}" style="color:#af9d7f">请选择...</text>
-				{{array1[index1]}}
-				<image class="arraw" src="http://img.gagctv.com/17112314452261654"></image>
-			</view>
-		</picker>
-  </view>
-  <view class="title" wx:if="{{lists.bpm.activityId=='hrbp'||index2!=3}}">
-		<view class="c1">
-			<text>是否统辖审批 </text>
-		</view>
-		<picker value="{{index1}}" range="{{array1}}" bindchange="pickChange"  data-mark="tongxia" disabled="{{current==1&&lists.bpm.activityId=='hrbp'?false:true}}">
-			<view class="timePicker  {{ifTongxia?'':'pickerError'}}" style="padding-left:10rpx">
-				<text wx:if="{{index2==3&&lists.bpm.activityId=='hrbp'}}" style="color:#af9d7f">请选择...</text>
-				{{array1[index2]}}
-				<image class="arraw" src="http://img.gagctv.com/17112314452261654"></image>
-			</view>
-		</picker>
-  </view>
-  <view class="title" wx:if="{{lists.bpm.activityId=='hrbp'||index4!=3}}">
-		<view class="c1">
-			<text>是否邮箱审批 </text>
-		</view>
-		<picker value="{{index1}}" range="{{array1}}" bindchange="pickChange"  data-mark="email" disabled="{{current==1&&lists.bpm.activityId=='hrbp'?false:true}}">
-			<view class="timePicker  {{ifEmail?'':'pickerError'}}" style="padding-left:10rpx">
-				<text wx:if="{{index4==3&&lists.bpm.activityId=='hrbp'}}" style="color:#af9d7f">请选择...</text>
-				{{array1[index4]}}
-				<image class="arraw" src="http://img.gagctv.com/17112314452261654"></image>
-			</view>
-		</picker>
-	</view>
-	<view class="title">
-		<view class="c1">
-			<text>是否OA审批<text style="color:red;font-size:25rpx">*</text> </text>
-		</view>
-		<picker value="{{index1}}" range="{{array1}}" bindchange="pickChange"  data-mark="oa" disabled="true">
-			<view class="timePicker" style="padding-left:10rpx">
-				{{array1[index3]}}
-				<image class="arraw" src="http://img.gagctv.com/17112314452261654"></image>
-			</view>
-		</picker>
-  </view>
-  <view class="title">
-		<view class="c1">
-			<text>是否SSC审批<text style="color:red;font-size:25rpx">*</text> </text>
-		</view>
-		<picker value="{{index1}}" range="{{array1}}" bindchange="pickChange"  data-mark="ssc" disabled="true">
-			<view class="timePicker" style="padding-left:10rpx">
-				{{array1[index5]}}
-				<image class="arraw" src="http://img.gagctv.com/17112314452261654"></image>
-			</view>
-		</picker>
-  </view> -->
   <view class="title" wx:if="{{lists.bpm.activityId=='emp'||imgLists.length>1}}">
     <view class="c1">
       <text> 图片</text>

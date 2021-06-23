@@ -23,6 +23,12 @@
   height: 100%;
   background:rgba(0,0,0,.5);
   z-index: 99;
+  transform: scale(0);
+  transition:all .3s
+}
+.show{
+  opacity: 1;
+  transform: scale(1);
 }
 .codeCon{
   text-align: center;
@@ -53,7 +59,10 @@
 }
 .rtitle1{
   font-size: 28rpx;
-  margin-bottom:10rpx
+  margin-top:30rpx;
+  font-weight: bolder;
+  color:#999;
+  font-size: 35rpx;
 }
 .qrcode{
   border-radius: 30rpx;
@@ -64,5 +73,9 @@
   width: 230px;
   height: 230px;
   margin:0 auto
+}
+.desc{
+  width: 80%;
+  margin-left: 10%;
 }
 

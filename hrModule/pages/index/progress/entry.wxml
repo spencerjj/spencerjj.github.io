@@ -80,12 +80,25 @@
 	</view>
 	<view class="title" wx:if="{{lists.bpm.activityId == 'DeptManager'}}">
     <view class="c1">
-      <text>试用期工资<text style="color:red">(非导购/工人岗位请填写)</text></text>
+      <text>试用期工资<text style="color:red">*(导购/工人等无岗位工资请填写0)</text></text>
     </view>
     <input class="c1Input" placeholder-style='color:#af9d7f' type="number" maxlength="10" bindinput='hinput5'
-      value="{{lists.trySalary}}" disabled="{{current!=1}}" confirm-type="done"></input>
+      value="{{trySalary}}" disabled="{{current!=1}}" confirm-type="done"></input>
 	</view>
-	<view class="title"  wx:if="{{lists.bpm.activityId == 'DeptManager'}}">
+	<view class="title" wx:if="{{lists.bpm.activityId == 'DeptManager'}}">
+    <view class="c1">
+      <text>是否有奖金基数<text style="color:red">*(百货部分岗位)</text></text>
+    </view>
+    <picker value="{{index6}}" range="{{array6}}" bindchange="pickChange6"
+			disabled="{{current!=1}}">
+			<view class="timePicker">
+				<text wx:if="{{index6==-1}}" style="color:#af9d7f">请选择...</text>
+				<view wx:else>{{array6[index6]}}</view>
+				<image class="arraw" src="http://img.gagctv.com/17112314452261654"></image>
+			</view>
+		</picker>
+	</view>
+	<!-- <view class="title"  wx:if="{{lists.bpm.activityId == 'DeptManager'}}">
 		<view class="c1">
 			<text>参保属地</text>
 		</view>
@@ -98,7 +111,7 @@
 				<image class="arraw" src="http://img.gagctv.com/17112314452261654"></image>
 			</view>
 		</picker>
-	</view>
+	</view> -->
 	<view class="title" wx:if="{{lists.bpm.activityId == 'DeptManager'}}">
 		<view class="c1">
 			<text>是否开通OA<text style="color:red;font-size:25rpx"></text></text>

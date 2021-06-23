@@ -31,7 +31,19 @@ function doLogin(phone){
           return;
         }else{
           wx.removeStorageSync('userInfo')
-          wx.setStorageSync('userInfo', res)
+          let pro = 0
+          let list = res
+          let point = res.gradePoint
+          if(res.tier=='银星卡会员'){
+            pro = (point/20000).toFixed(2)*100
+          }else if(res.tier=='金星卡会员'){
+            pro = (point/50000).toFixed(2)*100
+          }else if(res.tier=='黑金卡会员'){
+            pro = (point/100000).toFixed(2)*100
+          }
+          list.pro = pro
+          list.gradePoint = Number(list.gradePoint).toFixed(0)
+          wx.setStorageSync('userInfo', list)
           resolve(res)
         }
       })

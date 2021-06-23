@@ -155,15 +155,6 @@
   </view>
   <view class="title">
     <view class="c1">
-      <text>调入上级</text>
-    </view>
-    <view class="codePicker">
-      <text>{{lists.managerNameIn}}</text>
-      <image src="../../../images/file.png" bindtap="copy" data-cont="{{lists.managerNameIn}}"></image>
-    </view>
-  </view>
-  <view class="title">
-    <view class="c1">
       <text>转岗日期</text>
     </view>
     <view class="codePicker">

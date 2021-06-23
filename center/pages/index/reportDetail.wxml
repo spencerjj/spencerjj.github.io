@@ -3,7 +3,11 @@
   <view class="top">
     <view class="section">
       <view>活动名称：<text>{{title}}</text></view>
-      <view>活动时间：<text>{{time}}</text></view>
+      <view>
+      <picker range="{{timeLists}}" value="{{index}}" bindchange="timeChange">
+        活动时间：<text>{{timeLists[index]}}</text><image class="arraw" src="/images/arraw1.png"></image> 
+      </picker>
+      </view>
       <!-- <view>减扣积分：<text style="font-weight:bolder;color:#C30D23">1000</text></view> -->
     </view>
   </view>

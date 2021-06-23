@@ -95,7 +95,7 @@ Page({
   getInfo(e){
     var that = this;
     var data = {
-      corp_code: storeId,
+      storeId: storeId,
       mobile:that.data.userInfo.phone,
       ajax: '_json'
     }
@@ -109,19 +109,21 @@ Page({
           var weekDay = ["周日", "周一", "周二", "周三", "周四", "周五", "周六"];  
           lists.map(item=>{
             item.event.fileUrl=HOST_URI+'customer/'+item.event.fileUrl
-            item.compare = new Date().getTime()>new Date(item.event.startTime.replace(/-/g,'/')).getTime()?'进行中':'即将开始'
-            if(item.event.startTime==item.event.endTime){
-              var myDate = new Date(Date.parse(item.event.startTime.slice(0,10)));  
-              item.actTime = item.event.startTime.slice(0,10).replace(/-/g,'/')+' '+weekDay[myDate.getDay()]+' '+item.event.startTime.slice(-5)
+            item.compare = new Date().getTime()>new Date(item.eventStartTime.replace(/-/g,'/')).getTime()?'进行中':'即将开始'
+            if(item.eventStartTime==item.eventEndTime){
+              var myDate = new Date(Date.parse(item.eventStartTime.slice(0,10)));  
+              item.actTime = item.eventStartTime.slice(0,10).replace(/-/g,'/')+' '+weekDay[myDate.getDay()]+' '+item.eventStartTime.slice(-5).replace(/-/g,'/')
             }else{
-              item.actTime = item.event.startTime.slice(0,10).replace(/-/g,'/')+' ~ '+item.event.endTime.slice(5,10).replace(/-/g,'/')
+              if(item.eventStartTime.slice(5,-9)==item.eventEndTime.slice(5,-9)){
+                item.actTime = item.eventStartTime.slice(5,-3).replace(/-/g,'/')+' ~ '+item.eventEndTime.slice(11,-3).replace(/-/g,'/')
+              }else{
+                item.actTime = item.eventStartTime.slice(5,-3).replace(/-/g,'/')+' ~ '+item.eventEndTime.slice(5,-3).replace(/-/g,'/')
+              }
             }
             if(item.status!=0){
               endLists.push(...item)
             }
           })
-
-
         that.setData({
             lists:res.data,
             endLists
@@ -135,7 +137,7 @@ Page({
       }
     ).catch(res => {
       Toast({
-        message: '系统错误，请联系管理员',
+        message: res.message,
         type: 'warning'
       });
     });

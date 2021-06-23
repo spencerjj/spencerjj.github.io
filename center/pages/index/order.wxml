@@ -1,7 +1,10 @@
 <view class="container">
   <view class="lists">
     <view class="listItem" bindtap="showDetail" wx:key="index" wx:for="{{lists}}" data-index="{{index}}">
-      <view>{{item.saleDate}}</view>
+      <view class="ltop">
+        <view>{{item.saleDate}}</view>
+        <view>{{item.orderType}}</view>
+      </view>
       <view>
         <view>订单编号：{{item.orderno}}</view>
         <view>￥{{item.actAmount}}</view>

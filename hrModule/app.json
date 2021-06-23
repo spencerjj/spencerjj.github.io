@@ -2,6 +2,9 @@
   "pages": [
     "pages/index/inform",
     "pages/my/my",
+    "pages/my/report/index",
+    "pages/my/report/sign",
+    "pages/my/report/success",
     "pages/index/progress/outTransfer",
     "pages/index/progress/publishLeave",
     "pages/my/DISC/report",

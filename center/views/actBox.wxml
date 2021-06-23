@@ -1,5 +1,5 @@
 <view class="act-box" >
-  <view class="boxItem" wx:for="{{lists}}" wx:key="index" bindtap="toPage" data-id="{{item.id}}" data-url="{{item.fileUrl}}"  wx:if="{{item.isIndex==1&&type=='activity'}}">
+  <view class="boxItem" wx:for="{{lists}}" wx:key="index" bindtap="toPage" data-id="{{item.id}}" data-url="{{item.bannerUrl}}"  wx:if="{{item.isIndex==1&&type=='activity'}}">
     <image src="{{item.fileUrl}}" mode="aspectFill"></image>
     <view class="boxTitle">{{item.activeTypeName}}</view>
     <!-- <view class="boxTime">
@@ -10,7 +10,7 @@
     <image src="{{item.fileUrl}}" mode="aspectFill"></image>
     <view class="boxTitle">{{item.title}}</view>
     <view class="boxTime">
-      <van-icon name="clock-o" size="11" custom-style="vertical-align: 0%" /> {{item.actTime}}
+      <van-icon name="clock-o" size="11" custom-style="vertical-align: 0%" /> {{item.whyEventTimeList[0].actTime}}
     </view>
   </view>
 </view>

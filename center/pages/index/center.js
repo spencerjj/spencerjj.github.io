@@ -9,7 +9,8 @@ Page({
     current:0,
     isShow:false,
     swiperH:'',
-    card:3
+    card:3,
+    imgLists:[1,2,3,4]
   },
 
   /**
@@ -18,8 +19,24 @@ Page({
   onLoad: function (options) {
     var that = this
     app.ifUser().then((data)=>{
+      let current = 0
+      switch (data.tier){
+        case '银星卡会员':
+          current = 0
+          break;
+        case '金星卡会员':
+          current = 1
+          break;
+        case '黑金卡会员':
+          current = 2
+          break;
+        case '黑钻卡会员':
+          current = 3
+          break;
+      }
       that.setData({
-        userInfo:data
+        userInfo:data,
+        current
       })
     }).then()
   },

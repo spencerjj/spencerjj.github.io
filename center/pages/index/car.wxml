@@ -3,7 +3,13 @@
     <image src="/images/01-33.png" mode="widthFix"></image>
   </view>
   <view class="middle">
-    <view class="title">输入车牌</view>
+    <view class="top">
+      <view class="title">输入车牌</view>
+      <view class="add"  bindtap="add" hover-class="hover1" hover-stay-time=".5s">
+      <van-icon name="add" size="15" color="#5a81ec"/>增加车牌
+    </view>
+    </view>   
+    
     <keyboard plateNumber="{{plateNumber}}" bind:change="onChange"></keyboard>
     <view class="confirm'" bindtap="confirm" hover-class="hover1" hover-stay-time=".5s">查缴停车费</view>
     <view class="history" wx:if="{{carInfo.length>0}}">
@@ -22,6 +28,7 @@
         <view>会员当天消费满500元，免费停车2小时。</view>
         <view>会员当天消费满1000元，免费停车3小时。</view>
         <view>会员当天消费满5000元及以上，免费停车不限时间。</view>
+        <view>缴费后请在30分钟后离场。</view>
     </view>
 </view>
 <van-toast id="van-toast" />

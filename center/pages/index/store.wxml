@@ -1,25 +1,28 @@
 <view class="container">
   <view class="top">
-    <input type="text" placeholder="请输入商户关键字搜索" placeholder-style="color:#aaa" confirm-type="search"/>
+    <input type="text" placeholder="请输入商户关键字搜索" placeholder-style="color:#aaa" confirm-type="search" bindconfirm="nameChange" bindinput="nameInput"/>
     <van-icon name="search" size="22" custom-style="position:absolute;top:50%;left:50rpx;color:#aaa;margin-top:-11px" />
   </view>
   <view>
     <van-dropdown-menu>
-      <van-dropdown-item value="{{ value1 }}" options="{{ option1 }}" />
-      <van-dropdown-item value="{{ value2 }}" options="{{ option2 }}" />
+      <van-dropdown-item value="{{ value1 }}" options="{{ option1 }}" bind:change="floorChange"/>
+      <!-- <van-dropdown-item value="{{ value2 }}" options="{{ option2 }}"  bind:change="orderChange"/> -->
     </van-dropdown-menu>
   </view>
   <view class="lists">
-    <view class="actItem" bindtap="toPage">
-        <view><image src="/images/01-9.png" mode="aspectFit"></image></view>
+    <view class="actItem" bindtap="toPage" wx:for="{{shopLists}}" wx:key="index" data-index="{{index}}">
+        <view><image src="{{item.shopBg}}" mode="aspectFill"></image></view>
         <view>
-          <view>MaxMara 麦丝玛拉</view>
-          <view>奢侈品 购物中心1F</view>
+          <view>{{item.shopName}}</view>
+          <view>{{item.shopFloor}}</view>
         </view>
       </view>
-    <view class='nullDataInfo'>
+    <view class='nullDataInfo' wx:if="{{listIsFull}}">
       <van-divider contentPosition="center">无更多商户了</van-divider>
     </view>
-    <!-- <van-empty image="search" description="暂无商户"/> -->
+    <van-empty image="search" description="暂无商户"  wx:if="{{shopLists.length==0}}"/>
+    <view wx:if="{{loading}}" class='buskmark'><image src='/images/00-12.png'></image></view>
   </view>
 </view>
+<van-toast id="van-toast" />
+<van-dialog id="van-dialog" />

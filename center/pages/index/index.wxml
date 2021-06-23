@@ -6,18 +6,31 @@
   <view class="middle">
     <view class="center">
       <view class="ctop">
-        <image src="{{avatarUrl||'/images/01-41.png'}}"></image>
+        <image src="{{avatarUrl||'/images/01-2.png'}}" wx:if="{{!userInfo}}"></image>
+        <view class="avatar" wx:else><open-data type="userAvatarUrl"></open-data></view>
         <view class="info">
-          <view class="name"  wx:if="{{userInfo}}"><text>{{userInfo.name}}</text>
+          <view class="name"  wx:if="{{userInfo}}"><view>{{userInfo.name}}</view>
             <image src="/images/card1.png" mode="widthFix" style="" wx:if="{{userInfo.tier=='银星卡会员'}}"></image>
-            <image src="/images/card2.png" mode="widthFix" style="" wx:if="{{userInfo.tier=='金星卡会员'}}"></image>
-            <image src="/images/card3.png" mode="widthFix" style="" wx:if="{{userInfo.tier=='黑金卡会员'}}"></image>
-            <image src="/images/card4.png" mode="widthFix" style="" wx:if="{{userInfo.tier=='黑钻卡会员'}}"></image>
+            <image src="/images/card2.png" mode="widthFix" style="" wx:elif="{{userInfo.tier=='金星卡会员'}}"></image>
+            <image src="/images/card3.png" mode="widthFix" style="" wx:elif="{{userInfo.tier=='黑金卡会员'}}"></image>
+            <image src="/images/card4.png" mode="widthFix" style="" wx:elif="{{userInfo.tier=='黑钻卡会员'}}"></image>
           </view>
+          <view  wx:if="{{userInfo}}">我的积分: <text style="font-weight:bolder;color:#000;">{{userInfo.availConsumPoint||0}}</text> </view>
           <view class="name" wx:if="{{!userInfo}}" style="font-size:35rpx;color:#C79F62;border-bottom:2rpx solid #bbb;letter-spacing:3rpx" bindtap="toMy">您尚未登录哦</view>
-          <view  wx:if="{{userInfo}}">我的积分: <text style="font-weight:bolder;color:#000;">{{userInfo.availConsumPoint}}</text> </view>
-          <view wx:if="{{!userInfo}}"  bindtap="toMy">登录后使用更多功能</view>
+          <view wx:if="{{!userInfo}}"  bindtap="toMy" style="margin-top:10rpx">登录后使用更多功能</view>
+          <view class="progress" wx:if="{{userInfo}}">
+          <view class="pro">
+            <view style="width:{{userInfo.pro}}%">
+              
+            </view>
+          </view>
+          <view style="margin-top:10rpx;color:#666">
+            {{userInfo.gradePoint}}<text wx:if="{{userInfo.tier=='银星卡会员'}}">/20000</text><text wx:if="{{userInfo.tier=='金星卡会员'}}">/50000</text><text wx:if="{{userInfo.tier=='黑金卡会员'}}">/100000</text><text wx:if="{{userInfo.tier=='黑钻卡会员'}}"></text>
+            <text style="display:inline-block;float:right;color:white;background:#bbb;border-radius:5rpx;padding:0 5rpx;font-size:20rpx">升级</text>
+          </view>
         </view>
+        </view>
+        
         <view class="code" bindtap="use"  wx:if="{{userInfo}}">
           <image src="/images/code.png"></image>
           <view>会员码</view>
@@ -37,9 +50,10 @@
           <image src="/images/01-5.png" mode="widthFix"></image>
           <view>消费记录</view>
         </view>
-        <view bindtap="toPage" data-mark="borrow" hover-stay-time=".5s" hover-class="hover2">
-          <image src="/images/01-6.png" mode="widthFix"></image>
-          <view>商场服务</view>
+        <view hover-stay-time=".5s" hover-class="hover2">
+          <label for="btn"><image src="/images/01-17.png" mode="widthFix"></image>
+          <view>我要咨询</view></label>
+          <button open-type="contact" id="btn" style="width:0;height:0;opacity:0"></button>
         </view>
       </view>
     </view>

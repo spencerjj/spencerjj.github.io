@@ -24,13 +24,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    var that = this;
-    app.ifUser().then((data)=>{
-      that.setData({
-        userInfo:data
-      })
-      that.getInfo()
-    }).then()
+    
   },
 
   /**
@@ -44,7 +38,13 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    var that = this;
+    app.ifUser().then((data)=>{
+      that.setData({
+        userInfo:data
+      })
+      that.getInfo()
+    }).then()
   },
 
   /**
@@ -65,7 +65,7 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-    this.onLoad()
+    this.onShow()
   },
 
   /**
@@ -245,6 +245,10 @@ Page({
       resolve()
     });
   })
-
+ },
+ add(e){
+   wx.navigateTo({
+     url: 'addCar',
+   })
  }
 })

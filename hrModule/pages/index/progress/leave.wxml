@@ -41,7 +41,7 @@
 			<text>移交类型<text style="color:red;font-size:25rpx">*</text> </text>
 		</view>
 		<picker value="{{index2}}" range="{{array2}}" bindchange="pickChange1" disabled="{{current==1&&lists.bpm.activityId=='hrbp'?false:true}}">
-			<view class="timePicker pickerError" style="padding-left:10rpx">
+			<view class="timePicker" style="padding-left:10rpx">
 				<text wx:if="{{index2==10}}" style="color:#af9d7f">请选择...</text>
 				{{array2[index2]}}
 				<image class="arraw" src="http://img.gagctv.com/17112314452261654"></image>

@@ -20,7 +20,9 @@ Page({
     index3: 1,
     index4: 3,
     index5:-1,
+    index6:-1,
     array5:[],
+    array6:['否','是'],
     trySalary:'',
     notice: '请输入终止原因',
     focus: false,
@@ -199,8 +201,10 @@ Page({
                 emailAccount:res.data.oaEmployEntry.emailAccount?res.data.oaEmployEntry.emailAccount:'',
                 emailPwd:res.data.oaEmployEntry.emailPwd?res.data.oaEmployEntry.emailPwd:'',
                 safeLevel:res.data.oaEmployEntry.safeLevel?res.data.oaEmployEntry.safeLevel:'',
-                trySalary:res.data.trySalary?res.data.trySalary:''
+                trySalary:res.data.oaEmployEntry.trySalary?res.data.oaEmployEntry.trySalary:'',
+                index6:res.data.oaEmployEntry.bonusBaseState!= undefined?Number(res.data.oaEmployEntry.bonusBaseState):-1
               })
+              console.log(res.data.trySalary)
               var post = res.data.postList
               var lists = res.data.oaEmployEntry
               for (let x in post) {
@@ -225,8 +229,6 @@ Page({
                 }
               }
               if (lists.isdoor != undefined) {
-                that.setData({
-                })
                 if (lists.isdoor == 1) {
                   that.setData({
                     index2: 0,
@@ -238,8 +240,6 @@ Page({
                 }
               }
               if (lists.isemail != undefined) {
-                that.setData({
-                })
                 if (lists.isemail == 1) {
                   that.setData({
                     index3: 0,
@@ -283,29 +283,29 @@ Page({
         }
       }
     })
-    wx.request({
-      url: app.globalData.url + 'oa/oaEmployEntry/insuranceAddressList',
-      data: {
-        // __sid: app.globalData.__sid,
-        __sid: app.globalData.tempSid,
-        __ajax: 'json'
-      },
-      header: {
-        'content-type': 'application/json' // 默认值
-      },
-      success(res) {
-        console.log(res)
-        if(res.data){
-          let array5 = []
-          res.data.map((item)=>{
-            array5.push(item.name)
-          })
-          that.setData({
-            array5
-          })
-        }
-      }
-    })
+    // wx.request({
+    //   url: app.globalData.url + 'oa/oaEmployEntry/insuranceAddressList',
+    //   data: {
+    //     // __sid: app.globalData.__sid,
+    //     __sid: app.globalData.tempSid,
+    //     __ajax: 'json'
+    //   },
+    //   header: {
+    //     'content-type': 'application/json' // 默认值
+    //   },
+    //   success(res) {
+    //     console.log(res)
+    //     if(res.data){
+    //       let array5 = []
+    //       res.data.map((item)=>{
+    //         array5.push(item.name)
+    //       })
+    //       that.setData({
+    //         array5
+    //       })
+    //     }
+    //   }
+    // })
   },
   bindDateChange: function (e) {
     console.log('picker发送选择改变，携带值为', e.detail.value)
@@ -393,6 +393,12 @@ Page({
       index5: e.detail.value  
     })
   },
+  pickChange6:function(e){
+    console.log(e.detail.value)
+    this.setData({
+      index6: e.detail.value  
+    })
+  },
   handleOpen() {
     this.setData({
       visible: true
@@ -426,19 +432,33 @@ Page({
         })
         return;
       }
-      // if(that.data.lists.bpm.activityId == 'DeptManager'&&that.data.trySalary.length<1){
-      //   $Toast({
-      //     content:'请填写试用期工资',
-      //     type:'warning'
-      //   })
-      //   that.setData({
-      //     visible: false
-      //   })
-      //   wx.pageScrollTo({
-      //     scrollTop: 300
-      //   })
-      //   return;
-      // }
+      console.log(that.data.trySalary)
+      if(that.data.lists.bpm.activityId == 'DeptManager'&&that.data.trySalary.length<1){
+        $Toast({
+          content:'请填写试用期工资',
+          type:'warning'
+        })
+        that.setData({
+          visible: false
+        })
+        wx.pageScrollTo({
+          scrollTop: 300
+        })
+        return;
+      }
+      if(that.data.lists.bpm.activityId == 'DeptManager'&&that.data.index6==-1){
+        $Toast({
+          content:'请填写是否有奖金基数',
+          type:'warning'
+        })
+        that.setData({
+          visible: false
+        })
+        wx.pageScrollTo({
+          scrollTop: 350
+        })
+        return;
+      }
         const action = [...this.data.actions];
         action[0].loading = true;
 
@@ -452,13 +472,14 @@ Page({
           __sid: app.globalData.tempSid,
           __ajax: 'json',
           isoa: 1,
-          isemail: Math.abs(that.data.index2 - 1),
-          isdoor: Math.abs(that.data.index3 - 1),
+          isemail: Math.abs(that.data.index3 - 1),
+          isdoor: Math.abs(that.data.index2 - 1),
           oaPwd:that.data.oaPwd,
           emailAccount:that.data.emailAccount,
           emailPwd:that.data.emailPwd,
-          dependency:that.data.index5==-1?'':that.data.array5[that.data.index5],
+          // dependency:that.data.index5==-1?'':that.data.array5[that.data.index5],
           trySalary:that.data.trySalary,
+          bonusBaseState:that.data.index6,
           // safeLevel:that.data.safeLevel,
           'bpm.comment': that.data.hint,
           id: that.data.id,

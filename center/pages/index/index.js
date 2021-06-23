@@ -50,7 +50,8 @@ Page({
     repLists:[],
     noteLists:[],
     pointLists:[],
-    banner:[]
+    banner:[],
+    pro:0
   },
   onReady(e) {
 
@@ -65,8 +66,9 @@ Page({
     var that = this;
     var user = wx.getStorageSync('user')
     var userInfo = wx.getStorageSync('userInfo')
+    var cardNum = wx.getStorageSync('cardNum')||0
     that.setData({
-      cardNum:wx.getStorageSync('cardNum')||0,
+      cardNum:userInfo?cardNum:'',
       userInfo:userInfo||''
     })
     this.getNote()
@@ -82,6 +84,7 @@ Page({
         userInfo:wx.getStorageSync('userInfo')
       })
     })
+    that.onLoad()
   },
   login(e) {
     app.doLogin().then(data => {
@@ -137,6 +140,7 @@ Page({
           let actLists = res.data
           actLists.map(item=>{
             item.fileUrl=HOST_URI+'customer'+item.fileUrl
+            item.bannerUrl = HOST_URI+'customer'+item.bannerUrl
           })
           that.setData({
             actLists:res.data
@@ -167,14 +171,15 @@ Page({
         console.log(res)
         wx.stopPullDownRefresh()
         if (res.code=="SEL_000") {
+          let pointLists = res.vdefinemessage
+          pointLists = pointLists.slice(0,4)
           that.setData({
-            pointLists:res.vdefinemessage
+            pointLists
           })
         } else {
-          Toast({
-            message: '积分兑换获取失败',
-            type: 'warning'
-          });
+          that.setData({
+            pointLists:[]
+          })
         }
       }
     ).catch(res => {
@@ -199,12 +204,15 @@ Page({
           let actLists = res.data
           actLists.map(item=>{
             item.fileUrl=HOST_URI+'customer/'+item.fileUrl
-            if(item.startTime==item.endTime){
-              var myDate = new Date(Date.parse(item.startTime.slice(0,10)));  
-              item.actTime = item.startTime.slice(0,10).replace(/-/g,'/')+' '+weekDay[myDate.getDay()]+' '+item.startTime.slice(-5)
-            }else{
-              item.actTime = item.startTime.slice(0,10).replace(/-/g,'/')+' ~ '+item.endTime.slice(5,10).replace(/-/g,'/')
+            if(item.whyEventTimeList&&item.whyEventTimeList.length>0){
+              if(item.whyEventTimeList[0].startTime==item.whyEventTimeList[item.whyEventTimeList.length-1].endTime){
+                var myDate = new Date(Date.parse(item.whyEventTimeList[0].startTime.slice(0,10)));  
+                item.whyEventTimeList[0].actTime = item.whyEventTimeList[0].startTime.slice(0,10).replace(/-/g,'/')+' '+weekDay[myDate.getDay()]+' '+item.whyEventTimeList[0].startTime.slice(-5)
+              }else{
+                item.whyEventTimeList[0].actTime = item.whyEventTimeList[0].startTime.slice(0,10).replace(/-/g,'/')+' ~ '+item.whyEventTimeList[item.whyEventTimeList.length-1].endTime.slice(5,10).replace(/-/g,'/')
+              }
             }
+            
           })
           that.setData({
             repLists:res.data
@@ -218,7 +226,7 @@ Page({
       }
     ).catch(res => {
       Toast({
-        message: res.msg||'活动获取失败',
+        message: res.message||'活动获取失败',
         type: 'warning'
       });
     });
@@ -237,17 +245,18 @@ Page({
         if (res.result=='true') {
           let noteLists = res.data
           noteLists.map(item=>{
-            if(item.fileUrl.split(',').length>1){
-              item.fileUrl = item.fileUrl.split(',')
-              for(let x in item.fileUrl){
-                item.fileUrl[x] =  HOST_URI+'customer'+item.fileUrl[x]
+            if(item.fileUrl.length>0){
+              if(item.fileUrl.split(',').length>0){
+                item.fileUrl = item.fileUrl.split(',')
+                for(let x in item.fileUrl){
+                  item.fileUrl[x] =  HOST_URI+'customer'+item.fileUrl[x]
+                }
+              }else{
+                let array = []
+                array.push(HOST_URI+'customer/'+item.fileUrl)
+                item.fileUrl = array
               }
-            }else{
-              let array = []
-              array.push(HOST_URI+'customer/'+item.fileUrl)
-              item.fileUrl = array
             }
-
             if(item.imgUrl.split(',').length>1){
               item.imgUrl = item.imgUrl.split(',')
               for(let x in item.imgUrl){
@@ -259,8 +268,9 @@ Page({
               item.imgUrl = array
             }
           })
+          noteLists = noteLists.slice(0,4)
           that.setData({
-            noteLists:res.data
+            noteLists
           })
         } else {
           Toast({
@@ -289,7 +299,7 @@ Page({
   },
   use() {
     var that = this;
-    new oricode('canvas', that.data.userInfo.memNum, 250, 250);
+    new oricode('canvas', that.data.userInfo.parameter3, 250, 250);
     wx.showLoading({
       title: '加载中',
     })
@@ -407,5 +417,19 @@ Page({
         type: 'warning'
       });
     });
-  }
+  },
+  onShareAppMessage: function(res) {
+  //   let that = this
+  //   if (res.from === 'button') {
+  //   }
+  //   let path = 'pages/index/register?rePhone='+that.data.phoneNo
+  //   if(that.data.no){
+  //     path = 'pages/index/register?rePhone='+that.data.phoneNo+'&cardNo='+that.data.no
+  //   }
+  //   return {
+  //   title: "加入LAMPO会员中心",
+  //   path: path,
+  //   imageUrl: '/images/logo.png',
+  //   }
+    }
 })

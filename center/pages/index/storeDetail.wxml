@@ -1,18 +1,21 @@
 <view class="container">
-  <view class="top">
+  <view class="top {{storeDetail.shopBg?'':'tblack'}}">
+    <image src="{{storeDetail.shopBg}}" style="aspectFit" class="bg"></image>
+    <view class="secondbg"></view>
     <view class="actItem" bindtap="toPage">
       <view>
-        <image src="/images/01-9.png" mode="aspectFit"></image>
+        <image src="{{storeDetail.shopPic}}" mode="aspectFit"></image>
       </view>
       <view>
-        <view>MaxMara 麦丝玛拉</view>
-        <view>奢侈品 购物中心1F</view>
+        <view>{{storeDetail.shopName}}</view>
+        <view>{{storeDetail.shopLabel}}</view>
       </view>
     </view>
     <view class="location">
-      <image src="/images/01-18.png"></image>  <text>   常州购物中心 1F ></text>
+      <image src="/images/01-18.png" style="margin-right:10rpx"></image>  <text>   {{storeDetail.shopFloor}} ></text>
     </view>
     <image src="/images/01-19.png" class="phone" bindtap="call"></image>
+    <view bindtap="enter" class="enter" wx:if="{{storeDetail.shopLink}}">点击进店</view>
   </view>
     <view class="title">
       <view>
@@ -22,6 +25,6 @@
       <view></view>
     </view>
     <view class="content">
-      品牌故事品牌故事品牌故事品牌故事品牌故事品牌故事品牌故事品牌故事品牌故事品牌故事品牌故事品牌故事品牌故事品牌故事品牌故事品牌故事
+      {{storeDetail.shopStory}}
     </view>
 </view>

@@ -1,7 +1,7 @@
 {
   "pages": [
-    "pages/index/index",
     "pages/index/recommend",
+    "pages/index/index",
     "pages/index/mission",
     "pages/index/modify",
     "pages/index/cardDetail",

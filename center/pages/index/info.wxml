@@ -55,7 +55,7 @@
     <van-icon name="warning-o" />带*号为必填项
   </view>
 </view>
-<view class="bottom" bindtap='save' hover-class="hover1" hover-stay-time=".5s" hidden="{{birthday}}">
-      保存信息
+<view class="bottom" bindtap='save' hover-class="hover1" hover-stay-time=".5s" hidden="{{hasBir}}">
+      保存信息{{hasBir}}
   </view>
 <van-toast id="van-toast" />

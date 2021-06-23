@@ -5,8 +5,8 @@
   <view class="aright">
     <view>{{item.title}}</view>
     <view>
-      <van-icon name="clock-o" size="15" custom-style="vertical-align: -8%" /> {{item.actTime}}</view>
-      <view><text>#{{item.compare}}</text></view>
+      <van-icon name="clock-o" size="15" custom-style="vertical-align: -8%" /> {{item.whyEventTimeList[0].actTime}}</view>
+      <view><text>#{{item.compare||'即将开始'}}</text></view>
     <!-- <view class="people">
       <image src="/images/01-30.png" mode="widthFix"></image>余<text style="color:#e95513">12</text>人
     </view> -->

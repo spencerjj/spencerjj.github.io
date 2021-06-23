@@ -30,7 +30,12 @@ Page({
     vStatus: '可用,待激活',
     cardName: '',
     array1:[],
-    array2:[]
+    array2:[],
+    array3:[],
+    array4:[],
+    desc:'',
+    showType:1,
+    posLists:[]
   },
 
   /**
@@ -40,9 +45,11 @@ Page({
     var that = this;
     app.ifUser().then((data) => {
       that.setData({
-        userInfo: data
+        userInfo: data,
+        temp:0
       })
       that.getInfo()
+      that.getFutuer()
     }).then()
   },
 
@@ -99,6 +106,7 @@ Page({
     var userInfo = that.data.userInfo
     var data = {
       phone: userInfo.phone,
+      // phone:'13615236576',
       membership: '会员',
       store: store,
       ajax: '_json'
@@ -109,8 +117,11 @@ Page({
         wx.stopPullDownRefresh()
         if (res.code == 'SEL_000') {
           let lists = res.vouchermessage
+          let carLists = res.carCop
           let array1 = []
           let array2 = []
+          let array3 = []
+          let array4 = []
           lists.map((item)=>{
             if(item.status=='可用'||item.status=='待激活'){
               array1.push(item)
@@ -118,9 +129,19 @@ Page({
               array2.push(item)
             }
           })
+          carLists.forEach(item=>{
+            if(item.status=='无效'){
+              array4.push(item)
+            }else{
+              array3.push(item)
+            }
+          })
           that.setData({
             array1,
-            array2
+            array2,
+            array3,
+            array4,
+            temp:1
           })
           if (that.data.vStatus == '可用,待激活') {
             wx.removeStorageSync('cardNum')
@@ -139,6 +160,24 @@ Page({
       });
     });
   },
+  getFutuer(e){
+    var that = this;
+    var userInfo = that.data.userInfo
+    var data = {
+      pCardno: userInfo.parameter3,
+      // pCardno:'1151377581560846254',
+      storeId: storeId,
+      ajax: '_json'
+    }
+    getRequest(getApiHost(), 'customer/bh/api/crm/getFutuerVoucher', 'body', data, 0, false, false, false).then(
+      res => {
+        console.log(res)
+        that.setData({
+          posLists:res.data
+        })
+      }
+    )
+  },
   onChange(e) {
     this.setData({
       current: e.detail.index,
@@ -146,8 +185,13 @@ Page({
   },
   onClose() {
     this.setData({
-      show: false
+      show1: false
     })
+    setTimeout(()=>{
+      this.setData({
+        show:false
+      })
+    },300)
     this.onLoad()
   },
   recommend(e) {
@@ -164,13 +208,42 @@ Page({
     })
     that.setData({
       nowNum: e.detail.no,
-      cardName: e.detail.name
+      cardName: e.detail.name,
+      showType:1
     })
     setTimeout(() => {
       wx.hideLoading()
       this.setData({
         show: true
       })
+      setTimeout(()=>{
+        this.setData({
+          show1:true,
+        })
+      },50)
+    }, 300)
+  },
+  showDetail(e){
+    console.log(e.detail)
+    var that = this;
+    wx.showLoading({
+      title: '加载中',
+    })
+    that.setData({
+      desc: e.detail.desc,
+      cardName: e.detail.name,
+      showType:2
+    })
+    setTimeout(() => {
+      wx.hideLoading()
+      this.setData({
+        show: true
+      })
+      setTimeout(()=>{
+        this.setData({
+          show1:true,
+        })
+      },50)
     }, 300)
   },
   createQrCode: function (content, canvasId, cavW, cavH) {

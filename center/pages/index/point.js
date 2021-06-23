@@ -98,10 +98,9 @@ Page({
             orderLists:res.pointmessage.listOfMemberPointTxnInfo.pointTxnEntry
           })
         }else{
-          Toast({
-            message: res.msg,
-            type: 'warning'
-          });
+          that.setData({
+            orderLists:[]
+          })
         }
 
       }

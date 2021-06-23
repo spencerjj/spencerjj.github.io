@@ -60,13 +60,13 @@
   show="{{ show }}"
   closeable
   position="bottom"
-  custom-style="height: 70vh;"
+  custom-style="max-height: 70vh;"
   bind:close="onClose"
 >
   <view class="cardCon">
     <view class="title">停车优惠券</view>
     <view class='line'><van-divider contentPosition="center" customStyle="color:#666;border-color:#999">可用优惠券（{{cardLists.length}}）</van-divider></view>
-    <view class="listItem" wx:for="{{cardLists}}" wx:key="index" bindtap="select" data-id="{{item.parkId}}" data-dur="{{item.offerDuration}}" data-index="{{index}}">
+    <view class="listItem" wx:for="{{cardLists}}" wx:key="index" bindtap="select" data-id="{{item.parkId}}" data-dur="{{item.offerDuration}}" data-index="{{index}}" wx:if="{{item.status=='有效'}}">
       <view class="leftR"></view>
       <view class="rightR"></view>
       <view class="status" wx:if="{{item.ifsel}}">已选</view>
@@ -75,9 +75,10 @@
          <view>有效期至{{item.effecTime}}</view>
       </view>
       <view class="listTime">
-        <text>{{item.offerDuration}}</text>分钟
+        <text>{{item.offerDuration/60}}</text>小时
       </view>
     </view>
+    <view style="width:100%;height:50rpx"></view>
     <view class="clear" bindtap="clear">
       不使用优惠券
     </view>

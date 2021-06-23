@@ -4,6 +4,8 @@
   "navigationBarBackgroundColor": "#fff",
   "enablePullDownRefresh": true,
   "usingComponents":{
-    "card-lists":"/views/cardLists"
+    "card-lists":"/views/cardLists",
+    "carCard-lists":"/views/carCardLists",
+    "pos-lists":"/views/posLists"
   }
 }

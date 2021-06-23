@@ -201,6 +201,9 @@ Page({
               })
             },
             fail: function (err) {
+              wx.redirectTo({
+                url: 'borrow?active=1',
+              })
               Toast({
                 message: '支付失败',
                 type: 'warning'

@@ -4,7 +4,7 @@ import {
   postRequest,
   getRequest
 } from '../../utils/api.js'
-import {store,storeId} from '../../config.js'
+import {store,storeId,HOST_URI} from '../../config.js'
 var app = getApp();
 import Dialog from '../../miniprogram_npm/@vant/weapp/dialog/dialog'
 import Toast from '../../miniprogram_npm/@vant/weapp/toast/toast';
@@ -20,7 +20,8 @@ Page({
     nowNum:'',
     fileLists:[],
     imgLists:[],
-    noteDetail:[]
+    noteDetail:[],
+    content:''
   },
 
   /**
@@ -32,11 +33,26 @@ Page({
       let noteDetail = app.globalData.noteDetail
       let imgLists = noteDetail.imgUrl
       let fileLists = noteDetail.fileUrl
+      let wxWidth = (wx.getSystemInfoSync().windowWidth*0.9)+'px'
+      console.log(wxWidth)
+      let content = ''
+      if(noteDetail.content){
+        content = noteDetail.content
+        .replace(/<p([\s\w"=\/\.:;]+)((?:(style="[^"]+")))/ig, '<p')
+        .replace(/<div>/ig, '<div style="font-size: 15px; line-height: 25px;color:#777;letter-spacing:1.5px">')
+        content = content.replace(/style="[^"]+"/gi, '').replace(/style='[^']+'/gi, '');
+    content = content.replace(/width="[^"]+"/gi, '').replace(/width='[^']+'/gi, '');
+    content = content.replace(/height="[^"]+"/gi, '').replace(/height='[^']+'/gi, '');
+        content = content.replace(/\<img/gi, '<img style="width:'+wxWidth+';height:auto;display:block;margin-top:10px"');
+        content= content.replace(new RegExp(/src=\"/g), `src="`+HOST_URI)
+      }
+      console.log(noteDetail)
       that.setData({
         userInfo:data,
         fileLists,
         imgLists,
-        noteDetail
+        noteDetail,
+        content
       })
       // console.log(app.globalData.noteDetail)
       // that.getInfo()
@@ -120,4 +136,8 @@ Page({
       });
     });
   },
+  toPage(e){
+    console.log(this.data.noteDetail.shopLink)
+    wx.navigateToMiniProgram({ appId: 'wxf02c836c64be8566', path: this.data.noteDetail.shopLink, success(res) {  } })
+  }
 })

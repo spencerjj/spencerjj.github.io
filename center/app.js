@@ -10,6 +10,7 @@ import {
 import Toast from 'miniprogram_npm/@vant/weapp/toast/toast';
 App({
   onLaunch: function () {
+    wx.removeStorageSync('cardNum')
     const updateManager = wx.getUpdateManager()
 
     updateManager.onCheckForUpdate(function (res) {
@@ -33,7 +34,10 @@ App({
   globalData: {
     fileLists:[],
     noteDetail:[],
-    pointCard:[]
+    pointCard:[],
+    storeDetail:[],
+    eventDetail:[],
+    wxLink:''
   },
   ifUser() {
     return new Promise((resolve, reject) => {

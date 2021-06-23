@@ -21,7 +21,8 @@ Page({
     region: [],
     regionCode:[],
     id:'',
-    address:''
+    address:'',
+    hasBir:false
   },
 
   /**
@@ -32,6 +33,10 @@ Page({
     app.ifUser().then((data)=>{
       console.log(data)
       let region = [data.province,data.city,data.area]
+      let hasBir = false
+      if(data.birthDate||data.cardNum){
+        hasBir = true
+      }
       that.setData({
         region,
         userInfo:data,
@@ -41,6 +46,7 @@ Page({
         address:data.address,
         name: data.name,
         birthday: data.birthDate||'',
+        hasBir
       })
     }).then()
   },
@@ -93,45 +99,6 @@ Page({
    */
   onShareAppMessage: function () {
 
-  },
-  getInfo(e) {
-    var that = this;
-    var data = {
-      phone: wx.getStorageSync('phoneNo')
-    }
-    getRequest(getApiHost(), 'platform/v1/api/lampocrm/LPQueryMemberAllInfo', 'body', data, 0, false, true).then(
-      res => {
-        console.log(res)
-          that.setData({
-            sex: res.sex
-          })
-        if(res.city){
-          let region = [res.province,res.city,res.area]
-          console.log(region)
-          that.setData({
-            region
-          })
-        }
-        if (res.name) {
-          that.setData({
-            name: res.name
-          })
-        }
-        if (res.birthDate) {
-          that.setData({
-            birthday: res.birthDate
-          })
-        }
-        that.setData({
-          user: res
-        })
-      }
-    ).catch(res => {
-      Toast({
-        message: '系统错误，请联系管理员',
-        type: 'warning'
-      });
-    });
   },
   nameInput(e) {
     console.log(e.detail.value)

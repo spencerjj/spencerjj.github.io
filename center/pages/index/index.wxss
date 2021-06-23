@@ -39,6 +39,16 @@
   width: 120rpx;
   height: 120rpx;
   border-radius: 50%;
+  overflow: hidden;
+  margin-top: 50rpx;
+  margin-left: 30rpx;
+  float: left;
+}
+.avatar{
+  width: 120rpx;
+  height: 120rpx;
+  border-radius: 50%;
+  overflow: hidden;
   margin-top: 50rpx;
   margin-left: 30rpx;
   float: left;
@@ -46,34 +56,62 @@
 
 .info{
   float: left;
-  margin-top:70rpx;
+  margin-top:60rpx;
   font-size: 30rpx;
   margin-left:20rpx;
+  position: relative;
 }
 .info image{
   width: 100rpx;
   height: 100rpx;
 }
+
 .info view:first-child{
   font-weight: bolder;
 }
 .name{
   position: relative;
 }
-.name text{
-  display: inline-block;
+.name>view{
+  max-width: 150rpx;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 .name>image{
   position: absolute;
-  top:-30rpx;
+  top:5rpx;
+  left: -5rpx;
 }
 
 .info view:nth-child(2){
   font-size: 25rpx;
-  margin-top:10rpx;
+  margin-top:30rpx;
   color:#aaa
 }
-
+.progress{
+  float: left;
+  font-size: 25rpx;
+  position: absolute;
+  left:150rpx;
+  top:10rpx;
+  width: 220rpx;
+}
+.pro{
+  width: 220rpx;
+  height: 15rpx;
+  background:#999;
+  border-radius: 15rpx;
+  position: relative;
+  overflow: hidden;
+}
+.pro>view{
+  position: absolute;
+  left: 0;
+  height: 15rpx;
+  background:#ddd;
+  border-radius: 15rpx;
+}
 .code{
   float:right;
   text-align: center;
@@ -185,12 +223,12 @@
   background:rgba(255,255,255,.9);
   padding-top:200rpx;
   z-index: 99;
-  transform: scale(0) translateY(200%);
+  transform: scale(0);
   transition:all .3s
 }
 .show{
   opacity: 1;
-  transform: scale(1) translateY(0);
+  transform: scale(1);
 }
 .qrcode{
   position: absolute;

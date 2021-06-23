@@ -2,6 +2,9 @@
 page{
   background:white
 }
+.container{
+  overflow: hidden;
+}
 .video{
   width: 100%;
 }
@@ -23,9 +26,12 @@ page{
   color:#999
 }
 .title{
-  height: 50rpx;
+  min-height: 50rpx;
   font-weight: 500;
   font-size: 32rpx;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 .remarks{
   color:#666;

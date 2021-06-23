@@ -1,8 +1,9 @@
 {
   "pages": [
+    "pages/index/index",
+    "pages/index/store",
     "pages/index/my",
     "pages/index/car",
-    "pages/index/index",
     "pages/index/mainIndex",
     "pages/index/reportDetail",
     "pages/index/info",
@@ -18,7 +19,6 @@
     "pages/index/activity",
     "pages/index/center",
     "pages/index/storeDetail",
-    "pages/index/store",
     "pages/index/register",
     "pages/index/detail",
     "pages/index/shop",
@@ -38,7 +38,11 @@
     "pages/index/activityInfo",
     "views/noteBox",
     "views/noteLists",
-    "pages/index/noteDetail"
+    "pages/index/noteDetail",
+    "pages/index/addCar",
+    "views/carCardLists",
+    "pages/index/borrowtemp",
+    "pages/index/activityWx"
   ],
   "permission": {
     "scope.userLocation": {

@@ -17,7 +17,7 @@
         </view>
       </view> -->
       <view class="listItem" wx:for="{{orderLists}}" wx:key="index">
-      <view class="status">{{item.type}}</view>
+      <view class="status">{{item.type=="应计"?'增加':'使用'}}</view>
       <van-card
       desc="{{item.txnDate}}"
       title="{{item.subType}}"

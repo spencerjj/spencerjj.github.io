@@ -67,10 +67,21 @@ Component({
   methods: {
     report(e){
       console.log(this.data.lists[e.currentTarget.dataset.index].fileUrl)
-      app.globalData.fileLists = this.data.lists[e.currentTarget.dataset.index].fileUrl
-      wx.navigateTo({
-        url: 'activityInfo',
-      })
+      // 判断公众号链接
+      if(this.data.lists[e.currentTarget.dataset.index].wxLink){
+        app.globalData.wxLink = this.data.lists[e.currentTarget.dataset.index].wxLink
+        wx.navigateTo({
+          url: 'activityWx',
+        })
+      }else if(this.data.lists[e.currentTarget.dataset.index].shopLink){
+        wx.navigateToMiniProgram({ appId: 'wxf02c836c64be8566', path: this.data.lists[e.currentTarget.dataset.index].shopLink, success(res) {  } })
+      }else{
+        app.globalData.fileLists = this.data.lists[e.currentTarget.dataset.index].fileUrl
+        wx.navigateTo({
+          url: 'activityInfo',
+        })
+      }
+      
     }
   }
 })

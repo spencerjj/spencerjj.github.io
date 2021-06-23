@@ -139,11 +139,16 @@ Page({
         console.log(res)
         if (res.code = "SEL_000") {
           let cardLists = res.packOfferEntrys
+          let array = []
           cardLists.map(item => {
             item.offerDuration = item.offerDuration * 60
+            if(item.status=='有效'){
+              array.push(item)
+            }
           })
+
           that.setData({
-            cardLists: res.packOfferEntrys
+            cardLists: array
           })
         } else {
           that.setData({
@@ -198,7 +203,6 @@ Page({
       ajax: '_json'
     }
     if (that.data.nowDur > 1 || that.data.nowDur.length > 1) {
-      console.log(123)
       data.freeMoney = that.data.nowMoney
       data.freeTime = that.data.nowDur
       data['whyOrderDiscountList[0].code'] = that.data.nowId

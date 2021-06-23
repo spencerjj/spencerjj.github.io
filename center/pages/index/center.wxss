@@ -10,21 +10,29 @@
   overflow: hidden;
   position: relative;
 }
-.topSwiper image{
+
+.topSwiper>image{
   width: 100%;
+}
+.now{
+  position: absolute;
+  top:100rpx;
+  width: 140rpx !important;
+  height: 30rpx;
+  left: 40rpx;
 }
 .card{
   width: 90%;
   margin-left: 5%;
   text-align: center;
 }
-
-
  .mark{
    width: 90%;
    margin-left:5%;
    text-align: center;
-   margin-top:50rpx;
+   margin-top:70rpx;
+   font-weight: 500;
+   font-size: 37rpx;
  }
 .profile{
   width: 100rpx;
@@ -47,15 +55,16 @@
 }
 .sections>view{
   width: 33.333%;
-  font-size: 30rpx;
+  font-size: 28rpx;
   text-align: center;
   color:#000;
-  margin-top:100rpx;
+  margin-top:60rpx;
   position: relative;
+  font-weight: bolder;
 }
 .right{
   color:#999;
-  font-size: 20rpx;
+  font-size: 18rpx;
   width: 80%;
   margin:0 auto;
   margin-top:5rpx
@@ -66,4 +75,7 @@
 }
 .hover1{
   background:#eee !important
+}
+.wx-swiper-dots.wx-swiper-dots-horizontal{
+  top: 470rpx;
 }

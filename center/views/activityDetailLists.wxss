@@ -28,10 +28,11 @@
   float:right;
   margin-right: 20rpx;
 }
-.aright>view:nth-child(1){
+.aright text{
   font-weight: bolder;
-  min-width: 200rpx;
-  max-height: 90rpx;
+  display: block;
+  width:94%;
+  height: 90rpx;
   text-align: right;
   display: -webkit-box;
 overflow: hidden;
@@ -42,7 +43,7 @@ white-space: normal !important;
 -webkit-box-orient: vertical;
 
 }
-.aright>view:nth-child(2){
+.aright .location{
   display: inline-flex;
   align-items: center;
   color:#9e9e9f;
@@ -50,7 +51,7 @@ white-space: normal !important;
   font-weight: bolder;
   margin-top:10rpx
 }
-.aright>view:nth-child(3){
+.aright .state{
   clear: both;
   font-size: 20rpx;
   color:#dd5518;
@@ -61,7 +62,7 @@ white-space: normal !important;
   border-radius: 10rpx;
   margin-top:20rpx
 }
-.aright>view:nth-child(4){
+.aright .more{
   color:white;
   font-weight: bolder;
   background-image: linear-gradient(to right,#f7c9ab,#c9a07e);

@@ -1,7 +1,23 @@
-<view class="cardItems" bindtap="showCode" wx:for="{{cardLists}}" data-no="{{item.vnum}}" data-name="{{item.vname}}">
-  <image src="{{type=='disable'?'/images/card1.jpg':'/images/card.jpg'}}"></image>
-  <view class="notice">{{item.vname||item.type}}</view>
-  <view class="{{type=='disable'?'rule1':'rule'}}">全场满1元使用1元，不可折现</view>
-  <view class="date">有效期：{{item.startDate}}~{{item.endDate}}</view>
-  <view class="count">￥<text>{{item.denomination||0}}</text></view>
+<view class="cardItems" wx:for="{{cardLists}}" bindtap="showDetail" data-desc="{{item.useDesc}}" data-name="{{item.vname}}" wx:key="index">
+  <view class="count">
+    <view>￥<text>{{item.denomination||0}}</text></view>
+    <!-- <view>满1元可用</view> -->
+  </view>
+  <view class="detail">
+    <view>
+      {{item.vname||item.type}}
+    </view>
+    <view>
+      {{item.startDate}} ~ {{item.endDate}}
+    </view>
+  </view>
+  <view class="use {{type=='disable'?'used':''}}" catchtap="showCode"  data-no="{{item.vnum}}" data-name="{{item.vname}}" hover-class="hover1" hover-stay-time=".5s">
+    <view wx:if="{{type=='able'}}">立即</view>
+    <view wx:if="{{type=='able'}}">使用</view>
+    <view wx:if="{{type=='disable'}}">已</view>
+    <view wx:if="{{type=='disable'}}">失</view>
+    <view wx:if="{{type=='disable'}}">效</view>
+    <view class="tround"></view>
+    <view class="bround"></view>
+  </view>
 </view>

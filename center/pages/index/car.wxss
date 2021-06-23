@@ -13,6 +13,10 @@
   box-sizing: border-box;
   background:white;
 }
+.top{
+  display: flex;
+  justify-content: space-between;
+}
 .title{
   height: 60rpx;
   font-size: 32rpx;
@@ -49,6 +53,7 @@
   display: flex;
   align-items: center;
   min-height: 130rpx;
+  flex-wrap: wrap;
 }
 .history .hisItem{
   color:#c0c0c0;
@@ -67,4 +72,14 @@
   display: flex;
   align-items: center;
   justify-content: center;
+}
+.add{
+  width:160rpx;
+  height: 40rpx;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color:#5a81ec;
+  font-size: 22rpx;
 }
