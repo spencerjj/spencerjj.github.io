@@ -15,7 +15,7 @@ function doLogin(phone){
   }
   var data = {
     phone: phone,
-    // phone:13816397695,
+    // phone:13813667557,
     channel: '微会员',
     ajax: '_json'
   }

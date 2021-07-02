@@ -1,4 +1,4 @@
-
+var app = getApp()
 Component({
   options: {
     styleIsolation: 'apply-shared'
@@ -89,6 +89,17 @@ Component({
     },
     swiperChange(e){
       console.log(e.detail.current)
+    },
+    toPage(e){
+      if(e.currentTarget.dataset.type==1){
+      wx.navigateToMiniProgram({ appId: 'wxf02c836c64be8566', path: e.currentTarget.dataset.link, success(res) {  } })
+
+      }else if(e.currentTarget.dataset.type==2){
+        app.globalData.wxLink = e.currentTarget.dataset.link
+        wx.navigateTo({
+          url: 'activityWx',
+        })
+      }
     }
   }
 })

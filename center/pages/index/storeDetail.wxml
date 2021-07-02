@@ -14,7 +14,8 @@
     <view class="location">
       <image src="/images/01-18.png" style="margin-right:10rpx"></image>  <text>   {{storeDetail.shopFloor}} ></text>
     </view>
-    <image src="/images/01-19.png" class="phone" bindtap="call"></image>
+    <image src="/images/01-47.png" class="phone" bindtap="call"></image>
+    <image src="/images/01-46.png" class="ewm" bindtap="showCode" wx:if="{{storeDetail.shopEwm}}"></image>
     <view bindtap="enter" class="enter" wx:if="{{storeDetail.shopLink}}">点击进店</view>
   </view>
     <view class="title">
@@ -27,4 +28,10 @@
     <view class="content">
       {{storeDetail.shopStory}}
     </view>
+    <view class="showCode {{show1?'show':''}}" wx:if="{{show}}" bindtap="onClose" catchtouchmove="ture">
+  <view class="codeCon">
+    <image src="{{storeDetail.shopEwm}}" mode="widthFix"></image>
+    <view style="position:absolute;bottom:-150rpx;left:0;right:0;margin:0 auto"><van-icon name="clear" style="color:white" size="40"/></view>
+  </view>
+</view>
 </view>

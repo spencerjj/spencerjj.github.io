@@ -1,3 +1,6 @@
+.container{
+  padding-bottom:100rpx
+}
 .top{
   height: 400rpx;
   overflow: hidden;
@@ -46,7 +49,7 @@
   margin-top:60rpx;
   font-size: 28rpx;
   font-weight: bolder;
-  width: 70%;
+  width: 50%;
 }
 .actItem>view:nth-child(2) view:nth-child(2){
   font-size: 23rpx;
@@ -74,17 +77,25 @@
   color:white;
   border-radius:20rpx;
   padding:3px 10px;
-  background-image: linear-gradient(to right,#f7c9ab,#c9a07e);
+  border:1px solid #fff
 }
 .location image{
   width: 23rpx;
   height: 23rpx;
 }
 .phone{
-  width: 50rpx;
-  height: 60rpx;
+  width: 65rpx;
+  height: 65rpx;
   position: absolute;
-  right:50rpx;
+  right:20rpx;
+  bottom:110rpx;
+  z-index: 9;
+}
+.ewm{
+  width: 65rpx;
+  height: 65rpx;
+  position: absolute;
+  right:110rpx;
   bottom:110rpx;
   z-index: 9;
 }
@@ -120,4 +131,30 @@
   padding:10rpx;
   background:white;
   box-sizing: border-box;
+}
+.showCode{
+  position: fixed;
+  top:0;
+  width: 100%;
+  height: 100%;
+  background:rgba(0,0,0,.5);
+  z-index: 99;
+  transform: scale(0);
+  transition:all .3s
+}
+.show{
+  opacity: 1;
+  transform: scale(1);
+}.codeCon{
+  text-align: center;
+  width: 75%;
+  margin-left: 12.5%;
+  position: absolute;
+  top:10vh;
+  background:none;
+  border-radius: 30rpx;
+}
+.codeCon image{
+  width: 100%;
+  border-radius: 30rpx;
 }

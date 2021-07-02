@@ -1,7 +1,7 @@
 <view class="card-box">
   <view class="box-item"  wx:for="{{lists}}" wx:key="index" bindtap="toPage" data-index="{{index}}">
     <view>
-      <image src="/images/01-44.png" mode="aspectFit"></image>
+      <image src="{{item.parameter2||'/images/01-44.png'}}" mode="aspectFit"></image>
     </view>
     <view>{{item.vname}}</view>
     <view>{{item.excPoint}}积分</view>

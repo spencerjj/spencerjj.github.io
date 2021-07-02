@@ -34,6 +34,5 @@
     </view>
     <view style="position:absolute;bottom:-150rpx;left:0;right:0;margin:0 auto"><van-icon name="clear" style="color:white" size="40"/></view>
   </view>
-  
 </view>
 <van-toast id="van-toast" />

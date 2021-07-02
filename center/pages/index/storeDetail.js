@@ -14,7 +14,8 @@ Page({
    * 页面的初始数据
    */
   data: {
-    storeDetail:[]
+    storeDetail:[],
+    show: false,
   },
 
   /**
@@ -87,5 +88,32 @@ Page({
   enter(e){
     console.log(this.data.storeDetail.shopLink)
     wx.navigateToMiniProgram({ appId: 'wxf02c836c64be8566', path: this.data.storeDetail.shopLink, success(res) {  } })
-  }
+  },
+  showCode(e){
+    wx.showLoading({
+      title: '加载中',
+    })
+    setTimeout(() => {
+      wx.hideLoading()
+      this.setData({
+        show: true
+      })
+      setTimeout(()=>{
+        this.setData({
+          show1:true,
+        })
+      },50)
+    }, 300)
+  },
+  onClose() {
+    this.setData({
+      show1: false
+    })
+    setTimeout(()=>{
+      this.setData({
+        show:false
+      })
+    },300)
+    this.onLoad()
+  },
 })

@@ -51,6 +51,30 @@
   </view>
   <view class="title">
     <view class="c1">
+      <text>是否有奖金基数</text>
+    </view>
+    <view class="codePicker">
+      <text>{{lists.bonusStateOld==1?'是':'否'}}</text>
+    </view>
+  </view>
+  <view class="title">
+    <view class="c1">
+      <text>调整前奖金基数</text>
+    </view>
+    <view class="codePicker">
+      <text>{{lists.bonusOld}}</text>
+    </view>
+  </view>
+  <view class="title">
+    <view class="c1">
+      <text>调整前年收入</text>
+    </view>
+    <view class="codePicker">
+      <text>{{lists.yearSalaryOld}}</text>
+    </view>
+  </view>
+  <view class="title">
+    <view class="c1">
       <text>调薪类型</text>
     </view>
     <view class="codePicker">
@@ -59,7 +83,7 @@
   </view>
   <view class="title">
     <view class="c1">
-      <text>调整后薪资<text style="color:red;font-size:25rpx" wx:if="{{lists.bpm.activityId == 'hrbp'}}">*</text></text>
+      <text>调整后薪资<text style="color:red;font-size:25rpx" wx:if="{{lists.bpm.activityId == 'hrbp'}}">*不填写代表不调整薪资</text></text>
     </view>
     <input class="number1" placeholder-style='color:#af9d7f' type="number" maxlength="10" bindinput='hinput1'
       value="{{lists.salaryNew}}" disabled="{{current==1&&lists.bpm.activityId == 'hrbp'?false:true}}"
@@ -67,11 +91,27 @@
   </view>
   <view class="title">
     <view class="c1">
-      <text>调整后津贴<text style="color:red;font-size:25rpx" wx:if="{{lists.bpm.activityId == 'hrbp'}}">*</text></text>
+      <text>调整后津贴<text style="color:red;font-size:25rpx" wx:if="{{lists.bpm.activityId == 'hrbp'}}">*不填写代表不调整薪资</text></text>
     </view>
     <input class="number1" placeholder-style='color:#af9d7f' type="number" maxlength="10" bindinput='hinput3'
       value="{{lists.allowanceNew}}" disabled="{{current==1&&lists.bpm.activityId == 'hrbp'?false:true}}"
       confirm-type="done"></input>
+  </view>
+  <view class="title">
+    <view class="c1">
+      <text>调整后奖金基数</text>
+    </view>
+    <view class="codePicker">
+      <text>{{bonusNew||lists.bonusNew}}</text>
+    </view>
+  </view>
+  <view class="title">
+    <view class="c1">
+      <text>调整后年收入</text>
+    </view>
+    <view class="codePicker">
+      <text>{{yearSalaryNew||lists.yearSalaryNew}}</text>
+    </view>
   </view>
   <view class="sub">
     <view class="c1">

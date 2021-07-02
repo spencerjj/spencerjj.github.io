@@ -114,3 +114,6 @@ page{
   color:white;
   border-radius: 20rpx;
 }
+.disable{
+  color:#999
+}

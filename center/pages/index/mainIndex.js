@@ -175,8 +175,14 @@ Page({
         console.log(res)
         wx.stopPullDownRefresh()
         if (res.code=="SEL_000") {
+          let pointLists = res.vdefinemessage
+          pointLists.forEach(item=>{
+            if(item.parameter2){
+              item.parameter2 = HOST_URI+'customer/'+item.parameter2
+            }
+          })
           that.setData({
-            pointLists:res.vdefinemessage
+            pointLists
           })
         } else {
           that.setData({

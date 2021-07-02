@@ -66,6 +66,7 @@
 <view class="showCode {{show1?'show':''}}" wx:if="{{show}}" bindtap="onClose" catchtouchmove="ture">
   <view class="qrcode" wx:if="{{show2}}">
     <canvas class='canvas' canvas-id='canvas'></canvas>
+    <view style="text-align:center;font-weight:500;margin-top:10rpx">NO.{{userInfo.parameter3}}</view>
     <view style="position:absolute;bottom:-150rpx;left:50%;margin-left:-40rpx">
       <van-icon name="clear" style="color:#999" size="40" />
     </view>

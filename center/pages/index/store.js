@@ -175,7 +175,7 @@ Page({
           lists.map(item=>{
             item.shopPic = HOST_URI+'customer'+item.shopPic
             item.shopBg = HOST_URI+'customer'+item.shopBg
-            item.shopEwm = HOST_URI+'customer'+item.shopEwm
+            item.shopEwm = item.shopEwm?HOST_URI+'customer'+item.shopEwm:''
           })
           if (that.data.pageNo > 1) {
             console.log('第' + that.data.pageNo + '页')

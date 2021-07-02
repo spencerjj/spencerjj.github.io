@@ -30,13 +30,13 @@
     <input class="fill1" value="{{name}}" placeholder-style="color:#999" bindinput="nameInput"></input>
   </view>
   <view class="section">
-    <view class="s1">身份证号*</view>
-    <input class="fill1" value="{{cardNum}}" placeholder-style="color:#999" bindinput="idInput"></input>
+    <view class="s1">身份证号</view>
+    <input class="fill1 {{!hasCard||'disable'}}" value="{{cardNum}}" placeholder-style="color:#999" bindinput="idInput" disabled="{{hasCard}}"></input>
   </view>
   <view class="section">
     <view class="s1">生日*</view>
-    <picker start="1930-01-01" end="2021-01-01" bindchange="bindDateChange" mode="date" value="1990-01-01">
-      <view class="fill1">{{birthday}}</view>
+    <picker start="1930-01-01" end="2021-01-01" bindchange="bindDateChange" mode="date" value="1990-01-01" disabled="{{hasBir}}">
+      <view class="fill1  {{!hasBir||'disable'}}">{{birthday}}</view>
     </picker>
   </view>
   <view class="section">
@@ -55,7 +55,7 @@
     <van-icon name="warning-o" />带*号为必填项
   </view>
 </view>
-<view class="bottom" bindtap='save' hover-class="hover1" hover-stay-time=".5s" hidden="{{hasBir}}">
-      保存信息{{hasBir}}
+<view class="bottom" bindtap='save' hover-class="hover1" hover-stay-time=".5s">
+      保存信息
   </view>
 <van-toast id="van-toast" />

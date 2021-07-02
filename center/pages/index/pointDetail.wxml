@@ -6,7 +6,7 @@
     </view>
     <view class="content">
       <view>
-        <image src="/images/01-44.png" mode="aspectFill"></image>
+        <image src="{{pointCard.parameter2||'/images/01-44.png'}}" mode="aspectFill"></image>
       </view>
       <view>
         <view class="title1">{{pointCard.vname}}</view>

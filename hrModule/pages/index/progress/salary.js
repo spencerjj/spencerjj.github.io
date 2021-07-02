@@ -63,7 +63,9 @@ Page({
     m2Code: '',
     m2Name: '',
     allowanceNew: '',
-    txxxsm: ''
+    txxxsm: '',
+    yearSalaryNew:'',
+    bonusNew:''
   },
 
   /**
@@ -241,11 +243,11 @@ Page({
                     m1Name: lists.m1Name || '',
                     m2Code: lists.m2Code || '',
                     m2Name: lists.m2Name || '',
-                    start: lists.salaryDate|| '',
-                    salaryNew: lists.salaryNew|| '',
-                    allowanceNew: lists.allowanceNew|| '',
-                    remarks: lists.remarks|| '',
-                    txxxsm: lists.txxxsm|| ''
+                    start: lists.salaryDate || '',
+                    salaryNew: lists.salaryNew || '',
+                    allowanceNew: lists.allowanceNew || '',
+                    remarks: lists.remarks || '',
+                    txxxsm: lists.txxxsm || ''
                   })
                 }
               })
@@ -336,6 +338,7 @@ Page({
     this.setData({
       salaryNew: e.detail.value
     })
+    this.compu()
   },
   hinput2: function (e) {
     console.log(e.detail.value)
@@ -348,12 +351,40 @@ Page({
     this.setData({
       allowanceNew: e.detail.value
     })
+    this.compu()
   },
   hinput4: function (e) {
     console.log(e.detail.value)
     this.setData({
       txxxsm: e.detail.value
     })
+  },
+  compu() {
+    var that = this
+    var salaryNew = Number(that.data.salaryNew) || 0;
+    var allowanceNew = Number(that.data.allowanceNew) || 0;
+    var bonusStateOld = that.data.lists.bonusStateOld==1?1:0;
+    console.log(salaryNew+','+allowanceNew+','+bonusStateOld)
+    if (salaryNew && bonusStateOld) {
+      that.setData({
+        bonusNew:Number((salaryNew / 4).toFixed(2))
+      })
+    }else{
+      that.setData({
+        bonusNew:''
+      })
+    }
+    var bonusNew = that.data.bonusNew||0;
+    console.log(salaryNew+','+allowanceNew+','+bonusNew)
+    if (salaryNew || allowanceNew || bonusNew) {
+      that.setData({
+        yearSalaryNew:Number((salaryNew + +allowanceNew + +bonusNew) * 12)
+      })
+    }else{
+      that.setData({
+        yearSalaryNew:''
+      })
+    }
   },
   handleOpen() {
     this.setData({
@@ -599,6 +630,8 @@ Page({
           salaryDate: that.data.start,
           salaryNew: that.data.salaryNew,
           allowanceNew: that.data.allowanceNew,
+          bonusNew:that.data.bonusNew||that.data.lists.bonusNew,
+          yearSalaryNew:that.data.yearSalaryNew||that.data.lists.yearSalaryNew,
           remarks: that.data.remarks,
           txxxsm: that.data.txxxsm,
           m1Code: that.data.m1Code,

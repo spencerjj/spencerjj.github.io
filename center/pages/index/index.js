@@ -102,13 +102,19 @@ Page({
         console.log(res)
         wx.stopPullDownRefresh()
         if (res.result=='true') {
-          let lists = res.data[0].fileUrl
           let array = []
-          lists = lists.split(',')
-          lists.map(item=>{
-            item = HOST_URI+'customer'+item
-            array.push(item)
+          res.data.map(item=>{
+            let lists = res.data[0].fileUrl
+            lists = lists.split(',')
+            lists.map(son=>{
+              array.push({
+                url : HOST_URI+'customer'+son,
+                link:item.link,
+                linkType:item.linkType
+              })
+            })
           })
+          console.log(array)
           that.setData({
             banner:array
           })
@@ -172,7 +178,12 @@ Page({
         wx.stopPullDownRefresh()
         if (res.code=="SEL_000") {
           let pointLists = res.vdefinemessage
-          pointLists = pointLists.slice(0,4)
+          pointLists.forEach(item=>{
+            if(item.parameter2){
+              item.parameter2 = HOST_URI+'customer/'+item.parameter2
+            }
+          })
+          pointLists = pointLists.slice(0,6)
           that.setData({
             pointLists
           })

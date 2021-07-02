@@ -130,7 +130,7 @@
 }
 .qrcode{
   position: absolute;
-  top:50%;
+  top:45%;
   left:50%;
   margin-left:-135px;
   margin-top:-200px;

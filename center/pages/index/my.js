@@ -144,7 +144,6 @@ Page({
                 type: 'warning'
               });
             }
-
           }
         ).catch(res => {
           Toast({

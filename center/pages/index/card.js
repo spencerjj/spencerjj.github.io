@@ -123,6 +123,7 @@ Page({
           let array3 = []
           let array4 = []
           lists.map((item)=>{
+            // (new Date(item.endDate).getTime()>new Date().getTime())
             if(item.status=='可用'||item.status=='待激活'){
               array1.push(item)
             }else{
