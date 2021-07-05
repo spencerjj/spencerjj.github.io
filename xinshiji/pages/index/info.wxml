@@ -1,0 +1,61 @@
+<view class="content">
+  <view class="top">
+    <view class="topItem" bindtap="sexChange" data-sex="先生">
+      <view>
+        <van-icon name="checked" class="select" size="18" wx:if="{{sex=='先生'}}"/>
+        <image src="/images/01-38.png" class="icon"></image>
+      </view>
+      <view>
+        男性
+      </view>
+      <view>
+        Man
+      </view>
+    </view>
+    <view class="topItem" bindtap="sexChange" data-sex="女士">
+      <view>
+        <van-icon name="checked" class="select" size="18" wx:if="{{sex=='女士'}}"/>
+        <image src="/images/01-39.png" class="icon"></image>
+      </view>
+      <view>
+        女性
+      </view>
+      <view>
+        Woman
+      </view>
+    </view>
+  </view>
+  <view class="section">
+    <view class="s1">姓名*</view>
+    <input class="fill1" value="{{name}}" placeholder-style="color:#999" bindinput="nameInput"></input>
+  </view>
+  <view class="section">
+    <view class="s1">身份证号</view>
+    <input class="fill1 {{!hasCard||'disable'}}" value="{{cardNum}}" placeholder-style="color:#999" bindinput="idInput" disabled="{{hasCard}}"></input>
+  </view>
+  <view class="section">
+    <view class="s1">生日*</view>
+    <picker start="1930-01-01" end="2021-01-01" bindchange="bindDateChange" mode="date" value="1990-01-01" disabled="{{hasBir}}">
+      <view class="fill1  {{!hasBir||'disable'}}">{{birthday}}</view>
+    </picker>
+  </view>
+  <view class="section">
+    <view class="s1">地区:</view>
+    <picker mode="region" bindchange="bindRegionChange" value="{{region}}" custom-item="{{customItem}}" disabled="{{ifre}}">
+    <view class="fill1">
+      {{region[0]}}{{region[1]}}{{region[2]}}
+    </view>
+  </picker>
+  </view>
+  <view class="section">
+    <view class="s1">详细地址:</view>
+    <input class="fill1" value="{{address}}" placeholder-style="color:#999" bindinput="addressInput" disabled="{{ifemail}}"></input>
+  </view>
+  <view class="notice">
+    <van-icon name="warning-o" />带*号为必填项
+  </view>
+</view>
+<view class="bottom" bindtap='save' hover-class="hover1" hover-stay-time=".5s">
+      保存信息
+  </view>
+<van-toast id="van-toast" />

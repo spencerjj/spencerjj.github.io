@@ -1,0 +1,36 @@
+<view class="container">
+  <view class="content">
+    <view class="section">
+      <view>租借地址：</view>
+      <view>常州购物中心1F总台</view>
+    </view>
+    <view class="section">
+      <view>租借物品：</view>
+      <view>{{name}}</view>
+    </view>
+    <view class="section">
+      <view>租借数量：</view>
+      <view><van-stepper value="{{ nowNum }}" min="1" max="{{num}}" bind:change="onChange"/></view>
+    </view>
+    <view class="section">
+      <view>押金：</view>
+      <view class="money">￥{{totalMoney}}</view>
+    </view>
+  </view>
+  <view class="notice">
+    <view class="title">
+      注意事项
+    </view>
+    <view>
+      1.温馨提示：①婴儿车、婴儿背带仅限商场内使用，不得推出商场 ②婴儿车、婴儿背带必须在当天内归还 ③婴儿车、婴儿背带如有污损，遗失，需照价赔偿
+    </view>
+    <view>
+      2.温馨提示：①雨伞必须在一周内归还 ②雨伞如有污损，遗失，需照价赔偿
+    </view>
+  </view>
+  <view class="confirm" hover-class="hover1" hover-stay-time=".5s" bindtap="confirm">
+    提交租借申请
+  </view>
+</view>
+<van-toast id="van-toast" />
+<van-dialog id="van-dialog" />

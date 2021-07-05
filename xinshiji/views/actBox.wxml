@@ -1,0 +1,7 @@
+<scroll-view class="scrbtm" scroll-x="true">
+  <view class="boxItem" wx:for="{{lists}}" wx:key="index" bindtap="toPage" data-id="{{item.id}}"
+    data-url="{{item.bannerUrl}}">
+    <image src="{{item.fileUrl}}" mode="aspectFill"></image>
+    <view class="boxTitle">{{item.activeTypeName}}</view>
+  </view>
+</scroll-view>

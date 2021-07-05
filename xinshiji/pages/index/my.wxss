@@ -1,0 +1,206 @@
+/* pages/index/my.wxss */
+.top{
+  width: 100%;
+  height: 500rpx;
+  overflow: hidden;
+  position: relative;
+}
+.banner{
+  width: 100%;
+  height: 100%;
+}
+.center{
+  width: 90%;
+  margin-left: 5%;
+  height: 380rpx;
+  border-radius: 20rpx;
+  position: absolute;
+  top:60rpx;
+  /* background-image: url('http://tiebapic.baidu.com/forum/w%3D580/sign=c67c115e8b82d158bb8259b9b00b19d5/dbf542166d224f4a37d1e4a31ef790529922d1c0.jpg'); */
+  background-size: 100% 100%;
+}
+.ctop{
+  width: 100%;
+  height: 280rpx;
+}
+.avatar{
+  width: 120rpx;
+  height: 120rpx;
+  border-radius: 50%;
+  overflow: hidden;
+  margin-top: 50rpx;
+  margin-left: 30rpx;
+  float: left;
+}
+
+.info{
+  float: left;
+  margin-top:50rpx;
+  font-size: 35rpx;
+  margin-left:20rpx;
+  font-weight: bolder;
+  position: relative;
+}
+.info>view:first-child{
+  position: absolute;
+  top:-25rpx
+}
+.info>view:nth-child(2){
+  position: absolute;
+  width: 300rpx;
+  top:50rpx
+}
+.info image{
+  width: 100rpx;
+  height: 100rpx;
+}
+.code{
+  float:right;
+  text-align: center;
+  font-size: 25rpx;
+  margin-right:30rpx;
+  margin-top:70rpx
+}
+.code image{
+  width: 60rpx;
+  height: 60rpx;
+}
+.cbottom{
+  clear: both;
+  margin-left:8%;
+}
+.cbottom text{
+  font-weight: 900;
+  font-size: 45rpx;
+}
+.middle{
+  display: flex;
+  justify-content: space-around;
+  align-content: center;
+  height: 110rpx;
+  line-height: 110rpx;
+  background:white;
+  font-size: 22rpx;
+  color:#666
+}
+.middle>view{
+  width: 100%;
+  text-align: center;
+  position: relative;
+}
+  .mark{
+    position: absolute;
+    top: 25rpx;
+    right: 10rpx;
+    width: 35rpx;
+    height: 35rpx;
+    line-height: 35rpx;
+    text-align: center;
+    color:white;
+    font-size: 20rpx;
+    border-radius: 50%;
+    background:red
+  }
+.middle image{
+  width: 60rpx;
+  height: 60rpx;
+  vertical-align: middle;
+}
+.lists{
+  margin-top:30rpx;
+  padding-bottom:100rpx
+}
+.hover1{
+  background:#eee
+}
+.showCode{
+  position: fixed;
+  top:0;
+  width: 100%;
+  height: 100%;
+  background:rgba(255,255,255,.9);
+  padding-top:200rpx;
+  z-index: 99;
+  transform: scale(0);
+  transition:all .3s
+}
+.show{
+  opacity: 1;
+  transform: scale(1);
+}
+.qrcode{
+  position: absolute;
+  top:45%;
+  left:50%;
+  margin-left:-135px;
+  margin-top:-200px;
+  padding:10px;
+  padding-bottom:10px;
+  background:white;
+  border-radius: 30rpx;
+  box-shadow: 1px -1px 10px 1px #aaa;
+}
+.canvas{
+  width: 255px;
+  height: 250px;
+  margin:0 auto
+}
+.login{
+  width: 100%;
+  text-align: center;
+  font-size: 28rpx;
+  margin-top:100rpx;
+  color:#666;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.login image{
+  width: 150rpx;
+  height: 150rpx;
+  margin-right: 10rpx;
+}
+.login button{
+  width: 240rpx;
+  height: 60rpx;
+  line-height: 60rpx;
+  border-radius: 60rpx;
+  border:none !important;
+  background:#999;
+  color:#fff;
+  margin-top:10rpx;
+  font-size: 32rpx;
+}
+button::after{
+  border: none;
+}
+.listItem{
+  position: relative;
+  width: 94%;
+  height: 110rpx;
+  line-height: 110rpx;
+  margin-left: 3%;
+  background:white;
+  color:#666;
+  border-bottom:2rpx solid #ddd;
+  font-size: 28rpx;
+  text-align: left;
+  padding-left: 0;
+}
+.logo{
+  width: 60rpx;
+  height: 60rpx;
+  vertical-align: middle;
+  margin-top:-5rpx;
+  margin-left:50rpx;
+  margin-right: 20rpx;
+}
+.arraw{
+  width: 40rpx;
+  height: 40rpx;
+  top:50%;
+  margin-top: -20rpx;
+  right: 30rpx;
+  position: absolute;
+  transform: rotate(-90deg);
+}

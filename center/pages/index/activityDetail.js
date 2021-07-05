@@ -28,14 +28,12 @@ Page({
    */
   onLoad: function (options) {
     var that = this;
-    app.ifUser().then((data)=>{
+    console.log(options.url)
       that.setData({
-        userInfo:data,
         id:options.id,
         fileUrl:options.url
       })
       that.getInfo()
-    }).then()
   },
 
   /**
@@ -140,5 +138,20 @@ Page({
   },
   report(e){
     console.log(e.detail)
-  }
+  },
+  onShareAppMessage: function(res) {
+    let that = this
+    return {
+      path:`/pages/index/activityDetail?id=${that.data.id}&url=${that.data.fileUrl}`
+    }
+  },
+  onShareTimeline: function () {
+		return {
+	      title: '',
+	      query: {
+	        key: value
+	      },
+	      imageUrl: ''
+	    }
+	},
 })

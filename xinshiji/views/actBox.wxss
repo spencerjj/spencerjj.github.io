@@ -1,0 +1,32 @@
+.scrbtm {
+  display: flex;
+  white-space: nowrap;
+  margin-top: 30rpx;
+  height: 500rpx;
+}
+
+.scrbtm .boxItem {
+  width: 60%;
+  height: 420rpx;
+  display: inline-block;
+  margin-top: 20rpx;
+  margin-right: 50rpx;
+  border-radius: 20rpx;
+  background:#ededed;
+  text-align: center;
+  color:#2e2d30;
+  font-weight: 500;
+  box-shadow: 10rpx 10rpx 10rpx 2rpx #ddd;
+}
+.scrbtm .boxItem:first-child{
+  margin-left: 8%;
+}
+.boxItem image{
+  width: 90%;
+  height: 300rpx;
+  border-radius: 20rpx;
+  margin-top:25rpx
+}
+.boxTitle{
+  margin-top: 15rpx;
+}

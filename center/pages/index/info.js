@@ -101,13 +101,18 @@ Page({
   onReachBottom: function () {
 
   },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
+  onShareAppMessage: function(res) {
 
   },
+  onShareTimeline: function () {
+		return {
+	      title: '',
+	      query: {
+	        key: value
+	      },
+	      imageUrl: ''
+	    }
+	},
   nameInput(e) {
     console.log(e.detail.value)
     this.setData({

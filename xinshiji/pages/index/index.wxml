@@ -1,0 +1,84 @@
+<view class="container">
+  <!-- <get-info bind:getInfo="getUser"/> -->
+  <view class="banner">
+    <my-swiper imgLists="{{banner}}" sheight="90vh" autoplay="true"/>
+  </view>
+  <view class="middle">
+    <view class="center">
+      <view class="cbottom">
+        <view bindtap="toPage" data-mark="car">
+          <view class="img"  hover-stay-time=".5s" hover-class="hover2"><image src="/images/xinshiji/01-1.png" mode="widthFix"></image></view>
+          <view>会员权益</view>
+        </view>
+        <view bindtap="toPage" data-mark="card">
+          <view class="img"  hover-stay-time=".5s" hover-class="hover2"><image src="/images/xinshiji/01-2.png" mode="widthFix"></image></view>
+          <view>领券优惠</view>
+        </view>
+        <view bindtap="toPage" data-mark="order">
+          <view class="img"  hover-stay-time=".5s" hover-class="hover2"><image src="/images/xinshiji/01-3.png" mode="widthFix"></image></view>
+          <view>最新活动</view>
+        </view>
+        <view bindtap="toPage" data-mark="car">
+          <view class="img"  hover-stay-time=".5s" hover-class="hover2"><image src="/images/xinshiji/01-4.png" mode="widthFix"></image></view>
+          <view>停车缴费</view>
+        </view>
+        <view bindtap="toPage" data-mark="car">
+          <view class="img"  hover-stay-time=".5s" hover-class="hover2"><image src="/images/xinshiji/01-5.png" mode="widthFix"></image></view>
+          <view>商场服务</view>
+        </view>
+        <view bindtap="toPage" data-mark="card">
+          <view class="img"  hover-stay-time=".5s" hover-class="hover2"><image src="/images/xinshiji/01-6.png" mode="widthFix"></image></view>
+          <view>消费明细</view>
+        </view>
+        <view bindtap="toPage" data-mark="order">
+          <view class="img"  hover-stay-time=".5s" hover-class="hover2"><image src="/images/xinshiji/01-7.png" mode="widthFix"></image></view>
+          <view>积分兑换</view>
+        </view>
+        <view>
+          <label for="btn"><view class="img"  hover-stay-time=".5s" hover-class="hover2"><image src="/images/xinshiji/01-8.png" mode="widthFix"></image></view>
+          <view>联系客服</view></label>
+          <button open-type="contact" id="btn" style="width:0;height:0;opacity:0"></button>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class="scr">
+    <view class="scrtop">
+      <view class="scrleft">
+        <view>最新活动</view>
+        <view>Lateset Activity</view>
+      </view>
+      <view class="scrright">
+        <view class="img"  hover-stay-time=".5s" hover-class="hover2"><image src="/images/xinshiji/01-9.png" mode="widthFix"></image></view>
+      </view>
+    </view>
+        <act-box lists = "{{actLists}}"/>
+  </view>
+  <view class="scr">
+    <view class="scrtop">
+      <view class="scrleft">
+        <view>线上商城</view>
+        <view>Online Shopping</view>
+      </view>
+      <view class="scrright">
+        <view class="img"  hover-stay-time=".5s" hover-class="hover2"><image src="/images/xinshiji/01-9.png" mode="widthFix"></image></view>
+      </view>
+    </view>
+        <act-box lists = "{{actLists}}"/>
+  </view>
+  <view class="scr">
+    <view class="scrtop">
+      <view class="scrleft">
+        <view>积分兑换</view>
+        <view>Points For</view>
+      </view>
+      <view class="scrright">
+        <view class="img"  hover-stay-time=".5s" hover-class="hover2"><image src="/images/xinshiji/01-9.png" mode="widthFix"></image></view>
+      </view>
+    </view>
+        <card-box lists = "{{pointLists}}"/>
+  </view>
+</view>
+<my-tabbar  nowIndex="0"/>
+<van-toast id="van-toast" />
+<van-dialog id="van-dialog" />

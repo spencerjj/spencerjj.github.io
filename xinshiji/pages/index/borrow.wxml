@@ -1,0 +1,18 @@
+<view class="container">
+  <view class="mark">　</view>
+  <van-tabs swipeable animated sticky bind:change="onChange" color="#c79f62" title-inactive-color="#aaa" title-active-color="#c79f62" active="{{active}}">
+    <van-tab title="可租借">
+      <view class="card">
+        <borrow-lists lists="{{lists}}" type="able"/>
+      </view>
+    </van-tab>
+    <van-tab title="我的租借">
+      <view class="card">
+        <van-empty image="search" description="暂无租借记录" wx:if="{{borrowLists.length<1}}"/>
+        <borrow-lists lists="{{borrowLists}}" type="disabled"/>
+        <view wx:if="{{borrowLists.length>0}}" class='nullDataInfo'><van-divider contentPosition="center">无更多记录了</van-divider></view>
+      </view>
+    </van-tab>
+  </van-tabs>
+</view>
+<van-toast id="van-toast" />

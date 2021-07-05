@@ -1,0 +1,62 @@
+<view class="content">
+  <view class="name section">
+    <view class="s1">姓名</view>
+    <input maxlength="8" class="fill" bindinput="nameInput" value="{{name}}" placeholder="请填写姓名"
+      placeholder-style="color:#bfbfbf;font-weight:normal;font-size:30rpx"></input>
+  </view>
+  <view class="number section">
+    <view class="s1">性别</view>
+    <picker value="{{index1}}" range="{{array1}}" bindchange="sexChange">
+      <view class="fill">
+        <text>{{array1[index1]}}</text>
+        <image class="arraw" src="/images/arraw.png"></image>
+      </view>
+    </picker>
+    <image class="arraw" src="../../images/arraw.png"></image>
+  </view>
+  <view class="birthday section">
+    <view class="s1">生日</view>
+    <picker start="1930-01-01" end="2021-01-01" bindchange="dateChange" mode="date" value="1990-01-01">
+      <view class="fill"><text style="color:#bfbfbf;font-weight:normal;font-size:30rpx"
+          wx:if="{{!birthday}}">请选择生日</text><text>{{birthday}}</text></view>
+      <image class="arraw" src="/images/arraw.png"></image>
+    </picker>
+    <view class="fill1" wx:if="{{user.birthday}}">{{user.birthday}}</view>
+  </view>
+  <view class="number section">
+    <view class="s1">手机号</view>
+    <view class="fill">
+      <input value="{{phoneNo}}" disabled="true" style="width:70%;height:100rpx;line-height:100rpx"></input>
+      <button class="getPhone" open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber">点击获取手机号</button>
+    </view>
+  </view>
+
+</view>
+<button class="save" bindtap="checkFamily"  hover-class="hover1" hover-stay-time=".5s">
+  注册
+</button>
+<van-popup show="{{ show }}" round position="bottom" custom-style="height: 430rpx" bind:close="onClose">
+  <view class="family">
+    <view class="ftitle">绑定家庭卡</view>
+    <view class='list-item'>
+      <view class='info-box'>
+        <view class='line1'>
+          <view class='name'>{{familyList[0].name}}</view>
+          <view class="title title2">{{familyList[0].grade}}</view>
+        </view>
+        <view class='line2'>
+          <text class="shop">{{familyList[0].phone}}</text>
+        </view>
+        <image class="arraw1" src="/images/cut/r.png" wx:if="{{!familyList[0].select}}" />
+        <image class="arraw1" src="/images/cut/b.jpg" wx:else />
+      </view>
+    </view>
+    <view class="action">
+      <view  hover-class="hover1" hover-stay-time=".5s" bindtap="familyBind" data-id="0">拒绝绑定</view>
+      <view  hover-class="hover1" hover-stay-time=".5s" bindtap="familyBind" data-id="1">确认绑定</view>
+    </view>
+  </view>
+</van-popup>
+<van-notify id="van-notify" />
+<van-toast id="van-toast" />
+<van-dialog id="van-dialog" />

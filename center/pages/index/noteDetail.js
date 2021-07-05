@@ -101,12 +101,18 @@ Page({
 
   },
 
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
+  onShareAppMessage: function(res) {
 
   },
+  onShareTimeline: function () {
+		return {
+	      title: '',
+	      query: {
+	        key: value
+	      },
+	      imageUrl: ''
+	    }
+	},
   getInfo(e){
     var that = this;
     var data = {

@@ -1,0 +1,252 @@
+.container{
+  padding-bottom: 200rpx;
+}
+.top{
+  width: 96%;
+  margin-left:2%;
+  margin-top:20rpx;
+  height: 430rpx;
+  background:white;
+  border-radius: 10rpx;
+  padding:20rpx;
+  box-sizing: border-box
+}
+.topTitle{
+  font-size: 22rpx;
+  width: 100%;
+  margin-top:20rpx;
+  height: 50rpx;
+  border-bottom:2rpx solid #ddd;
+  color:#666
+}
+.carInfo{
+  font-size:46rpx;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  height: 100rpx;
+}
+.carInfo image{
+  width: 100rpx;
+  height: 30rpx;
+}
+.midTitle{
+  font-size: 22rpx;
+  width: 100%;
+  color:#666;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.midInfo{
+  font-size: 46rpx;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-weight: 500;
+  border-bottom:2rpx dashed #ddd;
+  padding-bottom:20rpx
+}
+.midInfo text{
+  font-size: 22rpx;
+}
+.midTitle1{
+  font-size: 22rpx;
+  width: 100%;
+  height: 40rpx;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.rights{
+  width: 96%;
+  margin-left:2%;
+  margin-top: 20rpx;
+  /* height: 240rpx; */
+  background:white;
+  border-radius: 10rpx;
+  padding:20rpx;
+  box-sizing: border-box
+}
+.card{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 28rpx;
+  font-weight: 500;
+  box-sizing: border-box;
+  padding-left: 40rpx;
+  position: relative;
+}
+.card1{
+  height: 80rpx;
+}
+.card2{
+  height: 50rpx;
+}
+.card2>view:first-child{
+  display: flex;
+  align-items: center;
+}
+.card2 .img1{
+  width: 60rpx;
+  height: 40rpx;
+}
+.card2>view:nth-child(2){
+  color:#F29600
+}
+.img2{
+  width: 30rpx;
+  height: 27rpx;
+  position: absolute;
+  left: 0rpx;
+}
+.total{
+  width: 96%;
+  margin-left:2%;
+  margin-top: 20rpx;
+  background:white;
+  border-radius: 10rpx;
+  padding:30rpx 20rpx;
+  box-sizing: border-box
+}
+.card3{
+  height: 60rpx;
+ 
+}
+.card3>view:first-child{
+  display: flex;
+  align-items: center;
+}
+.bottom{
+  height: 200rpx;
+  width: 100%;
+  position: fixed;
+  bottom: 0;
+  background:white;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 28rpx;
+  font-weight: 500;
+}
+.bottom>view:first-child{
+  margin-left: 60rpx;
+}
+.pay{
+  width: 250rpx;
+  height:100rpx;
+  font-size: 32rpx;
+  line-height: 100rpx;
+  background-image: linear-gradient(to right,#f7c9ab,#c9a07e);
+  text-align: center;
+  color:white;
+  border-radius: 50rpx;
+  margin-right:20rpx
+}
+.van-stepper{
+  margin-left:10rpx;
+  margin-right: 10rpx;
+}
+.van-stepper__input{
+  line-height: 18rpx !important;
+  font-size: 22rpx !important;
+}
+.cardCon{
+  width:100%;
+  background:#f2f3f4;
+  padding-bottom:100rpx
+}
+.title{
+  width: 100%;
+  height: 100rpx;
+  line-height: 100rpx;
+  font-size: 28rpx;
+  background:white;
+  text-align: center;
+}
+.line{
+  color:#999;
+  width: 94%;
+  margin:0 auto
+}
+.listItem{
+  width: 94%;
+  height: 180rpx;
+  background:white;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-radius: 10rpx;
+  margin-left: 3%;
+  margin-top:20rpx;
+  padding:30rpx;
+  box-sizing: border-box;
+  box-shadow: 0 0 5rpx 0 #eee;
+  position: relative;
+  overflow: hidden;
+}
+.leftR{
+  width: 20rpx;
+  height: 20rpx;
+  background:#f2f3f4;
+  border-radius: 50%;
+  top:50%;
+  margin-top:-10rpx;
+  left:-10rpx;
+  position: absolute;
+}
+.rightR{
+  width: 20rpx;
+  height: 20rpx;
+  background:#f2f3f4;
+  border-radius: 50%;
+  top:50%;
+  margin-top:-10rpx;
+  right:-10rpx;
+  position: absolute;
+}
+.listInfo>view:first-child{
+  font-size: 32rpx;
+  font-weight: 500;
+}
+.listInfo>view:last-child{
+  font-size: 22rpx;
+  color:#666
+}
+.listTime{
+  font-size: 22rpx;
+  color:#666
+}
+.listTime text{
+  font-size: 40rpx;
+  font-weight: 500;
+  color:#000
+}
+.clear{
+  position: fixed;
+  bottom:0;
+  width: 100%;
+  height: 100rpx;
+  line-height:100rpx;
+  text-align: center;
+  background:white;
+  box-shadow:  0 0 5rpx #eee;
+}
+.status{
+  position: absolute;
+  width: 150rpx;
+  height: 50rpx;
+  line-height: 50rpx;
+  color: white;
+  background: #F29600;
+  font-size: 25rpx;
+  border-radius: 10rpx;
+  text-align: center;
+  right: -50rpx;
+  top: 0rpx;
+  transform: rotate(45deg);
+}

@@ -1,0 +1,119 @@
+/* pages/my/account/addAccount.wxss */
+page{
+  padding-bottom:200rpx
+}
+.top{
+  height: 380rpx;
+  margin-top:100rpx;
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  padding:0 10%;
+  box-sizing: border-box;
+}
+.top>view{
+  text-align: center;
+  width: 40%;
+}
+.topItem>view:first-child{
+  position: relative;
+}
+.select{
+  position: absolute;
+  border:3rpx solid #f2f3f4;
+  right: 13rpx;
+  top:165rpx;
+  border-radius: 50%;
+  color:#999
+}
+.icon{
+  width: 250rpx;
+  height: 250rpx;
+}
+.topItem>view:nth-child(2){
+  font-weight: 500;
+  font-size: 26rpx;
+}
+.topItem>view:nth-child(3){
+  color:#999;
+  font-size: 16rpx;
+}
+.title1{
+  font-size: 28rpx;
+  color:#bfbfbf;
+  height: 60rpx;
+  line-height: 60rpx;
+  margin-left:30rpx
+}
+.section{
+  width: 94%;
+  margin-left: 3%;
+  border-bottom: 3rpx solid #ccc;
+  height: 50rpx;
+  margin-top:80rpx
+}
+.s1{
+  float:left;
+  width: 25%;
+  height:50rpx;
+  line-height: 50rpx;
+  text-align: left;
+  font-size: 26rpx;
+  color:#777
+}
+.fill1{
+  float: left;
+  width: 70%;
+  height:50rpx;
+  text-align: left;
+  color:#000;
+  font-size: 28rpx;
+  line-height: 50rpx;
+}
+.action{
+  text-align: center;
+  width: 80%;
+  margin-left:10%;
+  height: 70rpx;
+  font-size: 30rpx;
+  color:white;
+  line-height: 70rpx;
+  border-radius: 10rpx;
+  background: #ccc;
+  margin-top:100rpx;
+}
+.save{
+  background: #dcdcdc !important;
+}
+.hover1{
+  background:#ccc !important
+}
+
+.hide{
+  display: none
+}
+.notice{
+  height: 100rpx;
+  font-size: 24rpx ;
+  margin-left: 3%;
+  display: flex;
+  align-items: center;
+  padding-bottom: 30rpx;
+  color:#bbb
+}
+.bottom{
+  clear: both;
+  width: 94%;
+  margin-left: 3%;
+  height:100rpx;
+  font-size: 32rpx;
+  line-height: 100rpx;
+  background-image: linear-gradient(to right,#f7c9ab,#c9a07e);
+  margin-top: 50rpx;
+  text-align: center;
+  color:white;
+  border-radius: 20rpx;
+}
+.disable{
+  color:#999
+}

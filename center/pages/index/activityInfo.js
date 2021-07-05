@@ -1,22 +1,37 @@
-// pages/index/activityInfo.js
+// pages/index/activityWx.js
 var app = getApp();
+import {
+  getApiHost,
+  getRequest
+} from '../../utils/api.js'
+var app = getApp();
+import {
+  store,
+  storeId,
+  HOST_URI
+} from '../../config.js'
+import Toast from '../../miniprogram_npm/@vant/weapp/toast/toast';
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    fileLists:[]
+    wxLink:'',
+    id:'',
+    typeid:''
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    console.log(app.globalData.fileLists)
     this.setData({
-      fileLists:app.globalData.fileLists
+      // wxLink:app.globalData.wxLink
+      id:options.id,
+      typeid:options.typeid
     })
+    this.getInfo()
   },
 
   /**
@@ -60,11 +75,55 @@ Page({
   onReachBottom: function () {
 
   },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
-  }
+  getInfo(e) {
+    var that = this;
+    var data = {
+      storeId:storeId,
+      typeId:that.data.typeid,
+      id:that.data.id,
+      ajax: '_json'
+    }
+    getRequest(getApiHost(), 'customer/bh/api/active/getShoppingActiveSecondList', 'body', data, 0, false, false, true).then(
+      res => {
+        console.log(res)
+        if (res.result=='true') {
+          let url = res.data[0].fileUrl
+          let arr = []
+          url = url.split(',')
+          for(let x in url){
+            arr.push(HOST_URI+'customer'+url[x])
+          }
+          console.log(arr)
+          that.setData({
+            fileLists:arr
+          })
+        } else {
+          Toast({
+            message: '活动获取失败',
+            type: 'warning'
+          });
+        }
+      }
+    ).catch(res => {
+      Toast({
+        message: res.msg,
+        type: 'warning'
+      });
+    });
+  },
+  onShareAppMessage: function(res) {
+    let that = this
+    return {
+      path:"/pages/index/activityInfo?typeid="+this.data.typeid+"&id="+that.data.id
+    }
+  },
+  onShareTimeline: function () {
+		return {
+	      title: '',
+	      query: {
+	        key: value
+	      },
+	      imageUrl: ''
+	    }
+	},
 })

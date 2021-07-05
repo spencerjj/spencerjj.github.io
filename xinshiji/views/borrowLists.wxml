@@ -1,0 +1,18 @@
+<view class="container">
+  <view class="items" wx:for="{{lists}}" bindtap="toPage" data-num="{{item.rentNum}}" data-mark="{{item.remainNum}}" data-name="{{item.name}}" data-deposit="{{item.deposit}}">
+    <view>
+      <image src="/images/01-25.png" wx:if="{{item.name=='雨伞'||item.rentName=='雨伞'}}"></image>
+      <image src="/images/01-26.png" wx:elif="{{item.name=='婴儿车'||item.rentName=='婴儿车'}}"></image>
+      <image src="/images/01-27.png" wx:elif="{{item.name=='婴儿背带'||item.rentName=='婴儿背带'}}"></image>
+      <image src="/images/01-28.png" wx:elif="{{item.name=='宠物链条'||item.rentName=='宠物链条'}}"></image>       
+    </view>
+    <view>
+      <view class="name">{{item.name||item.rentName}}</view>
+      <view class="location"><image src="/images/01-29.png"></image><text wx:if="{{type!='able'}}">归还地点：</text><text> 1F 总台</text></view>
+      <view class="num"><text wx:if="{{type=='able'}}">可借用数量：{{item.remainNum}}</text><text wx:else>租用时间：{{item.rentDate}}-{{item.returnDate||'至今'}}</text></view>
+    </view>
+      <view class="btn {{item.remainNum<1?'disabled':''}}" hover-class="hover1" hover-stay-time=".5s" wx:if="{{type=='able'}}">
+        我要借用</view>
+      <view class="btn1 disabled" wx:else>{{item.rentState}}</view>
+  </view>
+</view>

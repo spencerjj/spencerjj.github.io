@@ -1,0 +1,37 @@
+<view class="container">
+  <view class="lists">
+    <!-- <view class="listItem" wx:for="{{orderLists}}" wx:key="index">
+        <view class="content">
+          <view>
+            <image src="/images/01-2.png" mode="aspectFill"></image>
+          </view>
+          <view>
+            <view class="title1">20元餐饮券</view>
+            <view class="mark">限购一张</view>
+            <view class="timeTitle">使用时间：</view>
+            <view class="time">2020.01.01-2020.02.01</view>
+          </view>
+          <view>
+            点击查看
+          </view>
+        </view>
+      </view> -->
+      <view class="listItem" wx:for="{{orderLists}}" wx:key="index">
+      <view class="status">{{item.type=="应计"?'增加':'使用'}}</view>
+      <van-card
+      desc="{{item.txnDate}}"
+      title="{{item.subType}}"
+      thumb="/images/01-2.png"
+    >
+    <view slot="price" style="font-size:30rpx;line-height:60rpx">
+      积分：<text style="color:red">{{item.type=="应计"?'+':''}}{{item.pointValue}}</text>
+    </view>
+    </van-card>
+    </view>
+  </view>
+  <van-empty image="search" description="暂无记录" wx:if="{{orderLists.length<1}}" />
+  <view class='nullDataInfo'>
+    <van-divider contentPosition="center" wx:if="{{orderLists.length>=1}}">无更多记录了</van-divider>
+  </view>
+</view>
+<van-toast id="van-toast" />

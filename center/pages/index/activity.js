@@ -195,5 +195,17 @@ Page({
   },
   createQrCode: function (content, canvasId, cavW, cavH) {
     QRCode.api.draw(content, canvasId, cavW, cavH);
-  }
+  },
+  onShareAppMessage: function(res) {
+
+  },
+  onShareTimeline: function () {
+		return {
+	      title: '',
+	      query: {
+	        key: value
+	      },
+	      imageUrl: ''
+	    }
+	},
 })

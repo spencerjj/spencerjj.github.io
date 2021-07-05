@@ -1,0 +1,9 @@
+{
+  "navigationBarTitleText": "活动报名记录",
+  "navigationBarTextStyle": "black",
+  "navigationBarBackgroundColor": "#f8f8f8",
+  "enablePullDownRefresh": true,
+  "usingComponents":{
+    "record-lists":"/views/recordLists"
+  }
+}

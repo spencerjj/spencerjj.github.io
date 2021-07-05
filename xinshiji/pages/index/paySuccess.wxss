@@ -1,0 +1,21 @@
+.container{
+  width: 100%;
+  text-align: center;
+}
+.container>view{
+  width: 100%;
+}
+.container image{
+  width: 200rpx;
+  height: 200rpx;
+  margin-top:200rpx
+}
+.container>view:nth-child(2){
+  font-size: 42rpx;
+  font-weight: 900;
+}
+.container>view:nth-child(3){
+  margin-top:20rpx;
+  color:#bbb;
+  font-weight: 500;
+}

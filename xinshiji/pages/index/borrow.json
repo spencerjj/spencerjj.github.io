@@ -1,0 +1,9 @@
+{
+  "navigationBarTitleText": "物品租借",
+  "navigationBarTextStyle": "black",
+  "navigationBarBackgroundColor": "#fff",
+  "enablePullDownRefresh": false,
+  "usingComponents":{
+    "borrow-lists":"/views/borrowLists"
+  }
+}

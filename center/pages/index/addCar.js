@@ -73,12 +73,6 @@ Page({
 
   },
 
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
-  },
   onChange(e){
     let that = this;
     this.setData({
@@ -152,5 +146,17 @@ Page({
        });
  }
   console.log(this.data.plateNumber.join(''))
+},
+onShareAppMessage: function(res) {
+
+},
+onShareTimeline: function () {
+  return {
+      title: '',
+      query: {
+        key: value
+      },
+      imageUrl: ''
+    }
 },
 })

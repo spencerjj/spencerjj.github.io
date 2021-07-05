@@ -1,0 +1,20 @@
+<!--pages/index/pointDetail.wxml-->
+<view class="container">
+  <view class="top">
+    <view class="section">
+      <view>活动名称：<text>{{title}}</text></view>
+      <view>
+      <picker range="{{timeLists}}" value="{{index}}" bindchange="timeChange">
+        活动时间：<text>{{timeLists[index]}}</text><image class="arraw" src="/images/arraw1.png"></image> 
+      </picker>
+      </view>
+      <!-- <view>减扣积分：<text style="font-weight:bolder;color:#C30D23">1000</text></view> -->
+    </view>
+  </view>
+  <view class="bottom">
+    <view><text style="font-size:45rpx">　</text></view>
+    <view bindtap="confirm"  hover-class="hover1" hover-stay-time=".5s">立即报名</view>
+  </view>
+</view>
+<van-toast id="van-toast" />
+<van-dialog id="van-dialog" />

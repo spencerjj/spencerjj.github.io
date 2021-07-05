@@ -1,0 +1,13 @@
+<view class="actItem" bindtap="showCode" wx:for="{{lists}}" wx:key="index" data-index="{{index}}">
+  <view>
+    <image src="{{item.event.fileUrl||'/images/01-2.png'}}" mode="aspectFill"></image>
+  </view>
+  <view class="aright">
+    <view>{{item.event.title}}</view>
+    <view>
+      <van-icon name="clock-o" size="15" custom-style="vertical-align: -8%" /> {{item.actTime}}</view>
+    <view class="{{item.status=='0'?'':'end'}}"><text wx:if="{{item.status=='0'}}">#{{item.compare}}</text><text wx:else>#已结束</text></view>
+    <view wx:if="{{item.status=='0'}}">
+      <van-icon name="scan" size="12" custom-style="vertical-align: -8%"/> 核销码</view>
+  </view>
+</view>

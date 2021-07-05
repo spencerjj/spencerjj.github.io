@@ -1,0 +1,46 @@
+.check{
+  width: 100%;
+  text-align: right;
+  font-size: 25rpx;
+  color:#666;
+  padding-top:40rpx
+}
+
+.card-box{
+  width: 100%;
+  text-align: center;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+.box-item{
+  width: 49%;
+  height: 380rpx;
+  border-radius: 10rpx;
+  overflow: hidden;
+  position: relative;
+  margin-top:15rpx;
+  padding:15rpx 30rpx;
+  box-sizing: border-box;
+  background:white;
+  text-align: left;
+  font-size: 30rpx;
+  font-weight: bolder;
+}
+.box-item image{
+  width: 100%;
+  height: 250rpx;
+  margin:0 auto
+}
+.box-item>view:nth-child(1){
+  overflow: hidden;
+  width: 100%;
+  height: 250rpx;
+  text-align: center;
+}
+.box-item>view:nth-child(2){
+  margin-top:20rpx;
+}
+.box-item>view:nth-child(3){
+  color:#f29600;
+}

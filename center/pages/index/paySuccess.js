@@ -56,11 +56,16 @@ Page({
   onReachBottom: function () {
 
   },
+  onShareAppMessage: function(res) {
 
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
-  }
+  },
+  onShareTimeline: function () {
+		return {
+	      title: '',
+	      query: {
+	        key: value
+	      },
+	      imageUrl: ''
+	    }
+	},
 })

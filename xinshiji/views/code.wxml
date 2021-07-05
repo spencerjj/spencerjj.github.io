@@ -1,0 +1,5 @@
+<view class="showCode" wx:if="{{show}}" bindtap="onClose">
+    <view class="qrcode">
+      <canvas class='canvas' canvas-id='canvas'></canvas>
+    </view>
+</view>

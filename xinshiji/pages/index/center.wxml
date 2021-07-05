@@ -1,0 +1,180 @@
+<view class="container">
+  <view>
+    <swiper indicator-dots="true" indicator-color="rgba(0, 0, 0, .2)" indicator-active-color="#888" autoplay="{{false}}" current="{{current}}"
+      duration="500" style="height:100vh;background:white">
+      <swiper-item style="width:100%">
+        <view class="topSwiper">
+          <image src="/images/01-21.png" mode="widthFix"></image>
+          <view class="profile">
+            <image src="{{avatarUrl||'/images/01-2.png'}}" wx:if="{{userInfo.tier=='银星卡会员'}}"></image>
+          </view>
+          <image src="/images/01-45.png" class="now" mode="widthFix" wx:if="{{userInfo.tier=='银星卡会员'}}"></image>
+        </view>
+        <view class="mark">
+          银星卡会员可享受以下专属权益
+        </view>
+        <view class="card">
+          <view class="sections">
+            <view>
+              <image src="/images/3-1.png"></image>
+              <view>时尚速递</view>
+              <view class="right">不定期推送最新时尚资讯</view>
+            </view>
+            <view>
+              <image src="/images/3-2.png"></image>
+              <view>会员沙龙</view>
+              <view class="right">定期举办主题丰富的VIP沙龙</view>
+            </view>
+            <view>
+              <image src="/images/3-3.png"></image>
+              <view>停车礼遇</view>
+              <view class="right"><text>消费享专属停车减免</text>
+                </view>
+              <view class="right">
+              </view>
+            </view>
+            <view>
+              <image src="/images/3-4.png"></image>
+              <view>积分换礼</view>
+              <view class="right">全年不间断积分换礼</view>
+            </view>
+            <view>
+              <image src="/images/3-5.png"></image>
+              <view>会员价商品</view>
+              <view class="right">VIP嘉宾可享会员价商品</view>
+            </view>
+          </view>
+        </view>
+      </swiper-item>
+      <swiper-item style="width:100%">
+        <view class="topSwiper">
+          <image src="/images/01-22.png" mode="widthFix"></image>
+          <view class="profile">
+            <image src="{{avatarUrl||'/images/01-2.png'}}" wx:if="{{userInfo.tier=='金星卡会员'}}"></image>
+          </view>
+          <image src="/images/01-45.png" class="now" mode="widthFix" wx:if="{{userInfo.tier=='金星卡会员'}}"></image>
+        </view>
+        <view class="mark">
+          金星卡会员可享受以下专属权益
+        </view>
+        <view class="card">
+          <view class="sections">
+            <view>
+              <image src="/images/3-1.png"></image>
+              <view>时尚速递</view>
+              <view class="right">不定期推送最新时尚资讯</view>
+            </view>
+            <view>
+              <image src="/images/3-2.png"></image>
+              <view>会员沙龙</view>
+              <view class="right">定期举办主题丰富的VIP沙龙</view>
+            </view>
+            <view>
+              <image src="/images/3-3.png"></image>
+              <view>停车礼遇</view>
+              <view class="right"><text>消费享专属停车减免</text></view>
+              <view class="right">
+              </view>
+            </view>
+            <view>
+              <image src="/images/3-4.png"></image>
+              <view>积分换礼</view>
+              <view class="right">全年不间断积分换礼</view>
+            </view>
+            <view>
+              <image src="/images/3-5.png"></image>
+              <view>会员价商品</view>
+              <view class="right">VIP嘉宾可享会员价商品</view>
+            </view>
+          </view>
+        </view>
+      </swiper-item>
+      <swiper-item style="width:100%">
+        <view class="topSwiper">
+          <image src="/images/01-23.png" mode="widthFix"></image>
+          <view class="profile">
+            <image src="{{avatarUrl||'/images/01-2.png'}}" wx:if="{{userInfo.tier=='黑金卡会员'}}"></image>
+          </view>
+          <image src="/images/01-45.png" class="now" mode="widthFix" wx:if="{{userInfo.tier=='黑金卡会员'}}"></image>
+        </view>
+        <view class="mark">
+          <text>黑金卡会员可享受以下专属权益</text>
+        </view>
+        <view class="card">
+          <view class="sections">
+            <view>
+              <image src="/images/3-1.png"></image>
+              <view>时尚速递</view>
+              <view class="right">不定期推送最新时尚资讯</view>
+            </view>
+            <view>
+              <image src="/images/3-2.png"></image>
+              <view>会员沙龙</view>
+              <view class="right">定期举办主题丰富的VIP沙龙</view>
+            </view>
+            <view>
+              <image src="/images/3-3.png"></image>
+              <view>停车礼遇</view>
+              <view class="right"><text>全年享50次免费停车</text></view>
+              <view class="right"><text>(享2小时/次)</text>
+              </view>
+            </view>
+            <view>
+              <image src="/images/3-4.png"></image>
+              <view>积分换礼</view>
+              <view class="right">全年不间断积分换礼</view>
+            </view>
+            <view>
+              <image src="/images/3-5.png"></image>
+              <view>会员价商品</view>
+              <view class="right">VIP嘉宾可享会员价商品</view>
+            </view>
+          </view>
+        </view>
+      </swiper-item>
+      <swiper-item style="width:100%">
+        <view class="topSwiper">
+          <image src="/images/01-24.png" mode="widthFix"></image>
+          <view class="profile">
+            <image src="{{avatarUrl||'/images/01-2.png'}}" wx:if="{{userInfo.tier=='黑钻卡会员'}}"></image>
+          </view>
+          <image src="/images/01-45.png" class="now" mode="widthFix" wx:if="{{userInfo.tier=='黑钻卡会员'}}"></image>
+        </view>
+        <view class="mark">
+          <text>黑钻卡卡会员可享受以下专属权益</text>
+        </view>
+        <view class="card">
+          <view class="sections">
+            <view>
+              <image src="/images/3-1.png"></image>
+              <view>时尚速递</view>
+              <view class="right">不定期推送最新时尚资讯</view>
+            </view>
+            <view>
+              <image src="/images/3-2.png"></image>
+              <view>会员沙龙</view>
+              <view class="right">定期举办主题丰富的VIP沙龙</view>
+            </view>
+            <view>
+              <image src="/images/3-3.png"></image>
+              <view>停车礼遇</view>
+              <view class="right"><text>全年免费停车</text></view>
+              <view class="right"><text>(享2小时/次)</text>
+              </view>
+            </view>
+            <view>
+              <image src="/images/3-4.png"></image>
+              <view>积分换礼</view>
+              <view class="right">全年不间断积分换礼</view>
+            </view>
+            <view>
+              <image src="/images/3-5.png"></image>
+              <view>会员价商品</view>
+              <view class="right">VIP嘉宾可享会员价商品</view>
+            </view>
+          </view>
+        </view>
+      </swiper-item>
+    </swiper>
+  </view>
+</view>

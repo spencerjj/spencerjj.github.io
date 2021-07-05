@@ -1,0 +1,6 @@
+<scroll-view class="scrbtm" scroll-x="true">
+  <view class="boxItem" wx:for="{{lists}}" wx:key="index" bindtap="toPage" data-index="{{index}}">
+    <image src="{{item.parameter2||'/images/01-44.png'}}" mode="aspectFit"></image>
+    <view class="boxTitle">积分兑礼 {{item.excPoint}}积分可兑</view>
+  </view>
+</scroll-view>

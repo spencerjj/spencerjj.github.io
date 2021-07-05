@@ -1,0 +1,36 @@
+<view class="container">
+  <view class="mark">　</view>
+  <van-tabs swipeable animated sticky bind:change="onChange" color="#c79f62" title-inactive-color="#aaa" title-active-color="#c79f62">
+    <van-tab title="待参加">
+      <view class="card">
+        <van-empty image="search" description="暂无记录" wx:if="{{lists.length<1}}"/>
+        <record-lists bind:showCode="showCode" type="able" lists="{{lists}}"/>
+        <view wx:if="{{lists.length>0}}" class='nullDataInfo'><van-divider contentPosition="center">无更多报名记录了</van-divider></view>
+      </view>
+    </van-tab>
+    <van-tab title="已结束">
+      <view class="card">
+        <van-empty image="search" description="暂无记录" wx:if="{{endLists.length<1}}"/>
+        <record-lists type="disabled"  lists="{{endLists}}"/>
+        <view wx:if="{{endLists.length>0}}" class='nullDataInfo'><van-divider contentPosition="center">无更多报名记录了</van-divider></view>
+      </view>
+    </van-tab>
+  </van-tabs>
+</view>
+<view class="showCode {{show1?'show':''}}" wx:if="{{show}}" bindtap="onClose"  catchtouchmove="ture">
+    <view class="codeCon" wx:if="{{show2}}">
+    <view class="rule rtitle">{{title}}</view>
+    <!-- <view class="rule tnotice">{{remarks}}</view> -->
+    <view class="qrcode">
+      <canvas class='canvas' canvas-id='canvas'></canvas>
+    </view>
+    <view class="rule rtitle1">活动规则</view>
+    <text class="rule">{{remarks}}</text>
+    <!-- <view class="rule">2.核销成功后请在指定场次参加，如未按时参加活动此券作废。</view>
+    <view class="rule">3.请听从现场工作引导有序进场。</view> -->
+    <view style="position:absolute;bottom:-150rpx;left:0;right:0;margin:0 auto"><van-icon name="clear" style="color:white" size="40"/></view>
+  </view>
+  
+</view>
+<van-toast id="van-toast" />
+<van-dialog id="van-dialog" />

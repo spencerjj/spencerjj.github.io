@@ -3,7 +3,7 @@
     <image src="{{fileUrl}}" mode="widthFix"></image>
   </view>
   <view class="content">
-    <activitydetail-lists lists="{{actLists}}"></activitydetail-lists>
+    <activitydetail-lists lists="{{actLists}}" typeid="{{id}}"></activitydetail-lists>
   </view>
 </view>
 <van-toast id="van-toast" />

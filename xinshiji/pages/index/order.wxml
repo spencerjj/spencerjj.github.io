@@ -1,0 +1,47 @@
+<view class="container">
+  <view class="lists">
+    <view class="listItem" bindtap="showDetail" wx:key="index" wx:for="{{lists}}" data-index="{{index}}">
+      <view class="ltop">
+        <view>{{item.saleDate}}</view>
+        <view>{{item.orderType}}</view>
+      </view>
+      <view>
+        <view>订单编号：{{item.orderno}}</view>
+        <view>￥{{item.actAmount}}</view>
+      </view>
+      <view>
+        <view>查看详情</view>
+      </view>
+    </view>
+  </view>
+  <van-empty image="search" description="暂无消费记录" wx:if="{{lists.length<1}}" />
+  <view class='nullDataInfo'>
+    <van-divider contentPosition="center" wx:if="{{lists.length>=1}}">无更多记录了</van-divider>
+  </view>
+</view>
+<view class="showPage {{show1?'show':''}}" wx:if="{{show}}"  bindtap="close">
+    <view class="detailInfo">
+      <view class="detailTitle">
+        订单明细
+      </view>
+      <view class="detailLists">
+        <view class="detailItem" wx:for="{{sonLists}}" wx:key="index">
+          <view>{{item.productName}}</view>
+          <view>￥{{item.actAmount}}</view>
+        </view>
+      </view>
+      <view class="detailTitle">
+        支付明细
+      </view>
+      <view class="detailLists">
+        <view class="detailItem" wx:for="{{payLists}}" wx:key="index">
+          <view>{{item.paymentM}}</view>
+          <view>￥{{item.paymentA}}</view>
+        </view>
+      </view>
+      <view class="btn {{sonLists.length<3?'btn1':'btn2'}}">
+        <view>确定</view>
+      </view>
+    </view>
+  </view>
+<van-toast id="van-toast" />

@@ -1,0 +1,18 @@
+<view>
+<swiper indicator-dots="{{indicatorDots}}" indicator-color="rgba(0, 0, 0, .3)" 
+         indicator-active-color="#c20303"
+    autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" style="min-height:90vh;background:white">
+    <block wx:key="index">
+        <swiper-item style="width:100%"  bindtap="toPage" data-type="{{item.linkType}}" data-link="{{item.link}}">
+          <image src="http://tiebapic.baidu.com/forum/w%3D580/sign=8af9e803b7d3572c66e29cd4ba126352/fe04314e251f95ca51e02d5c8c177f3e660952d5.jpg" class="slide-image" mode="aspectFill" style="width:100%;height:100%"></image>
+          <!-- <video src="{{item}}" class="slide-image"  style="width:100%"></video> -->
+        </swiper-item>
+      </block>
+      <block wx:key="index">
+        <swiper-item style="width:100%"  bindtap="toPage" data-type="{{item.linkType}}" data-link="{{item.link}}">
+          <image src="http://tiebapic.baidu.com/forum/w%3D580/sign=7e0843e735cf3bc7e800cde4e101babd/b0f7d62a6059252dcd2ba2ee719b033b5bb5b92e.jpg" class="slide-image" mode="aspectFill" style="width:100%;height:100%"></image>
+          <!-- <video src="{{item}}" class="slide-image"  style="width:100%"></video> -->
+        </swiper-item>
+      </block>
+    </swiper>
+  </view>

@@ -1,0 +1,38 @@
+<view class="container">
+  <view class="mark">　</view>
+  <van-tabs swipeable animated sticky bind:change="onChange" color="#c79f62" title-inactive-color="#aaa" title-active-color="#c79f62">
+    <van-tab title="可使用">
+      <view class="card">
+        <van-empty image="search" description="暂无卡券" wx:if="{{array1&&array1.length<1&&array3.length<1&&posLists.length<1}}"/>
+        <card-lists bind:showCode="showCode" bind:showDetail="showDetail" cardLists="{{array1}}" type="able"/>
+        <carCard-lists cardLists="{{array3}}" type="able"/>
+        <pos-lists cardLists="{{posLists}}" type="able" wx:if="{{temp==1}}" />
+        <view wx:if="{{array1.length>0||array3.length>0||posLists.length>0}}" class='nullDataInfo'><van-divider contentPosition="center">无更多卡券了</van-divider></view>
+      </view>
+    </van-tab>
+    <van-tab title="已失效">
+      <view class="card">
+        <van-empty image="search" description="暂无卡券" wx:if="{{array2&&array2.length<1&&array4.length<1}}"/>
+        <card-lists cardLists="{{array2}}" type="disable"/>
+        <carCard-lists cardLists="{{array4}}" type="disable"/>
+        <view wx:if="{{array2.length>0||array4.length>0}}" class='nullDataInfo'><van-divider contentPosition="center">无更多卡券了</van-divider></view>
+      </view>
+    </van-tab>
+  </van-tabs>
+</view>
+<view class="showCode {{show1?'show':''}}" wx:if="{{show}}" bindtap="onClose" catchtouchmove="ture">
+  <view class="codeCon">
+    <view class="rule rtitle">{{cardName}}</view>
+
+    <view class="qrcode" wx:if="{{showType==1}}">
+      <canvas class='canvas' canvas-id='canvas'></canvas>
+    </view>
+    <view class="rule tnotice"  wx:if="{{showType==1}}">{{nowNum}}</view>
+    <view class="desc" wx:if="{{showType==2}}">
+      <view class="rule rtitle1">活动规则</view>
+      <text class="rule">{{desc||'暂无活动规则'}}</text>
+    </view>
+    <view style="position:absolute;bottom:-150rpx;left:0;right:0;margin:0 auto"><van-icon name="clear" style="color:white" size="40"/></view>
+  </view>
+</view>
+<van-toast id="van-toast" />

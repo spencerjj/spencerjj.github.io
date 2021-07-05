@@ -1,0 +1,9 @@
+{
+  "navigationBarTitleText": "停车缴费",
+  "navigationBarTextStyle": "black",
+  "navigationBarBackgroundColor": "#fff",
+  "enablePullDownRefresh": true,
+  "usingComponents": {
+    "keyboard":"../../views/keyboard"
+  }
+}

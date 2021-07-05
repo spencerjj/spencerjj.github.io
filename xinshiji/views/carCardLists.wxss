@@ -1,0 +1,77 @@
+/* views/cardLists.wxss */
+.cardItems{
+  width: 90%;
+  margin-left:5%;
+  height: 250rpx;
+  border-radius: 20rpx;
+  margin-top:40rpx;
+  background:white;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+}
+.cardItems .count{
+  width: 30%;
+  font-size: 30rpx;
+  text-align: center;
+  color:#D59761;
+  text-align: center;
+  border-right:1rpx #eee solid;
+  height: 190rpx;
+  font-weight: 500;
+}
+.cardItems .count>view:first-child{
+  line-height: 190rpx;
+}
+.cardItems .count text{
+  font-size: 55rpx;
+  font-weight: bolder;
+}
+.detail{
+  width: 52%;
+  font-size: 32rpx;
+  text-align: left;
+  padding-left: 20rpx;
+}
+.detail>view:first-child{
+  font-weight: bolder;
+}
+.detail>view:nth-child(2){
+  font-size: 24rpx;
+  color:#999;
+  padding-right: 20rpx;
+}
+.use{
+  height: 100%;
+  width: 18%;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  flex-direction: column;
+  justify-content: center;
+  background:rgb(213, 151, 97,.9);
+  font-size: 32rpx;
+  font-weight: bolder;
+  color:white;
+  text-align: center;
+  border-left:1rpx dashed white;
+  position: relative;
+}
+.tround,.bround{
+  position: absolute;
+  width: 20rpx;
+  height: 20rpx;
+  border-radius: 50%;
+  background:#f2f3f4
+}
+.tround{
+  left:-10rpx;
+  top: -10rpx;
+}
+.bround{
+  bottom: -10rpx;
+  left: -10rpx;
+}
+.used{
+  background:#999 !important
+}

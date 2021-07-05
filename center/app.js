@@ -31,6 +31,7 @@ App({
       })
     })
   },
+
   globalData: {
     fileLists:[],
     noteDetail:[],

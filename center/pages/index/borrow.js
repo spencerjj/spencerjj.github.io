@@ -84,13 +84,6 @@ Page({
   onReachBottom: function () {
 
   },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
-  },
   getInfo(e){
     var that = this;
     var data = {
@@ -174,4 +167,16 @@ Page({
       url: 'recommend?no='+e.currentTarget.dataset.no,
     })
   },
+  onShareAppMessage: function(res) {
+
+  },
+  onShareTimeline: function () {
+		return {
+	      title: '',
+	      query: {
+	        key: value
+	      },
+	      imageUrl: ''
+	    }
+	},
 })

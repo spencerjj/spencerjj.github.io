@@ -430,17 +430,15 @@ Page({
     });
   },
   onShareAppMessage: function(res) {
-  //   let that = this
-  //   if (res.from === 'button') {
-  //   }
-  //   let path = 'pages/index/register?rePhone='+that.data.phoneNo
-  //   if(that.data.no){
-  //     path = 'pages/index/register?rePhone='+that.data.phoneNo+'&cardNo='+that.data.no
-  //   }
-  //   return {
-  //   title: "加入LAMPO会员中心",
-  //   path: path,
-  //   imageUrl: '/images/logo.png',
-  //   }
-    }
+
+  },
+  onShareTimeline: function () {
+		return {
+	      title: '',
+	      query: {
+	        key: value
+	      },
+	      imageUrl: ''
+	    }
+	},
 })

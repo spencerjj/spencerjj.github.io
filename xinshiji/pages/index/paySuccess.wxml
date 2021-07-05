@@ -1,0 +1,5 @@
+<view class="container">
+  <view><image src="/images/01-37.png"></image></view>
+  <view>　缴费成功！</view>
+  <view>请在30分钟内离场</view>
+</view>

@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "物品租赁",
+  "navigationBarTextStyle": "black",
+  "navigationBarBackgroundColor": "#fff",
+  "enablePullDownRefresh": true
+}

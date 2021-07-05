@@ -1,0 +1,9 @@
+{
+  "navigationBarTitleText": "增加车牌号",
+  "navigationBarTextStyle": "black",
+  "navigationBarBackgroundColor": "#fff",
+  "enablePullDownRefresh": false,
+  "usingComponents": {
+    "keyboard":"../../views/keyboard"
+  }
+}

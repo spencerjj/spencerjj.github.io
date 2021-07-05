@@ -11,6 +11,7 @@ Component({
       type: Array, // 类型（必填），目前接受的类型包括：String, Number, Boolean, Object, Array, null（表示任意类型）
       value: [], // 属性初始值（可选），如果未指定则会根据类型选择一个
     },
+    typeid:String
   },
   //组件的数据
   data: {
@@ -66,19 +67,18 @@ Component({
   //组件的方法，包括(事件响应函数)和(任意的自定义方法)
   methods: {
     report(e){
-      console.log(this.data.lists[e.currentTarget.dataset.index].fileUrl)
       // 判断公众号链接
       if(this.data.lists[e.currentTarget.dataset.index].wxLink){
         app.globalData.wxLink = this.data.lists[e.currentTarget.dataset.index].wxLink
         wx.navigateTo({
-          url: 'activityWx',
+          url: 'activityWx?id='+this.data.lists[e.currentTarget.dataset.index].id+'&typeid='+this.data.typeid
         })
       }else if(this.data.lists[e.currentTarget.dataset.index].shopLink){
         wx.navigateToMiniProgram({ appId: 'wxf02c836c64be8566', path: this.data.lists[e.currentTarget.dataset.index].shopLink, success(res) {  } })
       }else{
         app.globalData.fileLists = this.data.lists[e.currentTarget.dataset.index].fileUrl
         wx.navigateTo({
-          url: 'activityInfo',
+          url: 'activityInfo?id='+this.data.lists[e.currentTarget.dataset.index].id+'&typeid='+this.data.typeid
         })
       }
       

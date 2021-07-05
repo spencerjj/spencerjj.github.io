@@ -1,0 +1,19 @@
+<view class="cardItems" wx:for="{{cardLists}}" wx:key="index">
+  <view class="count">
+    <view>￥<text>{{item.tcftfqje}}</text></view>
+    <!-- <view>满1元可用</view> -->
+  </view>
+  <view class="detail">
+    <view>
+      {{item.tqname}}
+    </view>
+    <view>
+      {{item.tcftstartdate}} ~ {{item.tcftenddate}}
+    </view>
+  </view>
+  <view class="use {{type=='disable'?'used':''}}" hover-class="hover1" hover-stay-time=".5s">
+    <view wx:if="{{type=='able'}}">可用</view>
+    <view class="tround"></view>
+    <view class="bround"></view>
+  </view>
+</view>
