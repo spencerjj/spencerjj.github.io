@@ -7,7 +7,6 @@
     "activity-lists":"/views/activityLists",
     "report-lists":"/views/reportLists",
     "act-box":"/views/actBox",
-    "card-big":"/views/cardBig",
-    "note-lists":"/views/noteLists"
+    "card-big":"/views/cardBig"
   }
 }

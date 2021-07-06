@@ -21,10 +21,6 @@ Page({
   onReady: function () {
 
   },
-
-  onTabItemTap(item) {
-    wx.navigateToMiniProgram({ appId: 'wxf02c836c64be8566', path: '', success(res) {  } })
-  },
   /**
    * 生命周期函数--监听页面显示
    */

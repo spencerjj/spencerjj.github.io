@@ -1,0 +1,6 @@
+<view class="boss">
+  <image src="http://tiebapic.baidu.com/forum/w%3D580/sign=8af9e803b7d3572c66e29cd4ba126352/fe04314e251f95ca51e02d5c8c177f3e660952d5.jpg" mode="aspectFill" style="width:100%;height:100%"></image>
+  <image src="/images/xinshiji/01-26.png" class="icon icon1"></image>
+  <image src="/images/xinshiji/01-27.png" class="icon icon2"></image>
+</view>
+<my-tabbar nowIndex="2"/>

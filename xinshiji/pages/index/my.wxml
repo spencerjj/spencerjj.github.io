@@ -63,6 +63,7 @@
     <!-- <list-item imgPath="/images/01-17.png" url="contact" name="" /> -->
   </view>
 </view>
+<my-tabbar nowIndex="3"/>
 <view class="showCode {{show1?'show':''}}" wx:if="{{show}}" bindtap="onClose" catchtouchmove="ture">
   <view class="qrcode" wx:if="{{show2}}">
     <canvas class='canvas' canvas-id='canvas'></canvas>

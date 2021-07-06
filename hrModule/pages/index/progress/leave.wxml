@@ -78,6 +78,18 @@
 		</picker>
     </view>
   </view>
+  <view class="title" wx:if="{{lists.bpm.activityId=='hrbp'||lists.bpm.activityId=='hrmsg'}}">
+		<view class="c1">
+			<text>是否领取失业金<text style="color:red;font-size:25rpx">*</text> </text>
+		</view>
+		<picker value="{{index3}}" range="{{array3}}" bindchange="pickChange3" disabled="{{current==1&&lists.bpm.activityId=='hrbp'?false:true}}">
+			<view class="timePicker" style="padding-left:10rpx">
+        <text wx:if="{{index3==10}}" style="color:#af9d7f">请选择...</text>
+				{{array3[index3]}}
+				<image class="arraw" src="http://img.gagctv.com/17112314452261654"></image>
+			</view>
+		</picker>
+	</view>
   <!-- <view class="sub" wx:if="{{lists.bpm.activityId=='hrmsg'}}">
     <view class="c1">
       <text>最后结薪日<text style="color:red;font-size:25rpx">*</text></text>

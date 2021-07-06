@@ -17,6 +17,8 @@ Page({
     index1:1,
     array2:['完整','简易'],
     index2:10,
+    array3:['否','是'],
+    index3:10,
     notice:'请输入终止原因',
     focus:false,
     myComment:'',
@@ -189,7 +191,7 @@ Page({
                 id:res.data.oaEmployOut.id,
                 loadAll:false,
                 lastDate:res.data.oaEmployOut.lastDate||'',
-                salaryDate:res.data.oaEmployOut.salaryDate||''
+                salaryDate:res.data.oaEmployOut.salaryDate||'',
               })
               if (res.data.oaEmployOut.outType&&res.data.oaEmployOut.outType.length>0) {
                   that.setData({
@@ -203,6 +205,11 @@ Page({
                   easyMode:res.data.oaEmployOut.easyMode-1+1
                 })
             }
+            if (res.data.oaEmployOut.sfsyj&&res.data.oaEmployOut.sfsyj.length>0) {
+              that.setData({
+                index3: res.data.oaEmployOut.sfsyj-1+1,
+              })
+          }
               if (res.data.oaEmployOut.remainHoliday&&res.data.oaEmployOut.remainHoliday.length>0) {
                 that.setData({
                   day: res.data.oaEmployOut.remainHoliday,
@@ -314,6 +321,12 @@ Page({
       easyMode:e.detail.value
     })
   },
+  pickChange3: function (e) {
+    console.log(e.detail.value)
+    this.setData({
+      index3: e.detail.value,
+    })
+  },
   bindDateChange: function(e) {
     console.log( e.detail.value)
     this.setData({
@@ -376,29 +389,42 @@ Page({
         })
         return;
       }
+      var data = {
+        // __sid: app.globalData.__sid,
+        __sid: app.globalData.tempSid,
+        __ajax: 'json',
+        // remainHoliday:that.data.day,
+        lastDate:that.data.lastDate,
+        // salaryDate:that.data.salaryDate,
+        'bpm.comment': that.data.hint,
+        id: that.data.id,
+        userCode:that.data.lists.userCode,
+        outType:that.data.outType,
+        easyMode:that.data.easyMode,
+        'bpm.taskId':that.data.lists.bpm.taskId,
+        'bpm.procInsId':that.data.lists.bpm.procInsId,
+        'bpm.activityId':that.data.lists.bpm.activityId,
+        status:4
+      }
+      if(that.data.lists.bpm.activityId=='hrbp'&&that.data.index3==10){
+        $Toast({
+          content:'请选择移是否领取失业金',
+          type:'warning'
+        })
+        that.setData({
+          visible: false
+        })
+        return;
+      }else{
+        data.sfsyj = that.data.index3
+      }
         const action = [...this.data.actions];
         action[0].loading = true;
         this.setData({
           actions: action,
           ifClick:true
         });
-        var data = {
-          // __sid: app.globalData.__sid,
-          __sid: app.globalData.tempSid,
-          __ajax: 'json',
-          // remainHoliday:that.data.day,
-          lastDate:that.data.lastDate,
-          // salaryDate:that.data.salaryDate,
-          'bpm.comment': that.data.hint,
-          id: that.data.id,
-          userCode:that.data.lists.userCode,
-          outType:that.data.outType,
-          easyMode:that.data.easyMode,
-          'bpm.taskId':that.data.lists.bpm.taskId,
-          'bpm.procInsId':that.data.lists.bpm.procInsId,
-          'bpm.activityId':that.data.lists.bpm.activityId,
-          status:4
-        }
+
 
         wx.request({
           url: app.globalData.url + 'oa/oaEmployOut/save.json',

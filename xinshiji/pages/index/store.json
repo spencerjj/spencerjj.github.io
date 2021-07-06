@@ -2,8 +2,5 @@
   "navigationBarTitleText": "商户列表",
   "navigationBarTextStyle": "black",
   "navigationBarBackgroundColor": "#f8f8f8",
-  "enablePullDownRefresh": false,
-  "usingComponents":{
-    "my-tabbar":"/views/myTabbar"
-  }
+  "enablePullDownRefresh": false
 }

@@ -9,8 +9,6 @@
     "act-box":"/views/actBox",
     "card-box":"/views/cardBox",
     "get-info":"/views/getInfo",
-    "note-box":"/views/noteBox",
-    "my-swiper":"/views/myswiper",
-    "my-tabbar":"/views/myTabbar"
+    "my-swiper":"/views/myswiper"
   }
 }
