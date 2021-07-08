@@ -1,0 +1,31 @@
+/* pages/index/myCode.wxss */
+page{
+  background: #ddcbb4;
+}
+.qrcode {
+  position: absolute;
+  top: 280rpx;
+  left: 50%;
+  margin-left: -120px;
+  padding: 30px;
+  background: white;
+  border-radius: 30rpx;
+  /* box-shadow: 1px -1px 10px 1px #aaa; */
+}
+.canvas {
+  width: 180px;
+  height: 180px;
+  margin: 0 auto
+}
+.code{
+  width: 70%;
+  margin-left:15%;
+  text-align: center;
+  color:white;
+  font-size: 35rpx;
+  position: absolute;
+  top:400px;
+  letter-spacing: 5rpx;
+  border-bottom: 3rpx solid #f1ddc3;
+  padding-bottom: 40px;
+}

@@ -7,7 +7,7 @@
 
 .scrbtm .boxItem {
   width: 60%;
-  height: 420rpx;
+  height: 430rpx;
   display: inline-block;
   margin-top: 20rpx;
   margin-right: 50rpx;
@@ -29,4 +29,13 @@
 }
 .boxTitle{
   margin-top: 15rpx;
+  font-size: 35rpx;
+}
+.boxTitle1{
+  margin-top: 5rpx;
+  font-size: 25rpx;
+}
+.boxTitle1>view:nth-child(2){
+  font-size: 38rpx;
+  font-family: Arial, Helvetica, sans-serif;
 }

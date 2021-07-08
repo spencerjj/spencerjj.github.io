@@ -2,7 +2,7 @@
 .cardItems{
   width: 90%;
   margin-left:5%;
-  height: 250rpx;
+  height: 220rpx;
   border-radius: 20rpx;
   margin-top:40rpx;
   background:white;
@@ -16,7 +16,7 @@
   text-align: center;
   color:#D59761;
   text-align: center;
-  border-right:1rpx #eee solid;
+  border-right:1rpx #dfb781 dashed;
   height: 190rpx;
   font-weight: 500;
 }

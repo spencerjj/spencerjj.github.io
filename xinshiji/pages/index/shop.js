@@ -60,5 +60,12 @@ Page({
    */
   onShareAppMessage: function () {
 
+  },
+  toShop(e){
+    if(e.currentTarget.dataset.mark=='xin'){
+      wx.navigateToMiniProgram({ appId: 'wxf02c836c64be8566', path: '', success(res) {  } })
+    }else{
+      wx.navigateToMiniProgram({ appId: 'wxf02c836c64be8566', path: '', success(res) {  } })
+    }
   }
 })

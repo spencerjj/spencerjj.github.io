@@ -1,3 +1,15 @@
 <view class="container">
-  <image src="{{item}}" mode="widthFix" wx:for="{{fileLists}}" wx:key="index" />
+  <view class="top">
+    <image src="{{arr.bannerUrl}}" mode="aspectFill"></image>
+  </view>
+  <view class="info">
+    <view>{{arr.activeTypeName}}</view>
+    <view>时间:2021/05/01 周日 14:00至2021/06/01 周日 14:00</view>
+    <view>地点：B1F服务台</view>
+  </view>
+  <view class="detail">
+    <view>活动详情</view>
+    <view><text>xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx</text></view>
+  </view>
+  <view bindtap="reserve" class="conf" hover-class="hover1" hover-stay-time=".5s">立即预约</view>
 </view>

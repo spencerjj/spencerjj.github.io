@@ -74,7 +74,7 @@ Component({
           url: 'activityWx?id='+this.data.lists[e.currentTarget.dataset.index].id+'&typeid='+this.data.typeid
         })
       }else if(this.data.lists[e.currentTarget.dataset.index].shopLink){
-        wx.navigateToMiniProgram({ appId: 'wxf02c836c64be8566', path: this.data.lists[e.currentTarget.dataset.index].shopLink, success(res) {  } })
+        wx.navigateToMiniProgram({ appId: 'wx63cb5457e4aed91b', path: this.data.lists[e.currentTarget.dataset.index].shopLink, success(res) {  } })
       }else{
         app.globalData.fileLists = this.data.lists[e.currentTarget.dataset.index].fileUrl
         wx.navigateTo({

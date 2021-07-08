@@ -26,15 +26,14 @@ Page({
     userInfo: '',
     avatarUrl: '',
     cardNum: 0,
-    backLists: ['http://tiebapic.baidu.com/forum/w%3D580/sign=fe074a27dc25bc312b5d01906edd8de7/78d1a8ec8a136327b1225ddad48fa0ec09fac71f.jpg', 'http://tiebapic.baidu.com/forum/w%3D580/sign=e8db872ca5fe9925cb0c695804aa5ee4/3e2210dfa9ec8a13b1d5c809b203918fa1ecc01f.jpg', 'http://tiebapic.baidu.com/forum/w%3D580/sign=5638be1fa5dcd100cd9cf829428a47be/4c23d52a2834349b6ec47a9794ea15ce37d3bef4.jpg', 'http://tiebapic.baidu.com/forum/w%3D580/sign=fc27ba94683e6709be0045f70bc69fb8/82f61b4c510fd9f98c8b13da322dd42a2934a4f7.jpg'],
-    backUrl: 'http://tiebapic.baidu.com/forum/w%3D580/sign=fe074a27dc25bc312b5d01906edd8de7/78d1a8ec8a136327b1225ddad48fa0ec09fac71f.jpg'
+    backLists: ['http://tiebapic.baidu.com/forum/w%3D580/sign=d571df3014540923aa696376a259d1dc/c9e209fa513d2697012e294e08fbb2fb4316d836.jpg', 'http://tiebapic.baidu.com/forum/w%3D580/sign=b8d5a9721bdf8db1bc2e7c6c3921dddb/0bdef603918fa0ecec4fcce7639759ee3c6ddb5b.jpg', 'http://tiebapic.baidu.com/forum/w%3D580/sign=e396408e134e9258a63486e6ac80d1d1/4f9958ee3d6d55fb584edecc28224f4a21a4dd5b.jpg', 'http://tiebapic.baidu.com/forum/w%3D580/sign=6a0456c90c540923aa696376a25ad1dc/c9e209fa513d2697be5ba0b710fbb2fb4216d85b.jpg'],
+    backUrl: 'http://tiebapic.baidu.com/forum/w%3D580/sign=d571df3014540923aa696376a259d1dc/c9e209fa513d2697012e294e08fbb2fb4316d836.jpg'
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
   },
 
   /**
@@ -137,7 +136,22 @@ Page({
                 phoneNo: res.data
               })
               wx.setStorageSync('loginphone', res.data)
-              that.register()
+              doLogin(that.data.phoneNo).then((res) => {
+                let url = ''
+                if (res.tier == '金星卡会员') {
+                  url = that.data.backLists[1]
+                } else if (res.tier == '黑星卡会员') {
+                  url = that.data.backLists[2]
+                } else if (res.tier == '黑钻卡会员') {
+                  url = that.data.backLists[3]
+                } else {
+                  url = that.data.backLists[0]
+                }
+                that.setData({
+                  userInfo: res,
+                  backUrl: url
+                })
+              })
             } else {
               Toast({
                 message: '授权失败，请重新授权登录',
@@ -154,78 +168,10 @@ Page({
       })
     }
   },
-  register() {
-    var that = this;
-    var data = {
-      phone: that.data.phoneNo,
-      sex: wx.getStorageSync('weInfo').gender ? '先生' : '女士',
-      store: store,
-      name: wx.getStorageSync('weInfo').nickName || '购物中心会员',
-      openid: wx.getStorageSync('user').openid || '99999',
-      ajax: '_json'
-    }
-    getRequest(getApiHost(), 'customer/bh/api/crm/LPMemberRegister', 'body', data, 0, false, false).then(
-      res => {
-        console.log(res)
-        doLogin(that.data.phoneNo).then((res) => {
-          let url = ''
-          if (res.tier == '金星卡会员') {
-            url = that.data.backLists[1]
-          } else if (res.tier == '黑星卡会员') {
-            url = that.data.backLists[2]
-          } else if (res.tier == '黑钻卡会员') {
-            url = that.data.backLists[3]
-          } else {
-            url = that.data.backLists[0]
-          }
-          that.setData({
-            userInfo: res,
-            backUrl: url
-          })
-        })
-      }
-    ).catch(res => {
-      wx.showModal({
-        title: '系统错误，登录失败',
-        showCancel: false,
-        confirmText: '知道了',
-        confirmColor: '#1890FF'
-      })
-    });
-  },
   use() {
-    var that = this;
-    new oricode('canvas', that.data.userInfo.parameter3, 250, 250);
-    wx.showLoading({
-      title: '加载中',
+    wx.navigateTo({
+      url: 'myCode',
     })
-    setTimeout(() => {
-      wx.hideLoading()
-      this.setData({
-        show: true
-      })
-      setTimeout(() => {
-        this.setData({
-          show1: true,
-        })
-      }, 50)
-      setTimeout(() => {
-        this.setData({
-          show2: true
-        })
-      }, 300)
-    }, 300)
-  },
-  onClose() {
-    this.setData({
-      show1: false,
-      show2: false
-    })
-    setTimeout(() => {
-      this.setData({
-        show: false
-      })
-    }, 300)
   },
   toPage(e) {
     if (e.currentTarget.dataset.url == 'borrow') {

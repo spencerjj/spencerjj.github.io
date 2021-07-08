@@ -7,22 +7,22 @@
       <image src="/images/xinshiji/01-12.png" class="{{ifRun?'run':''}}"></image>
     </view>
     <view class="sections {{ifRun?'':'mainShow'}}">
-      <view class="secItem item1" catchtap="toPage" data-url="index">
+      <view class="secItem item1" catchtap="toPage" data-url="index" data-index='0'>
         <image src="/images/xinshiji/01-14.png"  mode="widthFix" wx:if="{{nowIndex==0}}"></image>
         <image src="/images/xinshiji/01-13.png"  mode="widthFix" wx:if="{{nowIndex!=0}}"></image>
         <view style="{{nowIndex==0?'color:#c59d62':''}}">首页</view>
       </view>
-      <view class="secItem item2" catchtap="toPage" data-url="store">
+      <view class="secItem item2" catchtap="toPage" data-url="store" data-index='1'>
         <image src="/images/xinshiji/01-16.png"  mode="widthFix" wx:if="{{nowIndex==1}}"></image>
         <image src="/images/xinshiji/01-15.png"  mode="widthFix" wx:if="{{nowIndex!=1}}"></image>
         <view style="{{nowIndex==1?'color:#c59d62':''}}">楼层导览</view>
       </view>
-      <view class="secItem item3" catchtap="toPage" data-url="shop">
+      <view class="secItem item3" catchtap="toPage" data-url="shop" data-index='2'>
         <image src="/images/xinshiji/01-18.png"  mode="widthFix" wx:if="{{nowIndex==2}}"></image>
         <image src="/images/xinshiji/01-17.png"  mode="widthFix" wx:if="{{nowIndex!=2}}"></image>
         <view style="{{nowIndex==2?'color:#c59d62':''}}">线上商城</view>
       </view>
-      <view class="secItem item4" catchtap="toPage" data-url="my">
+      <view class="secItem item4" catchtap="toPage" data-url="my" data-index='3'>
         <image src="/images/xinshiji/01-20.png"  mode="widthFix" wx:if="{{nowIndex==3}}"></image>
         <image src="/images/xinshiji/01-19.png"  mode="widthFix" wx:if="{{nowIndex!=3}}"></image>
         <view style="{{nowIndex==3?'color:#c59d62':''}}">我的</view>
@@ -30,7 +30,7 @@
     </view>
     <image class="iconItem icon1 {{ifRun?'iconShow':''}}" src="/images/xinshiji/01-23.png" catchtap="toPage" data-url="card"/>
     <image class="iconItem icon2 {{ifRun?'iconShow':''}}" src="/images/xinshiji/01-24.png" catchtap="toPage" data-url="card"/>
-    <image class="iconItem icon3 {{ifRun?'iconShow':''}}" src="/images/xinshiji/01-25.png" catchtap="toPage" data-url="card"/>
+    <image class="iconItem icon3 {{ifRun?'iconShow':''}}" src="/images/xinshiji/01-25.png" catchtap="toPage" data-url="myCode"/>
   </view>
 </view>
 <view class="cover" wx:if="{{ifRun}}" catchtouchmove="onPreventTouchMove" bindtap="run"></view>

@@ -1,0 +1,53 @@
+/* pages/index/hobby.wxss */
+.container{
+  position: relative;
+}
+.selection{
+  width: 80%;
+  margin-left: 10%;
+  height: 270rpx;
+  position: absolute;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+	gap: 10%;
+	grid-auto-flow: row;
+}
+.item{
+  text-align: center;
+  height: 20rpx;
+  line-height: 20rpx;
+  background: white;
+	padding: 18rpx 10rpx;
+	border-radius: 40rpx;
+  font-size: 25rpx;
+  letter-spacing: 3rpx;
+  color:#a07337;
+	background-image: linear-gradient(to right,#eee,#f9f9f9,#eee);
+	box-shadow: 10rpx 10rpx 20rpx 5rpx #ddd;
+}
+
+.first{
+  top:400rpx
+}
+.second{
+  top:800rpx
+}
+.confirm{
+  position: absolute;
+  top:1100rpx;
+  width: 130rpx;
+  height: 130rpx;
+  line-height: 130rpx;
+  text-align: center;
+  font-weight: 500;
+  font-size: 38rpx;
+  left: 0;
+  right: 0;
+  margin:0 auto;
+  border-radius: 50%;
+  background-image: linear-gradient(to right,#c59d62,#c59d6280,#c59d62);
+}
+.yellow{
+  background-image: linear-gradient(to right,#c59d62,#c59d6280,#c59d62);
+  color:white
+}

@@ -1,4 +1,11 @@
-<view class="cardItems" wx:for="{{cardLists}}" bindtap="showDetail" data-desc="{{item.useDesc}}" data-name="{{item.vname}}" wx:key="index">
+<view class="cardItems" wx:for="{{cardLists}}" bindtap="showDetail" data-desc="{{item.useDesc}}" data-name="{{item.vname}}" data-index="{{index}}" wx:key="index">
+<view class="top">
+  <view class="time">
+    {{item.startDate}}~{{item.endDate}}使用
+  </view>
+  <view class="btn">
+    使用说明
+  </view>
   <view class="count">
     <view>￥<text>{{item.denomination||0}}</text></view>
     <!-- <view>满1元可用</view> -->
@@ -8,9 +15,11 @@
       {{item.vname||item.type}}
     </view>
     <view>
-      {{item.startDate}} ~ {{item.endDate}}
+      {{item.useDesc}}
     </view>
   </view>
+</view>
+
   <view class="use {{type=='disable'?'used':''}}" catchtap="showCode"  data-no="{{item.vnum}}" data-name="{{item.vname}}" hover-class="hover1" hover-stay-time=".5s">
     <view wx:if="{{type=='able'}}">立即</view>
     <view wx:if="{{type=='able'}}">使用</view>

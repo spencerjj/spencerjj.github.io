@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText": "新世纪商城",
+  "navigationBarTextStyle": "black",
+  "navigationBarBackgroundColor": "#ffffff",
+  "enablePullDownRefresh": false,
+  "disableScroll":true
+}

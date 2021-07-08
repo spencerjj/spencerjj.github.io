@@ -17,14 +17,8 @@ Page({
     option1: [
       {},
     ],
-    // option2: [
-    //   { text: '全部排序', value: 0 },
-    //   { text: '好评排序', value: 'shopLike desc' },
-    //   { text: '销量排序', value: 'shopSale desc' },
-    // ],
     value1: "购物中心1F",
     value2: 0,
-    shopLists:[],
     shopName:'',
     shopFloor:'购物中心1F',
     orderBy:'',
@@ -32,7 +26,12 @@ Page({
     loading: false,
     listIsFull: false,
     pageNo:1,
-    pageSize:10
+    pageSize:10,
+    show: false,
+    shopEwm:'',
+    showPop:false,
+    popstate:false,
+    popstate1:false
   },
 
   /**
@@ -130,7 +129,7 @@ Page({
           let option1 = that.data.option1
           option1.push(...array)
           that.setData({
-            option1:option1
+            // option1:option1
           })
         } else {
           Toast({
@@ -265,6 +264,64 @@ Page({
     app.globalData.storeDetail = this.data.shopLists[index]
     wx.navigateTo({
       url: 'storeDetail'
+    })
+  },
+  call(e){
+    wx.makePhoneCall({
+      phoneNumber: e.currentTarget.dataset.num,
+    })
+  },
+  showCode(e){
+    wx.showLoading({
+      title: '加载中',
+    })
+    setTimeout(() => {
+      wx.hideLoading()
+      this.setData({
+        show: true,
+        shopEwm:e.currentTarget.dataset.ewm
+      })
+      setTimeout(()=>{
+        this.setData({
+          show1:true,
+        })
+      },50)
+    }, 300)
+  },
+  onClose() {
+    this.setData({
+      show1: false
+    })
+    setTimeout(()=>{
+      this.setData({
+        show:false
+      })
+    },300)
+  },
+  openPop(e){
+    this.setData({
+      showPop:!this.data.showPop,
+      popstate:this.data.popstate1?false:!this.data.popstate,
+      popstate1:false,
+      type:"floor"
+    })
+  },
+  openPop1(e){
+    this.setData({
+      showPop:!this.data.showPop,
+      popstate1:this.data.popstate?false:!this.data.popstate1,
+      popstate:false,
+      type:"major"
+    })
+  },
+  callback(e){
+    console.log(this.data.type)
+    console.log(e.detail)
+    this.setData({
+      showPop:!this.data.showPop,
+      type:"",
+      popstate:false,
+      popstate1:false
     })
   }
 })

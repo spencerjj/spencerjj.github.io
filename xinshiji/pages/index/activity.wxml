@@ -1,6 +1,6 @@
 <view class="container">
   <view class="mark">　</view>
-  <van-tabs swipeable animated sticky bind:change="onChange" color="#c79f62" title-inactive-color="#aaa" title-active-color="#c79f62">
+  <van-tabs swipeable animated sticky bind:change="onChange" color="#c79f62" title-inactive-color="#000" title-active-color="#c79f62">
     <van-tab title="待参加">
       <view class="card">
         <van-empty image="search" description="暂无记录" wx:if="{{lists.length<1}}"/>

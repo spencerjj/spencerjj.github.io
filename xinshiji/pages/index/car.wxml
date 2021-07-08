@@ -1,25 +1,28 @@
 <view class="content">
   <view class="banner">
-    <image src="/images/01-33.png" mode="widthFix"></image>
+    <image src="/images/xinshiji/01-46.png" mode="widthFix"></image>
+    <view class="tier">{{userInfo.tier}}</view>
+    <view class="point">积分　<text>{{userInfo.availConsumPoint}}</text></view>
   </view>
   <view class="middle">
     <view class="top">
-      <view class="title">输入车牌</view>
-      <view class="add"  bindtap="add" hover-class="hover1" hover-stay-time=".5s">
-      <van-icon name="add" size="15" color="#5a81ec"/>增加车牌
-    </view>
+      <view class="title">请输入车牌号</view>
     </view>   
     
     <keyboard plateNumber="{{plateNumber}}" bind:change="onChange"></keyboard>
-    <view class="confirm'" bindtap="confirm" hover-class="hover1" hover-stay-time=".5s">查缴停车费</view>
-    <view class="history" wx:if="{{carInfo.length>0}}">
+    <view class="history">
       <view class="hisItem" wx:for="{{carInfo}}" wx:key="index" bindtap="confirm" data-carnum='{{item.carNum}}'>
         {{item.carNum}}
       </view>
-      <view class="delete"  bindtap="delete" hover-class="hover1" hover-stay-time=".5s">
+      <view class="delete"  bindtap="delete" hover-class="hover1" hover-stay-time=".5s"  wx:if="{{carInfo.length>0}}">
         <van-icon name="delete" size="15" color="#c0c0c0"/>
       </view>
     </view>
+    <view style="text-align:center;margin-top:50rpx">
+      <image src="/images/xinshiji/01-44.png" style="width:85%;height:100rpx" bindtap="addCar" hover-class="hover1" hover-stay-time=".5s"></image>
+      <image src="/images/xinshiji/01-45.png" style="width:85%;height:100rpx" bindtap="confirm" hover-class="hover1" hover-stay-time=".5s"></image>
+    </view>
+    <!-- <view class="confirm'" bindtap="confirm" hover-class="hover1" hover-stay-time=".5s">查缴停车费</view> -->
   </view>
   <view class="bottom">
         <view>停车说明</view>
@@ -28,7 +31,6 @@
         <view>会员当天消费满500元，免费停车2小时。</view>
         <view>会员当天消费满1000元，免费停车3小时。</view>
         <view>会员当天消费满5000元及以上，免费停车不限时间。</view>
-        <view>缴费后请在30分钟后离场。</view>
     </view>
 </view>
 <van-toast id="van-toast" />

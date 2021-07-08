@@ -2,13 +2,41 @@
 .cardItems{
   width: 90%;
   margin-left:5%;
-  height: 250rpx;
+  height: 220rpx;
   border-radius: 20rpx;
   margin-top:40rpx;
   background:white;
   display: flex;
-  align-items: center;
   overflow: hidden;
+  position: relative;
+}
+.top{
+width: 85%;
+display: flex;
+height: 160rpx;
+display: flex;
+align-items: center;
+}
+.time{
+  position: absolute;
+  bottom:0;
+  left:6%;
+  width: 76%;
+  height: 60rpx;
+  border-top:1rpx dotted #ccc;
+  font-size: 20rpx;
+  line-height: 50rpx;
+  color:#999
+}
+.btn{
+  position: absolute;
+  bottom:18rpx;
+  right:20%;
+  padding:0rpx 10rpx;
+  border:1rpx solid #ccc;
+  border-radius: 20rpx;
+  font-size: 18rpx;
+  color:#999
 }
 .cardItems .count{
   width: 30%;
@@ -16,40 +44,42 @@
   text-align: center;
   color:#D59761;
   text-align: center;
-  border-right:1rpx #eee solid;
-  height: 190rpx;
   font-weight: 500;
-}
-.cardItems .count>view:first-child{
-  line-height: 190rpx;
 }
 .cardItems .count text{
   font-size: 55rpx;
   font-weight: bolder;
 }
 .detail{
-  width: 52%;
+  width: 70%;
   font-size: 32rpx;
   text-align: left;
   padding-left: 20rpx;
+}
+.detail view{
+  width: 100%;
+  vertical-align:middle;
 }
 .detail>view:first-child{
   font-weight: bolder;
 }
 .detail>view:nth-child(2){
   font-size: 24rpx;
-  color:#999
+  color:#999;
+  padding-right: 20rpx;
+  white-space: nowrap;overflow: hidden;
+  text-overflow:ellipsis
 }
 .use{
   height: 100%;
-  width: 18%;
+  width: 15%;
   display: flex;
   align-items: center;
   flex-wrap: wrap;
   flex-direction: column;
   justify-content: center;
   background:rgb(213, 151, 97,.9);
-  font-size: 32rpx;
+  font-size: 28rpx;
   font-weight: bolder;
   color:white;
   text-align: center;

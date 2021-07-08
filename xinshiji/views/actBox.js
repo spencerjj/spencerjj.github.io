@@ -69,20 +69,10 @@ Component({
   methods: {
     toPage(e){
       if(this.data.type=='activity'){
-        wx.navigateTo({
-          url: 'activityDetail?id='+e.currentTarget.dataset.id+'&url='+e.currentTarget.dataset.url,
-        })
-      }else{
         let index = e.currentTarget.dataset.index
-        let id = this.data.lists[index].id
-        let title = this.data.lists[index].title
-        let array = []
-        array.id = id
-        array.title = title
-        array.event = this.data.lists[index].whyEventTimeList
-        app.globalData.eventDetail = array
+        app.globalData.eventDetail = this.data.lists[index]
         wx.navigateTo({
-          url: 'reportDetail'
+          url: 'activityInfo'
         })
       }
     }

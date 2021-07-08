@@ -15,7 +15,7 @@ function doLogin(phone){
   }
   var data = {
     phone: phone,
-    // phone:13813667557,
+    // phone:13816397695,
     channel: '微会员',
     ajax: '_json'
   }
@@ -23,11 +23,14 @@ function doLogin(phone){
     res => {
       wx.stopPullDownRefresh()
       console.log(res)
-        if (res.code == 'SEL_001' || res.code == 'SEL_002') {
-          Toast({
-            message: res.msg,
-            type: 'warning'
-          });
+        if (res.code == 'SEL_001' || res.code == 'SEL_002'||res.code=='SEL_004') {
+          // Toast({
+          //   message: res.msg,
+          //   type: 'warning'
+          // });
+          wx.navigateTo({
+            url: 'welcome',
+          })
           return;
         }else{
           wx.removeStorageSync('userInfo')

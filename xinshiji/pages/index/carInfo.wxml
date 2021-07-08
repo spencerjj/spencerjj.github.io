@@ -1,8 +1,5 @@
 <view class="container">
   <view class='top'>
-    <view class="topTitle">
-      我的车辆
-    </view>
     <view class="carInfo">
       {{carInfo.plateNo}} <image src="/images/01-35.png" mode="widthFix" wx:if="{{carInfo.plateNo.length==8}}"></image>
     </view>

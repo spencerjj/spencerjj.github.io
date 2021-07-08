@@ -4,9 +4,9 @@
     </view>
     <view class="item {{activeIndex == 1 ? 'active':''}}" bindtap="inputKeyboard" data-index="1">{{plateNumber[1]}}
     </view>
-    <view class="item item-dot">
+    <!-- <view class="item item-dot">
       <view class="dot"></view>
-    </view>
+    </view> -->
     <view class="item {{activeIndex == 2 ? 'active':''}}" bindtap="inputKeyboard" data-index="2">{{plateNumber[2]||''}}
     </view>
     <view class="item {{activeIndex == 3 ? 'active':''}}" bindtap="inputKeyboard" data-index="3">{{plateNumber[3]||''}}

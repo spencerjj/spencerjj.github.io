@@ -20,7 +20,7 @@ Page({
     ],
     show:false,
     userInfo:'',
-    lists:[],
+    lists:0,
     sonLists:[],
     payLists:[]
   },

@@ -1,14 +1,18 @@
 <view class="container">
+  <view class="cover">
   <view class="top">
-    <input type="text" placeholder="请输入商户关键字搜索" placeholder-style="color:#aaa" confirm-type="search" bindconfirm="nameChange" bindinput="nameInput"/>
-    <van-icon name="search" size="22" custom-style="position:absolute;top:50%;left:50rpx;color:#aaa;margin-top:-11px" />
+    <input type="text" placeholder="请输入品牌关键字搜索" placeholder-style="color:#ccc" confirm-type="search" bindconfirm="nameChange" bindinput="nameInput"/>
+    <van-icon name="search" size="25" custom-style="position:absolute;top:50%;left:70rpx;color:#000;margin-top:-11px" />
   </view>
-  <view>
-    <van-dropdown-menu>
-      <van-dropdown-item value="{{ value1 }}" options="{{ option1 }}" bind:change="floorChange"/>
-      <!-- <van-dropdown-item value="{{ value2 }}" options="{{ option2 }}"  bind:change="orderChange"/> -->
-    </van-dropdown-menu>
+  <view class="middle">
+    <view hover-class="hover1" hover-stay-time=".5s" bindtap="openPop">
+      楼层<image src="/images/xinshiji/01-36.png" class="{{popstate?'round':''}}"></image>
+    </view>
+    <view hover-class="hover1" hover-stay-time=".5s" bindtap="openPop1">
+      业态<image src="/images/xinshiji/01-36.png" class="{{popstate1?'round':''}}"></image>
+    </view>
   </view>
+</view>
   <view class="lists">
     <view class="actItem" bindtap="toPage" wx:for="{{shopLists}}" wx:key="index" data-index="{{index}}">
         <view><image src="{{item.shopBg}}" mode="aspectFill"></image></view>
@@ -16,14 +20,25 @@
           <view>{{item.shopName}}</view>
           <view>{{item.shopFloor}}</view>
         </view>
+        <image src="/images/xinshiji/01-37.png" class="icon icon1" catchtap="call" data-num="{{item.shopPhone}}"></image>
+        <image src="/images/xinshiji/01-38.png" class="icon icon2" catchtap="showCode" wx:if="{{item.shopEwm}}" data-ewm="{{item.shopEwm}}"></image>
       </view>
     <view class='nullDataInfo' wx:if="{{listIsFull}}">
       <van-divider contentPosition="center">无更多商户了</van-divider>
     </view>
-    <van-empty image="search" description="暂无商户"  wx:if="{{shopLists.length==0}}"/>
+    <van-empty image="search" description="暂无商户"  wx:if="{{shopLists&&shopLists.length==0}}"/>
     <view wx:if="{{loading}}" class='buskmark'><image src='/images/00-12.png'></image></view>
   </view>
 </view>
+<view class="showCode {{show1?'show':''}}" wx:if="{{show}}" bindtap="onClose" catchtouchmove="ture">
+    <view class="codeCon">
+      <image src="{{shopEwm}}" mode="widthFix"></image>
+      <view style="position:absolute;bottom:-150rpx;left:0;right:0;margin:0 auto">
+        <van-icon name="clear" style="color:white" size="40" />
+      </view>
+    </view>
+  </view>
 <my-tabbar  nowIndex="1"/>
 <van-toast id="van-toast" />
 <van-dialog id="van-dialog" />
+<store-pop catchtouchmove="onPreventTouchMove" bind:callback="callback" showPop="{{showPop}}" type="{{type}}" />

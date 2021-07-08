@@ -76,10 +76,9 @@ Component({
       }
     },
     showDetail(e){
-      if(this.data.type=='able'&&e.currentTarget.dataset.desc.length>1){
+      if(this.data.type=='able'){
         let detailInfo = {}
-        detailInfo.name = e.currentTarget.dataset.name
-        detailInfo.desc = e.currentTarget.dataset.desc
+        detailInfo = this.data.cardLists[e.currentTarget.dataset.index]
         this.triggerEvent('showDetail',detailInfo)
       }
     }

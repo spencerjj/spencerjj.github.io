@@ -120,55 +120,6 @@ Page({
       });
     });
   },
-  getRecord(e){
-    var that = this;
-    var data = {
-      store: store,
-      memNum:that.data.userInfo.memNum,
-      // memNum:'I-11325050',
-      ajax: '_json'
-    }
-    getRequest(getApiHost(), 'customer/bh/api/crm/queryRentalItemsRecord', 'body', data, 0, false, false,true).then(
-      res => {
-        console.log(res)
-        wx.stopPullDownRefresh()
-        if(res.code=='SEL_000'){
-          that.setData({
-            borrowLists:res.rentalItemsRecord.listOfRentalItemsRecord.rentalItemsEnery
-          })
-        }else{
-          // Toast({
-          //   message: res.msg,
-          //   type: 'warning'
-          // });
-          that.setData({
-            borrowLists:[]
-          })
-        }
-      }
-    ).catch(res => {
-      Toast({
-        message: '系统错误，请联系管理员',
-        type: 'warning'
-      });
-    });
-  },
-  onChange(e){
-    this.setData({
-      current:e.detail.index
-    })
-    if(e.detail.index==0){
-      this.getInfo()
-    }else{
-      this.getRecord()
-    }
-  },
-  onClose() {
-    this.setData({
-      show: false
-    })
-    this.onLoad()
-  },
   recommend(e){
     wx.navigateTo({
       url: 'recommend?no='+e.currentTarget.dataset.no,

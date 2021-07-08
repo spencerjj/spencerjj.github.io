@@ -50,7 +50,7 @@ App({
           type: 'warning'
         });
         setTimeout(() => {
-          wx.switchTab({
+          wx.redirectTo({
             url: 'my'
           })
         }, 2000)

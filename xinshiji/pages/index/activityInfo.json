@@ -1,6 +1,6 @@
 {
   "navigationBarTitleText": "活动详情",
   "navigationBarTextStyle": "black",
-  "navigationBarBackgroundColor": "#fff",
+  "navigationBarBackgroundColor": "#f8f8f8",
   "enablePullDownRefresh": false
 }

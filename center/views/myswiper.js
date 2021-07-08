@@ -92,7 +92,7 @@ Component({
     },
     toPage(e){
       if(e.currentTarget.dataset.type==1){
-      wx.navigateToMiniProgram({ appId: 'wxf02c836c64be8566', path: e.currentTarget.dataset.link, success(res) {  } })
+      wx.navigateToMiniProgram({ appId: 'wx63cb5457e4aed91b', path: e.currentTarget.dataset.link, success(res) {  } })
 
       }else if(e.currentTarget.dataset.type==2){
         app.globalData.wxLink = e.currentTarget.dataset.link

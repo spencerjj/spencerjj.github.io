@@ -35,10 +35,11 @@
   width: 90%;
   margin-left: 5%;
   position: absolute;
-  top:10vh;
+  top:20vh;
   background:white;
-  padding:50rpx 0;
-  border-radius: 30rpx;
+  padding:30rpx 0;
+  border-radius: 10rpx;
+  min-height: 300rpx;
 }
 .rule{
   width: 80%;
@@ -59,7 +60,6 @@
 }
 .rtitle1{
   font-size: 28rpx;
-  margin-top:30rpx;
   font-weight: bolder;
   color:#999;
   font-size: 35rpx;
@@ -77,5 +77,10 @@
 .desc{
   width: 80%;
   margin-left: 10%;
+}
+.rcontent{
+  width: 100%;
+  text-align: left;
+  display: inline-block
 }
 

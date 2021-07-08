@@ -43,20 +43,22 @@
 .notice view{
   font-size: 28rpx;
   line-height: 40rpx;
+  margin-top: 10rpx;
 }
 .confirm{
   position: fixed;
-  width: 90%;
-  margin-left: 5%;
-  color:white;
-  background:#c79f62;
+  width: 50%;
+  margin-left: 25%;
+  color:#000;
   height: 100rpx;
   line-height: 100rpx;
   font-weight: bolder;
   text-align: center;
-  border-radius: 15rpx;
-  font-size: 38rpx;
+  border-radius: 50rpx;
+  font-size: 32rpx;
   bottom:50rpx;
+  background-image: linear-gradient(to right,#c59d62,#c59d6280,#c59d62);
+	box-shadow: 10rpx 10rpx 20rpx 5rpx #ddd;
 }
 .hover1{
   opacity: .5;

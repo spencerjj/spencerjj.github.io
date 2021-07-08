@@ -14,7 +14,7 @@
       </view>
     </view>
   </view>
-  <van-empty image="search" description="暂无消费记录" wx:if="{{lists.length<1}}" />
+  <van-empty image="search" description="暂无消费记录" wx:if="{{lists&&lists.length<1}}" />
   <view class='nullDataInfo'>
     <van-divider contentPosition="center" wx:if="{{lists.length>=1}}">无更多记录了</van-divider>
   </view>

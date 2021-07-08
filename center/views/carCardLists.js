@@ -72,6 +72,14 @@ Component({
           url: 'car'
         })
       }
+    },
+    showDetail(e){
+      if(this.data.type=='able'){
+        console.log(123)
+        let detailInfo = {}
+        detailInfo.desc = e.currentTarget.dataset.source
+        this.triggerEvent('showDetail',detailInfo)
+      }
     }
   }
 })

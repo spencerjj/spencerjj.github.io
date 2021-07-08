@@ -32,17 +32,7 @@ Component({
     created: function () {}, //在组件实例刚刚被创建时执行，注意此时不能调用 setData
     attached: function () {}, //在组件实例进入页面节点树时执行
     ready: function () {
-      let weInfo = wx.getStorageSync('weInfo')
-      console.log(weInfo)
-      if(weInfo){
-        this.setData({
-          ifShow:false
-        })
-      }else{
-        this.setData({
-          ifShow:true
-        })
-      }
+     
     }, //在组件布局完成后执行
     moved: function () {}, //在组件实例被移动到节点树另一个位置时执行
     detached: function () {}, //在组件实例被从页面节点树移除时执行
@@ -90,9 +80,11 @@ Component({
       })
     },
     toPage(e){
-      wx.navigateTo({
-        url: e.currentTarget.dataset.url
-      })
+      if(this.data.nowIndex!=e.currentTarget.dataset.index){
+        wx.navigateTo({
+          url: e.currentTarget.dataset.url
+        })
+      }
     },
     onPreventTouchMove(){
       console.log(123)

@@ -7,6 +7,6 @@ module.exports = {
   // HOST_URI: 'http://192.168.2.81:8980/',//范
   // HOST_URI: 'http://192.168.2.50:8980/', //刘
   HOST_URI:'https://bhwhy.cbxsj.com/',
-  store:'购物中心',
-  storeId:'601'
+  store:'新世纪',
+  storeId:'603'
 };

@@ -71,4 +71,7 @@
   height: 230px;
   margin:0 auto
 }
+.van-tabs__nav{
+  background:#f2f3f4
+}
 

@@ -1,22 +1,39 @@
 // pages/index/activityInfo.js
+import {
+  getApiHost,
+  getRequest
+} from '../../utils/api.js'
 var app = getApp();
+import {
+  store,
+  storeId,
+  HOST_URI
+} from '../../config.js'
+import Toast from '../../miniprogram_npm/@vant/weapp/toast/toast';
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    fileLists:[]
+    userInfo:[],
+    arr:[]
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    console.log(app.globalData.fileLists)
-    this.setData({
-      fileLists:app.globalData.fileLists
-    })
+    var that = this;
+    app.ifUser().then((data)=>{
+      let arr = []
+      arr = app.globalData.eventDetail
+      console.log(app.globalData.eventDetail)
+      that.setData({
+        userInfo:data,
+        arr
+      })
+    }).then()
   },
 
   /**
@@ -66,5 +83,10 @@ Page({
    */
   onShareAppMessage: function () {
 
+  },
+  reserve(e){
+    wx.navigateTo({
+      url: 'actReport'
+    })
   }
 })

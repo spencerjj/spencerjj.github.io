@@ -1,9 +1,7 @@
 <view class="container">
   <!-- <get-info bind:getInfo="getUser"/> -->
   <view class="top">
-    <image src="/images/01-8.png" mode="scaleToFill" class="banner"></image>
-
-    <view class="center"  style="background-image:url({{backUrl}})">
+    <view class="center" style="background-image:url({{backUrl}})">
       <view class="ctop">
         <view class="login" wx:if="{{!userInfo}}">
           <view>
@@ -14,56 +12,88 @@
             <button open-type="getPhoneNumber" bindgetphonenumber="getPhone" hover-class="hover1"
               hover-stay-time=".5s">登录/注册</button>
           </view>
-
         </view>
         <view class="avatar" wx:if="{{userInfo}}" bindtap="quit">
           <open-data type="userAvatarUrl"></open-data>
         </view>
         <view class="info" wx:if="{{userInfo}}">
-          <view>
-            <image src="/images/card1.png" mode="widthFix" style="" wx:if="{{userInfo.tier=='银星卡会员'}}"></image>
-            <image src="/images/card2.png" mode="widthFix" style="" wx:if="{{userInfo.tier=='金星卡会员'}}"></image>
-            <image src="/images/card3.png" mode="widthFix" style="" wx:if="{{userInfo.tier=='黑金卡会员'}}"></image>
-            <image src="/images/card4.png" mode="widthFix" style="" wx:if="{{userInfo.tier=='黑钻卡会员'}}"></image>
+          <view><text wx:if="{{userInfo.tier=='银星卡会员'}}" style="color:#7d7d7d">{{userInfo.name}}{{test}}</text><text
+              wx:if="{{userInfo.tier=='金星卡会员'}}" style="color:#c59d62">{{userInfo.name}}</text><text
+              wx:if="{{userInfo.tier=='黑金卡会员'}}" style="color:#c59d62">{{userInfo.name}}</text><text
+              wx:if="{{userInfo.tier=='黑钻卡会员'}}" style="color:#000">{{userInfo.name}}</text></view>
+          <image src="/images/xinshiji/01-30.png" mode="widthFix" style="" wx:if="{{userInfo.tier=='银星卡会员'}}"></image>
+          <image src="/images/xinshiji/01-31.png" mode="widthFix" style="" wx:elif="{{userInfo.tier=='金星卡会员'}}"></image>
+          <image src="/images/xinshiji/01-32.png" mode="widthFix" style="" wx:elif="{{userInfo.tier=='黑金卡会员'}}"></image>
+          <image src="/images/xinshiji/01-33.png" mode="widthFix" style="" wx:elif="{{userInfo.tier=='黑钻卡会员'}}"></image>
+          <view class="progress" wx:if="{{userInfo}}">
+            <view class="pro {{userInfo.tier=='银星卡会员'?'yin1':''}}">
+              <view style="width:{{userInfo.pro}}%" class="{{userInfo.tier=='银星卡会员'?'yin2':''}}">
+              </view>
+            </view>
+            <view style="margin-top:10rpx;color:#666">
+              <text wx:if="{{userInfo.tier=='银星卡会员'}}" style="color: #7d7d7d">{{userInfo.gradePoint}}/20000</text><text
+                wx:if="{{userInfo.tier=='金星卡会员'}}" style="color: #d8a766">{{userInfo.gradePoint}}/50000</text><text
+                wx:if="{{userInfo.tier=='黑金卡会员'}}" style="color: #d8a766">{{userInfo.gradePoint}}/100000</text><text
+                wx:if="{{userInfo.tier=='黑钻卡会员'}}" style="color: #000">{{userInfo.gradePoint}}</text>
+              <text class="up" wx:if="{{userInfo.tier=='银星卡会员'}}" style="background: #bbb">升级</text><text class="up"
+                wx:if="{{userInfo.tier=='金星卡会员'}}" style="background: #d8a766">升级</text><text class="up"
+                wx:if="{{userInfo.tier=='黑金卡会员'}}" style="background: #d8a766">升级</text><text class="up"
+                wx:if="{{userInfo.tier=='黑钻卡会员'}}" style="background: #000">升级</text>
+            </view>
           </view>
-          <view>{{userInfo.name}}</view>
         </view>
         <view class="code" bindtap="use" wx:if="{{userInfo}}">
-          <image src="/images/code.png"></image>
-          <view>会员码</view>
+          <image src="/images/xinshiji/01-28.png"></image>
         </view>
       </view>
       <view class="cbottom" wx:if="{{userInfo}}">
-        <!-- 积分: <text>{{userInfo.availConsumPoint}}</text>　l　钱包: ￥<text>{{userInfo.availConsumPoint}}</text> -->
-        积分: <text>{{userInfo.availConsumPoint||0}}</text>
+        <view><text wx:if="{{userInfo.tier=='银星卡会员'}}" style="color:#B4B4B5">银星会员</text><text
+            wx:if="{{userInfo.tier=='金星卡会员'}}" style="color:#c59d62">金星会员</text><text wx:if="{{userInfo.tier=='黑金卡会员'}}"
+            style="color:#c59d62">黑金会员</text><text wx:if="{{userInfo.tier=='黑钻卡会员'}}" style="color:#000">黑钻会员</text>
+        </view>
+        <text style="{{userInfo.tier=='黑金卡会员'?'color:#fff':''}}">我的积分: {{userInfo.availConsumPoint||0}}
+        </text>
       </view>
     </view>
   </view>
   <view class="middle">
-    <!-- <view hover-class="hover1" hover-stay-time=".5s" bindtap="toPage" data-url="card">
-      <view class="mark" hidden="{{cardNum==0}}">{{cardNum}}</view>
-      <image src="/images/01-10.png" style="margin-top:-10rpx"></image>
-      优惠券
-    </view> -->
-    <view hover-class="hover1" hover-stay-time=".5s" bindtap="toPage" data-url="center">
-      <image src="/images/01-11.png" style="margin-top:-10rpx"></image>
-      会员权益
+    <view bindtap="toPage" data-mark="car">
+      <view class="img" hover-stay-time=".5s" hover-class="hover2">
+        <image src="/images/xinshiji/01-2.png" mode="widthFix"></image>
+      </view>
+      <view>领券优惠</view>
     </view>
-    <view hover-class="hover1" hover-stay-time=".5s" bindtap="toPage" data-url="borrow1">
-      <image src="/images/01-6.png"></image>
-      商场服务
+    <view bindtap="toPage" data-mark="card">
+      <view class="img" hover-stay-time=".5s" hover-class="hover2">
+        <image src="/images/xinshiji/01-7.png" mode="widthFix"></image>
+      </view>
+      <view>积分兑换</view>
+    </view>
+    <view bindtap="toPage" data-mark="order">
+      <view class="img" hover-stay-time=".5s" hover-class="hover2">
+        <image src="/images/xinshiji/01-3.png" mode="widthFix"></image>
+      </view>
+      <view>最新活动</view>
+    </view>
+    <view bindtap="toPage" data-mark="more">
+      <view class="img" hover-stay-time=".5s" hover-class="hover2">
+        <image src="/images/xinshiji/01-34.png" mode="widthFix"></image>
+      </view>
+      <view>查看更多</view>
     </view>
   </view>
   <view class="lists">
-    <list-item imgPath="/images/01-13.png" url="order" name="消费记录" />
-    <list-item imgPath="/images/01-15.png" url="borrow" name="租借记录" />
-    <list-item imgPath="/images/01-16.png" url="activity" name="报名记录" />
-    <list-item imgPath="/images/01-34.png" url="point" name="积分兑换记录" />
-    <list-item imgPath="/images/01-15.png" url="info" name="完善个人资料" />
-    <!-- <list-item imgPath="/images/01-17.png" url="contact" name="" /> -->
+    <list-item url="detail" name="会员章程" />
+    <list-item url="center" name="会员等级" />
+    <list-item url="order" name="消费记录" />
+    <list-item url="point" name="积分历史" />
+  </view>
+  <view class="lists">
+    <list-item url="" name="小新微信" />
+    <list-item url="" name="福利社群" />
   </view>
 </view>
-<my-tabbar nowIndex="3"/>
+<my-tabbar nowIndex="3" />
 <view class="showCode {{show1?'show':''}}" wx:if="{{show}}" bindtap="onClose" catchtouchmove="ture">
   <view class="qrcode" wx:if="{{show2}}">
     <canvas class='canvas' canvas-id='canvas'></canvas>

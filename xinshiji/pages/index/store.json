@@ -1,6 +1,9 @@
 {
-  "navigationBarTitleText": "商户列表",
+  "navigationBarTitleText": "楼层指南",
   "navigationBarTextStyle": "black",
   "navigationBarBackgroundColor": "#f8f8f8",
-  "enablePullDownRefresh": false
+  "enablePullDownRefresh": false,
+  "usingComponents": {
+    "store-pop":"/views/storePop"
+  }
 }

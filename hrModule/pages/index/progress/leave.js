@@ -406,17 +406,19 @@ Page({
         'bpm.activityId':that.data.lists.bpm.activityId,
         status:4
       }
-      if(that.data.lists.bpm.activityId=='hrbp'&&that.data.index3==10){
-        $Toast({
-          content:'请选择移是否领取失业金',
-          type:'warning'
-        })
-        that.setData({
-          visible: false
-        })
-        return;
-      }else{
-        data.sfsyj = that.data.index3
+      if(that.data.lists.bpm.activityId=='hrbp'){
+        if(that.data.index3==10){
+          $Toast({
+            content:'请选择移是否领取失业金',
+            type:'warning'
+          })
+          that.setData({
+            visible: false
+          })
+          return;
+        }else{
+          data.sfsyj = that.data.index3
+        }
       }
         const action = [...this.data.actions];
         action[0].loading = true;

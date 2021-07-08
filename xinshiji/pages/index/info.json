@@ -1,6 +1,6 @@
 {
-  "navigationBarTitleText": "完善个人资料",
+  "navigationBarTitleText": "新会员信息",
   "navigationBarTextStyle": "black",
-  "navigationBarBackgroundColor": "#fff",
+  "navigationBarBackgroundColor": "#f8f8f8",
   "enablePullDownRefresh": false
 }

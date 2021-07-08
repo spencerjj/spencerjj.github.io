@@ -29,7 +29,6 @@ Page({
     userInfo: '',
     vStatus: '可用,待激活',
     cardName: '',
-    array1:[],
     array2:[],
     array3:[],
     array4:[],
@@ -144,10 +143,6 @@ Page({
             array4,
             temp:1
           })
-          if (that.data.vStatus == '可用,待激活') {
-            wx.removeStorageSync('cardNum')
-            wx.setStorageSync('cardNum', array1.length)
-          }
         } else {
           that.setData({
             cards: []

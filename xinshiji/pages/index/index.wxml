@@ -22,11 +22,11 @@
           <view class="img"  hover-stay-time=".5s" hover-class="hover2"><image src="/images/xinshiji/01-4.png" mode="widthFix"></image></view>
           <view>停车缴费</view>
         </view>
-        <view bindtap="toPage" data-mark="car">
+        <view bindtap="toPage" data-mark="service">
           <view class="img"  hover-stay-time=".5s" hover-class="hover2"><image src="/images/xinshiji/01-5.png" mode="widthFix"></image></view>
           <view>商场服务</view>
         </view>
-        <view bindtap="toPage" data-mark="card">
+        <view bindtap="toPage" data-mark="order">
           <view class="img"  hover-stay-time=".5s" hover-class="hover2"><image src="/images/xinshiji/01-6.png" mode="widthFix"></image></view>
           <view>消费明细</view>
         </view>
@@ -52,7 +52,7 @@
         <view class="img"  hover-stay-time=".5s" hover-class="hover2"><image src="/images/xinshiji/01-9.png" mode="widthFix"></image></view>
       </view>
     </view>
-        <act-box lists = "{{actLists}}"/>
+        <act-box lists = "{{actLists}}" type="activity"/>
   </view>
   <view class="scr">
     <view class="scrtop">
@@ -64,7 +64,7 @@
         <view class="img"  hover-stay-time=".5s" hover-class="hover2"><image src="/images/xinshiji/01-9.png" mode="widthFix"></image></view>
       </view>
     </view>
-        <act-box lists = "{{actLists}}"/>
+        <act-box lists = "{{actLists}}" type="shop"/>
   </view>
   <view class="scr">
     <view class="scrtop">

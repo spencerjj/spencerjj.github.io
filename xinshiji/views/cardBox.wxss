@@ -7,7 +7,7 @@
 
 .scrbtm .boxItem {
   width: 60%;
-  height: 420rpx;
+  height: 430rpx;
   display: inline-block;
   margin-top: 20rpx;
   margin-right: 50rpx;

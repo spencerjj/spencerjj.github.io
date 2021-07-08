@@ -246,6 +246,7 @@ Page({
                     start: lists.salaryDate || '',
                     salaryNew: lists.salaryNew || '',
                     allowanceNew: lists.allowanceNew || '',
+                    bonusNew:lists.bonusNew||'',
                     remarks: lists.remarks || '',
                     txxxsm: lists.txxxsm || ''
                   })
@@ -363,11 +364,11 @@ Page({
     var that = this
     var salaryNew = Number(that.data.salaryNew) || 0;
     var allowanceNew = Number(that.data.allowanceNew) || 0;
-    var bonusStateOld = that.data.lists.bonusStateOld==1?1:0;
+    var bonusStateOld = Number(that.data.lists.bonusStateOld)==1?1:0;
     console.log(salaryNew+','+allowanceNew+','+bonusStateOld)
     if (salaryNew && bonusStateOld) {
       that.setData({
-        bonusNew:Number((salaryNew / 4).toFixed(2))
+        bonusNew:Number((salaryNew / 4).toFixed(2))||''
       })
     }else{
       that.setData({
@@ -630,7 +631,7 @@ Page({
           salaryDate: that.data.start,
           salaryNew: that.data.salaryNew,
           allowanceNew: that.data.allowanceNew,
-          bonusNew:that.data.bonusNew||that.data.lists.bonusNew,
+          bonusNew:that.data.bonusNew,
           yearSalaryNew:that.data.yearSalaryNew||that.data.lists.yearSalaryNew,
           remarks: that.data.remarks,
           txxxsm: that.data.txxxsm,

@@ -1,0 +1,12 @@
+<view class="container">
+  <image src="/images/xinshiji/01-43.png" mode="widthFix" style="width:100%"></image>
+  <view class="selection first">
+    <view wx:for="{{pro}}" wx:key="index" class="item {{item.choose?'yellow':''}}" bindtap="select" data-index="{{index}}">{{item.name}}</view>
+  </view>
+  <view class="selection second">
+    <view wx:for="{{act}}" wx:key="index" class="item {{item.choose?'yellow':''}}" bindtap="select1" data-index="{{index}}">{{item.name}}</view>
+  </view>
+  <view class="confirm" hover-class="hover1" hover-stay-time=".5s" bindtap="confirm">
+    OK
+  </view>
+</view>

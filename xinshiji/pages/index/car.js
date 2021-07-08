@@ -17,7 +17,8 @@ Page({
     show:true,
     plateNumber:"苏".split(''),
     ifFit:false,
-    carInfo:[]
+    carInfo:[],
+    userInfo:[]
   },
 
   /**
@@ -112,7 +113,7 @@ Page({
       wx.stopPullDownRefresh()
       if(res.code=='SEL_000'){
         that.setData({
-          carInfo:res.carInfo
+          carInfo:res.carInfo.reverse().slice(0,4)
         })
       }else{
         that.setData({
@@ -169,11 +170,9 @@ Page({
         console.log(res)
         wx.stopPullDownRefresh()
         if(res.result=='true'){
-          that.addCar(pnum).then(res=>{
             wx.navigateTo({
               url: 'carInfo?pnum='+pnum
             })
-          })
         }else{
           Toast({
             message: res.message,
@@ -225,26 +224,52 @@ Page({
   });
  },
  addCar(carNum){
-  var that = this;
-  var userInfo = that.data.userInfo
-  console.log(123)
-  return new Promise((resolve,reject)=>{
-    var data = {
-      memNum:userInfo.memNum,
-      carNum:carNum,
-      // store:store,
-      ajax: '_json'
-    }
-    console.log(data)
-    getRequest(getApiHost(), 'customer/bh/api/crm/insertMemberCar', 'body', data, 0, false, false,true).then(
-      res => {
-        console.log(res)
-        resolve()
-      }
-    ).catch(res => {
-      resolve()
-    });
-  })
+    var that = this
+   let plateNumber = this.data.plateNumber
+   var userInfo = that.data.userInfo
+    if(plateNumber.length>=7){
+      plateNumber.map(item=>{
+        if(item.length<1){
+         Toast({  
+           message: '请正确输入车牌',
+           type: 'warning'
+         });
+         return;
+        }
+      })
+     }else{
+      Toast({
+        message: '请正确输入车牌',
+        type: 'warning'
+      });
+      return;
+     }
+  if(this.data.ifFit){
+     var data = {
+       memNum:userInfo.memNum,
+       carNum:plateNumber.join(''),
+       ajax: '_json'
+     }
+     console.log(data)
+     getRequest(getApiHost(), 'customer/bh/api/crm/insertMemberCar', 'body', data, 0, false, false,true).then(
+       res => {
+         Toast({
+           message: res.msg,
+           type: 'warning'
+         });
+         if(res.code=="SEL_000"){
+           that.getInfo()
+         }
+       }
+     ).catch(res => {
+     });
+  }else{
+    Toast({
+          message: '请正确输入车牌',
+          type: 'warning'
+        });
+  }
+   console.log(this.data.plateNumber.join(''))
  },
  add(e){
    wx.navigateTo({

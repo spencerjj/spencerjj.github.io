@@ -1,5 +1,6 @@
 {
   "pages": [
+    "pages/index/card",
     "pages/index/index",
     "pages/index/store",
     "pages/index/my",
@@ -15,7 +16,6 @@
     "pages/index/activityDetail",
     "pages/index/borrowDetail",
     "pages/index/borrow",
-    "pages/index/card",
     "pages/index/activity",
     "pages/index/center",
     "pages/index/storeDetail",

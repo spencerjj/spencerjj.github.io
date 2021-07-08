@@ -137,7 +137,7 @@ Page({
     getRequest(getApiHost(), 'customer/bh/api/crm/queryParkingOffer', 'body', data, 0, false, false, true).then(
       res => {
         console.log(res)
-        if (res.code = "SEL_000") {
+        if (res.code == "SEL_000") {
           let cardLists = res.packOfferEntrys
           let array = []
           cardLists.map(item => {

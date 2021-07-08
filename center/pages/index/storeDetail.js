@@ -93,7 +93,7 @@ Page({
   },
   enter(e){
     console.log(this.data.storeDetail.shopLink)
-    wx.navigateToMiniProgram({ appId: 'wxf02c836c64be8566', path: this.data.storeDetail.shopLink, success(res) {  } })
+    wx.navigateToMiniProgram({ appId: 'wx63cb5457e4aed91b', path: this.data.storeDetail.shopLink, success(res) {  } })
   },
   showCode(e){
     wx.showLoading({

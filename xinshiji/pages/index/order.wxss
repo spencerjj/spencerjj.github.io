@@ -17,7 +17,7 @@
 }
 .listItem{
   overflow: hidden;
-  margin-top:10rpx;
+  margin-top:40rpx;
   height: 190rpx;
   background:white;
   padding:10rpx 30rpx;
@@ -119,13 +119,16 @@
   height: 100rpx;
 }
 .btn>view{
-  width: 120rpx;
-  color:white;
-  background-image: linear-gradient(to right,#f3d8aa,#D9A148);
+  width: 140rpx;
+  padding:10rpx;
+  color:#000;
+  letter-spacing: 10rpx;
+  background-image: linear-gradient(to right,#c59d62,#c59d6280,#c59d62);
+  box-shadow: 10rpx 10rpx 20rpx 5rpx #ccc;
   text-align: center;
-  border-radius: 20rpx;
+  border-radius: 30rpx;
   font-size: 25rpx;
   position: absolute;
-  bottom:0;
+  bottom:10rpx;
   right: 0;
 }

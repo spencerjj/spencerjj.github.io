@@ -1,0 +1,12 @@
+<view>
+  <image src="/images/xinshiji/01-41.png" mode="widthFix" style="width:100%"></image>
+  <view class="content">
+    <view class="notice">
+      更多特权优惠等您来享
+    </view>
+    <view class="btn" hover-class="hover1" hover-stay-time=".5s" bindtap="toPage">
+      登录/注册我的会员
+    </view>
+  </view>
+</view>
+<van-toast id="van-toast" />

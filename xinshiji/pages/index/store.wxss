@@ -1,57 +1,120 @@
 /* pages/index/store.wxss */
-.top{
-  height: 90rpx;
+page{
+  padding-bottom: 300rpx;
+}
+.cover{
+  position: absolute;
   width: 100%;
-  background:white;
-  padding-top:10rpx;
+  z-index: 9;
+  top:0;
+  background:#f2f3f4
+}
+.top{
+  height: 110rpx;
+  width: 100%;
+  padding-top:20rpx;
   position: relative;
 }
 .top input{
-  width: 94%;
-  margin-left:3%;
-  background:#eee;
-  height: 80rpx;
-  line-height: 80rpx;
-  padding-left:80rpx;
+  width: 90%;
+  margin-left:5%;
+  background:#fff;
+  height: 100rpx;
+  line-height: 100rpx;
+  padding-left:100rpx;
   box-sizing: border-box;
+  border-radius: 50rpx;
+  box-shadow:  0 0rpx 10rpx 10rpx #eee inset
+}
+.middle{
+  width:90%;
+  margin-left: 5%;
+  display: flex;
+  justify-content: space-between;
+  border-bottom:2rpx solid #e9e9e9;
+  padding-bottom: 20rpx;
+}
+.middle view{
+  margin-top:40rpx;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100rpx;
+  background: white;
+  padding:10rpx 30rpx;
   border-radius: 40rpx;
-
+  font-size: 28rpx;
+  background-image: linear-gradient(to right,#eee,#f1f1f1,#eee);
+  box-shadow: 10rpx 10rpx 20rpx 8rpx #ccc;
+}
+.middle view image{
+  width: 30rpx;
+  height: 30rpx;
+  margin-left: 5rpx;
+  transition: linear  .3s;
+}
+.round{
+  transform:rotate(180deg);
+}
+.middle view:first-child{
+  margin-left: 50rpx;
+}
+.middle view:nth-child(2){
+  margin-right: 50rpx;
+}
+.lists{
+  margin-top:300rpx
 }
 .actItem{
   width: 94%;
-  height: 300rpx;
+  height: 270rpx;
   margin-top:35rpx;
   margin-left:3%;
   background:#fff;
   position: relative;
   border-radius: 20rpx;
+  box-shadow: 10rpx 10rpx 10rpx 5rpx #ccc;
 }
 .actItem>view:first-child{
-  width: 35%;
-  height: 250rpx;
+  width: 32%;
+  height: 220rpx;
   margin-top:25rpx;
   margin-left:30rpx;
   overflow: hidden;
   border-radius: 10rpx;
   float: left;
+  box-shadow: 10rpx 10rpx 10rpx 5rpx #ddd;
 }
 .actItem>view:first-child image{
   width: 100%;
-  height: 250rpx;
+  height: 220rpx;
 }
 .actItem>view:nth-child(2){
   float: left;
   margin-left:30rpx;
   margin-top:70rpx;
-  font-size: 38rpx;
+  font-size: 35rpx;
   font-weight: bolder;
   width: 50%;
 }
 .actItem>view:nth-child(2) view:nth-child(1){
-  height: 120rpx;
+  height: 100rpx;
 }
 .actItem>view:nth-child(2) view:nth-child(2){
   font-size: 28rpx;
+}
+.icon{
+  width: 100rpx;
+  height: 100rpx;
+  position: absolute;
+  top:0
+}
+.icon1{
+  right: 0;
+}
+.icon2{
+  right: 70rpx;
 }
 .buskmark{
   width: 100%;
@@ -68,4 +131,30 @@
   0% {transform: rotate(0deg);}
   50% {transform: rotate(180deg);}
   100% {transform: rotate(360deg);}
+}
+.showCode{
+  position: fixed;
+  top:0;
+  width: 100%;
+  height: 100%;
+  background:rgba(0,0,0,.5);
+  z-index: 99;
+  transform: scale(0);
+  transition:all .3s
+}
+.show{
+  opacity: 1;
+  transform: scale(1);
+}.codeCon{
+  text-align: center;
+  width: 75%;
+  margin-left: 12.5%;
+  position: absolute;
+  top:10vh;
+  background:none;
+  border-radius: 30rpx;
+}
+.codeCon image{
+  width: 100%;
+  border-radius: 30rpx;
 }

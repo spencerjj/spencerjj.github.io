@@ -1,0 +1,13 @@
+<view catchtouchmove="onPreventTouchMove" class="'box' {{showPop?'pop':'close'}}" wx:if="{{ifShow}}">
+	<view wx:if="{{type=='floor'}}" class="pop-body">
+		<view wx:for="{{floor}}" wx:key="id" class="'button' {{item.type=='1'?'colums':''}} {{item.choose?'yellow':''}}" data-index="{{index}}" bindtap="onFloor">
+			<view wx:if="{{item.type=='0'}}">{{item.name}}</view>
+			<view wx:if="{{item.type=='1'}}">{{item.name1}}</view>
+			<view wx:if="{{item.type=='1'}}">{{item.name2}}</view>
+		</view>
+	</view>
+	<view wx:if="{{type=='major'}}" class="pop-body">
+		<view wx:for="{{major}}" wx:key="id" class="'button' {{item.choose?'yellow':''}}"  data-index="{{index}}"  bindtap="onMajor">{{item.name}}</view>
+	</view>
+	<view bindtap="onChooseitem" class="conf">确认</view>
+</view>

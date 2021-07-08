@@ -1,61 +1,39 @@
 <view class="content">
-  <view class="top">
-    <view class="topItem" bindtap="sexChange" data-sex="先生">
-      <view>
-        <van-icon name="checked" class="select" size="18" wx:if="{{sex=='先生'}}"/>
-        <image src="/images/01-38.png" class="icon"></image>
-      </view>
-      <view>
-        男性
-      </view>
-      <view>
-        Man
-      </view>
-    </view>
-    <view class="topItem" bindtap="sexChange" data-sex="女士">
-      <view>
-        <van-icon name="checked" class="select" size="18" wx:if="{{sex=='女士'}}"/>
-        <image src="/images/01-39.png" class="icon"></image>
-      </view>
-      <view>
-        女性
-      </view>
-      <view>
-        Woman
-      </view>
-    </view>
+  <view class="title">
+    个人信息
   </view>
+  <view class="info">
   <view class="section">
     <view class="s1">姓名*</view>
-    <input class="fill1" value="{{name}}" placeholder-style="color:#999" bindinput="nameInput"></input>
-  </view>
-  <view class="section">
-    <view class="s1">身份证号</view>
-    <input class="fill1 {{!hasCard||'disable'}}" value="{{cardNum}}" placeholder-style="color:#999" bindinput="idInput" disabled="{{hasCard}}"></input>
+    <input class="fill1" placeholder-style="color:#999" bindinput="nameInput" placeholder="请输入姓名"></input>
   </view>
   <view class="section">
     <view class="s1">生日*</view>
-    <picker start="1930-01-01" end="2021-01-01" bindchange="bindDateChange" mode="date" value="1990-01-01" disabled="{{hasBir}}">
-      <view class="fill1  {{!hasBir||'disable'}}">{{birthday}}</view>
+    <picker start="1930-01-01" end="2021-01-01" bindchange="bindDateChange" mode="date" value="1990-01-01">
+      <view class="fill1"><text wx:if="{{birthday.length==0}}" style="color:#999">请选择时间</text>{{birthday}}</view>
     </picker>
   </view>
   <view class="section">
-    <view class="s1">地区:</view>
-    <picker mode="region" bindchange="bindRegionChange" value="{{region}}" custom-item="{{customItem}}" disabled="{{ifre}}">
+    <view class="s1">手机号</view>
+    <input class="fill1" placeholder-style="color:#999" bindinput="phoneInput" placeholder="请输入手机号"></input>
+  </view>
+  <view class="section">
+    <view class="s1">地区</view>
+    <picker mode="region" bindchange="bindRegionChange" value="{{region}}" custom-item="{{customItem}}">
     <view class="fill1">
+      <text wx:if="{{region.length==0}}" style="color:#999">请选择城市区域</text>
       {{region[0]}}{{region[1]}}{{region[2]}}
     </view>
   </picker>
   </view>
   <view class="section">
-    <view class="s1">详细地址:</view>
-    <input class="fill1" value="{{address}}" placeholder-style="color:#999" bindinput="addressInput" disabled="{{ifemail}}"></input>
-  </view>
-  <view class="notice">
-    <van-icon name="warning-o" />带*号为必填项
+    <view class="s1">详细地址</view>
+    <input class="fill1" placeholder-style="color:#999" bindinput="addressInput" placeholder="请输入地址"></input>
   </view>
 </view>
-<view class="bottom" bindtap='save' hover-class="hover1" hover-stay-time=".5s">
+
+</view>
+  <view class="btn" bindtap='save' hover-class="hover1" hover-stay-time=".5s">
       保存信息
-  </view>
+    </view>
 <van-toast id="van-toast" />

@@ -1,0 +1,8 @@
+<view>
+  <image src="/images/xinshiji/01-40.png" mode="widthFix" style="width:100%"></image>
+  <view class="qrcode">
+    <canvas class='canvas' canvas-id='canvas'></canvas>
+  </view>
+  <view class="code">{{userInfo.parameter3}}</view>
+</view>
+<van-toast id="van-toast" />

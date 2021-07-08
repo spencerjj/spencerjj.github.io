@@ -10,12 +10,7 @@ Component({
         
 
       ], // 属性初始值（可选），如果未指定则会根据类型选择一个
-    },
-    type:{
-      type:String,
-      value:'able'
     }
-   
   },
   //组件的数据
   data: {
@@ -71,7 +66,7 @@ Component({
   //组件的方法，包括(事件响应函数)和(任意的自定义方法)
   methods: {
     toPage(e){
-      if(this.data.type=='able'&&e.currentTarget.dataset.mark>0){
+      if(e.currentTarget.dataset.mark>0){
         wx.navigateTo({
           url: 'borrowDetail?rentNum='+e.currentTarget.dataset.num+'&name='+e.currentTarget.dataset.name+'&num='+e.currentTarget.dataset.mark+'&deposit='+e.currentTarget.dataset.deposit
         })

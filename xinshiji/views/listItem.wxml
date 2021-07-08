@@ -1,5 +1,5 @@
 <view class="listItem"  hover-class="hover1" hover-stay-time=".5s" bindtap="toPage" data-url="{{url}}">
-  <image src="{{imgPath}}" class="logo"></image>
+  <!-- <image src="{{imgPath}}" class="logo"></image> -->
   {{name}}
-  <image class="arraw" src="/images/arraw.png"></image> 
+  <image class="arraw" src="/images/xinshiji/01-35.png"></image> 
 </view>

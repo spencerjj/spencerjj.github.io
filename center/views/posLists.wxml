@@ -1,4 +1,12 @@
 <view class="cardItems" wx:for="{{cardLists}}" wx:key="index">
+  <view class="top">
+
+  <view class="time">
+    {{item.tcftstartdate}}~{{item.tcftenddate}}使用
+  </view>
+  <!-- <view class="btn">
+    使用说明
+  </view> -->
   <view class="count">
     <view>￥<text>{{item.tcftfqje}}</text></view>
     <!-- <view>满1元可用</view> -->
@@ -8,8 +16,9 @@
       {{item.tqname}}
     </view>
     <view>
-      {{item.tcftstartdate}} ~ {{item.tcftenddate}}
+      无门槛
     </view>
+  </view>
   </view>
   <view class="use {{type=='disable'?'used':''}}" hover-class="hover1" hover-stay-time=".5s">
     <view wx:if="{{type=='able'}}">可用</view>

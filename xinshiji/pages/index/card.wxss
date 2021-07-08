@@ -1,9 +1,56 @@
 /* pages/index/activity.wxss */
 .container{
   position: relative;
+  padding-bottom: 100rpx;
+}
+.top{
+  display: flex;
+  justify-content: space-between;
+  width: 80%;
+  margin-left: 10%;
+  height: 80rpx;
+  margin-top:10rpx
+}
+.top>view:first-child{
+  line-height: 80rpx;
+  width: 100rpx;
+  border-bottom: 2rpx solid #dfb781;
+}
+.top>view:nth-child(2){
+  display: flex;
+  align-items: center;
+}
+.top image{
+  width: 100rpx;
+  height: 37rpx;
+  align-items: center;
+  margin-right: 20rpx;
+}
+.middle{
+  width: 90%;
+  margin-left: 5%;
+  margin-top: 20rpx;
+}
+.middle image{
+  width: 100%;
+  height: 300rpx;
+  border-radius: 50rpx;
+  box-shadow: 0 0 20rpx 0rpx #ddd;
 }
 .card{
+  width: 90%;
+  margin-left:5%;
   padding-bottom: 100rpx;
+  box-shadow: 0 0 20rpx 0rpx #ddd;
+  border-radius: 20rpx;
+  margin-top:50rpx
+}
+.title{
+  height: 80rpx;
+  line-height: 120rpx;
+  color:#777;
+  width: 90%;
+  margin-left:5%;
 }
 .mark{
   position: fixed;

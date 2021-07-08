@@ -2,14 +2,15 @@
   padding-bottom: 200rpx;
 }
 .top{
-  width: 96%;
-  margin-left:2%;
+  width: 90%;
+  margin-left:5%;
   margin-top:20rpx;
-  height: 430rpx;
+  height: 370rpx;
   background:white;
   border-radius: 10rpx;
   padding:20rpx;
-  box-sizing: border-box
+  box-sizing: border-box;
+  box-shadow: 15rpx 15rpx 15rpx 5rpx #ddd;
 }
 .topTitle{
   font-size: 22rpx;
@@ -61,14 +62,15 @@
   justify-content: space-between;
 }
 .rights{
-  width: 96%;
-  margin-left:2%;
-  margin-top: 20rpx;
+  width: 90%;
+  margin-left:5%;
+  margin-top: 40rpx;
   /* height: 240rpx; */
   background:white;
   border-radius: 10rpx;
   padding:20rpx;
-  box-sizing: border-box
+  box-sizing: border-box;
+  box-shadow: 15rpx 15rpx 15rpx 5rpx #ddd;
 }
 .card{
   display: flex;
@@ -104,13 +106,14 @@
   left: 0rpx;
 }
 .total{
-  width: 96%;
-  margin-left:2%;
-  margin-top: 20rpx;
+  width: 90%;
+  margin-left:5%;
+  margin-top: 60rpx;
   background:white;
   border-radius: 10rpx;
   padding:30rpx 20rpx;
-  box-sizing: border-box
+  box-sizing: border-box;
+  box-shadow: 15rpx 15rpx 15rpx 5rpx #ddd;
 }
 .card3{
   height: 60rpx;

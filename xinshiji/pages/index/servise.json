@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText": "商场服务",
+  "navigationBarTextStyle": "black",
+  "navigationBarBackgroundColor": "#f8f8f8",
+  "enablePullDownRefresh": true,
+  "disableScroll": true
+}

@@ -29,8 +29,6 @@ Page({
     userInfo: '',
     vStatus: '可用,待激活',
     cardName: '',
-    array1:[],
-    array2:[],
     array3:[],
     array4:[],
     desc:'',
@@ -129,6 +127,12 @@ Page({
           let array4 = []
           lists.map((item)=>{
             // (new Date(item.endDate).getTime()>new Date().getTime())
+            if(item.startDate){
+              item.startDate = item.startDate.slice(0,10).replace(/-/g, '.')
+            }
+            if(item.endDate){
+              item.endDate = item.endDate.slice(0,10).replace(/-/g, '.')
+            }
             if(item.status=='可用'||item.status=='待激活'){
               array1.push(item)
             }else{
@@ -136,6 +140,12 @@ Page({
             }
           })
           carLists.forEach(item=>{
+            if(item.geneTime){
+              item.geneTime = item.geneTime.slice(0,10).replace(/-/g, '.')
+            }
+            if(item.effecTime){
+              item.effecTime = item.effecTime.slice(0,10).replace(/-/g, '.')
+            }
             if(item.status=='无效'){
               array4.push(item)
             }else{
@@ -178,8 +188,23 @@ Page({
     getRequest(getApiHost(), 'customer/bh/api/crm/getFutuerVoucher', 'body', data, 0, false, false, false).then(
       res => {
         console.log(res)
+        let lists = res.data
+        lists.map(item=>{
+          if(item.startDate){
+            item.startDate = item.startDate.slice(0,10).replace(/-/g, '.')
+          }
+          if(item.endDate){
+            item.endDate = item.endDate.slice(0,10).replace(/-/, '.')
+          }
+          if(item.tcftenddate){
+            item.tcftenddate = item.tcftenddate.slice(0,10).replace(/-/g, '.')
+          }
+          if(item.tcftstartdate){
+            item.tcftstartdate = item.tcftstartdate.slice(0,10).replace(/-/, '.')
+          }
+        })
         that.setData({
-          posLists:res.data
+          posLists:lists
         })
       }
     )
@@ -198,7 +223,9 @@ Page({
         show:false
       })
     },300)
-    this.onLoad()
+    if(this.data.showType==1){
+      this.onLoad()
+    }
   },
   recommend(e) {
     wx.navigateTo({
@@ -236,8 +263,8 @@ Page({
       title: '加载中',
     })
     that.setData({
-      desc: e.detail.desc,
-      cardName: e.detail.name,
+      desc: e.detail.useDesc,
+      cardName: e.detail.vname,
       showType:2
     })
     setTimeout(() => {

@@ -1,0 +1,25 @@
+/* pages/index/welcome.wxss */
+page{
+  background:white;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+}
+.content{
+  position: absolute;
+  top:850rpx;
+  width: 100%;
+  text-align: center;
+  letter-spacing: 3rpx;
+}
+.notice{
+  font-size: 38rpx;
+}
+.btn{
+  width: 100%;
+  margin-top:-30px;
+  font-size: 35rpx;
+  height: 320rpx;
+  line-height: 300rpx;
+  background: url(http://tiebapic.baidu.com/forum/w%3D580/sign=cd416f3050ce36d3a20483380af13a24/662a43a7d933c89547b70b91941373f083020019.jpg);
+  background-size: 100% 100%;
+ 
+}

@@ -1,4 +1,12 @@
-<view class="cardItems" wx:for="{{cardLists}}" wx:key="index">
+<view class="cardItems" wx:for="{{cardLists}}" wx:key="index" data-source="{{item.source}}">
+  <view class="top">
+
+  <view class="time">
+    {{item.geneTime}}~{{item.effecTime}}使用
+  </view>
+  <!-- <view class="btn">
+    使用说明
+  </view> -->
   <view class="count">
     <view>X<text>{{item.remainNum||0}}</text></view>
     <!-- <view>满1元可用</view> -->
@@ -8,8 +16,10 @@
       {{item.store}}停车券
     </view>
     <view>
-      有效期至{{item.effecTime}}
+      {{item.offerDuration}}小时
+      <!-- 有效期至{{item.effecTime}} -->
     </view>
+  </view>
   </view>
   <view class="use {{type=='disable'?'used':''}}" catchtap="showCode" hover-class="hover1" hover-stay-time=".5s">
     <view wx:if="{{type=='able'}}">立即</view>

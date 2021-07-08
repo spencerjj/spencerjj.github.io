@@ -5,6 +5,11 @@ import {
 } from '../../utils/api.js'
 var app = getApp();
 import {
+  store,
+  storeId,
+  HOST_URI
+} from '../../config.js'
+import {
   doLogin
 } from '../../utils/login.js'
 import Dialog from '../../miniprogram_npm/@vant/weapp/dialog/dialog'
@@ -33,30 +38,6 @@ Page({
    */
   onLoad: function (options) {
     var that = this
-    app.ifUser().then((data) => {
-      console.log(data)
-      let region = [data.province, data.city, data.area]
-      let hasBir = false
-      let hasCard = false
-      if (data.birthDate) {
-        hasBir = true
-      }
-      if (data.cardNum) {
-        hasCard = true
-      }
-      that.setData({
-        region,
-        userInfo: data,
-        cardNum: data.cardNum,
-        id: data.cardNum,
-        sex: data.sex || '先生',
-        address: data.address,
-        name: data.name,
-        birthday: data.birthDate || '',
-        hasBir,
-        hasCard
-      })
-    }).then()
   },
 
   /**
@@ -114,10 +95,10 @@ Page({
       name: e.detail.value,
     })
   },
-  idInput(e) {
+  phoneInput(e) {
     console.log(e.detail.value)
     this.setData({
-      id: e.detail.value,
+      phone: e.detail.value,
     })
   },
   bindDateChange: function (e) {
@@ -166,17 +147,14 @@ Page({
       });
       return;
     }
-    if (!that.data.hasCard&&that.data.id.length >0) {
-      if (that.data.id.length==18) {
-        data.parameter1 = that.data.id
-        ifCard = true
-      } else {
-        Toast({
-          message: '请正确填写身份证号',
-          type: 'warning'
-        });
-        return;
-      }
+    if (that.data.phone.length == 11) {
+      data.phone = that.data.phone
+    } else {
+      Toast({
+        message: '请正确填写手机号',
+        type: 'warning'
+      });
+      return;
     }
     if (!that.data.hasBir) {
       if (that.data.birthday.length > 0) {
@@ -191,47 +169,41 @@ Page({
       }
     }
 
-    data.province = that.data.region[0]
-    data.city = that.data.region[1]
-    data.area = that.data.region[2]
-    data.address = that.data.address
-    data.memNum = that.data.userInfo.memNum
-    data.sex = that.data.sex
+    data.province = that.data.region[0]||''
+    data.city = that.data.region[1]||''
+    data.area = that.data.region[2]||''
+    data.address = that.data.address||''
     data.channel = '微会员'
+    data.sex = wx.getStorageSync('weInfo').gender ? '先生' : '女士'
+    data.store = store
+    data.openid = wx.getStorageSync('user').openid || '88888'
+    data.ajax = '_json'
     console.log(data)
-    getRequest(getApiHost(), 'customer/bh/api/crm/wechatMemberUpdate', 'body', data, 0, false, true).then(
+    getRequest(getApiHost(), 'customer/bh/api/crm/LPMemberRegister', 'body', data, 0, false, false).then(
       res => {
         console.log(res)
-        if (res.code == 'SEL_000') {
-          if(ifCard){
-            that.setData({
-              hasCard:true
-            })
-          }
-          if(ifBir){
-            that.setData({
-              hasBir:true
-            })
-          }
-          doLogin(that.data.userInfo.phone).then((res) => {
-            Toast({
-              message: '修改成功',
-              type: 'success'
-            })
+        if (res.code == "SEL_000") {
+          doLogin(that.data.phoneNo).then((res) => {
+            console.log('success register')
           })
         } else {
+          wx.navigateTo({
+            url: 'hobby',
+          })
           Toast({
             message: res.msg,
             type: 'warning'
-          })
+          });
         }
-
+       
       }
     ).catch(res => {
-      Toast({
-        message: '系统错误，请联系管理员',
-        type: 'warning'
-      });
+      wx.showModal({
+        title: '系统错误，登录失败',
+        showCancel: false,
+        confirmText: '知道了',
+        confirmColor: '#1890FF'
+      })
     });
   }
 })

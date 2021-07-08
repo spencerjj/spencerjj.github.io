@@ -6,131 +6,48 @@
   overflow: hidden;
   position: relative;
 }
-.tblack{
-  background:#000 !important
-}
-.bg{
-  width: 100%;
-  height: 400rpx;
-}
-.secondbg{
-  width: 100%;
-  height: 400rpx;
-  position: absolute;
-  top:0;
-  z-index: 2;
-  background:rgba(0,0,0,.5)
-}
+
 .actItem{
   width: 94%;
-  height: 150rpx;
-  top:160rpx;
+  height: 130rpx;
+  overflow: hidden;
   margin-left:3%;
+  padding:30rpx 0;
   position: relative;
-  border-radius: 20rpx;
-  color:white;
-  position: absolute;
+  color:#000;
   z-index: 9;
+  display: flex;
+  align-items: center;
+  border-bottom: 2rpx solid #ccc;
 }
 .actItem>view:first-child{
-  width: 150rpx;
-  height: 150rpx;
-  margin-top:25rpx;
+  width: 200rpx;
+  height: 200rpx;
   overflow: hidden;
-  float: left;
 }
 .actItem>view:first-child image{
-  width: 150rpx;
-  height: 150rpx;
+  width: 200rpx;
+  height: 200rpx;
 }
 .actItem>view:nth-child(2){
-  float: left;
-  margin-left:30rpx;
-  margin-top:60rpx;
-  font-size: 28rpx;
-  font-weight: bolder;
-  width: 50%;
-}
-.actItem>view:nth-child(2) view:nth-child(2){
-  font-size: 23rpx;
+  font-size: 32rpx;
   font-weight: 500;
+  width: 65%;
+  margin-top:-10rpx
 }
-.location{
-  position: absolute;
-  bottom:0;
-  width: 94%;
-  margin-left: 3%;
-  height: 70rpx;
-  display: flex;
-  align-items: center;
-  color:white;
-  font-size: 23rpx;
-  z-index: 9;
-}
-.enter{
-  position: absolute;
-  bottom:10rpx;
-  right: 3%;
-  color:white;
-  font-size: 23rpx;
-  z-index: 9;
-  color:white;
-  border-radius:20rpx;
-  padding:3px 10px;
-  border:1px solid #fff
-}
-.location image{
-  width: 23rpx;
-  height: 23rpx;
-}
-.phone{
-  width: 65rpx;
-  height: 65rpx;
-  position: absolute;
-  right:20rpx;
-  bottom:110rpx;
-  z-index: 9;
-}
-.ewm{
-  width: 65rpx;
-  height: 65rpx;
-  position: absolute;
-  right:110rpx;
-  bottom:110rpx;
-  z-index: 9;
-}
-.title{
-  display: flex;
+.detail{
   width: 90%;
-  margin-left:5%;
-  margin-top:70rpx;
+  margin-left: 5%;
+  font-size: 28rpx;
+  margin-top: 30rpx;
+  font-weight: 400;
 }
-.title>view:first-child{
-  width: 40%;
+.detail>view:nth-child(2){
   display: flex;
-  align-items: center;
+  justify-content: space-between;
 }
-.title>view>text:first-child{
-  font-size: 45rpx;
-  font-weight: 900;
-}
-.title>view>text:nth-child(2){
-  font-size: 30rpx;
-  font-weight: 900;
-  display: inline-block;
-  margin-left:10rpx
-}
-.title>view:nth-child(2){
-  width: 60%;
-  height: 45rpx;
-  border-bottom:1rpx solid black
-}
-.content{
-  width: 90%;
-  margin-left:5%;
-  padding:10rpx;
-  background:white;
-  box-sizing: border-box;
+.middle{
+  text-align: center;
 }
 .showCode{
   position: fixed;
